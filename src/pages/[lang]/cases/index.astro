@@ -1,0 +1,55 @@
+---
+import FormattedDate from '../../../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+import { i18nParams } from '../../../i18n/consts'
+import Base from '../../../layouts/Base.astro';
+import HeroHeader from '../../../components/HeroHeader.astro';
+
+const { lang } = Astro.params;
+
+const posts = (await getCollection('blog')).sort
+(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
+export function getStaticPaths() {
+  return i18nParams;
+}
+
+function getPostLangAndSlug(post) {
+	const [lang, ...slug] = post.slug.split('/');
+	return {lang, slug}
+}
+---
+<Base>
+	<HeroHeader 
+		headline="Our blog"
+		text="We specialize in delivering cutting-edge Customer Experience Management solutions tailored for your business."
+		buttonText="Get Started"
+	/>
+    <div class="container px-4 md:mx-auto py-20">
+        <div class="flex flex-col items-center justify-center space-y-10">
+            {
+				posts.map((post) => (
+					getPostLangAndSlug(post).lang === lang &&
+					<a href={`./${getPostLangAndSlug(post).slug}/`} >
+						<div class="card w-100 bg-base-100 shadow-xl">
+							<figure class="m-0">
+								<img class="rounded-t-2xl" width={720} height={360} src={post.data.heroImage} alt="" transition:name={post.slug} /> 
+							</figure>
+							<div class="card-body">
+								<h2 class="card-title my-0" transition:name={post.slug + "_title"}>{post.data.title}</h2>
+								<p class="date">
+									<FormattedDate date={post.data.pubDate} transition:name={post.slug + "_date"} />
+								</p>
+								<div class="card-actions justify-end">
+									<button class="btn btn-primary bg-blue-500 text-white border-0">Read More</button>
+								</div>
+							</div>
+						</div>
+					</a>
+				))
+			}
+        </div>
+    </div>	
+</Base>
