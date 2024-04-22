@@ -2,7 +2,8 @@
 interface Props {
   size?: "md" | "lg";
   block?: boolean;
-  style?: "outline" | "primary" | "inverted";
+  style?: "primary" | "secondary";
+  color?: "light" | "dark";
   class?: string;
   [x: string]: any;
 }
@@ -10,30 +11,36 @@ interface Props {
 const {
   size = "md",
   style = "primary",
+  color = "dark",
   block,
   class: className,
   ...rest
 } = Astro.props;
 
 const sizes = {
-  md: "px-5 py-2.5",
+  md: "px-4 py-3.5",
   lg: "px-6 py-3",
 };
 
 const styles = {
-  outline: "border-2 border-black hover:bg-black text-black hover:text-white",
-  primary:
-    "bg-black text-white hover:bg-slate-900  border-2 border-transparent",
+    primary_dark:
+        "bg-white text-black hover:bg-blue-100 border-2 border-transparent rounded-full",
+    primary_light:
+        "bg-secondary text-black hover:bg-orange-100 border-2 border-transparent rounded-full",
+    secondary_light:
+        "bg-white text-secondary hover:bg-orange-100 border border-blue-100 rounded box-border",
+    secondary_dark:
+        "bg-blue text-white hover:bg-blue-900 border border-white rounded box-border",
 };
 ---
 
 <button
   {...rest}
   class:list={[
-    "rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200",
+    "font-medium text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200",
     block && "w-full",
     sizes[size],
-    styles[style],
+    styles[style + "_" + color],
     className,
   ]}
   ><slot />

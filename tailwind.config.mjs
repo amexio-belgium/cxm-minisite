@@ -6,13 +6,16 @@ export default {
 		  sans: ['Lexend', 'sans-serif'],
 		},
 		colors: {
+			'transparent': 'transparent',
 			'primary': '#084772',
 			'secondary': '#ED6C25',
 			'quaternary': '#D9E8F5',
 			'quinary': '#86ABD4',
 			'tertiary': '#FFC256',
 			'white': '#fff',
+			'black': "#0B1215",
 			'blue': {
+				DEFAULT: '#084772',
 				50: '#e6edf1',
 				100: '#b2c6d3',
 				200: '#8daabe',
@@ -25,6 +28,7 @@ export default {
 				900: '#031e30',
 			},
 			'orange': {
+				DEFAULT: '#ed6c25',
 				50: '#fdf0e9',
 				100: '#f9d1bb',
 				200: '#f7bb9b',
@@ -37,6 +41,7 @@ export default {
 				900: '#642d10',
 			},
 			'lightest-blue': {
+				DEFAULT: '#d9e8f5',
 				50: '#fbfdfe',
 				100: '#f3f8fc',
 				200: '#eef4fa',
@@ -49,6 +54,7 @@ export default {
 				900: '##5b6167',
 			},
 			'light-blue': {
+				DEFAULT: '#86abd4',
 				50: '#f3f7fb',
 				100: '#d9e5f2',
 				200: '#c7d8eb',
@@ -61,6 +67,7 @@ export default {
 				900: '#384859',
 			},
 			'yellow': {
+				DEFAULT: '#ffc256',
 				50: '#fff9ee',
 				100: '#ffeccb',
 				200: '#ffe3b1',
@@ -74,7 +81,6 @@ export default {
 			}
 		},
 		extend: {
-			
 			spacing: {
 			
 			},

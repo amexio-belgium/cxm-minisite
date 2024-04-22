@@ -1,7 +1,6 @@
 ---
 import Nav from './Nav.astro'
 import { SITE_TITLE } from '../consts';
-import LanguagePicker from '../components/LanguagePicker.astro';
 import { getLangFromUrl } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -9,8 +8,8 @@ const lang = getLangFromUrl(Astro.url);
 ---
 <header class="bg-base-100 w-screen px-10 h-[80px] flex flex-row justify-between items-center">
 	<a href={`/${lang}/`} class="flex justify-center text-xl">
-		<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt="" />
+		<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt={SITE_TITLE} />
 	</a>
 	<Nav />
-	<a class="p-2 rounded-lg	 bg-primary text-white">CONTACT</a>
+	<a class="p-2 rounded-lg bg-primary text-white">CONTACT</a>
 </header>
