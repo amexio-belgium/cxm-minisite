@@ -5,9 +5,11 @@ import HeaderLink from './HeaderLink.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-<ul class="menu menu-horizontal px-1">
-    <HeaderLink href={`/${lang}/`}>{t('nav.home')}</HeaderLink>
-    <HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
-    <HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
-    <HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
-</ul>
+<nav class="flex gap-2 flex-row justify-center items-center	">
+    <ul class="flex px-1">
+        <HeaderLink href={`/${lang}/`}>{t('nav.home')}</HeaderLink>
+        <HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
+        <HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
+        <HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
+    </ul>
+</nav>

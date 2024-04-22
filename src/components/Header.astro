@@ -7,39 +7,10 @@ import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 
 ---
-<header class="bg-base-100">
-	<a href={`/${lang}/`} class="flex justify-center h-16 p-4 md:hidden text-xl">
+<header class="bg-base-100 w-screen px-10 h-[80px] flex flex-row justify-between items-center">
+	<a href={`/${lang}/`} class="flex justify-center text-xl">
 		<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt="" />
 	</a>
-	<nav class="max-w-screen-xl navbar bg-base-100 mx-auto">
-		<div class="navbar-start">
-			<div class="dropdown">
-				<div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-					</svg>
-				</div>
-				<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-					<Nav>
-				</ul>
-			</div>
-		  	<a href={`/${lang}/`} class="hidden md:flex text-xl">
-				<img width={140} height={30} src={"/Amexio-Horizontal.svg"} alt={SITE_TITLE} />
-			</a>
-					</div>
-		<div class="navbar-center">
-			<Nav>
-		</div>
-		<div class="navbar-end">
-			<div class="dropdown">
-				<div tabindex="0" role="button" class="btn btn-ghost h-2">
-					Language
-				</div>
-				<ul tabindex="0" class="menu menu-sm dropdown-content z-[1] p-1 shadow bg-base-100 rounded-box w-26">
-					<LanguagePicker />
-				</ul>
-			</div>
-			<a class="btn bg-primary text-white">CONTACT</a>
-		</div>
-	</nav>
+	<Nav />
+	<a class="p-2 rounded-lg	 bg-primary text-white">CONTACT</a>
 </header>
