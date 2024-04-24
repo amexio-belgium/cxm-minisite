@@ -5,7 +5,6 @@ import { i18nParams } from '../../../i18n/consts'
 import Base from '../../../layouts/Base.astro';
 import HeroHeader from '../../../components/HeroHeader.astro';
 import Button from '../../../components/ui/Button.astro';
-import ProfileCard from '../../../components/ProfileCard.astro';
 
 const { lang } = Astro.params;
 
@@ -47,7 +46,7 @@ function getPostLangAndSlug(post) {
 									<FormattedDate date={post.data.pubDate} transition:name={post.slug + "_date"} />
 								</p>
 								<div class="card-actions justify-end">
-									<Button class="mt-8" style="inverted">Read More</Button>
+									<Button class="mt-8">Read More</Button>
 								</div>
 							</div>
 						</div>

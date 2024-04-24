@@ -9,8 +9,10 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
-<li class="mx-1">
-	<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<li class="w-full border-b border-opacity-60 border-blue-100 pl-8 py-4 md:border-0 md:p-0">
+	<a href={href} class:list={["block group w-fit text-white pr-2 text-lg flex justify-start md:justify-end items-center gap-1 focus:outline-none focus:rounded focus:ring-2 focus:ring-tertiary" ,className , { active: isActive }]} {...props}>
+		<img class="opacity-0 group-focus:ml-4 group-hover:opacity-100 group-focus:opacity-100 scale-0 group-hover:scale-100 group-focus:scale-100 w-0 group-hover:w-4 group-focus:w-4 h-4 relative transition-all duration-500" 
+		src="/icons/logo.svg" width={16} height={16}>
 		<slot />
 	</a>
 </li>

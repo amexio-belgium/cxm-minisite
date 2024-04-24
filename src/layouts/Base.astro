@@ -6,7 +6,6 @@ import Footer from '../components/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-
 const lang = getLangFromUrl(Astro.url);
 
 ---
@@ -17,7 +16,7 @@ const lang = getLangFromUrl(Astro.url);
     </head>
     <body class="bg-blue-800">
         <Header />
-        <main class="max-w-[1304px] mx-auto p-8" transition:name="root" transition:animate="slide">
+        <main class="max-w-[1304px] mx-auto mt-24 p-8">
             <slot />
         </main>
         <Footer />

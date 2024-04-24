@@ -1,15 +1,45 @@
 ---
 import Nav from './Nav.astro'
 import { SITE_TITLE } from '../consts';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import HeaderLink from './HeaderLink.astro';
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 ---
-<header class="bg-base-100 w-screen px-10 h-[80px] flex flex-row justify-between items-center">
-	<a href={`/${lang}/`} class="flex justify-center text-xl">
-		<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt={SITE_TITLE} />
-	</a>
-	<Nav />
-	<a class="p-2 rounded-lg bg-primary text-white">CONTACT</a>
-</header>
+<nav class="fixed z-10 bg-base-100 h-24 w-screen shadow backdrop-blur-xl top-0 border-b border-opacity-60 border-blue-100 flex items-center justify-center">
+	<div class="max-w-[1304px] w-screen px-8 flex flex-wrap items-center justify-between">
+	  	<a href={`/${lang}/`} class="flex justify-center text-xl focus:outline-none focus:rounded focus:ring-2 focus:ring-tertiary">
+			<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt={SITE_TITLE} />
+		</a>
+		<button id="burger-icon"
+			type="button" 
+			class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary"
+			aria-controls="navbar-default" aria-expanded="false">
+			<span class="sr-only">Open main menu</span>
+			<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+				<path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+			</svg>
+		</button>
+		<div class="navmenu-toggle bg-blue-800 md:bg-transparent hidden absolute md:static shadow md:shadow-none border-b border-opacity-60 border-blue-100 md:border-0 top-24 left-0 w-screen md:block md:w-auto" id="navbar-default">
+			<ul class="font-medium md:bg-transparent flex flex-col items-start md:justify-end gap-0 md:gap-8 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0">
+				<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
+				<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
+				<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
+				<HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
+				<HeaderLink href={`/${lang}/contact/`}>{t('nav.contact')}</HeaderLink>
+			</ul>
+		</div>
+	</div>
+
+</nav>
+
+<script>
+	const menuButton = document.getElementById("burger-icon");
+	menuButton.addEventListener("click", () => {
+	  [...document.querySelectorAll(".navmenu-toggle")].forEach((Element) => {
+		Element.classList.toggle("hidden");
+	  });
+	});
+</script>

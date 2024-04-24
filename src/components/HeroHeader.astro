@@ -13,8 +13,8 @@ const { headline, text, buttonText } = Astro.props;
     <h1 class="text-white text-[70px] leading-[105px] font-bold mb-11" 
         set:html={headline}>
     </h1>
-    <div class="grid gap-6 grid-area">
-        <div class="mx-auto px-8 md:px-0 text-left grid-a">
+    <div class="grid gap-12 md:gap-6 grid-area grid-cols-1 md:grid-cols-12">
+        <div class="mx-auto text-left grid-a">
             { text && 
                 <p class="text-3xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
             }
@@ -26,7 +26,7 @@ const { headline, text, buttonText } = Astro.props;
             title="tes"
             profileImg='https://via.placeholder.com/50x50'
             buttonText={buttonText}
-            class='grid-b animation ease-out'
+            class='grid-b animation'
         />
         
         <ProfileCard 
@@ -48,9 +48,11 @@ const { headline, text, buttonText } = Astro.props;
     
     .grid-area{ 
         grid-template-areas: 
-        "a a a a a a b b b b b b"
-        "c c c c c c b b b b b b"
+        "a a a a a a" 
+        "b b b b b b"
+        "c c c c c c" 
     }
+   
     .grid-a{
         grid-area: a;
     }
@@ -71,6 +73,14 @@ const { headline, text, buttonText } = Astro.props;
 
         &-delay {
             animation-delay: 300ms;
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+        .grid-area{ 
+            grid-template-areas: 
+            "a a a a a a b b b b b b"
+            "c c c c c c b b b b b b"
         }
     }
 

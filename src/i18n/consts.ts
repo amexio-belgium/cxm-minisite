@@ -19,10 +19,14 @@ export const defaultLang = 'en';
 
 export const ui = {
     en: {
-        'nav.home': 'Home',
+        'nav.services': 'Services',
         'nav.about': 'About',
-        'nav.blog': 'Blog',
-        'nav.cases': 'Cases',
+        'nav.contact': 'Contact',
+        'nav.blog': 'Insights',
+        'nav.cases': 'Work',
+        '404.headline': "Something's missing.",
+        '404.text': "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+        '404.button': 'Back to Homepage',
         'hero.headline': 'Turning your content <mark>into value</mark>',
         'hero.text': 'AmeXio Fuse designs, builds and runs large-scale content platforms to make your business more smart, fast & cost-effective.',
         'hero.button': 'Get Started',
@@ -40,8 +44,11 @@ export const ui = {
         'contact.button': 'Contact Now'
     },
     fr: {
-        'nav.home': 'Accueil',
-        'nav.about': 'À propos',
+        'nav.services': 'Services',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'nav.blog': 'Insights',
+        'nav.cases': 'Work',
         'hero.headline' : 'Empower Your CXM with Us',
         'hero.text' : "Nous sommes spécialisés dans la fourniture de solutions de gestion de l'expérience client de pointe adaptées à votre entreprise",
         'hero.button' : 'Get Started',
@@ -59,7 +66,11 @@ export const ui = {
         'contact.button' : 'Contact Now'
     },
     nl: {
-        'nav.about': 'Over ons',
+        'nav.services': 'Services',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'nav.blog': 'Insights',
+        'nav.cases': 'Work',
         'hero.headline': 'Empower Your CXM with Us',
         'hero.text':'Wij zijn gespecialiseerd in het leveren van geavanceerde oplossingen voor Customer Experience Management, op maat gemaakt voor uw bedrijf.',
         'hero.button': 'Aan de slag',
