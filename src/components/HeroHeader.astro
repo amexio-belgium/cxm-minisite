@@ -1,15 +1,23 @@
 ---
 import ProfileCard from './ProfileCard.astro';
-
+import LogoSlant from './elements/LogoSlant.astro'
 interface Props {
     headline: string;
     text?: string;
     buttonText?: string;
+    homepage?: boolean;
+    backgroundImage?: string;
 }
 
-const { headline, text, buttonText } = Astro.props;
+const { 
+    headline, 
+    text, 
+    buttonText, 
+    homepage, 
+    backgroundImage
+} = Astro.props;
 ---
-<div class="py-20 text-white hero-gradient">
+<div class="py-20 pb-60 text-white hero-gradient relative">
     <h1 class="text-white text-[70px] leading-[105px] font-bold mb-11" 
         set:html={headline}>
     </h1>
@@ -20,25 +28,36 @@ const { headline, text, buttonText } = Astro.props;
             }
         </div>
 
-        <ProfileCard 
-            content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
-            name='Voornaam Achternaam'
-            title="tes"
-            profileImg='https://via.placeholder.com/50x50'
-            buttonText={buttonText}
-            class='grid-b animation'
-        />
-        
-        <ProfileCard 
-            content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
-            name='Voornaam Achternaam'
-            title="tes"
-            direction='right'
-            profileImg='https://via.placeholder.com/50x50'
-            buttonText={buttonText}
-            class='grid-c animation animation-delay'
-        />
+        { homepage &&
+            <ProfileCard 
+                content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
+                name='Voornaam Achternaam'
+                title="tes"
+                profileImg='https://via.placeholder.com/50x50'
+                buttonText={buttonText}
+                class='grid-b animation'
+            />
+            
+            <ProfileCard 
+                content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
+                name='Voornaam Achternaam'
+                title="tes"
+                direction='right'
+                profileImg='https://via.placeholder.com/50x50'
+                buttonText={buttonText}
+                class='grid-c animation animation-delay'
+            />
+        }    
     </div>
+    { !homepage && 
+        ( backgroundImage ? 
+            <img src="backgroundImage" width={1200} height={700}class="absolute w-xl top-0 -right-1/4 h-auto object-cover" />
+        :
+            <div class="absolute w-xl top-0 -right-1/4 h-auto object-cover">
+                <LogoSlant/>
+            </div>
+        )
+    }
 </div>
 
 <style>
