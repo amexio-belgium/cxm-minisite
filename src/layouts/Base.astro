@@ -4,7 +4,6 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
-import { slide } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
@@ -16,11 +15,11 @@ const lang = getLangFromUrl(Astro.url);
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
         <ViewTransitions />
     </head>
-    <body >
+    <body class="bg-blue-800">
         <Header />
-        <!-- <main transition:name="root" transition:animate="slide"> -->
+        <main class="max-w-[1304px] mx-auto p-8" transition:name="root" transition:animate="slide">
             <slot />
-        <!-- </main> -->
+        </main>
         <Footer />
     </body>
 </html>

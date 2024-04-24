@@ -1,21 +1,85 @@
 ---
-import Button from './ui/Button.astro';
+import ProfileCard from './ProfileCard.astro';
+
 interface Props {
-    headline?: string;
+    headline: string;
     text?: string;
     buttonText?: string;
-    visual?: string;
 }
 
-const { headline, text, buttonText, visual } = Astro.props;
+const { headline, text, buttonText } = Astro.props;
 ---
-<div class="bg-blue-900 text-white py-20">
-    <div class="container mx-auto px-8 md:px-0 text-center">
-        { headline && <h1 class="text-4xl md:text-5xl font-semibold">{headline}</h1> }
-        { text && <p class="mt-4 text-lg">{text}</p> }
-        { buttonText &&  
-        <Button class="mt-8" style="primary" color="dark">{buttonText}</Button> 
-       
-        }
+<div class="py-20 text-white hero-gradient">
+    <h1 class="text-white text-[70px] leading-[105px] font-bold mb-11" 
+        set:html={headline}>
+    </h1>
+    <div class="grid gap-6 grid-area">
+        <div class="mx-auto px-8 md:px-0 text-left grid-a">
+            { text && 
+                <p class="text-3xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
+            }
+        </div>
+
+        <ProfileCard 
+            content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
+            name='Voornaam Achternaam'
+            title="tes"
+            profileImg='https://via.placeholder.com/50x50'
+            buttonText={buttonText}
+            class='grid-b animation ease-out'
+        />
+        
+        <ProfileCard 
+            content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
+            name='Voornaam Achternaam'
+            title="tes"
+            direction='right'
+            profileImg='https://via.placeholder.com/50x50'
+            buttonText={buttonText}
+            class='grid-c animation animation-delay'
+        />
     </div>
 </div>
+
+<style>
+    .hero-gradient {
+        background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
+    }
+    
+    .grid-area{ 
+        grid-template-areas: 
+        "a a a a a a b b b b b b"
+        "c c c c c c b b b b b b"
+    }
+    .grid-a{
+        grid-area: a;
+    }
+
+    .grid-b {
+        grid-area: b;
+    }
+
+    .grid-c {
+        grid-area: c;
+    }
+
+    .animation {
+        margin-top: 60%;
+        animation: 1000ms slide-up;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+
+        &-delay {
+            animation-delay: 300ms;
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            margin-top: 60%;
+        }
+        to {
+            margin-top: 0%;
+        }
+    }
+</style>

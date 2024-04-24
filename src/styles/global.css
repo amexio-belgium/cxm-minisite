@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-
+    h1 mark {
+        color: #FFC256;
+        background-color: unset;
+        display: block;
+    }
 }
 
 @layer components {
@@ -13,3 +17,4 @@
 @layer utilities {
 
 }
+
