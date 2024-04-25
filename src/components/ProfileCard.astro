@@ -29,7 +29,7 @@ const styles = {
     light:
         "bg-white",
     dark:
-        "from-blue-600 to-blue-800 shadow-blue-200",
+        "from-blue-600/70 to-blue-800/70 shadow-blue-200",
 };
 
 const directions = {
@@ -57,5 +57,5 @@ const directions = {
         </div>
     </div>
   <slot />
-  { buttonText && <Button class="absolute right-8 -bottom-6" style="primary" color="dark">{buttonText}</Button> }
+  { buttonText && <Button class="absolute right-8 -bottom-6" icon link="/contact" style="primary" color="dark">{buttonText}</Button> }
 </div>

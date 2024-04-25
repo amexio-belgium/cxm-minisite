@@ -7,8 +7,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 ---
-<nav class="fixed z-10 bg-base-100 h-24 w-screen shadow backdrop-blur-xl top-0 border-b border-opacity-60 border-blue-100 flex items-center justify-center">
-	<div class="max-w-[1304px] w-screen px-8 flex flex-wrap items-center justify-between">
+<nav class="fixed z-10 bg-base-100 h-24 w-screen shadow backdrop-blur-sm top-0 border-b border-opacity-60 border-blue-100 flex items-center justify-center">
+	<div class="max-w-[1304px] w-screen px-8 lg:px-6 flex flex-wrap items-center justify-between">
 	  	<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
 			<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt={SITE_TITLE} />
 		</a>

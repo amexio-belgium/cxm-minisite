@@ -21,7 +21,7 @@ const {
     <h1 class="text-white text-[70px] leading-[105px] font-bold mb-11" 
         set:html={headline}>
     </h1>
-    <div class="grid gap-12 md:gap-6 grid-area grid-cols-1 md:grid-cols-12">
+    <div class="grid gap-12 relative md:gap-6 grid-area grid-cols-1 md:grid-cols-12">
         <div class="mx-auto text-left grid-a">
             { text && 
                 <p class="text-3xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
@@ -85,13 +85,14 @@ const {
     }
 
     .animation {
-        margin-top: 60%;
+        top: 150px;
+        opacity: 0;
         animation: 1000ms slide-up;
-        animation-timing-function: ease-out;
+        animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
         animation-fill-mode: forwards;
 
         &-delay {
-            animation-delay: 300ms;
+            animation-delay: 400ms;
         }
     }
 
@@ -105,10 +106,12 @@ const {
 
     @keyframes slide-up {
         from {
-            margin-top: 60%;
+            top: 150px;
+            opacity: 0;
         }
         to {
-            margin-top: 0%;
+            top: 0%;
+            opacity: 1;
         }
     }
 </style>

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { i18nParams } from '../i18n/consts'
 import { useTranslations } from '../i18n/utils';
+import Button from '../components/ui/Button.astro';
 
 export function getStaticPaths() {
 	return i18nParams;
@@ -13,7 +14,7 @@ const t = useTranslations(lang);
 console.log(lang)
 ---
 <Base>
-    <section class="h-fit">
+    <section class="">
         <div class="py-20 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center">
                 <h1 class="mb-4 text-8xl tracking-tight font-extrabold lg:text-9xl text-tertiary ">404</h1>
@@ -23,9 +24,7 @@ console.log(lang)
                 <p class="mb-4 text-lg font-light text-white">
                     {t('404.text')}
                 </p>
-                <a href="/" class="inline-flex text-white bg-secondary hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm px-5 py-2.5 text-center d my-4">
-                    {t('404.button')}
-                </a>
+                <Button class="mt-4 inline-block" link="/" style="primary" size='lg' color="dark">{t('404.button')}</Button>
             </div>   
         </div>
     </section>
