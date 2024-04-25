@@ -1,10 +1,32 @@
 ---
 import { languages } from '../i18n/consts';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Link from './ui/Link.astro';
+
+const currentLang = getLangFromUrl(Astro.url);
 ---
-<ul>
+<button id="currentlang" class="inline-flex gap-2 text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
+  <img class="w-6 h-6" src="/icons/world.svg" alt="world">
+  {languages[currentLang]}
+</button>
+<ul class="absolute bottom-0 hidden p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/70 rounded-xl language-toggle">
   {Object.entries(languages).map(([lang, label]) => (
     <li>
-      <a class="text-white" href={`/${lang}/`}>{label}</a>
+      <Link class="text-white hover:underline" href={`/${lang}/`}>{label}</Link>
     </li>
   ))}
 </ul>
+
+<script is:inline>
+	document.addEventListener('click', function(event) {
+		if (event.target.closest('#currentlang')) {
+			[...document.querySelectorAll(".language-toggle")].forEach((Element) => {
+				Element.classList.toggle("hidden");
+			});
+		} else {
+      [...document.querySelectorAll(".language-toggle")].forEach((Element) => {
+				Element.classList.add("hidden");
+			});
+    }
+	})
+</script>

@@ -11,7 +11,7 @@ export default defineConfig({
     mdx(), 
     sitemap(), 
     tailwind({
-      nesting: true,
+       nesting: true,
     })
   ]
 });

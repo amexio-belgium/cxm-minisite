@@ -1,9 +1,11 @@
 ---
 import Button from './ui/Button.astro';
+import { Image } from 'astro:assets';
+
 interface Props {
     profileImg?: string;
     content: string;
-    name?: string;
+    name: string;
     title?: string;
     color?: "light" | "dark";
     direction?: "right" | "left";
@@ -37,8 +39,6 @@ const directions = {
     right: "bg-gradient-to-l mr-16 md:mr-0",
 }
 ---
-
-
 <div
   {...rest}
   class:list={[
@@ -50,7 +50,7 @@ const directions = {
   >
     <p class="text-lg" set:html={content}></p>
     <div class="flex gap-4 mt-8">
-        <img class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} src={profileImg} alt={name + " " + title}>
+        {profileImg && <Image loading="eager" src={profileImg} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
         <div class="">
             <p class="text-sm font-medium sm:text-lg">{name}</p>
             <p class="text-xs font-medium sm:text-sm">{title}</p>

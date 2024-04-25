@@ -1,0 +1,39 @@
+---
+import Image from "astro/components/Image.astro"
+import Button from './ui/Button.astro';
+
+interface Props {
+    projectImage: string;
+    smallImage: string;
+    content: string;
+    name: string;
+    link?: string;
+    class?: string;
+    [x: string]: any;
+}
+
+const {
+    projectImage,
+    smallImage,
+    content,
+    name,
+    class: className,
+    link,
+    ...rest
+} = Astro.props;
+---
+
+<div {...rest} class="relative w-full h-[520px] mb-8">
+    <div class="w-full h-[470px] left-0 top-0 absolute rounded-2xl overflow-hidden flex-col justify-start items-start inline-flex">
+      <Image src={projectImage} class="w-full " loading="lazy" width={790} height={470} alt={name}/>
+    </div>
+
+    <div class="absolute flex flex-col max-w-[542px] gap-8 p-4 mr-16 text-white bg-blue-800 border shadow-sm items-start justify-start -bottom-3 right-8 shadow-blue-200 bg-gradient-to-l md:mr-0 rounded-2xl border-quaternary">
+        <div class="flex items-center justify-between w-full">
+            <h4 class="text-2xl font-bold">{name}</h4>
+            {projectImage && <Image loading="eager" src={projectImage} class="rounded-full w-14 h-14" width={56} height={56} alt={name} /> }
+        </div>
+        <p class="text-sm" set:html={content}></p>
+        <Button class="" link={link} style="secondary" color="dark">Discover more about {name}</Button>
+    </div>
+</div>

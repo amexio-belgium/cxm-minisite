@@ -1,0 +1,25 @@
+---
+
+interface Props {
+    class?: string;
+    [x: string]: any;
+}
+
+const {
+    class: className,
+    ...rest
+} = Astro.props;
+
+---
+<div 
+    {...rest}
+    class:list={[
+        "inline-flex flex-col items-start justify-start h-auto gap-8 p-8 shadow bg-tertiary/80 rounded-2xl backdrop-blur",
+        className,
+    ]}>
+    <div class="flex flex-col items-start justify-start gap-2">
+      <h4 class="text-3xl font-bold text-black">Sign up</h4>
+      <p class="text-lg font-medium text-black">Receive our latest insights in your mailbox every month</p>
+    </div>
+    <input class="rounded h-[50px] w-full p-4 ring-offset-2 ring-offset-black focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary" type="email" id="email" placeholder="Email" pattern=".+@example\.com" size="30" required />
+</div>

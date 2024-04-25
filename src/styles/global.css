@@ -1,20 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    h1 mark {
-        color: #FFC256;
-        background-color: unset;
-        display: block;
-    }
+h1 mark {
+    color: #FFC256;
+    background-color: unset;
+    display: block;
 }
 
-@layer components {
-
+.hero-gradient {
+    background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
 }
 
-@layer utilities {
-
+.footer-gradient-blue {
+    background: radial-gradient(41.57% 90%  at 50% 0%, rgba(134, 171, 212, 0.70) 0%, rgba(134, 171, 212, 0.00) 100%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
+.footer-gradient-orange {
+    background: radial-gradient(41.57% 90%  at 50% 100%, rgba(255, 194, 86, 0.70) 0%, rgba(255, 194, 86, 0.00) 100%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
