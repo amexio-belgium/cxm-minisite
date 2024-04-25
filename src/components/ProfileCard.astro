@@ -50,10 +50,10 @@ const directions = {
   >
     <p class="text-lg" set:html={content}></p>
     <div class="flex gap-4 mt-8">
-        <img class="rounded-full w-10 h-10 sm:w-14 sm:h-14" width={50} height={50} src={profileImg} alt={name + " " + title}>
+        <img class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} src={profileImg} alt={name + " " + title}>
         <div class="">
-            <p class="text-sm sm:text-lg font-medium">{name}</p>
-            <p class="text-xs sm:text-sm font-medium">{title}</p>
+            <p class="text-sm font-medium sm:text-lg">{name}</p>
+            <p class="text-xs font-medium sm:text-sm">{title}</p>
         </div>
     </div>
   <slot />

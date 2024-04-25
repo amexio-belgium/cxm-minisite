@@ -7,14 +7,14 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 ---
-<nav class="fixed z-10 bg-base-100 h-24 w-screen shadow backdrop-blur-sm top-0 border-b border-opacity-60 border-blue-100 flex items-center justify-center">
+<nav class="fixed top-0 z-10 flex items-center justify-center w-screen h-24 border-b border-blue-100 shadow bg-base-100 backdrop-blur-sm border-opacity-60">
 	<div class="max-w-[1304px] w-screen px-8 lg:px-6 flex flex-wrap items-center justify-between">
 	  	<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
 			<img width={200} height={60} src={"/Amexio-Horizontal.svg"} alt={SITE_TITLE} />
 		</a>
 		<button id="burger-icon"
 			type="button" 
-			class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary"
+			class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary"
 			aria-controls="navbar-default" 
 			aria-expanded="false">
 			<span class="sr-only">Open main menu</span>
@@ -22,8 +22,8 @@ const t = useTranslations(lang);
 				<path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
 			</svg>
 		</button>
-		<div class="navmenu-toggle bg-blue-800 md:bg-transparent hidden absolute md:static shadow md:shadow-none border-b border-opacity-60 border-blue-100 md:border-0 top-24 left-0 w-screen md:block md:w-2/4" id="navbar-default">
-			<ul class="font-medium md:bg-transparent flex flex-col items-start md:justify-end gap-0 md:gap-8 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0">
+		<div class="absolute left-0 hidden w-screen border-b border-blue-100 shadow bg-blue-800/90 navmenu-toggle md:bg-transparent md:static md:shadow-none border-opacity-60 md:border-0 top-24 md:block md:w-2/4" id="navbar-default">
+			<ul class="flex flex-col items-start gap-0 font-medium md:bg-transparent md:justify-end md:gap-8 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0">
 				<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
 				<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
 				<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
@@ -34,11 +34,12 @@ const t = useTranslations(lang);
 	</div>
 </nav>
 
-<script>
-	const menuButton = document.getElementById("burger-icon");
-	menuButton.addEventListener("click", () => {
-	  [...document.querySelectorAll(".navmenu-toggle")].forEach((Element) => {
-		Element.classList.toggle("hidden");
-	  });
-	});
+<script is:inline>
+	document.addEventListener('click', function(event) {
+		if (event.target.closest('#burger-icon')) {
+			[...document.querySelectorAll(".navmenu-toggle")].forEach((Element) => {
+				Element.classList.toggle("hidden");
+			});
+		}
+	})
 </script>

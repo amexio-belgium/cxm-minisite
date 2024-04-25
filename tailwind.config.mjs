@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
@@ -80,16 +82,55 @@ export default {
 				900: '#6b5124',
 			}
 		},
+		keyframes: {
+			bounceslow: {
+			  '0%, 60%': { transform: 'translateY(0%)' },
+			  '30%': { transform: 'translateY(-1%)' },
+			}
+		},
 		extend: {
 			spacing: {
 			
 			},
 			borderRadius: {
 			
-			}
+			},
+			animation: {
+				'bounce-slow': 'bounceslow 3s ease-in-out infinite',
+			},
 		}
 	},
 	plugins: [  
 		require('@tailwindcss/typography'),
+		plugin(function ({ matchUtilities, theme }) {
+			matchUtilities(
+				{
+					'animate-duration': (value) => ({
+						animationDuration: value,
+					}),
+				},
+				{ values: theme('transitionDuration') }
+			)
+		}),
+		plugin(function ({ matchUtilities, theme }) {
+			matchUtilities(
+				{
+					'animate-delay': (value) => ({
+						animationDelay: value,
+					}),
+				},
+				{ values: theme('transitionDelay') }
+			)
+		}),
+		plugin(function ({ matchUtilities, theme }) {
+			matchUtilities(
+				{
+					'animate-ease': (value) => ({
+						animationTimingFunction: value,
+					}),
+				},
+				{ values: theme('transitionTimingFunction') }
+			)
+		}),
 	],
 }
