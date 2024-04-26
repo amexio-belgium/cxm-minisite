@@ -1,12 +1,21 @@
 ---
 import LanguagePicker from '../components/LanguagePicker.astro';
+import { Image } from 'astro:assets';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import FooterLink from './FooterLink.astro'
 import Newsletter from './Newsletter.astro'
+import facebook from "../assets/icons/facebook.svg"
+import youtube from "../assets/icons/youtube.svg"
+import twitter from "../assets/icons/twitter.svg"
+import linkedin from "../assets/icons/linkedin.svg"
+import iconBlue from "../assets/logos/icon_blue.svg"
+import logoWhite from "../assets/logos/Amexio_White.svg"
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
 
 ---
 
@@ -48,16 +57,16 @@ const t = useTranslations(lang);
             <FooterLink href={`/${lang}/contact/`}>{t('nav.contact')}</FooterLink>
             <div class="inline-flex items-center justify-start h-6 gap-2">
               <Link href="" rel="noopener">
-                <img loading="lazy" class="w-6 h-6" src="/icons/facebook.svg" alt="facebook">
+                <Image loading="lazy" class="w-6 h-6" src={facebook} alt="facebook" />
               </Link>
               <Link href="" rel="noopener">
-                <img loading="lazy" class="w-6 h-6" src="/icons/twitter.svg" alt="X (Twitter)">
+                <Image loading="lazy" class="w-6 h-6" src={twitter} alt="X (Twitter)" />
               </a>
               <Link href="" rel="noopener">
-                <img loading="lazy" class="w-6 h-6" src="/icons/linkedin.svg" alt="LinkedIn">
+                <Image loading="lazy" class="w-6 h-6" src={linkedin} alt="LinkedIn" />
               </Link>
               <Link href="" rel="noopener">
-                <img loading="lazy" class="w-6 h-6" src="/icons/youtube.svg" alt="youtube">
+                <Image loading="lazy" class="w-6 h-6" src={youtube} alt="youtube" />
               </Link>
             </div>
           </div>
@@ -67,12 +76,12 @@ const t = useTranslations(lang);
     </div>
     <div class="max-w-[1304px] w-screen mx-auto px-8 bg-sky-900 py-4 justify-between items-center inline-flex">
       <p class="inline-flex text-lg font-medium text-white">
-        Copyright © 2024 - AmeXio Fuse is part of <img loading="lazy" class="pl-2" width={114} height={24} src="/logos/Amexio_White.svg" alt="Amexio"/>
+        Copyright © 2024 - AmeXio Fuse is part of <Image loading="lazy" class="pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
       </p>
       <div class="relative flex items-center justify-end gap-8">
           <Link class="text-base font-medium text-white underline" href={`/${lang}/privacy/`}>Privacy policy</Link>
           <Link class="text-base font-medium text-white underline" href={`/${lang}/cookies/`}>Cookies</Link>
-          <img loading="lazy" class="w-6 h-6" src="/logos/icon_blue.svg" alt="">
+          <Image loading="lazy" class="w-6 h-6" src={iconBlue} alt="" />
           <LanguagePicker />
       </div>
     </div>

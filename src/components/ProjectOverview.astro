@@ -1,0 +1,28 @@
+---
+import ProjectPreview from './ProjectPreview.astro'
+import Button from './ui/Button.astro';
+
+---
+<div class="relative flex flex-row py-20 mb-60 mr-16 pr-8 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
+    <div class="sticky flex flex-col items-start w-3/12 gap-2 h-fit top-40">
+      <h2 class="text-4xl font-bold">Our Projects</h2>
+      <Button class="" style="primary" color="dark">Discover All our projects</Button>
+    </div>
+    <div class="flex flex-col w-9/12 gap-2">
+        <ProjectPreview 
+            projectImage='/src/assets/projects/placeholder.png'
+            smallImage='/src/assets/projects/placeholder_small.png' 
+            name="KBC" 
+            content="Exceptional content lives at the heart of every great digital experience."/>
+        <ProjectPreview 
+            projectImage='/src/assets/projects/placeholder.png'
+            smallImage='/src/assets/projects/placeholder_small.png' 
+            name="KBC" 
+            content="Exceptional content lives at the heart of every great digital experience."/>
+        <ProjectPreview 
+            projectImage='/src/assets/projects/placeholder.png'
+            smallImage='/src/assets/projects/placeholder_small.png' 
+            name="KBC" 
+            content="Exceptional content lives at the heart of every great digital experience."/>
+    </div>
+</div>

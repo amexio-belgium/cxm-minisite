@@ -1,6 +1,8 @@
 ---
-import Image from "astro/components/Image.astro"
+import type { ImageMetadata } from 'astro';
+
 import Button from './ui/Button.astro';
+import { Image } from 'astro:assets';
 
 interface Props {
     projectImage: string;
@@ -21,17 +23,23 @@ const {
     link,
     ...rest
 } = Astro.props;
+
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
+if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+
 ---
 
 <div {...rest} class="relative w-full h-[520px] mb-8">
     <div class="w-full h-[470px] left-0 top-0 absolute rounded-2xl overflow-hidden flex-col justify-start items-start inline-flex">
-      <Image src={projectImage} class="w-full " loading="lazy" width={790} height={470} alt={name}/>
+      <Image src={images[projectImage]()} class="w-full" loading="lazy" width={790} height={470} alt={name}/>
     </div>
 
     <div class="absolute flex flex-col max-w-[542px] gap-8 p-4 mr-16 text-white bg-blue-800 border shadow-sm items-start justify-start -bottom-3 right-8 shadow-blue-200 bg-gradient-to-l md:mr-0 rounded-2xl border-quaternary">
         <div class="flex items-center justify-between w-full">
             <h4 class="text-2xl font-bold">{name}</h4>
-            {projectImage && <Image loading="eager" src={projectImage} class="rounded-full w-14 h-14" width={56} height={56} alt={name} /> }
+            {projectImage && <Image loading="eager" src={images[projectImage]()}  class="rounded-full w-14 h-14" width={56} height={56} alt={name} /> }
         </div>
         <p class="text-sm" set:html={content}></p>
         <Button class="" link={link} style="secondary" color="dark">Discover more about {name}</Button>

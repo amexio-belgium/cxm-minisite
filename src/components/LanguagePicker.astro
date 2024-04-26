@@ -1,12 +1,14 @@
 ---
 import { languages } from '../i18n/consts';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl } from '../i18n/utils';
 import Link from './ui/Link.astro';
+import iconWorld from '../assets/icons/world.svg'
+import { Image } from 'astro:assets';
 
 const currentLang = getLangFromUrl(Astro.url);
 ---
 <button id="currentlang" class="inline-flex gap-2 text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
-  <img class="w-6 h-6" src="/icons/world.svg" alt="world">
+  <Image class="w-6 h-6" src={iconWorld} alt="world" />
   {languages[currentLang]}
 </button>
 <ul class="absolute bottom-0 hidden p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/70 rounded-xl language-toggle">
