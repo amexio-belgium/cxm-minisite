@@ -1,5 +1,4 @@
 ---
-import LanguagePicker from '../components/LanguagePicker.astro';
 import { Image } from 'astro:assets';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
@@ -12,6 +11,7 @@ import twitter from "../assets/icons/twitter.svg"
 import linkedin from "../assets/icons/linkedin.svg"
 import iconBlue from "../assets/logos/icon_blue.svg"
 import logoWhite from "../assets/logos/Amexio_White.svg"
+import LanguageMenu from './LanguageMenu';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -82,7 +82,7 @@ const t = useTranslations(lang);
           <Link class="text-base font-medium text-white underline" href={`/${lang}/privacy/`}>Privacy policy</Link>
           <Link class="text-base font-medium text-white underline" href={`/${lang}/cookies/`}>Cookies</Link>
           <Image loading="lazy" class="w-6 h-6" src={iconBlue} alt="" />
-          <LanguagePicker />
+          <LanguageMenu currentLang={lang} />
       </div>
     </div>
 </footer>

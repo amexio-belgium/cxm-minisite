@@ -4,6 +4,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import HeaderLink from './HeaderLink.astro';
 import logoImage from '../assets/logos/Amexio_Fuse_Horizontal.svg';
 import { Image } from 'astro:assets';
+import LanguageMenu from './LanguageMenu';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
