@@ -4,6 +4,11 @@
       "strictNullChecks": true,
       "allowJs": true,
       "baseUrl": ".",
+      "paths": {
+        "@components/*": ["src/components/*"],
+        "@layouts/*": ["src/layouts/*"],
+        "@assets/*": ["src/assets/*"]
+      },
       "jsx": "react-jsx",
       "jsxImportSource": "@builder.io/qwik"
     }

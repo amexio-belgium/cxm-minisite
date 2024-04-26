@@ -1,10 +1,10 @@
 ---
-import FormattedDate from '../../../components/FormattedDate.astro';
 import { getCollection } from 'astro:content';
 import { i18nParams } from '../../../i18n/consts'
-import Base from '../../../layouts/Base.astro';
-import HeroHeader from '../../../components/HeroHeader.astro';
-import Button from '../../../components/ui/Button.astro';
+import Base from '@layouts/Base.astro';
+import HeroHeader from '@components/HeroHeader.astro';
+import Button from '@components/ui/Button.astro';
+import FormattedDate from '@components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
 const { lang } = Astro.params;

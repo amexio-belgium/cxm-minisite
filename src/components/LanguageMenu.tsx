@@ -1,7 +1,6 @@
 import { component$, useSignal, $, useOnDocument } from '@builder.io/qwik';
 import { languages } from '../i18n/consts';
 import iconWorld from '../assets/icons/world.svg'
-import Link from './ui/Link.astro';
 
 interface languagesProps {
     currentLang: string
@@ -12,7 +11,7 @@ const LanguageMenu = component$((props: languagesProps) => {
 
     useOnDocument(
         "click",
-        $((event: Event) => {
+        $(() => {
             if(isVisible.value === true) {
                 isVisible.value = false;
             }

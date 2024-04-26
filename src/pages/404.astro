@@ -1,8 +1,8 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '@layouts/Base.astro';
 import { i18nParams } from '../i18n/consts'
 import { useTranslations } from '../i18n/utils';
-import Button from '../components/ui/Button.astro';
+import Button from '@components/ui/Button.astro';
 
 export function getStaticPaths() {
 	return i18nParams;

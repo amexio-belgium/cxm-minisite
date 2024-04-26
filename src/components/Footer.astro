@@ -2,16 +2,16 @@
 import { Image } from 'astro:assets';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import FooterLink from './FooterLink.astro'
 import Newsletter from './Newsletter.astro'
-import facebook from "../assets/icons/facebook.svg"
-import youtube from "../assets/icons/youtube.svg"
-import twitter from "../assets/icons/twitter.svg"
-import linkedin from "../assets/icons/linkedin.svg"
-import iconBlue from "../assets/logos/icon_blue.svg"
-import logoWhite from "../assets/logos/Amexio_White.svg"
 import LanguageMenu from './LanguageMenu';
+import facebook from "@assets/icons/facebook.svg"
+import youtube from "@assets/icons/youtube.svg"
+import twitter from "@assets/icons/twitter.svg"
+import linkedin from "@assets/icons/linkedin.svg"
+import iconBlue from "@assets/logos/icon_blue.svg"
+import logoWhite from "@assets/logos/Amexio_White.svg"
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

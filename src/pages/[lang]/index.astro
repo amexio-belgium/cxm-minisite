@@ -2,10 +2,10 @@
 import { i18nParams } from '../../i18n/consts'
 import { useTranslations } from '../../i18n/utils';
 import { Image } from 'astro:assets';
-import Base from '../../layouts/Base.astro';
-import HeroHeader from '../../components/HeroHeader.astro';
-import ProjectOverview from '../../components/ProjectOverview.astro'
-import painPoint from '../../assets/icons/painpoint.svg';
+import Base from '@layouts/Base.astro';
+import HeroHeader from '@components/HeroHeader.astro';
+import ProjectOverview from '@components/ProjectOverview.astro'
+import painPoint from '@assets/icons/painpoint.svg';
 
 export function getStaticPaths() {
 	return i18nParams;
