@@ -24,24 +24,35 @@ const {
     ...rest
 } = Astro.props;
 
-
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
 if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
 if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-
 ---
 
-<div {...rest} class="relative w-full h-[520px] mb-8">
-    <div class="w-full h-[470px] left-0 top-0 absolute rounded-2xl overflow-hidden flex-col justify-start items-start inline-flex">
-      <Image src={images[projectImage]()} class="w-full" loading="lazy" width={790} height={470} alt={name}/>
+<div {...rest} class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[470px] mb-8 shadow-xl">
+    <div class="p-8 h-1/2 lg:h-full w-full lg:w-1/2">
+        <h4 class="text-2xl font-bold mb-2">{name}</h4>
+        <p class="lg:text-xl" set:html={content}></p>
+        <Button class="" link={link} style="tertiary" color="dark">Discover more about {name}</Button>
     </div>
-
-    <div class="absolute flex flex-col max-w-[542px] gap-8 p-4 mr-16 text-white bg-blue-800 border shadow-sm items-start justify-start -bottom-3 right-8 shadow-blue-200 bg-gradient-to-l md:mr-0 rounded-2xl border-quaternary">
-        <div class="flex items-center justify-between w-full">
-            <h4 class="text-2xl font-bold">{name}</h4>
-            {projectImage && <Image loading="eager" src={images[projectImage]()}  class="rounded-full w-14 h-14" width={56} height={56} alt={name} /> }
-        </div>
-        <p class="text-sm" set:html={content}></p>
-        <Button class="" link={link} style="secondary" color="dark">Discover more about {name}</Button>
-    </div>
+    <div class="mask-project w-full lg:w-3/4 h-1/2 lg:h-full right-0 bottom-0 md:absolute overflow-hidden flex-col justify-start items-start inline-flex">
+      <Image src={images[projectImage]()} class="w-full h-full" loading="lazy" width={790} height={470} alt={name}/>
+      {smallImage && <Image loading="eager" src={images[smallImage]()}  class="absolute top-8 right-8 rounded-full w-20 h-auto" width={56} height={56} alt={name} /> }
+    </div> 
 </div>
+
+<style>
+    .mask-project {
+        mask-image: url("/background/mask.svg");
+        mask-size: cover; 
+        mask-size: 200% auto;
+        mask-position: top right;
+    }
+    @media only screen and (min-width: 768px) {
+        .mask-project {
+            mask-size: cover; 
+            mask-position: unset;
+        }
+    }
+    
+</style>

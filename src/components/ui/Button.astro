@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 interface Props {
   size?: "md" | "lg";
   icon?: boolean;
-  style?: "primary" | "secondary";
+  style?: "primary" | "secondary" | "tertiary";
   color?: "light" | "dark";
   class?: string;
   link?: string;
@@ -37,6 +37,10 @@ const styles = {
       "bg-transparant text-tertiary border border-white hover:border-tertiary box-border focus-visible:ring-tertiary ring-black ring-offset-black",
     secondary_light:
       "bg-transparant text-black border border-blue-100 hover:border-blue-900  box-border focus-visible:ring-orange ring-white ring-offset-white",
+    tertiary_light:
+      "text-black text-sm mt-3",
+    tertiary_dark:
+      "text-black text-sm mt-3"
 };
 
 const iconFill = {
@@ -55,7 +59,7 @@ const iconFill = {
   {...rest}
   class:list={[
     "font-medium inline-flex items-center flex-row gap-2 text-center rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-2 ring-offset-2",
-    sizes[size],
+    style !== "tertiary" ? sizes[size]: '',
     styles[style + "_" + color],
     className,
   ]}
@@ -67,4 +71,9 @@ const iconFill = {
     </svg> 
   }
   <slot />
+  {
+    style == "tertiary" && <span class="text-xl -mt-1">
+      &#8250;
+    </span>
+  }
 </a>
