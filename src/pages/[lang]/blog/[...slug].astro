@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -22,10 +23,10 @@ const { Content } = await post.render();
 
 ---
 <Base {...post.data}>
-	<div class="prose container mx-auto py-20" >
-		<img class="rounded-t-2xl" width={720} height={360} src={post.data.heroImage} alt="" transition:name={post.slug} />
-		<h1 transition:name={post.slug + "_title"}>{post.data.title}</h1>
-		<p class="date">
+	<div class="prose prose-invert mx-auto py-20 text-white">
+		<Image class="rounded-t-3xl" width={720} height={360} src={post.data.heroImage} alt="" transition:name={post.slug} />
+		<h1 class="text-bold text-3xl text-white" transition:name={post.slug + "_title"}>{post.data.title}</h1>
+		<p class="text-sm">
 			<FormattedDate date={post.data.pubDate} transition:name={post.slug + "_date"} />
 		</p>
 		<Content />
