@@ -6,6 +6,7 @@ export default {
 	theme: {
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],
+		  serif: ['Contane', 'serif']
 		},
 		colors: {
 			'transparent': 'transparent',
