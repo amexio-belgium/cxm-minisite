@@ -1,0 +1,32 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '@layouts/Base.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('services');
+	const paths = posts.map((post) => {
+		const [lang, ...slug] = post.slug.split('/');
+		return { 
+			params: { lang, slug: slug.join('/') || undefined }, 
+			props: post 
+		};
+	});
+	return paths;
+}
+
+type Props = CollectionEntry<'services'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+---
+<Base {...post.data}>
+	<div class="prose prose-invert mx-auto py-20 text-white">
+		<Image class="rounded-t-3xl" width={720} height={360} src={post.data.heroImage} alt="" transition:name={post.slug} />
+		<h1 class="text-bold text-3xl text-white" transition:name={post.slug + "_title"}>{post.data.title}</h1>
+		<p class="text-sm">
+		</p>
+		<Content />
+	</div>
+</Base>

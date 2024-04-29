@@ -12,19 +12,28 @@ const blog = defineCollection({
 	}),
 });
 
-const project = defineCollection({
+const work = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
 		draft: z.boolean().optional(),
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
+		heroImage: z.string(),
+	}),
+});
+
+const service = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		draft: z.boolean().optional(),
 		heroImage: z.string(),
 	}),
 });
 
 export const collections = {
   'blog': blog,
-  'cases': project
+  'cases': work,
+  'services': service
 };
