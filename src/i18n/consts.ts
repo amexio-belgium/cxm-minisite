@@ -19,6 +19,7 @@ export const defaultLang = 'en';
 
 export const ui = {
     en: {
+        'main.skiplink': 'Skip to main content',
         'nav.services': 'Services',
         'nav.about': 'About',
         'nav.contact': 'Contact',
@@ -44,6 +45,7 @@ export const ui = {
         'contact.button': 'Contact Now'
     },
     fr: {
+        'main.skiplink': 'Skip to main content',
         'nav.services': 'Services',
         'nav.about': 'About',
         'nav.contact': 'Contact',
@@ -66,6 +68,7 @@ export const ui = {
         'contact.button' : 'Contact Now'
     },
     nl: {
+        'main.skiplink': 'Skip to main content',
         'nav.services': 'Services',
         'nav.about': 'About',
         'nav.contact': 'Contact',

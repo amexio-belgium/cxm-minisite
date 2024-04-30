@@ -1,0 +1,74 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { href, class: className, ...props } = Astro.props;
+---
+
+<a
+    href={href}
+    class:list={[
+        "sr-only focus:not-sr-only bg-yellow-500 text-black focus:px-4 focus:py-4 focus:block js-skiplink",
+        className,
+    ]}
+    {...props}
+>
+    <slot />
+</a>
+<script type="module">
+    (function () {
+        function setFocus($element, options = {}) {
+            const isFocusable = $element.getAttribute("tabindex");
+
+            if (!isFocusable) {
+                $element.setAttribute("tabindex", "-1");
+            }
+
+            /**
+             * Handle element focus
+             */
+            function onFocus() {
+                $element.addEventListener("blur", onBlur, { once: true });
+            }
+
+            /**
+             * Handle element blur
+             */
+            function onBlur() {
+                options.onBlur?.call($element);
+
+                if (!isFocusable) {
+                    $element.removeAttribute("tabindex");
+                }
+            }
+
+            // Add listener to reset element on blur, after focus
+            $element.addEventListener("focus", onFocus, { once: true });
+
+            // Focus element
+            options.onBeforeFocus?.call($element);
+            $element.focus();
+        }
+        const initializeSkipLink = function (skiplink) {
+            const targetId = skiplink.getAttribute("href").split("#").pop();
+            const targetEl = document.getElementById(targetId);
+            skiplink.addEventListener("click", () =>
+                setFocus($linkedElement, {
+                    onBeforeFocus() {
+                        $linkedElement.classList.add("outline-none");
+                    },
+                    onBlur() {
+                        $linkedElement.classList.remove("outline-none");
+                    },
+                }),
+            );
+        };
+
+        const skiplinks = document.querySelectorAll(".js-skiplink");
+
+        [...skiplinks].forEach((skipLink) => {
+            initializeSkipLink(skipLink);
+        });
+    })();
+</script>
