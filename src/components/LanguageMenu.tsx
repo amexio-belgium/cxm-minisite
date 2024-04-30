@@ -24,7 +24,7 @@ const LanguageMenu = component$((props: languagesProps) => {
                 <ul class="absolute bottom-0 p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/70 rounded-xl">
                     {Object.entries(languages).map(([lang, label]) => (
                         <li>
-                            <a class="text-white hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary" href={`/${lang}/`}>{label}</a>
+                            <a class="text-white hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary" href={`/${lang}/`} hreflang={`${lang}`} lang={`${lang}`}>{label}</a>
                         </li>
                     ))}
                 </ul>
