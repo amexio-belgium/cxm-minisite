@@ -9,7 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
 
 ---
-<html lang={lang} data-theme="light" >
+<html lang={lang} >
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
         <ViewTransitions />

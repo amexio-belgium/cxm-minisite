@@ -1,6 +1,6 @@
 ---
 title: 'Third post'
-description: 'Lorem ipsum dolor sit amet'
+description: 'LLorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.'
 pubDate: 'Jul 22 2022'
 heroImage: '/blog-placeholder-2.jpg'
 ---
