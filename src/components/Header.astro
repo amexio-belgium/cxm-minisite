@@ -35,7 +35,7 @@ const t = useTranslations(lang);
 		</div>
 	</div>
 </nav>
-<div class="fixed left-0 z-10 hidden w-screen border-b border-blue-500 md:hidden backdrop-blur navmenu-toggle md:bg-transparent md:static md:shadow-none border-opacity-60 md:border-0 top-24 md:block md:w-2/4" id="navbar-default">
+<div class="fixed left-0 z-10 hidden w-screen shadow-lg shadow-blue-100/20 md:hidden md:shadow-none backdrop-blur navmenu-toggle md:bg-transparent border-opacity-60 md:border-0 top-24 md:w-2/4" id="navbar-default">
 	<ul class="flex flex-col items-start gap-0 font-medium md:bg-transparent md:justify-end md:gap-8 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0">
 		<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
 		<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
