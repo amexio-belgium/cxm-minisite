@@ -31,14 +31,18 @@ const LanguageMenu = component$((props: languagesProps) => {
 
     const handleLanguageMenuBlur = $((event: FocusEvent) => {
         const languageMenu = document.getElementById(languageMenuId);
-        if (!languageMenu?.contains(event.relatedTarget as Node)) {
+        const languageTrigger = document.getElementById(languageTriggerId);
+
+        if (languageMenu?.contains(event.relatedTarget as Node) || (event.relatedTarget as Node) == languageTrigger) {
+            return false;
+        } else {
             isVisible.value = false;
         }
     });
     
     return (
         <>
-            <button id="{languageTriggerId}"
+            <button id={languageTriggerId}
             onClick$={() => {
                 isVisible.value = !isVisible.value;
             }} 
