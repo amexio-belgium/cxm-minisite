@@ -17,55 +17,58 @@ const { href, class: className, ...props } = Astro.props;
     <slot />
 </a>
 <script type="module">
-    function setFocus($element, options = {}) {
-        const isFocusable = $element.getAttribute("tabindex");
-
-        if (!isFocusable) {
-            $element.setAttribute("tabindex", "-1");
-        }
-
-        /**
-         * Handle element focus
-         */
-        function onFocus() {
-            $element.addEventListener("blur", onBlur, { once: true });
-        }
-
-        /**
-         * Handle element blur
-         */
-        function onBlur() {
-            options.onBlur?.call($element);
+    (function () {
+        function setFocus($element, options = {}) {
+            const isFocusable = $element.getAttribute("tabindex");
 
             if (!isFocusable) {
-                $element.removeAttribute("tabindex");
+                $element.setAttribute("tabindex", "-1");
             }
+
+            /**
+             * Handle element focus
+             */
+            function onFocus() {
+                $element.addEventListener("blur", onBlur, { once: true });
+            }
+
+            /**
+             * Handle element blur
+             */
+            function onBlur() {
+                options.onBlur?.call($element);
+
+                if (!isFocusable) {
+                    $element.removeAttribute("tabindex");
+                }
+            }
+
+            // Add listener to reset element on blur, after focus
+            $element.addEventListener("focus", onFocus, { once: true });
+
+            // Focus element
+            options.onBeforeFocus?.call($element);
+            $element.focus();
         }
+        const initializeSkipLink = function (skiplink) {
+            const targetId = skiplink.getAttribute("href").split("#").pop();
+            const targetEl = document.getElementById(targetId);
+            skiplink.addEventListener("click", () =>
+                setFocus($linkedElement, {
+                    onBeforeFocus() {
+                        $linkedElement.classList.add("outline-none");
+                    },
+                    onBlur() {
+                        $linkedElement.classList.remove("outline-none");
+                    },
+                }),
+            );
+        };
 
-        // Add listener to reset element on blur, after focus
-        $element.addEventListener("focus", onFocus, { once: true });
+        const skiplinks = document.querySelectorAll(".js-skiplink");
 
-        // Focus element
-        options.onBeforeFocus?.call($element);
-        $element.focus();
-    }
-    const initializeSkipLink = function(skiplink){
-        const targetId= skiplink.getAttribute('href').split('#').pop();
-        const targetEl = document.getElementById(targetId);
-        skiplink.addEventListener('click', () =>
-      setFocus($linkedElement, {
-        onBeforeFocus() {
-          $linkedElement.classList.add('outline-none')
-        },
-        onBlur() {
-          $linkedElement.classList.remove('outline-none')
-        }
-      })
-    )};
-
-    const skiplinks= document.querySelectorAll('.js-skiplink');
-
-    [...skiplinks].forEach(skipLink=> {
-        initializeSkipLink(skipLink);
-    });
+        [...skiplinks].forEach((skipLink) => {
+            initializeSkipLink(skipLink);
+        });
+    })();
 </script>
