@@ -26,7 +26,7 @@ const LanguageMenu = component$((props: languagesProps) => {
             }} 
             aria-expanded={isVisible.value}
             class="inline-flex gap-2 text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
-                <img class="w-6 h-6" src={iconWorld.src} alt="world" />
+                <img class="w-6 h-6" src={iconWorld.src} alt="" />
                 {languages[props.currentLang]}
             </button>
             {isVisible.value ? (
