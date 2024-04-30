@@ -20,6 +20,15 @@ const LanguageMenu = component$((props: languagesProps) => {
     
     return (
         <>
+            <button 
+            onClick$={() => {
+                isVisible.value = !isVisible.value;
+            }} 
+            aria-expanded={isVisible.value}
+            class="inline-flex gap-2 text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
+                <img class="w-6 h-6" src={iconWorld.src} alt="world" />
+                {languages[props.currentLang]}
+            </button>
             {isVisible.value ? (
                 <ul class="absolute bottom-0 p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/70 rounded-xl">
                     {Object.entries(languages).map(([lang, label]) => (
@@ -29,14 +38,6 @@ const LanguageMenu = component$((props: languagesProps) => {
                     ))}
                 </ul>
             ) : null}
-            <button 
-            onClick$={() => {
-                isVisible.value = !isVisible.value;
-            }} 
-            class="inline-flex gap-2 text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
-                <img class="w-6 h-6" src={iconWorld.src} alt="world" />
-                {languages[props.currentLang]}
-            </button>
         </>
     );
 });
