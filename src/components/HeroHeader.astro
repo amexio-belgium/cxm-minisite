@@ -18,13 +18,13 @@ const {
 } = Astro.props;
 ---
 <div class="relative py-20 text-white pb-60 hero-gradient">
-    <h1 class="text-white text-[70px] leading-[105px] font-bold mb-11" 
+    <h1 class="font-serif text-3xl font-bold text-white mb-11" 
         set:html={headline}>
     </h1>
     <div class="relative grid grid-cols-1 gap-12 md:gap-6 grid-area md:grid-cols-12">
         <div class="mx-auto text-left grid-a">
             { text && 
-                <p class="text-3xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
+                <p class="text-xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
             }
         </div>
 
@@ -49,14 +49,13 @@ const {
             />
         }    
     </div>
-    { !homepage && 
-        ( backgroundImage ? 
+    { 
+        backgroundImage ? 
             <img src="backgroundImage" width={1200} height={700}class="absolute top-0 object-cover h-auto w-xl -right-1/4" />
         :
-            <div class="absolute top-0 object-cover h-auto w-xl -right-1/4">
+            <div class="absolute object-cover h-auto top-10 -z-10 w-xl -right-1/4">
                 <LogoSlant/>
             </div>
-        )
     }
 </div>
 

@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Button from '@components/ui/Button.astro';
+import { Image } from 'astro:assets';
+
+const { lang } = Astro.params;
+
+const posts = (await getCollection('blog', 
+    (post) => {
+        console.log( post.slug)
+        return !post.data.draft && getPostLangAndSlug(post).lang === lang
+    }))
+    .sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    )
+    .splice(0,2);
+
+function getPostLangAndSlug(post) {
+	const [lang, ...slug] = post.slug.split('/');
+	return {lang, slug}
+}
+---
+<div class="relative flex flex-col pt-20 pb-10 pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
+    <h2 class="mb-8 font-serif text-2xl">Latest insights</h2>
+    <div class="flex flex-col w-full gap-8 lg:flex-row">
+        {
+            posts.map((post) => (
+                <div class="relative w-full h-auto mb-8 overflow-hidden shadow-sm shadow-primary/20 bg-primary rounded-2xl">
+                    <div class="w-full mask-blog h-1/2">
+                        <Image src={post.data.heroImage} class="h-full min-w-full" loading="lazy" width={580} height={340} alt={post.data.title}/>
+                    </div> 
+                    <div class="flex flex-col justify-between w-full p-8 pt-16 text-white h-1/2">
+                        <div>
+                           <h3 class="mb-2 font-serif text-xl">{post.data.title}</h3>
+                            <p class="text-base" set:html={post.data.description}></p>
+                        </div>
+                        <Button class="mt-8" link={`/blog/${getPostLangAndSlug(post).slug}/`} style="tertiary" color="light">Uncover this insight</Button>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    .mask-blog {
+        clip-path: polygon( 0% 0%,0% 80.904%,0% 80.904%,1.125% 82.915%,2.502% 85.175%,4.119% 87.582%,5.967% 90.033%,8.031% 92.427%,10.301% 94.661%,12.766% 96.632%,15.413% 98.238%,18.231% 99.377%,21.208% 99.947%,21.208% 100%,100% 100%,100% 0%,0% 0% );
+        mask-size: cover; 
+        mask-size: 100% auto;
+        mask-position: bottom left;
+        width: 101%;
+    }
+
+</style>

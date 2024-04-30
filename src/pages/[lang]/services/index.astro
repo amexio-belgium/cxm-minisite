@@ -24,22 +24,22 @@ function getPostLangAndSlug(service) {
         headline="Our work"
         text="We specialize in delivering cutting-edge Customer Experience Management solutions tailored for your business."
     />
-    <div class="md:mx-auto py-20">
+    <div class="py-20 md:mx-auto">
         <div class="flex flex-wrap items-center justify-center gap-4">
             {
 				services.map((service) => (
 					getPostLangAndSlug(service).lang === lang &&
-					<a href={`./services/${getPostLangAndSlug(service).slug}/`} >
-						<div class="w-1/3 bg-light-blue-100 rounded-3xl overflow-hidden shadow-xl">
+					<a href={`./${getPostLangAndSlug(service).slug}/`} >
+						<div class="w-1/3 overflow-hidden shadow-xl bg-light-blue-100 rounded-3xl">
 							<figure class="m-0">
 								<Image class="rounded-t-2xl" width={720} height={360} src={service.data.heroImage} alt="" transition:name={service.slug} /> 
 							</figure>
 							<div class="flex flex-col p-4">
-								<h2 class="text-bold text-3xl" transition:name={service.slug + "_title"}>{service.data.title}</h2>
+								<h2 class="text-3xl text-bold" transition:name={service.slug + "_title"}>{service.data.title}</h2>
 								<p class="text-sm">
 									{service.data.description}
 								</p>
-								<div class="card-actions justify-end">
+								<div class="justify-end card-actions">
 									<Button>Read More</Button>
 								</div>
 							</div>

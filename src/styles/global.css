@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'Contane';
+    src: url('ContaneMediumRegular.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Contane';
+    src: url('ContaneRegular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 h1 mark {
     color: #FFC256;
     background-color: unset;
