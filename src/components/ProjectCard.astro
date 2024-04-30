@@ -31,13 +31,13 @@ if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in gl
 
 <div {...rest} class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[470px] mb-8 shadow-xl">
     <div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
-        <h3 class="mb-2 font-serif text-2xl">{name}</h3>
-        <p class="lg:text-xl" set:html={content}></p>
+        <h3 class="mb-2 font-serif text-xl">{name}</h3>
+        <p class="text-base" set:html={content}></p>
         <Button class="" link={link} style="tertiary" color="dark">Discover more about {name}</Button>
     </div>
     <div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-3/4 h-1/2 lg:h-full md:absolute">
       <Image src={images[projectImage]()} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={name}/>
-      {smallImage && <Image loading="eager" src={images[smallImage]()}  class="absolute w-20 h-auto rounded-full top-8 right-8" width={56} height={56} alt={name} /> }
+      {smallImage && <Image loading="eager" src={images[smallImage]()}  class="absolute w-10 h-auto md:w-20 top-4 right-4 md:top-8 md:right-8" width={56} height={56} alt={name} /> }
     </div> 
 </div>
 
@@ -48,6 +48,7 @@ if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in gl
         mask-size: 200% auto;
         mask-position: top right;
     }
+    
     @media only screen and (min-width: 768px) {
         .mask-project {
             mask-size: cover; 

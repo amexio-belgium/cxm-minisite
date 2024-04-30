@@ -4,6 +4,14 @@ const plugin = require('tailwindcss/plugin')
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
+		fontSize: {
+			'sm': ['14px', 'normal'],
+			'base': ['18px', 'normal'],
+			'lg': ['20px', '28px'],
+			'xl': ['28px', '44px'],
+			'2xl': ['44px', '66px'],
+			'3xl': ['60px', '90px'],
+		},
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],
 		  serif: ['Contane', 'serif']
