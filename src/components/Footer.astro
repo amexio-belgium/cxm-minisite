@@ -48,16 +48,16 @@ const t = useTranslations(lang);
           <FooterLink href={`/${lang}/about/`}>{t('nav.about')}</FooterLink>
           <FooterLink href={`/${lang}/contact/`}>{t('nav.contact')}</FooterLink>
           <div class="z-50 inline-flex items-center justify-start h-12 gap-2 md:w-1/3">
-            <Link href="" rel="noopener">
+            <Link href="https://www.facebook.com/Amexio/" rel="noopener">
               <Image loading="lazy" class="w-6 h-6" src={facebook} alt="facebook" />
             </Link>
-            <Link href="" rel="noopener">
+            <Link href="https://twitter.com/AmexioExpertECM" rel="noopener">
               <Image loading="lazy" class="w-6 h-6" src={twitter} alt="X (Twitter)" />
             </a>
-            <Link href="" rel="noopener">
+            <Link href="https://www.linkedin.com/company/amexio/mycompany/verification/" rel="noopener">
               <Image loading="lazy" class="w-6 h-6" src={linkedin} alt="LinkedIn" />
             </Link>
-            <Link href="" rel="noopener">
+            <Link href="https://www.youtube.com/channel/UC3Gu3APHTiyV3ZjVihs488w" rel="noopener">
               <Image loading="lazy" class="w-6 h-6" src={youtube} alt="youtube" />
             </Link>
           </div>
@@ -69,7 +69,9 @@ const t = useTranslations(lang);
   <div class="relative z-50 flex flex-col items-start justify-start w-full bg-blue-900">
     <div class="max-w-[1304px] w-screen mx-auto gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
       <p class="flex flex-col items-center gap-2 text-base font-medium text-center text-white md:text-left md:text-lg md:flex-row xl:w-1/2">
-        Copyright © 2024 - AmeXio Fuse is part of <Image loading="lazy" class="md:pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
+        {t('footer.copyright')} <Link href="https://www.amexio.fr/" rel="noopener">
+          <Image loading="lazy" class="md:pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
+        </Link>
       </p>
       <div class="relative flex flex-wrap items-center justify-center gap-8 lg:justify-end md:mt-0 xl:w-1/2">
         <Link class="text-base font-medium text-white underline" href={`/${lang}/privacy/`}>{t('footer.privacy')}</Link>

@@ -37,8 +37,8 @@ if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/ass
         "text-black z-20 rounded-xl flex-col flex items-start ",
         styles[style],
       ]}>
-        <h4 class="font-serif text-xl">{title}</h4>
-        <p>{text}</p>
+        <h4 class="font-serif text-xl" set:html={title}></h4>
+        <p set:html={text}></p>
         {buttonText && <Button class="mt-6" color="light" href={buttonLink}>{buttonText}</Button>}
     </div>
 </div>
