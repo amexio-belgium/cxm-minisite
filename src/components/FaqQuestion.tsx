@@ -40,13 +40,13 @@ const FaqQuestion = component$((props: Props) => {
     });
     
     return (
-        <div class="border-b border-gray-500 justify-start items-start gap-2 inline-flex flex-col pt-6">
-            <div class="flex justify-between w-full gap-2 mb-6" id={faqTriggerId}
-            onClick$={() => {
-                isVisible.value = !isVisible.value;
-            }} 
-            aria-expanded={isVisible.value}>
-                <b class="text-lg">{props.headline}</b>
+        <div class="border-b border-gray-500 justify-start items-start gap-2 inline-flex flex-col py-6">
+            <div class="flex justify-between w-full gap-2" id={faqTriggerId}
+                onClick$={() => {isVisible.value = !isVisible.value;}} 
+                aria-expanded={isVisible.value}>
+                <b class="text-lg">
+                    {props.headline}
+                </b>
                 {isVisible.value ? 
                     <svg class="icon-open"  width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="34" height="34" rx="17" fill="#FFC256"/>
@@ -58,15 +58,13 @@ const FaqQuestion = component$((props: Props) => {
                         <path d="M16.25 17.75H11.75V16.25H16.25V11.75H17.75V16.25H22.25V17.75H17.75V22.25H16.25V17.75Z" fill="#0B1215"/>
                     </svg>
                 }   
-              
             </div>
 
             {isVisible.value ? (
-                <div id={faqId}  window:onKeyUp$={handleKeyUp}  document:onBlur$={handleFaqBlur} class="faq-text flex-col w-full gap-2 pb-6">
-                    <p class="text-lg">{props.text}</p>
+                <div id={faqId} window:onKeyUp$={handleKeyUp}  document:onBlur$={handleFaqBlur} class="faq-text flex-col w-full gap-2 pt-8">
+                    <p class="text-lg" dangerouslySetInnerHTML={props.text}></p>
                 </div>
             ) : null}
-
         </div>
     );
 });

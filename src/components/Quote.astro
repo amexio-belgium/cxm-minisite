@@ -23,7 +23,7 @@ if (!images[profileImage]) throw new Error(`"${profileImage}" does not exist in 
 ---
 <div class:list={[className, "flex flex-col justify-end gap-8 mb-40 md:flex-row"]}>
     <div class="flex flex-col items-center justify-center text-white md:w-4/12 ">
-        <Image class="mb-8 rounded-full aspect-square w-52 h-52" src={images[profileImage]()} alt={name} />
+        <Image loading="lazy" class="mb-8 rounded-full aspect-square w-52 h-52" src={images[profileImage]()} alt={name} />
         <span set:html={name}></span>
         <span class="text-sm" set:html={jobtitle}></span>
     </div>

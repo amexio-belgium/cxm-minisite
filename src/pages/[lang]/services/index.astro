@@ -46,7 +46,7 @@ const t = useTranslations(lang, 'services');
 							</Button>
 						</div>
 						<div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-3/4 h-1/2 lg:h-full md:absolute">
-							<Image src={service.data.heroImage} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={service.data.title}/>
+							<Image loading="lazy" src={service.data.heroImage} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={service.data.title}/>
 						</div> 
 					</div>
 				))
@@ -62,7 +62,7 @@ const t = useTranslations(lang, 'services');
 	<TeaserWithImage 
 	headline={t('explainer.headline')}
 	description={t('explainer.description')}>
-		<Image src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
+		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
 	</TeaserWithImage>
 </Base>
 

@@ -32,7 +32,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
 if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
 ---
 <div class="relative flex flex-col gap-8 my-40 isolate">
-    <Image class="w-full rounded-xl" src={images[image]()}  alt={title} />
+    <Image loading="lazy" class="w-full rounded-xl" src={images[image]()}  alt={title} />
     <div class:list={[
         "text-black z-20 rounded-xl flex-col flex items-start ",
         styles[style],
