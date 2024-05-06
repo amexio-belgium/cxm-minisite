@@ -4,6 +4,8 @@ import { i18nParams } from '../../../i18n/consts'
 import Base from '@layouts/Base.astro';
 import HeroHeader from '@components/HeroHeader.astro';
 import Button from '@components/ui/Button.astro';
+import { useTranslations } from 'src/i18n/utils';
+
 import FormattedDate from '@components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 
@@ -19,12 +21,16 @@ function getPostLangAndSlug(post) {
 	const [lang, ...slug] = post.slug.split('/');
 	return {lang, slug}
 }
+
+const t = useTranslations(lang, 'work');
+
 ---
 <Base>
 	<HeroHeader 
-        headline="Our work"
-        text="We specialize in delivering cutting-edge Customer Experience Management solutions tailored for your business."
-    />
+		headline={t('hero.headline')}
+		text={t('hero.subheadline')}
+	/>
+
     <div class="md:mx-auto py-20">
         <div class="flex flex-wrap items-center justify-center gap-4">
             {

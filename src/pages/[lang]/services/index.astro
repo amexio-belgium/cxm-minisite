@@ -1,11 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import { i18nParams } from '../../../i18n/consts'
+import { useTranslations } from '../../../i18n/utils';
 import Base from '@layouts/Base.astro';
 import HeroHeader from '@components/HeroHeader.astro';
 import Button from '@components/ui/Button.astro';
 import { Image } from 'astro:assets';
-
+import explainer from '@assets/images/explainer.jpg';
 const { lang } = Astro.params;
 
 const services = (await getCollection('services'));
@@ -18,35 +19,62 @@ function getPostLangAndSlug(service) {
 	const [lang, ...slug] = service.slug.split('/');
 	return {lang, slug}
 }
+
+const t = useTranslations(lang, 'services');
 ---
 <Base>
 	<HeroHeader 
-        headline="Our work"
-        text="We specialize in delivering cutting-edge Customer Experience Management solutions tailored for your business."
-    />
-    <div class="py-20 md:mx-auto">
-        <div class="flex flex-wrap items-center justify-center gap-4">
-            {
+		headline={t('hero.headline')}
+		text={t('hero.subheadline')}
+	/>
+	<div class="relative flex flex-col xl:flex-row py-20 gap-8 pr-8 md:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
+		<div class="flex flex-col items-start w-full gap-2 mb-16 xl:sticky xl:w-3/12 h-fit top-40">
+		  <h2 class="mb-2 font-serif text-2xl">{t('overview.headline')}</h2>
+		</div>
+		<div class="flex flex-col w-full gap-2 xl:w-9/12">
+			{
 				services.map((service) => (
 					getPostLangAndSlug(service).lang === lang &&
-					<a href={`./${getPostLangAndSlug(service).slug}/`} >
-						<div class="w-1/3 overflow-hidden shadow-xl bg-light-blue-100 rounded-3xl">
-							<figure class="m-0">
-								<Image class="rounded-t-2xl" width={720} height={360} src={service.data.heroImage} alt="" transition:name={service.slug} /> 
-							</figure>
-							<div class="flex flex-col p-4">
-								<h2 class="text-3xl text-bold" transition:name={service.slug + "_title"}>{service.data.title}</h2>
-								<p class="text-sm">
-									{service.data.description}
-								</p>
-								<div class="justify-end card-actions">
-									<Button>Read More</Button>
-								</div>
-							</div>
+						<div class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[470px] mb-8 shadow-xl">
+						<div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
+							<h3 class="mb-2 font-serif text-xl">{service.data.title}</h3>
+							<p class="text-base" set:html={service.data.description}></p>
+							<Button class="" link={`./${getPostLangAndSlug(service).slug}/`} style="tertiary" color="dark">{service.data.cta || t('overview.backupcta')}</Button>
 						</div>
-					</a>
+						<div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-3/4 h-1/2 lg:h-full md:absolute">
+							<Image src={service.data.heroImage} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={service.data.title}/>
+						</div> 
+					</div>
 				))
 			}
-        </div>
-    </div>	
+		</div>
+	</div>
+
+	<div class="relative flex py-20 justify-between gap-8 mb-60 pl-12 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:left-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
+		<div class="flex flex-col items-center justify-center gap-6 ">
+			<h2 class="font-serif text-2xl text-balance">
+				{t('explainer.headline')}
+			</h2>
+			<p class="text-base font-medium max-w-[65ch]">
+				{t('explainer.description')}
+			</p>
+		</div>
+		<Image src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
+	</div>
 </Base>
+
+<style>
+    .mask-project {
+        clip-path: polygon( 54.806% 0.062%,54.806% 0.062%,53.272% 0.408%,51.853% 1.125%,50.559% 2.116%,49.402% 3.286%,48.392% 4.539%,47.541% 5.779%,46.86% 6.911%,46.36% 7.837%,46.052% 8.464%,45.947% 8.694%,-0.036% 100%,99.927% 99.938%,99.927% 99.938%,99.934% 99.938%,99.942% 99.938%,99.949% 99.938%,99.956% 99.938%,99.964% 99.938%,99.971% 99.938%,99.978% 99.938%,99.985% 99.938%,99.993% 99.938%,100% 99.938%,100% 0.041%,54.806% 0.041% );
+        mask-size: cover; 
+        mask-size: 200% auto;
+        mask-position: top right;
+    }
+    
+    @media only screen and (min-width: 768px) {
+        .mask-project {
+            mask-size: cover; 
+            mask-position: unset;
+        }
+    }
+</style>

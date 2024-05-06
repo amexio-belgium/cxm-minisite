@@ -1,27 +1,36 @@
 ---
 import ProjectPreview from './ProjectCard.astro'
 import Button from './ui/Button.astro';
+import { useTranslations } from '../i18n/utils';
+const { lang } = Astro.params;
+
+const t = useTranslations(lang, 'home');
 ---
 <div class="relative flex flex-col xl:flex-row py-20 pr-8 md:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
     <div class="flex flex-col items-start w-full gap-2 mb-16 xl:sticky xl:w-3/12 h-fit top-40">
-      <h2 class="mb-2 font-serif text-2xl">Our Projects</h2>
-      <Button class="" style="primary" color="dark">Discover All our projects</Button>
+      <h2 class="mb-2 font-serif text-2xl">{t('projectoverview.headline')}</h2>
+      <Button class="" style="primary" color="dark"> {t('projectoverview.button')}</Button>
     </div>
     <div class="flex flex-col w-full gap-2 xl:w-9/12">
         <ProjectPreview 
             projectImage='/src/assets/projects/kbc.jpg'
             smallImage='/src/assets/projects/kbc_logo.png' 
             name="KBC" 
-            content="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."/>
+            content={t('project1.description')}
+            buttonText={t('project1.button')} />
+
         <ProjectPreview 
             projectImage='/src/assets/projects/telenet.jpg'
             smallImage='/src/assets/projects/telenet_logo.png' 
             name="Mediafin" 
-            content="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."/>
+            content={t('project2.description')} 
+            buttonText={t('project2.button')} />
+
         <ProjectPreview 
             projectImage='/src/assets/projects/telenet.jpg'
             smallImage='/src/assets/projects/kbc_logo.png' 
             name="Telenet" 
-            content="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."/>
+            content={t('project3.description')}
+            buttonText={t('project2.button')} />
     </div>
 </div>

@@ -105,7 +105,7 @@ export default {
 			
 			},
 			animation: {
-				'bounce-slow': 'bounceslow 3s ease-in-out infinite',
+				'bounce-slow': 'bounceslow 3s ease-in-out 3',
 			},
 		}
 	},
