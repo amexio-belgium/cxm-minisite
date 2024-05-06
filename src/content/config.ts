@@ -29,6 +29,7 @@ const service = defineCollection({
 		description: z.string(),
 		draft: z.boolean().optional(),
 		heroImage: z.string(),
+		cta: z.string().optional(),
 	}),
 });
 

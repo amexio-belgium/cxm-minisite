@@ -1,6 +1,8 @@
 ---
 import ProfileCard from './ProfileCard.astro';
-import LogoSlant from './elements/LogoSlant.astro'
+import LogoSlant from './elements/LogoSlant.astro';
+import { useTranslations } from '../i18n/utils';
+
 interface Props {
     headline: string;
     text?: string;
@@ -16,6 +18,11 @@ const {
     homepage, 
     backgroundImage
 } = Astro.props;
+
+const { lang } = Astro.params;
+
+const t = useTranslations(lang, 'home');
+
 ---
 <div class="relative py-20 text-white pb-60 hero-gradient">
     <h1 class="font-serif text-3xl font-bold text-white mb-11" 
@@ -30,18 +37,18 @@ const {
 
         { homepage &&
             <ProfileCard 
-                content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
-                name='Voornaam Achternaam'
-                title="tes"
+                content={t('heroprofile1.text')}
+                name="name"
+                title={t('heroprofile1.title')}
                 profileImg='https://via.placeholder.com/50x50'
                 buttonText={buttonText}
                 class='grid-b animation'
             />
             
             <ProfileCard 
-                content="A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future."
-                name='Voornaam Achternaam'
-                title="tes"
+                content={t('heroprofile2.text')}
+                name="name"
+                title={t('heroprofile2.title')}
                 direction='right'
                 profileImg='https://via.placeholder.com/50x50'
                 buttonText={buttonText}

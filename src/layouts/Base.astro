@@ -9,12 +9,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
 
 ---
-<html lang={lang} >
+<html class="overflow-x-clip" lang={lang} >
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
         <ViewTransitions />
     </head>
-    <body class="overflow-x-hidden bg-blue-800">
+    <body class="overflow-x-clip bg-blue-800">
         <Header />
         <main id="main-content" class="max-w-[1304px] mx-auto mt-24 p-8">
             <slot />
