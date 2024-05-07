@@ -2,10 +2,10 @@ export const home = {
     en: {
         'hero.headline': 'Turning your content <mark>into value</mark>',
         'hero.text': 'AmeXio Fuse designs, builds and runs large-scale content platforms to make your business more smart, fast & cost-effective.',
-        'hero.button': 'Get Started',
-        'heroprofile1.text': 'blablabla',
+        'hero.button': 'Book a meeting',
+        'heroprofile1.text': "A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future.",
         'heroprofile1.title': 'test title 1',
-        'heroprofile2.text': 'Hello ik hou van amexio super tof',
+        'heroprofile2.text': "A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future.",
         'heroprofile2.title': 'test title',
         'projectoverview.headline': 'Our projects',
         'projectoverview.button': 'Discover all our Projects',
