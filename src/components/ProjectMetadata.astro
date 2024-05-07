@@ -5,32 +5,35 @@ interface Props {
     duration?: string;
     collaboration?: string;
     services?: string;
-    fullWidth: boolean;
-    class?: string;
 }
 
 const { 
     duration,
     collaboration,
     services,
-    class: className 
 } = Astro.props;
 
 const { lang } = Astro.params;
 const t = useTranslations(lang, 'work');
 ---
 
-<div class="bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full backdrop-blur-sm">
-    <h2 class="text-xl font-serif" set:html={t('metadata.headline')}></h2>
+<div class="from-blue-600/70 to-blue-800/70 shadow-blue-200 bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full backdrop-blur-sm">
+    <h2 class="text-xl font-serif mb-6" set:html={t('metadata.headline')}></h2>
     <ol class="flex flex-row gap-8">
         {
-           duration && <li>{t('metadata.collaboration') + ": " + duration} </li>
+            duration && <li class="peer">
+                {t('metadata.duration') + ": " + duration} 
+            </li>
         } 
         {
-           collaboration && <li>{t('metadata.collaboration') + ": " + collaboration} </li>
+           collaboration && <li class="peer peer-first:before:content-['/'] before:mr-8 before:text-secondary">
+                {t('metadata.collaboration') + ": " + collaboration}
+            </li>
         }
         {
-           services && <li>{t('metadata.collaboration') + ": " + services} </li>
+            services && <li class="peer peer-first:before:content-['/'] before:mr-8 before:text-secondary">
+                {t('metadata.services') + ": " + services} 
+            </li>
         }
     </ol>
     <div class="flex flex-row gap-6">

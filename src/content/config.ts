@@ -16,9 +16,12 @@ const work = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
+		client: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean().optional(),
 		heroImage: z.string(),
+		logo: z.string().optional(),
+		tags: z.string().optional(),
 	}),
 });
 

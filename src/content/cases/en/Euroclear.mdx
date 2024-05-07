@@ -1,8 +1,11 @@
 ---
 title: 'Euroclear'
+client: 'Euroclear'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 02 2022'
+draft: false
 heroImage: '/blog-placeholder-5.jpg'
+logo: '/blog-placeholder-5.jpg'
+tags: 'finance, media, government, retail, manufacturing'
 ---
 import HeroHeader from '@components/HeroHeader.astro';
 import ProjectMetadata from '@components/ProjectMetadata.astro'
@@ -29,8 +32,11 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
 <ProjectMetadata
     duration="12 weeks"
     collaboration='test'
-    services='Development'
-></ProjectMetadata>
+    services='Development'>
+    <Image src={kbc} alt="" class="h-10 w-auto"/>
+    <Image src={telenet} alt="" class="h-10 w-auto"/>
+    <Image src={mediafin} alt="" class="h-10 w-auto"/>
+</ProjectMetadata>
 
 <TeaserWithImage 
 	headline="Why work with us?"
