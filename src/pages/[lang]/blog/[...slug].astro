@@ -22,7 +22,7 @@ const post = Astro.props;
 const { Content } = await post.render();
 
 ---
-<Base {...post.data}>
+<Base {...post.data} title={"Amexio Fuse - " + post.data.title}>
 	<div class="prose prose-invert mx-auto py-20 text-white">
 		<Image class="rounded-t-3xl" width={720} height={360} src={post.data.heroImage} alt="" transition:name={post.slug} />
 		<h1 class="text-bold text-3xl text-white" transition:name={post.slug + "_title"}>{post.data.title}</h1>

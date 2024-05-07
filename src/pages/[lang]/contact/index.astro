@@ -12,7 +12,7 @@ const { lang } = Astro.params;
 const t = useTranslations(lang, 'contact');
 
 ---
-<Base>
+<Base title={t('contact.title')}>
 	<HeroHeader 
 		headline={t('hero.headline')}
 		text={t('hero.subheadline')}

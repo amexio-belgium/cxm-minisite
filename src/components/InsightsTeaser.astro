@@ -8,7 +8,6 @@ const { lang } = Astro.params;
 
 const posts = (await getCollection('blog', 
     (post) => {
-        console.log( post.slug)
         return !post.data.draft && getPostLangAndSlug(post).lang === lang
     }))
     .sort(

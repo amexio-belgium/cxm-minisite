@@ -1,5 +1,6 @@
 export const home = {
     en: {
+        'home.title': "AmeXio Fuse - Home",
         'hero.headline': 'Turning your content <mark>into value</mark>',
         'hero.text': 'AmeXio Fuse designs, builds and runs large-scale content platforms to make your business more smart, fast & cost-effective.',
         'hero.button': 'Book a meeting',

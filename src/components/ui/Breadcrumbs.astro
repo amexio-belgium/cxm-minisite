@@ -1,5 +1,4 @@
 ---
-import title from 'title';
 const paths = Astro.url.pathname.split('/').filter(x => x);
 
 let parts = [
@@ -12,7 +11,7 @@ let parts = [
 paths.forEach((text, i) => {
   const href = `/${paths.slice(0, i + 1).join('/')}`;
   if (i !== 0) {
-    parts.push({ text: title(text.replace(/[-_]/g, ' ')), href })
+    parts.push({ text: text.replace(/[-_]/g, ' '), href })
   }
 })
 ---
@@ -21,7 +20,7 @@ paths.forEach((text, i) => {
         <ol class="flex text-white gap-4" role="list">
             {parts.map(({ text, ...attrs }, index) => (
                 <li class="text-regular flex items-center gap-4" role="listitem">
-                    <a {...attrs}>{text}</a> 
+                    <a {...attrs} class="capitalize">{text}</a> 
                     { index !== parts.length - 1 && 
                     <svg class="w-2 h-4" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.82246 6.50502L0.974251 1.65681C0.867398 1.54995 0.810309 1.41894 0.802982 1.26377C0.795656 1.10861 0.852745 0.970268 0.974251 0.848762C1.09576 0.727257 1.23043 0.666504 1.37827 0.666504C1.52612 0.666504 1.66079 0.727257 1.7823 0.848762L6.79299 5.85948C6.89253 5.95901 6.96244 6.06074 7.0027 6.16468C7.04295 6.2686 7.06308 6.38205 7.06308 6.50502C7.06308 6.62799 7.04295 6.74144 7.0027 6.84536C6.96244 6.9493 6.89253 7.05103 6.79299 7.15056L1.7823 12.1613C1.67544 12.2681 1.54443 12.3252 1.38926 12.3325C1.23409 12.3399 1.09576 12.2828 0.974251 12.1613C0.852745 12.0398 0.791992 11.9051 0.791992 11.7573C0.791992 11.6094 0.852745 11.4747 0.974251 11.3532L5.82246 6.50502Z" fill="#FBFDFE"/>

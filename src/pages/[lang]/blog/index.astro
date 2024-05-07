@@ -26,7 +26,7 @@ function getPostLangAndSlug(post) {
 const t = useTranslations(lang, 'blog');
 
 ---	
-<Base>
+<Base title={t('blog.title')}>
     <HeroHeader 
 		headline={t('hero.headline')}
 		text={t('hero.subheadline')}
