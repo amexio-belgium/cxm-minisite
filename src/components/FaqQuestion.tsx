@@ -40,8 +40,8 @@ const FaqQuestion = component$((props: Props) => {
     });
     
     return (
-        <div class="border-b border-gray-500 justify-start items-start gap-2 inline-flex flex-col py-6">
-            <div class="flex justify-between items-center w-full gap-4" id={faqTriggerId}
+        <div class="border-b border-gray-500 py-6  h-fit">
+            <div class="flex justify-between items-center w-full gap-4 cursor-pointer" id={faqTriggerId}
                 onClick$={() => {isVisible.value = !isVisible.value;}} 
                 aria-expanded={isVisible.value}>
                 <b class="text-lg">
@@ -60,11 +60,9 @@ const FaqQuestion = component$((props: Props) => {
                 }   
             </div>
 
-            {isVisible.value ? (
-                <div id={faqId} window:onKeyUp$={handleKeyUp}  document:onBlur$={handleFaqBlur} class="faq-text flex-col w-full gap-2 pt-8">
-                    <p class="text-lg" dangerouslySetInnerHTML={props.text}></p>
-                </div>
-            ) : null}
+            <div id={faqId} window:onKeyUp$={handleKeyUp}  document:onBlur$={handleFaqBlur} class="flex-col w-full">
+                <p class={["text-lg overflow-hidden transition-[max-height, padding] duration-300", isVisible.value ? "max-h-[800px] pt-8": "max-h-0 pt-0" ]} dangerouslySetInnerHTML={props.text}></p>
+            </div>
         </div>
     );
 });

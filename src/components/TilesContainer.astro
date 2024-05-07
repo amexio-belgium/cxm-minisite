@@ -1,22 +1,37 @@
 ---
+import { getImage } from "astro:assets"
+import slant from "@assets/images/slantwithimage.png"
+
 interface Props {
     headline: string;
     description: string;
+    orangeSlant?: boolean;
     class?: string;
 }
+
 const { 
     headline, 
     description,
+    orangeSlant = false,
     class: className 
 } = Astro.props;
+
+const optimizedBackgroundImage = await getImage({ src: slant })
 ---
 <div class:list={["relative inline-flex flex-col items-start justify-start gap-10 bg-cover my-60", className]}>
-    <div class="absolute bg-[url('/background/slant_orange.svg')] -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat"></div>
-    <div class="flex flex-col items-start justify-start gap-6 md:w-9/12">
+    
+    {
+        orangeSlant ? 
+        <div class="absolute bg-[url('/background/slant_orange.svg')] -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat"></div>
+        : 
+        <div style={`background-image: url('${optimizedBackgroundImage.src}')`} class={`absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat`}></div>
+    }
+    
+    <div class="flex flex-col items-start justify-start gap-6 lg:w-9/12">
         <h2 class="font-serif text-2xl text-white text-balance" set:html={headline}></h2>
         <p class="text-base font-medium max-w-[65ch] text-white" set:html={description}></p>
     </div>
-    <div class="inline-flex flex-col items-stretch justify-start gap-8 md:flex-row">
+    <div class="inline-flex flex-col items-stretch justify-start gap-8 lg:flex-row">
        <slot />
     </div>
 </div>

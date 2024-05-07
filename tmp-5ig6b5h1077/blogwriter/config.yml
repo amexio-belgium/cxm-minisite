@@ -1,0 +1,49 @@
+backend:
+  name: github
+  repo: CosmicEvil/amexioCxmWebsite
+  commit_messages:
+    create: Create {{collection}} “{{slug}}”
+    update: Update {{collection}} “{{slug}}”
+    delete: Delete {{collection}} “{{slug}}”
+    uploadMedia: Upload “{{path}}”
+    deleteMedia: Delete “{{path}}”
+    openAuthoring: '{{message}}'
+
+i18n:
+  structure: multiple_folders
+  locales: [en, nl, fr]
+  
+collections:
+  - name: "blog"
+    label: "Blog posts"
+    folder: "src/content/blog"
+    create: true 
+    i18n: true
+    fields: 
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Description", name: "description", widget: "string", i18n: true }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true,  i18n: true }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime", i18n: "duplicate" }
+      - { label: "Featured Image", name: "heroImage", widget: "image", i18n: "duplicate"  }
+      - { label: "Tags", name: "tags", widget: "list",  default: ["news"] }
+      - { label: "Body", name: "body", widget: "markdown", i18n: true }
+      
+  - name: "case"
+    label: "Cases"
+    folder: "src/content/cases"
+    create: true 
+    i18n: true
+    fields: 
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Description", name: "description", widget: "string", i18n: true }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true,  i18n: true }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime", i18n: "duplicate" }
+      - { label: "Featured Image", name: "heroImage", widget: "image", i18n: "duplicate"  }
+      - { label: "Body", name: "body", widget: "markdown", i18n: true }
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+media_library:
+  name: uploadcare
+  config:
+    publicKey: demopublickey
