@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Contane';
-    src: url('ContaneMediumRegular.woff2') format('woff2');
+    src: url('/fonts/ContaneMediumRegular.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'Contane';
-    src: url('ContaneRegular.woff2') format('woff2');
+    src: url('/fonts/ContaneRegular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'Lexend';
-    src: url('Lexend-Regular.woff2') format('woff2');
+    src: url('/fonts/Lexend-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'Lexend';
-    src: url('Lexend-Bold.woff2') format('woff2');
+    src: url('/fonts/Lexend-Bold.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
