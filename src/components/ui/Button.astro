@@ -4,7 +4,7 @@ import { getLangFromUrl } from '../../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 
 interface Props {
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
   icon?:  "phone" | "info" | "none";
   style?: "primary" | "secondary" | "tertiary";
   color?: "light" | "dark";
