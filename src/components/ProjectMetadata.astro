@@ -1,0 +1,39 @@
+---
+import { useTranslations } from 'src/i18n/utils';
+
+interface Props {
+    duration?: string;
+    collaboration?: string;
+    services?: string;
+    fullWidth: boolean;
+    class?: string;
+}
+
+const { 
+    duration,
+    collaboration,
+    services,
+    class: className 
+} = Astro.props;
+
+const { lang } = Astro.params;
+const t = useTranslations(lang, 'work');
+---
+
+<div class="bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full backdrop-blur-sm">
+    <h2 class="text-xl font-serif" set:html={t('metadata.headline')}></h2>
+    <ol class="flex flex-row gap-8">
+        {
+           duration && <li>{t('metadata.collaboration') + ": " + duration} </li>
+        } 
+        {
+           collaboration && <li>{t('metadata.collaboration') + ": " + collaboration} </li>
+        }
+        {
+           services && <li>{t('metadata.collaboration') + ": " + services} </li>
+        }
+    </ol>
+    <div class="flex flex-row gap-6">
+        <slot />
+    </div>
+</div>

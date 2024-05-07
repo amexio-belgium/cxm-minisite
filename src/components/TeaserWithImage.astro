@@ -2,16 +2,22 @@
 interface Props {
     headline: string;
     description: string;
+    fullWidth?: boolean;
     class?: string;
+
 }
 
 const { 
     headline, 
     description,
+    fullWidth = false,
     class: className 
 } = Astro.props;
 ---
-<div class:list={["relative flex flex-col lg:flex-row py-8 md:py-20 justify-between gap-8 mb-12 pl-6 md:pl-12 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:left-0 marker:before:h-full before:w-[3000px] before:rounded-xl", className]}>
+<div class:list={[
+    "relative flex flex-col py-8 md:py-20 justify-between gap-8 mb-12 before:-z-10 before:absolute before:top-0 before:bottom-0 before:h-full",
+    fullWidth ? "lg:flex-row-reverse before:bg-lightest-blue-500 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px]" : " pl-6 md:pl-12 lg:flex-row before:bg-light-blue-50 before:left-0 before:w-[3000px] before:rounded-xl",
+    className]}>
     <div class="flex flex-col justify-center gap-6 text-black text-left">
         <h2 class="font-serif text-2xl text-balance" set:html={headline}></h2>
         <p class="text-base font-medium max-w-[65ch]" set:html={description}></p>
