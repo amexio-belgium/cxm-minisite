@@ -33,6 +33,7 @@ const t = useTranslations(lang, 'home');
             { text && 
                 <p class="text-xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
             }
+            <slot />
         </div>
 
         { homepage &&
@@ -54,7 +55,7 @@ const t = useTranslations(lang, 'home');
                 buttonText={buttonText}
                 class='grid-c animation animation-delay'
             />
-        }    
+        } 
     </div>
     { 
         backgroundImage ? 

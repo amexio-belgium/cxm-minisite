@@ -1,8 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import Base from '@layouts/Base.astro';
-import HeroHeader from '@components/HeroHeader.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('services');
@@ -24,10 +22,6 @@ const { Content } = await post.render();
 ---
 <Base {...post.data}>
 	<div class="mx-auto py-20 text-white">
-		<HeroHeader 
-			headline={post.data.title}
-			text={post.data.description}
-		/>
 		<Content />
 	</div>
 </Base>

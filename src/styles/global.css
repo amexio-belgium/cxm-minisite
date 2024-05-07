@@ -30,6 +30,24 @@
     font-display: swap;
 }
 
+:root {
+    /* Changes the primary theme color to purple using primitives */
+    --sl-color-primary-50: #fdf0e9;
+    --sl-color-primary-100: #f9d1bb;
+    --sl-color-primary-200: #f7bb9b;
+    --sl-color-primary-300: #f39d6d;
+    --sl-color-primary-400: #f18951;
+    --sl-color-primary-500: #ed6c25;
+    --sl-color-primary-600: #ed6c25;
+    --sl-color-primary-700: #a84d1a;
+    --sl-color-primary-800: #823b14;
+    --sl-color-primary-900: #642d10;
+    --sl-color-primary-950: #642d10;
+    --track-width: 2px;
+    --sl-color-neutral-200:#d9e8f5;
+    --sl-spacing-medium: 24px;
+    --sl-spacing-large: 24px;
+}
 
 h1 mark {
     color: #FFC256;
@@ -57,3 +75,6 @@ h1 mark {
     position: static;
 }
 
+.tab.tab--active:not(.tab--disabled) {
+    color: white;
+}

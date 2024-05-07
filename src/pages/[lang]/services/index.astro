@@ -7,7 +7,10 @@ import HeroHeader from '@components/HeroHeader.astro';
 import Button from '@components/ui/Button.astro';
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import tabimage from '@assets/images/tab.jpg';
+
 import TeaserWithImage from '@components/TeaserWithImage.astro';
+
 const { lang } = Astro.params;
 
 const services = (await getCollection('services'));
@@ -37,15 +40,15 @@ const t = useTranslations(lang, 'services');
 			{
 				services.map((service) => (
 					getPostLangAndSlug(service).lang === lang &&
-						<div class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[470px] mb-8 shadow-xl">
-						<div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
+						<div class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[346px] mb-8 shadow-xl">
+						<div class="relative w-full flex flex-col pb-28 p-8 md:p-8 h-1/2 lg:h-full lg:w-1/2">
 							<h3 class="mb-2 font-serif text-xl" set:html={service.data.title}></h3>
 							<p class="text-base" set:html={service.data.description}></p>
-							<Button class="" link={`/services/${getPostLangAndSlug(service).slug}/`} style="tertiary" color="dark">
+							<Button class="absolute bottom-8" link={`/services/${getPostLangAndSlug(service).slug}/`} style="primary" size="sm" color="light">
 								{service.data.cta || t('overview.backupcta')}
 							</Button>
 						</div>
-						<div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-3/4 h-1/2 lg:h-full md:absolute">
+						<div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-1/2 h-1/2 lg:h-full md:absolute">
 							<Image loading="eager" src={service.data.heroImage} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={service.data.title}/>
 						</div> 
 					</div>
@@ -55,13 +58,45 @@ const t = useTranslations(lang, 'services');
 	</div>
 
 	<div class="text-white mb-40">
-		<h2 class="font-serif text-2xl text-balance" set:html={t('collaborate.headline')}></h2>
-		<p set:html={t('collaborate.description')}></p>
+		<h2 class="font-serif text-2xl text-balance mb-8" set:html={t('collaborate.headline')}></h2>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace.js"></script>
+
+		<sl-tab-group>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model1">{t('collaborate.title1')}</sl-tab>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model2">{t('collaborate.title2')}</sl-tab>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model3">{t('collaborate.title3')}</sl-tab>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model4">{t('collaborate.title4')}</sl-tab>
+
+			<sl-tab-panel name="model1"> 
+				<div class="flex flex-col md:flex-row mt-8 gap-8 pb-8">
+					<p class="w-1/2" set:html={t('collaborate.description1')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="model2">
+				<div class="flex flex-col md:flex-row mt-8 gap-8">
+					<p class="w-1/2" set:html={t('collaborate.description2')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="model3">
+				<div class="flex flex-col md:flex-row mt-8 gap-8">
+					<p class="w-1/2" set:html={t('collaborate.description3')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="model4">
+				<div class="flex flex-col md:flex-row mt-8 gap-8">
+					<p class="w-1/2" set:html={t('collaborate.description4')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+		</sl-tab-group>
 	</div>
 
 	<TeaserWithImage 
-	headline={t('explainer.headline')}
-	description={t('explainer.description')}>
+		headline={t('explainer.headline')}
+		description={t('explainer.description')}>
 		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
 	</TeaserWithImage>
 </Base>
