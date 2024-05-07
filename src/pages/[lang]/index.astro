@@ -14,15 +14,17 @@ import strategize from '@assets/icons/strategize.svg';
 import design from '@assets/icons/design.svg';
 import realize from '@assets/icons/realize.svg';
 import optimize from '@assets/icons/optimize.svg';
+import TilesContainer from '@components/TilesContainer.astro';
+import SmallTile from '@components/SmallTile.astro';
 
 export function getStaticPaths() {
 	return i18nParams;
 }
 
 const { lang } = Astro.params;
-const t = useTranslations(lang);
+const t = useTranslations(lang, 'home');
 ---
-<Base>
+<Base title={t('home.title')}>
   <HeroHeader 
       headline={t('hero.headline')}
       text={t('hero.text')}
@@ -31,115 +33,89 @@ const t = useTranslations(lang);
   />
 
   <ProjectOverview />
-
-  <div class="relative inline-flex flex-col items-start justify-start gap-10 bg-cover my-60">
-    <div class="absolute bg-[url('/background/slant_orange.svg')] -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat"></div>
-    <div class="flex flex-col items-start justify-start gap-6 md:w-9/12">
-        <h2 class="font-serif text-2xl text-white text-balance">
-            Managing content at scale is challenging
-        </h2>
-        <p class="text-base font-medium max-w-[65ch] text-white">
-            Exceptional content lives at the heart of every great digital experience.
-        </p>
-        <p class="text-base font-medium max-w-[65ch] text-white">
-          However, as your digital channels expand and more teams come onboard, scaling 
-          content operations in your organization can be cumbersome: content governance gets more complex 
-          and content becomes harder to find and discover. Eventually, your customers suffer from inconsistent, 
-          inaccessible and slow experiences.
-        </p>
-    </div>
-    <div class="inline-flex flex-col items-stretch justify-start gap-8 md:flex-row">
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 px-12 py-6 border-blue-500 shadow backdrop-blur-lg md:w-1/3 bg-gradient-to-l from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border-1">
-        <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
-        <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center text-white">Paint point</div>
-          <div class="text-base text-center text-white">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
-        </div>
-      </div>
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 px-12 py-6 border-blue-500 shadow backdrop-blur-lg md:w-1/3 bg-gradient-to-l from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border-1">
-        <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
-        <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center text-white">Paint point</div>
-          <div class="text-base text-center text-white">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
-        </div>
-      </div>
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 px-12 py-6 border-blue-500 shadow backdrop-blur-lg md:w-1/3 bg-gradient-to-l from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border-1">
-        <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
-        <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center text-white">Paint point</div>
-          <div class="text-base text-center text-white">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
+  <TilesContainer 
+    headline={t('painpoint.headline')} 
+    description={t('painpoint.description')} >
+    <SmallTile 
+      headline={t('painpoint1.headline')} 
+      description={t('painpoint1.description')} >
+      <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
+    </SmallTile>
+    <SmallTile 
+      headline={t('painpoint2.headline')} 
+      description={t('painpoint2.description')} >
+      <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
+    </SmallTile>
+    <SmallTile 
+      headline={t('painpoint3.headline')} 
+      description={t('painpoint3.description')} >
+      <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
+    </SmallTile>
+  </TilesContainer>
   
   <div class="relative flex flex-col py-20 mb-60 pl-12 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:left-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
     <div class="flex flex-col items-start justify-between w-full gap-4 mb-8 md:mb-4 md:items-center md:flex-row">
-      <h2 class="font-serif text-2xl">How we can help</h2>
-      <Button link="/services" color="light">Discover all our services</Button>
+      <h2 class="font-serif text-2xl" set:html={t('services.headline')}></h2>
+      <Button link="/services" color="light">{t('services.button')}</Button>
     </div>
     <div class="flex flex-col items-start w-full gap-8 mb-12 md:w-9/12 h-fit">
-      <p class="text-base text-black">
-        Exceptional content lives at the heart of every great digital experience.
-      </p>
-      <p class="text-base text-black">
-        However, as your digital channels expand and more teams come onboard, scaling 
-        content operations in your organization can be cumbersome: content governance gets more complex 
-        and content becomes harder to find and discover. Eventually, your customers suffer from inconsistent, 
-        inaccessible and slow experiences.
-      </p>
+      <p class="text-base text-black" set:html={t('services.descriptionP1')}></p>
+      <p class="text-base text-black" set:html={t('services.descriptionP2')}></p>
     </div>
     <div class="flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap">
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={strategize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center ">Strategize</div>
-          <div class="text-base text-center">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
+          <div class="font-serif text-xl text-center " set:html={t('services1.headline')}></div>
+          <div class="text-base text-center" set:html={t('services1.description')}></div>
         </div>
       </div>
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={design} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center ">Design</div>
-          <div class="text-base text-center">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
+          <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
+          <div class="text-base text-center" set:html={t('services2.description')}></div>
         </div>
       </div>
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={realize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center ">Realize</div>
-          <div class="text-base text-center">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
+          <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
+          <div class="text-base text-center" set:html={t('services3.description')}></div>
         </div>
       </div>
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={optimize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
-          <div class="font-serif text-xl text-center ">Optimize</div>
-          <div class="text-base text-center">Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</div>
-      </div>
+          <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
+          <div class="text-base text-center" set:html={t('services4.description')}></div>
+        </div>
       </div>
     </div>
   </div>
 
   <Quote 
-    quote='The new website of L’Echo appeals to a broad audience and boasts extended customisation possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience.' 
+    quote={t('quote.text')}
     name='Johan Condijts'
-    jobtitle='Editor for lecho.be'
-    profileImage='/src/assets/people/placeholder_small.png'/>
+    jobtitle={t('quote.title')}
+    profileImage='/src/assets/people/placeholder_small.png'
+    />
 
   <InsightsTeaser />
 
   <Highlight 
-    title='In the picture'
-    text='Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.' 
+    title={t('highlight.headline')}
+    text={t('highlight.text')}
     image='/src/assets/images/highlight.png'
-    buttonText='Discover'
+    buttonText={t('highlight.button')}
     />
+
   <Highlight 
-    title='In the picture'
-    text='Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.' 
+    title={t('highlight.headline')}
+    text={t('highlight.text')}
     image='/src/assets/images/highlight.png'
-    buttonText='Discover'
+    buttonText={t('highlight.button')}
     style='lightblue'
     />
 </Base>

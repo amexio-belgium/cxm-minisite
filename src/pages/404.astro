@@ -11,20 +11,19 @@ import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 
 const t = useTranslations(lang);
-console.log(lang)
 ---
-<Base>
+<Base title={t('404.title')}>
     <section class="">
-        <div class="py-20 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div class="mx-auto max-w-screen-sm text-center">
-                <h1 class="mb-4 text-8xl tracking-tight font-extrabold lg:text-9xl text-tertiary ">404</h1>
-                <p class="mb-4 text-3xl font-bold text-white md:text-4xl">
+        <div class="max-w-screen-xl px-4 py-40 mx-auto lg:py-40 lg:px-6">
+            <div class="max-w-screen-sm mx-auto text-center">
+                <h1 class="mb-4 text-[80px] font-extrabold tracking-tight lg:text-9xl text-tertiary ">404</h1>
+                <p class="mb-4 text-xl font-bold text-white md:text-4xl">
                     {t('404.headline')}
                 </p>
                 <p class="mb-4 text-lg font-light text-white">
                     {t('404.text')}
                 </p>
-                <Button class="mt-4 inline-block" link="/" style="primary" size='lg' color="dark">{t('404.button')}</Button>
+                <Button class="inline-block mt-4" link="/" style="primary" color="dark">{t('404.button')}</Button>
             </div>   
         </div>
     </section>

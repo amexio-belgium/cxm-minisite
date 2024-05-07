@@ -10,7 +10,7 @@ export default {
 			'lg': ['20px', '28px'],
 			'xl': ['28px', '44px'],
 			'2xl': ['44px', '66px'],
-			'3xl': ['60px', '90px'],
+			'3xl': ['60px', '75px'],
 		},
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],
@@ -105,7 +105,7 @@ export default {
 			
 			},
 			animation: {
-				'bounce-slow': 'bounceslow 3s ease-in-out infinite',
+				'bounce-slow': 'bounceslow 3s ease-in-out 3',
 			},
 		}
 	},

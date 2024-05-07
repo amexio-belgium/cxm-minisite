@@ -1,10 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import { i18nParams } from '../../../i18n/consts'
+import { useTranslations } from '../../../i18n/utils';
 import Base from '@layouts/Base.astro';
 import HeroHeader from '@components/HeroHeader.astro';
 import Button from '@components/ui/Button.astro';
 import { Image } from 'astro:assets';
+import explainer from '@assets/images/explainer.jpg';
+import tabimage from '@assets/images/tab.jpg';
+
+import TeaserWithImage from '@components/TeaserWithImage.astro';
 
 const { lang } = Astro.params;
 
@@ -18,35 +23,96 @@ function getPostLangAndSlug(service) {
 	const [lang, ...slug] = service.slug.split('/');
 	return {lang, slug}
 }
+
+const t = useTranslations(lang, 'services');
 ---
-<Base>
+<Base title={t('services.title')}>
 	<HeroHeader 
-        headline="Our work"
-        text="We specialize in delivering cutting-edge Customer Experience Management solutions tailored for your business."
-    />
-    <div class="py-20 md:mx-auto">
-        <div class="flex flex-wrap items-center justify-center gap-4">
-            {
+		headline={t('hero.headline')}
+		text={t('hero.subheadline')}
+	/>
+
+	<div class="relative flex flex-col mb-40 xl:flex-row py-20 gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
+		<div class="flex flex-col items-start w-full gap-2 mb-16 xl:sticky xl:w-4/12 h-fit top-40">
+		  <h2 class="mb-2 font-serif text-2xl" set:html={t('overview.headline')}></h2>
+		</div>
+		<div class="flex flex-col w-full gap-2 xl:w-8/12">
+			{
 				services.map((service) => (
 					getPostLangAndSlug(service).lang === lang &&
-					<a href={`./${getPostLangAndSlug(service).slug}/`} >
-						<div class="w-1/3 overflow-hidden shadow-xl bg-light-blue-100 rounded-3xl">
-							<figure class="m-0">
-								<Image class="rounded-t-2xl" width={720} height={360} src={service.data.heroImage} alt="" transition:name={service.slug} /> 
-							</figure>
-							<div class="flex flex-col p-4">
-								<h2 class="text-3xl text-bold" transition:name={service.slug + "_title"}>{service.data.title}</h2>
-								<p class="text-sm">
-									{service.data.description}
-								</p>
-								<div class="justify-end card-actions">
-									<Button>Read More</Button>
-								</div>
-							</div>
+						<div class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[346px] mb-8 shadow-xl">
+						<div class="relative w-full flex flex-col pb-28 p-8 md:p-8 h-1/2 lg:h-full lg:w-1/2">
+							<h3 class="mb-2 font-serif text-xl" set:html={service.data.title}></h3>
+							<p class="text-base" set:html={service.data.description}></p>
+							<Button class="absolute bottom-8" link={`/services/${getPostLangAndSlug(service).slug}/`} style="primary" size="sm" color="light">
+								{service.data.cta || t('overview.backupcta')}
+							</Button>
 						</div>
-					</a>
+						<div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-1/2 h-1/2 lg:h-full md:absolute">
+							<Image loading="eager" src={service.data.heroImage} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={service.data.title}/>
+						</div> 
+					</div>
 				))
 			}
-        </div>
-    </div>	
+		</div>
+	</div>
+
+	<div class="text-white mb-40">
+		<h2 class="font-serif text-2xl text-balance mb-8" set:html={t('collaborate.headline')}></h2>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace.js"></script>
+
+		<sl-tab-group>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model1">{t('collaborate.title1')}</sl-tab>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model2">{t('collaborate.title2')}</sl-tab>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model3">{t('collaborate.title3')}</sl-tab>
+			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model4">{t('collaborate.title4')}</sl-tab>
+
+			<sl-tab-panel name="model1"> 
+				<div class="flex flex-col md:flex-row mt-8 gap-8 pb-8">
+					<p class="w-1/2" set:html={t('collaborate.description1')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="model2">
+				<div class="flex flex-col md:flex-row mt-8 gap-8">
+					<p class="w-1/2" set:html={t('collaborate.description2')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="model3">
+				<div class="flex flex-col md:flex-row mt-8 gap-8">
+					<p class="w-1/2" set:html={t('collaborate.description3')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="model4">
+				<div class="flex flex-col md:flex-row mt-8 gap-8">
+					<p class="w-1/2" set:html={t('collaborate.description4')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				</div>
+			</sl-tab-panel>
+		</sl-tab-group>
+	</div>
+
+	<TeaserWithImage 
+		headline={t('explainer.headline')}
+		description={t('explainer.description')}>
+		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
+	</TeaserWithImage>
 </Base>
+
+<style>
+    .mask-project {
+        clip-path: polygon( 54.806% 0.062%,54.806% 0.062%,53.272% 0.408%,51.853% 1.125%,50.559% 2.116%,49.402% 3.286%,48.392% 4.539%,47.541% 5.779%,46.86% 6.911%,46.36% 7.837%,46.052% 8.464%,45.947% 8.694%,-0.036% 100%,99.927% 99.938%,99.927% 99.938%,99.934% 99.938%,99.942% 99.938%,99.949% 99.938%,99.956% 99.938%,99.964% 99.938%,99.971% 99.938%,99.978% 99.938%,99.985% 99.938%,99.993% 99.938%,100% 99.938%,100% 0.041%,54.806% 0.041% );
+        mask-size: cover; 
+        mask-size: 200% auto;
+        mask-position: top right;
+    }
+    
+    @media only screen and (min-width: 768px) {
+        .mask-project {
+            mask-size: cover; 
+            mask-position: unset;
+        }
+    }
+</style>

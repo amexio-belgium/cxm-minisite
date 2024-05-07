@@ -1,31 +1,97 @@
 ---
-title: 'Using MDX'
-description: 'Lorem ipsum dolor sit amet'
+title: 'Content Science'
+description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'
 pubDate: 'Jul 02 2022'
 heroImage: '/blog-placeholder-5.jpg'
+cta: 'Learn more about Content Science'
 ---
 
-This theme comes with the [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) integration installed and configured in your `astro.config.mjs` config file. If you prefer not to use MDX, you can disable support by removing the integration from your config file.
+import Customers from "@components/Customers.astro"
+import Highlight from "@components/Highlight.astro"
+import InsightsTeaser from "@components/InsightsTeaser.astro"
+import Quote from "@components/Quote.astro"
+import TilesContainer from "@components/TilesContainer.astro"
+import SmallTile from "@components/SmallTile.astro"
+import TeaserWithImage  from "@components/TeaserWithImage.astro"
+import Faq from "@components/Faq.astro"
+import FaqQuestion from "@components/FaqQuestion.tsx"
+import { Image } from 'astro:assets';
+import explainer from '@assets/images/explainer.jpg';
+import kbc from '@assets/projects/kbc_logo.png';
+import telenet from '@assets/projects/telenet_logo.png';
+import mediafin from '@assets/projects/mediafin_logo.svg';
+import HeroHeader from '@components/HeroHeader.astro';
 
-## Why MDX?
+<HeroHeader 
+		headline="AEM Stabilize and optimize"
+		text="description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'">
+	<Customers 
+		headline="Customers we advised on strategy">
+		<Image src={kbc} alt="" class="h-10 w-auto"/>
+		<Image src={telenet} alt="" class="h-10 w-auto"/>
+		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+	</Customers> 
+</HeroHeader>
+<TeaserWithImage 
+	headline="Why work with us?"
+	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
+		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
+	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+</TeaserWithImage>
 
-MDX is a special flavor of Markdown that supports embedded JavaScript & JSX syntax. This unlocks the ability to [mix JavaScript and UI Components into your Markdown content](https://docs.astro.build/en/guides/markdown-content/#mdx-features) for things like interactive charts or alerts.
+<TilesContainer 
+    headline="Approach and techniques"
+    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    <SmallTile 
+		headline="Cum Solis"
+		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+    </SmallTile>
+    <SmallTile 
+		headline="Nulla Vitae"
+		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+    </SmallTile>
+    <SmallTile 
+		headline="Aenean eu leo quam"
+		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+    </SmallTile>
+</TilesContainer>
+  
+<Highlight 
+	title="In the picture"
+	text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."
+	image='/src/assets/images/highlight.png'
+	buttonText="discover"
+	/>
 
-If you have existing content authored in MDX, this integration will hopefully make migrating to Astro a breeze.
+<Faq headline="Questions we usually get">
+	<FaqQuestion 
+		headline="What technology do you work in?" 
+		text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.">
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="Can you help me with services for development only?" 
+		text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.">
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="What makes you different from other agencies?" 
+		text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.">
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="Can you support my in-house team?" 
+		text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.">
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="Do you work for startups?" 
+		text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.">
+	</FaqQuestion>
+</Faq>
 
-## Example
+<InsightsTeaser />
 
-Here is how you import and use a UI component inside of MDX.  
-When you open this page in the browser, you should see the clickable button below.
-
-import HeaderLink from '../../../components/HeaderLink.astro';
-
-<HeaderLink href="#" onclick="alert('clicked!')">
-	Embedded component in MDX
-</HeaderLink>
-
-## More Links
-
-- [MDX Syntax Documentation](https://mdxjs.com/docs/what-is-mdx)
-- [Astro Usage Documentation](https://docs.astro.build/en/guides/markdown-content/#markdown-and-mdx-pages)
-- **Note:** [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives) are still required to create interactive components. Otherwise, all components in your MDX will render as static HTML (no JavaScript) by default.
+<Quote 
+    quote="The new website of L’Echo appeals to a broad audience and boasts extended customisation possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
+    name='Johan Condijts'
+    jobtitle="editor"
+    profileImage='/src/assets/people/placeholder_small.png'
+	class="mt-40"
+    /> 

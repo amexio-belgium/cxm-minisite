@@ -9,6 +9,7 @@ interface Props {
     smallImage: string;
     content: string;
     name: string;
+    buttonText: string;
     link?: string;
     class?: string;
     [x: string]: any;
@@ -21,6 +22,7 @@ const {
     name,
     class: className,
     link,
+    buttonText,
     ...rest
 } = Astro.props;
 
@@ -33,7 +35,7 @@ if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in gl
     <div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
         <h3 class="mb-2 font-serif text-xl">{name}</h3>
         <p class="text-base" set:html={content}></p>
-        <Button class="" link={link} style="tertiary" color="dark">Discover more about {name}</Button>
+        <Button class="" link={link} style="tertiary" color="dark">{buttonText}</Button>
     </div>
     <div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-3/4 h-1/2 lg:h-full md:absolute">
       <Image src={images[projectImage]()} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={name}/>

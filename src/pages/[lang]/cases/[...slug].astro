@@ -20,7 +20,7 @@ const work = Astro.props;
 const { Content } = await work.render();
 
 ---
-<Base {...work.data}>
+<Base {...work.data}  title={"Amexio Fuse - " + work.data.title}>
 	<div class="prose prose-invert mx-auto py-20 text-white">
 		<img class="rounded-t-3xl" width={720} height={360} src={work.data.heroImage} alt="" transition:name={work.slug} />
 		<h1 class="text-bold text-3xl text-white" transition:name={work.slug + "_title"}>{work.data.title}</h1>

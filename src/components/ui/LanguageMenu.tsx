@@ -1,6 +1,6 @@
 import { component$, useId, useSignal, $, useOnDocument } from '@builder.io/qwik';
-import { languages } from '../i18n/consts';
-import iconWorld from '../assets/icons/world.svg'
+import { languages } from '../../i18n/consts';
+import iconWorld from '@assets/icons/world.svg'
 
 interface languagesProps {
     currentLang: string

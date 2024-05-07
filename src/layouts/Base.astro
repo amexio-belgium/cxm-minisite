@@ -5,18 +5,22 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
 
+const { title } = Astro.props;
+
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
+import Breadcrumbs  from "@components/ui/Breadcrumbs.astro";
 
 ---
-<html lang={lang} >
+<html class="overflow-x-clip" lang={lang} >
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={title || SITE_TITLE} description={SITE_DESCRIPTION} />
         <ViewTransitions />
     </head>
-    <body class="overflow-x-hidden bg-blue-800">
+    <body class="overflow-x-clip bg-blue-800">
         <Header />
-        <main class="max-w-[1304px] mx-auto mt-24 p-8">
+        <main id="main-content" class="max-w-[1304px] mx-auto mt-24 p-8">
+            <Breadcrumbs />
             <slot />
         </main>
         <Footer />

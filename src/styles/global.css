@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Contane';
-    src: url('ContaneMediumRegular.woff2') format('woff2');
+    src: url('/fonts/ContaneMediumRegular.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -8,10 +8,45 @@
 
 @font-face {
     font-family: 'Contane';
-    src: url('ContaneRegular.woff2') format('woff2');
+    src: url('/fonts/ContaneRegular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lexend';
+    src: url('/fonts/Lexend-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lexend';
+    src: url('/fonts/Lexend-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* Changes the primary theme color to purple using primitives */
+    --sl-color-primary-50: #fdf0e9;
+    --sl-color-primary-100: #f9d1bb;
+    --sl-color-primary-200: #f7bb9b;
+    --sl-color-primary-300: #f39d6d;
+    --sl-color-primary-400: #f18951;
+    --sl-color-primary-500: #ed6c25;
+    --sl-color-primary-600: #ed6c25;
+    --sl-color-primary-700: #a84d1a;
+    --sl-color-primary-800: #823b14;
+    --sl-color-primary-900: #642d10;
+    --sl-color-primary-950: #642d10;
+    --track-width: 2px;
+    --sl-color-neutral-200:#d9e8f5;
+    --sl-spacing-medium: 24px;
+    --sl-spacing-large: 24px;
 }
 
 h1 mark {
@@ -34,4 +69,12 @@ h1 mark {
     background: radial-gradient(41.57% 90%  at 50% 100%, rgba(255, 194, 86, 0.70) 0%, rgba(255, 194, 86, 0.00) 100%);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+}
+
+.js-skiplink:focus ~ header > nav {
+    position: static;
+}
+
+.tab.tab--active:not(.tab--disabled) {
+    color: white;
 }

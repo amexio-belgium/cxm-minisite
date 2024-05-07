@@ -1,0 +1,20 @@
+---
+interface Props {
+    headline: string;
+    description: string;
+    class?: string;
+}
+
+const { 
+    headline, 
+    description,
+    class: className 
+} = Astro.props;
+---
+<div class:list={["relative flex flex-col lg:flex-row py-8 md:py-20 justify-between gap-8 mb-12 pl-6 md:pl-12 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:left-0 marker:before:h-full before:w-[3000px] before:rounded-xl", className]}>
+    <div class="flex flex-col justify-center gap-6 text-black text-left">
+        <h2 class="font-serif text-2xl text-balance" set:html={headline}></h2>
+        <p class="text-base font-medium max-w-[65ch]" set:html={description}></p>
+    </div>
+    <slot />
+</div>
