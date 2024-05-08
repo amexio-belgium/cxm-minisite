@@ -2,10 +2,10 @@
 title: 'AEM Stabilize and optimize'
 description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'
 pubDate: 'Jul 02 2022'
-heroImage: '/blog-placeholder-5.jpg'
+heroImage: '/blog-placeholder-1.jpg'
 cta: 'Learn more about AEM Optimisation'
 ---
-
+import HeroHeader from '@components/HeroHeader.astro';
 import Customers from "@components/Customers.astro"
 import Highlight from "@components/Highlight.astro"
 import InsightsTeaser from "@components/InsightsTeaser.astro"
@@ -21,12 +21,17 @@ import kbc from '@assets/projects/kbc_logo.png';
 import telenet from '@assets/projects/telenet_logo.png';
 import mediafin from '@assets/projects/mediafin_logo.svg';
 
-<Customers 
-	headline="Customers we advised on strategy">
-	<Image src={kbc} alt="" class="h-24 w-auto"/>
-	<Image src={telenet} alt="" class="h-24 w-auto"/>
-	<Image src={mediafin} alt="" class="h-24 w-auto"/>
-</Customers>
+<HeroHeader 
+	headline={frontmatter.title}
+    text={frontmatter.description}
+    backgroundImage={frontmatter.heroImage} >	
+	<Customers headline="Customers we advised on strategy">
+		<Image src={kbc} alt="" class="h-10 w-auto"/>
+		<Image src={telenet} alt="" class="h-10 w-auto"/>
+		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+	</Customers> 
+</HeroHeader>
+
 
 <TeaserWithImage 
 	headline="Why work with us?"
@@ -37,10 +42,11 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
 
 <TilesContainer 
     headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    description="Fusce dapibus, <b>tellus ac cursus commodo, tortor mauris</b> condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
     <SmallTile 
 		headline="Cum Solis"
 		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		<Image src={kbc} alt="" class="h-24 w-auto"/>
     </SmallTile>
     <SmallTile 
 		headline="Nulla Vitae"

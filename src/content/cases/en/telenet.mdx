@@ -7,6 +7,10 @@ draft: false
 heroImage: '/blog-placeholder-4.jpg'
 logo: '/blog-placeholder-4.jpg'
 tags: 'finance, media, government, retail, manufacturing'
+duration: "12 weeks"
+collaboration: 'test'
+services: 'Development'
+technologies: 'Vuejs, aem'
 ---
 import HeroHeader from '@components/HeroHeader.astro';
 import ProjectMetadata from '@components/ProjectMetadata.astro'
@@ -26,19 +30,24 @@ import telenet from '@assets/projects/telenet_logo.png';
 import mediafin from '@assets/projects/mediafin_logo.svg';
 
 <HeroHeader 
-		headline="AEM Stabilize and optimize"
-		text="description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'">
+    headline={frontmatter.title}
+    client={frontmatter.client}
+    text={frontmatter.description}
+    backgroundImage={frontmatter.heroImage} >
 </HeroHeader>
 
 <ProjectMetadata
-    duration="12 weeks"
-    collaboration='test'
-    services='Development'>
+    duration={frontmatter.duration}
+    collaboration={frontmatter.collaboration}
+    services={frontmatter.services}
+    technologies={frontmatter.technologies}>
+    <Image src={kbc} alt="kbc" class="h-10 w-auto"/>
+    <Image src={telenet} alt="telenet" class="h-10 w-auto"/>
+    <Image src={mediafin} alt="mediafin" class="h-10 w-auto"/>
     <Image src={kbc} alt="" class="h-10 w-auto"/>
     <Image src={telenet} alt="" class="h-10 w-auto"/>
     <Image src={mediafin} alt="" class="h-10 w-auto"/>
 </ProjectMetadata>
-
 <TeaserWithImage 
 	headline="Why work with us?"
 	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.

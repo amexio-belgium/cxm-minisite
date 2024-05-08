@@ -14,9 +14,11 @@ paths.forEach((text, i) => {
     parts.push({ text: text.replace(/[-_]/g, ' '), href })
   }
 })
+
 ---
+
 { parts.length > 1 &&
-    <nav aria-label="Breadcrumb" class="">
+    <nav aria-label="Breadcrumb" class="absolute">
         <ol class="flex text-white gap-4" role="list">
             {parts.map(({ text, ...attrs }, index) => (
                 <li class="text-regular flex items-center gap-4" role="listitem">

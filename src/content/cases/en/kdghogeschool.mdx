@@ -31,9 +31,13 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
 </HeroHeader>
 
 <ProjectMetadata
-    duration="12 weeks"
-    collaboration='test'
-    services='Development'>
+    duration={frontmatter.duration}
+    collaboration={frontmatter.collaboration}
+    services={frontmatter.services}
+    technologies={frontmatter.technologies}>
+    <Image src={kbc} alt="" class="h-10 w-auto"/>
+    <Image src={telenet} alt="" class="h-10 w-auto"/>
+    <Image src={mediafin} alt="" class="h-10 w-auto"/>
     <Image src={kbc} alt="" class="h-10 w-auto"/>
     <Image src={telenet} alt="" class="h-10 w-auto"/>
     <Image src={mediafin} alt="" class="h-10 w-auto"/>

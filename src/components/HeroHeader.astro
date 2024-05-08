@@ -2,13 +2,16 @@
 import ProfileCard from './ProfileCard.astro';
 import LogoSlant from './elements/LogoSlant.astro';
 import { useTranslations } from '../i18n/utils';
-
+import { Image } from 'astro:assets';
+import Breadcrumbs  from "@components/ui/Breadcrumbs.astro";
 interface Props {
     headline: string;
+    client?: string;
     text?: string;
     buttonText?: string;
     homepage?: boolean;
     backgroundImage?: string;
+    backgroundImageAltText?: string;
 }
 
 const { 
@@ -16,7 +19,9 @@ const {
     text, 
     buttonText, 
     homepage, 
-    backgroundImage
+    backgroundImage,
+    client,
+    backgroundImageAltText = ''
 } = Astro.props;
 
 const { lang } = Astro.params;
@@ -24,14 +29,25 @@ const { lang } = Astro.params;
 const t = useTranslations(lang, 'home');
 
 ---
-<div class="relative py-20 text-white pb-60 hero-gradient">
-    <h1 class="font-serif text-3xl font-bold text-white mb-11" 
-        set:html={headline}>
-    </h1>
-    <div class="relative grid grid-cols-1 gap-12 md:gap-6 grid-area md:grid-cols-12">
-        <div class="mx-auto text-left grid-a">
+<div class:list={[
+    "relative py-10 text-white pb-32 lg:pb-60", 
+        !backgroundImage && "hero-gradient",
+        backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
+    ]}>
+    <Breadcrumbs />
+
+    <div class="text-white mt-24 mb-10">
+        {
+            client && <p class="uppercase font-serif text-xl" set:html={client}></p>
+        }
+        <h1 class="font-serif text-3xl font-bold w-full md:w-2/3" 
+            set:html={headline}>
+        </h1>
+    </div>
+    <div class:list={["relative ", homepage && "grid grid-cols-1 gap-12 md:gap-6 grid-area md:grid-cols-12"]}>
+        <div class:list={[" text-left w-full md:w-[80ch]", homepage && "grid-a md:w-full"]}>
             { text && 
-                <p class="text-xl font-normal mt-4 leading-[46px]" set:html={text}></p> 
+                <p class="text-lg md:text-xl" set:html={text}></p> 
             }
             <slot />
         </div>
@@ -59,9 +75,11 @@ const t = useTranslations(lang, 'home');
     </div>
     { 
         backgroundImage ? 
-            <img src="backgroundImage" width={1200} height={700}class="absolute top-0 object-cover h-auto w-xl -right-1/4" />
+            <Image src={backgroundImage} width={1200} height={700} alt={backgroundImageAltText} 
+                class="absolute top-0 -z-10 object-cover h-full w-xl -right-1/4" 
+            />
         :
-            <div class="absolute object-cover h-auto top-10 -z-10 w-xl -right-1/4">
+            <div class="absolute object-cover h-auto -top-0 opacity-30 md:opacity-100 md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-1/4">
                 <LogoSlant/>
             </div>
     }
