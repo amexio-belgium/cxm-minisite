@@ -1,6 +1,6 @@
 export const contact = {
     en: {
-        'contact.title': "AmeXio Fuse - Contact",
+        'contact.title': "Contact - AmeXio Fuse",
         'hero.headline': 'Contact',
         'hero.subheadline': 'A streamlined content lifecycle is at the core of your Customer Experience Management (CXM) process, and goes beyond the implementation of a Content Management System (CMS). Therefore, we provide a broad spectrum of services to help you meet concrete business outcomes.',
     },
