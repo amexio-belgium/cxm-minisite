@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { i18nParams } from '../../../i18n/consts'
 import Base from '@layouts/Base.astro';
 import HeroHeader from '@components/HeroHeader.astro';
-import Button from '@components/ui/Button.astro';
+import Link from '@components/ui/Link.astro';
 import FormattedDate from '@components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import { useTranslations } from 'src/i18n/utils';
@@ -32,29 +32,55 @@ const t = useTranslations(lang, 'blog');
 		text={t('hero.subheadline')}
 	/>
 
-    <div class="container px-4 md:mx-auto py-20">
-        <div class="flex flex-col items-center justify-center gap-8 py-10">
-            {
-				posts.map((post) => (
-					(getPostLangAndSlug(post).lang === lang && !post.data.draft) &&
-					<a href={`./${getPostLangAndSlug(post).slug}/`} >
-						<div class="w-100 bg-light-blue-100 rounded-3xl overflow-hidden shadow-xl">
-							<figure class="m-0">
-								<Image class="rounded-t-2xl" width={720} height={360} src={post.data.heroImage} alt="" transition:name={post.slug} /> 
-							</figure>
-							<div class="flex flex-col p-4">
-								<h2 class="text-bold text-3xl" transition:name={post.slug + "_title"}>{post.data.title}</h2>
-								<p class="text-sm">
-									<FormattedDate date={post.data.pubDate} transition:name={post.slug + "_date"} />
-								</p>
-								<div class="card-actions justify-end">
-									<Button class="mt-8">Read More</Button>
-								</div>
-							</div>
+	<div class="mt-20 mb-40">
+		{
+			posts.map((post, index) => (
+				(getPostLangAndSlug(post).lang === lang && index == 0) &&
+				<Link class="flex flex-col md:flex-row w-full  justify-stretch gap-8" href={`./${getPostLangAndSlug(post).slug}/`} >
+					<div class="aspect-square flex items-center justify-center shadow-xl shadow-primary/20 rounded-t-xl md:rounded-tr-none md:rounded-l-xl overflow-hidden">
+						<Image loading="eager" src={post.data.heroImage} class="min-w-full min-h-full max-w-[unset] h-[unset] object-cover" loading="lazy" width={512} height={512} alt={post.data.title}/>
+					</div> 
+					<div class="pb-8 px-8 pt-0 md:p-8 max-h-full w-full flex flex-col justify-between gap-8 border-b-2 md:border-y-2 border-y-white text-white">
+						<div class="flex flex-col gap-4">
+							<h3 class="mb-2 font-serif text-xl [&>mark]:text-black" set:html={post.data.title}></h3>
+							<p class="text-base" set:html={post.data.description}></p>
 						</div>
-					</a>
-				))
-			}
-        </div>
-    </div>	
+						<div class="flex flex-row items-center gap-4">
+							<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
+							{
+								post.data.tags && <p class="font-serif uppercase text-base before:content-['/'] before:font-sans before:mr-4 before:text-secondary">
+									{post.data.tags}
+								</p>
+							}	
+						</div>
+					</div>
+				</Link>
+			))
+		}
+	</div>
+
+	<div class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-20 pb-40 w-full gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
+		{
+			posts.map((post, index) => (
+				(getPostLangAndSlug(post).lang === lang && index > 0) &&
+				<Link class="flex flex-col justify-stretch" href={`./${getPostLangAndSlug(post).slug}/`} >
+					<div class="w-full min-h-[260px] flex items-center justify-center rounded-t-xl overflow-hidden">
+						<Image loading="lazy" src={post.data.heroImage} class="min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={512} height={512} alt={post.data.title}/>
+					</div> 
+					<div class="p-8 pt-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
+						<div class="flex flex-row items-center gap-4">
+							<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
+							{
+								post.data.tags && <p class="font-serif uppercase text-base before:content-['/'] before:font-sans before:mr-4 before:text-secondary">
+									{post.data.tags}
+								</p>
+							}
+						</div>
+						<h3 class="font-serif mb-2 text-xl [&>mark]:text-black" set:html={post.data.title}></h3>
+						<p class="text-base" set:html={post.data.description}></p>
+					</div>
+				</Link>
+			))
+		}
+	</div>
 </Base>

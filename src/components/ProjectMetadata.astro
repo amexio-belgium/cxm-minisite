@@ -1,0 +1,49 @@
+---
+import { useTranslations } from 'src/i18n/utils';
+
+interface Props {
+    duration?: string;
+    collaboration?: string;
+    services?: string;
+    technologies?: string;
+}
+
+const { 
+    duration,
+    collaboration,
+    services,
+    technologies,
+} = Astro.props;
+
+const { lang } = Astro.params;
+const t = useTranslations(lang, 'work');
+---
+
+<div class="-mt-8 from-blue-600/70 to-blue-800/70 shadow-blue-200 bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full">
+    <h2 class="text-xl font-serif mb-6" set:html={t('metadata.headline')}></h2>
+    <ol class="flex flex-col md:flex-row gap-4 md:gap-8 mb-8">
+        {
+            duration && <li class="peer">
+                {t('metadata.duration') + ": " + duration} 
+            </li>
+        } 
+        {
+           collaboration && <li class="peer pt-4 md:p-0 peer-first:border-t peer-first:border-orange md:border-none md:peer-first:before:content-['/'] md:before:peer-first:mr-8 before:text-secondary">
+                {t('metadata.collaboration') + ": " + collaboration}
+            </li>
+        }
+        {
+            technologies && <li class="peer pt-4 md:p-0 peer-first:border-t peer-first:border-orange md:border-none  md:peer-first:before:content-['/'] md:before:peer-first:mr-8 before:text-secondary">
+                {t('metadata.technologies') + ": " + technologies} 
+            </li>
+        }
+        {
+            services && <li class="peer pt-4 md:p-0 peer-first:border-t peer-first:border-orange md:border-none  md:peer-first:before:content-['/'] md:before:peer-first:mr-8 before:text-secondary">
+                {t('metadata.services') + ": " + services} 
+            </li>
+        }
+    </ol>
+    <div class="flex flex-row gap-6 flex-wrap">
+        <slot />
+    </div>
+</div>

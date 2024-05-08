@@ -9,7 +9,6 @@ const { title } = Astro.props;
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
-import Breadcrumbs  from "@components/ui/Breadcrumbs.astro";
 
 ---
 <html class="overflow-x-clip" lang={lang} >
@@ -19,8 +18,7 @@ import Breadcrumbs  from "@components/ui/Breadcrumbs.astro";
     </head>
     <body class="overflow-x-clip bg-blue-800">
         <Header />
-        <main id="main-content" class="max-w-[1304px] mx-auto mt-24 p-8">
-            <Breadcrumbs />
+        <main id="main-content" class="max-w-[1304px] mx-auto mt-24 px-8">
             <slot />
         </main>
         <Footer />

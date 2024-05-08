@@ -23,15 +23,16 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
 import HeroHeader from '@components/HeroHeader.astro';
 
 <HeroHeader 
-		headline="AEM Stabilize and optimize"
-		text="description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'">
-	<Customers 
-		headline="Customers we advised on strategy">
+	headline={frontmatter.title}
+    text={frontmatter.description}
+    backgroundImage={frontmatter.heroImage} >	
+	<Customers headline="Customers we advised on strategy">
 		<Image src={kbc} alt="" class="h-10 w-auto"/>
 		<Image src={telenet} alt="" class="h-10 w-auto"/>
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
+
 <TeaserWithImage 
 	headline="Why work with us?"
 	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.

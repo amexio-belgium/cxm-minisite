@@ -33,23 +33,25 @@ const t = useTranslations(lang, 'services');
 	/>
 
 	<div class="relative flex flex-col mb-40 xl:flex-row py-20 gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
-		<div class="flex flex-col items-start w-full gap-2 mb-16 xl:sticky xl:w-4/12 h-fit top-40">
+		<div class="flex flex-col items-start w-full gap-2 mb-8 md:mb-16 xl:sticky xl:w-4/12 h-fit top-40">
 		  <h2 class="mb-2 font-serif text-2xl" set:html={t('overview.headline')}></h2>
 		</div>
 		<div class="flex flex-col w-full gap-2 xl:w-8/12">
 			{
 				services.map((service) => (
 					getPostLangAndSlug(service).lang === lang &&
-						<div class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:h-[540px] lg:h-[346px] mb-8 shadow-xl">
-						<div class="relative w-full flex flex-col pb-28 p-8 md:p-8 h-1/2 lg:h-full lg:w-1/2">
-							<h3 class="mb-2 font-serif text-xl" set:html={service.data.title}></h3>
-							<p class="text-base" set:html={service.data.description}></p>
-							<Button class="absolute bottom-8" link={`/services/${getPostLangAndSlug(service).slug}/`} style="primary" size="sm" color="light">
+						<div class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:min-h-[346px] mb-8 shadow-xl">
+						<div class="relative w-full flex flex-col items-start justify-between gap-20 p-4 sm:p-8 h-1/2 md:h-full md:w-2/3">
+							<div class="flex flex-col">
+								<h3 class="mb-2 font-serif text-xl" set:html={service.data.title}></h3>
+								<p class="text-base" set:html={service.data.description}></p>
+							</div>
+							<Button  link={`/services/${getPostLangAndSlug(service).slug}/`} style="primary" size="sm" color="light">
 								{service.data.cta || t('overview.backupcta')}
 							</Button>
 						</div>
-						<div class="relative bottom-0 right-0 inline-flex flex-col items-start justify-start w-full overflow-hidden mask-project lg:w-1/2 h-1/2 lg:h-full md:absolute">
-							<Image loading="eager" src={service.data.heroImage} class="aspect-[790/470] min-w-full h-auto lg:w-auto lg:min-h-full" loading="lazy" width={790} height={470} alt={service.data.title}/>
+						<div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project md:w-1/2 md:-right-1/12 h-1/2 md:h-full md:absolute">
+							<Image loading="eager" src={service.data.heroImage} class="min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={790} height={470} alt={service.data.title}/>
 						</div> 
 					</div>
 				))
@@ -68,27 +70,27 @@ const t = useTranslations(lang, 'services');
 			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model4">{t('collaborate.title4')}</sl-tab>
 
 			<sl-tab-panel name="model1"> 
-				<div class="flex flex-col md:flex-row mt-8 gap-8 pb-8">
-					<p class="w-1/2" set:html={t('collaborate.description1')}></p>
-					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
+					<p class="w-full md:w-1/2" set:html={t('collaborate.description1')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-full md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model2">
-				<div class="flex flex-col md:flex-row mt-8 gap-8">
-					<p class="w-1/2" set:html={t('collaborate.description2')}></p>
-					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
+					<p class="w-full md:w-1/2" set:html={t('collaborate.description2')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-full md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model3">
-				<div class="flex flex-col md:flex-row mt-8 gap-8">
-					<p class="w-1/2" set:html={t('collaborate.description3')}></p>
-					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
+					<p class="w-full md:w-1/2" set:html={t('collaborate.description3')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-full md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model4">
-				<div class="flex flex-col md:flex-row mt-8 gap-8">
-					<p class="w-1/2" set:html={t('collaborate.description4')}></p>
-					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-1/2 shadow-sm shadow-primary" />
+				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
+					<p class="w-full md:w-1/2" set:html={t('collaborate.description4')}></p>
+					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} class="rounded-2xl overflow-hidden w-full md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 		</sl-tab-group>
@@ -103,14 +105,14 @@ const t = useTranslations(lang, 'services');
 
 <style>
     .mask-project {
-        clip-path: polygon( 54.806% 0.062%,54.806% 0.062%,53.272% 0.408%,51.853% 1.125%,50.559% 2.116%,49.402% 3.286%,48.392% 4.539%,47.541% 5.779%,46.86% 6.911%,46.36% 7.837%,46.052% 8.464%,45.947% 8.694%,-0.036% 100%,99.927% 99.938%,99.927% 99.938%,99.934% 99.938%,99.942% 99.938%,99.949% 99.938%,99.956% 99.938%,99.964% 99.938%,99.971% 99.938%,99.978% 99.938%,99.985% 99.938%,99.993% 99.938%,100% 99.938%,100% 0.041%,54.806% 0.041% );
-        mask-size: cover; 
-        mask-size: 200% auto;
+		clip-path: polygon( 100% 100%,100% 0%,21.705% 0%,21.705% 0.029%,21.705% 0.029%,19.048% 0.522%,16.589% 1.543%,14.348% 2.954%,12.343% 4.62%,10.594% 6.404%,9.12% 8.17%,7.94% 9.78%,7.074% 11.1%,6.54% 11.991%,6.358% 12.319%,0% 22.694%,0% 100%,100% 100% );
+		mask-size: 200% auto;
         mask-position: top right;
     }
     
     @media only screen and (min-width: 768px) {
         .mask-project {
+			clip-path: polygon( 76.039% 0.021%,76.039% 0.021%,73.912% 0.367%,71.944% 1.084%,70.15% 2.076%,68.546% 3.246%,67.146% 4.5%,65.967% 5.741%,65.022% 6.872%,64.329% 7.8%,63.902% 8.426%,63.756% 8.656%,0% 100%,99.899% 99.938%,100% 99.938%,100% 0%,76.039% 0%,76.039% 0.021% );
             mask-size: cover; 
             mask-position: unset;
         }

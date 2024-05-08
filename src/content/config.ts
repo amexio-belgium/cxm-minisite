@@ -9,6 +9,7 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string(),
+		tags: z.string().optional(),
 	}),
 });
 
@@ -16,9 +17,16 @@ const work = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
+		client: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean().optional(),
 		heroImage: z.string(),
+		logo: z.string().optional(),
+		tags: z.string().optional(),
+		duration: z.string().optional(),
+		services: z.string().optional(),
+		technologies: z.string().optional(),
+		collaboration: z.string().optional(),
 	}),
 });
 

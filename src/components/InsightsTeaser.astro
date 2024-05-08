@@ -5,26 +5,62 @@ import { useTranslations } from '../i18n/utils';
 import { Image } from 'astro:assets';
 
 const { lang } = Astro.params;
+interface Props {
+    collection?: 'insights' | 'cases';
+    current?: string;
+    tag?: string;
+}
 
-const posts = (await getCollection('blog', 
-    (post) => {
-        return !post.data.draft && getPostLangAndSlug(post).lang === lang
-    }))
-    .sort(
-        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-    )
-    .splice(0,2);
+const { 
+    collection = "insights",
+    tag = '',
+    current
+} = Astro.props;
+
+const posts = await getPosts();
+
+async function getPosts() {
+    if (collection == "cases") {
+        return (await getCollection('cases',
+            (post) => {
+                return !post.data.draft 
+                        && getPostLangAndSlug(post).lang === lang 
+                        && (!tag || (tag && post.data.tags && post.data.tags.includes(tag)))
+                        && (!current || (current && post.data.title !== current))
+            }))
+        .splice(0,2);
+    } 
+
+    return (await getCollection('blog', 
+        (post) => {
+            return !post.data.draft 
+                && getPostLangAndSlug(post).lang === lang 
+                && (!tag || (tag && post.data.tags && post.data.tags.includes(tag))) 
+                && (!current || (current && post.data.title !== current))
+        }))
+        .sort(
+            (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+        )
+        .splice(0,2);
+} 
 
 function getPostLangAndSlug(post) {
 	const [lang, ...slug] = post.slug.split('/');
 	return {lang, slug}
 }
-const t = useTranslations(lang);
 
+const t = useTranslations(lang);
 ---
 <div class="relative flex flex-col pt-20 pb-10 pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
     <h2 class="mb-8 font-serif text-2xl text-black">
-        {t('insightsteaser.headline')}
+        {  
+            (() => {
+                if ( collection === "insights" ) {
+                    return t('insightsteaser.headline')
+                } 
+                    return t('casesteaser.headline')
+            })
+        }
     </h2>
     <div class="flex flex-col w-full gap-8 lg:flex-row">
         {
@@ -36,10 +72,17 @@ const t = useTranslations(lang);
                     <div class="flex flex-col justify-between w-full p-8 pt-16 text-white h-1/2">
                         <div>
                             <h3 class="mb-2 font-serif text-xl">{post.data.title}</h3>
-                            <p class="text-base" set:html={post.data.description}></p>
+                            {collection == "insights" && <p class="text-base" set:html={post.data.description}></p>}
                         </div>
                         <Button class="mt-8" link={`/blog/${getPostLangAndSlug(post).slug}/`} style="tertiary" color="light">
-                            {t('insightsteaser.button')}
+                            {  
+                                (() => {
+                                    if ( collection === "insights" ) {
+                                        return t('insightsteaser.button')
+                                    } 
+                                        return t('casesteaser.button')
+                                })
+                            }
                         </Button>
                     </div>
                 </div>
