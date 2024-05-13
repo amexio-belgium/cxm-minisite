@@ -7,6 +7,7 @@ export const ui = {
         'nav.contact': 'Contact',
         'nav.blog': 'Insights',
         'nav.cases': 'Work',
+        'breadcrumb.label': 'Breadcrumb',
         '404.title': "AmeXio Fuse - 404",
         '404.headline': "Something's missing.",
         '404.text': "Sorry, we can't find that page. You'll find lots to explore on the home page.",
