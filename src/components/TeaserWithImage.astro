@@ -22,5 +22,7 @@ const {
         <h2 class="font-serif text-2xl text-balance" set:html={headline}></h2>
         <p class="text-base font-medium max-w-[65ch]" set:html={description}></p>
     </div>
-    <slot />
+    <div class="shadow-xl shadow-primary/20 rounded-xl overflow-hidden">
+        <slot />
+    </div>
 </div>

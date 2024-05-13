@@ -1,8 +1,10 @@
 ---
 title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
+description: 'Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-3.jpg'
+tags: 'Composability'
+
 ---
 
 # Adobe Summit 2024: Supercharge CXM With generative AI

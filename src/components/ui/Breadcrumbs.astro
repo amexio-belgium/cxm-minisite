@@ -18,7 +18,9 @@ paths.forEach((text, i) => {
     parts.push({ text: text.replace(/[-_]/g, ' '), href })
   }
 })
+
 ---
+
 { parts.length > 1 &&
     <nav aria-label={t('breadcrumb.label')}>
         <ol class="flex text-white gap-2 -ms-2" role="list">

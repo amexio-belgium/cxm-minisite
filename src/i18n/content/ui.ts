@@ -23,6 +23,8 @@ export const ui = {
         'footer.copyright': 'Copyright © 2024 - AmeXio Fuse is part of ',
         'insightsteaser.headline': 'Latest insights',
         'insightsteaser.button': 'Uncover this insight',
+        'casesteaser.headline': 'Related Work',
+        'casesteaser.button': 'Uncover this case',
     },
     fr: {
         'main.skiplink': 'Skip to main content',
