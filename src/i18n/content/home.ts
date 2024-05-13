@@ -1,6 +1,7 @@
 export const home = {
     en: {
         'home.title': "AmeXio Fuse",
+        'home.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'Turning your content <mark>into value</mark>',
         'hero.text': 'AmeXio Fuse designs, builds and runs large-scale content platforms to make your business more smart, fast & cost-effective.',
         'hero.button': 'Book a meeting',
