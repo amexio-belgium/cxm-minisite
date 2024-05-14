@@ -12,7 +12,7 @@ const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
 <li class="relative w-full py-4 pl-8 border-b-[0.5px] border-blue-100/70 bg-blue-800/60 md:bg-transparent md:w-fit border-opacity-60 md:border-0 md:p-0">
-	<a href={href} aria-current={isActive && "page"} class:list={["block group w-full text-white pr-2 text-lg flex justify-start md:justify-center items-center gap-1 focus-visible:outline-none focus-visible:rounded focus-visible:px-4 focus-visible:ring-2 focus-visible:ring-tertiary" ,className , { active: isActive }]} {...props}>
+	<a href={href} aria-current={isActive && "page"} class:list={["block group w-full text-white pr-2 text-lg flex justify-start md:justify-center items-center gap-1 focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500" ,className , { active: isActive }]} {...props}>
 		<Image loading="eager" class="relative opacity-0 group-[.active]:opacity-100 group-hover:opacity-100 group-focus:opacity-100 scale-0 group-[.active]:scale-100 group-hover:scale-100 group-focus:scale-100 w-0 group-[.active]:w-4 group-hover:w-4 group-focus:w-4 h-4 transition-all duration-500" 
 		src={logoIcon} width={16} height={16} alt="" />
 		<slot />

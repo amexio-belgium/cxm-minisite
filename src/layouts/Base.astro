@@ -5,7 +5,7 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
@@ -13,7 +13,7 @@ const lang = getLangFromUrl(Astro.url);
 ---
 <html class="overflow-x-clip" lang={lang} >
     <head>
-        <BaseHead title={title || SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
         <ViewTransitions />
     </head>
     <body class="overflow-x-clip bg-blue-800">

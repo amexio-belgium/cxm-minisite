@@ -12,7 +12,7 @@ const { lang } = Astro.params;
 const t = useTranslations(lang, 'about');
 
 ---
-<Base title={t('about.title')}>
+<Base title={t('about.title')} description={t('about.seoDescription')}>
 	<HeroHeader 
 		headline={t('hero.headline')}
 		text={t('hero.subheadline')}

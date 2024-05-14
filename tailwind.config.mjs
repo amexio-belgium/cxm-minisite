@@ -5,12 +5,12 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		fontSize: {
-			'sm': ['14px', '20px'],
-			'base': ['18px', '26px'],
-			'lg': ['20px', '30px'],
-			'xl': ['28px', '44px'],
-			'2xl': ['44px', '58px'],
-			'3xl': ['60px', '75px'],
+			'sm': ['0.875rem', '1.25rem'],
+			'base': ['1.125rem', '1.625rem'],
+			'lg': ['1.25rem', '1.875rem'],
+			'xl': ['1.75rem', '2.75rem'],
+			'2xl': ['2.75rem', '3.625rem'],
+			'3xl': ['3.75rem', '4.688rem'],
 		},
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],
