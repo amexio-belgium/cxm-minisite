@@ -6,21 +6,23 @@ heroImage: '/blog-placeholder-1.jpg'
 cta: 'Learn more about CXM Assessment'
 ---
 
-import Customers from "@components/Customers.astro"
-import Highlight from "@components/Highlight.astro"
-import InsightsTeaser from "@components/InsightsTeaser.astro"
-import Quote from "@components/Quote.astro"
-import TilesContainer from "@components/TilesContainer.astro"
-import SmallTile from "@components/SmallTile.astro"
-import TeaserWithImage  from "@components/TeaserWithImage.astro"
-import Faq from "@components/Faq.astro"
-import FaqQuestion from "@components/FaqQuestion.tsx"
+import HeroHeader from '@components/uicomposition/HeroHeader.astro';
+import ProjectMetadata from '@components/uicomposition/ProjectMetadata.astro'
+import Customers from "@components/uicomposition/Customers.astro"
+import Highlight from "@components/uicomposition/Highlight.astro"
+import InsightsTeaser from "@components/uicomposition/InsightsTeaser.astro"
+import Quote from "@components/uicomposition/Quote.astro"
+import TilesContainer from "@components/uicomposition/TilesContainer.astro"
+import SmallTile from "@components/uielements/SmallTile.astro"
+import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
+import Faq from "@components/uicomposition/Faq.astro"
+import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
 import kbc from '@assets/projects/kbc_logo.png';
 import telenet from '@assets/projects/telenet_logo.png';
 import mediafin from '@assets/projects/mediafin_logo.svg';
-import HeroHeader from '@components/HeroHeader.astro';
+
 
 <HeroHeader 
 	headline={frontmatter.title}
@@ -95,4 +97,4 @@ import HeroHeader from '@components/HeroHeader.astro';
     jobtitle="editor"
     profileImage='/src/assets/people/placeholder_small.png'
 	class="mt-40"
-    /> 
+    /> @components/qwik/FaqQuestion

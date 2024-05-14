@@ -12,22 +12,21 @@ collaboration: 'test'
 services: 'Development'
 technologies: 'Vuejs, aem'
 ---
-import HeroHeader from '@components/HeroHeader.astro';
-import ProjectMetadata from '@components/ProjectMetadata.astro'
-import Customers from "@components/Customers.astro"
-import Highlight from "@components/Highlight.astro"
-import InsightsTeaser from "@components/InsightsTeaser.astro"
-import Quote from "@components/Quote.astro"
-import TilesContainer from "@components/TilesContainer.astro"
-import SmallTile from "@components/SmallTile.astro"
-import TeaserWithImage  from "@components/TeaserWithImage.astro"
-import Faq from "@components/Faq.astro"
-import FaqQuestion from "@components/FaqQuestion.tsx"
+import HeroHeader from '@components/uicomposition/HeroHeader.astro';
+import ProjectMetadata from '@components/uicomposition/ProjectMetadata.astro'
+import Customers from "@components/uicomposition/Customers.astro"
+import InsightsTeaser from "@components/uicomposition/InsightsTeaser.astro"
+import Quote from "@components/uicomposition/Quote.astro"
+import TilesContainer from "@components/uicomposition/TilesContainer.astro"
+import SmallTile from "@components/uielements/SmallTile.astro"
+import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
+
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
 import kbc from '@assets/projects/kbc_logo.png';
 import telenet from '@assets/projects/telenet_logo.png';
 import mediafin from '@assets/projects/mediafin_logo.svg';
+
 
 <HeroHeader 
     headline={frontmatter.title}
@@ -92,3 +91,4 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
 this needs to be the case teaser
 <InsightsTeaser />
 
+@components/qwik/FaqQuestion

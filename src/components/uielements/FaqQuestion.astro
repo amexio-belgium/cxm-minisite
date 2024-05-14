@@ -1,0 +1,21 @@
+---
+import Details from '../qwik/Details.tsx'
+
+interface Props {
+    headline: string;
+    text: string;
+    class?: string;
+}
+
+const { 
+	headline, 
+	text,
+    class: className	
+} = Astro.props;
+
+---
+<Details 
+	headline={headline}
+	text={text}
+    class={className}>
+</Details>

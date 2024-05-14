@@ -6,7 +6,7 @@ interface Props {
     class?: string;
 }
 
-const FaqQuestion = component$((props: Props) => {
+const Details = component$((props: Props) => {
     const isVisible = useSignal(false);
 
     return (
@@ -30,4 +30,4 @@ const FaqQuestion = component$((props: Props) => {
     );
 });
  
-export default FaqQuestion;
+export default Details;
