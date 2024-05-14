@@ -10,7 +10,7 @@ const Details = component$((props: Props) => {
     const isVisible = useSignal(false);
 
     return (
-        <details class="border-b border-gray-500 py-6  h-fit">
+        <details class={["py-6 h-fit", props.class]}>
             <summary class="flex justify-between items-center w-full gap-4 cursor-pointer" onClick$={() => {isVisible.value = !isVisible.value;}} >
                 <b class="text-lg">{props.headline}</b>
                 {isVisible.value ? 
