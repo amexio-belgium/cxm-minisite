@@ -1,9 +1,9 @@
 ---
-import ProfileCard from './ProfileCard.astro';
-import LogoSlant from './elements/LogoSlant.astro';
-import { useTranslations } from '../i18n/utils';
+import ProfileCard from '@components/uielements/ProfileCard.astro';
+import LogoSlant from '@components/graphicelements/LogoSlant.astro';
+import { useTranslations } from '../../i18n/utils';
 import { Image } from 'astro:assets';
-import Breadcrumbs  from "@components/ui/Breadcrumbs.astro";
+import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
 interface Props {
     headline: string;
     client?: string;

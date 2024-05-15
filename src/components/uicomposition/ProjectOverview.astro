@@ -1,7 +1,7 @@
 ---
-import ProjectPreview from './ProjectCard.astro'
-import Button from './ui/Button.astro';
-import { useTranslations } from '../i18n/utils';
+import ProjectPreview from '../uielements/ProjectCard.astro'
+import Button from '../uielements/Button.astro';
+import { useTranslations } from '../../i18n/utils';
 const { lang } = Astro.params;
 
 const t = useTranslations(lang, 'home');
