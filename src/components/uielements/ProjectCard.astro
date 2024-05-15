@@ -1,7 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
 
-import Button from './ui/Button.astro';
+import Button from '../uielements/Button.astro';
 import { Image } from 'astro:assets';
 
 interface Props {
@@ -31,7 +31,7 @@ if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in 
 if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
 ---
 
-<div {...rest} class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:h-[470px] mb-8 shadow-xl">
+<div {...rest} class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-xl">
     <div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
         <h3 class="mb-2 font-serif text-xl">{name}</h3>
         <p class="text-sm md:text-base" set:html={content}></p>

@@ -1,9 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import HeaderLink from './ui/HeaderLink.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import HeaderLink from '../uielements/HeaderLink.astro';
 import logoImage from '@assets/logos/Amexio_Fuse_Horizontal.svg';
 import { Image } from 'astro:assets';
-import SkipLink from './ui/Skiplink.astro';
+import SkipLink from '../uielements/Skiplink.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
