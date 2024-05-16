@@ -6,7 +6,7 @@ type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<a
+<a 
     href={href}
     class:list={[
         "sr-only underline focus:not-sr-only bg-yellow-500 text-black focus:px-4 focus:py-4 focus:block js-skiplink",
@@ -54,12 +54,12 @@ const { href, class: className, ...props } = Astro.props;
             const targetId = skiplink.getAttribute("href").split("#").pop();
             const targetEl = document.getElementById(targetId);
             skiplink.addEventListener("click", () =>
-                setFocus($linkedElement, {
+                setFocus(targetEl, {
                     onBeforeFocus() {
-                        $linkedElement.classList.add("outline-none");
+                        targetEl.classList.add("outline-none");
                     },
                     onBlur() {
-                        $linkedElement.classList.remove("outline-none");
+                        targetEl.classList.remove("outline-none");
                     },
                 }),
             );
