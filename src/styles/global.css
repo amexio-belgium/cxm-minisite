@@ -31,7 +31,7 @@
 }
 
 :root {
-    /* Changes the primary theme color to purple using primitives */
+    /* Shoelace tab component - Changes the primary theme color to purple using primitives */
     --sl-color-primary-50: #fdf0e9;
     --sl-color-primary-100: #f9d1bb;
     --sl-color-primary-200: #f7bb9b;
@@ -84,4 +84,9 @@ mark {
 
 .tab.tab--active:not(.tab--disabled) {
     color: white;
+}
+
+/* Hide default browser triangle in Safari */ 
+summary::-webkit-details-marker {
+    display: none;
 }
