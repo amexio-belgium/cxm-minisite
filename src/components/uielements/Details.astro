@@ -1,0 +1,163 @@
+---
+interface Props {
+    headline: string;
+    headlineTag: string;
+    text: string;
+    class?: string;
+}
+
+const { 
+    headline,
+    headlineTag, 
+    class: className
+} = Astro.props;
+
+const HeadlineTagName = headlineTag;
+---
+<enhanced-details>
+    <details class:list={[
+        "py-6 h-fit",
+        className,
+    ]}>
+      <summary class="flex justify-between items-center w-full gap-4 cursor-pointer hover:text-yellow-500 focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
+        <HeadlineTagName class:list={["text-lg font-bold"]}>{headline}</HeadlineTagName>
+        <span class="relative text-black w-10 h-10 flex-shrink-0 rounded-full bg-tertiary pointer-events-none">
+            <svg class="absolute inset-1/2 -translate-x-1/2 -translate-y-1/2" width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="h-bar" d="M0.75 5.25H11.25V6.75H0.75V5.25Z" fill="currentColor"/>
+                <path class="v-bar" d="M5.25 0.75V11.25H6.75V0.75H5.25Z" fill="currentColor"/>
+            </svg>
+        </span>
+    </summary>
+    <div class="js-details-content pe-16">
+        <div class="prose prose-lg prose-ondark pt-8 font-normal">
+            <slot />
+        </div>
+    </div>
+  </details>
+</enhanced-details>
+<style>
+    .v-bar {
+        transition: transform .15s ease-out, opacity .3s ease-out;
+        transform-origin: center center;
+        will-change: transform, opacity;
+    }
+    details[open] svg .v-bar{
+        opacity: 0;
+        transform: rotate(90deg);
+    }
+</style>
+<script>
+    class enhancedDetails extends HTMLElement {
+      constructor() {
+        super();
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const details = this.querySelector<HTMLDetailsElement>('details');
+        const summary = this.querySelector<HTMLElement>('summary');
+        const content = this.querySelector<HTMLElement>('.js-details-content');
+
+        if(!details || !content || !summary) return;
+
+        let isClosing = false;
+        let animation: Animation | null = null;
+        let isExpanding = false;
+
+        const onAnimationFinish = (open) => {
+            // Set the open attribute based on the parameter
+            details.open = open;
+            // Clear the stored animation
+            animation = null;
+            // Reset isClosing & isExpanding
+            isClosing = false;
+            isExpanding = false;
+            // Remove the overflow hidden and the fixed height
+            details.style.height = '';
+            details.style.overflow = '';
+        }
+
+        const closeDetails = () => {
+            // Set the element as "being closed"
+            isClosing = true;
+            // Store the current height of the element
+            const startHeight = `${details.offsetHeight}px`;
+            // Calculate the height of the summary
+            const endHeight = `${details.offsetHeight - content.offsetHeight}px`;
+            // If there is already an animation running
+            if (animation) {
+                // Cancel the current animation
+                animation.cancel();
+            }
+
+            // Start a WAAPI animation
+            animation = details.animate({
+                // Set the keyframes from the startHeight to endHeight
+                height: [startHeight, endHeight]
+            }, {
+                duration: 400,
+                easing: 'ease-out'
+            });
+    
+            // When the animation is complete, call onAnimationFinish()
+            animation.onfinish = () => onAnimationFinish(false);
+            // If the animation is cancelled, isClosing variable is set to false
+            animation.oncancel = () => isClosing = false;
+        }
+
+        const expand = () => {
+            // Set the element as "being expanding"
+            isExpanding = true;
+            // Get the current fixed height of the element
+            const startHeight = `${details.offsetHeight}px`;
+            // Calculate the open height of the element (summary height + content height)
+            const endHeight = `${details.offsetHeight + content.offsetHeight}px`;
+    
+            // If there is already an animation running
+            if (animation) {
+            // Cancel the current animation
+                animation.cancel();
+            }
+    
+            // Start a WAAPI animation
+            animation = details.animate({
+                // Set the keyframes from the startHeight to endHeight
+                height: [startHeight, endHeight]
+                }, {
+                duration: 400,
+                easing: 'ease-out'
+            });
+            
+            // When the animation is complete, call onAnimationFinish()
+            animation.onfinish = () => onAnimationFinish(true);
+            // If the animation is cancelled, isExpanding variable is set to false
+            animation.oncancel = () => isExpanding = false;
+        }
+
+        const openDetails = () => {
+            // Apply a fixed height on the element
+            details.style.height = `${details.offsetHeight}px`;
+            // Force the [open] attribute on the details element
+            details.open = true;
+             // Wait for the next frame to call the expand function
+            window.requestAnimationFrame(() => expand());
+        }
+
+        const clickHandler = (e) => { 
+            if(!reducedMotion.matches) {
+            // Stop default behaviour from the browser
+            e.preventDefault();
+            // Add an overflow on the <details> to avoid content overflowing
+            details.style.overflow = 'hidden';
+            // Check if the element is being closed or is already closed
+            if (isClosing || !details.open) {
+                openDetails();
+            // Check if the element is being openned or is already open
+            } else if (isExpanding || details.open) {
+                closeDetails();
+            }}
+        }
+        
+        summary?.addEventListener('click',clickHandler,false);
+      }
+    }
+    customElements.define('enhanced-details', enhancedDetails);
+  </script>
