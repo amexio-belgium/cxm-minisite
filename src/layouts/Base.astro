@@ -6,7 +6,7 @@ import Footer from '@components/layoutcomponents/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
 import TrackingFooter from '@components/uielements/TrackingFooter.astro';
 
-const { title, description } = Astro.props;
+const { title, description, page } = Astro.props;
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
@@ -16,6 +16,10 @@ const lang = getLangFromUrl(Astro.url);
     <head>
         <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
         <ViewTransitions />
+        {
+            page == "contact" && 
+            <link rel="preload" href="https://js-eu1.hsforms.net/forms/embed/v2.js" as="script" />
+        }
     </head>
     <body class="overflow-x-clip bg-blue-800">
         <Header />
