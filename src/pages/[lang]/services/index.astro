@@ -51,7 +51,7 @@ const t = useTranslations(lang, 'services');
 							</Button>
 						</div>
 						<div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project md:w-1/2 md:-right-1/12 h-1/2 md:h-full md:absolute">
-							<Image loading="eager" src={service.data.heroImage} class="min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={790} height={470} alt={service.data.title}/>
+							<Image loading="eager" src={service.data.heroImage} class="min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={790} height={470} alt={service.data.altTextImage || ""} />
 						</div> 
 					</div>
 				))

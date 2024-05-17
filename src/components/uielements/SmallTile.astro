@@ -2,18 +2,22 @@
 interface Props {
     headline: string;
     description: string;
+    headlineTag?: "h3" | "h4" | "h5";
     class?: string;
 }
 const { 
     headline, 
     description,
+    headlineTag = "h3", 
     class: className 
 } = Astro.props;
+
+const HeadlineTagName = headlineTag;
 ---
 <div class:list={["inline-flex flex-col items-center justify-center w-full gap-8 px-12 py-6 border-blue-500 shadow backdrop-blur-lg lg:w-1/3 bg-gradient-to-l from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border-1", className]}>
     <slot />
     <div class="flex flex-col items-center justify-start gap-4">
-        <div class="font-serif text-xl text-center text-white" set:html={headline}></div>
-        <div class="text-base text-center text-white" set:html={description}></div>
+        <HeadlineTagName class:list={["font-serif text-xl text-center text-white"]} set:html={headline}></HeadlineTagName>
+        <p class="text-base text-center text-white" set:html={description}></p>
     </div>
 </div>
