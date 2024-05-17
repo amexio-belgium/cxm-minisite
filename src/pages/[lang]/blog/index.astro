@@ -36,7 +36,7 @@ const t = useTranslations(lang, 'blog');
 		{
 			posts.map((post, index) => (
 				(getPostLangAndSlug(post).lang === lang && index == 0) &&
-				<article class="relative flex flex-col md:flex-row w-full  justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500" href={`./${getPostLangAndSlug(post).slug}/`} >
+				<article class="relative flex flex-col md:flex-row w-full  justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500">
 					<div class="aspect-square flex items-center justify-center shadow-xl shadow-primary/20 rounded-t-xl md:rounded-tr-none md:rounded-l-xl overflow-hidden">
 						<Image loading="eager" src={post.data.heroImage} class="min-w-full min-h-full max-w-[unset] h-[unset] object-cover" loading="lazy" width={512} height={512} alt={post.data.title}/>
 					</div> 
