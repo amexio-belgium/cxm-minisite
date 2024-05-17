@@ -107,6 +107,22 @@ export default {
 			animation: {
 				'bounce-slow': 'bounceslow 3s ease-in-out 3',
 			},
+			typography: ({ theme }) => ({
+				ondark: {
+				  css: {
+					'--tw-prose-body': theme('colors.white'),
+					'--tw-prose-headings': theme('colors.white'),
+					'--tw-prose-lead': theme('colors.white'),
+					'--tw-prose-links': theme('colors.yellow[500]'),
+					'--tw-prose-bullets': theme('colors.white'),
+					'--tw-prose-hr': theme('colors.white'),
+					'--tw-prose-quotes': theme('colors.white'),
+					'--tw-prose-quote-borders': theme('colors.white'),
+					'--tw-prose-captions': theme('colors.white'),
+					'--tw-prose-counters': theme('colors.white'),
+				  },
+				},
+			  }),
 		}
 	},
 	plugins: [  

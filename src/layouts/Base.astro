@@ -4,6 +4,7 @@ import BaseHead from '@components/layoutcomponents/BaseHead.astro';
 import Header from '@components/layoutcomponents/Header.astro';
 import Footer from '@components/layoutcomponents/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
+import TrackingFooter from '@components/uielements/TrackingFooter.astro';
 
 const { title, description } = Astro.props;
 
@@ -18,9 +19,10 @@ const lang = getLangFromUrl(Astro.url);
     </head>
     <body class="overflow-x-clip bg-blue-800">
         <Header />
-        <main id="main-content" class="max-w-[1304px] mx-auto mt-24 px-8">
+        <main id="main-content" class="max-w-[1304px] mx-auto mt-24 scroll-mt-24 px-8">
             <slot />
         </main>
         <Footer />
+        <TrackingFooter />
     </body>
 </html>
