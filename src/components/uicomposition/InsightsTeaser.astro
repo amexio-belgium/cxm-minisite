@@ -67,7 +67,7 @@ const t = useTranslations(lang);
             posts.map((post) => (
                 <div class="relative w-full h-auto mb-8 overflow-hidden shadow-sm shadow-primary/20 bg-primary rounded-2xl">
                     <div class="w-full mask-blog h-1/2">
-                        <Image src={post.data.heroImage} class="h-full min-w-full" loading="lazy" width={580} height={340} alt={post.data.title}/>
+                        <Image src={post.data.heroImage} class="h-full min-w-full" loading="lazy" width={580} height={340} alt={post.data.altTextImage || ""} />
                     </div> 
                     <div class="flex flex-col justify-between w-full p-8 pt-16 text-white h-1/2">
                         <div>

@@ -9,6 +9,7 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string(),
+		altTextImage: z.string().optional(),
 		tags: z.string().optional(),
 	}),
 });
@@ -21,6 +22,7 @@ const work = defineCollection({
 		description: z.string(),
 		draft: z.boolean().optional(),
 		heroImage: z.string(),
+		altTextImage: z.string().optional(),
 		logo: z.string().optional(),
 		tags: z.string().optional(),
 		duration: z.string().optional(),
@@ -37,6 +39,7 @@ const service = defineCollection({
 		description: z.string(),
 		draft: z.boolean().optional(),
 		heroImage: z.string(),
+		altTextImage: z.string().optional(),
 		cta: z.string().optional(),
 	}),
 });
