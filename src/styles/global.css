@@ -90,3 +90,16 @@ mark {
 summary::-webkit-details-marker {
     display: none;
 }
+
+/* Set / before post tag */
+@supports (content: "x" / "y") {
+    .c-post-tags:before {
+        content: "/" / "";
+    }
+}
+@supports not (content: "x" / "y") {
+    .c-post-tags:before {
+        content: "/";
+        alt: "";
+    }
+}
