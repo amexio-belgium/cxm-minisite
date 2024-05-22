@@ -18,6 +18,6 @@ const HeadlineTagName = headlineTag;
     <slot />
     <div class="flex flex-col items-center justify-start gap-4">
         <HeadlineTagName class:list={["font-serif text-xl text-center text-white"]} set:html={headline}></HeadlineTagName>
-        <p class="text-base text-center text-white" set:html={description}></p>
+        <p class="text-base font-light text-center text-white" set:html={description}></p>
     </div>
 </div>

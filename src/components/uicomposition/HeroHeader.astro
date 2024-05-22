@@ -47,7 +47,7 @@ const t = useTranslations(lang, 'home');
     <div class:list={["relative ", homepage && "grid grid-cols-1 gap-12 md:gap-6 grid-area md:grid-cols-12"]}>
         <div class:list={[" text-left w-full md:w-[80ch]", homepage && "grid-a md:w-full"]}>
             { text && 
-                <p class="text-lg md:text-xl" set:html={text}></p> 
+                <p class="text-lg font-light md:text-xl" set:html={text}></p> 
             }
             <slot />
         </div>

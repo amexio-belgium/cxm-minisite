@@ -16,6 +16,14 @@
 
 @font-face {
     font-family: 'Lexend';
+    src: url('/fonts/Lexend-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lexend';
     src: url('/fonts/Lexend-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
