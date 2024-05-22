@@ -1,0 +1,25 @@
+---
+interface Props {
+    headlineTag?: "h2" | "h3" | "h4";
+    class?: string;
+}
+
+const {
+    headlineTag = "h3", 
+    class: className
+} = Astro.props;
+
+const sizes = {
+    h2:
+      "text-2xl",
+    h3:
+      "text-xl",
+    h4:
+      "text-lg",
+}
+
+const HeadlineTagName = headlineTag;
+---
+<HeadlineTagName class:list={["not-prose font-serif", sizes[headlineTag], className]}>
+    <slot />
+</HeadlineTagName>

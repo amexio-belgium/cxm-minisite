@@ -50,8 +50,8 @@ const t = useTranslations(lang, 'work');
 										<Image loading="lazy" src={casepost.data.logo} class="" loading="lazy" width={120} height={80} alt={casepost.data.client || casepost.data.title}/>
 								}
 							</div>
-							<p class="text-base" set:html={casepost.data.description}></p>
-							<ol class="list-disc list-inside">
+							<p class="text-base font-light" set:html={casepost.data.description}></p>
+							<ol class="list-disc font-light list-inside">
 								{
 									casepost.data.duration && <li class="">
 										{t('metadata.duration') + ": " + casepost.data.duration} 

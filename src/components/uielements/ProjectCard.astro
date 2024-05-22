@@ -34,8 +34,8 @@ if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in gl
 <div {...rest} class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-xl">
     <div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
         <h3 class="mb-2 font-serif text-xl">{name}</h3>
-        <p class="text-sm md:text-base" set:html={content}></p>
-        <Button class="" link={link} style="tertiary" color="light">{buttonText}</Button>
+        <p class="text-sm font-light md:text-base" set:html={content}></p>
+        <Button class="" link={link} style="tertiary" color="dark">{buttonText}</Button>
     </div>
 
     <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project lg:w-3/4 h-[300px] lg:h-full lg:absolute">
