@@ -54,10 +54,6 @@ mark {
     background-color: unset;
 }
 
-/* h3 mark {
-    color: unset;
-} */
-
 .hero-gradient {
     background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
 }
