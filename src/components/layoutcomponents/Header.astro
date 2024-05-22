@@ -11,23 +11,23 @@ const t = useTranslations(lang);
 ---
 <SkipLink href="#main-content">{t('main.skiplink')}</SkipLink>
 <header>
-	<nav class="fixed top-0 z-10 flex items-center justify-center w-screen h-24 border-b-[0.5px] shadow-lg border-blue-100/70 shadow-blue-100/20 bg-blue-800/60 backdrop-blur">
-		<div class="max-w-[1304px] w-screen px-8 h-full lg:px-6 flex flex-wrap items-center justify-between ">
+	<nav class="flex items-center justify-center w-screen border-b py-6 border-blue-100/70 bg-blue-800/60">
+		<div class="max-w-[1304px] w-screen px-8 h-full lg:px-6 flex flex-wrap  items-center justify-between ">
 			<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
-				<Image loading="eager" class="w-[200px] h-[60px]" src={logoImage} alt="Amexio Fuse"  />
+				<Image loading="eager" class="w-[200px] h-[50px]" src={logoImage} alt="Amexio Fuse"  />
 			</a>
-			<button id="burger-icon"
+			<button id="main-menu-trigger"
 				type="button" 
 				class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary"
-				aria-controls="navbar-default" 
+				aria-controls="main-menu" 
 				aria-expanded="false">
-				<span class="sr-only">Open main menu</span>
+				<span class="sr-only">Main menu</span>
 				<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
 					<path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
 				</svg>
 			</button>
-			<div class="hidden w-screen border-b border-blue-500 md:bg-transparent md:static md:shadow-none border-opacity-60 md:border-0 top-24 md:block md:w-2/4">
-				<ul class="flex flex-col items-start gap-0 font-medium md:bg-transparent md:justify-end md:gap-8 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0">
+			<div class="w-screen border-b border-blue-500 -mx-8 md:mx-0 md:static border-opacity-60 md:border-0 md:w-auto md:grow-0" id="main-menu">
+				<ul class="flex flex-col items-start gap-0 font-medium md:bg-transparent md:gap-6 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0 lg:justify-end lg:gap-8">
 					<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
 					<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
 					<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
@@ -37,22 +37,23 @@ const t = useTranslations(lang);
 			</div>
 		</div>
 	</nav>
-	<div class="fixed left-0 z-10 hidden w-screen border-b border-blue-500 md:hidden backdrop-blur navmenu-toggle md:bg-transparent md:static md:shadow-none border-opacity-60 md:border-0 top-24 md:w-2/4" id="navbar-default">
-		<ul class="flex flex-col items-start gap-0 font-medium md:bg-transparent md:justify-end md:gap-8 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0">
-			<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
-			<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
-			<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
-			<HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
-			<HeaderLink href={`/${lang}/contact/`}>{t('nav.contact')}</HeaderLink>
-		</ul>
-	</div>
 </header>
-<script is:inline>
-	document.addEventListener('click', function(event) {
-		if (event.target.closest('#burger-icon')) {
-			[...document.querySelectorAll(".navmenu-toggle")].forEach((Element) => {
-				Element.classList.toggle("hidden");
-			});
+<style>
+	@media (max-width: 1023px) { 
+		#main-menu-trigger[aria-expanded="false"] + #main-menu {
+			/*display: none;*/
 		}
-	})
+	}
+</style>
+<script is:inline>
+	const mainMenu = document.getElementById('main-menu');
+	const mainMenuTrigger = document.getElementById('main-menu-trigger');
+
+	if(mainMenu && mainMenuTrigger) {
+		document.addEventListener('click', function(event) {
+			if (event.target.closest('#main-menu-trigger')) {
+				mainMenuTrigger.setAttribute('aria-expanded',mainMenuTrigger.getAttribute('aria-expanded')!== 'true');
+			}
+		})
+	}
 </script>

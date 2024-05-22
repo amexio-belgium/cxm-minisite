@@ -70,13 +70,6 @@ mark {
     background-repeat: no-repeat;
 }
 
-/* Adjustments due to fixed header */ 
-.js-skiplink:focus ~ header > nav {
-    position: static;
-}
-.js-skiplink:focus ~ main {
-    margin-top: 0;
-}
 
 .tab.tab--active:not(.tab--disabled) {
     color: white;
