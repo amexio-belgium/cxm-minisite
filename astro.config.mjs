@@ -7,6 +7,7 @@ import qwikdev from '@qwikdev/astro';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://dreamy-trifle-7f42a6.netlify.app',
   integrations: [
     mdx(), 
     sitemap(), 
