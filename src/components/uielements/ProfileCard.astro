@@ -48,7 +48,7 @@ const directions = {
     className,
   ]}
   >
-    <p class="text-base" set:html={content}></p>
+    <p class="text-base font-light" set:html={content}></p>
     <div class="flex gap-4 mt-8 items-center">
         {profileImg && <Image loading="eager" src={profileImg} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
         <div class="flex flex-col justify-center gap-1">

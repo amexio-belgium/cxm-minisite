@@ -43,7 +43,7 @@ const t = useTranslations(lang, 'blog');
 					<div class="pb-8 px-8 pt-0 md:p-8 max-h-full w-full flex flex-col justify-between gap-8 border-b-2 md:border-y-2 border-y-white text-white">
 						<div class="flex flex-col gap-4">
 							<h3 class="mb-2 font-serif text-xl [&>mark]:text-black" set:html={post.data.title}></h3>
-							<p class="text-base" set:html={post.data.description}></p>
+							<p class="text-base font-light" set:html={post.data.description}></p>
 						</div>
 						<div class="flex flex-row items-center gap-4">
 							<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
@@ -77,7 +77,7 @@ const t = useTranslations(lang, 'blog');
 							}
 						</div>
 						<h3 class="font-serif mb-2 text-xl [&>mark]:text-black" set:html={post.data.title}></h3>
-						<p class="text-base" set:html={post.data.description}></p>
+						<p class="text-base font-light" set:html={post.data.description}></p>
 					</div>
 				</Link>
 			))

@@ -30,6 +30,7 @@ const styles = {
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
 if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+
 ---
 <div class="relative flex flex-col gap-8 my-40 isolate">
     <Image loading="lazy" class="w-full rounded-xl" src={images[image]()}  alt={title} />
@@ -38,7 +39,7 @@ if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/ass
         styles[style],
       ]}>
         <h4 class="font-serif text-xl" set:html={title}></h4>
-        <p set:html={text}></p>
+        <p class="font-light" set:html={text}></p>
         {buttonText && <Button class="mt-6" color="light" href={buttonLink}>{buttonText}</Button>}
     </div>
 </div>

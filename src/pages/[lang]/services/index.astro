@@ -44,7 +44,7 @@ const t = useTranslations(lang, 'services');
 						<div class="relative w-full flex flex-col items-start justify-between gap-20 p-4 sm:p-8 h-1/2 md:h-full md:w-2/3">
 							<div class="flex flex-col">
 								<h3 class="mb-2 font-serif text-xl" set:html={service.data.title}></h3>
-								<p class="text-base" set:html={service.data.description}></p>
+								<p class="text-base font-light" set:html={service.data.description}></p>
 							</div>
 							<Button  link={`/services/${getPostLangAndSlug(service).slug}/`} style="primary" size="sm" color="light">
 								{service.data.cta || t('overview.backupcta')}
@@ -81,28 +81,28 @@ const t = useTranslations(lang, 'services');
 
 			<sl-tab-panel name="model1"> 
 				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
-					<p class="w-full md:w-1/2" set:html={t('collaborate.description1')}></p>
+					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description1')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
 						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model2">
 				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
-					<p class="w-full md:w-1/2" set:html={t('collaborate.description2')}></p>
+					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description2')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
 						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model3">
 				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
-					<p class="w-full md:w-1/2" set:html={t('collaborate.description3')}></p>
+					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description3')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
 						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model4">
 				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 pb-8">
-					<p class="w-full md:w-1/2" set:html={t('collaborate.description4')}></p>
+					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description4')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
 						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
 				</div>
