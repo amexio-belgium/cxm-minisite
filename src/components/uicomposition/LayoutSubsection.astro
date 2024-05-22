@@ -19,7 +19,7 @@ const {
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
 if (imageSrc && !images[imageSrc]) throw new Error(`"${imageSrc}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
 ---
-<section class:list={[
+<div class:list={[
     'relative my-4',
     alignment == 'row' && '',
     className,
@@ -28,7 +28,7 @@ if (imageSrc && !images[imageSrc]) throw new Error(`"${imageSrc}" does not exist
         <Image loading="lazy" class='w-1/2 shape-wrap lg:float-right my-8 mx-auto lg:ml-4 lg:mt-[8vh] lg:mb-4 lg:-mr-32 shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
             src={images[imageSrc]()} 
             alt={imageAlt} />
-        <div class='text-justify'>
+        <div>
             <slot />
         </div>
     }
@@ -43,7 +43,7 @@ if (imageSrc && !images[imageSrc]) throw new Error(`"${imageSrc}" does not exist
     {
         !imageSrc && <slot />
     }
-</section>
+</div>
 
 <style>
     .shape-wrap {
