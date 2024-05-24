@@ -4,12 +4,13 @@ import { Image } from 'astro:assets';
 
 interface Props {
     profileImg?: string;
-    content: string;
+    content?: string;
     name: string;
     title?: string;
     color?: "light" | "dark";
     direction?: "right" | "left";
     buttonText?: string;
+    s?: boolean;
     class?: string;
     [x: string]: any;
 }
@@ -22,6 +23,7 @@ const {
     buttonText = "Book a meeting",
     color = "dark",
     direction = "left",
+    hideButton = false,
     block,
     class: className,
     ...rest
@@ -35,7 +37,7 @@ const styles = {
 };
 
 const directions = {
-    left: "bg-gradient-to-r ml-16 md:ml-0",
+    left: "bg-gradient-to-r ml-16 md:ml-0 ",
     right: "bg-gradient-to-l mr-16 md:mr-0",
 }
 ---
@@ -48,8 +50,8 @@ const directions = {
     className,
   ]}
   >
-    <p class="text-base font-light" set:html={content}></p>
-    <div class="flex gap-4 mt-8 items-center">
+    {content && <p class="text-base font-light mb-8 " set:html={content}></p>}
+    <div class="flex gap-4 items-center">
         {profileImg && <Image loading="eager" src={profileImg} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
         <div class="flex flex-col justify-center gap-1">
             <p class="text-base font-medium">{name}</p>
@@ -57,5 +59,5 @@ const directions = {
         </div>
     </div>
     <slot />
-    { buttonText && <Button class="absolute right-8 -bottom-6" icon="info" link="/contact" style="primary" color="dark">{buttonText}</Button> }
+    { !hideButton && <Button class="absolute right-8 -bottom-6" icon="info" link="/contact" style="primary" color="dark">{buttonText}</Button> }
 </div>

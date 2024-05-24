@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import Base from '@layouts/Base.astro';
 import FormattedDate from '@components/uielements/FormattedDate.astro';
 import HeroHeader from '@components/uicomposition/HeroHeader.astro';
+import ProfileCard from '@components/uielements/ProfileCard.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -25,10 +26,11 @@ const { Content } = await post.render();
 <Base {...post.data} title={"Amexio Fuse - " + post.data.title}>
 	<HeroHeader 
 		headline={post.data.title}
+		text={post.data.description}
 		backgroundImage={post.data.heroImage} 
 		backgroundImageAltText={post.data.altTextImage || ""}
 		>
-		<div class="flex flex-row items-center gap-4 text-white">
+		<div class="mt-8 flex flex-row items-center gap-4 text-white">
 			<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
 			{
 				post.data.tags && <p class="font-serif uppercase text-base before:content-['/'] before:font-sans before:mr-4 before:text-secondary">
@@ -37,6 +39,16 @@ const { Content } = await post.render();
 			}	
 		</div>
 	</HeroHeader>
+	{post.data.author && 
+		<ProfileCard 
+			name={post.data.author}
+			title={post.data.authorTitle}
+			direction='right'
+			profileImg={post.data.authorProfileImg}
+			hideButton
+			class='-mt-12 w-full motion-safe:animate-fade-up motion-safe:animate-delay-500'
+			/> 
+	} 
 	<div class="prose lg:prose-xl prose-invert mx-auto mt-20 mb-40">		
 		<Content />
 	</div>

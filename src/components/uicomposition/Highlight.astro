@@ -23,23 +23,48 @@ const {
 
 const styles = {
     yellow:
-      "py-6 pr-6 sm:pr-20 relative md:absolute md:bottom-12 w-full md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
+      "yellow py-6 pr-6 sm:pr-20 -mt-6 mr-8 relative md:absolute md:bottom-12 w-11/12 md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
     lightblue:
-      "bg-lightest-blue-500 relative shadow-xl p-8 md:absolute md:right-8 md:-bottom-20 w-full md:w-8/12",
+      "bg-lightest-blue-500 ml-4 -mt-8 relative shadow-xl p-8 md:absolute md:right-8 md:-bottom-20 w-11/12 md:w-8/12 rounded-xl",
 };
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
 if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+const id = Math.random().toString(36).slice(2, 11)
 
 ---
-<div class="relative flex flex-col gap-8 my-40 isolate">
-    <Image loading="lazy" class="w-full rounded-xl" src={images[image]()}  alt={title} />
+
+<div class="relative flex flex-col  my-40 isolate group">
+  <div class="w-full rounded-xl overflow-hidden">
+      <Image loading="lazy" class="group-hover:scale-110 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
+    </div>
     <div class:list={[
-        "text-black z-20 rounded-xl flex-col flex items-start ",
+        "animate-once animate-delay-500 animate-ease-out text-black z-20  flex-col flex items-start ",
         styles[style],
+        id
       ]}>
         <h4 class="font-serif text-xl" set:html={title}></h4>
         <p class="font-light" set:html={text}></p>
         {buttonText && <Button class="mt-6" color="light" href={buttonLink}>{buttonText}</Button>}
     </div>
 </div>
+
+<script define:vars={{id}}>
+  const textBlock = document.querySelector(`.${id}`);
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && textBlock) {
+        if(textBlock.classList.contains("yellow")) {
+          textBlock.classList.add('motion-safe:animate-fade-right');
+        } else {
+          textBlock.classList.add('motion-safe:animate-fade-right');
+        }
+        
+        observer.unobserve(textBlock);
+      }
+    });
+  });
+
+  textBlock && observer.observe(textBlock);
+</script>
