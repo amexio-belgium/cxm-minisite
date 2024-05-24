@@ -11,37 +11,70 @@ const t = useTranslations(lang);
 ---
 <SkipLink href="#main-content">{t('main.skiplink')}</SkipLink>
 <header>
-	<nav class="flex items-center justify-center w-screen border-b py-6 border-light-blue-200/60 bg-blue-800/60">
-		<div class="max-w-[1304px] w-screen px-8 h-full lg:px-6 flex flex-wrap  items-center justify-between ">
+	<nav class="flex items-center justify-center w-screen py-4">
+		<div class="max-w-[1304px] w-screen px-8 h-full lg:px-6 flex flex-wrap items-center justify-between ">
 			<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
-				<Image loading="eager" class="w-[200px] h-[50px]" src={logoImage} alt="Amexio Fuse"  />
+				<Image loading="eager" class="w-auto h-[36px] md:h-[50px] transition-all duration-300" src={logoImage} alt="Amexio Fuse Home" />
 			</a>
 			<button id="main-menu-trigger"
 				type="button" 
-				class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary"
+				class="inline-flex items-center justify-center w-10 h-10 p-2 -mr-2 text-white md:hidden hover:rotate-90 focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500 transition-transform ease-in-out"
 				aria-controls="main-menu" 
 				aria-expanded="false">
-				<span class="sr-only">Main menu</span>
-				<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-					<path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-				</svg>
+				<span class="sr-only">Open main menu</span>
+				<svg class="w-8 h-8 fill-current" width="36" height="36" aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-menu"></use></svg>
 			</button>
-			<div class="w-screen border-b border-blue-500 -mx-8 md:mx-0 md:static border-opacity-60 md:border-0 md:w-auto md:grow-0" id="main-menu">
-				<ul class="flex flex-col items-start gap-0 font-medium md:bg-transparent md:gap-6 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0 lg:justify-end lg:gap-8">
-					<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
-					<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
-					<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
-					<HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
-					<HeaderLink href={`/${lang}/contact/`}>{t('nav.contact')}</HeaderLink>
-				</ul>
+			<dialog class="main-navigation-dialog open:bg-blue-800 open:fade-in" class="m-0" id="main-menu">
+				<div class="flex items-center justify-center w-screen border-b border-transparent py-4 md:hidden">
+					<div class="max-w-[1304px] w-screen px-8 h-full lg:px-6 flex flex-wrap  items-center justify-between ">
+						<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
+							<Image loading="eager" class="w-auto h-[36px] md:h-[50px]" src={logoImage} alt="Amexio Fuse"  />
+						</a>
+						<button id="close-main-menu"
+							type="button" 
+							class="inline-flex items-center justify-center w-10 h-10 p-2 -mr-2 text-white md:hidden focus:outline-none"
+							aria-controls="main-menu">
+							<span class="sr-only">Close main menu</span>
+							<svg class="w-8 h-8 fill-current" width="36" height="36" aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-close"></use></svg>
+						</button>
+					</div>
+				</div>
+				<div class="main-navigation relative pr-8 ml-auto w-fit md:pr-0">
+					<ul class="main-navigation flex flex-col  text-right items-start gap-0 font-medium md:text-left md:gap-6 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0 lg:justify-end lg:gap-8">
+						<HeaderLink href={`/${lang}/services`}>{t('nav.services')}</HeaderLink>
+						<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
+						<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
+						<HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
+						<HeaderLink href={`/${lang}/contact/`}>{t('nav.contact')}</HeaderLink>
+					</ul>
+					<span class="js-active-page-idicator hidden top-0 right-4 absolute bg-orange-500 md:top-auto md:left-0 md:right:auto md:-bottom-3 w-[6px] h-[6px] rounded-full prop-bg-contrast transition-transform ease-in-out duration-500"></span>
+				</div>
+			</dialog>
 			</div>
 		</div>
 	</nav>
 </header>
 <style>
 	@media (max-width: 767px) { 
-		#main-menu-trigger[aria-expanded="false"] + #main-menu {
-			display: none;
+		.main-navigation a:hover,
+		.main-navigation a[aria-current] {
+			padding-right:8px;
+		}
+		.main-navigation:hover a:not(:hover) {
+			padding-right:0;
+		}
+
+		.main-nav__dialog {
+			min-height: 100%;
+			max-width: 100%;
+			margin: 0;
+
+		}
+	}
+
+	@media (min-width: 768px) { 
+		.main-navigation-dialog {
+			all: unset;
 		}
 	}
 </style>
@@ -50,10 +83,95 @@ const t = useTranslations(lang);
 	const mainMenuTrigger = document.getElementById('main-menu-trigger');
 
 	if(mainMenu && mainMenuTrigger) {
-		document.addEventListener('click', function(event) {
-			if (event.target.closest('#main-menu-trigger')) {
-				mainMenuTrigger.setAttribute('aria-expanded',mainMenuTrigger.getAttribute('aria-expanded')!== 'true');
+		const isSmallScreen = window.matchMedia("(max-width: 767px)");
+		const mainNav = mainMenu.querySelector('.main-navigation');
+		const mainNavLinks = mainNav.querySelectorAll('a');
+		const activeMainNavLink = mainNav.querySelector('a[aria-current="page"');
+		const dotIndicator = mainMenu.querySelector('.js-active-page-idicator');
+		const closeMainMenuTrigger = document.getElementById('close-main-menu');
+
+		const getCenterX = (el) => {
+            return el.getBoundingClientRect().width / 2
+        }
+		const getCenterY = (el) => {
+            return el.getBoundingClientRect().height / 2
+        }
+
+		const getLeft = (el) => {
+            return el.getBoundingClientRect().left
+        }
+
+		const getTop = (el) => {
+            return el.getBoundingClientRect().top
+        }
+
+		const showDotIndicator = () => {
+			dotIndicator.classList.remove('hidden');
+		}
+		const hideDotIndicator = () => {
+			dotIndicator.classList.add('hidden');
+		}
+
+		const setInitialDotState = () => {
+			if(activeMainNavLink) {
+				handleDotPosition(activeMainNavLink,mainNav);
+				showDotIndicator();
 			}
-		})
+			else {
+				hideDotIndicator();
+			}
+		}
+
+		const handleDotPosition = (element,wrapper) => {
+			if (isSmallScreen.matches) {
+				dotIndicator.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
+			} else {
+				dotIndicator.style.transform = `translateX(${getLeft(element) + getCenterX(element) - getLeft(wrapper)}px)`;
+			}
+			showDotIndicator();
+		}
+
+		const openMobileMenu = () => {
+			document.documentElement.style.overflowY = 'hidden';
+        	document.documentElement.style.position = 'fixed';
+			mainMenuTrigger.setAttribute('aria-expanded','true');
+			mainMenu.showModal();
+			setInitialDotState();
+		}
+
+		const handleOrientationChange = (mql) => {
+  			if(isSmallScreen.matches) {
+				mainMenu.removeAttribute("role");
+				mainMenu.close();
+			} else {
+				mainMenu.setAttribute("role","none");
+				mainMenu.close();
+			}
+		}
+
+		isSmallScreen.addEventListener("change", handleOrientationChange);
+
+		closeMainMenuTrigger.addEventListener('click',function(){
+			mainMenu.close();
+		},false);
+
+		mainMenu.addEventListener('close',function() {
+			document.documentElement.style.overflowY = '';
+        	document.documentElement.style.position = '';
+			mainMenuTrigger.setAttribute('aria-expanded','false');
+		},false);
+
+		mainMenuTrigger.addEventListener('click', function(event) {
+			openMobileMenu();
+		});
+
+		[...mainNavLinks].forEach(mainNavLink => {
+            mainNavLink.addEventListener('mouseenter',function (e){
+				handleDotPosition(e.target,mainNav);
+			},false);
+        });
+
+		mainNav.addEventListener("mouseleave",setInitialState,false);
+		setInitialDotState();
 	}
 </script>
