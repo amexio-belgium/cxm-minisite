@@ -5,6 +5,9 @@ According to yearly tradition Adobe brings us a new Adobe Summit. Full of innova
 pubDate: 2024-04-16T15:43:00.000Z
 heroImage: https://ucarecdn.com/578f977f-bae5-4516-a9e3-03e1d9029c14/
 tags: 'Strategy'
+author: "wouter massie"
+authorTitle: "CXM Consultant"
+authorProfileImg: '/blog-placeholder-3.jpg'
 ---
 
 According to yearly tradition Adobe brings us a new Adobe Summit. Full of innovation, Inspiring talks, new product launches and ground breaking updates to existing products across the Adobe Experience Cloud and Adobe Creative Cloud. This years theme is “**The future of digital marketing in the era of generative AI”.** This theme was chosen to build and improve upon the massive innovation in Generative AI that is happening all over the digital landscape. Adobe’s unveiling of enhancements across their platforms sets a new benchmark for utilising generative AI to derive insights from unified customer data, personalise content at scale, and elevate customer engagement through complex journey orchestration.

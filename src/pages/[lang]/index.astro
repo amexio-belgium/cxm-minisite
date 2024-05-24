@@ -54,42 +54,42 @@ const t = useTranslations(lang, 'home');
     </SmallTile>
   </TilesContainer>
   
-  <div class="relative flex flex-col py-20 mb-60 pl-12 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:left-0 marker:before:h-full before:w-[3000px] before:rounded-xl">
+  <div class="relative flex flex-col py-20 mb-60 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:-left-12 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
     <div class="flex flex-col items-start justify-between w-full gap-4 mb-8 md:mb-4 md:items-center md:flex-row">
       <h2 class="font-serif text-2xl" set:html={t('services.headline')}></h2>
       <Button link="/services" color="light">{t('services.button')}</Button>
     </div>
     <div class="flex flex-col items-start w-full gap-8 mb-12 md:w-9/12 h-fit">
-      <p class="text-base text-black" set:html={t('services.descriptionP1')}></p>
-      <p class="text-base text-black" set:html={t('services.descriptionP2')}></p>
+      <p class="text-base text-black font-light" set:html={t('services.descriptionP1')}></p>
+      <p class="text-base text-black font-light" set:html={t('services.descriptionP2')}></p>
     </div>
     <div class="flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap">
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={strategize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services1.headline')}></div>
-          <div class="text-base text-center" set:html={t('services1.description')}></div>
+          <div class="text-base font-light text-center" set:html={t('services1.description')}></div>
         </div>
       </div>
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={design} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
-          <div class="text-base text-center" set:html={t('services2.description')}></div>
+          <div class="text-base font-light text-center" set:html={t('services2.description')}></div>
         </div>
       </div>
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={realize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
-          <div class="text-base text-center" set:html={t('services3.description')}></div>
+          <div class="text-base font-light text-center" set:html={t('services3.description')}></div>
         </div>
       </div>
       <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={optimize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
-          <div class="text-base text-center" set:html={t('services4.description')}></div>
+          <div class="text-base font-light text-center" set:html={t('services4.description')}></div>
         </div>
       </div>
     </div>
@@ -101,6 +101,14 @@ const t = useTranslations(lang, 'home');
     jobtitle={t('quote.title')}
     profileImage='/src/assets/people/placeholder_small.png'
     />
+    <Quote 
+    quote={t('quote.text')}
+    name='Johan Condijts'
+    jobtitle={t('quote.title')}
+    profileImage='/src/assets/people/placeholder_small.png'
+    variant="flat"
+    />
+
 
   <InsightsTeaser />
 

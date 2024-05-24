@@ -29,17 +29,18 @@ const {
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
 if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
 if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
----
+const id = Math.random().toString(36).slice(2, 11)
 
-<div {...rest} class="flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-xl">
+---
+<div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-xl", id]}>
     <div class="w-full p-8 h-1/2 lg:h-full lg:w-1/2">
         <h3 class="mb-2 font-serif text-xl">{name}</h3>
-        <p class="text-sm md:text-base" set:html={content}></p>
-        <Button class="" link={link} style="tertiary" color="light">{buttonText}</Button>
+        <p class="text-sm font-light md:text-base" set:html={content}></p>
+        <Button class="" link={link} style="tertiary" color="dark">{buttonText}</Button>
     </div>
 
     <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project lg:w-3/4 h-[300px] lg:h-full lg:absolute">
-      <Image src={images[projectImage]()} class="min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={790} height={470} alt={name}/>
+      <Image src={images[projectImage]()} class="md:group-hover:scale-110 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={790} height={470} alt={name}/>
       {smallImage && <Image loading="eager" src={images[smallImage]()}  class="absolute w-20 h-auto top-4 right-4 md:top-8 md:right-8" width={56} height={56} alt={name} /> }
     </div> 
 </div>
@@ -60,3 +61,18 @@ if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in gl
         }
     }
 </style>
+
+<script define:vars={{id}}>
+    const textBlock = document.querySelector(`.${id}`);
+  
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && textBlock) {
+          textBlock.classList.add('motion-safe:animate-fade-up');
+          observer.unobserve(textBlock);
+        }
+      });
+    });
+  
+    textBlock && observer.observe(textBlock);
+</script>

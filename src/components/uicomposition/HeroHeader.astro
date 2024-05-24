@@ -36,7 +36,7 @@ const t = useTranslations(lang, 'home');
     ]}>
     <Breadcrumbs />
 
-    <div class="text-white mt-24 mb-10">
+    <div class="text-white mt-4 mb-10">
         {
             client && <p class="uppercase font-serif text-xl" set:html={client}></p>
         }
@@ -47,7 +47,7 @@ const t = useTranslations(lang, 'home');
     <div class:list={["relative ", homepage && "grid grid-cols-1 gap-12 md:gap-6 grid-area md:grid-cols-12"]}>
         <div class:list={[" text-left w-full md:w-[80ch]", homepage && "grid-a md:w-full"]}>
             { text && 
-                <p class="text-lg md:text-xl" set:html={text}></p> 
+                <p class="text-lg font-light md:text-xl" set:html={text}></p> 
             }
             <slot />
         </div>
@@ -59,7 +59,7 @@ const t = useTranslations(lang, 'home');
                 title={t('heroprofile1.title')}
                 profileImg='https://via.placeholder.com/50x50'
                 buttonText={buttonText}
-                class='grid-b animation'
+                class='grid-b motion-safe:animate-fade-up motion-safe:animate-delay-[1500ms]'
             />
             
             <ProfileCard 
@@ -69,7 +69,7 @@ const t = useTranslations(lang, 'home');
                 direction='right'
                 profileImg='https://via.placeholder.com/50x50'
                 buttonText={buttonText}
-                class='grid-c animation animation-delay'
+                class='grid-c motion-safe:animate-fade-up motion-safe:animate-delay-[2000ms]'
             />
         } 
     </div>
@@ -79,8 +79,14 @@ const t = useTranslations(lang, 'home');
                 class="absolute top-0 -z-10 object-cover h-full w-xl -right-1/4" 
             />
         :
-            <div class="absolute object-cover h-auto -top-0 opacity-30 md:opacity-100 md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-1/4">
-                <LogoSlant/>
+            <div class:list={
+                ["absolute object-cover h-auto -top-0 opacity-30 md:opacity-100",
+                    homepage ? 
+                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-1/4" 
+                        : 
+                    "md:top-10 -z-10 w-[300%] md:w-8/12 -right-full md:-right-[10%]"
+                ]}>
+                <LogoSlant homepageAnimation={homepage} />
             </div>
     }
 </div>
@@ -105,34 +111,12 @@ const t = useTranslations(lang, 'home');
         grid-area: c;
     }
 
-    .animation {
-        top: 150px;
-        opacity: 0;
-        animation: 1000ms slide-up;
-        animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
-        animation-fill-mode: forwards;
-
-        &-delay {
-            animation-delay: 400ms;
-        }
-    }
 
     @media only screen and (min-width: 768px) {
         .grid-area{ 
             grid-template-areas: 
             "a a a a a a b b b b b b"
             "c c c c c c b b b b b b"
-        }
-    }
-
-    @keyframes slide-up {
-        from {
-            top: 150px;
-            opacity: 0;
-        }
-        to {
-            top: 0%;
-            opacity: 1;
         }
     }
 </style>
