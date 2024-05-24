@@ -4,7 +4,9 @@ description: 'Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce male
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-3.jpg'
 tags: 'Composability'
-
+author: "wouter massie"
+authorTitle: "CXM Consultant"
+authorProfileImg: '/blog-placeholder-3.jpg'
 ---
 
 # Adobe Summit 2024: Supercharge CXM With generative AI

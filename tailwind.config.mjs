@@ -11,6 +11,7 @@ export default {
 			'xl': ['1.75rem', '2.75rem'],
 			'2xl': ['2.75rem', '3.625rem'],
 			'3xl': ['3.75rem', '4.688rem'],
+			'4xl': ['4.75rem', '5.7rem'],
 		},
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],
@@ -95,6 +96,16 @@ export default {
 			bounceslow: {
 			  '0%, 60%': { transform: 'translateY(0%)' },
 			  '30%': { transform: 'translateY(-1%)' },
+			},
+			heroshow: {
+				'0%': { 
+					transform: 'scale(1.5)', 
+					opacity:'0' 
+				},
+				'100%': { 
+					transform: 'scale(1)', 
+					opacity:'1' 
+				}
 			}
 		},
 		extend: {
@@ -106,6 +117,7 @@ export default {
 			},
 			animation: {
 				'bounce-slow': 'bounceslow 3s ease-in-out 3',
+				'hero-show': 'heroshow 0.3s ease-in',
 			},
 			typography: ({ theme }) => ({
 				ondark: {
@@ -127,35 +139,6 @@ export default {
 	},
 	plugins: [  
 		require('@tailwindcss/typography'),
-		plugin(function ({ matchUtilities, theme }) {
-			matchUtilities(
-				{
-					'animate-duration': (value) => ({
-						animationDuration: value,
-					}),
-				},
-				{ values: theme('transitionDuration') }
-			)
-		}),
-		plugin(function ({ matchUtilities, theme }) {
-			matchUtilities(
-				{
-					'animate-delay': (value) => ({
-						animationDelay: value,
-					}),
-				},
-				{ values: theme('transitionDelay') }
-			)
-		}),
-		plugin(function ({ matchUtilities, theme }) {
-			matchUtilities(
-				{
-					'animate-ease': (value) => ({
-						animationTimingFunction: value,
-					}),
-				},
-				{ values: theme('transitionTimingFunction') }
-			)
-		}),
+		require('tailwindcss-animated'),
 	],
 }

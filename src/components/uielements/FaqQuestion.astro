@@ -4,14 +4,12 @@ import Details from '../uielements/Details.astro'
 interface Props {
     headline: string;
     headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
-    text: string;
     class?: string;
 }
 
 const { 
 	headline,
     headlineTag = "h3",
-	text,
     class: className	
 } = Astro.props;
 
@@ -19,7 +17,6 @@ const {
 <Details 
 	headline={headline}
     headlineTag={headlineTag}
-	text={text}
     class:list={["border-b border-gray-500", className]}>
     <slot/>
 </Details>

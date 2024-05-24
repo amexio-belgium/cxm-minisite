@@ -19,7 +19,7 @@ const { lang } = Astro.params;
 const t = useTranslations(lang, 'work');
 ---
 
-<div class="-mt-8 from-blue-600/70 to-blue-800/70 shadow-blue-200 bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full">
+<div class="-mt-16 motion-safe:animate-fade-up animate-delay-500 animate-ease-out  from-blue-600/70 to-blue-800/70 shadow-blue-200 bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full">
     <h2 class="text-xl font-serif mb-6" set:html={t('metadata.headline')}></h2>
     <dl class="project-metadata flex flex-col lg:flex-row lg:flex-wrap gap-4 mb-8">
         {

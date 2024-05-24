@@ -1,15 +1,42 @@
 ---
+interface Props {
+    homepageAnimation?: boolean;
 
+}
+
+const { 
+    homepageAnimation = false,
+} = Astro.props;
 ---
-<svg width="1200" height="700" class="w-full h-auto" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="700" class="w-full h-auto overflow-visible" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g opacity="0.6">
-    <g class="motion-safe:animate-bounce-slow motion-safe:animate-delay-300" clip-path="url(#clip0_173_6103)">
+    <g class:list={
+    ["origin-center motion-safe:animate-once motion-safe:animate-ease-out motion-safe:animate-delay-300",
+        homepageAnimation ? 
+            "motion-safe:animate-jump-in motion-safe:animate-duration-[2000ms] " 
+        : 
+            "motion-safe:animate-fade-up motion-safe:animate-duration-[2000ms] " 
+    ]} 
+    clip-path="url(#clip0_173_6103)">
     <path d="M1143.66 -9.99039L785.125 410.335L785.079 410.39L785.037 410.447L785.037 410.447L785.036 410.447L785.034 410.45L785.022 410.466C785.011 410.481 784.993 410.506 784.968 410.539C784.918 410.605 784.841 410.706 784.739 410.839C784.533 411.106 784.222 411.503 783.809 412.011C782.983 413.029 781.751 414.493 780.141 416.261C776.919 419.799 772.193 424.54 766.189 429.342C754.167 438.959 737.175 448.698 716.978 449.697L584.343 449.99L942.875 29.6646L942.921 29.6103L942.963 29.5535L942.963 29.5533L942.964 29.5528L942.966 29.5502L942.978 29.5339C942.989 29.5186 943.007 29.4942 943.032 29.4612C943.082 29.3951 943.159 29.2943 943.261 29.1609C943.467 28.8942 943.778 28.4975 944.191 27.9888C945.017 26.9714 946.249 25.5068 947.859 23.7389C951.082 20.2012 955.807 15.4598 961.811 10.6579C973.833 1.04128 990.825 -8.69804 1011.02 -9.69713L1143.66 -9.99039Z" stroke="#ED6C25" stroke-width="4"/>
     </g>
-    <g class="motion-safe:animate-bounce-slow motion-safe:animate-delay-150" clip-path="url(#clip1_173_6103)">
+    <g class:list={
+        ["origin-center motion-safe:animate-once motion-safe:animate-ease-out motion-safe:animate-delay-150",
+            homepageAnimation ? 
+                "motion-safe:animate-jump-in motion-safe:animate-duration-[2000ms] " 
+            : 
+                "motion-safe:animate-fade-up motion-safe:animate-duration-[2000ms] " 
+        ]}  
+        clip-path="url(#clip1_173_6103)">
     <path d="M853.663 63.0096L495.124 484.25L495.077 484.304L495.036 484.361L495.035 484.361L495.035 484.362L495.033 484.364L495.021 484.381C495.01 484.396 494.991 484.421 494.967 484.454C494.917 484.52 494.84 484.621 494.737 484.755C494.531 485.022 494.22 485.42 493.807 485.929C492.982 486.949 491.749 488.417 490.139 490.189C486.917 493.734 482.191 498.486 476.188 503.298C464.165 512.935 447.174 522.695 426.977 523.696L294.337 523.99L652.876 102.75L652.923 102.696L652.964 102.639L652.965 102.639L652.965 102.638L652.967 102.636L652.979 102.619C652.99 102.604 653.009 102.579 653.033 102.546C653.083 102.48 653.16 102.379 653.263 102.245C653.469 101.978 653.78 101.58 654.193 101.071C655.018 100.051 656.251 98.5832 657.861 96.8115C661.083 93.266 665.809 88.5143 671.812 83.702C683.835 74.0645 700.826 64.3047 721.023 63.3035L853.663 63.0096Z" stroke="#86ABD4" stroke-width="4"/>
     </g>
-    <g  class="motion-safe:animate-bounce-slow " clip-path="url(#clip2_173_6103)">
+    <g class:list={
+        ["origin-center motion-safe:animate-once motion-safe:animate-ease-out",
+            homepageAnimation ? 
+                "motion-safe:animate-jump-in motion-safe:animate-duration-[2000ms]" 
+            : 
+                "motion-safe:animate-fade-up motion-safe:animate-duration-[2000ms]" 
+        ]}  clip-path="url(#clip2_173_6103)">
     <path d="M563.663 137.01L205.124 558.25L205.077 558.304L205.036 558.361L205.035 558.361L205.035 558.362L205.033 558.364L205.021 558.381C205.01 558.396 204.991 558.421 204.967 558.454C204.917 558.52 204.84 558.621 204.737 558.755C204.531 559.022 204.22 559.42 203.807 559.929C202.982 560.949 201.749 562.417 200.139 564.189C196.917 567.734 192.191 572.486 186.188 577.298C174.165 586.935 157.174 596.695 136.977 597.696L4.33687 597.99L362.876 176.75L362.923 176.696L362.964 176.639L362.965 176.639L362.965 176.638L362.967 176.636L362.979 176.619C362.99 176.604 363.009 176.579 363.033 176.546C363.083 176.48 363.16 176.379 363.263 176.245C363.469 175.978 363.78 175.58 364.193 175.071C365.018 174.051 366.251 172.583 367.861 170.811C371.083 167.266 375.809 162.514 381.812 157.702C393.835 148.065 410.826 138.305 431.023 137.304L563.663 137.01Z" stroke="#D9E8F5" stroke-width="4"/>
     </g>
     </g>
