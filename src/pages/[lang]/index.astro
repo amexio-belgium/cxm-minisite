@@ -63,29 +63,29 @@ const t = useTranslations(lang, 'home');
       <p class="text-base text-black font-light" set:html={t('services.descriptionP1')}></p>
       <p class="text-base text-black font-light" set:html={t('services.descriptionP2')}></p>
     </div>
-    <div class="flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap">
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
+    <div class="services flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap">
+      <div class="service__item motion-safe:animate-delay-[250ms] inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={strategize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services1.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services1.description')}></div>
         </div>
       </div>
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
+      <div class="service__item motion-safe:animate-delay-500 inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={design} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services2.description')}></div>
         </div>
       </div>
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
+      <div class="service__item motion-safe:animate-delay-[750ms] inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={realize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services3.description')}></div>
         </div>
       </div>
-      <div class="inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
+      <div class="service__item motion-safe:animate-delay-1000 inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
         <Image src={optimize} alt="" width={80} height={80} class="w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
@@ -94,6 +94,24 @@ const t = useTranslations(lang, 'home');
       </div>
     </div>
   </div>
+
+  <script is:inline>
+    const services = document.querySelector(`.services`);
+    console.log(services)
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && services) {
+          const items = services.querySelectorAll(".service__item")
+          items.forEach(item => {
+            item.classList.add('motion-safe:animate-fade-right');
+          })
+          observer.unobserve(services);
+        }
+      });
+    });
+  
+    services && observer.observe(services);
+  </script>
 
   <Quote 
     quote={t('quote.text')}
