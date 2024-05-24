@@ -58,9 +58,9 @@ const t = useTranslations(lang, 'blog');
 						<div class="flex flex-row items-center gap-4">
 							<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
 							{
-								post.data.tags && <p class="font-serif uppercase text-base before:content-['/'] before:font-sans before:mr-4 before:text-secondary">
+								post.data.tags && <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
 									{post.data.tags}
-								</p>
+								</span>
 							}
 						</div>
 					</div>
@@ -81,9 +81,9 @@ const t = useTranslations(lang, 'blog');
 						<div class="flex flex-row items-center gap-4">
 							<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
 							{
-								post.data.tags && <p class="font-serif uppercase text-base before:content-['/'] before:font-sans before:mr-4 before:text-secondary">
+								post.data.tags && <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
 									{post.data.tags}
-								</p>
+								</span>
 							}
 						</div>
 						<h2 class="font-serif mb-2 text-xl [&>mark]:text-black"><Link class="outline-none hover:text-blue-500 hover:underline hover:decoration-1 content-none before:absolute before:inset-x-0 before:inset-y-0" href={`./${getPostLangAndSlug(post).slug}/`} set:html={post.data.title}></Link></h2>
