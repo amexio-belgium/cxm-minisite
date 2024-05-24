@@ -30,17 +30,18 @@ const t = useTranslations(lang, 'home');
 
 ---
 <div class:list={[
-    "relative py-10 text-white pb-32 lg:pb-60", 
+    "relative py-10 text-white pb-32 lg:pb-40", 
         !backgroundImage && "hero-gradient",
+        homepage && "mb-[30vh]", 
         backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
     ]}>
     <Breadcrumbs />
 
-    <div class="text-white mt-4 mb-10">
+    <div class="text-white mt-8 mb-10">
         {
             client && <p class="uppercase font-serif text-xl" set:html={client}></p>
         }
-        <h1 class="font-serif text-3xl font-bold w-full md:w-2/3" 
+        <h1 class="font-serif text-4xl font-bold w-full md:w-2/3" 
             set:html={headline}>
         </h1>
     </div>
@@ -51,7 +52,8 @@ const t = useTranslations(lang, 'home');
             }
             <slot />
         </div>
-
+        
+        <!-- Disabled for now
         { homepage &&
             <ProfileCard 
                 content={t('heroprofile1.text')}
@@ -71,7 +73,7 @@ const t = useTranslations(lang, 'home');
                 buttonText={buttonText}
                 class='grid-c motion-safe:animate-fade-up motion-safe:animate-delay-[2000ms]'
             />
-        } 
+        }  -->
     </div>
     { 
         backgroundImage ? 
@@ -82,7 +84,7 @@ const t = useTranslations(lang, 'home');
             <div class:list={
                 ["absolute object-cover h-auto -top-0 opacity-30 md:opacity-100",
                     homepage ? 
-                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-1/4" 
+                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-[30%]" 
                         : 
                     "md:top-10 -z-10 w-[300%] md:w-8/12 -right-full md:-right-[10%]"
                 ]}>
