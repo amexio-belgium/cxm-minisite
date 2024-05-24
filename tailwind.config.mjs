@@ -11,6 +11,7 @@ export default {
 			'xl': ['1.75rem', '2.75rem'],
 			'2xl': ['2.75rem', '3.625rem'],
 			'3xl': ['3.75rem', '4.688rem'],
+			'4xl': ['4.75rem', '5.7rem'],
 		},
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],

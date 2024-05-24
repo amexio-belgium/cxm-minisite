@@ -29,7 +29,7 @@ const {
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
 if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
 if (!images[smallImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-const id = Math.random().toString(36).slice(2, 11)
+const id = "id_" + Math.random().toString(36).slice(2, 11)
 
 ---
 <div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-xl", id]}>
@@ -62,7 +62,7 @@ const id = Math.random().toString(36).slice(2, 11)
     }
 </style>
 
-<script define:vars={{id}}>
+<script define:vars={{id}} is:inline>
     const textBlock = document.querySelector(`.${id}`);
   
     const observer = new IntersectionObserver(entries => {
