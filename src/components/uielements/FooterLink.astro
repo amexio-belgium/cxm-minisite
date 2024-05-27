@@ -1,15 +1,13 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { Image } from 'astro:assets';
-import logoIcon from '@assets/logos/icon_white.svg';
 
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<a href={href} class="flex items-center sm:w-1/3 justify-start font-serif text-[32px] font-medium text-white group focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary" {...props}>
-    <Image class="relative w-0 h-6 transition-all duration-500 scale-0 opacity-0 group-hover:mr-2 group-hover:opacity-100 group-focus:opacity-100 group-hover:scale-100 group-focus:scale-100 group-hover:w-6 group-focus:w-4" 
-      src={logoIcon} alt=""  />
-    <slot />
-</a>
+<div class="sm:w-1/3 ">
+  <a href={href} class="hover:underline hover:underline-offset-4 hover:decoration-secondary hover:decoration-2 font-serif text-xl md:text-[2rem] font-medium text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary" {...props}>
+      <slot />
+  </a>
+</div>

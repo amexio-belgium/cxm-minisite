@@ -23,7 +23,7 @@ const post = Astro.props;
 const { Content } = await post.render();
 
 ---
-<Base {...post.data} title={"Amexio Fuse - " + post.data.title}>
+<Base {...post.data} title={"Amexio Fuse - " + post.data.title.replace(/<[^>]*>?/gm, '')}>
 	<HeroHeader 
 		headline={post.data.title}
 		text={post.data.description}

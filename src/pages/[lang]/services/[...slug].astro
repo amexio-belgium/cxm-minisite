@@ -20,7 +20,7 @@ const post = Astro.props;
 const { Content } = await post.render();
 
 ---
-<Base {...post.data} title={"Amexio Fuse - " + post.data.title}>
+<Base {...post.data} title={"Amexio Fuse - " + post.data.title.replace(/<\/[^>]+(>|$)/g, "")}>
 	<div class="mx-auto text-white">
 		<Content />
 	</div>
