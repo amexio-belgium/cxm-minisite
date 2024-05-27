@@ -21,29 +21,51 @@ const t = useTranslations(lang, 'work');
 
 <div class="-mt-16 motion-safe:animate-fade-up animate-delay-500 animate-ease-out  from-blue-600/70 to-blue-800/70 shadow-blue-200 bg-gradient-to-r mb-20 text-white relative p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full">
     <h2 class="text-xl font-serif mb-6" set:html={t('metadata.headline')}></h2>
-    <ol class="flex flex-col md:flex-row gap-4 md:gap-8 mb-8">
+    <dl class="project-metadata flex flex-col lg:flex-row lg:flex-wrap gap-4 mb-8">
         {
-            duration && <li class="peer">
-                {t('metadata.duration') + ": " + duration} 
-            </li>
+            duration && <div class="flex lg:after:ml-4 after:text-secondary">
+                <dt class="inline lg:block">{t('metadata.duration')+ ":"}</dt>
+                <dd class="inline lg:block">{duration}</dd>
+            </div>
         } 
         {
-           collaboration && <li class="peer pt-4 md:p-0 peer-first:border-t peer-first:border-orange md:border-none md:peer-first:before:content-['/'] md:before:peer-first:mr-8 before:text-secondary">
-                {t('metadata.collaboration') + ": " + collaboration}
-            </li>
+           collaboration && <div class="lg:flex lg:after:ml-4 after:text-secondary">
+                <dt class="inline lg:block">{t('metadata.collaboration')+ ":"}</dt>
+                <dd class="inline lg:block">{collaboration}</dd>
+            </div>
         }
         {
-            technologies && <li class="peer pt-4 md:p-0 peer-first:border-t peer-first:border-orange md:border-none  md:peer-first:before:content-['/'] md:before:peer-first:mr-8 before:text-secondary">
-                {t('metadata.technologies') + ": " + technologies} 
-            </li>
+            technologies && <div class="lg:flex lg:after:ml-4 after:text-secondary">
+                <dt class="inline lg:block">{t('metadata.technologies')+ ":"}</dt>
+                <dd class="inline lg:block">{technologies}</dd> 
+            </div>
         }
         {
-            services && <li class="peer pt-4 md:p-0 peer-first:border-t peer-first:border-orange md:border-none  md:peer-first:before:content-['/'] md:before:peer-first:mr-8 before:text-secondary">
-                {t('metadata.services') + ": " + services} 
-            </li>
+            services && <div class="lg:flex">
+                <dt class="inline lg:block">{t('metadata.services')+ ":"}</dt>
+                <dd class="inline lg:block">{ services}</dd> 
+            </div>
         }
-    </ol>
+    </dl>
     <div class="flex flex-row gap-6 flex-wrap">
         <slot />
     </div>
 </div>
+<style>
+@media (min-width: 1024px) { 
+    .project-metadata dt {
+        padding-inline-end: 1ch;
+    }
+    @supports (content: "x" / "y") {
+            .project-metadata > div:not(:last-child):after {
+                content: "/" / "";
+            }
+    }
+    @supports not (content: "x" / "y") {
+        .project-metadata > div:not(:last-child):after {
+                content: "/";
+                alt: "";
+        }
+    }
+}
+</style>
