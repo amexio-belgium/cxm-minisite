@@ -30,9 +30,10 @@ const t = useTranslations(lang, 'home');
 
 ---
 <div class:list={[
+
     "relative pt-10 text-white pb-0 md:pb-32 lg:pb-40", 
         !backgroundImage && "hero-gradient",
-        homepage && "md:mb-[30vh]", 
+        homepage && "md:mb-[30vh]",  
         backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
     ]}>
     <Breadcrumbs />
