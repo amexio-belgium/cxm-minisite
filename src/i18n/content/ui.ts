@@ -2,6 +2,8 @@
 export const ui = {
     en: {
         'main.skiplink': 'Skip to main content',
+        'mainmenu.open': 'Open main menu',
+        'mainmenu.close': 'Close main menu',
         'nav.services': 'Services',
         'nav.about': 'About',
         'nav.contact': 'Contact',
