@@ -58,10 +58,10 @@ const t = useTranslations(lang, 'blog');
 							</div>
 						}
 						<div class="flex flex-row items-center gap-4">
-							<FormattedDate class="font-serif text-base" date={post.data.pubDate} transition:name={post.slug + "_date"} />
+							<FormattedDate class="font-serif text-base" date={post.data.pubDate} />
 							{
 								post.data.tags && 
-								<p class="c-post-tag  font-serif uppercase text-base before:content-['/'] before:font-sans before:mr-4 before:text-secondary">
+								<span class="c-post-tag font-serif uppercase text-base before:mr-4 before:text-secondary">
 									{post.data.tags}
 								</span>
 							}
