@@ -78,13 +78,6 @@ mark {
     background-repeat: no-repeat;
 }
 
-/* Adjustments due to fixed header */ 
-.js-skiplink:focus ~ header > nav {
-    position: static;
-}
-.js-skiplink:focus ~ main {
-    margin-top: 0;
-}
 
 .tab.tab--active:not(.tab--disabled) {
     color: white;
@@ -94,3 +87,94 @@ mark {
 summary::-webkit-details-marker {
     display: none;
 }
+
+/* Set / before post tag */
+@supports (content: "x" / "y") {
+    .c-post-tags:before {
+        content: "/" / "";
+    }
+}
+@supports not (content: "x" / "y") {
+    .c-post-tags:before {
+        content: "/";
+        alt: "";
+    }
+}
+
+/* Main navigation animation and dialog styles */
+@media (max-width: 767px) { 
+    .main-navigation a:hover,
+    .main-navigation a[aria-current] {
+        padding-right: .25rem;
+    }
+
+    .main-navigation:hover a:not(:hover) {
+        padding-right: 0;
+    }
+
+    .main-navigation-dialog {
+        min-height: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    .main-navigation__item {
+        -webkit-animation: fade-in-top 0.3s ease-in both;
+        animation: fade-in-top 0.3s ease-in both;
+        animation-delay: calc(var(--n-of-headerlinks) * .15s);
+    }
+    .main-navigation__item:nth-child(1) {
+        animation-delay: calc((1 / var(--n-of-headerlinks)) * .15s);
+    }
+    .main-navigation__item:nth-child(2) {
+        animation-delay: calc((2 / var(--n-of-headerlinks)) * .15s);
+    }
+    .main-navigation__item:nth-child(3) {
+        animation-delay: calc((3 / var(--n-of-headerlinks)) * .15s);
+    }
+    .main-navigation__item:nth-child(4) {
+        animation-delay: calc(4 / var(--n-of-headerlinks) * .15s);
+    }
+    .main-navigation__item:nth-child(5) {
+        animation-delay: calc((5 / var(--n-of-headerlinks)) * .15s);
+    }
+    .main-navigation__item:nth-child(6) {
+        animation-delay: calc((6 / var(--n-of-headerlinks)) * .15s);
+    }
+}
+@media (prefers-reduced-motion) {
+    .main-navigation__item {
+        animation: none;
+    }       
+}
+
+@media (min-width: 768px) { 
+    .main-navigation-dialog {
+        all: unset;
+    }
+}
+
+@-webkit-keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateX(1.5rem);
+            transform: translateX(1.5rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateX(1.5rem);
+            transform: translateX(1.5rem);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
