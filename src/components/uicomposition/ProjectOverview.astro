@@ -6,10 +6,14 @@ const { lang } = Astro.params;
 
 const t = useTranslations(lang, 'home');
 ---
-<div class="relative flex flex-col xl:flex-row py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
-    <div class="flex flex-col items-start w-full gap-2 mb-16 p-8 xl:sticky xl:w-3/12 h-fit top-40">
-      <h2 class="mb-2 font-serif text-2xl">{t('projectoverview.headline')}</h2>
-      <Button link="/cases" class="" style="primary" color="light"> {t('projectoverview.button')}</Button>
+<div class="relative flex flex-col xl:flex-row py-4 md:py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
+    <div class="flex flex-col items-start w-full gap-2 mb-4 md:mb-16 p-8 xl:sticky xl:w-3/12 h-fit top-40">
+        <h2 class="mb-2 font-serif text-2xl">
+            {t('projectoverview.headline')}
+        </h2>
+        <Button link="/cases" class="" style="primary" color="light">
+            {t('projectoverview.button')}
+        </Button>
     </div>
     <div class="flex flex-col w-full gap-2 xl:w-9/12">
         <ProjectPreview 

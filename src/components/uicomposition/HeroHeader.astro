@@ -30,9 +30,10 @@ const t = useTranslations(lang, 'home');
 
 ---
 <div class:list={[
-    "relative py-10 text-white pb-32 lg:pb-40", 
+
+    "relative pt-10 text-white pb-0 md:pb-32 lg:pb-40", 
         !backgroundImage && "hero-gradient",
-        homepage && "mb-[30vh]", 
+        homepage && "md:mb-[30vh]",  
         backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
     ]}>
     <Breadcrumbs />
@@ -41,7 +42,9 @@ const t = useTranslations(lang, 'home');
         {
             client && <p class="uppercase font-serif text-xl" set:html={client}></p>
         }
-        <h1 class="font-serif text-4xl font-bold w-full md:w-2/3" 
+        <h1 class:list={["font-serif font-bold w-full md:w-2/3",
+            homepage ? "text-2xl md:text-4xl" : " text-3xl "
+        ]} 
             set:html={headline}>
         </h1>
     </div>
