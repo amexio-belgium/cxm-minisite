@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
+
 type Props = HTMLAttributes<"a">;
 
 const { href, class: className, ...props } = Astro.props;
@@ -16,50 +17,19 @@ const { href, class: className, ...props } = Astro.props;
 >
     <slot />
 </a>
-<script type="module">
+<script>
+    import setFocus from "@lib/setFocus.js";
     (function () {
-        function setFocus($element, options = {}) {
-            const isFocusable = $element.getAttribute("tabindex");
-
-            if (!isFocusable) {
-                $element.setAttribute("tabindex", "-1");
-            }
-
-            /**
-             * Handle element focus
-             */
-            function onFocus() {
-                $element.addEventListener("blur", onBlur, { once: true });
-            }
-
-            /**
-             * Handle element blur
-             */
-            function onBlur() {
-                options.onBlur?.call($element);
-
-                if (!isFocusable) {
-                    $element.removeAttribute("tabindex");
-                }
-            }
-
-            // Add listener to reset element on blur, after focus
-            $element.addEventListener("focus", onFocus, { once: true });
-
-            // Focus element
-            options.onBeforeFocus?.call($element);
-            $element.focus();
-        }
         const initializeSkipLink = function (skiplink) {
             const targetId = skiplink.getAttribute("href").split("#").pop();
             const targetEl = document.getElementById(targetId);
             skiplink.addEventListener("click", () =>
                 setFocus(targetEl, {
                     onBeforeFocus() {
-                        targetEl.classList.add("outline-none");
+                        targetEl!.classList.add("outline-none");
                     },
                     onBlur() {
-                        targetEl.classList.remove("outline-none");
+                        targetEl!.classList.remove("outline-none");
                     },
                 }),
             );

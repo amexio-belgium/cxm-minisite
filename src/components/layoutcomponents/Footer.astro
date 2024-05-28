@@ -4,7 +4,7 @@ import Button from '@components/uielements/Button.astro';
 import Link from '@components/uielements/Link.astro';
 import FooterLink from '@components/uielements/FooterLink.astro';
 import LanguageMenu from '@components/qwik/LanguageMenu.tsx'
-import footerimage from "@assets/images/highlight.png"
+import footerimage from "@assets/images/window.jpg"
 import facebook from "@assets/icons/facebook.svg"
 import youtube from "@assets/icons/youtube.svg"
 import twitter from "@assets/icons/twitter.svg"
@@ -30,7 +30,10 @@ const t = useTranslations(lang);
         <Button link="/contact" class="mt-8" size="lg" icon="phone" style="secondary" color="light">{t('footer.button')}</Button>
       </div>
       <div class="absolute flex justify-center w-9/12 sm:w-7/12 md:w-5/12 overflow-hidden rounded-full top-[320px] md:top-[200px] lg:top-20 -right-24 md:right-16 aspect-square">
-        <Image class="md:group-hover/image:scale-110 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" loading="lazy" src={footerimage} alt="A nice foto of a person in a crowd" />
+        <Image  loading="lazy" 
+          class="md:group-hover/image:scale-110 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" 
+          src={footerimage} 
+          alt="A nice foto of a person in a crowd" />
       </div>
     </div>
   </div>
@@ -68,9 +71,9 @@ const t = useTranslations(lang);
 
   <div class="relative z-50 flex flex-col items-start justify-start w-full bg-blue-900">
     <div class="max-w-[1304px] w-screen mx-auto gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
-      <p class="flex flex-col items-center gap-2 text-base font-medium text-center text-white md:text-left md:text-lg md:flex-row xl:w-1/2">
+      <p class="font-medium text-center text-white md:text-left md:text-lg xl:w-1/2">
         {t('footer.copyright')} <Link href="https://www.amexio.fr/" rel="noopener">
-          <Image loading="lazy" class="md:pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
+          <Image loading="lazy" class="inline md:pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
         </Link>
       </p>
       <div class="relative flex flex-wrap items-center justify-center gap-8 lg:justify-end md:mt-0 xl:w-1/2">

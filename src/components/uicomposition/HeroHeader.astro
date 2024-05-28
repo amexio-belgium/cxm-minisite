@@ -28,12 +28,13 @@ const { lang } = Astro.params;
 
 const t = useTranslations(lang, 'home');
 
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
+if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
 ---
 <div class:list={[
-
-    "relative pt-10 text-white pb-0 md:pb-32 lg:pb-40", 
+        "relative pt-10 text-white pb-0 md:pb-32 lg:pb-40", 
         !backgroundImage && "hero-gradient",
-        homepage && "md:mb-[30vh]",  
+        homepage && "md:mb-[30vh]",
         backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
     ]}>
     <Breadcrumbs />
@@ -80,14 +81,14 @@ const t = useTranslations(lang, 'home');
     </div>
     { 
         backgroundImage ? 
-            <Image src={backgroundImage} width={1200} height={700} alt={backgroundImageAltText} 
-                class="absolute top-0 -z-10 object-cover h-full w-xl -right-1/4" 
+            <Image src={images[backgroundImage]()} width={1200} height={700} alt={backgroundImageAltText} 
+                class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4" 
             />
         :
             <div class:list={
                 ["absolute object-cover h-auto -top-0 opacity-30 md:opacity-100",
                     homepage ? 
-                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-[30%]" 
+                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-[30%]"
                         : 
                     "md:top-10 -z-10 w-[300%] md:w-8/12 -right-full md:-right-[10%]"
                 ]}>

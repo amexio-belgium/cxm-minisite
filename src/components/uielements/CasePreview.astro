@@ -1,0 +1,62 @@
+---
+import { useTranslations } from 'src/i18n/utils';
+import { Image } from 'astro:assets';
+import Button from '@components/uielements/Button.astro';
+
+const { lang } = Astro.params;
+
+const { 
+    caseData,
+    link
+} = Astro.props;
+
+const t = useTranslations(lang, 'work');
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
+if (!images[caseData.heroImage]) throw new Error(`"${caseData}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+
+---
+<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col md:flex-row w-full justify-stretch gap-8">
+    <div class="w-full md:w-1/2 flex items-center justify-center shadow-xl shadow-primary/20 rounded-xl overflow-hidden">
+        <Image loading="lazy" src={images[caseData.heroImage]()} class="motion-safe:group-hover:scale-110 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] obj" loading="lazy" width={512} height={512} alt={caseData.altTextImage || ""} />
+    </div> 
+    <div class="pb-8 px-8 md:p-8 max-h-full w-full md:w-1/2 flex flex-col justify-between gap-8 border-b-2 md:border-y-2 border-y-quaternary">
+        <div class="flex flex-col gap-8">
+            <div class="flex flex-row gap-8 justify-between">
+                <div class="flex flex-col">
+                    <span class="font-serif text-primary" set:html={caseData.client}></span>
+                    <h2 class="mb-2 font-serif text-xl [&>mark]:text-black" set:html={caseData.title}></h2>
+                </div>
+                {								
+                    caseData.logo && 
+                        <Image loading="lazy" src={caseData.logo} class="" loading="lazy" width={120} height={80} alt={caseData.client || caseData.title}/>
+                }
+            </div>
+            <p class="text-base font-light" set:html={caseData.description}></p>
+            <ol class="list-disc font-light list-inside">
+                {
+                    caseData.duration && <li class="">
+                        {t('metadata.duration') + ": " + caseData.duration} 
+                    </li>
+                } 
+                {
+                    caseData.collaboration && <li class="">
+                        {t('metadata.collaboration') + ": " + caseData.collaboration}
+                    </li>
+                }
+                {
+                    caseData.technologies && <li class="">
+                        {t('metadata.technologies') + ": " + caseData.technologies} 
+                    </li>
+                }
+                {
+                    caseData.services && <li class="">
+                        {t('metadata.services') + ": " + caseData.services} 
+                    </li>
+                }
+            </ol>
+        </div>
+        <Button class="self-end" link={link} style="primary" size="sm" color="light">
+            {t('overview.cta')}
+        </Button>
+    </div>
+</div>
