@@ -32,9 +32,9 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
 if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
 ---
 <div class:list={[
-    "relative text-white", 
+        "relative pt-10 text-white pb-0 md:pb-32 lg:pb-40", 
         !backgroundImage && "hero-gradient",
-        homepage ? "lg:h-screen lg:flex lg:justify-center lg:flex-col py-20" : "pt-10 pb-0 md:pb-32 lg:pb-40",  
+        homepage && "md:mb-[30vh]",
         backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
     ]}>
     <Breadcrumbs />
@@ -88,7 +88,7 @@ if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundI
             <div class:list={
                 ["absolute object-cover h-auto -top-0 opacity-30 md:opacity-100",
                     homepage ? 
-                    "lg:top-[20vh] xl:-top-[10vh] -z-10 w-[400%] md:w-screen -right-full md:-right-[60vw]" 
+                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-[30%]"
                         : 
                     "md:top-10 -z-10 w-[300%] md:w-8/12 -right-full md:-right-[10%]"
                 ]}>

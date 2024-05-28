@@ -4,7 +4,7 @@ import Button from '@components/uielements/Button.astro';
 import Link from '@components/uielements/Link.astro';
 import FooterLink from '@components/uielements/FooterLink.astro';
 import LanguageMenu from '@components/qwik/LanguageMenu.tsx'
-import footerimage from "@assets/images/highlight.png"
+import footerimage from "@assets/images/window.jpg"
 import facebook from "@assets/icons/facebook.svg"
 import youtube from "@assets/icons/youtube.svg"
 import twitter from "@assets/icons/twitter.svg"
@@ -30,7 +30,10 @@ const t = useTranslations(lang);
         <Button link="/contact" class="mt-8" size="lg" icon="phone" style="secondary" color="light">{t('footer.button')}</Button>
       </div>
       <div class="absolute flex justify-center w-9/12 sm:w-7/12 md:w-5/12 overflow-hidden rounded-full top-[320px] md:top-[200px] lg:top-20 -right-24 md:right-16 aspect-square">
-        <Image class="md:group-hover/image:scale-110 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" loading="lazy" src={footerimage} alt="A nice foto of a person in a crowd" />
+        <Image  loading="lazy" 
+          class="md:group-hover/image:scale-110 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" 
+          src={footerimage} 
+          alt="A nice foto of a person in a crowd" />
       </div>
     </div>
   </div>
