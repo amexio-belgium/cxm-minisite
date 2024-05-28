@@ -119,34 +119,34 @@ summary::-webkit-details-marker {
     }
 
     .main-navigation__item {
-        --amimation-delay: .3s;
+        --animation-delay: .3s;
         -webkit-animation: fade-in-top 0.3s ease-in both;
         animation: fade-in-top 0.3s ease-in both;
-        animation-delay: calc(var(--n-of-headerlinks) * var(--amimation-delay));
+        animation-delay: calc(var(--n-of-headerlinks) * var(--animation-delay));
     }
 
     .main-navigation__item:nth-child(1) {
-        animation-delay: calc((1 / var(--n-of-headerlinks)) * var(--amimation-delay));
+        animation-delay: calc((1 / var(--n-of-headerlinks)) * var(--animation-delay));
     }
 
     .main-navigation__item:nth-child(2) {
-        animation-delay: calc((2 / var(--n-of-headerlinks)) * var(--amimation-delay));
+        animation-delay: calc((2 / var(--n-of-headerlinks)) * var(--animation-delay));
     }
 
     .main-navigation__item:nth-child(3) {
-        animation-delay: calc((3 / var(--n-of-headerlinks)) * var(--amimation-delay));
+        animation-delay: calc((3 / var(--n-of-headerlinks)) * var(--animation-delay));
     }
 
     .main-navigation__item:nth-child(4) {
-        animation-delay: calc(4 / var(--n-of-headerlinks) * var(--amimation-delay));
+        animation-delay: calc(4 / var(--n-of-headerlinks) * var(--animation-delay));
     }
 
     .main-navigation__item:nth-child(5) {
-        animation-delay: calc((5 / var(--n-of-headerlinks)) * var(--amimation-delay));
+        animation-delay: calc((5 / var(--n-of-headerlinks)) * var(--animation-delay));
     }
 
     .main-navigation__item:nth-child(6) {
-        animation-delay: calc((6 / var(--n-of-headerlinks)) * var(--amimation-delay));
+        animation-delay: calc((6 / var(--n-of-headerlinks)) * var(--animation-delay));
     }
 }
 @media (prefers-reduced-motion) {
