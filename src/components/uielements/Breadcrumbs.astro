@@ -15,7 +15,8 @@ let parts = [
 paths.forEach((text, i) => {
   const href = `/${paths.slice(0, i + 1).join('/')}`;
   if (i !== 0) {
-    parts.push({ text: text.replace(/[-_]/g, ' '), href })
+    const translatedText = t('nav.' + text.replace(/[-_]/g, ' '))
+    parts.push({ text: translatedText || text.replace(/[-_]/g, ' '), href })
   }
 })
 

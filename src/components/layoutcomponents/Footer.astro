@@ -68,9 +68,9 @@ const t = useTranslations(lang);
 
   <div class="relative z-50 flex flex-col items-start justify-start w-full bg-blue-900">
     <div class="max-w-[1304px] w-screen mx-auto gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
-      <p class="flex flex-col items-center gap-2 text-base font-medium text-center text-white md:text-left md:text-lg md:flex-row xl:w-1/2">
+      <p class="font-medium text-center text-white md:text-left md:text-lg xl:w-1/2">
         {t('footer.copyright')} <Link href="https://www.amexio.fr/" rel="noopener">
-          <Image loading="lazy" class="md:pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
+          <Image loading="lazy" class="inline md:pl-2" width={114} height={24} src={logoWhite} alt="Amexio" />
         </Link>
       </p>
       <div class="relative flex flex-wrap items-center justify-center gap-8 lg:justify-end md:mt-0 xl:w-1/2">

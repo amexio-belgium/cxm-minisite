@@ -3,14 +3,14 @@ import { getCollection } from 'astro:content';
 import { i18nParams } from '../../../i18n/consts'
 import Base from '@layouts/Base.astro';
 import HeroHeader from '@components/uicomposition/HeroHeader.astro';
-import Button from '@components/uielements/Button.astro';
+import CasePreview from '@components/uielements/CasePreview.astro';
 import { useTranslations } from 'src/i18n/utils';
-
-import { Image } from 'astro:assets';
 
 const { lang } = Astro.params;
 
-const cases = (await getCollection('cases'));
+const cases = (await getCollection('cases', (post) => {
+                return getPostLangAndSlug(post).lang === lang 
+            }))
 
 export function getStaticPaths() {
   return i18nParams;
@@ -33,52 +33,7 @@ const t = useTranslations(lang, 'work');
 	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col mb-40 py-20 w-full gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
 		{
 			cases.map((casepost) => (
-				getPostLangAndSlug(casepost).lang === lang &&
-				<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col md:flex-row w-full justify-stretch gap-8">
-					<div class="w-full md:w-1/2 flex items-center justify-center shadow-xl shadow-primary/20 rounded-xl overflow-hidden">
-						<Image loading="lazy" src={casepost.data.heroImage} class="motion-safe:group-hover:scale-110 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] obj" loading="lazy" width={512} height={512} alt={casepost.data.altTextImage || ""} />
-					</div> 
-					<div class="pb-8 px-8 md:p-8 max-h-full w-full md:w-1/2 flex flex-col justify-between gap-8 border-b-2 md:border-y-2 border-y-quaternary">
-						<div class="flex flex-col gap-8">
-							<div class="flex flex-row gap-8 justify-between">
-								<div class="flex flex-col">
-									<span class="font-serif text-primary" set:html={casepost.data.client}></span>
-									<h2 class="mb-2 font-serif text-xl [&>mark]:text-black" set:html={casepost.data.title}></h2>
-								</div>
-								{								
-									casepost.data.logo && 
-										<Image loading="lazy" src={casepost.data.logo} class="" loading="lazy" width={120} height={80} alt={casepost.data.client || casepost.data.title}/>
-								}
-							</div>
-							<p class="text-base font-light" set:html={casepost.data.description}></p>
-							<ol class="list-disc font-light list-inside">
-								{
-									casepost.data.duration && <li class="">
-										{t('metadata.duration') + ": " + casepost.data.duration} 
-									</li>
-								} 
-								{
-									casepost.data.collaboration && <li class="">
-										{t('metadata.collaboration') + ": " + casepost.data.collaboration}
-									</li>
-								}
-								{
-									casepost.data.technologies && <li class="">
-										{t('metadata.technologies') + ": " + casepost.data.technologies} 
-									</li>
-								}
-								{
-									casepost.data.services && <li class="">
-										{t('metadata.services') + ": " + casepost.data.services} 
-									</li>
-								}
-							</ol>
-						</div>
-						<Button class="self-end" link={`/cases/${getPostLangAndSlug(casepost).slug}/`} style="primary" size="sm" color="light">
-							{t('overview.cta')}
-						</Button>
-					</div>
-				</div>
+				<CasePreview caseData={casepost.data} link={`/cases/${getPostLangAndSlug(casepost).slug}/`} />
 			))
 		}
 	</div>
