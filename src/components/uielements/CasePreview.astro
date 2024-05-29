@@ -12,7 +12,9 @@ const {
 
 const t = useTranslations(lang, 'work');
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (!images[caseData.heroImage]) throw new Error(`"${caseData}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+if (!images[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.{jpeg,jpg,png,gif}');
+if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exist in glob: "src/assets/logos/*.{jpeg,jpg,png,gif}"`);
 
 ---
 <div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col md:flex-row w-full justify-stretch gap-8">
@@ -28,7 +30,7 @@ if (!images[caseData.heroImage]) throw new Error(`"${caseData}" does not exist i
                 </div>
                 {								
                     caseData.logo && 
-                        <Image loading="lazy" src={caseData.logo} class="w-auto h-12 sm:h-16 md:h-12 xl:h-16 shrink-0" loading="lazy" width={120} height={60} alt={caseData.client || caseData.title}/>
+                        <Image loading="lazy" src={logoimages[caseData.logo]()}  class="w-auto h-12 sm:h-16 md:h-12 xl:h-16 shrink-0" loading="lazy" width={120} height={60} alt={caseData.client || caseData.title}/>
                 }
             </div>
             <p class="text-base font-light" set:html={caseData.description}></p>

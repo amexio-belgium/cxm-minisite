@@ -84,7 +84,7 @@ posts.map((post) => {
         <div class="text-black relative flex flex-col w-full gap-8">
             {
                 posts.map((post) => (
-                    <CasePreview caseData={post.data} link={`/${lang}/case/${getPostLangAndSlug(post).slug}/`} />
+                    <CasePreview caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
                 ))
             }
         </div>
