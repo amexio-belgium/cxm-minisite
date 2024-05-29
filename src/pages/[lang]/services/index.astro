@@ -21,7 +21,6 @@ export function getStaticPaths() {
 }
 
 function getPostLangAndSlug(service) {
-	console.log(service.data)
 	const [lang, ...slug] = service.slug.split('/');
 	return {lang, slug}
 }
@@ -34,9 +33,9 @@ const t = useTranslations(lang, 'services');
 		text={t('hero.subheadline')}
 	/>
 
-	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col mb-40 xl:flex-row py-20 gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
-		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-700 flex flex-col items-start w-full gap-2 mb-8 md:mb-16 xl:sticky xl:w-4/12 h-fit top-40">
-		  <h2 class="mb-2 font-serif text-2xl" set:html={t('overview.headline')}></h2>
+	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col mb-40 xl:flex-row py-20 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
+		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-700 flex flex-col items-start w-full pr-12 gap-2 mb-8 md:mb-16 xl:sticky xl:w-4/12 h-fit top-40">
+		  <h2 class="mb-2 font-serif text-2xl text-pretty" set:html={t('overview.headline')}></h2>
 		</div>
 		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 flex flex-col w-full gap-2 xl:w-8/12">
 			{
@@ -100,7 +99,8 @@ const t = useTranslations(lang, 'services');
 
 	<TeaserWithImage 
 		headline={t('explainer.headline')}
-		description={t('explainer.description')}>
+		description={t('explainer.description')}
+		class='mb-40'>
 		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
 	</TeaserWithImage>
 </Base>
