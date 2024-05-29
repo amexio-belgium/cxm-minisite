@@ -40,6 +40,9 @@ const directions = {
     left: "bg-gradient-to-r ml-16 md:ml-0 ",
     right: "bg-gradient-to-l mr-16 md:mr-0",
 }
+const profileImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/*.{jpeg,jpg,png,gif}');
+if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+
 ---
 <div
   {...rest}
@@ -52,7 +55,7 @@ const directions = {
   >
     {content && <p class="text-base font-light mb-8 " set:html={content}></p>}
     <div class="flex gap-4 items-center">
-        {profileImg && <Image loading="eager" src={profileImg} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
+        {profileImg && <Image loading="eager" src={profileImages[profileImg]()} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
         <div class="flex flex-col justify-center gap-1">
             <p class="text-base font-medium">{name}</p>
             <p class="text-sm font-medium">{title}</p>

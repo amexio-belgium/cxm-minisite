@@ -24,8 +24,10 @@ import telenet from '@assets/logos/telenet_logo.png';
 import mediafin from '@assets/logos/mediafin_logo.png';
 
 <HeroHeader 
-		headline="AEM Stabilize and optimize"
-		text="description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'">
+    headline={frontmatter.title}
+    client={frontmatter.client}
+    text={frontmatter.description}
+    backgroundImage={frontmatter.heroImage} >
 </HeroHeader>
 
 <ProjectMetadata
