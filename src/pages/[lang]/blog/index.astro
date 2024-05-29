@@ -33,11 +33,11 @@ const t = useTranslations(lang, 'blog');
 		text={t('hero.subheadline')}
 	/>
 
-	<div class=" mb-40 motion-safe:animate-fade-up motion-safe:animate-delay-500">
+	<div class="mb-40 motion-safe:animate-fade-up motion-safe:animate-delay-500">
 		{
 			posts.map((post, index) => (
 				( index == 0) &&
-				<BlogPreview highlighted blogData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
+				<BlogPreview highlighted blogData={post.data} link={`./${getPostLangAndSlug(post).slug}/`} />
 			))
 		}
 	</div>
@@ -46,7 +46,7 @@ const t = useTranslations(lang, 'blog');
 		{
 			posts.map((post, index) => (
 				(index > 0) &&
-				<BlogPreview blogData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
+				<BlogPreview blogData={post.data} link={`./${getPostLangAndSlug(post).slug}/`} />
 			))
 		}
 	</div>

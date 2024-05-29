@@ -1,5 +1,5 @@
 ---
-import ProjectPreview from '../uielements/ProjectCard.astro'
+import ProjectCard from '../uielements/ProjectCard.astro'
 import Button from '../uielements/Button.astro';
 import { useTranslations } from '../../i18n/utils';
 const { lang } = Astro.params;
@@ -7,34 +7,34 @@ const { lang } = Astro.params;
 const t = useTranslations(lang, 'home');
 ---
 <div class="relative flex flex-col xl:flex-row py-4 md:py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
-    <div class="flex flex-col items-start w-full gap-2 mb-4 md:mb-16 p-8 xl:sticky xl:w-3/12 h-fit top-40">
+    <div class="flex flex-col items-start w-full gap-2 mb-4 md:mb-16 pr-12 xl:sticky xl:w-3/12 h-fit top-40">
         <h2 class="mb-2 font-serif text-2xl">
             {t('projectoverview.headline')}
         </h2>
-        <Button link="/cases" class="" style="primary" color="light">
+        <Button link="/cases" class="" style="secondary" color="light">
             {t('projectoverview.button')}
         </Button>
     </div>
     <div class="flex flex-col w-full gap-2 xl:w-9/12">
-        <ProjectPreview 
+        <ProjectCard 
             projectImage='/src/assets/projects/kbc.jpg'
-            smallImage='/src/assets/projects/kbc_logo.png' 
+            smallImage='/src/assets/logos/kbc_logo_white.png' 
             name="KBC" 
             content={t('project1.description')}
             buttonText={t('project1.button')} 
             link="/cases/euroclear/"/>
 
-        <ProjectPreview 
+        <ProjectCard 
             projectImage='/src/assets/projects/telenet.jpg'
-            smallImage='/src/assets/projects/telenet_logo.png' 
+            smallImage='/src/assets/logos/mediafin_logo_white.png' 
             name="Mediafin" 
             content={t('project2.description')} 
             buttonText={t('project2.button')}  
             link="/cases/kbc/"/>
 
-        <ProjectPreview 
+        <ProjectCard 
             projectImage='/src/assets/projects/telenet.jpg'
-            smallImage='/src/assets/projects/kbc_logo.png' 
+            smallImage='/src/assets/logos/telenet_logo_white.png' 
             name="Telenet" 
             content={t('project3.description')}
             buttonText={t('project2.button')} 

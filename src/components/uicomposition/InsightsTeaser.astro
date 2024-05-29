@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Button from '@components/uielements/Button.astro';
 import { useTranslations } from '../../i18n/utils';
 import { Image } from 'astro:assets';
+import BlogPreview from '@components/uielements/BlogPreview.astro';
 
 const { lang } = Astro.params;
 interface Props {
@@ -41,7 +42,7 @@ async function getPosts() {
         .sort(
             (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
         )
-        .splice(0,2);
+        .splice(0,3);
 } 
 
 function getPostLangAndSlug(post) {
@@ -58,7 +59,7 @@ posts.map((post) => {
 }
 )
 ---
-<div class="relative flex flex-col pt-20 pb-10 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
+<div class="relative flex flex-col py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
     <h2 class="mb-8 font-serif text-2xl text-black">
         {  
             (() => {
@@ -70,42 +71,11 @@ posts.map((post) => {
             })
         }
     </h2>
-    <div class="flex flex-col w-full gap-8 lg:flex-row">
+    <div class="text-black relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
         {
             posts.map((post) => (
-                <div class="group flex flex-col relative w-full h-auto mb-8 overflow-hidden shadow-sm shadow-primary/20 bg-primary rounded-2xl">
-                    <div class="w-full shrink-0 mask-blog h-[300px] aspect-video overflow-hidden">
-                        <Image src={images[post.data.heroImage]()}  class="md:group-hover:scale-110  transition-transform ease-in-out duration-300 min-h-full min-w-full" loading="lazy" width={580} height={340} alt={post.data.altTextImage || ""} />
-                    </div> 
-                    <div class="flex flex-col justify-between w-full h-[100%] p-8 pt-16 text-white">
-                        <div>
-                            <h3 class="mb-2 font-serif text-xl">{post.data.title}</h3>
-                            {collection == "insights" && <p class="text-small font-light " set:html={post.data.description}></p>}
-                        </div>
-                        <Button class="mt-8" link={`/blog/${getPostLangAndSlug(post).slug}/`} style="tertiary" color="light">
-                            {  
-                                (() => {
-                                    if ( collection === "insights" ) {
-                                        return t('insightsteaser.button')
-                                    } 
-                                        return t('casesteaser.button')
-                                })
-                            }
-                        </Button>
-                    </div>
-                </div>
+            <BlogPreview  blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />                
             ))
         }
     </div>
 </div>
-
-<style>
-    .mask-blog {
-        clip-path: polygon( 0% 0%,0% 80.904%,0% 80.904%,1.125% 82.915%,2.502% 85.175%,4.119% 87.582%,5.967% 90.033%,8.031% 92.427%,10.301% 94.661%,12.766% 96.632%,15.413% 98.238%,18.231% 99.377%,21.208% 99.947%,21.208% 100%,100% 100%,100% 0%,0% 0% );
-        mask-size: cover; 
-        mask-size: 100% auto;
-        mask-position: bottom left;
-        width: 101%;
-    }
-
-</style>

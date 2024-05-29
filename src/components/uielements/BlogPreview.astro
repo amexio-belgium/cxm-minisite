@@ -39,20 +39,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                     </h2>
                     <p class="text-base font-light" set:html={blogData.description}></p>
                 </div>
-                {
-                    blogData.author &&
-                    <div class="flex gap-4 mt-8 items-center">
-                        { blogData.authorProfileImg && 
-                            <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
-                            width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
-                        }
-                        <div class="flex flex-col justify-center gap-1">
-                            <p class="text-base font-medium">{blogData.author}</p>
-                            <p class="text-sm font-medium">{blogData.authorTitle}</p>
-                        </div>
-                    </div>
-                }
-                <div class="flex flex-row items-center gap-4">
+                <div class=" mt-8  flex flex-row items-center gap-4">
                     <FormattedDate class="font-serif text-base" date={blogData.pubDate} />
                     {
                         blogData.tags && 
@@ -61,6 +48,20 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                         </span>
                     }
                 </div>
+                {
+                    blogData.author &&
+                    <div class="flex gap-4 items-center">
+                        { blogData.authorProfileImg && 
+                            <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
+                            width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
+                        }
+                        <div class="flex flex-col justify-center gap-1">
+                            <p class="text-base font-medium">{blogData.author}</p>
+                            <p class="text-sm font-serif font-medium">{blogData.authorTitle}</p>
+                        </div>
+                    </div>
+                }
+      
             </div>
         </article>
         :
@@ -69,31 +70,32 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                 <Image loading="lazy" src={images[blogData.heroImage]()}  class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300  max-w-[unset] h-[unset] object-cover" 
                 loading="lazy" width={512} height={512} alt={blogData.altTextImage || ""} />
             </div> 
-            <div class="p-8 pt-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
+            <div class="p-2 py-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
                 <div class="flex flex-row items-center gap-4">
                     <FormattedDate class="font-serif text-base" date={blogData.pubDate} />
                     {
-                        blogData.tags && <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
+                        blogData.tags && 
+                        <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
                             {blogData.tags}
                         </span>
                     }
                 </div>
-                <h2 class="font-serif mb-2 text-xl [&>mark]:text-black">
+                <h2 class="font-serif font-bold mb-2 text-lg [&>mark]:text-black">
                     <Link class="outline-none hover:text-blue-500 hover:underline hover:decoration-1 content-none before:absolute before:inset-x-0 before:inset-y-0" 
                         href={link} set:html={blogData.title}>
                     </Link>
                 </h2>
-                <p class="text-base font-light" set:html={blogData.description}></p>
+                <p class="text-small font-light" set:html={blogData.description}></p>
                 {
                     blogData.author &&
-                    <div class="self-bottom flex gap-4 mt-auto pt-4 items-center">
+                    <div class="self-bottom flex gap-4 mt-auto pt-8 items-center">
                         { blogData.authorProfileImg && 
                             <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
                             width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
                         }
                         <div class="flex flex-col justify-center gap-1">
-                            <p class="text-base font-medium">{blogData.author}</p>
-                            <p class="text-sm font-medium">{blogData.authorTitle}</p>
+                            <p class="font-medium">{blogData.author}</p>
+                            <p class="text-sm font-serif">{blogData.authorTitle}</p>
                         </div>
                     </div>
                 }
