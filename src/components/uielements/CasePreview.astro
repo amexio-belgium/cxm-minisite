@@ -28,7 +28,7 @@ if (!images[caseData.heroImage]) throw new Error(`"${caseData}" does not exist i
                 </div>
                 {								
                     caseData.logo && 
-                        <Image loading="lazy" src={caseData.logo} class="aspect-[2/1]  shrink-0" loading="lazy" width={120} height={80} alt={caseData.client || caseData.title}/>
+                        <Image loading="lazy" src={caseData.logo} class="w-auto h-12 sm:h-16 md:h-12 xl:h-16 shrink-0" loading="lazy" width={120} height={60} alt={caseData.client || caseData.title}/>
                 }
             </div>
             <p class="text-base font-light" set:html={caseData.description}></p>

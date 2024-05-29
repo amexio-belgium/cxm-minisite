@@ -97,7 +97,6 @@ const t = useTranslations(lang, 'home');
 
   <script is:inline>
     const services = document.querySelector(`.services`);
-    console.log(services)
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting && services) {

@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import Button from '@components/uielements/Button.astro';
 import { useTranslations } from '../../i18n/utils';
-import { Image } from 'astro:assets';
 import BlogPreview from '@components/uielements/BlogPreview.astro';
+import CasePreview from '@components/uielements/CasePreview.astro';
 
 const { lang } = Astro.params;
 interface Props {
@@ -53,13 +52,14 @@ function getPostLangAndSlug(post) {
 const t = useTranslations(lang);
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
 posts.map((post) => {
+    console.log(post.data.heroImage)
     if (!images[post.data.heroImage]) { 
         throw new Error(`"${post.data.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
     }
 }
 )
 ---
-<div class="relative flex flex-col py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
+<div class="relative md:mb-20 flex flex-col py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
     <h2 class="mb-8 font-serif text-2xl text-black">
         {  
             (() => {
@@ -71,11 +71,22 @@ posts.map((post) => {
             })
         }
     </h2>
-    <div class="text-black relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
-        {
-            posts.map((post) => (
-            <BlogPreview  blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />                
-            ))
-        }
-    </div>
+    {
+        collection == "insights" ? 
+          <div class="text-black relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
+            {
+                posts.map((post) => (
+                    <BlogPreview blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />
+                ))
+            }
+            </div>
+        : 
+        <div class="text-black relative flex flex-col w-full gap-8">
+            {
+                posts.map((post) => (
+                    <CasePreview caseData={post.data} link={`/${lang}/case/${getPostLangAndSlug(post).slug}/`} />
+                ))
+            }
+        </div>
+    }
 </div>
