@@ -13,20 +13,22 @@ const {
 } = Astro.props;
 
 const t = useTranslations(lang, 'work');
+
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
 if (!images[blogData.heroImage]) throw new Error(`"${blogData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
-
+const profileImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/*.{jpeg,jpg,png,gif}');
+if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.authorProfileImg}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
 ---
 {
     highlighted ? 
-        <article class="group relative overflow-hidden flex flex-col md:flex-row w-full justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500 bg-gradient-to-r  from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border border-blue shadow-sm backdrop-blur-sm ">
-            <div class="aspect-square flex items-center justify-center shadow-xl shadow-primary/20 rounded-t-xl md:rounded-tr-none md:rounded-l-xl overflow-hidden">
+        <article class="group relative overflow-hidden flex flex-col lg:flex-row w-full justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500 bg-gradient-to-r  from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border border-blue shadow-sm backdrop-blur-sm ">
+            <div class="h-[300px] lg:h-[unset] lg:aspect-square lg:shrink-0 flex items-center justify-center shadow-xl shadow-primary/20 rounded-t-xl lg:rounded-tr-none lg:rounded-l-xl overflow-hidden">
                 <Image loading="eager" src={images[blogData.heroImage]()} 
-                    class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full max-w-[unset] h-[unset] object-cover" 
-                    loading="lazy" width={512} height={512} 
+                    class="aspect-square motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full max-w-[unset] h-[unset] object-cover" 
+                    loading="lazy" width={512} height={300} 
                     alt={blogData.altTextImage || ""} />
             </div> 
-            <div class="mr-8 pb-8 px-8 pt-0 md:p-8 max-h-full w-full flex flex-col justify-between gap-8 text-white">
+            <div class="mr-8 pb-8 px-8 pt-0 md:p-8 max-h-full w-full lg:w-fit flex flex-col justify-between gap-8 text-white">
                 <div class="flex flex-col gap-4">
                     <h2 class="mb-2 font-serif text-xl [&>mark]:text-black">
                         <Link 
@@ -37,20 +39,7 @@ if (!images[blogData.heroImage]) throw new Error(`"${blogData.heroImage}" does n
                     </h2>
                     <p class="text-base font-light" set:html={blogData.description}></p>
                 </div>
-                {
-                    blogData.author &&
-                    <div class="flex gap-4 mt-8 items-center">
-                        { blogData.authorProfileImg && 
-                            <Image loading="eager" src={blogData.authorProfileImg} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
-                            width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
-                        }
-                        <div class="flex flex-col justify-center gap-1">
-                            <p class="text-base font-medium">{blogData.author}</p>
-                            <p class="text-sm font-medium">{blogData.authorTitle}</p>
-                        </div>
-                    </div>
-                }
-                <div class="flex flex-row items-center gap-4">
+                <div class=" mt-8  flex flex-row items-center gap-4">
                     <FormattedDate class="font-serif text-base" date={blogData.pubDate} />
                     {
                         blogData.tags && 
@@ -59,39 +48,53 @@ if (!images[blogData.heroImage]) throw new Error(`"${blogData.heroImage}" does n
                         </span>
                     }
                 </div>
+                {
+                    blogData.author &&
+                    <div class="flex gap-4 items-center">
+                        { blogData.authorProfileImg && 
+                            <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
+                            width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
+                        }
+                        <div class="flex flex-col justify-center gap-1">
+                            <p class="text-base">{blogData.author}</p>
+                            <p class="text-sm font-serif">{blogData.authorTitle}</p>
+                        </div>
+                    </div>
+                }
             </div>
         </article>
         :
         <article class="group relative flex flex-col justify-stretch has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-0 has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-blue-500">
             <div class="w-full shrink-0 aspect-[5/3] flex items-center justify-center rounded-t-xl overflow-hidden">
-                <Image loading="lazy" src={images[blogData.heroImage]()}  class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300  max-w-[unset] h-[unset] object-cover" 
+                <Image loading="lazy" src={images[blogData.heroImage]()}  class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 w-full" 
                 loading="lazy" width={512} height={512} alt={blogData.altTextImage || ""} />
             </div> 
-            <div class="p-8 pt-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
+            <div class="p-2 py-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
                 <div class="flex flex-row items-center gap-4">
                     <FormattedDate class="font-serif text-base" date={blogData.pubDate} />
                     {
-                        blogData.tags && <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
+                        blogData.tags && 
+                        <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
                             {blogData.tags}
                         </span>
                     }
                 </div>
-                <h2 class="font-serif mb-2 text-xl [&>mark]:text-black">
+                <h2 class="font-serif font-bold mb-2 text-lg [&>mark]:text-black">
                     <Link class="outline-none hover:text-blue-500 hover:underline hover:decoration-1 content-none before:absolute before:inset-x-0 before:inset-y-0" 
                         href={link} set:html={blogData.title}>
                     </Link>
                 </h2>
-                <p class="text-base font-light" set:html={blogData.description}></p>
+                <p class="text-small font-light" set:html={blogData.description}></p>
                 {
                     blogData.author &&
-                    <div class="self-bottom flex gap-4 mt-auto pt-4 items-center">
+                    <div class="self-bottom flex gap-4 mt-auto pt-8 items-center">
                         { blogData.authorProfileImg && 
-                            <Image loading="eager" src={blogData.authorProfileImg} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
+                            <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
                             width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
                         }
                         <div class="flex flex-col justify-center gap-1">
-                            <p class="text-base font-medium">{blogData.author}</p>
-                            <p class="text-sm font-medium">{blogData.authorTitle}</p>
+                            <p class="font-medium">{blogData.author}</p>
+                            <p class="text-sm font-serif">{blogData.authorTitle}</p>
                         </div>
                     </div>
                 }

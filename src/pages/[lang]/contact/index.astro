@@ -23,21 +23,24 @@ const t = useTranslations(lang, 'contact');
 	/>
 
 	<div class="p-16 bg-white rounded-xl"> 
-
 		<script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/embed/v2.js" is:inline></script>
-		<script is:inline> 
+		<script is:inline define:vars={{lang}}> 
+		let formId =  "0bbb8a62-0b4c-42f5-820a-f7efe483b6e7"
+		lang == "fr" && (formId = "e0b390be-6491-40c2-9045-33ef9ed28f96")
+		lang == "nl" && (formId =  "71312006-dc15-4ec1-9b49-64c2babbd2f7")
+
 			try {
 				hbspt.forms.create({
 					region: "eu1",
 					portalId: "143190687",
-					formId: "0bbb8a62-0b4c-42f5-820a-f7efe483b6e7"
+					formId
 				});
 			} catch (error) {
 				setTimeout(() => {
 					hbspt.forms.create({
 						region: "eu1",
 						portalId: "143190687",
-						formId: "0bbb8a62-0b4c-42f5-820a-f7efe483b6e7"
+						formId
 					});
 				}, 2000);
 			}
