@@ -9,11 +9,11 @@ import InsightsTeaser from '@components/uicomposition/InsightsTeaser.astro';
 import Quote from '@components/uicomposition/Quote.astro';
 import Highlight from '@components/uicomposition/Highlight.astro';
 import Button from '@components/uielements/Button.astro';
-import painPoint from '@assets/icons/painpoint.svg';
-import strategize from '@assets/icons/strategize.svg';
-import design from '@assets/icons/design.svg';
-import realize from '@assets/icons/realize.svg';
-import optimize from '@assets/icons/optimize.svg';
+import Painpoint from '@components/graphicelements/painpoint.astro';
+import Strategize from '@components/graphicelements/strategize.astro';
+import Design from '@components/graphicelements/design.astro';
+import Realize from '@components/graphicelements/realize.astro';
+import Optimize from '@components/graphicelements/optimize.astro';
 import TilesContainer from '@components/uicomposition/TilesContainer.astro';
 import SmallTile from '@components/uielements/SmallTile.astro';
 
@@ -40,17 +40,17 @@ const t = useTranslations(lang, 'home');
     <SmallTile 
       headline={t('painpoint1.headline')} 
       description={t('painpoint1.description')} >
-      <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
+      <Painpoint class="fill-white overflow-visible w-20 h-20" />
     </SmallTile>
     <SmallTile 
       headline={t('painpoint2.headline')} 
       description={t('painpoint2.description')} >
-      <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
+      <Painpoint class="fill-white overflow-visible w-20 h-20" />
     </SmallTile>
     <SmallTile 
       headline={t('painpoint3.headline')} 
       description={t('painpoint3.description')} >
-      <Image src={painPoint} alt="" width={80} height={80} class="w-20 h-20" />
+      <Painpoint class="fill-white overflow-visible w-20 h-20" />
     </SmallTile>
   </TilesContainer>
   
@@ -65,28 +65,28 @@ const t = useTranslations(lang, 'home');
     </div>
     <div class="services flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap">
       <div class="service__item motion-safe:animate-delay-[250ms] inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
-        <Image src={strategize} alt="" width={80} height={80} class="w-20 h-20" />
+        <Strategize class="overflow-visible w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services1.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services1.description')}></div>
         </div>
       </div>
       <div class="service__item motion-safe:animate-delay-500 inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
-        <Image src={design} alt="" width={80} height={80} class="w-20 h-20" />
+        <Design class="overflow-visible w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services2.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services2.description')}></div>
         </div>
       </div>
       <div class="service__item motion-safe:animate-delay-[750ms] inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
-        <Image src={realize} alt="" width={80} height={80} class="w-20 h-20" />
+        <Realize class="overflow-visible w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services3.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services3.description')}></div>
         </div>
       </div>
       <div class="service__item motion-safe:animate-delay-1000 inline-flex flex-col items-center justify-start w-full gap-8 md:w-5/12 lg:w-full">
-        <Image src={optimize} alt="" width={80} height={80} class="w-20 h-20" />
+        <Optimize class="overflow-visible w-20 h-20" />
         <div class="flex flex-col items-center justify-start gap-4">
           <div class="font-serif text-xl text-center " set:html={t('services4.headline')}></div>
           <div class="text-base font-light text-center" set:html={t('services4.description')}></div>
@@ -132,14 +132,14 @@ const t = useTranslations(lang, 'home');
   <Highlight 
     title={t('highlight.headline')}
     text={t('highlight.text')}
-    image='/src/assets/images/highlight.png'
+    image='/src/assets/images/leuvenoffice_4.jpg'
     buttonText={t('highlight.button')}
     />
 
   <Highlight 
     title={t('highlight.headline')}
     text={t('highlight.text')}
-    image='/src/assets/images/highlight.png'
+    image='/src/assets/images/leuvenoffice_4.jpg'
     buttonText={t('highlight.button')}
     style='lightblue'
     />

@@ -22,9 +22,31 @@ import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
 
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/logos/kbc_logo_white.png';
-import telenet from '@assets/logos/telenet_logo_white.png';
-import mediafin from '@assets/logos/mediafin_logo_white.png';
+import analytics from '@assets/logos/technologies/adobe_analytics_white.png';
+import target from '@assets/logos/technologies/adobe_target_white.png';
+import aem from '@assets/logos/technologies/aem_white.png';
+import angular from '@assets/logos/technologies/angular.png';
+import astro from '@assets/logos/technologies/astro.png';
+import contentsquare from '@assets/logos/technologies/contentsquare.png';
+import drupal from '@assets/logos/technologies/drupal.png';
+import kontentai from '@assets/logos/technologies/kontentai_white.png';
+import google from '@assets/logos/technologies/googlemarketingplatform.png';
+import nextjs from '@assets/logos/technologies/nextjs_white.png';
+import react from '@assets/logos/technologies/react_white.png'; 
+import vue from '@assets/logos/technologies/vue_white.png';
+import sanity from '@assets/logos/technologies/sanity.png';
+import analytics_square from '@assets/logos/technologies/adobe_analytics_square.png';
+import target_square from '@assets/logos/technologies/adobe_target_square.png';
+import aem_square from '@assets/logos/technologies/aem_square.png';
+import angular_square from '@assets/logos/technologies/angular_square.png';
+import astro_square from '@assets/logos/technologies/astro_square.png';
+import contentsquare_square from '@assets/logos/technologies/contentsquare_square.png';
+import drupal_square from '@assets/logos/technologies/drupal_square.png';
+import kontentai_square from '@assets/logos/technologies/kontentai_square.png';
+import nextjs_square from '@assets/logos/technologies/nextjs_square_white.png';
+import react_square from '@assets/logos/technologies/react_square.png'; 
+import vue_square from '@assets/logos/technologies/vue_square.png';
+import sanity_square from '@assets/logos/technologies/sanity_square.png';
 
 <HeroHeader 
     headline={frontmatter.title}
@@ -38,12 +60,39 @@ import mediafin from '@assets/logos/mediafin_logo_white.png';
     collaboration={frontmatter.collaboration}
     services={frontmatter.services}
     technologies={frontmatter.technologies}>
-    <Image src={kbc} alt="kbc" class="h-10 w-auto"/>
-    <Image src={telenet} alt="telenet" class="h-10 w-auto"/>
-    <Image src={mediafin} alt="mediafin" class="h-10 w-auto"/>
-    <Image src={kbc} alt="" class="h-10 w-auto"/>
-    <Image src={telenet} alt="" class="h-10 w-auto"/>
-    <Image src={mediafin} alt="" class="h-10 w-auto"/>
+    <Image src={analytics} alt="kbc" class="h-10 w-auto"/>
+    <Image src={target} alt="telenet" class="h-10 w-auto"/>
+    <Image src={aem} alt="mediafin" class="h-10 w-auto"/>
+    <Image src={angular} alt="" class="h-10 w-auto"/>
+    <Image src={astro} alt="" class="h-10 w-auto"/>
+    <Image src={contentsquare} alt="" class="h-10 w-auto"/>
+    <Image src={drupal} alt="kbc" class="h-8 w-auto"/>
+    <Image src={kontentai} alt="telenet" class="h-10 w-auto"/>
+    <Image src={google} alt="mediafin" class="h-10 w-auto"/>
+    <Image src={nextjs} alt="" class="h-6 w-auto"/>
+    <Image src={react} alt="" class="h-10 w-auto"/>
+    <Image src={vue} alt="" class="h-10 w-auto"/>
+    <Image src={sanity} alt="" class="h-8 w-auto"/>
+</ProjectMetadata>
+
+<ProjectMetadata
+    duration={frontmatter.duration}
+    collaboration={frontmatter.collaboration}
+    services={frontmatter.services}
+    technologies={frontmatter.technologies}>
+    <Image src={analytics_square} alt="kbc" class="h-10 w-auto"/>
+    <Image src={target_square} alt="telenet" class="h-10 w-auto"/>
+    <Image src={aem_square} alt="mediafin" class="h-10 w-auto"/>
+    <Image src={angular_square} alt="" class="h-10 w-auto"/>
+    <Image src={astro_square} alt="" class="h-10 w-auto"/>
+    <Image src={contentsquare_square} alt="" class="h-10 w-auto"/>
+    <Image src={drupal_square} alt="kbc" class="h-10 w-auto"/>
+    <Image src={kontentai_square} alt="telenet" class="h-10 w-auto"/>
+    <Image src={google} alt="mediafin" class="h-10 w-auto"/>
+    <Image src={nextjs_square} alt="" class="h-10 w-auto"/>
+    <Image src={react_square} alt="" class="h-10 w-auto"/>
+    <Image src={vue_square} alt="" class="h-10 w-auto"/>
+    <Image src={sanity_square} alt="" class="h-10 w-auto"/>
 </ProjectMetadata>
 
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
