@@ -2,7 +2,7 @@ export const contact = {
     en: {
         'contact.title': "Contact - AmeXio Fuse",
         'contact.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
-        'hero.headline': 'Contact',
+        'hero.headline': '<mark>Contact</mark> us',
         'hero.subheadline': 'A streamlined content lifecycle is at the core of your Customer Experience Management (CXM) process, and goes beyond the implementation of a Content Management System (CMS). Therefore, we provide a broad spectrum of services to help you meet concrete business outcomes.',
         'form.headline': 'Let\'s discuss your content challenge',
         'highlight.headline': 'Offices and contact info',
