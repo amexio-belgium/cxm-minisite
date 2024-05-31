@@ -46,11 +46,11 @@ const t = useTranslations(lang, 'services');
 		</div>
 	</div>
 
-	<div class="text-white mb-40">
+	<div class="text-white mb-40 animate-pulse animate-once animate-ease-out">
 		<h2 class="font-serif text-2xl text-balance mb-8" set:html={t('collaborate.headline')}></h2>
-		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab/tab.js"></script>
-		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-group/tab-group.js"></script>
-		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-panel/tab-panel.js"></script>
+		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab/tab.js"></script>
+		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-group/tab-group.js"></script>
+		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-panel/tab-panel.js"></script>
 
 		<sl-tab-group>
 			<sl-tab class="text-lg w-1/4 text-center aria-selected:border-secondary aria-selected:border-b-2" slot="nav" panel="model1">

@@ -50,25 +50,12 @@ function getPostLangAndSlug(post) {
 }
 
 const t = useTranslations(lang);
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-posts.map((post) => {
-    console.log(post.data.heroImage)
-    if (!images[post.data.heroImage]) { 
-        throw new Error(`"${post.data.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
-    }
-}
-)
+
 ---
 <div class="relative md:mb-20 flex flex-col py-20 lg:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 lg:before:right-0 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
     <h2 class="mb-8 font-serif text-2xl text-black">
         {  
-            (() => {
-                if ( collection === "insights" ) {
-                    return t('insightsteaser.headline')
-                } 
-                
-                return t('casesteaser.headline')
-            })
+            (collection === "insights") ? t('insightsteaser.headline') : t('casesteaser.headline')
         }
     </h2>
     {
