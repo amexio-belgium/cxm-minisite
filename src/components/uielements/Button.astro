@@ -72,7 +72,7 @@ const iconFill = {
   >
   { icon !== "none" && 
     <svg class:list={[iconFill[style + "_" + color], 
-      "group-hover/icon:animate-jump animate-once animate-ease-out ", 
+      "group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none animate-once animate-ease-out ", 
       { "w-8 h-8 mr-2": size == "lg" }]} 
       width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <use xlink:href={`/icons/icon-sprite.svg#icon-${icon}`}></use>

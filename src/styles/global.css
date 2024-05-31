@@ -78,17 +78,8 @@ mark {
 
 .caseheadline mark{
     -webkit-text-fill-color: unset;
-
 }
 
-@keyframes background-position {
-    from {
-        background-position: 100%;
-    }
-    to {
-        background-position: 0 100%;
-    }
-}
 
 .hero-gradient {
     background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
@@ -209,3 +200,11 @@ summary::-webkit-details-marker {
   }
 }
 
+@keyframes background-position {
+    from {
+        background-position: 100%;
+    }
+    to {
+        background-position: 0 100%;
+    }
+}

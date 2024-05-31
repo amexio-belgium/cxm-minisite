@@ -51,5 +51,16 @@ const {
       transform: scale(1.1);
     }
   }
+
+  @media (prefers-reduced-motion) {
+  .mobile, .pc {
+    animation: none;
+  }
+  .service__item:has(.mobile):hover {
+    .mobile, .pc {
+      transform: unset;
+    }
+  } 
+}
 </style>
   

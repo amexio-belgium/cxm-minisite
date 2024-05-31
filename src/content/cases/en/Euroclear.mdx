@@ -19,6 +19,7 @@ import Quote from "@components/uicomposition/Quote.astro"
 import TilesContainer from "@components/uicomposition/TilesContainer.astro"
 import SmallTile from "@components/uielements/SmallTile.astro"
 import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
+import TechnologyIcon from '@components/uielements/TechnologyIcon.astro';
 
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
@@ -80,19 +81,58 @@ import sanity_square from '@assets/logos/technologies/sanity_square.png';
     collaboration={frontmatter.collaboration}
     services={frontmatter.services}
     technologies={frontmatter.technologies}>
-    <Image src={analytics_square} alt="" class="h-10 w-auto"/>
-    <Image src={target_square} alt="" class="h-10 w-auto"/>
-    <Image src={aem_square} alt="" class="h-10 w-auto"/>
-    <Image src={angular_square} alt="" class="h-10 w-auto"/>
-    <Image src={astro_square} alt="" class="h-10 w-auto"/>
-    <Image src={contentsquare_square} alt="" class="h-10 w-auto"/>
-    <Image src={drupal_square} alt="" class="h-10 w-auto"/>
-    <Image src={kontentai_square} alt="" class="h-10 w-auto"/>
-    <Image src={google} alt="" class="h-10 w-auto"/>
-    <Image src={nextjs_square} alt="" class="h-10 w-auto"/>
-    <Image src={react_square} alt="" class="h-10 w-auto"/>
-    <Image src={vue_square} alt="" class="h-10 w-auto"/>
-    <Image src={sanity_square} alt="" class="h-10 w-auto"/>
+    <TechnologyIcon link="https://business.adobe.com/products/analytics/adobe-analytics.html">
+        <Image src={analytics_square} alt="" />
+        Adobe analytics
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={target_square} alt="" />
+        Adobe target
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={aem_square} alt="" />
+        Adobe Experience Manager
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={angular_square} alt="" />
+        Angular
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={astro_square} alt="" />
+        Astro
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={contentsquare_square} alt="" />
+        Contentsquare
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={drupal_square} alt="" />
+        Drupal
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={kontentai_square} alt="" />
+        Kontent.ai
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={google} alt="" />
+        Google Marketing Platform
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={nextjs_square} alt="" />
+        Next.js
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={react_square} alt="" />
+        React
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={vue_square} alt="" />
+        Vue
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={sanity_square} alt="" />
+        Sanity.io
+    </TechnologyIcon>
 </ProjectMetadata>
 
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"

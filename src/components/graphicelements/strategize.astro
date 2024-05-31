@@ -46,4 +46,16 @@ const {
   .service__item:has(.flag):hover .flag {
     transform: scale(1.2) rotate(-10deg)
   }
+
+
+  @media (prefers-reduced-motion) {
+    .hexagon, .flag {
+      animation: none;
+    }
+    .service__item:has(.flag):hover {
+      .flag {
+        transform: unset;
+      }
+    } 
+  }
 </style>

@@ -59,5 +59,16 @@ const {
       transform: scale(1.2);
     }
   } 
-   
+
+@media (prefers-reduced-motion) {
+  .pen, .squiggle {
+    animation: none;
+  }
+  .service__item:has(.squiggle):hover {
+    .squiggle, .pen {
+      transform: unset;
+    }
+  } 
+}
+  
 </style>
