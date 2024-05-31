@@ -1,0 +1,63 @@
+---
+interface Props {
+  class?: string;
+}
+const { 
+  class: className,
+} = Astro.props;
+
+---
+<svg class={className} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 81 80">
+  <path class="squiggle" d="M57.4,49.7c-.5-.3-1-.3-1.5-.2-.5.2-.9.4-1.2.9-.3.4-.3.9-.2,1.5.2.5.5.9.9,1.2,1.7.8,3,1.8,3.9,2.8.9,1.1,1.4,2.2,1.4,3.4,0,2.2-1.4,4.1-4.1,5.6-2.7,1.5-5.9,2.3-9.7,2.3s-1,.2-1.4.6c-.4.4-.6.8-.6,1.4s.2,1,.6,1.4c.4.4.8.6,1.4.6,4.3,0,8.4-1,12.1-3.1s5.6-5,5.6-8.7-.6-3.8-1.9-5.4c-1.2-1.6-3-3-5.4-4.2Z"/>
+  <path class="squiggle" d="M12.7,44.9c.5-.1.9-.4,1.2-.9.3-.4.4-.9.3-1.4-.1-.5-.4-.9-.8-1.3-.9-.6-1.6-1.2-2-1.8-.4-.6-.7-1.2-.7-1.8,0-1.2.7-2.3,2.2-3.5,1.5-1.1,4.2-2.6,8.2-4.3,5.1-2.2,8.6-4.1,10.4-5.9,1.8-1.7,2.7-3.7,2.7-5.9s-1.3-5.2-3.8-7c-2.5-1.8-5.8-2.8-9.9-2.8s-4.8.4-6.9,1.3c-2.2.9-3.8,2-4.8,3.3-.4.4-.5.9-.5,1.4,0,.5.3,1,.8,1.3.4.3.9.4,1.4.4.5,0,.9-.3,1.3-.6,1.1-1.1,2.3-1.9,3.8-2.4,1.5-.5,3.1-.8,4.9-.8,3.1,0,5.5.6,7.2,1.7,1.7,1.2,2.6,2.5,2.6,4.1s-.7,2.6-2.2,3.7c-1.4,1.1-4.3,2.6-8.6,4.5-4.9,2.1-8.2,4-10.1,5.7-1.8,1.6-2.7,3.6-2.7,5.7s.4,2.9,1.3,4c.9,1.1,1.9,2.1,3.2,2.9.4.3.9.4,1.4.3Z"/>
+  <path class="pen" d="M73.2,15c-.2-.5-.5-.9-.9-1.3l-4.2-4.2c-.4-.4-.8-.7-1.3-.9-.5-.2-1-.2-1.5-.2s-1,0-1.4.2c-.5.2-.9.5-1.4.9L12.6,59.4c-.6.6-1,1.3-1.4,2-.3.8-.5,1.6-.5,2.5v4c0,.9.3,1.7.9,2.3.6.6,1.4.9,2.3.9h4c.8,0,1.7-.2,2.5-.5.8-.3,1.5-.8,2-1.4l49.9-49.9c.4-.4.7-.9.9-1.4.2-.5.2-1,.2-1.4s0-1-.2-1.5ZM18.8,67.2h-4.2v-4.2L56,21.6l2.2,2.1,2.1,2.2-41.4,41.4Z"/>
+</svg>
+
+<style is:global>
+  .squiggle {
+    fill: #ed6c25;
+    stroke-width: 0px;
+    animation-name: squigle;
+    animation-duration: 2s;
+    transform-origin: center;
+    animation-timing-function: ease-in-out;
+    transition: transform 0.5s ease-in-out;
+
+  }
+  
+  .pen {
+    fill: #0b1215;
+    stroke-width: 0px;
+    animation-name: pen;
+    animation-duration: 1s;
+    transform-origin: center;
+    animation-timing-function: ease-out;
+    transition: transform 0.5s ease-in-out;
+
+  }
+
+  @keyframes pen {
+    from {transform: translate(50px) scale(0.5) rotate(50deg);}
+    to {transform: translate(-0px) scale(1) rotate(0);}
+  }
+
+  @keyframes squigle {
+    0%   {transform: rotate(0)}
+    25%  {transform: rotate(-10deg)}
+    50%  {transform: rotate(10deg)}
+    100% {transform: rotate(0)}
+  }
+
+  .service__item:has(.squiggle):hover {
+    .squiggle {
+      transform-origin: center;
+      transform: scale(1.1) rotate(-10deg);
+    }
+
+    .pen {
+      transform-origin: center;
+      transform: scale(1.2);
+    }
+  } 
+   
+</style>

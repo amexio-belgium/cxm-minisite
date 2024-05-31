@@ -47,7 +47,10 @@ const t = useTranslations(lang, 'work');
             </div>
         }
     </dl>
-    <div class="flex flex-row gap-6 flex-wrap">
+    <!-- <div class="flex flex-row gap-6 items-center flex-wrap">
+        <slot />
+    </div> -->
+    <div class="grid grid-cols-5 gap-8 flex-row gap-6 items-center flex-wrap">
         <slot />
     </div>
 </div>

@@ -43,7 +43,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
         styles[style],
         id
       ]}>
-        <h4 class="font-serif text-xl" set:html={title}></h4>
+        <h2 class="font-serif text-xl" set:html={title}></h2>
         <p class="font-light" set:html={text}></p>
         {buttonText && <Button class="mt-6" color="light" href={buttonLink}>{buttonText}</Button>}
     </div>
