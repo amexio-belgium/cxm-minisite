@@ -92,22 +92,6 @@ export default {
 				900: '#6b5124',
 			}
 		},
-		keyframes: {
-			bounceslow: {
-			  '0%, 60%': { transform: 'translateY(0%)' },
-			  '30%': { transform: 'translateY(-1%)' },
-			},
-			heroshow: {
-				'0%': { 
-					transform: 'scale(1.5)', 
-					opacity:'0' 
-				},
-				'100%': { 
-					transform: 'scale(1)', 
-					opacity:'1' 
-				}
-			}
-		},
 		extend: {
 			spacing: {
 			
@@ -118,6 +102,22 @@ export default {
 			animation: {
 				'bounce-slow': 'bounceslow 3s ease-in-out 3',
 				'hero-show': 'heroshow 0.3s ease-in',
+			},
+			keyframes: {
+				bounceslow: {
+				  '0%, 60%': { transform: 'translateY(0%)' },
+				  '30%': { transform: 'translateY(-1%)' },
+				},
+				heroshow: {
+					'0%': { 
+						transform: 'scale(1.5)', 
+						opacity:'0' 
+					},
+					'100%': { 
+						transform: 'scale(1)', 
+						opacity:'1' 
+					}
+				}
 			},
 			typography: ({ theme }) => ({
 				ondark: {
