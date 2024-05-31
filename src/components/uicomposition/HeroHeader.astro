@@ -1,6 +1,5 @@
 ---
 import LogoSlant from '@components/graphicelements/LogoSlant.astro';
-import { useTranslations } from '../../i18n/utils';
 import { Image } from 'astro:assets';
 import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
 interface Props {
@@ -22,12 +21,17 @@ const {
     backgroundImageAltText = ''
 } = Astro.props;
 
-const { lang } = Astro.params;
+let backgroundImageFound;
 
-const t = useTranslations(lang, 'home');
-
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+if (backgroundImage && backgroundImage.includes("/projects/")) {
+    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
+    if (!projectImages[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    backgroundImageFound = projectImages[backgroundImage]
+} else if (backgroundImage) {
+    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
+    if (!images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    backgroundImageFound = images[backgroundImage]
+}
 ---
 <div class:list={[
         "relative pt-10 text-white pb-20 md:pb-32 lg:pb-40", 
@@ -58,7 +62,7 @@ if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundI
     </div>
     { 
         backgroundImage ? 
-            <Image src={images[backgroundImage]()} width={1200} height={700} alt={backgroundImageAltText} 
+            <Image src={backgroundImageFound()} width={1200} height={700} alt={backgroundImageAltText} 
                 class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4" 
             />
         :

@@ -9,6 +9,7 @@ interface Props {
     text: string;
     buttonText?: string;
     buttonLink?: string;
+    headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
     style?: "yellow" | "lightblue";
     image: string;
 }
@@ -18,6 +19,7 @@ const {
     buttonText,
     image, 
     buttonLink,
+    headlineTag = "h2",
     style = "yellow",
 } = Astro.props;
 
@@ -30,20 +32,22 @@ const styles = {
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
 if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
-const id = "id_" + Math.random().toString(36).slice(2, 11)
+const id = "id_" + Math.random().toString(36).slice(2, 11);
+
+const HeadlineTagName = headlineTag;
 
 ---
 
 <div class="relative flex flex-col  my-40 isolate group">
   <div class="w-full rounded-xl overflow-hidden">
-      <Image loading="lazy" class="group-hover:scale-105 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
+      <Image loading="lazy" class="group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
     </div>
     <div class:list={[
         "animate-once animate-delay-500 animate-ease-out text-black z-20  flex-col flex items-start ",
         styles[style],
         id
       ]}>
-        <h4 class="font-serif text-xl" set:html={title}></h4>
+         <HeadlineTagName class="font-serif text-xl" set:html={title}></HeadlineTagName>
         <p class="font-light" set:html={text}></p>
         {buttonText && <Button class="mt-6" color="light" href={buttonLink}>{buttonText}</Button>}
     </div>
