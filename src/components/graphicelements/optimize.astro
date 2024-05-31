@@ -61,4 +61,16 @@ const {
         transform: scale(1.1);
     }
   } 
+
+    @media (prefers-reduced-motion) {
+        .arrow, .circle {
+            animation: none;
+        }
+
+        .service__item:has(.arrow):hover {
+            .arrow, .circle {
+                transform: unset;
+            }
+        } 
+    }
 </style>

@@ -36,7 +36,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
 
 <div class="relative flex flex-col  my-40 isolate group">
   <div class="w-full rounded-xl overflow-hidden">
-      <Image loading="lazy" class="group-hover:scale-105 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
+      <Image loading="lazy" class="group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
     </div>
     <div class:list={[
         "animate-once animate-delay-500 animate-ease-out text-black z-20  flex-col flex items-start ",

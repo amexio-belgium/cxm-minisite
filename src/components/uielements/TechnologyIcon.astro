@@ -12,7 +12,7 @@ const {
 ---
 <div class:list={[link ? "group": "grid grid-cols-4 sm:justify-items-center items-center gap-4 text-sm [&>img]:w-auto [&>img]:h-14 sm:[&>img]:h-10 [&>img]:max-w-[unset] [&>img]:col-span-1 [&>p]:col-span-3 [&>p]:align-left [&>p]:justify-self-start", className]}>
     {link ? 
-        <Link class:list={["grid grid-cols-4 sm:justify-items-center items-center gap-4 text-sm [&>img]:w-auto [&>img]:h-14 sm:[&>img]:h-10 [&>img]:max-w-[unset] [&>img]:col-span-1 [&>p]:col-span-3 [&>p]:align-left [&>p]:justify-self-start [&>img]:transition group-hover:[&>img]:scale-110", className]} 
+        <Link class:list={["grid grid-cols-4 sm:justify-items-center items-center gap-4 text-sm [&>img]:w-auto [&>img]:h-14 sm:[&>img]:h-10 [&>img]:max-w-[unset] [&>img]:col-span-1 [&>p]:col-span-3 [&>p]:align-left [&>p]:justify-self-start [&>img]:transition group-hover:[&>img]:scale-110 motion-reduce:group-hover:[&>img]:scale-100", className]} 
             href={link}>  
             <slot />
         </Link>

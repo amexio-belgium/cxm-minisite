@@ -22,7 +22,7 @@ const { class: className } = Astro.props;
         transition: transform 0.3s ease-in-out;
     }
   
-    .smallTile:has(.painpoint):hover {
+    .smalltile:has(.painpoint):hover {
         .exclamation {
             transform: scale(1.4)
         }
@@ -31,4 +31,16 @@ const { class: className } = Astro.props;
             transform: scale(1.1)
         }
     } 
+
+    @media (prefers-reduced-motion) {
+        .painpoint, .exclamation {
+            animation: none;
+        }
+
+        .smalltile:has(.painpoint):hover {
+            .painpoint, .exclamation {
+                transform: unset;
+            }
+        } 
+    }
   </style>

@@ -32,8 +32,9 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                 <div class="flex flex-col gap-4">
                     <h2 class="mb-2 font-serif text-xl [&>mark]:text-black">
                         <Link 
-                            class="outline-none hover:text-yellow-500 hover:underline hover:decoration-1 focus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
-                            href={link} 
+                            class="outline-nonefocus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
+                            href={link}
+                            hoverColor="yellow"
                             set:html={blogData.title}>
                         </Link>
                     </h2>
@@ -80,7 +81,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                     }
                 </div>
                 <h2 class="font-serif font-bold mb-2 text-lg [&>mark]:text-black">
-                    <Link class="outline-none hover:text-blue-500 hover:underline hover:decoration-1 content-none before:absolute before:inset-x-0 before:inset-y-0" 
+                    <Link onWhite class="outline-none text-black content-none before:absolute before:inset-x-0 before:inset-y-0" 
                         href={link} set:html={blogData.title}>
                     </Link>
                 </h2>
