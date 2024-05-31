@@ -55,29 +55,39 @@
     --sl-color-neutral-200:#d9e8f5;
     --sl-spacing-medium: 24px;
     --sl-spacing-large: 24px;
+    --color-white: #fff;
+	--color-black: #0B1215;
+    --color-transparent: 'transparent';
+    --color-primary: #084772;
+    --color-secondary: #ED6C25;
+    --color-quaternary: #D9E8F5;
+    --color-quinary: #86ABD4;
+    --color-tertiary: #FFC256;
 }
 
 mark {
-    color: #FFC256;
-    background-color: unset;
+    color: var(--color-white);
+    background: linear-gradient(to right, var(--color-tertiary), var(--color-tertiary) 50%, var(--color-white) 50%); 
+    text-decoration: none; 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: background-position 500ms ease-out;
+}
+
+@keyframes background-position {
+    from {
+        background-position: 100%;
+    }
+    to {
+        background-position: 0 100%;
+    }
 }
 
 .hero-gradient {
     background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
 }
-
-.footer-gradient-blue {
-    background: radial-gradient(41.57% 90%  at 50% 0%, rgba(134, 171, 212, 0.70) 0%, rgba(134, 171, 212, 0.00) 100%);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
-.footer-gradient-orange {
-    background: radial-gradient(41.57% 90%  at 50% 100%, rgba(255, 194, 86, 0.70) 0%, rgba(255, 194, 86, 0.00) 100%);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
 
 .tab.tab--active:not(.tab--disabled) {
     color: white;
@@ -152,7 +162,12 @@ summary::-webkit-details-marker {
 @media (prefers-reduced-motion) {
     .main-navigation__item {
         animation: none;
-    }       
+    }
+
+    mark {
+        color: var(--color-tertiary);
+        background-clip: initial
+    }
 }
 
 @media (min-width: 768px) { 
