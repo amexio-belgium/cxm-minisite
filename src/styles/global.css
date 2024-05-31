@@ -76,6 +76,11 @@ mark {
     animation: background-position 500ms ease-out;
 }
 
+.caseheadline mark{
+    -webkit-text-fill-color: unset;
+
+}
+
 @keyframes background-position {
     from {
         background-position: 100%;
@@ -159,6 +164,7 @@ summary::-webkit-details-marker {
         animation-delay: calc((6 / var(--n-of-headerlinks)) * var(--animation-delay));
     }
 }
+
 @media (prefers-reduced-motion) {
     .main-navigation__item {
         animation: none;
@@ -166,7 +172,9 @@ summary::-webkit-details-marker {
 
     mark {
         color: var(--color-tertiary);
-        background-clip: initial
+        background-clip: initial;
+        background: none;
+        -webkit-text-fill-color: unset;
     }
 }
 
