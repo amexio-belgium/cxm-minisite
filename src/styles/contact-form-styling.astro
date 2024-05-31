@@ -1,0 +1,224 @@
+<style is:global>
+  /*----------------------------
+HUBSPOT form
+------------------------------*/
+  .optimusPrime {
+    --error-bg: #ffebe8;
+    --error-color: #cc0000;
+    --label-color: #0b1215;
+    --input-color: #0b1215;
+    --input-bg-color: #fbfdfe;
+    --input-border-color: #778087;
+    --input-border-color-hover: #ed6c25;
+    --required-indicator-color: #ed6c25;
+    --cta-bg-color:#084772;
+    --cta-bg-color-hover: #04273F;
+    --cta-color:#fbfdfe;
+    --icon-check: url("data:image/svg+xml, %3Csvg%20width=%2716%27%20height=%2716%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20fill-rule=%27evenodd%27%20clip-rule=%27evenodd%27%20d=%27M5.87866%2010.5371L12.2442%204.17159C12.6347%203.78106%2013.2679%203.78106%2013.6584%204.17159C14.0489%204.56211%2014.0489%205.19528%2013.6584%205.5858L6.58733%2012.6569C6.39166%2012.8525%206.13508%2012.9502%205.87863%2012.9498C5.6222%2012.9502%205.36564%2012.8525%205.16999%2012.6569L2.34156%209.82844C1.95104%209.43792%201.95104%208.80475%202.34156%208.41423C2.73209%208.0237%203.36525%208.0237%203.75578%208.41423L5.87866%2010.5371Z%27%20fill=%27%23101D40%27%2F%3E%3C%2Fsvg%3E");
+    clear: both;
+  }
+
+  .optimusPrime fieldset + fieldset > .hs-form-field {
+    margin-top: 1.5rem;
+  }
+
+  .optimusPrime label {
+    color: var(--label-color);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .optimusPrime .hs-form-required {
+    color: var(--required-indicator-color);
+    vertical-align: super;
+    padding-left: 0.125rem;
+  }
+
+  .optimusPrime .hs-input[type="text"],
+  .optimusPrime .hs-input[type="email"] {
+    border-radius: 0.125rem;
+    border: 1px solid var(--input-border-color);
+    background: transparent;
+    padding: 0.875rem 1rem;
+    font-weight: 300;
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    transition:
+      0.3s border-color linear,
+      0.15s box-shadow ease-in-out;
+  }
+
+  .optimusPrime .hs-input[type="text"]:hover,
+  .optimusPrime .hs-input[type="email"]:hover,
+  .optimusPrime .hs-input[type="text"]:focus,
+  .optimusPrime .hs-input[type="email"]:focus {
+    outline: none;
+    border: 1px solid var(--input-border-color-hover);
+  }
+
+  .optimusPrime .hs-input[type="text"]:focus-visible,
+  .optimusPrime .hs-input[type="email"]:focus-visible {
+    outline: 1px solid var(--input-border-color-hover);
+    box-shadow: 0px 0px 8px 0px rgba(0, 36, 74, 0.15);
+  }
+
+  .optimusPrime .hs-input.invalid[type="text"],
+  .optimusPrime .hs-input.invalid[type="email"] {
+    border: 1px solid var(--error-color);
+  }
+
+  .optimusPrime .hs-input.invalid[type="text"]:focus,
+  .optimusPrime .hs-input.invalid[type="email"]:focus {
+    outline: none;
+    border: 1px solid var(--error-color);
+  }
+
+  .optimusPrime .hs-input.invalid[type="text"]:focus-visible,
+  .optimusPrime .hs-input.invalid[type="email"]:focus-visible {
+    outline: 2px solid var(--error-color);
+  }
+
+  .optimusPrime .form-columns-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .optimusPrime .form-columns-2 .hs-form-field {
+    flex-grow: 1;
+    flex-basis: 15.5625rem;
+  }
+  .optimusPrime .hs_error_rollup {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-top: 1.5rem;
+    display: inline-block;
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-color);
+  }
+  
+  .optimusPrime .hs_error_rollup .hs-error-msgs {
+    margin-top: 0;
+  }
+
+  .optimusPrime .hs-form-booleancheckbox label {
+    position: relative;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input + span {
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input + span:before {
+    cursor: pointer;
+    flex: 0 0 auto;
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--input-border-color);
+    background: var(--input-bg-color);
+    display: inline-block;
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input + span:hover:before {
+    border: 1px solid var(--input-border-color-hover);
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input:focus + span:before {
+    border: 1px solid var(--input-border-color-hover);
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input:focus-visible + span:before {
+    outline: 1px solid var(--input-border-color-hover);
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input + span:after {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    border-radius: 0.25rem;
+    top: 0.75rem;
+    left: 0.25rem;
+    mask-image: var(--icon-check);
+    mask-size: contain;
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-50%) scale(0.5);
+    background-color: transparent;
+  }
+
+  .optimusPrime .hs-form-booleancheckbox input:checked + span:after {
+    transform: translateY(-50%) scale(1);
+    background-color: var(--input-border-color-hover);
+  }
+
+  .optimusPrime .legal-consent-container .hs-richtext {
+    font-weight: 300;
+    margin-top: 1rem;
+  }
+  @media (min-width: 600px) {
+    .optimusPrime .hs_recaptcha {
+      float: right;
+    }
+  }
+
+  .optimusPrime .hs_recaptcha,
+  .optimusPrime .hs-submit {
+    margin-top: 1.5rem;
+  }
+
+  .optimusPrime .hs-button.primary  {
+    padding: 0.875rem 1rem;
+    border-radius: 3.125rem;
+    background: var(--cta-bg-color);
+    color: var(--cta-color);
+    cursor: pointer;
+  }
+  .optimusPrime .hs-button.primary:hover  {
+    background: var(--cta-bg-color-hover);
+  }
+  .optimusPrime .hs-button.primary:focus-visible  {
+    outline: 2px solid var(--input-border-color-hover);
+    outline-offset: 2px;
+  }
+  .optimusPrime .hs-error-msgs {
+    margin-top: 0.5rem;
+    color: var(--error-color);
+  }
+
+  .optimusPrime .hs-error-msgs label {
+    color: var(--error-color);
+  }
+
+  .optimusPrime .legal-consent-container {
+    font-size: 1rem;
+    margin-top: 2rem;
+    background-color: #eef4fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+
+  .optimusPrime .legal-consent-container input {
+  }
+</style>
