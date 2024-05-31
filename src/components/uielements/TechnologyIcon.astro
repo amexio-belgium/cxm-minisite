@@ -1,0 +1,12 @@
+---
+interface Props {
+    class?: string;
+}
+const { 
+    class: className 
+} = Astro.props;
+
+---
+<div class:list={["grid grid-cols-4 justify-items-center items-center gap-4 text-sm [&>img]:w-auto [&>img]:h-14 sm:[&>img]:h-10 [&>img]:max-w-[unset] [&>img]:col-span-1 [&>p]:col-span-3 [&>p]:align-left [&>p]:justify-self-start", className]}>
+    <slot />
+</div>
