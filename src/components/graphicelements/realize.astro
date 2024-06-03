@@ -53,14 +53,14 @@ const {
   }
 
   @media (prefers-reduced-motion) {
-  .mobile, .pc {
-    animation: none;
-  }
-  .service__item:has(.mobile):hover {
     .mobile, .pc {
-      transform: unset;
+      animation: none;
     }
-  } 
-}
+    .service__item:has(.mobile):hover {
+      .mobile, .pc {
+        transform: unset;
+      }
+    } 
+  }
 </style>
   

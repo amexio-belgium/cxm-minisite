@@ -5,6 +5,7 @@ import type { HTMLAttributes } from 'astro/types';
 interface Props extends HTMLAttributes<'a'> {
   hoverColor?: "yellow" | "orange",
   onWhite?: boolean,
+  longText?: boolean,
 }
 
 const { 
@@ -12,6 +13,7 @@ const {
     class: className, 
     hoverColor = "orange",
     onWhite,
+    longText,
     ...props 
 } = Astro.props;
 
@@ -20,6 +22,7 @@ const {
     "bg-clip-text bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] motion-reduce:transition-none  text-transparent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary",
     hoverColor == "orange" && "transition-all bg-gradient-to-r from-secondary from-0% via-secondary via-50%",
     hoverColor == "yellow" && "transition-all bg-gradient-to-r from-tertiary from-0% via-tertiary via-50%",
+    longText ?  "duration-700" : 'duration-300',
     onWhite ? "to-black to-50%" : "to-white to-50%"
     , className ]} {...props}>
     <slot />

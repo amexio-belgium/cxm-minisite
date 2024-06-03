@@ -34,6 +34,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                         <Link 
                             class="outline-none focus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
                             href={link}
+                            longText
                             hoverColor="yellow"
                             set:html={blogData.title}>
                         </Link>
@@ -81,7 +82,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                     }
                 </div>
                 <h2 class="font-serif font-bold mb-2 text-lg [&>mark]:text-black">
-                    <Link onWhite class="outline-none text-black content-none before:absolute before:inset-x-0 before:inset-y-0" 
+                    <Link onWhite longText class="outline-none text-black content-none before:absolute before:inset-x-0 before:inset-y-0" 
                         href={link} set:html={blogData.title}>
                     </Link>
                 </h2>
