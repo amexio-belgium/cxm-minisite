@@ -27,9 +27,9 @@ const t = useTranslations(lang, 'home');
   <HeroHeader 
       headline={t('hero.headline')}
       text={t('hero.text')}
-      buttonText={t('hero.button')}
-      homepage
-  />
+      homepage>
+    <Button class="mt-8" icon="info" link="/contact" style="primary" color="dark">{t('hero.button')}</Button>
+  </HeroHeader>
 
   <ProjectOverview />
   

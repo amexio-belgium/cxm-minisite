@@ -23,7 +23,7 @@ if (caseData.heroImage.includes("/projects/")) {
     if (!images[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
     caseImage = images[caseData.heroImage]()
 }
-console.log(caseImage)
+
 const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.{jpeg,jpg,png,gif}');
 if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exist in glob: "src/assets/logos/*.{jpeg,jpg,png,gif}"`);
 

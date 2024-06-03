@@ -73,7 +73,7 @@ mark {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
-    animation: background-position 500ms ease-out;
+    animation: background-position 600ms ease-out;
 }
 
 .caseheadline mark{
