@@ -1,11 +1,9 @@
 ---
 title: 'Karel de Grote Hogeschool Antwerpen	'
-
-client: 'Argenta'
 description: 'Lorem ipsum dolor sit amet'
 draft: false
-heroImage: '/src/assets/images/office.jpg'
-logo: '/blog-placeholder-4.jpg'
+heroImage: '/src/assets/images/leuvenoffice_2.jpg'
+logo: '/src/assets/logos/kdghogeschool_logo.png'
 tags: 'finance, media, government, retail, manufacturing'
 ---
 import HeroHeader from '@components/uicomposition/HeroHeader.astro';
@@ -19,14 +17,16 @@ import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
 
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/projects/kbc_logo.png';
-import telenet from '@assets/projects/telenet_logo.png';
-import mediafin from '@assets/projects/mediafin_logo.svg';
+import kbc from '@assets/logos/kbc_logo.png';
+import telenet from '@assets/logos/telenet_logo.png';
+import mediafin from '@assets/logos/mediafin_logo.png';
 
 
 <HeroHeader 
-		headline="AEM Stabilize and optimize"
-		text="description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'">
+    headline={frontmatter.title}
+    client={frontmatter.client}
+    text={frontmatter.description}
+    backgroundImage={frontmatter.heroImage} >
 </HeroHeader>
 
 <ProjectMetadata

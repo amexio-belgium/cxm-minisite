@@ -1,7 +1,5 @@
 ---
-import ProfileCard from '@components/uielements/ProfileCard.astro';
 import LogoSlant from '@components/graphicelements/LogoSlant.astro';
-import { useTranslations } from '../../i18n/utils';
 import { Image } from 'astro:assets';
 import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
 interface Props {
@@ -17,24 +15,37 @@ interface Props {
 const { 
     headline, 
     text, 
-    buttonText, 
     homepage, 
     backgroundImage,
     client,
     backgroundImageAltText = ''
 } = Astro.props;
 
-const { lang } = Astro.params;
+let backgroundImageFound;
 
-const t = useTranslations(lang, 'home');
+if (backgroundImage && backgroundImage.includes("/projects/")) {
+    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
+    if (!projectImages[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    backgroundImageFound = projectImages[backgroundImage]
+} else if (backgroundImage) {
+    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
+    if (!images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    backgroundImageFound = images[backgroundImage]
+}
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+let headlineWithSpeed = ""
+
+if (headline.includes("<mark")){
+    const textLength = headline.length;
+    const baseSpeed = 20; 
+    headlineWithSpeed = headline.replace("<mark", `<mark style="animation-duration: ${textLength*baseSpeed}ms" `)
+}
+
 ---
 <div class:list={[
         "relative pt-10 text-white pb-20 md:pb-32 lg:pb-40", 
         !backgroundImage && "hero-gradient",
-        homepage && "md:mb-[30vh]",
+        homepage && "md:mb-0",
         backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
     ]}>
     <Breadcrumbs />
@@ -43,86 +54,34 @@ if (backgroundImage && !images[backgroundImage]) throw new Error(`"${backgroundI
         {
             client && <p class="uppercase font-serif text-xl" set:html={client}></p>
         }
-        <h1 class:list={["font-serif font-bold w-full md:w-2/3",
+        <h1 class:list={["font-serif font-bold w-full lg:w-2/3",
             homepage ? "text-2xl md:text-4xl" : " text-3xl "
         ]} 
-            set:html={headline}>
+            set:html={headlineWithSpeed || headline}>
         </h1>
     </div>
-    <div class:list={["relative ", homepage && "grid grid-cols-1 gap-12 md:gap-6 grid-area md:grid-cols-12"]}>
-        <div class:list={[" text-left w-full md:w-[80ch]", homepage && "grid-a md:w-full"]}>
+    <div class:list={["relative ", homepage && "w-full lg:w-1/2"]}>
+        <div class:list={[" text-left w-full md:w-[80ch]", homepage && " md:w-full"]}>
             { text && 
                 <p class="text-lg font-light md:text-xl" set:html={text}></p> 
             }
             <slot />
         </div>
-        
-        <!-- Disabled for now
-        { homepage &&
-            <ProfileCard 
-                content={t('heroprofile1.text')}
-                name="name"
-                title={t('heroprofile1.title')}
-                profileImg='https://via.placeholder.com/50x50'
-                buttonText={buttonText}
-                class='grid-b motion-safe:animate-fade-up motion-safe:animate-delay-[1500ms]'
-            />
-            
-            <ProfileCard 
-                content={t('heroprofile2.text')}
-                name="name"
-                title={t('heroprofile2.title')}
-                direction='right'
-                profileImg='https://via.placeholder.com/50x50'
-                buttonText={buttonText}
-                class='grid-c motion-safe:animate-fade-up motion-safe:animate-delay-[2000ms]'
-            />
-        }  -->
     </div>
     { 
         backgroundImage ? 
-            <Image src={images[backgroundImage]()} width={1200} height={700} alt={backgroundImageAltText} 
+            <Image src={backgroundImageFound()} width={1200} height={700} alt={backgroundImageAltText} 
                 class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4" 
             />
         :
             <div class:list={
-                ["absolute object-cover h-auto -top-0 opacity-30 md:opacity-100",
+                ["absolute object-cover h-auto opacity-30 lg:opacity-100",
                     homepage ? 
-                    "md:top-10 -z-10 w-[400%] md:w-full -right-full md:-right-[30%]"
+                    "-top-10 lg:-top-20 -z-10 w-[400%] lg:w-full -right-full lg:-right-[40%]"
                         : 
-                    "md:top-10 -z-10 w-[300%] md:w-8/12 -right-full md:-right-[10%]"
+                    "-bottom-1/2 md:-bottom-full lg:top-10 -z-10 w-[400%] md:w-[300%] lg:w-8/12 -right-full lg:-right-[10%]"
                 ]}>
                 <LogoSlant homepageAnimation={homepage} />
             </div>
     }
 </div>
-
-<style>
-    .grid-area{ 
-        grid-template-areas: 
-        "a a a a a a" 
-        "b b b b b b"
-        "c c c c c c" 
-    }
-   
-    .grid-a{
-        grid-area: a;
-    }
-
-    .grid-b {
-        grid-area: b;
-    }
-
-    .grid-c {
-        grid-area: c;
-    }
-
-
-    @media only screen and (min-width: 768px) {
-        .grid-area{ 
-            grid-template-areas: 
-            "a a a a a a b b b b b b"
-            "c c c c c c b b b b b b"
-        }
-    }
-</style>

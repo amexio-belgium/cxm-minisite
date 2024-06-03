@@ -1,10 +1,10 @@
 ---
 title: '<mark>Drupal</mark> minisite platform'
 client: 'Euroclear'
-description: 'Fr'
+description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet'
 draft: false
-heroImage: '/src/assets/images/keyboard.jpg'
-logo: '/blog-placeholder-5.jpg'
+heroImage: '/src/assets/images/window.jpg'
+logo: '/src/assets/logos/euroclear_logo.png'
 tags: 'finance, media, government, retail, manufacturing'
 duration: "12 weeks"
 collaboration: 'test'
@@ -22,9 +22,9 @@ import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
 
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/projects/kbc_logo.png';
-import telenet from '@assets/projects/telenet_logo.png';
-import mediafin from '@assets/projects/mediafin_logo.svg';
+import kbc from '@assets/logos/kbc_logo_white.png';
+import telenet from '@assets/logos/telenet_logo_white.png';
+import mediafin from '@assets/logos/mediafin_logo_white.png';
 
 <HeroHeader 
     headline={frontmatter.title}
@@ -45,6 +45,90 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
     <Image src={telenet} alt="" class="h-10 w-auto"/>
     <Image src={mediafin} alt="" class="h-10 w-auto"/>
 </ProjectMetadata>
+
+import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
+import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
+import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
+import ContentText  from "@components/uielements/ContentText.astro"
+import {YouTube} from 'astro-lazy-youtube-embed'
+
+<YouTube 
+    title="Just Curious - Limmy's Homemade Show"
+    videoId="FfTT7mxGw8I" />
+
+<LayoutSection>
+    <ContentHeadline headlineTag="h2">The Challenge</ContentHeadline>
+    <ContentHeadline>The Challenge</ContentHeadline>
+    <ContentHeadline  headlineTag="h4">The Challenge</ContentHeadline>
+
+    <LayoutSubsection
+        imageSrc='/src/assets/images/explainer.jpg'
+        imageAlt='Subsection Alt'
+        
+    >
+        <ContentHeadline>The challenge</ContentHeadline>
+        <ContentText>
+        <p>AmeXio was tapped to do the implementation of the platform with Adobe Experience Manager in close 
+        collaboration with Internet Architects, which was responsible for the first steps of the project – concept, 
+        functional analysis and graphic design. Adobe Experience Manager is very suited for the tasks at hand, with 
+        functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges 
+        of this project was the large amount of websites that needed to be rolled-out in a relatively short time. By 
+        the time the project was finished, 18 websites needed to be built.
+        The new websites were aimed at the general public, so there were extensive guidelines concerning responsiveness and 
+        accessibility which needed to be followed. For example: according to Belgian government policies, the website needed to 
+        adhere to Anysurfer guidelines. Some of the websites also required more than one language version, something which is easily 
+        implementable in Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to 
+        tourists and offers information in English, French, German and of course Dutch.
+        On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum would add a news item 
+        about an upcoming event, it should be possible to display the item on the main website of the Province, for instance. 
+        AmeXio was also asked not only to build the platform and get 18 sites operational, but also to provide a toolkit so the 
+        IT department of the Province itself could easily create further sites themselves in the future, if necessary. In the end the 
+        platform would be used by about 80 different departments of the Province, all of which would be managing some pages on specific sites. 
+        This highlights the complexity of underlying projects like this that on the surface seem simple, but can become complex because of the
+        great amount of users and different usages.</p>
+        </ContentText>
+
+    </LayoutSubsection>
+    <LayoutSubsection
+        imageSrc='/src/assets/images/tab.jpg'
+        imageAlt='Subsection Alt'
+        alignment='row'
+    >
+        <ContentHeadline>test</ContentHeadline>
+        <ContentText>Adobe Experience Manager is very suited for the tasks at hand, with 
+        functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges of 
+        this project was the large amount of websites that needed to be rolled-out in a relatively short time. 
+        By the time the project was finished, 18 websites needed to be built.
+        The new websites were aimed at the general public, so there
+        were extensive guidelines concerning responsiveness and accessibility which needed to be followed.
+        For example: according to Belgian government policies, the website needed to adhere to Anysurfer guidelines. 
+        Some of the websites also required more than one language version, something which is easily implementable in 
+        Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to 
+        tourists and offers information in English, French, German and of course Dutch.
+        On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum     </ContentText>
+    </LayoutSubsection>
+    <LayoutSubsection>
+        <ContentHeadline>test</ContentHeadline>
+        <ContentText>Adobe Experience Manager is very suited for the tasks at hand, with 
+        functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges of 
+        this project was the large amount of websites that needed to be rolled-out in a relatively short time. 
+        By the time the project was finished, 18 websites needed to be built.
+        The new websites were aimed at the general public, so there
+        were extensive guidelines concerning responsiveness and accessibility which needed to be followed.
+        For example: according to Belgian government policies, the website needed to adhere to Anysurfer guidelines. 
+        Some of the websites also required more than one language version, something which is easily implementable in 
+        Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to 
+        tourists and offers information in English, French, German and of course Dutch.
+        On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum     </ContentText>
+    </LayoutSubsection>
+</LayoutSection>
+
+<LayoutSection backgroundColor='dark'>
+    <ContentHeadline>test</ContentHeadline>
+    <ContentText>Adobe Experience Manager is very suited for the tasks at hand, with functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges of this project was the large amount of websites that needed to be rolled-out in a relatively short time. By the time the project was finished, 18 websites needed to be built.
+    The new websites were aimed at the general public, so there were extensive guidelines concerning responsiveness and accessibility which needed to be followed. For example: according to Belgian government policies, the website needed to adhere to Anysurfer guidelines. Some of the websites also required more than one language version, something which is easily implementable in Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to tourists and offers information in English, French, German and of course Dutch.
+    On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum </ContentText>
+</LayoutSection>
 
 <TeaserWithImage 
 	headline="Why work with us?"
@@ -91,4 +175,3 @@ import mediafin from '@assets/projects/mediafin_logo.svg';
     tag='government'
     current='Euroclear'
 />
-

@@ -1,77 +1,35 @@
 ---
-import { i18nParams } from '../../../i18n/consts'
-import { useTranslations } from 'src/i18n/utils';
-import Base from '@layouts/Base.astro';
-import HeroHeader from '@components/uicomposition/HeroHeader.astro';
-import TilesContainer from '@components/uicomposition/TilesContainer.astro';
-import SmallTile from '@components/uielements/SmallTile.astro';
-import Highlight from '@components/uicomposition/Highlight.astro';
-import Prose from '@components/uielements/Prose.astro'
+import { i18nParams } from "../../../i18n/consts";
+import { useTranslations } from "src/i18n/utils";
+import Base from "@layouts/Base.astro";
+import HeroHeader from "@components/uicomposition/HeroHeader.astro";
+import Highlight from "@components/uicomposition/Highlight.astro";
+import ContactForm from "@components/uielements/contactForm.astro";
 
 export function getStaticPaths() {
 	return i18nParams;
 }
 
 const { lang } = Astro.params;
-const t = useTranslations(lang, 'contact');
-
+const t = useTranslations(lang, "contact");
 ---
-<Base page="contact" title={t('contact.title')} description={t('contact.seoDescription')}>
-	<HeroHeader 
-		headline={t('hero.headline')}
-		text={t('hero.subheadline')}
+
+<Base
+	page="contact"
+	title={t("contact.title")}
+	description={t("contact.seoDescription")}
+>
+	<HeroHeader headline={t("hero.headline")} text={t("hero.subheadline")} />
+
+	<ContactForm headline={t("form.headline")} />
+
+	<Highlight
+		title={t("highlight.headline")}
+		text={t("highlight.text")}
+		headlineTag="h2",
+		buttonLink={t("highlight.link")},
+		image="/src/assets/images/highlight.png"
+		buttonText={t("highlight.button")}
+		style="lightblue"
 	/>
-
-	<div class="p-16 bg-white rounded-xl"> 
-
-		<script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/embed/v2.js" is:inline></script>
-		<script is:inline> 
-			try {
-				hbspt.forms.create({
-					region: "eu1",
-					portalId: "143190687",
-					formId: "0bbb8a62-0b4c-42f5-820a-f7efe483b6e7"
-				});
-			} catch (error) {
-				setTimeout(() => {
-					hbspt.forms.create({
-						region: "eu1",
-						portalId: "143190687",
-						formId: "0bbb8a62-0b4c-42f5-820a-f7efe483b6e7"
-					});
-				}, 2000);
-			}
-		</script>
-	</div>
-
-	<Prose>
-		<h3>test </h3>
-		<p>dhqsdhiqsihd qisddhqsdhiq sihdqisddhqsdhiqs ihdqisddhqsdhiqsihdqisd </p>
-		<ul>
-			<li>test1</li>
-			<li>test1</li>
-			<li>test1</li>
-		</ul>
-	</Prose>
-
-	<TilesContainer 
-		orangeSlant
-		headline="Our offices">
-		<SmallTile 
-			headline="Leuven"
-			description="Gaston Geenslaan 20 <br> 3001 heverlee <br> 18319919199391" >
-		</SmallTile>
-		<SmallTile 
-			headline="Eindhoven"
-			description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
-		</SmallTile>
-	</TilesContainer>
-
-	<Highlight 
-		title={t('highlight.headline')}
-		text={t('highlight.text')}
-		image='/src/assets/images/highlight.png'
-		buttonText={t('highlight.button')}
-		style='lightblue'
-    />
 </Base>

@@ -11,24 +11,37 @@ const {
 } = Astro.props;
 
 const t = useTranslations(lang, 'work');
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (!images[caseData.heroImage]) throw new Error(`"${caseData}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+
+let caseImage
+
+if (caseData.heroImage.includes("/projects/")) {
+    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
+    if (!projectImages[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    caseImage = projectImages[caseData.heroImage]()
+} else {
+    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
+    if (!images[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    caseImage = images[caseData.heroImage]()
+}
+
+const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.{jpeg,jpg,png,gif}');
+if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exist in glob: "src/assets/logos/*.{jpeg,jpg,png,gif}"`);
 
 ---
 <div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col md:flex-row w-full justify-stretch gap-8">
-    <div class="w-full md:w-1/2 flex items-center justify-center shadow-xl shadow-primary/20 rounded-xl overflow-hidden">
-        <Image loading="lazy" src={images[caseData.heroImage]()} class="motion-safe:group-hover:scale-110 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] obj" loading="lazy" width={512} height={512} alt={caseData.altTextImage || ""} />
+    <div class="w-full md:w-1/2 flex items-center justify-center shadow-lg shadow-primary/20 rounded-xl overflow-hidden">
+        <Image loading="lazy" src={caseImage} class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] obj" loading="lazy" width={512} height={512} alt={caseData.altTextImage || ""} />
     </div> 
     <div class="pb-8 px-8 md:p-8 max-h-full w-full md:w-1/2 flex flex-col justify-between gap-8 border-b-2 md:border-y-2 border-y-quaternary">
-        <div class="flex flex-col gap-8">
-            <div class="flex flex-row gap-8 justify-between">
+        <div class="flex flex-col gap-2">
+            <div class="flex flex-row mb-4 gap-8 items-start justify-between">
                 <div class="flex flex-col">
                     <span class="font-serif text-primary" set:html={caseData.client}></span>
-                    <h2 class="mb-2 font-serif text-xl [&>mark]:text-black" set:html={caseData.title}></h2>
+                    <h2 class="caseheadline mb-2 font-serif text-xl [&>mark]:text-black [&>mark]:bg-none [&>mark]:bg-clip-border" set:html={caseData.title}></h2>
                 </div>
                 {								
                     caseData.logo && 
-                        <Image loading="lazy" src={caseData.logo} class="" loading="lazy" width={120} height={80} alt={caseData.client || caseData.title}/>
+                        <Image loading="lazy" src={logoimages[caseData.logo]()}  class="w-auto h-12 sm:h-16 md:h-12 xl:h-16 shrink-0" loading="lazy" width={120} height={60} alt={caseData.client || caseData.title}/>
                 }
             </div>
             <p class="text-base font-light" set:html={caseData.description}></p>
