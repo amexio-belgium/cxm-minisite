@@ -39,6 +39,7 @@ const service = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
+		previewTitle: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean().optional(),
 		heroImage: z.string(),

@@ -65,6 +65,10 @@
     --color-tertiary: #FFC256;
 }
 
+p b, p strong {
+    font-weight: 600;
+}
+
 mark {
     color: var(--color-white);
     background: linear-gradient(to right, var(--color-tertiary), var(--color-tertiary) 50%, var(--color-white) 50%); 
@@ -79,7 +83,6 @@ mark {
 .caseheadline mark{
     -webkit-text-fill-color: unset;
 }
-
 
 .hero-gradient {
     background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
