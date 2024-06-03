@@ -74,6 +74,10 @@ mark {
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
     animation: background-position 600ms ease-out;
+
+    &.long-title {
+        animation: background-position 1000ms ease-out;
+    }  
 }
 
 .caseheadline mark{
