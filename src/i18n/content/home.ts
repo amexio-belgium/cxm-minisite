@@ -18,7 +18,7 @@ export const home = {
         'project3.description': 'Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.',
         'project3.button': 'Discover more about telenet',
         'painpoint.headline': 'Managing content at scale can be challenging',
-        'painpoint.description': 'Exceptional content lives at the heart of every great digital experience.<br /><br />However, as your digital channels expand and more teams come onboard, scaling content operations in your organization can be cumbersome: content governance gets more complex and content becomes harder to find and discover. Eventually, your customers suffer from inconsistent, inaccessible and slow experiences.',
+        'painpoint.description': 'Exceptional content lives at the heart of every great digital experience.<br /><br />However, as your digital channels expand and more teams come onboard, scaling content operations in your organization can be cumbersome: <strong>content governance</strong> gets more complex and content becomes harder to find and discover. Eventually, your <strong>customers suffer</strong> from inconsistent, inaccessible and slow experiences.',
         'painpoint1.headline': 'Lack of content governance',
         'painpoint1.description': 'As content volume increases, efficiency of production and editorial teams is heavily reduced, content lifecycle complexity increases, resulting in slower time to market.',
         'painpoint2.headline': 'Inconsistencies across channels',
