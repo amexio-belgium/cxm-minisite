@@ -12,6 +12,7 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import slant from "@assets/images/slantwithimage.png"
 
 export function getStaticPaths() {
 	return i18nParams;
@@ -48,6 +49,9 @@ const t = useTranslations(lang, 'about');
 			headline="Aenean eu leo quam"
 			description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
 		</SmallTile>
+		<div slot="bg-image" class="absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-32 bg-contain bg-no-repeat">
+			<Image loading="lazy" src={slant} alt="" />
+		</div>
 	</TilesContainer>
 	  	
 	<Highlight 

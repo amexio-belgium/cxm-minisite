@@ -15,6 +15,8 @@ import Realize from '@components/graphicelements/realize.astro';
 import Optimize from '@components/graphicelements/optimize.astro';
 import TilesContainer from '@components/uicomposition/TilesContainer.astro';
 import SmallTile from '@components/uielements/SmallTile.astro';
+import slant from "@assets/images/slantwithimage.png"
+import Image from 'astro/components/Image.astro';
 
 export function getStaticPaths() {
 	return i18nParams;
@@ -51,6 +53,9 @@ const t = useTranslations(lang, 'home');
       description={t('painpoint3.description')} >
       <Painpoint class="fill-white overflow-visible w-20 h-20" />
     </SmallTile>
+    <div slot="bg-image" class="absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-32 bg-contain bg-no-repeat">
+      <Image loading="lazy" src={slant} alt="" />
+    </div>
   </TilesContainer>
   
   <div class="relative flex flex-col py-20 mb-60 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:-left-12 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
@@ -111,23 +116,26 @@ const t = useTranslations(lang, 'home');
     services && observer.observe(services);
   </script>
 
+  <!--
   <Quote 
     quote={t('quote.text')}
     name='Johan Condijts'
     jobtitle={t('quote.title')}
     profileImage='/src/assets/people/placeholder_small.png'
     />
-    <Quote 
+  <Quote 
     quote={t('quote.text')}
     name='Johan Condijts'
     jobtitle={t('quote.title')}
     profileImage='/src/assets/people/placeholder_small.png'
     variant="flat"
     />
+  -->
 
 
   <InsightsTeaser />
 
+  <!--
   <Highlight 
     title={t('highlight.headline')}
     text={t('highlight.text')}
@@ -142,4 +150,7 @@ const t = useTranslations(lang, 'home');
     buttonText={t('highlight.button')}
     style='lightblue'
     />
+  -->
+
 </Base>
+

@@ -30,7 +30,10 @@ if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exi
 ---
 <div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col md:flex-row w-full justify-stretch gap-8">
     <div class="w-full md:w-1/2 flex items-center justify-center shadow-lg shadow-primary/20 rounded-xl overflow-hidden">
-        <Image loading="lazy" src={caseImage} class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] obj" loading="lazy" width={512} height={512} alt={caseData.altTextImage || ""} />
+        <Image loading="lazy" 
+        src={caseImage} 
+        class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] w-auto" 
+        loading="lazy" width={600} height={412} alt={caseData.altTextImage || ""} />
     </div> 
     <div class="pb-8 px-8 md:p-8 max-h-full w-full md:w-1/2 flex flex-col justify-between gap-8 border-b-2 md:border-y-2 border-y-quaternary">
         <div class="flex flex-col gap-2">

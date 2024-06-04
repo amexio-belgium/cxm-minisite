@@ -16,18 +16,22 @@ if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not e
 
 ---
 
-<div class="group/service flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:min-h-[346px] mb-8 shadow-xl">
-    <div class="relative w-full flex flex-col items-start justify-between gap-20 p-4 sm:p-8 h-1/2 md:h-full md:w-2/3">
+<div class="group/service flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto mb-8 shadow-xl">
+    <div class="relative w-full flex flex-col items-start justify-between gap-8 md:gap-20 p-4 sm:p-8 h-1/2 md:h-full md:w-2/3">
         <div class="flex flex-col">
-            <h3 class="mb-2 font-serif text-xl" set:html={serviceData.title}></h3>
+            <h3 class="mb-2 font-serif text-xl" set:html={serviceData.previewTitle || serviceData.title}></h3>
             <p class="text-base font-light" set:html={serviceData.description}></p>
         </div>
-        <Button link={link} style="primary" size="sm" color="light">
+        <Button link={link} style="primary" size="sm" color="light" class="z-10">
             {serviceData.cta || t('overview.backupcta')}
         </Button>
     </div>
-    <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project md:w-1/2 md:-right-1/12 h-1/2 md:h-full md:absolute object-cover">
-        <Image loading="eager" src={images[serviceData.heroImage]()} class="motion-safe:group-hover/service:scale-110 transition-transform md:absolute top-0 ease-in-out duration-300 max-w-[unset] w-auto   min-w-full shrink-0 md:h-full" loading="lazy" width={790} height={470} alt={serviceData.altTextImage || ""} />
+    <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project max-h-[200px] md:max-h-[unset] md:w-1/2 md:-right-1/12 md:h-full md:absolute object-cover">
+        <Image 
+            loading="eager" 
+            src={images[serviceData.heroImage]()} 
+            class="motion-safe:group-hover/service:scale-110 transition-transform md:absolute top-0 ease-in-out duration-300 max-w-[unset] w-full md:w-auto   min-w-full shrink-0 md:h-full" 
+            loading="lazy" width={790} height={470} alt={serviceData.altTextImage || ""} />
     </div> 
 </div>
 

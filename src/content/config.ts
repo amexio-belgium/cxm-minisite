@@ -24,6 +24,7 @@ const work = defineCollection({
 		client: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean().optional(),
+		pubDate: z.coerce.date().optional(),
 		heroImage: z.string(),
 		altTextImage: z.string().optional(),
 		logo: z.string().optional(),
@@ -39,8 +40,10 @@ const service = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
+		previewTitle: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean().optional(),
+		pubDate: z.coerce.date().optional(),
 		heroImage: z.string(),
 		altTextImage: z.string().optional(),
 		cta: z.string().optional(),
