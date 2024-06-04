@@ -72,6 +72,7 @@ if (headline.includes("<mark")){
         backgroundImage ? 
             <Image src={backgroundImageFound()} width={1200} height={700} alt={backgroundImageAltText} 
                 class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4" 
+                loading="eager"
             />
         :
             <div class:list={

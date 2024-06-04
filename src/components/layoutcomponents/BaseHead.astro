@@ -1,6 +1,5 @@
 ---
-import '../../styles/global.css';
-import Tracking from '@components/uielements/Tracking.astro';
+import css from  '../../styles/global.css?url';
 
 interface Props {
 	title: string;
@@ -12,7 +11,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.url);
 
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 ---
-
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -52,4 +50,4 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<Tracking />
+<link rel="stylesheet" href={css}>
