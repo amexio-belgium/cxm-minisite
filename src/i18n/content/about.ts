@@ -1,9 +1,9 @@
 export const about = {
     en: {
-        'about.title': "About - AmeXio Fuse",
+        'about.title': "About us - AmeXio Fuse",
         'about.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
-        'hero.headline': 'About',
-        'hero.subheadline': 'A streamlined content lifecycle is at the core of your Customer Experience Management (CXM) process, and goes beyond the implementation of a Content Management System (CMS). Therefore, we provide a broad spectrum of services to help you meet concrete business outcomes.',
+        'hero.headline': 'About us',
+        'hero.subheadline': 'We are happy to discuss your content challenge! Let\'s discover how we can help you to remove impediments from your content lifecycle and improve the way your team deals with content and scales its operations.<br /><br />Sure there are ways to get more <strong>value</strong> from your content?',
     },
     fr: {
         'about.title': "À propos - AmeXio Fuse",

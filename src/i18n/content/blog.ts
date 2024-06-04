@@ -3,7 +3,7 @@ export const blog = {
         'blog.title': "Insights - AmeXio Fuse",
         'blog.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'Insights',
-        'hero.subheadline': 'A streamlined content lifecycle is at the core of your Customer Experience Management (CXM) process, and goes beyond the implementation of a Content Management System (CMS). Therefore, we provide a broad spectrum of services to help you meet concrete business outcomes.',
+        'hero.subheadline': 'Our teams are passionate about solving challenges for our clients. Below, we share our expertise and journey along the way. Dive into our posts to explore our innovative solutions and gain practical insights from our experiences.',
     },
     fr: {
         'blog.title': "Points de vue - AmeXio Fuse",
