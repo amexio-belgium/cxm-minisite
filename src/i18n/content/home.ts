@@ -2,8 +2,8 @@ export const home = {
     en: {
         'home.title': "AmeXio Fuse",
         'home.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
-        'hero.headline': 'Turning your content <br><mark>into value</mark>',
-        'hero.text': 'AmeXio Fuse designs, builds and runs large-scale omnichannel content platforms to make your business more <strong>smart, fast & cost-effective</strong>.',
+        'hero.headline': 'Is your <mark><strong>content</strong></mark> fuelling memorable customer experiences?',
+        'hero.text': 'AmeXio Fuse helps your team to scale its <mark><strong>omnichannel content operations</strong></mark> and make your business more smart, fast & cost-effective.',
         'hero.button': 'Talk to us about your content challenge',
         'heroprofile1.text': "A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future.",
         'heroprofile1.title': 'test title 1',
