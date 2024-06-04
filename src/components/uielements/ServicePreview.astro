@@ -19,7 +19,7 @@ if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not e
 <div class="group/service flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto md:min-h-[346px] mb-8 shadow-xl">
     <div class="relative w-full flex flex-col items-start justify-between gap-20 p-4 sm:p-8 h-1/2 md:h-full md:w-2/3">
         <div class="flex flex-col">
-            <h3 class="mb-2 font-serif text-xl" set:html={serviceData.title}></h3>
+            <h3 class="mb-2 font-serif text-xl" set:html={serviceData.previewTitle || serviceData.title}></h3>
             <p class="text-base font-light" set:html={serviceData.description}></p>
         </div>
         <Button link={link} style="primary" size="sm" color="light">
