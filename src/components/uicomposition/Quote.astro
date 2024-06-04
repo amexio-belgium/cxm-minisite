@@ -29,7 +29,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
     {
         variant == "flat" && 
         <div class="flex flex-col items-center justify-center text-white md:w-4/12 ">
-        <Image loading="lazy" class="motion-safe:group-hover/quote:scale-110 transition-transform ease-in-out duration-300  mb-8 rounded-full aspect-square w-52 h-52" src={images[profileImage]()} alt={name} />
+        <Image loading="lazy" class="motion-safe:group-hover/quote:scale-110 transition-transform ease-in-out duration-300  mb-8 rounded-full aspect-square w-52 h-52 sm:w-40 sm:h-40 lg:w-52 lg:h-52" src={images[profileImage]()} alt={name} />
         <span set:html={name}></span>
         <span class="text-sm" set:html={jobtitle}></span>
         </div>
