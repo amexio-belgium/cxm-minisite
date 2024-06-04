@@ -3,7 +3,7 @@ export const blog = {
         'blog.title': "Insights - AmeXio Fuse",
         'blog.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'Insights',
-        'hero.subheadline': 'Our teams are passionate about solving challenges for our clients. Below, we share our expertise and journey along the way. Dive into our posts to explore our innovative solutions and gain practical insights from our experiences.',
+        'hero.subheadline': 'Our teams are <mark><strong>passionate</strong></mark> about solving challenges for our clients. Below, we share our expertise and journey along the way. Dive into our posts to explore our innovative solutions and gain practical insights from our experiences.',
     },
     fr: {
         'blog.title': "Points de vue - AmeXio Fuse",

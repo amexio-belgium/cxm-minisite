@@ -3,7 +3,7 @@ export const about = {
         'about.title': "About us - AmeXio Fuse",
         'about.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'About us',
-        'hero.subheadline': 'We are happy to discuss your content challenge! Let\'s discover how we can help you to remove impediments from your content lifecycle and improve the way your team deals with content and scales its operations.<br /><br />Sure there are ways to get more <strong>value</strong> from your content?',
+        'hero.subheadline': 'Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
     },
     fr: {
         'about.title': "À propos - AmeXio Fuse",
