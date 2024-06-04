@@ -13,8 +13,16 @@ import TeaserWithImage from '@components/uicomposition/TeaserWithImage.astro';
 const { lang } = Astro.params;
 
 const services = (await getCollection('services', (post) => {
-    return getPostLangAndSlug(post).lang === lang 
-}));
+                return !post.data.draft 
+                        && getPostLangAndSlug(post).lang === lang 
+            }))
+			.sort((a, b) =>  {
+				let adate = 0
+				if(a.data.pubDate != null) { adate = a.data.pubDate.valueOf()}
+				let bdate = 0
+				if(b.data.pubDate != null) { bdate = b.data.pubDate.valueOf()}
+				return bdate - adate
+			})
 
 export function getStaticPaths() {
   return i18nParams;
