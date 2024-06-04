@@ -7,7 +7,7 @@ const {
 } = Astro.props;
 
 ---
-<svg class:list={["logo", className]} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 350 73">
+<svg class:list={["logo", className]} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 350 73" aria-hidden="true" focusable="false">
     <path class="white" d="M.9,37.6C.9,23.8,12,12.6,25.8,12.6s24.9,11.2,24.9,25.1-11.2,25.1-24.9,25.1S.9,51.5.9,37.6ZM3.6,37.6c0-12.3,9.9-22.3,22.2-22.3s22.2,10,22.2,22.3-9.9,22.3-22.2,22.3S3.6,49.9,3.6,37.6Z"/>
     <path class="white2" d="M39.6,49.3l-17.8-20.8s-1.4-1.9-3.4-2h-6.7l17.8,20.8s1.4,1.9,3.4,2h6.7Z"/>
     <path class="orange" d="M39.5,26.5l-17.7,20.8s-1.4,1.9-3.4,2h-6.7s17.7-20.8,17.7-20.8c0,0,1.4-1.9,3.4-2h6.7s0,0,0,0Z"/>
@@ -29,29 +29,31 @@ const {
      <path class="white2 spark1" d="M338.5,40.2c-.1,0-.3,0-.4,0-.6-.2-1-.9-.7-1.5l1.9-5.4c.2-.6.9-1,1.5-.7.6.2,1,.9.7,1.5l-1.9,5.4c-.2.5-.6.8-1.1.8Z"/>
     <path class="white2 spark2" d="M345.3,45.8h-2.8c-.7,0-1.2-.5-1.2-1.2s.5-1.2,1.2-1.2h2.8c.7,0,1.2.5,1.2,1.2s-.5,1.2-1.2,1.2Z"/>
     <path class="white2 spark3" d="M341.4,42.2c-.4,0-.7-.2-1-.5-.4-.5-.3-1.3.2-1.7l7.3-5.5c.5-.4,1.3-.3,1.7.2.4.5.3,1.3-.2,1.7l-7.3,5.5c-.2.2-.5.2-.7.2Z"/>
-  </svg>
-  
-  <style>
-      .logo {
-          overflow: visible;
-          transition: transform 300ms ease-in-out;
-          transform-origin: left center;
-  
-      }
-      .orange {
+</svg>
+<span class="sr-only">AmeXio Fuse</span>  
+
+<style>
+    .logo {
+        overflow: visible;
+        transition: transform 300ms ease-in-out;
+        transform-origin: left center;
+
+    }
+    .orange {
         fill: #ff6100;
-      }
-  
-      .orange, .white, .white2 {
+    }
+
+    .orange, .white, .white2 {
         stroke-width: 0px;
-      }
-  
-      .white {
+    }
+
+    .white {
         fill-rule: evenodd;
-      }
-  
-      .white, .white2 {
+    }
+
+    .white, .white2 {
         fill: #fff;
+<<<<<<< HEAD
       }
   
       .spark1, .spark2, .spark3 {
@@ -87,6 +89,43 @@ const {
               animation-delay: 100ms;
           }
       }
+=======
+    }
+
+    .spark1, .spark2, .spark3 {
+        opacity: 0;
+        animation: spark-down 300ms ease-in-out ;
+        animation-fill-mode: forwards;
+    }
+    .spark1 {
+        animation-delay: 200ms;
+    }
+
+    .spark3 {
+        animation-delay: 100ms;
+    }
+
+    .fuse {
+        transform-origin: 75% center;
+        transition-delay: 300ms;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+        
+        .spark1, .spark2, .spark3 {
+            opacity: 1;
+            animation: spark-up 300ms ease-in-out;
+            animation-fill-mode: forwards;
+        }
+        .spark1 {
+            animation-delay: 200ms;
+        }
+        .spark3 {
+            animation-delay: 100ms;
+        }
+    }
+>>>>>>> cbfc7cf (Try for css of contact form)
 
     @media (prefers-reduced-motion) {
         .spark1, .spark2, .spark3 {
