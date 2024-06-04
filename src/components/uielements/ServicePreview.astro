@@ -22,7 +22,7 @@ if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not e
             <h3 class="mb-2 font-serif text-xl" set:html={serviceData.previewTitle || serviceData.title}></h3>
             <p class="text-base font-light" set:html={serviceData.description}></p>
         </div>
-        <Button link={link} style="primary" size="sm" color="light">
+        <Button link={link} style="primary" size="sm" color="light" class="z-10">
             {serviceData.cta || t('overview.backupcta')}
         </Button>
     </div>
