@@ -5,7 +5,7 @@ import logoImage from '@assets/logos/Amexio_Fuse_Horizontal.svg';
 import { Image } from 'astro:assets';
 import SkipLink from '../uielements/Skiplink.astro';
 import setFocus from "../../lib/setFocus.js";
-
+import AmexioFuse from '@components/graphicelements/AmexioFuse.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -16,7 +16,7 @@ const t = useTranslations(lang);
 	<nav class="flex items-center justify-center w-screen py-4 md:pt-6 lg:pt-8">
 		<div class="max-w-[1304px] w-screen px-8 h-full lg:px-6 flex flex-wrap items-center justify-between ">
 			<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
-				<Image loading="eager" class="w-auto h-[36px] md:h-[50px] transition-all duration-300" src={logoImage} alt="Amexio Fuse Home" />
+				<AmexioFuse class="w-auto h-[36px] md:h-[50px]"  />
 			</a>
 			<button id="main-menu-trigger"
 				type="button" 

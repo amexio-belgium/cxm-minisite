@@ -24,7 +24,7 @@ const work = defineCollection({
 		client: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean().optional(),
-		pubDate: z.string().optional(),
+		pubDate: z.coerce.date().optional(),
 		heroImage: z.string(),
 		altTextImage: z.string().optional(),
 		logo: z.string().optional(),
