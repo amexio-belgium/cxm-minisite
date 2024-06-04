@@ -13,8 +13,8 @@ import TeaserWithImage from '@components/uicomposition/TeaserWithImage.astro';
 const { lang } = Astro.params;
 
 const services = (await getCollection('services', (post) => {
-                return getPostLangAndSlug(post).lang === lang 
-            }));
+    return getPostLangAndSlug(post).lang === lang 
+}));
 
 export function getStaticPaths() {
   return i18nParams;
