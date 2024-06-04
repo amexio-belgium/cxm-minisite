@@ -1,9 +1,9 @@
 export const work = {
     en: {
-        'work.title': "Work - AmeXio Fuse",
+        'work.title': "Our work - AmeXio Fuse",
         'work.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
-        'hero.headline': 'Work',
-        'hero.subheadline': 'A streamlined content lifecycle is at the core of your Customer Experience Management (CXM) process, and goes beyond the implementation of a Content Management System (CMS). Therefore, we provide a broad spectrum of services to help you meet concrete business outcomes.',
+        'hero.headline': 'Our work',
+        'hero.subheadline': 'For over two decades, we have been <mark><strong>partnering</strong></mark> with our ambitious clients, turning their content into value through highly scalable content platforms.',
         'overview.headline': 'Some of our clients',
         'overview.cta': 'Read the reference case',
         'metadata.headline': 'Project metadata',
@@ -13,7 +13,7 @@ export const work = {
         'metadata.services': 'Services',
     },
     fr: {
-        'work.title': "Travail - AmeXio Fuse",
+        'work.title': "Notre travail - AmeXio Fuse",
         'work.seoDescription': "Entrez un résumé concis du contenu de la page ici, en mettant en évidence les informations et avantages clés. Incluez des mots-clés pertinents et terminez par un appel à l'action clair.",
         'hero.headline': 'Travail',
         'hero.subheadline': "Un cycle de vie de contenu rationalisé est au cœur de votre processus de gestion de l'expérience client (CXM), et va au-delà de la mise en œuvre d'un système de gestion de contenu (CMS). Par conséquent, nous fournissons un large éventail de services pour vous aider à atteindre des résultats commerciaux concrets.",
@@ -26,7 +26,7 @@ export const work = {
         'metadata.services': 'Services',
     },
     nl: {
-        'work.title': "Werk - AmeXio Fuse",
+        'work.title': "Ons werk - AmeXio Fuse",
         'work.seoDescription': "Voer hier een beknopte samenvatting van de inhoud van de pagina in, waarin belangrijke informatie en voordelen worden benadrukt. Inclusief relevante zoekwoorden en eindig met een duidelijke oproep tot actie.",
         'hero.headline': 'Werk',
         'hero.subheadline': 'Een gestroomlijnde contentlevenscyclus staat centraal in uw Customer Experience Management (CXM) proces, en gaat verder dan de implementatie van een Content Management Systeem (CMS). Daarom bieden wij een breed scala aan diensten om u te helpen concrete bedrijfsresultaten te behalen.',
