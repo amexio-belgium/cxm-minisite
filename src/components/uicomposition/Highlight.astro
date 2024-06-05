@@ -53,7 +53,7 @@ const HeadlineTagName = headlineTag;
     </div>
 </div>
 
-<script define:vars={{id}} is:inline>
+<script define:vars={{id}} >
   const textBlock = document.querySelector(`.${id}`);
 
   const observer = new IntersectionObserver(entries => {
