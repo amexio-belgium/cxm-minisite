@@ -7,7 +7,7 @@ const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + subpath?.[0];
+const isActive = href === pathname || (href+"/") === pathname  || href === '/' + subpath?.[0];
 ---
 <li class="relative w-full md:w-fit main-navigation__item">
 	<a href={href} aria-current={isActive && "page"} class:list={["inline-block font-serif text-white ml-auto md:font-base text-xl md:text-base py-4 md:py-1 transition-all md:transition ease-in-out duration-500 md:duration-300 out-expo delay-100 md:hover:-translate-y-1 focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500" ,className , { active: isActive }]} {...props}>
