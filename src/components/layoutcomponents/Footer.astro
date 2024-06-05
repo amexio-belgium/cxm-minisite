@@ -12,35 +12,50 @@ import linkedin from "@assets/icons/linkedin.svg"
 import iconWhite from "@assets/logos/icon_white.svg"
 import { getLangFromUrl, useTranslations } from '../../i18n/utils.ts';
 
+const { page } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 ---
 <footer class="group/image relative inline-flex flex-col items-start justify-start w-full overflow-hidden isolate">
-  <div class="relative flex flex-col items-start justify-start w-full bg-quaternary">
-    <div class="relative max-w-[1304px] w-full mx-auto px-8 py-20 justify-start items-center gap-[90px] inline-flex ">
-      <div class="inline-flex flex-col items-start justify-start w-full gap-2 sm:w-1/2 ">
-        <h2 class="font-serif text-3xl text-black">
-          {t('footer.headline')}
-        </h2>
-        <p class="text-base font-light text-black md:text-xl text-pretty">
-          {t('footer.subheadline')}
-        </p>
-        <Button link="/contact" class="mt-8" size="lg" icon="phone" style="secondary" color="light">{t('footer.button')}</Button>
+  {
+    page != "contact" &&
+      <div class="relative flex flex-col items-start justify-start w-full bg-quaternary">
+        <div class="relative max-w-[1304px] w-full mx-auto px-8 py-20 justify-start items-center gap-[90px] inline-flex ">
+          <div class="inline-flex flex-col items-start justify-start w-full gap-2 sm:w-1/2 ">
+            <h2 class="font-serif text-3xl text-black">
+              {t('footer.headline')}
+            </h2>
+            <p class="text-base font-light text-black md:text-xl text-pretty">
+              {t('footer.subheadline')}
+            </p>
+            <Button link="/contact" class="mt-8" size="lg" icon="email" style="secondary" color="light">{t('footer.button')}</Button>
+          </div>
+          <div class="absolute flex justify-center w-7/12 sm:w-5/12 md:w-4/12 overflow-hidden rounded-full top-[320px] md:top-[250px] lg:top-40 -right-24 md:right-16 aspect-square">
+            <Image loading="lazy" 
+              class="hidden md:block md:group-hover/image:scale-105 motion-reduce:md:group-hover/image:scale-100 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" 
+              src={footerimage} 
+              alt="A nice foto of a person in a crowd" />
+          </div>
+        </div>
       </div>
-      <div class="absolute flex justify-center w-7/12 sm:w-5/12 md:w-4/12 overflow-hidden rounded-full top-[320px] md:top-[250px] lg:top-40 -right-24 md:right-16 aspect-square">
-        <Image loading="lazy" 
-          class="hidden md:block md:group-hover/image:scale-105 motion-reduce:md:group-hover/image:scale-100 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" 
-          src={footerimage} 
-          alt="A nice foto of a person in a crowd" />
-      </div>
-    </div>
-  </div>
-
+  }
   <div class="relative flex flex-col items-start justify-start w-full bg-sky-900">
     <div class="relative max-w-[1304px] py-10 w-screen mx-auto px-8 gap-14 justify-start items-center inline-flex">
-      <div class="pointer-events-none absolute z-40 h-[691px] sm:h-[636px] -right-[24.25rem] -bottom-20 sm:right-[-391px] md:right-[-291px] lg:right-0">
-        <svg class=" h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 881 811"><defs><style>.cls-1{fill:#ed6c25;}.cls-1,.cls-2{stroke-width:0px;}.cls-2{fill:#084872;}</style></defs><path class="cls-2" d="M730.66.33c-32.16,2.38-53.65,19.43-70.8,37.39-2.65,2.94-3.78,4.29-5.51,6.55,0,0-309.38,362.32-309.38,362.32l5.5.14c1.83-2.26,306.97-359.66,308.39-361.73,5.28-6.31,10.13-11.46,19.05-18.74,11.74-9.39,30.46-20.82,52.85-21.93,0,0,141.56-.31,141.56-.31l-343.04,402.64h5.02L881,0l-150.34.33Z"/><path class="cls-1" d="M529.28,406.66c-55.31,62.04-265.05,315.55-326.19,378.08-11.74,9.39-30.46,20.82-52.85,21.93,0,0-141.56.31-141.56.31l341.79-400.24c-1.25-.06-4.22-.12-5.5-.14L0,811s150.34-.33,150.34-.33c23.55-1.16,43.04-13.05,55.24-22.81,64.11-65.88,270.05-315.68,328.71-381.2h-5.02Z"/></svg>
+      <div class:list={["pointer-events-none absolute z-40",
+         page == "contact" ? "h-[636px] -right-[240px] min-[400px]:-right-[120px] min-[500px]:-right-[80px] -bottom-[400px] sm:right-[5px] md:right-[21px] lg:right-[40px]" : "h-[691px] sm:h-[636px] -right-[36.25rem] min-[400px]:-right-[32.25rem] min-[500px]:-right-[26.25rem] -bottom-20 sm:right-[-391px] md:right-[-291px] lg:right-0"
+      ]}>
+        <svg class="h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 881 811">
+          {
+            page == "contact" ? 
+            <defs><style>.orangeFillFooter{fill:var(--color-secondary);}.orangeFillFooter,.bluefillfooter{stroke-width:0px;}.bluefillfooter{fill:var(--color-secondary);}</style></defs>
+            :
+            <defs><style>.orangeFillFooter{fill:var(--color-secondary);}.orangeFillFooter,.bluefillfooter{stroke-width:0px;}.bluefillfooter{fill:var(--color-primary);}</style></defs>
+          }
+          <path class="bluefillfooter" d="M730.66.33c-32.16,2.38-53.65,19.43-70.8,37.39-2.65,2.94-3.78,4.29-5.51,6.55,0,0-309.38,362.32-309.38,362.32l5.5.14c1.83-2.26,306.97-359.66,308.39-361.73,5.28-6.31,10.13-11.46,19.05-18.74,11.74-9.39,30.46-20.82,52.85-21.93,0,0,141.56-.31,141.56-.31l-343.04,402.64h5.02L881,0l-150.34.33Z"/>
+          <path class="orangeFillFooter" d="M529.28,406.66c-55.31,62.04-265.05,315.55-326.19,378.08-11.74,9.39-30.46,20.82-52.85,21.93,0,0-141.56.31-141.56.31l341.79-400.24c-1.25-.06-4.22-.12-5.5-.14L0,811s150.34-.33,150.34-.33c23.55-1.16,43.04-13.05,55.24-22.81,64.11-65.88,270.05-315.68,328.71-381.2h-5.02Z"/>
+        </svg>
       </div>
       <div class="flex items-start justify-start w-full py-4 md:w-9/12 lg:w-5/12">
         <div class="grid grid-cols-2 gap-x-8 md:gap-x-0 md:inline-flex flex-wrap items-start justify-start gap-y-2 md:gap-y-8 md:flex-row">
@@ -69,7 +84,7 @@ const t = useTranslations(lang);
   </div>
 
   <div class="relative z-50 flex flex-col items-start justify-start w-full bg-blue-900">
-    <div class="max-w-[1304px] w-screen mx-auto gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
+    <div class="max-w-[1304px] w-screen mx-auto gap-4 md:gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
       <p class="text-sm text-center text-white md:text-left md:text-sm xl:w-1/2">
         {t('footer.copyright')} 
         <Link class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary" 
@@ -77,7 +92,7 @@ const t = useTranslations(lang);
           AmeXio Group
         </Link>
       </p>
-      <div class="relative flex flex-wrap items-center justify-center gap-8 lg:justify-end md:mt-0 xl:w-1/2">
+      <div class="relative flex flex-wrap items-center justify-center gap-4 md:gap-8 lg:justify-end md:mt-0 xl:w-1/2">
         <Link class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary"  href={`/${lang}/privacy/`}>
           {t('footer.privacy')}
         </Link>

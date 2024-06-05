@@ -5,12 +5,13 @@ const lang = getLangFromUrl(Astro.url);
 
 interface Props {
   size?: "sm" | "md" | "lg";
-  icon?:  "phone" | "info" | "none";
+  icon?:  "phone" | "info" | "email" | "none";
   style?: "primary" | "secondary" | "tertiary";
   color?: "light" | "dark";
   class?: string;
   link?: string;
   iconOnly?: boolean;
+  longText?: boolean;
   [x: string]: any;
 }
 
@@ -20,6 +21,7 @@ const {
   color = "dark",
   icon = "none",
   iconOnly = false,
+  longText = false,
   class: className,
   link,
   ...rest
@@ -62,9 +64,12 @@ const iconFill = {
   {...rest}
   class:list={[
     "group/icon font-medium inline-flex items-center flex-row gap-2 text-center rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-2 outline-offset-2",
-    style === "tertiary" || iconOnly ? '' : sizes[size],
+    style === "tertiary" || iconOnly || longText ? '' : sizes[size],
     (iconOnly && size == "md") && 'p-4',
     (iconOnly && size == "lg") && 'p-8',
+    (longText && size == "sm") && 'py-1 px-4 text-[0.875rem] md:text-[1rem]',
+    (longText && size == "md") && 'py-4 px-4 sm:px-4 sm:py-3.5 ',
+    (longText && size == "lg") && 'py-2 px-4 md:p-6',
     styles[style + "_" + color],
     className,
   ]}
@@ -73,7 +78,8 @@ const iconFill = {
   { icon !== "none" && 
     <svg class:list={[iconFill[style + "_" + color], 
       "shrink-0 group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none animate-once animate-ease-out ", 
-      { "w-8 h-8 mr-2": size == "lg" }]} 
+      size == "lg" && "w-8 h-8 mr-2",
+      longText && "hidden sm:inline"]}
       width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <use xlink:href={`/icons/icon-sprite.svg#icon-${icon}`}></use>
     </svg>
