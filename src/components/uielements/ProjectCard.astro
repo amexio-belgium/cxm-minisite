@@ -44,8 +44,20 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
     </div>
 
     <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project lg:w-3/4 h-[300px] lg:h-full lg:absolute">
-      <Image src={images[projectImage]()} class="md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" loading="lazy" width={790} height={470} alt={name}/>
-      {smallImage && <Image loading="eager" src={logoimages[smallImage]()}  class="absolute w-auto h-20 top-4 right-4 md:top-8 md:right-8" width={80} height={80} alt={name} /> }
+      <Image 
+        src={images[projectImage]()} 
+        class="md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" 
+        loading="lazy" 
+        width={790} height={470} 
+        alt={name}/>
+      { smallImage && 
+        <Image 
+          loading="eager" 
+          src={logoimages[smallImage]()} 
+          class="absolute w-auto h-20 top-4 right-4 md:top-8 md:right-8" 
+          height={80}
+          alt={name} /> 
+        }
     </div> 
 </div>
 
