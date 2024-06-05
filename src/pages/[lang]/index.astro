@@ -30,7 +30,7 @@ const t = useTranslations(lang, 'home');
       headline={t('hero.headline')}
       text={t('hero.text')}
       homepage>
-    <Button class="mt-8" icon="info" link="/contact" style="primary" color="dark">{t('hero.button')}</Button>
+    <Button class="mt-8" longText icon="info" link="/contact" style="primary" color="dark">{t('hero.button')}</Button>
   </HeroHeader>
 
   <ProjectOverview />
@@ -58,10 +58,10 @@ const t = useTranslations(lang, 'home');
     </div>
   </TilesContainer>
   
-  <div class="relative flex flex-col py-20 mb-60 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:-left-12 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
+  <div class="relative flex flex-col pt-20 pb-8 md:py-20 md:mb-60 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:-left-12 marker:before:h-full before:w-[3000px] lg:before:rounded-xl">
     <div class="flex flex-col items-start justify-between w-full gap-4 mb-8 md:mb-4 md:items-center md:flex-row">
       <h2 class="font-serif text-2xl" set:html={t('services.headline')}></h2>
-      <Button link="/services" color="light">{t('services.button')}</Button>
+      <Button class="hidden md:visible"link="/services" color="light">{t('services.button')}</Button>
     </div>
     <div class="flex flex-col items-start w-full mb-20 md:w-9/12 h-fit">
       <p class="text-base text-black font-light" set:html={t('services.descriptionP1')}></p>
@@ -96,6 +96,7 @@ const t = useTranslations(lang, 'home');
           <div class="text-base font-light text-center" set:html={t('services4.description')}></div>
         </div>
       </div>
+      <Button class="mt-8 mx-auto visible md:hidden"link="/services" color="light">{t('services.button')}</Button>
     </div>
   </div>
 
