@@ -28,7 +28,7 @@ const hbsptContactForm = {
                 cssClass: "optimusPrime",
                 css: "",
                 target: "#optimusPrime",
-                onFormReady: function (form) {
+                onFormReady: function () {
                     const formWrapper = document.getElementById("optimusPrime");
                     const formSkeleton = document.getElementById("contact-form-placeholder");
                     formWrapper?.setAttribute('aria-busy', "false");
