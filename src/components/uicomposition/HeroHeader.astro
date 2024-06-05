@@ -55,7 +55,7 @@ if (headline.includes("<mark")){
             client && <p class="uppercase font-serif text-xl" set:html={client}></p>
         }
         <h1 class:list={["font-serif font-bold w-full lg:w-2/3",
-            homepage ? "text-2xl md:text-4xl" : " text-3xl "
+            homepage ? "text-2xl md:text-4xl" : "text-2xl md:text-3xl "
         ]} 
             set:html={headlineWithSpeed || headline}>
         </h1>

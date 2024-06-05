@@ -77,6 +77,7 @@ mark {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
+    will-change: background-position;
     animation: background-position 600ms ease-out;
 }
 
@@ -100,12 +101,12 @@ summary::-webkit-details-marker {
 /* Set / before post tag */
 @supports (content: "x" / "y") {
     .c-post-tag:before {
-        content: "/" / "";
+        --tw-content: "/" / "";
     }
 }
 @supports not (content: "x" / "y") {
     .c-post-tag:before {
-        content: "/";
+        --tw-content: "/";
         alt: "";
     }
 }

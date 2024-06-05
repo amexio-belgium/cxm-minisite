@@ -25,7 +25,7 @@ const {
 
 const styles = {
     yellow:
-      "yellow py-6 pr-6 sm:pr-20 -mt-6 mr-8 relative md:absolute md:bottom-12 w-11/12 md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
+      "yellow py-6 pr-6 sm:pr-20 -mt-6 md:mr-8 relative md:absolute md:bottom-12 w-full md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
     lightblue:
       "bg-lightest-blue-500 ml-4 -mt-8 relative shadow-xl p-8 md:absolute md:right-8 md:-bottom-20 w-11/12 md:w-8/12 rounded-xl",
 };
@@ -38,8 +38,8 @@ const HeadlineTagName = headlineTag;
 
 ---
 
-<div class="relative flex flex-col  my-40 isolate group">
-  <div class="w-full rounded-xl overflow-hidden">
+<div class="relative flex flex-col my-20 md:my-40 isolate group">
+  <div class="flex items-center justify-center ml-[-150%] w-[400%] max-h-[400px] sm:max-h-[unset] sm:ml-[unset] sm:w-full rounded-xl overflow-hidden">
       <Image loading="lazy" class="group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
     </div>
     <div class:list={[
@@ -53,7 +53,7 @@ const HeadlineTagName = headlineTag;
     </div>
 </div>
 
-<script define:vars={{id}} is:inline>
+<script define:vars={{id}} >
   const textBlock = document.querySelector(`.${id}`);
 
   const observer = new IntersectionObserver(entries => {
