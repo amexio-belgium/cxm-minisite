@@ -1,10 +1,10 @@
 ---
 import { getLangFromUrl } from '../i18n/utils';
 import BaseHead from '@components/layoutcomponents/BaseHead.astro';
-import ContactFormStyling from 'src/styles/contact-form-styling.astro';
 import Header from '@components/layoutcomponents/Header.astro';
 import Footer from '@components/layoutcomponents/Footer.astro';
 import TrackingFooter from '@components/uielements/TrackingFooter.astro';
+import Tracking from '@components/uielements/Tracking.astro';
 
 const { title, description, page } = Astro.props;
 
@@ -17,16 +17,16 @@ const lang = getLangFromUrl(Astro.url);
         <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
         {
             page == "contact" && 
-            <link rel="preload" href="https://js-eu1.hsforms.net/forms/embed/v2.js" as="script" />
-            <ContactFormStyling/>
+            <link rel="preload" href="https://js-eu1.hsforms.net/forms/embed/v2.js" as="script" /> 
         }
+        <Tracking />
     </head>
     <body class="overflow-x-clip bg-blue-800">
         <Header />
-        <main id="main-content" class="max-w-[1304px] mx-auto px-8">
+        <main id="main-content" class="max-w-[1304px] mx-auto px-4 sm:px-8">
             <slot />
         </main>
-        <Footer />
+        <Footer page={page} />
         <TrackingFooter />
     </body>
 </html>

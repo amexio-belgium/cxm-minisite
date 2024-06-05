@@ -1,7 +1,7 @@
 ---
 import { useTranslations } from "src/i18n/utils";
 const { lang } = Astro.params;
-
+import ContactFormStyling from 'src/styles/contact-form-styling.astro';
 interface Props {
     headline: string;
 }
@@ -9,7 +9,7 @@ const { headline } = Astro.props;
 
 const t = useTranslations(lang, "work");
 ---
-
+<ContactFormStyling/>
 <div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative mb-40 xl:flex-row py-20 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px]">
     <div class="motion-safe:animate-fade-up motion-safe:animate-delay-700 w-full lg:grid lg:grid-cols-12 mb-8 md:mb-16">
         <h2 class="col-start-3 col-span-8 font-serif text-2xl" set:html={headline}></h2>

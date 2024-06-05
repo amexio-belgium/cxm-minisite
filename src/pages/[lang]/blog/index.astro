@@ -33,7 +33,7 @@ const t = useTranslations(lang, 'blog');
 		text={t('hero.subheadline')}
 	/>
 
-	<div class="mb-40 motion-safe:animate-fade-up motion-safe:animate-delay-500">
+	<div class="mb-20 md:mb-40 motion-safe:animate-fade-up motion-safe:animate-delay-500">
 		{
 			posts.map((post, index) => (
 				( index == 0) &&
@@ -42,7 +42,7 @@ const t = useTranslations(lang, 'blog');
 		}
 	</div>
 
-	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-20 pb-40 w-full gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
+	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-20 pb-20 md:pb-40 w-full gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
 		{
 			posts.map((post, index) => (
 				(index > 0) &&
