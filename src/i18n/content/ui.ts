@@ -28,6 +28,7 @@ export const ui = {
         'insightsteaser.button': 'Uncover this insight',
         'casesteaser.headline': 'Related Work',
         'casesteaser.button': 'Uncover this case',
+        'share.twitter': 'Check out this great blog from AmeXio!'
     },
     fr: {
         'main.skiplink': 'Passer au contenu principal',
