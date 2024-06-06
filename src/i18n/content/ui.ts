@@ -28,6 +28,7 @@ export const ui = {
         'insightsteaser.button': 'Uncover this insight',
         'casesteaser.headline': 'Related Work',
         'casesteaser.button': 'Uncover this case',
+        'skeleton.loading': 'Loading',
     },
     fr: {
         'main.skiplink': 'Passer au contenu principal',
@@ -57,6 +58,7 @@ export const ui = {
         'insightsteaser.button': 'Découvrez cet aperçu',
         'casesteaser.headline': 'Travail connexe',
         'casesteaser.button': 'Découvrez ce cas',
+        'skeleton.loading': 'Chargement',
     },
     nl: {
         'main.skiplink': 'Ga naar hoofdinhoud',
@@ -86,5 +88,6 @@ export const ui = {
         'insightsteaser.button': 'Ontdek dit inzicht',
         'casesteaser.headline': 'Gerelateerd werk',
         'casesteaser.button': 'Ontdek deze case',
+        'skeleton.loading': 'Bezig met laden',
 },
 } as const;

@@ -25,11 +25,11 @@ const hbsptContactForm = {
                 portalId: "143190687",
                 formId,
                 cssRequired: "",
-                cssClass: "optimusPrime",
+                cssClass: "cxm-hbs-form",
                 css: "",
-                target: "#optimusPrime",
+                target: "#cxm-contact-form",
                 onFormReady: function () {
-                    const formWrapper = document.getElementById("optimusPrime");
+                    const formWrapper = document.getElementById("cxm-contact-form");
                     const formSkeleton = document.getElementById("contact-form-placeholder");
                     formWrapper?.setAttribute('aria-busy', "false");
                     formSkeleton?.classList.add("hidden");
