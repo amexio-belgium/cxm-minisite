@@ -4,7 +4,6 @@ interface Props {
     description: string;
     fullWidth?: boolean;
     class?: string;
-
 }
 
 const { 
@@ -19,7 +18,7 @@ const {
     fullWidth ? 
         "lg:flex-row-reverse before:bg-lightest-blue-500 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px]" 
         : 
-        " md:pl-0 lg:flex-row before:bg-light-blue-50 before:-left-12 before:w-[3000px] before:rounded-xl",
+        "md:pl-0 lg:flex-row before:bg-light-blue-50 before:-left-12 before:w-[3000px] before:rounded-xl",
     className]}>
     <div class="flex flex-col justify-center gap-6 text-black text-left">
         <h2 class="font-serif text-xl sm:text-2xl text-balance" set:html={headline}></h2>
