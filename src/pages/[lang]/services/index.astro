@@ -80,7 +80,7 @@ const t = useTranslations(lang, 'services');
 		</div>
 	</div>
 
-	<div class="text-white mb-20 md:mb-40 ">
+	<div class="text-white mb-20 md:mb-40">
 		<h2 class="font-serif text-2xl text-balance mb-8" set:html={t('collaborate.headline')}></h2>
 		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab/tab.js"></script>
 		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-group/tab-group.js"></script>
@@ -134,7 +134,7 @@ const t = useTranslations(lang, 'services');
 	<TeaserWithImage 
 		headline={t('explainer.headline')}
 		description={t('explainer.description')}
-		class='pb-20  md:mb-40'>
-		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="w-full rounded-xl" />
+		class='pb-20 mb-0 md:mb-0 xl:mb-40'>
+		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
 	</TeaserWithImage>
 </Base>
