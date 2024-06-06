@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro';
 
 import Button from '../uielements/Button.astro';
 import { Image } from 'astro:assets';
-
+import Link from './Link.astro';
 interface Props {
     projectImage: string;
     smallImage: string;
@@ -34,11 +34,12 @@ if (!logoimages[smallImage]) throw new Error(`"${smallImage}" does not exist in 
 const id = "id_" + Math.random().toString(36).slice(2, 11)
 
 ---
-<div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-lg", id]}>
+<Link href={link} class="cursor-pointer">
+  <div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-lg", id]}>
     <div class="w-full p-4 sm:p-8 h-1/2 lg:h-full lg:w-1/2">
-        <h3 class="mb-2 font-serif text-xl">{name}</h3>
-        <p class="text-sm font-light sm:text-base" set:html={content}></p>
-        <Button class="" link={link} style="tertiary" color="dark">
+        <h3 class="mb-2 text-black font-serif text-xl">{name}</h3>
+        <p class="text-sm text-black font-light sm:text-base" set:html={content}></p>
+        <Button class="" decorative style="tertiary" color="dark">
           {buttonText}
         </Button>
     </div>
@@ -59,8 +60,8 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
           alt={name} /> 
         }
     </div> 
-</div>
-
+  </div>
+</Link>
 <style>
     .mask-project {
 		clip-path: polygon( 100% 100%,100% 0%,21.705% 0%,21.705% 0.029%,21.705% 0.029%,19.048% 0.522%,16.589% 1.543%,14.348% 2.954%,12.343% 4.62%,10.594% 6.404%,9.12% 8.17%,7.94% 9.78%,7.074% 11.1%,6.54% 11.991%,6.358% 12.319%,0% 22.694%,0% 100%,100% 100% );
