@@ -86,7 +86,7 @@ mark {
 }
 
 .hero-gradient {
-    background: radial-gradient(41.57% 50% at 50% 50%, rgba(8, 71, 114, 0.60) 0%, rgba(8, 71, 114, 0.00) 100%)
+    background: radial-gradient(41.57% 50% at 50% 50%, #08477299 0%, rgba(8, 71, 114, 0.00) 100%)
 }
 
 .tab.tab--active:not(.tab--disabled) {
