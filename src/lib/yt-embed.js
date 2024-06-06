@@ -10,33 +10,32 @@
  *   https://github.com/Daugilas/lazyYT
  *   https://github.com/vb/lazyframe
  */
+import setFocus from "@lib/setFocus.js";
+
 class LiteYTEmbed extends HTMLElement {
     connectedCallback() {
         this.videoId = this.getAttribute('videoid');
-
+        let posterImage = this.querySelector('.lty-poster');
         let playBtnEl = this.querySelector('.lty-playbtn');
         // A label for the button takes priority over a [playlabel] attribute on the custom-element
         this.playLabel = (playBtnEl && playBtnEl.textContent.trim()) || this.getAttribute('playlabel') || 'Play';
-
+        this.posterImage = posterImage;
         this.dataset.title = this.getAttribute('title') || "";
+        this.setFocus = setFocus;
 
         /**
-         * Lo, the youtube poster image!  (aka the thumbnail, image placeholder, etc)
+         * Load, the youtube poster image!  (aka the thumbnail, image placeholder, etc)
          *
          * See https://github.com/paulirish/lite-youtube-embed/blob/master/youtube-thumbnail-urls.md
          */
-        if (!this.style.backgroundImage) {
-          this.style.backgroundImage = `url("https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg")`;
-          this.upgradePosterImage();
-        }
+        this.upgradePosterImage();
 
         // Set up play button, and its visually hidden label
         if (!playBtnEl) {
-            playBtnEl = document.createElement('button');
-            playBtnEl.type = 'button';
-            playBtnEl.classList.add('lty-playbtn');
+            playBtnEl = this.createPlayBtn();
             this.append(playBtnEl);
         }
+
         if (!playBtnEl.textContent) {
             const playBtnLabelEl = document.createElement('span');
             playBtnLabelEl.className = 'lyt-visually-hidden';
@@ -44,9 +43,20 @@ class LiteYTEmbed extends HTMLElement {
             playBtnEl.append(playBtnLabelEl);
         }
 
-        this.addNoscriptIframe();
+        if (playBtnEl.tagName === 'A') {
+            const isFocused = playBtnEl === document.activeElement;
+            const btnEl = this.createPlayBtn();
 
-        // playBtnEl.removeAttribute('href');
+            while (playBtnEl.firstChild) {
+                btnEl.appendChild(playBtnEl.firstChild); // Moves the child
+            }
+            playBtnEl.replaceWith(btnEl);
+            // Preserve focus state if link is replaced with button.
+            if (isFocused) btnEl.focus();
+            playBtnEl = btnEl;
+        }
+
+        this.addNoscriptIframe();
 
         // On hover (or tap), warm up the TCP connections we're (likely) about to use.
         this.addEventListener('pointerover', LiteYTEmbed.warmConnections, {once: true});
@@ -140,8 +150,10 @@ class LiteYTEmbed extends HTMLElement {
                 playerVars: paramsObj,
                 events: {
                     'onReady': event => {
+                        this.classList.add('lyt-loaded');
                         event.target.playVideo();
                         resolve(player);
+                        this.setFocus(player.getIframe());
                     }
                 }
             });
@@ -175,9 +187,20 @@ class LiteYTEmbed extends HTMLElement {
 
         const iframeEl = this.createBasicIframe();
         this.append(iframeEl);
+        this.classList.add('lyt-loaded');
+        
 
         // Set focus for a11y
-        iframeEl.focus();
+        setTimeout(() => {
+            this.setFocus(iframeEl, {
+                onBeforeFocus() {
+                    iframeEl.classList.add("yt-iframe-has-focus");
+                },
+                onBlur() {
+                    iframeEl.classList.remove("yt-iframe-has-focus");
+                },
+            });
+        }, 100);
     }
 
     createBasicIframe(){
@@ -192,6 +215,13 @@ class LiteYTEmbed extends HTMLElement {
         // https://stackoverflow.com/q/64959723/89484
         iframeEl.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(this.videoId)}?${this.getParams().toString()}`;
         return iframeEl;
+    }
+
+    createPlayBtn(){
+        const btnEl = document.createElement('button');
+        btnEl.type = 'button';
+        btnEl.classList.add('lty-playbtn');
+        return btnEl;
     }
 
     /**
@@ -215,9 +245,12 @@ class LiteYTEmbed extends HTMLElement {
                 // Youtube's style of returning data even with a 404 status. That data is a 120x90 placeholder image.
                 // … per "annoying yt 404 behavior" in the .md
                 const noAvailablePoster = e.target.naturalHeight == 90 && e.target.naturalWidth == 120;
+                console.log("upgradePosterImage");
+                console.log(noAvailablePoster);
                 if (noAvailablePoster) return;
 
-                this.style.backgroundImage = `url("${webpUrl}")`;
+                this.posterImage.src = webpUrl;
+                //this.style.backgroundImage = `url("${webpUrl}")`;
             }
         }, 100);
     }
