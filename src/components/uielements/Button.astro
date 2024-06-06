@@ -12,6 +12,7 @@ interface Props {
   link?: string;
   iconOnly?: boolean;
   longText?: boolean;
+  decorative?: boolean;
   [x: string]: any;
 }
 
@@ -22,6 +23,7 @@ const {
   icon = "none",
   iconOnly = false,
   longText = false,
+  decorative = false,
   class: className,
   link,
   ...rest
@@ -58,9 +60,12 @@ const iconFill = {
     secondary_dark:
       "fill-tertiary",
 };
+
+const TagName = decorative ? "span" : "a";
+
 ---
 
-<a
+<TagName
   {...rest}
   class:list={[
     "group/icon font-medium inline-flex items-center flex-row gap-2 text-center rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-2 outline-offset-2",
@@ -93,4 +98,4 @@ const iconFill = {
         <use xlink:href="/icons/icon-sprite.svg#icon-chevron-right"></use>
       </svg>
   }
-</a>
+</TagName>

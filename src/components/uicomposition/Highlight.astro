@@ -39,11 +39,11 @@ const HeadlineTagName = headlineTag;
 ---
 
 <div class="relative flex flex-col my-20 md:my-40 isolate group">
-  <div class="flex items-center justify-center ml-[-150%] w-[400%] max-h-[400px] sm:max-h-[unset] sm:ml-[unset] sm:w-full rounded-xl overflow-hidden">
+  <div class="flex items-center justify-center ml-[-150%] w-[400%] max-h-[400px] lg:max-h-[unset] lg:ml-[unset] lg:w-full rounded-xl overflow-hidden">
       <Image loading="lazy" class="group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
     </div>
     <div class:list={[
-        "animate-once animate-delay-500 animate-ease-out text-black z-20  flex-col flex items-start ",
+        "animate-once animate-delay-500 animate-ease-out text-black z-20 flex-col flex items-start ",
         styles[style],
         id
       ]}>

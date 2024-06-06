@@ -21,11 +21,11 @@ if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not e
             <h3 class="mb-2 font-serif text-lg sm:text-xl" set:html={serviceData.previewTitle || serviceData.title}></h3>
             <p class="text-sm sm:text-base font-light" set:html={serviceData.description}></p>
         </div>
-        <Button link={link} longText style="primary" size="sm" color="light" class="z-10">
+        <Button link={link} longText style="primary" size="sm" color="light" class="z-10 md:max-w-xs lg:max-w-md xl:max-w-sm">
             {serviceData.cta || t('overview.backupcta')}
         </Button>
     </div>
-    <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project max-h-[200px] md:max-h-[unset] md:w-1/2 md:-right-1/12 md:h-full md:absolute object-cover">
+    <div class="bg-blue-100 relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project max-h-[200px] md:max-h-[unset] md:w-1/2 md:-right-1/12 md:h-full md:absolute object-cover">
         <Picture
             src={images[serviceData.heroImage]()} 
             alt={serviceData.altTextImage || ""}
