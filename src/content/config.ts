@@ -47,6 +47,7 @@ const service = defineCollection({
 		heroImage: z.string(),
 		altTextImage: z.string().optional(),
 		cta: z.string().optional(),
+		groupType: z.string()
 	}),
 });
 

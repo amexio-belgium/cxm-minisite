@@ -1,6 +1,6 @@
 ---
 import LogoSlant from '@components/graphicelements/LogoSlant.astro';
-import { Image } from 'astro:assets';
+import { Picture } from "astro:assets";
 import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
 interface Props {
     headline: string;
@@ -70,8 +70,12 @@ if (headline.includes("<mark")){
     </div>
     { 
         backgroundImage ? 
-            <Image src={backgroundImageFound()} width={1200} height={700} alt={backgroundImageAltText} 
-                class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4" 
+            <Picture
+                src={backgroundImageFound()}
+                alt={backgroundImageAltText}
+                widths={[400, 800, 1200]}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4"
                 loading="eager"
             />
         :
