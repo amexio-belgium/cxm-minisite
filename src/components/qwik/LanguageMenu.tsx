@@ -48,8 +48,10 @@ const LanguageMenu = component$((props: languagesProps) => {
             }} 
             aria-expanded={isVisible.value}
             type="button"
-            class="inline-flex gap-2 text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary">
-                <img class="w-6 h-6" src={iconWorld.src} alt="" />
+            class="group inline-flex gap-2 focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary
+            bg-clip-text bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] motion-reduce:transition-none  text-transparent 
+            transition-all bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50%">
+                <img class="w-6 h-6 group-hover:scale-125 transition motion-reduce:transition-none" src={iconWorld.src} alt="" />
                 {languages[props.currentLang]}
             </button>
             {isVisible.value ? (

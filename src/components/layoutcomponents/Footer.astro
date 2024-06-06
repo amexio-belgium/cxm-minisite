@@ -101,8 +101,10 @@ const t = useTranslations(lang);
         <Link class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary" href={`/${lang}/cookies/`}>
           {t('footer.cookies')}
         </Link>
-        <div class="inline-flex gap-8">
-          <Image loading="lazy" class="w-6 h-6" src={iconWhite} alt="" />
+        <div class="inline-flex items-center gap-8">
+          <svg class="fill-secondary w-6 h-6">
+            <use xlink:href="/icons/icon-sprite.svg#icon-slant"></use>
+          </svg>  
           <LanguageMenu currentLang={lang} />
         </div>
       </div>
