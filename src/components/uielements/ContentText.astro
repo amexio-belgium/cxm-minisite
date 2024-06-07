@@ -8,6 +8,6 @@ const {
 } = Astro.props;
 
 ---
-<div class:list={["font-light", className]}>
+<div class:list={["font-light [&>*]:first:mt-0 [&>*]:last:mb-0", className]}>
     <slot />
 </div>

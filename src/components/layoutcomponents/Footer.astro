@@ -4,12 +4,11 @@ import Button from '@components/uielements/Button.astro';
 import Link from '@components/uielements/Link.astro';
 import FooterLink from '@components/uielements/FooterLink.astro';
 import LanguageMenu from '@components/qwik/LanguageMenu.tsx'
-import footerimage from "@assets/images/window.jpg"
+import footerimage from "@assets/images/flag.png"
 import facebook from "@assets/icons/facebook.svg"
 import youtube from "@assets/icons/youtube.svg"
 import twitter from "@assets/icons/twitter.svg"
 import linkedin from "@assets/icons/linkedin.svg"
-import iconWhite from "@assets/logos/icon_white.svg"
 import { getLangFromUrl, useTranslations } from '../../i18n/utils.ts';
 
 const { page } = Astro.props;
@@ -66,18 +65,26 @@ const t = useTranslations(lang);
           <FooterLink href={`/${lang}/cases/`}>{t('nav.cases')}</FooterLink>
           <FooterLink href={`/${lang}/about/`}>{t('nav.about')}</FooterLink>
           <FooterLink href={`/${lang}/contact/`}>{t('nav.contact')}</FooterLink>
-          <div class="z-50 inline-flex items-center justify-start h-12 gap-[2px] md:w-1/3">
+          <div class="z-50 inline-flex items-center justify-start h-12 gap-[1px] md:w-1/3">
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.facebook.com/Amexio/" rel="noopener">
-              <Image loading="lazy" class="w-6 h-6" src={facebook} alt="facebook" />
+              <svg class="fill-white w-8 h-8">
+                <use xlink:href="/icons/icon-sprite.svg#icon-facebook"></use>
+              </svg>  
             </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://twitter.com/AmexioExpertECM" rel="noopener">
-              <Image loading="lazy" class="w-6 h-6" src={twitter} alt="X (Twitter)" />
+              <svg class="fill-white w-8 h-8">
+                <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
+              </svg>  
             </a>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.linkedin.com/company/amexio/mycompany/verification/" rel="noopener">
-              <Image loading="lazy" class="w-6 h-6" src={linkedin} alt="LinkedIn" />
+              <svg class="fill-white w-8 h-8">
+                <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
+              </svg>  
             </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.youtube.com/channel/UC3Gu3APHTiyV3ZjVihs488w" rel="noopener">
-              <Image loading="lazy" class="w-6 h-6" src={youtube} alt="youtube" />
+              <svg class="fill-white w-8 h-8">
+                <use xlink:href="/icons/icon-sprite.svg#icon-youtube"></use>
+              </svg>  
             </Link>
           </div>
         </div>

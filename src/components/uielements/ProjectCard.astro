@@ -34,34 +34,39 @@ if (!logoimages[smallImage]) throw new Error(`"${smallImage}" does not exist in 
 const id = "id_" + Math.random().toString(36).slice(2, 11)
 
 ---
-<Link href={link} class="cursor-pointer">
-  <div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-lg", id]}>
-    <div class="w-full p-4 sm:p-8 h-1/2 lg:h-full lg:w-1/2">
-        <h3 class="mb-2 text-black font-serif text-xl">{name}</h3>
-        <p class="text-sm text-black font-light sm:text-base" set:html={content}></p>
-        <Button class="" decorative style="tertiary" color="dark">
-          {buttonText}
-        </Button>
-    </div>
-
-    <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project lg:w-3/4 h-[300px] lg:h-full lg:absolute">
-      <Image 
-        src={images[projectImage]()} 
-        class="md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" 
-        loading="lazy" 
-        width={790} height={470} 
-        alt={name}/>
-      { smallImage && 
-        <Image 
-          loading="eager" 
-          src={logoimages[smallImage]()} 
-          class="absolute w-auto h-20 top-4 right-4 md:top-8 md:right-8" 
-          height={80}
-          alt={name} /> 
-        }
-    </div> 
+<div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-lg", id]}>
+  <div class="w-full p-4 sm:p-8 h-1/2 lg:h-full lg:w-1/2">
+      <h3 class="mb-2 text-black font-serif text-xl">
+        <Link 
+          onWhite
+          yellow
+          class="outline-none text-black content-none before:absolute before:z-20 before:inset-x-0 before:inset-y-0" 
+          href={link} 
+          set:html={name}>
+        </Link>
+      </h3>
+      <p class="text-sm text-black font-light sm:text-base" set:html={content}></p>
+      <Button class="" decorative style="tertiary" color="dark">
+        {buttonText}
+      </Button>
   </div>
-</Link>
+  <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project lg:w-3/4 h-[300px] lg:h-full lg:absolute z-10">
+    <Image 
+      src={images[projectImage]()} 
+      class="md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" 
+      loading="lazy" 
+      width={790} height={470} 
+      alt={name}/>
+    { smallImage && 
+      <Image 
+        loading="eager" 
+        src={logoimages[smallImage]()} 
+        class="absolute w-auto h-20 top-4 right-4 md:top-8 md:right-8" 
+        height={80}
+        alt={name} /> 
+      }
+  </div> 
+</div>
 <style>
     .mask-project {
 		clip-path: polygon( 100% 100%,100% 0%,21.705% 0%,21.705% 0.029%,21.705% 0.029%,19.048% 0.522%,16.589% 1.543%,14.348% 2.954%,12.343% 4.62%,10.594% 6.404%,9.12% 8.17%,7.94% 9.78%,7.074% 11.1%,6.54% 11.991%,6.358% 12.319%,0% 22.694%,0% 100%,100% 100% );
