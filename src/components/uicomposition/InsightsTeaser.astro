@@ -68,7 +68,7 @@ const t = useTranslations(lang);
             }
             </div>
         : 
-        <div class="text-black relative grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+        <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8">
             {
                 posts.map((post) => (
                     <CasePreview small caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />

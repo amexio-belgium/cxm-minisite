@@ -29,6 +29,7 @@ export const ui = {
         'casesteaser.headline': 'Related Work',
         'casesteaser.button': 'Uncover this case',
         'share.twitter': 'Check out this great blog from AmeXio!',
+        'share.message': 'Share this on',
         'skeleton.loading': 'Loading',
     },
     fr: {

@@ -25,7 +25,7 @@ if (!images[profileImage]) throw new Error(`"${profileImage}" does not exist in 
 const id = "id_" + Math.random().toString(36).slice(2, 11)
 
 ---
-<div class:list={[className, "group/quote flex flex-col justify-end gap-8 mb-40 md:flex-row"]}>
+<div class:list={[className, "group/quote flex flex-col justify-end gap-8 mt-20 lg:mt-0 mb-40 md:flex-row"]}>
     {
         variant == "flat" && 
         <div class="flex flex-col items-center justify-center text-white md:w-4/12 ">

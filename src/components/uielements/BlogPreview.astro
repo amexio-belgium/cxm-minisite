@@ -21,7 +21,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
 ---
 {
     highlighted ? 
-        <article class="group relative overflow-hidden flex flex-col lg:flex-row w-full justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500 bg-gradient-to-r  from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border border-blue shadow-sm backdrop-blur-sm ">
+        <article class="group relative overflow-hidden flex flex-col lg:flex-row w-full justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500 bg-gradient-to-r  from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border border-blue shadow-sm ">
             <div class="h-[300px] lg:h-[unset] lg:aspect-square lg:shrink-0 flex items-center justify-center shadow-xl shadow-primary/20 rounded-t-xl lg:rounded-tr-none lg:rounded-l-xl overflow-hidden">
                 <Image loading="eager" 
                     src={images[blogData.heroImage]()} 

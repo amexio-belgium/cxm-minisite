@@ -76,18 +76,18 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
             </div>
         </div>
         { sharing && 
-            <div class="flex gap-2 md:gap-4 items-center">
-                <span>Share this</span>
-               <Link id="linkedin-share-button" class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary" href="#">
-                   <svg class="fill-white w-8 md:w-12 h-8 md:h-12">
-                       <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
-                   </svg>  
-               </Link>
-               <Link id="twitter-share-button" class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary" href="#">
-                   <svg class="fill-white w-8 md:w-12 h-8 md:h-12">
-                       <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
-                   </svg>  
-               </Link>
+            <div class="flex md:gap items-center">
+                <span class="mr-2"> {t('share.message')}</span>
+                <Link id="linkedin-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
+                    <svg class="fill-white w-8 h-8">
+                        <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
+                    </svg>  
+                </Link>
+                <Link id="twitter-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
+                    <svg class="fill-white w-8 h-8">
+                        <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
+                    </svg>  
+                </Link>
            </div>
           
           }
