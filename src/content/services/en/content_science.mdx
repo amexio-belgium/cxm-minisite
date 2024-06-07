@@ -1,7 +1,7 @@
 ---
-title: 'Content Science'
+title: 'Increase your content value using <mark><strong>Artificial Intelligence</strong></mark>'
 previewTitle: 'Increase your content value using Artificial Intelligence'
-description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'
+description: "Information overload makes content discovery more challenging than ever. Businesses face the daunting task of managing large volumes of content and <mark><strong>maximizing value</strong></mark> for customers. However, recent AI evolutions provide you with a new kind of tool in your toolbox which can help you to extract value from your content in new and innovative ways."
 pubDate: 'May 27 2024'
 heroImage: '/src/assets/images/highlight.png'
 altTextImage: 'The alt text for the hero image'
@@ -19,43 +19,39 @@ import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
 import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
-import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
-
+import content_pile from '@assets/images/content_pile.jpg';
+import kbc from '@assets/logos/kbc_logo_white.png';
+import telenet from '@assets/logos/telenet_logo_white.png';
 
 <HeroHeader 
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we advised on strategy">
-		<Image src={kbc} alt="" class="h-10 w-auto"/>
-		<Image src={telenet} alt="" class="h-10 w-auto"/>
-		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+	<Customers headline="Customers we advised on Content Science">
+		<Image src={kbc} alt="KBC" class="h-10 w-auto"/>
+		<Image src={telenet} alt="Telenet" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+	headline="70% of all content in your organization is unstructured. How can you maximize its value?"
+	description="Today, managing the lifecycle of vast amounts of unstructured content poses a significant challenge for businesses. Without a standardized approach to content governance, efficiency issues arise, leading to time-consuming and costly processes. Content teams typically struggles with content that is siloed, unstructured, and difficult to access.<br /><br />At the same time, customers have a hard time finding the right information across your digital channels.<br /><br />The solution? Apply the power of a Large Language Model (LLM) and related technologies to your content, right? But how can you ensure customers get a qualitative experience, including accurate and up-to-date information? LLMs on their own fall short, since they often miss domain knowledge and come up with inaccurate information...<br /><br />That's where <strong>Content Science</strong> comes in.">
+	<Image src={content_pile} alt="Big pile of unstructured content with glasses on top." width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
-    headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    headline="How can Content Science help?"
+    description="Technologies like Generative AI are not a magic bullet: without a centralized content governance process, additional enrichment to content or context classification, the output of Generative AI models tends not to be suitable for high-end production use cases. The discipline of Content Science therefore focuses on harnessing unstructured content within your organization to its fullest potential by optimizing its lifecycle for AI use cases.">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Infuse up-to-date domain knowledge"
+		description="Provide LLMs with extra context by feeding in your organizational content." >
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Improve accurary and reduce hallucinations"
+		description="Enforce more accurate LLM ouputs by limiting its scope to your own private knowledge base." >
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
+		headline="Reduce hallucinations"
 		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
     </SmallTile>
 </TilesContainer>
