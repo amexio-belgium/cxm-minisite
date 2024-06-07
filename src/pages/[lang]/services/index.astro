@@ -46,8 +46,8 @@ const t = useTranslations(lang, 'services');
 
 	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col mb-20 md:mb-40 xl:flex-row py-20 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
 		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-700 flex flex-col items-start w-full md:pr-12 gap-2 mb-8 md:mb-16 xl:sticky xl:w-4/12 h-fit top-40">
-		  <h2 class="mb- font-serif text-2xl text-pretty" set:html={t('overview.headline')}></h2>
-		  <ul class="list-disc list-inside	">
+		  <h2 class="font-serif text-2xl text-pretty" set:html={t('overview.headline')}></h2>
+		  <!-- <ul class="list-disc list-inside	">
 			{
 				groups.map((group, index) => (
 					<li class="font-serif text-base">
@@ -57,15 +57,17 @@ const t = useTranslations(lang, 'services');
 					</li>
 				))
 			}
-		  </ul>
+		  </ul> -->
 		</div>
 		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 flex flex-col w-full gap-2 xl:w-8/12">
 			{
 				groups.map((group, index) => (
 					<>
-					<div class="mx-4 md:mx-8 mb-12 mt-12 first:mt-4 first:md:mt-0">
-						<h3 id={"anchor-" + groups[index]} class="scroll-mt-10 md:scroll-mt-40	font-serif text-xl">{t('overview.group'+[index+1])}</h3>
-						<p class="font-sans text-base">{t('overview.group'+[index+1]+"description")}</p>
+					<div class="xl:mx-8 mb-6 mt-12 first:mt-4 first:md:mt-0">
+						<h3 id={"anchor-" + groups[index]} class="scroll-mt-10 md:scroll-mt-40 font-serif text-[2.3rem]">
+							{t('overview.group'+[index+1])}
+						</h3>
+						{/* <p class="font-sans text-base">{t('overview.group'+[index+1]+"description")}</p> */}
 					</div>
 				 	
 						{
