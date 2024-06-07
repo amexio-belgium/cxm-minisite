@@ -98,6 +98,12 @@ const t = useTranslations(lang);
 			}
 		}
 
+		const mainNavigationResizeObserver = new ResizeObserver(entries => {
+			for (let entry of entries) {
+				setInitialDotState();
+			}
+		});
+	
 		const handleDotPosition = (element,wrapper) => {
 			if (isSmallScreen.matches) {
 				dotIndicator!.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
@@ -168,5 +174,9 @@ const t = useTranslations(lang);
 
 		mainNav!.addEventListener("mouseleave",setInitialDotState,false);
 		setInitialDotState();
+		
+		if(mainNav){
+			mainNavigationResizeObserver.observe(mainNav);
+		}
 	}
 </script>
