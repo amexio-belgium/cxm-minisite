@@ -20,7 +20,9 @@ const work = Astro.props;
 const { Content } = await work.render();
 
 ---
-<Base {...work.data}  title={work.data.title.replace(/<[^>]*>?/gm, '') + " - Amexio Fuse"}>
+<Base {...work.data}  
+	title={work.data.title.replace(/<[^>]*>?/gm, '') + " - Amexio Fuse"}
+	description={work.data.description}>
 	<div class="mx-auto text-white">
 		<Content />
 	</div>

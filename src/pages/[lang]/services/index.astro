@@ -9,6 +9,7 @@ import explainer from '@assets/images/explainer.jpg';
 import tabimage from '@assets/images/tab.jpg';
 import ServicePreview from '@components/uielements/ServicePreview.astro';
 import TeaserWithImage from '@components/uicomposition/TeaserWithImage.astro';
+import Link from '@components/uielements/Link.astro';
 
 const { lang } = Astro.params;
 
@@ -33,6 +34,8 @@ function getPostLangAndSlug(service) {
 	return {lang, slug}
 }
 
+const groups = ["Strategize", "Design & Realize", "Optimize"]
+
 const t = useTranslations(lang, 'services');
 ---
 <Base title={t('services.title')} description={t('services.seoDescription')}>
@@ -43,18 +46,41 @@ const t = useTranslations(lang, 'services');
 
 	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col mb-20 md:mb-40 xl:flex-row py-20 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
 		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-700 flex flex-col items-start w-full md:pr-12 gap-2 mb-8 md:mb-16 xl:sticky xl:w-4/12 h-fit top-40">
-		  <h2 class="mb-2 font-serif text-2xl text-pretty" set:html={t('overview.headline')}></h2>
+		  <h2 class="mb- font-serif text-2xl text-pretty" set:html={t('overview.headline')}></h2>
+		  <ul class="list-disc list-inside	">
+			{
+				groups.map((group, index) => (
+					<li class="font-serif text-base">
+						<Link href={"#anchor-" + groups[index]} onWhite>
+							{t('overview.group'+[index+1])}
+						</Link>
+					</li>
+				))
+			}
+		  </ul>
 		</div>
 		<div class="motion-safe:animate-fade-up motion-safe:animate-delay-1000 flex flex-col w-full gap-2 xl:w-8/12">
 			{
-				services.map((service) => (
-					<ServicePreview serviceData={service.data} link={`/services/${getPostLangAndSlug(service).slug}/`} />
+				groups.map((group, index) => (
+					<>
+					<div class="mx-4 md:mx-8 mb-12 mt-12 first:mt-4 first:md:mt-0">
+						<h3 id={"anchor-" + groups[index]} class="scroll-mt-10 md:scroll-mt-40	font-serif text-xl">{t('overview.group'+[index+1])}</h3>
+						<p class="font-sans text-base">{t('overview.group'+[index+1]+"description")}</p>
+					</div>
+				 	
+						{
+							services.map((service) => (
+								groups[index] == service.data.groupType && 
+								<ServicePreview serviceData={service.data} link={`/services/${getPostLangAndSlug(service).slug}/`} />
+							))
+						}
+					</>
 				))
 			}
 		</div>
 	</div>
 
-	<div class="text-white mb-20 md:mb-40 ">
+	<div class="text-white mb-20 md:mb-40">
 		<h2 class="font-serif text-2xl text-balance mb-8" set:html={t('collaborate.headline')}></h2>
 		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab/tab.js"></script>
 		<script is:inline type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-group/tab-group.js"></script>
@@ -75,31 +101,31 @@ const t = useTranslations(lang, 'services');
 			</sl-tab>
 
 			<sl-tab-panel name="model1"> 
-				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8">
-					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description1')}></p>
+				<div class="flex flex-col-reverse lg:flex-row mt-8 gap-8">
+					<p class="w-full font-light lg:w-1/2" set:html={t('collaborate.description1')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
-						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
+						class="rounded-2xl overflow-hidden w-full h-fit lg:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model2">
-				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8">
-					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description2')}></p>
+				<div class="flex flex-col-reverse lg:flex-row mt-8 gap-8">
+					<p class="w-full font-light lg:w-1/2" set:html={t('collaborate.description2')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
-						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
+						class="rounded-2xl overflow-hidden w-full h-fit lg:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model3">
-				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8">
-					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description3')}></p>
+				<div class="flex flex-col-reverse lg:flex-row mt-8 gap-8">
+					<p class="w-full font-light lg:w-1/2" set:html={t('collaborate.description3')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
-						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
+						class="rounded-2xl overflow-hidden w-full h-fit lg:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 			<sl-tab-panel name="model4">
-				<div class="flex flex-col-reverse md:flex-row mt-8 gap-8 ">
-					<p class="w-full font-light md:w-1/2" set:html={t('collaborate.description4')}></p>
+				<div class="flex flex-col-reverse lg:flex-row mt-8 gap-8 ">
+					<p class="w-full font-light lg:w-1/2" set:html={t('collaborate.description4')}></p>
 					<Image loading="lazy" src={tabimage} alt={t('explainer.imagealt')} 
-						class="rounded-2xl overflow-hidden w-full h-fit md:w-1/2 shadow-sm shadow-primary" />
+						class="rounded-2xl overflow-hidden w-full h-fit lg:w-1/2 shadow-sm shadow-primary" />
 				</div>
 			</sl-tab-panel>
 		</sl-tab-group>
@@ -108,7 +134,7 @@ const t = useTranslations(lang, 'services');
 	<TeaserWithImage 
 		headline={t('explainer.headline')}
 		description={t('explainer.description')}
-		class='pb-20 md:pb-0 md:mb-40'>
+		class='pb-20 mb-0 md:mb-0 xl:mb-40'>
 		<Image loading="lazy" src={explainer} alt={t('explainer.imagealt')} width={512} height={512} class="rounded-xl" />
 	</TeaserWithImage>
 </Base>

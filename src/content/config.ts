@@ -9,6 +9,7 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string(),
+		socialImage: z.string().optional(),
 		altTextImage: z.string().optional(),
 		tags: z.string().optional(),
 		author: z.string().optional(),
@@ -47,6 +48,7 @@ const service = defineCollection({
 		heroImage: z.string(),
 		altTextImage: z.string().optional(),
 		cta: z.string().optional(),
+		groupType: z.string()
 	}),
 });
 

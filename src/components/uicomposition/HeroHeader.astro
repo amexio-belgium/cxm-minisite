@@ -1,6 +1,6 @@
 ---
 import LogoSlant from '@components/graphicelements/LogoSlant.astro';
-import { Image } from 'astro:assets';
+import { Picture } from "astro:assets";
 import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
 interface Props {
     headline: string;
@@ -37,10 +37,17 @@ let headlineWithSpeed = ""
 
 if (headline.includes("<mark")){
     const textLength = headline.length;
-    const baseSpeed = 20; 
+    const baseSpeed = 10; 
     headlineWithSpeed = headline.replace("<mark", `<mark style="animation-duration: ${textLength*baseSpeed}ms" `)
 }
 
+let textWithSpeed = ""
+
+if (text && text.includes("<mark")){
+    const textLength = text.length;
+    const baseSpeed = 3; 
+    textWithSpeed = text.replace("<mark", `<mark style="animation-duration: ${textLength*baseSpeed}ms" `)
+}
 ---
 <div class:list={[
         "relative pt-10 text-white pb-20 md:pb-32 lg:pb-40", 
@@ -54,24 +61,28 @@ if (headline.includes("<mark")){
         {
             client && <p class="uppercase font-serif text-xl" set:html={client}></p>
         }
-        <h1 class:list={["font-serif font-bold w-full lg:w-2/3",
+        <h1 class:list={["font-serif text-pretty font-bold w-full lg:w-11/12 xl:w-2/3",
             homepage ? "text-2xl md:text-4xl" : "text-2xl md:text-3xl "
         ]} 
             set:html={headlineWithSpeed || headline}>
         </h1>
     </div>
-    <div class:list={["relative ", homepage && "w-full lg:w-1/2"]}>
-        <div class:list={[" text-left w-full md:w-[80ch]", homepage && " md:w-full"]}>
+    <div class:list={["relative ", homepage && "w-full xl:w-1/2"]}>
+        <div class:list={[" text-left w-full md:w-[80ch]", homepage && "md:w-full"]}>
             { text && 
-                <p class="text-lg font-light md:text-xl" set:html={text}></p> 
+                <p class="text-lg font-light md:text-xl" set:html={textWithSpeed || text}></p> 
             }
             <slot />
         </div>
     </div>
     { 
         backgroundImage ? 
-            <Image src={backgroundImageFound()} width={1200} height={700} alt={backgroundImageAltText} 
-                class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4" 
+            <Picture
+                src={backgroundImageFound()}
+                alt={backgroundImageAltText}
+                widths={[400, 800, 1200]}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4"
                 loading="eager"
             />
         :
