@@ -77,16 +77,18 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
         </div>
         { sharing && 
             <div class="flex md:gap items-center">
-                <span class="mr-2"> {t('share.message')}</span>
+                <span class="mr-2">{t('share.message')}</span>
                 <Link id="linkedin-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
                         <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
-                    </svg>  
+                    </svg>
+                    <span class="sr-only">LinkedIn</span>
                 </Link>
                 <Link id="twitter-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
                         <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
-                    </svg>  
+                    </svg>
+                    <span class="sr-only">X(twitter)</span>
                 </Link>
            </div>
           
@@ -101,9 +103,7 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
     const linkedIn = document.getElementById('linkedin-share-button')
     linkedIn && linkedIn.addEventListener('click', function(event) {
         event.preventDefault();
-        const pageUrl = encodeURIComponent(window.location.href);
         const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`;
-        
         window.open(shareUrl, '_blank', 'width=600,height=400');
     });
 

@@ -5,10 +5,6 @@ import Link from '@components/uielements/Link.astro';
 import FooterLink from '@components/uielements/FooterLink.astro';
 import LanguageMenu from '@components/qwik/LanguageMenu.tsx'
 import footerimage from "@assets/images/flag.png"
-import facebook from "@assets/icons/facebook.svg"
-import youtube from "@assets/icons/youtube.svg"
-import twitter from "@assets/icons/twitter.svg"
-import linkedin from "@assets/icons/linkedin.svg"
 import { getLangFromUrl, useTranslations } from '../../i18n/utils.ts';
 
 const { page } = Astro.props;
@@ -69,22 +65,26 @@ const t = useTranslations(lang);
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.facebook.com/Amexio/" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-facebook"></use>
-              </svg>  
+              </svg>
+              <span class="sr-only">{t('footer.srvisit')} Facebook</span>
             </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://twitter.com/AmexioExpertECM" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
-              </svg>  
-            </a>
+              </svg> 
+              <span class="sr-only">{t('footer.srvisit')} X(twitter)</span> 
+            </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.linkedin.com/company/amexio/mycompany/verification/" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
-              </svg>  
+              </svg>
+              <span class="sr-only">{t('footer.srvisit')} LinkedIn</span>
             </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.youtube.com/channel/UC3Gu3APHTiyV3ZjVihs488w" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-youtube"></use>
               </svg>  
+              <span class="sr-only">{t('footer.srvisit')} Youtube</span>
             </Link>
           </div>
         </div>

@@ -23,6 +23,7 @@ export const ui = {
         'footer.button': "Get in touch",
         'footer.privacy': "Privacy Policy",
         'footer.cookies': "Cookies",
+        'footer.srvisit': "Visit us on",
         'footer.copyright': 'Copyright © 2024 - AmeXio Fuse is part of ',
         'insightsteaser.headline': 'Latest insights',
         'insightsteaser.button': 'Uncover this insight',
