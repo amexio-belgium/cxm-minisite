@@ -33,7 +33,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
             </div> 
             <div class="mr-8 pb-8 px-4 md:px-8 pt-0 md:p-8 max-h-full w-full lg:w-fit flex flex-col justify-between gap-4 md:gap-8 text-white">
                 <div class="flex flex-col gap-4">
-                    <h2 class="mb-2 font-serif text-xl [&>mark]:text-black">
+                    <h2 class="mb-2 font-serif text-lg [&>mark]:text-black">
                         <Link 
                             class="outline-none focus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
                             href={link}
@@ -42,14 +42,14 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                             set:html={blogData.title}>
                         </Link>
                     </h2>
-                    <p class="text-base font-light" set:html={blogData.description}></p>
+                    <p class="text-sm font-light" set:html={blogData.description}></p>
                 </div>
                 <div>
                     <div class="mb-4 mt-4 md:mt-8 flex flex-row items-center gap-4">
-                        <FormattedDate class="font-serif text-base" date={blogData.pubDate} />
+                        <FormattedDate class="font-serif text-sm" date={blogData.pubDate} />
                         {
                             blogData.tags && 
-                            <span class="c-post-tag font-serif uppercase text-base before:mr-4 before:text-secondary">
+                            <span class="c-post-tag font-serif uppercase text-sm before:mr-4 before:text-secondary">
                                 {blogData.tags}
                             </span>
                         }
@@ -62,8 +62,8 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                                 width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
                             }
                             <div class="flex flex-col justify-center gap-1">
-                                <p class="text-base">{blogData.author}</p>
-                                <p class="text-sm font-serif">{blogData.authorTitle}</p>
+                                <p class="text-xs">{blogData.author}</p>
+                                <p class="text-xxs font-serif">{blogData.authorTitle}</p>
                             </div>
                         </div>
                     }
@@ -83,10 +83,10 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
             </div> 
             <div class="p-2 py-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
                 <div class="flex flex-row items-center gap-4">
-                    <FormattedDate class="font-serif text-base" date={blogData.pubDate} />
+                    <FormattedDate class="font-serif text-sm" date={blogData.pubDate} />
                     {
                         blogData.tags && 
-                        <span class="c-post-tag font-serif uppercase text-base before:font-sans before:mr-4 before:text-secondary">
+                        <span class="c-post-tag font-serif uppercase text-sm before:font-sans before:mr-4 before:text-secondary">
                             {blogData.tags}
                         </span>
                     }
@@ -100,7 +100,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                     set:html={blogData.title}>
                     </Link>
                 </h2>
-                <p class="text-small font-light" set:html={blogData.description}></p>
+                <p class="text-sm font-light" set:html={blogData.description}></p>
                 {
                     blogData.author &&
                     <div class="self-bottom flex gap-4 mt-auto pt-8 items-center">
@@ -109,8 +109,8 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                             width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
                         }
                         <div class="flex flex-col justify-center gap-1">
-                            <p class="font-medium">{blogData.author}</p>
-                            <p class="text-sm font-serif">{blogData.authorTitle}</p>
+                            <p class="font-xs">{blogData.author}</p>
+                            <p class="text-xxs font-serif">{blogData.authorTitle}</p>
                         </div>
                     </div>
                 }
