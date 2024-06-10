@@ -10,7 +10,7 @@ const { href, class: className, ...props } = Astro.props;
 <a 
     href={href}
     class:list={[
-        "sr-only underline focus:not-sr-only bg-yellow-500 text-black focus:px-4 focus:py-4 focus:block js-skiplink",
+        "sr-only underline focus:not-sr-only bg-yellow-500 text-black focus:px-4 focus:py-4 focus:block focus-visible:outline focus-visible:outline-offset-0 2focus-visible:outline-2 focus-visible:outline-yellow-500 js-skiplink",
         className,
     ]}
     {...props}
