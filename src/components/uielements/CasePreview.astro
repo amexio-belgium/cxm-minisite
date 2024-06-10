@@ -58,8 +58,8 @@ if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exi
                         <Image loading="lazy" src={logoimages[caseData.logo]()}  class="w-auto h-12 sm:h-16 md:h-12 xl:h-16 shrink-0" loading="lazy" height={60} alt={caseData.client || caseData.title}/>
                 }
             </div>
-            <p class="text-base font-light [&>mark]:text-black" set:html={caseData.description}></p>
-            <ol class="list-disc font-light list-inside">
+            <p class="text-sm font-light [&>mark]:text-black" set:html={caseData.description}></p>
+            <ol class="list-disc mt-2 text-sm font-serif list-inside">
                 {
                     caseData.duration && <li class="">
                         {t('metadata.duration') + ": " + caseData.duration} 

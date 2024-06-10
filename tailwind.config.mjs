@@ -5,13 +5,15 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		fontSize: {
-			'sm': ['0.875rem', '1.25rem'],
-			'base': ['1.125rem', '1.625rem'],
-			'lg': ['1.25rem', '1.875rem'],
-			'xl': ['1.75rem', '2.75rem'],
-			'2xl': ['2.75rem', '3.625rem'],
-			'3xl': ['3.75rem', '4.688rem'],
-			'4xl': ['4.75rem', '5.7rem'],
+			'xxs': ['0.875rem', '1.25rem'],
+			'xs': ['1rem', '1.5rem'],
+			'sm': ['1.125rem', '1.5rem'],
+			'base': ['1.25rem', '1.625rem'],
+			'lg': ['1.5rem', '2rem'], 
+			'xl': ['1.75rem', '2.75rem'], 
+			'2xl': ['2rem', '2.5rem'], 
+			'3xl': ['2.75rem', '3.625rem'],
+			'4xl': ['4.75rem', '6rem'], 
 		},
 		fontFamily: {
 		  sans: ['Lexend', 'sans-serif'],

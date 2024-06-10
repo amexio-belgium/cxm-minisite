@@ -71,22 +71,24 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
         <div class="flex gap-4 items-center">
             {profileImg && <Image loading="eager" src={profileImages[profileImg]()} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
             <div class="flex flex-col justify-center gap-1">
-                <p class="text-base font-medium">{name}</p>
-                <p class="text-sm font-medium">{title}</p>
+                <p class="text-xs font-medium">{name}</p>
+                <p class="text-xxs font-serif font-medium">{title}</p>
             </div>
         </div>
         { sharing && 
             <div class="flex md:gap items-center">
-                <span class="mr-2"> {t('share.message')}</span>
+                <span class="mr-2 text-sm">{t('share.message')}</span>
                 <Link id="linkedin-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
                         <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
-                    </svg>  
+                    </svg>
+                    <span class="sr-only">LinkedIn</span>
                 </Link>
                 <Link id="twitter-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
                         <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
-                    </svg>  
+                    </svg>
+                    <span class="sr-only">X(twitter)</span>
                 </Link>
            </div>
           
@@ -101,9 +103,7 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
     const linkedIn = document.getElementById('linkedin-share-button')
     linkedIn && linkedIn.addEventListener('click', function(event) {
         event.preventDefault();
-        const pageUrl = encodeURIComponent(window.location.href);
         const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`;
-        
         window.open(shareUrl, '_blank', 'width=600,height=400');
     });
 

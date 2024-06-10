@@ -5,10 +5,6 @@ import Link from '@components/uielements/Link.astro';
 import FooterLink from '@components/uielements/FooterLink.astro';
 import LanguageMenu from '@components/qwik/LanguageMenu.tsx'
 import footerimage from "@assets/images/flag.png"
-import facebook from "@assets/icons/facebook.svg"
-import youtube from "@assets/icons/youtube.svg"
-import twitter from "@assets/icons/twitter.svg"
-import linkedin from "@assets/icons/linkedin.svg"
 import { getLangFromUrl, useTranslations } from '../../i18n/utils.ts';
 
 const { page } = Astro.props;
@@ -26,7 +22,7 @@ const t = useTranslations(lang);
             <h2 class="font-serif text-3xl text-black">
               {t('footer.headline')}
             </h2>
-            <p class="text-base font-light text-black md:text-xl text-pretty">
+            <p class="text-base font-light text-black md:text-lg text-pretty">
               {t('footer.subheadline')}
             </p>
             <Button link="/contact" class="mt-8" size="lg" icon="email" style="secondary" color="light">{t('footer.button')}</Button>
@@ -69,22 +65,26 @@ const t = useTranslations(lang);
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.facebook.com/Amexio/" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-facebook"></use>
-              </svg>  
+              </svg>
+              <span class="sr-only">{t('footer.srvisit')} Facebook</span>
             </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://twitter.com/AmexioExpertECM" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
-              </svg>  
-            </a>
+              </svg> 
+              <span class="sr-only">{t('footer.srvisit')} X(twitter)</span> 
+            </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.linkedin.com/company/amexio/mycompany/verification/" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
-              </svg>  
+              </svg>
+              <span class="sr-only">{t('footer.srvisit')} LinkedIn</span>
             </Link>
             <Link class="border-2 border-blue-800 rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.youtube.com/channel/UC3Gu3APHTiyV3ZjVihs488w" rel="noopener">
               <svg class="fill-white w-8 h-8">
                 <use xlink:href="/icons/icon-sprite.svg#icon-youtube"></use>
               </svg>  
+              <span class="sr-only">{t('footer.srvisit')} Youtube</span>
             </Link>
           </div>
         </div>
@@ -94,7 +94,7 @@ const t = useTranslations(lang);
 
   <div class="relative z-50 flex flex-col items-start justify-start w-full bg-blue-900">
     <div class="max-w-[1304px] w-screen mx-auto gap-4 md:gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
-      <p class="text-sm text-center text-white md:text-left md:text-sm xl:w-1/2">
+      <p class="text-xs font-light text-center text-white md:text-left md:text-xs xl:w-1/2">
         {t('footer.copyright')} 
         <Link class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary" 
         href="https://www.amexio.fr/" rel="noopener">
