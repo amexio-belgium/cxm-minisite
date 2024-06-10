@@ -45,9 +45,9 @@ const styles = {
     secondary_light:
       "gap-2 bg-transparant text-black border-2 border-blue-900 hover:bg-primary/10 hover:border-blue-500 box-border focus-visible:outline-orange",
     tertiary_light:
-      "rounded-none text-white text-sm font-light mt-3 hover:text-blue-100 focus-visible:outline-orange-500",
+      "rounded-none text-white text-[1rem] font-light mt-3 hover:text-blue-100 focus-visible:outline-orange-500",
     tertiary_dark:
-      "rounded-none text-black text-sm font-light mt-3 hover:text-blue-600 focus-visible:outline-orange-500",
+      "rounded-none text-black text-[1rem] font-light mt-3 hover:text-blue-600 focus-visible:outline-orange-500",
 };
 
 const iconFill = {
@@ -69,7 +69,7 @@ const TagName = decorative ? "span" : "a";
   {...rest}
   class:list={[
     "group/icon inline-flex font-light items-center flex-row text-center rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-2 outline-offset-2",
-    style === "tertiary" || iconOnly || longText ? 'text-[1rem]' : sizes[size],
+    style === "tertiary" || iconOnly || longText ? '' : sizes[size],
     (iconOnly && size == "md") && 'p-4',
     (iconOnly && size == "lg") && 'p-8',
     (longText && size == "sm") && 'py-1 px-4 text-[0.875rem] md:text-[1rem]',
