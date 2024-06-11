@@ -55,10 +55,10 @@ const LanguageMenu = component$((props: languagesProps) => {
                 {languages[props.currentLang]}
             </button>
             {isVisible.value ? (
-                <ul id={languageMenuId} window:onKeyUp$={handleKeyUp}  document:onBlur$={handleLanguageMenuBlur} class="absolute bottom-0 p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/70 rounded-xl">
+                <ul id={languageMenuId} window:onKeyUp$={handleKeyUp}  document:onBlur$={handleLanguageMenuBlur} class="absolute bottom-0 p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/90 rounded-xl">
                     {Object.entries(languages).map(([lang, label]) => (
                         <li>
-                            <a aria-current={props.currentLang == lang} class="text-white hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary" href={`/${lang}/`} hreflang={`${lang}`} lang={`${lang}`}>{label}</a>
+                            <a aria-current={props.currentLang == lang} class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary bg-clip-text bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] motion-reduce:transition-none text-transparent transition-all bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-secondary" href={`/${lang}/`} hreflang={`${lang}`} lang={`${lang}`}>{label}</a>
                         </li>
                     ))}
                 </ul>

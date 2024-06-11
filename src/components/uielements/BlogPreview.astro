@@ -35,7 +35,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                 <div class="flex flex-col gap-4">
                     <h2 class="mb-2 font-serif text-lg [&>mark]:text-black">
                         <Link 
-                            class="outline-none focus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
+                            class="no-underline	 outline-none focus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
                             href={link}
                             textLength={blogData.title.length}
                             hoverColor="yellow"
@@ -95,7 +95,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                     <Link 
                     onWhite 
                     textLength={blogData.title.length}
-                    class="outline-none text-black content-none before:absolute before:inset-x-0 before:inset-y-0" 
+                    class="no-underline outline-none text-black content-none before:absolute before:inset-x-0 before:inset-y-0" 
                     href={link} 
                     set:html={blogData.title}>
                     </Link>
