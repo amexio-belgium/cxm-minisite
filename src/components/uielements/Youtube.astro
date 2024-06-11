@@ -1,6 +1,9 @@
 ---
+import { useTranslations } from "src/i18n/utils";
 import '../../styles/yt-embed.css';
-import Link from './Link.astro';
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
 
 interface Props {
     videoId: string;
@@ -15,11 +18,10 @@ const {
 } = Astro.props;
 ---
 
-<lite-youtube class={className} videoid={videoId}  style={`background-image: url('https://i.ytimg.com/vi/${videoId}/hqdefault.jpg');`} >
-    <a href={`https://youtube.com/watch?v=${videoId}`} class="lty-playbtn" title="Play Video">
-        <span class="lyt-visually-hidden">
-            {title}
-        </span>     
+<lite-youtube class={className} videoid={videoId}>
+    <img src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`} alt="" class="lty-poster" loading="lazy" width="480" height="360">
+    <a href={`https://youtube.com/watch?v=${videoId}`} class="lty-playbtn">
+        <span class="lyt-visually-hidden">{t('youtube.play.prefix')}: {title}</span>     
     </a>
 </lite-youtube>
 

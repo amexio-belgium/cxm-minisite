@@ -7,12 +7,14 @@ interface Props {
     imageSrc?: string;
     imageAlt?: string;
     class?: string;
+    fullWidth?: boolean;
 }
 
 const { 
     alignment = "column",
     imageSrc,
     imageAlt = '',
+    fullWidth = false,
     class: className,
 } = Astro.props;
 
@@ -25,7 +27,7 @@ if (imageSrc && !images[imageSrc]) throw new Error(`"${imageSrc}" does not exist
     className,
 ]}> 
     { (alignment == 'row' && imageSrc) &&
-        <Image loading="lazy" class='w-1/2 shape-wrap lg:float-right my-8 mx-auto lg:ml-4 lg:mt-[8vh] lg:mb-4 lg:-mr-32 shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+        <Image loading="lazy" class='w-1/2 shape-wrap xl:float-right my-8 mx-auto xl:ml-4 xl:mt-[8vh] xl:mb-4 xl:-mr-32 shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
             src={images[imageSrc]()} 
             alt={imageAlt} />
         <div>
@@ -35,7 +37,9 @@ if (imageSrc && !images[imageSrc]) throw new Error(`"${imageSrc}" does not exist
 
     { (alignment == 'column' && imageSrc)  &&
         <slot />
-        <Image loading="lazy" class='w-full	my-8 shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+        <Image loading="lazy" class:list={[' mx-auto my-8 shadow-xl shadow-primary/20 rounded-xl overflow-hidden',
+            fullWidth ? "w-full" : "w-1/2"
+        ]}
             src={images[imageSrc]()} 
             alt={imageAlt} />
     }
