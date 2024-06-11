@@ -22,8 +22,10 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import content_pile from '@assets/images/content_pile.jpg';
+import content_pipeline from '@assets/images/content_pipeline.png';
 import kbc from '@assets/logos/kbc_logo_white.png';
 import telenet from '@assets/logos/telenet_logo_white.png';
+import slant from "@assets/images/slantwithimage.png"
 
 <HeroHeader 
 	headline={frontmatter.title}
@@ -35,67 +37,68 @@ import telenet from '@assets/logos/telenet_logo_white.png';
 	</Customers> 
 </HeroHeader>
 
-<TeaserWithImage 
+<TeaserWithImage
+	align="left" 
 	headline="70% of all content in your organization is unstructured. How can you maximize its value?"
-	description="Today, managing the lifecycle of vast amounts of unstructured content poses a significant challenge for businesses. Without a standardized approach to content governance, efficiency issues arise, leading to time-consuming and costly processes. Content teams typically struggles with content that is siloed, unstructured, and difficult to access.<br /><br />At the same time, customers have a hard time finding the right information across your digital channels.<br /><br />The solution? Apply the power of a Large Language Model (LLM) and related technologies to your content, right? But how can you ensure customers get a qualitative experience, including accurate and up-to-date information? LLMs on their own fall short, since they often miss domain knowledge and come up with inaccurate information...<br /><br />That's where <strong>Content Science</strong> comes in.">
+	description="Today, managing the lifecycle of vast amounts of unstructured content poses a significant challenge. Without a standardized approach to content governance, efficiency issues arise, leading to time-consuming and costly processes.<br /><br />At the same time, customers have a hard time finding the right information across your digital channels.<br /><br />The solution? Apply the power of a Large Language Model (LLM) and related technologies to your content, right? But how can you ensure customers get a <strong>qualitative</strong> experience, including <strong>accurate</strong> and <strong>up-to-date</strong> information? LLMs on their own fall short, since they often miss domain knowledge and come up with inaccurate information.<br /><br />That's where <strong>Content Science</strong> comes in.">
 	<Image src={content_pile} alt="Big pile of unstructured content with glasses on top." width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
     headline="How can Content Science help?"
-    description="Technologies like Generative AI are not a magic bullet: without a centralized content governance process, additional enrichment to content or context classification, the output of Generative AI models tends not to be suitable for high-end production use cases. The discipline of Content Science therefore focuses on harnessing unstructured content within your organization to its fullest potential by optimizing its lifecycle for AI use cases.">
+    description="Techniques like <strong>Retrieval Augmented Generation</strong> (RAG) are not a magic bullet: without a centralized content governance process, additional enrichment to content or context classification, the output of Generative AI models tends not to be suitable for high-end production use cases. The discipline of Content Science therefore focuses on harnessing unstructured content within your organization to its fullest potential by optimizing its lifecycle for AI use cases.">
+    <SmallTile 
+		headline="Prepare your content for AI use cases"
+		description="Introduce a Content Pipeline to augment your content before using it in an AI context.">
+    </SmallTile>
     <SmallTile 
 		headline="Infuse up-to-date domain knowledge"
-		description="Provide LLMs with extra context by feeding in your organizational content." >
+		description="Provide LLMs with extra context by feeding in your organizational knowledge.">
     </SmallTile>
     <SmallTile 
-		headline="Improve accurary and reduce hallucinations"
-		description="Enforce more accurate LLM ouputs by limiting its scope to your own private knowledge base." >
+		headline="Enforce more accurate LLM outputs"
+		description="Reduce hallucinations by limiting LLM scope to your own private set content.">
     </SmallTile>
-    <SmallTile 
-		headline="Reduce hallucinations"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
-    </SmallTile>
+    <div slot="bg-image" class="absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat">
+      <Image loading="lazy" src={slant} alt="" />
+    </div>
 </TilesContainer>
+
+<TeaserWithImage 
+	headline="Introducting Content Pipelines"
+	description="Content teams typically struggles with content that is siloed, unstructured, and scattered across different sources. A Content Pipeline allows you to put the Content Science discipline into practice by <strong>transforming your raw content</strong> into structured, annotated, and accessible information, significantly enhancing the performance of applied AI models.<br /><br />A Content Pipeline <strong>complements your RAG</strong> setup by collecting and connecting diverse data sources, the pipeline begins by cleaning and filtering the content to remove noise and irrelevant information. Classification and annotation processes then organize the content into meaningful categories and add valuable metadata. Constructing a knowledge graph embeds these structured insights, creating rich, interconnected data representations.">
+	<Image src={content_pipeline} alt="Conceptual presentation of a Content Pipeline, illustrating the typical steps in such a pipeline: collect, connect, clean, filter, classify, annotate, construct graph, embed, measure and learn." width={968} class="rounded-xl" />
+</TeaserWithImage>
   
 <Highlight 
-	title="In the picture"
-	text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."
-	image='/src/assets/images/highlight.png'
-	buttonText="discover"
+	title="Ready to set up your Content Pipeline?"
+	text="Let's meet up and discuss the first steps on how to kickstart a Content Science initiative in your organization."
+	image='/src/assets/images/leuvenoffice_2.jpg'
+	buttonText="Book a meeting with one of experts"
+	link="google.be"
 	/>
 
 <Faq headline="Questions we usually get">
 	<FaqQuestion
-		headline="Can you help me with services for development only?"
+		headline="Is Content Science related to Data Science?"
 		headlineTag="h3"> 
-		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-    	<ul> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ul>
+		<p>Content Science can indeed be seen as the counterpart of Data Science: Content Science focuses on the systematic organization, classification, and management of unstructured content to enforce higher-quality results in content retrieval scenarios using AI models. Data Science, on the hand, involves the extraction of insights from structured data through statistical analysis, machine learning, and other advanced analytical techniques. It is typically used for audience segmentation, content personalization and recommendations.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you help me with services for development only?"
+		headline="What are the first steps to take?"
 		headlineTag="h3" >
 		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="What makes you different from other agencies?" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-    	<ol> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ol>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Can you support my in-house team?">
+		headline="Can AmeXio Fuse help me get started?">
 		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Do you work for startups?">
+		headline="What are the biggest challenges when deploying AI-augmented search?">
+		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="Which technology is typically used to implement a Content Pipeline in practice?">
 		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
 	</FaqQuestion>
 </Faq>
