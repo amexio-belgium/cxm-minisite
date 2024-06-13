@@ -7,7 +7,7 @@ export const contact = {
         'form.headline': 'Let\'s discuss your content challenge',
         'highlight.headline': 'Visit us on-site',
         'highlight.text': 'Drop by one of our offices and meet with our teams in person!',
-        'highlight.button': 'Consult our office locations on the AmeXio Group website',
+        'highlight.button': 'Discover our office locations',
         'highlight.link': 'https://www.amexio.fr/en/contact-en/',
     },
     fr: {
