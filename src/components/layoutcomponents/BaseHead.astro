@@ -1,16 +1,39 @@
 ---
 import css from  '../../styles/global.css?url';
 import printcss from  '../../styles/print.css?url';
+import { getCollection } from 'astro:content';
 
 interface Props {
 	title: string;
 	description: string;
+	overrideCanonical?: string;
 	image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.url);
+function getPostLangAndSlug(post) {
+	const [lang, ...slug] = post.slug.split('/');
+	return {lang, slug}
+}
 
-const { title, description, image = '/share-image.jpg' } = Astro.props;
+let urls
+
+if (Astro.url.pathname.includes("/blog/")){
+	urls = (await getCollection('blog', (post) => {
+			return  Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
+		}))
+} else if (Astro.url.pathname.includes("/cases/")){
+	urls = (await getCollection('cases', (post) => {
+			return Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
+		}))
+} else if (Astro.url.pathname.includes("/services/")){
+	urls = (await getCollection('services', (post) => {
+			return Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
+		}))
+} 
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.url);
+const { lang } = Astro.params;
+const { title, description, overrideCanonical, image = '/share-image.jpg' } = Astro.props;
 ---
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -33,7 +56,16 @@ const { title, description, image = '/share-image.jpg' } = Astro.props;
 <link href="https://www.googletagmanager.com/gtag/js?id=GTM-TMZBQX4" rel="preload" as="script">
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+{
+	urls.length > 0 ? urls.map((post, index) => (
+		<link rel="alternate" hreflang={getPostLangAndSlug(post).lang} href={Astro.site + post.slug} /> 
+	))
+	:
+	<link rel="alternate" hreflang="en" href={Astro.url.toString().replace("/"+lang+"/","/en/")} /> 
+	<link rel="alternate" hreflang="nl" href={Astro.url.toString().replace("/"+lang+"/","/nl/")} /> 
+	<link rel="alternate" hreflang="fr" href={Astro.url.toString().replace("/"+lang+"/","/fr/")} /> 
+}
+<link rel="canonical" href={overrideCanonical || canonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
