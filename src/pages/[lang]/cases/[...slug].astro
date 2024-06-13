@@ -23,7 +23,7 @@ const { Content } = await work.render();
 <Base {...work.data}  
 	title={work.data.title.replace(/<\/?[^>]+(>|$)/g, "") + " - Amexio Fuse"}
 	description={work.data.description}
-	overrideCanonical={work.data.canonicalURl}
+	overrideCanonical={work.data.canonicalURL}
 	>
 	<div class="mx-auto text-white">
 		<Content />

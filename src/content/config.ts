@@ -15,7 +15,7 @@ const blog = defineCollection({
 		author: z.string().optional(),
 		authorTitle: z.string().optional(),
 		authorProfileImg: z.string().optional(),
-		canonicalURl: z.string().optional(),
+		canonicalURL: z.string().optional(),
 	}),
 });
 
@@ -35,7 +35,7 @@ const work = defineCollection({
 		services: z.string().optional(),
 		technologies: z.string().optional(),
 		collaboration: z.string().optional(),
-		canonicalURl: z.string().optional(),
+		canonicalURL: z.string().optional(),
 	}),
 });
 
