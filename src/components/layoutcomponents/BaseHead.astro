@@ -57,7 +57,7 @@ const { title, description, overrideCanonical, image = '/share-image.jpg' } = As
 
 <!-- Canonical URL -->
 {
-	urls.length > 0 ? urls.map((post, index) => (
+	urls && urls.length > 0 ? urls.map((post, index) => (
 		<link rel="alternate" hreflang={getPostLangAndSlug(post).lang} href={Astro.site + post.slug} /> 
 	))
 	:
