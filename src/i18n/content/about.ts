@@ -3,7 +3,7 @@ export const about = {
         'about.title': "About us - AmeXio Fuse",
         'about.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'About us',
-        'hero.subheadline': 'Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
+        'hero.subheadline': "We're here to help you create, grow, and fine-tune your experience platform. With AmeXio Fuse, we make your business smarter, faster, and more affordable. Our mission? To provide the tools and support you need to boost your operations and achieve lasting success",
     },
     fr: {
         'about.title': "À propos - AmeXio Fuse",
