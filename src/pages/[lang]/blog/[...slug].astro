@@ -27,6 +27,7 @@ const { Content } = await post.render();
 	title={post.data.title.replace(/<\/?[^>]+(>|$)/g, "") + " - Amexio Fuse"}
 	description={post.data.description}
 	image={post.data.socialImage}
+	overrideCanonical={post.data.canonicalURL}
 	>
 	<HeroHeader 
 		headline={post.data.title}
