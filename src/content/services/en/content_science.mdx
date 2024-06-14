@@ -21,7 +21,7 @@ import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
 import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
-import content_pile from '@assets/images/content_pile.jpg';
+import content_pile from '@assets/images/unsortedcontent.jpg';
 import content_pipeline from '@assets/images/llm.png';
 import kbc from '@assets/logos/kbc_logo_white.png';
 import telenet from '@assets/logos/telenet_logo_white.png';
@@ -39,20 +39,20 @@ import slant from "@assets/images/slantwithimage.png"
 
 <TeaserWithImage
 	align="left" 
-	headline="70% of all content in your organization is unstructured. How can you maximize its value?"
-	description="Today, managing the lifecycle of vast amounts of unstructured content poses a significant challenge. Without a standardized approach to content governance, efficiency issues arise, leading to time-consuming and costly processes.<br /><br />At the same time, customers have a hard time finding the right information across your digital channels.<br /><br />The solution? Apply the power of a Large Language Model (LLM) and related technologies to your content, right? But how can you ensure customers get a <strong>qualitative</strong> experience, including <strong>accurate</strong> and <strong>up-to-date</strong> information? LLMs on their own fall short, since they often miss domain knowledge and come up with inaccurate information.<br /><br />That's where <strong>Content Science</strong> comes in.">
+	headline="Unsure about LLMs and GPTs? We hear you."
+	description="<strong>70%</strong> of all content in your organization is unstructured. How can you make the most of it? We know managing unstructured content can be overwhelming. Without a clear approach to <strong>content governance</strong>, you face efficiency issues that turn processes into time-consuming and costly tasks. Your customers also struggle to find the right information on your digital channels.<br /><br />You might think a Large Language Model (LLM) is the fix, right? But LLMs often lack domain knowledge and can deliver inaccurate information, falling short of providing a truly qualitative experience. That’s where Content Science comes in. It facilitates the <strong>structure and precision</strong> needed to manage your unstructured content effectively, ensuring your customers get accurate and up-to-date information every time.">
 	<Image src={content_pile} alt="Big pile of unstructured content with glasses on top." width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
-    headline="How can Content Science help?"
-    description="Techniques like <strong>Retrieval Augmented Generation</strong> (RAG) are not a magic bullet: without a centralized content governance process, additional enrichment to content or context classification, the output of Generative AI models tends not to be suitable for high-end production use cases. The discipline of Content Science therefore focuses on harnessing unstructured content within your organization to its fullest potential by optimizing its lifecycle for AI use cases.">
+    headline="Benefits of Content Science for your organization"
+    description="Techniques like <strong>Retrieval Augmented Generation</strong> (RAG) are not a magic bullet. Without a centralized content governance process and additional content enrichment or context classification, the output of Generative AI models often falls short for high-end production use cases.<br /><br />Content Science, however, is the answer. It focuses on harnessing your unstructured content to its fullest potential by optimizing its lifecycle for AI use cases, ensuring your content is managed effectively and used to its greatest advantage.">
     <SmallTile 
 		headline="Prepare your content for AI use cases"
 		description="Introduce a Content Pipeline to augment your content before using it in an AI context.">
     </SmallTile>
     <SmallTile 
-		headline="Infuse up-to-date domain knowledge"
+		headline="Embed up-to-date domain knowledge"
 		description="Provide LLMs with extra context by feeding in your organizational knowledge.">
     </SmallTile>
     <SmallTile 
@@ -65,16 +65,29 @@ import slant from "@assets/images/slantwithimage.png"
 </TilesContainer>
 
 <TeaserWithImage 
-	headline="Introducting Content Pipelines"
-	description="Content teams typically struggles with content that is siloed, unstructured, and scattered across different sources. A Content Pipeline allows you to put the Content Science discipline into practice by <strong>transforming your raw content</strong> into structured, annotated, and accessible information, significantly enhancing the performance of applied AI models.<br /><br />A Content Pipeline <strong>complements your RAG</strong> setup by collecting and connecting diverse data sources, the pipeline begins by cleaning and filtering the content to remove noise and irrelevant information. Classification and annotation processes then organize the content into meaningful categories and add valuable metadata. Constructing a knowledge graph embeds these structured insights, creating rich, interconnected data representations.">
+	headline="Discover Content Pipelines"
+	description="Content teams often struggle with content that is siloed, unstructured, and scattered across various sources. A Content Pipeline allows you to apply the discipline of Content Science by <strong>transforming raw content</strong> into structured, annotated, and accessible information, significantly enhancing the performance of applied AI models.<br /><br />A Content Pipeline <strong>complements</strong> your RAG setup by collecting and connecting diverse data sources. It begins by cleaning and filtering the content to remove noise and irrelevant information. Then, classification and annotation processes organize the content into meaningful categories and add valuable metadata. Constructing a <strong>knowledge graph</strong> embeds these structured insights, creating rich, interconnected data representations.">
 	<Image src={content_pipeline} alt="Conceptual presentation of a Content Pipeline, illustrating the typical steps in such a pipeline: collect, connect, clean, filter, classify, annotate, construct graph, embed, measure and learn." width={968} class="rounded-xl" />
+</TeaserWithImage>
+
+<TeaserWithImage 
+	headline="Typical use cases for Content Pipelines"
+	description="Content pipelines can be used in various business scenarios, such as:
+	<ul>
+		<li>Customer Support Automation: Improve AI chatbots and virtual assistants with accurate, up-to-date information for better customer service.</li>
+		<li>Knowledge Management: Organize and structure large volumes of internal documents, making it easier for employees to find and use information.</li>
+		<li>Content Personalization: Deliver tailored content to users based on their preferences and behavior, boosting engagement and conversion rates.</li>
+		<li>Regulatory Compliance: Ensure all content meets industry regulations by systematically categorizing and tagging it for easy retrieval and audits.</li>
+		<li>Product Information Management: Structure product data for e-commerce platforms, ensuring consistency and accuracy across all channels.</li>
+	<ul>
+	<p>At Amexio, we know that defining initial business cases can be tough. That’s why we offer support in this crucial first step, helping you package a content pipeline as part of a larger content science strategy. While we focus on building a comprehensive content science strategy, we also help define a first concrete use-case that immediately shows business value.</p>">
 </TeaserWithImage>
   
 <Highlight 
 	title="Ready to set up your Content Pipeline?"
 	text="Let's meet up and discuss the first steps on how to kickstart a Content Science initiative in your organization."
 	image='/src/assets/images/leuvenoffice_2.jpg'
-	buttonText="Book a meeting with one of experts"
+	buttonText="Book a meeting with one of our experts"
 	link="google.be"
 	/>
 

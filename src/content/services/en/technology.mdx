@@ -1,7 +1,7 @@
 ---
 title: 'Technology Advisory'
 previewTitle: 'Evaluate & scout fit for purpose CXM technology in a vendor-agnostic way'
-description: 'Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.'
+description: 'Today, organizations must navigate a complex array of tools and technologies to stay competitive and meet evolving customer expectations. With our Technology Advisory service, we help you to compose and optimize your CXM ecosystem, taking into account your digital strategy and objectives.'
 pubDate: 'May 29 2024'
 heroImage: '/src/assets/images/development.jpg'
 altTextImage: 'The alt text for the hero image'
@@ -24,23 +24,26 @@ import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
 import kbc from '@assets/logos/kbc_logo.png';
 import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
+import mediafin from '@assets/logos/mediafin_logo_white.png';
 
 <HeroHeader 
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we advised on strategy">
-		<Image src={kbc} alt="" class="h-10 w-auto"/>
-		<Image src={telenet} alt="" class="h-10 w-auto"/>
+	<Customers headline="Customers we advised on technology">
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
+	headline="Not sure which technology fits best?"
+	description="Organizations often face several challenges in managing their content effectively:
+	<ul>
+		<li>Complexity of Current Systems: Traditional on-premises CMS solutions can be costly and complex to maintain.</li>
+		<li>Integration Issues: Integrating various business applications with public-facing channels while maintaining a consistent user experience is challenging.</li>
+		<li>Technological Shifts: The content management market is rapidly evolving with trends like low-code platforms, cloud/SaaS adoption, AI integrations, and composability.</li>
+		<li>Future-Proofing: Organizations need to ensure their content management solutions are scalable, maintainable, and cost-effective for future needs.</li>
+	</ul>">
 	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
