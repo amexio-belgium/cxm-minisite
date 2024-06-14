@@ -124,6 +124,7 @@ export default {
 			typography: ({ theme }) => ({
 				DEFAULT: {
 					css: {
+						'--tw-prose-bullets': theme('colors.black'),
 						a: {
 							color: theme('colors.blue.500'),
 							'&:hover': {
