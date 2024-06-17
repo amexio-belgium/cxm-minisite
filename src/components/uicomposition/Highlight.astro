@@ -48,7 +48,7 @@ const HeadlineTagName = headlineTag;
         id
       ]}>
         <HeadlineTagName class="font-serif text-xl" set:html={title}></HeadlineTagName>
-        <p class="font-light font-sm" set:html={text}></p>
+        <div class="prose font-light font-sm" set:html={text}></div>
         {buttonText && <Button class="mt-6" color="light" href={buttonLink}>{buttonText}</Button>}
     </div>
 </div>

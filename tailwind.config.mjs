@@ -9,15 +9,15 @@ export default {
 			'xs': ['1rem', '1.5rem'],
 			'sm': ['1.125rem', '1.5rem'],
 			'base': ['1.25rem', '1.625rem'],
-			'lg': ['1.5rem', '2rem'], 
-			'xl': ['1.75rem', '2.75rem'], 
-			'2xl': ['2rem', '2.5rem'], 
+			'lg': ['1.5rem', '2rem'],
+			'xl': ['1.75rem', '2.75rem'],
+			'2xl': ['2rem', '2.5rem'],
 			'3xl': ['2.75rem', '3.625rem'],
-			'4xl': ['4.75rem', '6rem'], 
+			'4xl': ['4.75rem', '6rem'],
 		},
 		fontFamily: {
-		  sans: ['Lexend', 'sans-serif'],
-		  serif: ['Contane', 'serif']
+			sans: ['Lexend', 'sans-serif'],
+			serif: ['Contane', 'serif']
 		},
 		colors: {
 			'transparent': 'transparent',
@@ -96,10 +96,10 @@ export default {
 		},
 		extend: {
 			spacing: {
-			
+
 			},
 			borderRadius: {
-			
+
 			},
 			animation: {
 				'bounce-slow': 'bounceslow 3s ease-in-out 3',
@@ -107,44 +107,83 @@ export default {
 			},
 			keyframes: {
 				bounceslow: {
-				  '0%, 60%': { transform: 'translateY(0%)' },
-				  '30%': { transform: 'translateY(-1%)' },
+					'0%, 60%': { transform: 'translateY(0%)' },
+					'30%': { transform: 'translateY(-1%)' },
 				},
 				heroshow: {
-					'0%': { 
-						transform: 'scale(1.5)', 
-						opacity:'0' 
+					'0%': {
+						transform: 'scale(1.5)',
+						opacity: '0'
 					},
-					'100%': { 
-						transform: 'scale(1)', 
-						opacity:'1' 
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
 					}
 				}
 			},
 			typography: ({ theme }) => ({
-				ondark: {
-				  css: {
-					'--tw-prose-body': theme('colors.white'),
-					'--tw-prose-headings': theme('colors.white'),
-					'--tw-prose-lead': theme('colors.white'),
-					'--tw-prose-links': theme('colors.yellow[500]'),
-					'--tw-prose-bullets': theme('colors.white'),
-					'--tw-prose-hr': theme('colors.white'),
-					'--tw-prose-quotes': theme('colors.white'),
-					'--tw-prose-bold': theme('colors.white'),
-					'--tw-prose-quote-borders': theme('colors.white'),
-					'--tw-prose-captions': theme('colors.white'),
-					'--tw-prose-counters': theme('colors.white'),
-					'--tw-prose-th-borders': theme('colors.white'),
-					'--tw-prose-td-borders': theme('colors.blue[50]'),
-					'--tw-prose-kbd': theme('colors.white'),
-					'--tw-prose-kbd-shadows': "255 255 255"
-				  },
+				DEFAULT: {
+					css: {
+						'--tw-prose-bullets': theme('colors.black'),
+						a: {
+							color: theme('colors.blue.500'),
+							'&:hover': {
+								color: theme('colors.blue.500'),
+								textDecorationThickness: 'max(3px, .1875rem, .12em)',
+							},
+							'&:focus': {
+								outline: 'none',
+								boxShadow: 'none' // This disables the ring effect
+							},
+							'&:focus-visible': {
+								outlineColor: theme('colors.blue.500'),
+								outlineStyle: 'solid',
+								outlineOffset: '2px',
+								outlineWidth: '2px',
+							}
+						}
+					},
 				},
-			  }),
+				ondark: {
+					css: {
+						'--tw-prose-body': theme('colors.white'),
+						'--tw-prose-headings': theme('colors.white'),
+						'--tw-prose-lead': theme('colors.white'),
+						'--tw-prose-links': theme('colors.yellow[500]'),
+						'--tw-prose-bullets': theme('colors.white'),
+						'--tw-prose-hr': theme('colors.white'),
+						'--tw-prose-quotes': theme('colors.white'),
+						'--tw-prose-bold': theme('colors.white'),
+						'--tw-prose-quote-borders': theme('colors.white'),
+						'--tw-prose-captions': theme('colors.white'),
+						'--tw-prose-counters': theme('colors.white'),
+						'--tw-prose-th-borders': theme('colors.white'),
+						'--tw-prose-td-borders': theme('colors.blue[50]'),
+						'--tw-prose-kbd': theme('colors.white'),
+						'--tw-prose-kbd-shadows': "255 255 255",
+						a: {
+
+							'&:hover': {
+								color: theme('colors.yellow.500'),
+								textDecorationThickness: 'max(3px, .1875rem, .12em)',
+							},
+							'&:focus': {
+								outline: 'none',
+								boxShadow: 'none' // This disables the ring effect
+							},
+							'&:focus-visible': {
+								outlineColor: theme('colors.yellow.500'),
+								outlineStyle: 'solid',
+								outlineOffset: '2px',
+								outlineWidth: '2px',
+							}
+						},
+					},
+				},
+			}),
 		}
 	},
-	plugins: [  
+	plugins: [
 		require('@tailwindcss/typography'),
 		require('tailwindcss-animated'),
 	],
