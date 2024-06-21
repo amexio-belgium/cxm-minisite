@@ -2,17 +2,20 @@
 interface Props {
     backgroundColor?: "light" | "dark";
     class?: string;
+    notProse?: Boolean;
 }
 
 const { 
     backgroundColor = "light",
     class: className,
+    notProse = false
 } = Astro.props;
 ---
 <div class:list={[
-    'mx-auto prose md:prose-xl max-w-full relative py-20 xl:px-0 w-[70ch] before:-z-10 before:absolute before:top-0 before:bottom-0 before:h-full before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] before:w-[10000px]',
+    'mx-auto font-light relative xl:px-0 before:-z-10 before:absolute before:top-0 before:bottom-0 before:h-full before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] before:w-[10000px]',
     backgroundColor === "light" && '!text-black before:bg-lightest-blue-50',
     backgroundColor === "dark" && '!text-light before:bg-blue-800 prose-ondark',
+    notProse ? '': 'py-20 prose prose-lg md:prose-xl prose-h2:font-serif prose-h2:font-medium prose-h3:font-serif prose-h3:font-medium prose-h4:font-serif prose-h4:font-medium prose-h5:font-serif prose-h5:font-medium prose-h6:font-serif prose-h6:font-regular',
     className,
 ]}>
     <slot />
