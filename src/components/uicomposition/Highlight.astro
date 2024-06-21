@@ -12,6 +12,7 @@ interface Props {
     headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
     style?: "yellow" | "lightblue";
     image: string;
+    class?: string;
 }
 const { 
     title, 
@@ -21,6 +22,7 @@ const {
     buttonLink,
     headlineTag = "h4",
     style = "yellow",
+    class: className,
 } = Astro.props;
 
 const styles = {
@@ -38,7 +40,7 @@ const HeadlineTagName = headlineTag;
 
 ---
 
-<div class="relative flex flex-col my-20 md:my-40 isolate group">
+<div class:list={["relative flex flex-col my-20 md:my-40 isolate",className]}>
   <div class="flex items-center justify-center ml-[-150%] w-[400%] max-h-[400px] lg:max-h-[unset] lg:ml-[unset] lg:w-full rounded-xl overflow-hidden">
       <Image loading="lazy" class="group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
     </div>
