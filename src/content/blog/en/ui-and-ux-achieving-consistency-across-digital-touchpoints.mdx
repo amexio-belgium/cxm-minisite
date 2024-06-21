@@ -9,97 +9,64 @@ authorTitle: "XXXX"
 authorProfileImg: '/src/assets/people/placeholder_small.png'
 ---
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
-import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
-import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
-import ContentText  from "@components/uielements/ContentText.astro"
-import Link from "@components/uielements/Link.astro"
 
 <LayoutSection backgroundColor="dark">
-    <LayoutSubsection>
-        <ContentText>
-            <p>The narrative of a brand is not limited anymore to copy writing and picture selection, and any customer engagement strategy requires a personalized approach. The challenge: To keep the company’s voice consistent, while the days are long gone when marketing managers could overlook every single communication.</p>
-            <p>How this problem can be solved? Only from scratch. After reading this article, you’ll understand what that means – and, most importantly, how to tackle it.</p>
-        </ContentText>
-    </LayoutSubsection>
+    <p>The narrative of a brand is not limited anymore to copy writing and picture selection, and any customer engagement strategy requires a personalized approach. The challenge: To keep the company’s voice consistent, while the days are long gone when marketing managers could overlook every single communication.</p>
+    <p>How this problem can be solved? Only from scratch. After reading this article, you’ll understand what that means – and, most importantly, how to tackle it.</p>
 </LayoutSection>
 
 <LayoutSection>
-    <ContentHeadline headlineTag="h2">1. Introduce a Single Source of Truth</ContentHeadline>
-        <ContentText>
-            <p>The main problem is that often, brands see every point of contact (website, terminal, digital apps and so on) as a different project. And each one of them has its own code that handles the visual experience separately. This is rather costly as design changes need to be maintained in every single project.</p>
-            <p>Thus, it can happen easily that the experience between digital channels becomes inconsistent, because of silo mentality or simply because of negligence. This often leads to an iterative cycle where some entity within the company eventually sees the need of defining “a new corporate online identity”.</p>
-            <p>This doesn’t tackle the core of the problem. Designers and developers want a single source of truth they can refer to and don’t need to maintain themselves! Having only one source of truth is cost effective as there is less code. Changes are done only once and are distributed centrally to all teams.</p>
-            <p>There are some things to consider though:</p>
-            <ol>
-            <li>The UI code must be centrally accessible and technology agnostic</li>
-            <li>A team needs to be available for fast updates when this is requested</li>
-            <li>The UI elements are to be documented clearly, especially when, where and what variants can be used</li>
-            <li>A governance team has to be an arbiter in what type of context certain elements can be used.</li>
-            </ol>
-            <p>A tool such as ​Storybook: UI Component Explorer for Front-end Developers ​helps in achieving all of these goals. Storybook is an open source tool for developing UI components in isolation for React, Vue and Angular. It makes building stunning user interfaces organized and efficient.</p>
-        </ContentText>
-
-    <ContentHeadline headlineTag="h2">2. User Interaction Elements First</ContentHeadline>
-        <ContentText>
-            <p>A digital governance team should centrally create all elements used on the digital channels, from the smallest and simplest link to the more concrete and defined main menu.</p>
-            <p>You can create variants of certain elements, sometimes to define context (e.g. is a link external or internal?), sometimes to be used in a different element (e.g. a link in the standard text, versus a link in the main menu).</p>
-            <p>Designing elements from their core up to templates and pages (and not the other way around) requires a more abstract way to design, but it achieves a number of benefits:</p>
-            <ol>
-                <li>
-                    <strong>Prevents inconsistency in design</strong>
-                     and user interaction, as the design choices cascade to different levels
-                </li>
-                <li>
-                    <strong>Gives better control over changes</strong>
-                    : A change in an atom cascades into all molecules
-                </li>
-                <li>
-                    <strong>Allows a Mobile First approach</strong>
-                     at all levels (from atom to pages), to define certain design choices
-                </li>
-                <li>
-                    <strong>Makes user accessibility easier</strong>
-                    : Once you do it right, it’s done right overall
-                </li>
-                <li>
-                    <strong>Prevents duplication</strong>
-                     for similar use elsewhere, as variants can be defined for either context or inheritance, directly on the atom
-                </li>
-                <li>
-                    <strong>Allows elements to be tested</strong>
-                     out of the context of a project, making secluded tests possible
-                </li>
-                <li>
-                    <strong>Transparency to stakeholders</strong>
-                    : requests from stakeholders that potentially result in conflicting or wrong duplication of interaction, can now be handled at the correct level of development
-                </li>
-                <li>
-                    <strong>Saves time and resources</strong>
-                    : Designers can design with reusable elements and don’t have to do every task from zero.
-                </li>
-            </ol>
-            <p>
-                A number of organizations have adopted to this style of working. The 
-                <a href="https://design-system.service.gov.uk/" target="_blank" rel="nofollow noopener">design system of Gov.uk</a>
-                is a nice example. It’s even been used as a base for other governments like 
-                <a href="https://designsystem.gov.au/" target="_blank" rel="nofollow noopener">Australia</a>
-                &#8216;s and 
-                <a href="https://design-system-alpha.digital.govt.nz/" target="_blank" rel="nofollow noopener">New Zealand</a>
-                &#8216;s (among others). In the private sector we also find examples of different companies who’ve even open-sourced their design systems: 
-                <a href="https://www.audi.com/ci/en/guides/user-interface/introduction.html" target="_blank" rel="nofollow noopener">Audi</a>
-                , 
-                <a href="http://ux.mailchimp.com/patterns/" target="_blank" rel="nofollow noopener">Mailchimp</a>
-                , 
-                <a href="https://www.carbondesignsystem.com/" target="_blank" rel="nofollow noopener">IBM</a>
-                 and 
-                <a href="https://design.axa.com/" target="_blank" rel="nofollow noopener">AXA</a>
-                , only to name a few.
-            </p>
-        </ContentText>
+    <h2>1. Introduce a Single Source of Truth</h2>
+    <p>The main problem is that often, brands see every point of contact (website, terminal, digital apps and so on) as a different project. And each one of them has its own code that handles the visual experience separately. This is rather costly as design changes need to be maintained in every single project.</p>
+    <p>Thus, it can happen easily that the experience between digital channels becomes inconsistent, because of silo mentality or simply because of negligence. This often leads to an iterative cycle where some entity within the company eventually sees the need of defining “a new corporate online identity”.</p>
+    <p>This doesn’t tackle the core of the problem. Designers and developers want a single source of truth they can refer to and don’t need to maintain themselves! Having only one source of truth is cost effective as there is less code. Changes are done only once and are distributed centrally to all teams.</p>
+    <p>There are some things to consider though:</p>
+    <ol>
+    <li>The UI code must be centrally accessible and technology agnostic</li>
+    <li>A team needs to be available for fast updates when this is requested</li>
+    <li>The UI elements are to be documented clearly, especially when, where and what variants can be used</li>
+    <li>A governance team has to be an arbiter in what type of context certain elements can be used.</li>
+    </ol>
+    <p>A tool such as ​Storybook: UI Component Explorer for Front-end Developers ​helps in achieving all of these goals. Storybook is an open source tool for developing UI components in isolation for React, Vue and Angular. It makes building stunning user interfaces organized and efficient.</p>
 
 
-    <ContentHeadline headlineTag="h2">Conclusion</ContentHeadline>
-        <ContentText>
-            <p>You as a marketer, creative or designer want to be sure that every user interaction with your brand, product, website or mobile app provides a consistent and recognizable experience. To do so, there is some work to be done before jumping to the “real” job of designing and styling. But once you do it right, you achieve innumerous benefits. Epecially when doing it right from the start. Read on to learn about the crucial checkpoints you need to adhere to, for your investment to substantially make sense.</p>
-        </ContentText>
+    <h2>2. User Interaction Elements First</h2>
+    <p>A digital governance team should centrally create all elements used on the digital channels, from the smallest and simplest link to the more concrete and defined main menu.</p>
+    <p>You can create variants of certain elements, sometimes to define context (e.g. is a link external or internal?), sometimes to be used in a different element (e.g. a link in the standard text, versus a link in the main menu).</p>
+    <p>Designing elements from their core up to templates and pages (and not the other way around) requires a more abstract way to design, but it achieves a number of benefits:</p>
+    <ol>
+        <li>
+            <strong>Prevents inconsistency in design</strong> and user interaction, as the design choices cascade to different levels
+        </li>
+        <li>
+            <strong>Gives better control over changes</strong>: A change in an atom cascades into all molecules
+        </li>
+        <li>
+            <strong>Allows a Mobile First approach</strong> at all levels (from atom to pages), to define certain design choices
+        </li>
+        <li><strong>Makes user accessibility easier</strong>: Once you do it right, it’s done right overall</li>
+        <li><strong>Prevents duplication</strong> for similar use elsewhere, as variants can be defined for either context or inheritance, directly on the atom</li>
+        <li><strong>Allows elements to be tested</strong> out of the context of a project, making secluded tests possible</li>
+        <li><strong>Transparency to stakeholders</strong>: requests from stakeholders that potentially result in conflicting or wrong duplication of interaction, can now be handled at the correct level of development</li>
+        <li><strong>Saves time and resources</strong>: Designers can design with reusable elements and don’t have to do every task from zero.</li>
+    </ol>
+    <p>
+        A number of organizations have adopted to this style of working. The 
+        <a href="https://design-system.service.gov.uk/" target="_blank" rel="nofollow noopener">design system of Gov.uk</a>
+        is a nice example. It’s even been used as a base for other governments like 
+        <a href="https://designsystem.gov.au/" target="_blank" rel="nofollow noopener">Australia</a>
+        &#8216;s and 
+        <a href="https://design-system-alpha.digital.govt.nz/" target="_blank" rel="nofollow noopener">New Zealand</a>
+        &#8216;s (among others). In the private sector we also find examples of different companies who’ve even open-sourced their design systems: 
+        <a href="https://www.audi.com/ci/en/guides/user-interface/introduction.html" target="_blank" rel="nofollow noopener">Audi</a>
+        , 
+        <a href="http://ux.mailchimp.com/patterns/" target="_blank" rel="nofollow noopener">Mailchimp</a>
+        , 
+        <a href="https://www.carbondesignsystem.com/" target="_blank" rel="nofollow noopener">IBM</a>
+         and 
+        <a href="https://design.axa.com/" target="_blank" rel="nofollow noopener">AXA</a>
+        , only to name a few.
+    </p>
+    <h2>Conclusion</h2>
+    <p>You as a marketer, creative or designer want to be sure that every user interaction with your brand, product, website or mobile app provides a consistent and recognizable experience. To do so, there is some work to be done before jumping to the “real” job of designing and styling. But once you do it right, you achieve innumerous benefits. Epecially when doing it right from the start. Read on to learn about the crucial checkpoints you need to adhere to, for your investment to substantially make sense.</p>
 </LayoutSection>

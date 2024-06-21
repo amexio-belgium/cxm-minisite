@@ -5,15 +5,15 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		fontSize: {
-			'xxs': ['0.875rem', '1.25rem'],
-			'xs': ['1rem', '1.5rem'],
-			'sm': ['1.125rem', '1.5rem'],
-			'base': ['1.25rem', '1.625rem'],
-			'lg': ['1.5rem', '2rem'],
-			'xl': ['1.75rem', '2.75rem'],
-			'2xl': ['2rem', '2.5rem'],
-			'3xl': ['2.75rem', '3.625rem'],
-			'4xl': ['4.75rem', '6rem'],
+			'xxs': ['0.875rem', '1.5'],
+			'xs': ['1rem', '1.5'],
+			'sm': ['1.125rem', '1.5'],
+			'base': ['1.25rem', '1.5'],
+			'lg': ['1.5rem', '1.3'],
+			'xl': ['1.75rem', '1.3'],
+			'2xl': ['2rem', '1.3'],
+			'3xl': ['2.75rem', '1.3'],
+			'4xl': ['4.75rem', '1.3'],
 		},
 		fontFamily: {
 			sans: ['Lexend', 'sans-serif'],
@@ -122,6 +122,128 @@ export default {
 				}
 			},
 			typography: ({ theme }) => ({
+				lg: {
+					css: {
+						h2: {
+							fontSize: '2rem',
+							lineHeight: '1.3',
+							marginTop: '2.5rem',
+							marginBottom: '0.5rem',
+						  },
+						  h3: {
+							fontSize: '1.75rem',
+							lineHeight: '1.3',
+							marginTop: '1.5rem',
+							marginBottom: '0.5rem',
+						  },
+						  h4: {
+							fontSize: '1.5rem',
+							lineHeight: '1.3',
+							marginTop: '1.25rem',
+							marginBottom: '0.5rem',
+						  },
+						  h5: {
+							fontSize: '1.25rem',
+							lineHeight: '1.3',
+							marginTop: '1rem',
+							marginBottom: '0.5rem',
+						  },
+						  h6: {
+							fontSize: '1.25rem',
+							lineHeight: '1.3',
+							marginTop: '1rem',
+							marginBottom: '.5rem',
+						  },
+						  'h5 + *': {
+							marginTop: '0',
+						  },
+						  'h6 + *': {
+							marginTop: '0',
+						  },
+						  p: {
+							lineHeight: '1.5',
+							marginTop: '1.125rem',
+							marginBottom: '1.125rem',
+						  },
+						  ol: {
+							marginTop: '1.125rem',
+							marginBottom: '1.125rem',
+						  },
+						  ul: {
+							marginBottom: '1.125rem',
+							marginBottom: '1.125rem',
+						  },
+						  img: {
+							marginTop: '1.5rem',
+							marginBottom: '1.5rem',
+						  },
+						  picture: {
+							marginTop: '1.5rem',
+							marginBottom: '1.5rem',
+						  },
+					}
+				},
+				xl: {
+					css: {
+						h2: {
+							fontSize: '2.75rem',
+							lineHeight: '1.3',
+							marginTop: '4rem',
+							marginBottom: '0.75rem',
+						  },
+						  h3: {
+							fontSize: '2rem',
+							lineHeight: '1.3',
+							marginTop: '2.5rem',
+							marginBottom: '0.75rem',
+						  },
+						  h4: {
+							fontSize: '1.75rem',
+							lineHeight: '1.3',
+							marginTop: '2rem',
+							marginBottom: '0.75rem',
+						  },
+						  h5: {
+							fontSize: '1.5rem',
+							lineHeight: '1.3',
+							marginTop: '1.5rem',
+							marginBottom: '0.75rem',
+						  },
+						  h6: {
+							fontSize: '1.5rem',
+							lineHeight: '1.3',
+							marginTop: '1.5rem',
+							marginBottom: '1rem',
+						  },
+						  'h5 + *': {
+							marginTop: '0',
+						  },
+						  'h6 + *': {
+							marginTop: '0',
+						  },
+						  p: {
+							marginTop: '1.5rem',
+							marginBottom: '1.5rem',
+							lineHeight: '1.5',
+						  },
+						  ol: {
+							marginTop: '1.5rem',
+							marginBottom: '1.5rem',
+						  },
+						  ul: {
+							marginTop: '1.5rem',
+							marginBottom: '1.5rem',
+						  }, 
+						  img: {
+							marginTop: '2rem',
+							marginBottom: '2rem',
+						  },
+						  picture: {
+							marginTop: '2rem',
+							marginBottom: '2rem',
+						  },
+					}
+				},
 				DEFAULT: {
 					css: {
 						'--tw-prose-bullets': theme('colors.black'),
@@ -141,7 +263,7 @@ export default {
 								outlineOffset: '2px',
 								outlineWidth: '2px',
 							}
-						}
+						},
 					},
 				},
 				ondark: {
@@ -162,7 +284,7 @@ export default {
 						'--tw-prose-kbd': theme('colors.white'),
 						'--tw-prose-kbd-shadows': "255 255 255",
 						a: {
-
+							color: theme('colors.yellow.500'),
 							'&:hover': {
 								color: theme('colors.yellow.500'),
 								textDecorationThickness: 'max(3px, .1875rem, .12em)',
