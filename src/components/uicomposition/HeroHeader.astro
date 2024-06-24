@@ -24,12 +24,12 @@ const {
 let backgroundImageFound;
 
 if (backgroundImage && backgroundImage.includes("/projects/")) {
-    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
-    if (!projectImages[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}');
+    if (!projectImages[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
     backgroundImageFound = projectImages[backgroundImage]
 } else if (backgroundImage) {
-    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-    if (!images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
+    if (!images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
     backgroundImageFound = images[backgroundImage]
 }
 

@@ -14,10 +14,10 @@ const {
 
 const t = useTranslations(lang, 'work');
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (!images[blogData.heroImage]) throw new Error(`"${blogData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
-const profileImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/*.{jpeg,jpg,png,gif}');
-if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.authorProfileImg}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
+if (!images[blogData.heroImage]) throw new Error(`"${blogData.heroImage}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
+const profileImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/{,**/}*.{jpeg,jpg,png,gif}');
+if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.authorProfileImg}" does not exist in glob: "/src/assets/people/*.{jpeg,jpg,png,gif}"`);
 ---
 {
     highlighted ? 
