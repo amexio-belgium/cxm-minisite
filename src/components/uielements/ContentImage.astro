@@ -22,7 +22,8 @@ const {
     loading = 'lazy',
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (!images[srcFile]) throw new Error(`"${srcFile}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
+if (!images[srcFile]) throw new Error(`"${srcFile}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
 ---
 <Image class={className} src={images[srcFile]()} loading={loading} alt={altText} width={width} height={height} />
