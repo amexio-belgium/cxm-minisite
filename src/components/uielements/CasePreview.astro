@@ -16,17 +16,17 @@ const t = useTranslations(lang, 'work');
 let caseImage
 
 if (caseData.heroImage.includes("/projects/")) {
-    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
-    if (!projectImages[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}');
+    if (!projectImages[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
     caseImage = projectImages[caseData.heroImage]()
 } else {
-    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-    if (!images[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
+    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
+    if (!images[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
     caseImage = images[caseData.heroImage]()
 }
 
-const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.{jpeg,jpg,png,gif}');
-if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exist in glob: "src/assets/logos/*.{jpeg,jpg,png,gif}"`);
+const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}');
+if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exist in glob: "src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}"`);
 
 ---
 <div class:list={["motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col justify-stretch gap-8",
