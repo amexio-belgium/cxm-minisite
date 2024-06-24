@@ -9,7 +9,7 @@ authorTitle: "XXXX"
 authorProfileImg: '/src/assets/people/placeholder_small.png'
 ---
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
-import { Picture, Image } from 'astro:assets';
+import ContentImage  from "@components/uielements/ContentImage.astro"
 import Quote from "@components/uicomposition/Quote.astro"
 
 <LayoutSection backgroundColor="dark">
@@ -26,14 +26,11 @@ import Quote from "@components/uicomposition/Quote.astro"
         variant = "content-glass"
         class="pb-2">
     </Quote>
-
     <p>The two websites built on Adobe Experience Manager (AEM) were initially launched in public beta (“primeur”), meaning visitors could switch from the new to the old version and vice versa if desired.</p>
     <p>The renewed channels offer the “ideal reading experience on any device” with a fresh, new and responsive web design. From smartphone or tablet to PC, the new multimedia communications are enriched with foto-sliders, videos, quotes and other multimedia. Users can now navigate quickly and easily on all screens, customize their own newsfeed with selected keywords, their stocks wallet and share their preferred insights with integrated social media tools.</p>
-   
-    <Image loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
             src='/src/assets/images/mediafin-story.jpg' 
-            alt=''
-            width="640 × 360"
+            width="640"
             height="360"
     />
     <Quote 
@@ -43,20 +40,17 @@ import Quote from "@components/uicomposition/Quote.astro"
         profileImage="/src/assets/people/placeholder_small.png"
         variant = "content-glass"
         class="pb-2">
-    </Quote>
-
-     
-        <p>A renewed “Markets” section and “portfolio tool” present financial information and stock and fund prices for a quick and convenient overview in real-time. A new “Investment Assistant” also makes investing a lot easier, offering step-by-step tips on financial investments.</p>
-        <p>There are also two important highlights on the content side.</p>
-        <p>First of all, all the editorial content is still managed in Mediafin’s legacy systems. The workflow is so specific to their business that it wouldn’t be efficient to change their core business system.</p>
-        <p>This was also the reason why they chose Adobe: AEM allows content managers to shuffle the content around between the homepage and landing pages to make the whole presentation much more dynamic. Authors can also easily assemble news “dossier” packages related to a certain topic and create the dossier page “on-the-fly” in almost any layout they want, without any impact on the editorial teams.</p>
-        <p>Secondly, the fact that the new websites are Mediafin’s sales channels and their product at the same time means they’re business critical. Needless to say that a lot of focus has been given to infrastructure and performance tuning.</p>
-        <p>AmeXio’s team of more than 15 digital experts will continue to work on developing new functionalities to improve readers’ experience as well as authoring experience for the content managers.</p>
-<Image loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+    </Quote> 
+    <p>A renewed “Markets” section and “portfolio tool” present financial information and stock and fund prices for a quick and convenient overview in real-time. A new “Investment Assistant” also makes investing a lot easier, offering step-by-step tips on financial investments.</p>
+    <p>There are also two important highlights on the content side.</p>
+    <p>First of all, all the editorial content is still managed in Mediafin’s legacy systems. The workflow is so specific to their business that it wouldn’t be efficient to change their core business system.</p>
+    <p>This was also the reason why they chose Adobe: AEM allows content managers to shuffle the content around between the homepage and landing pages to make the whole presentation much more dynamic. Authors can also easily assemble news “dossier” packages related to a certain topic and create the dossier page “on-the-fly” in almost any layout they want, without any impact on the editorial teams.</p>
+    <p>Secondly, the fact that the new websites are Mediafin’s sales channels and their product at the same time means they’re business critical. Needless to say that a lot of focus has been given to infrastructure and performance tuning.</p>
+    <p>AmeXio’s team of more than 15 digital experts will continue to work on developing new functionalities to improve readers’ experience as well as authoring experience for the content managers.</p>
+    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
             src='/src/assets/images/overlay-elements-image-packshot-2-tijd@2x-1.png' 
-            alt=''
-            width="1100"
-            height="392"
+            width="800"
+            height="285"
     />
 </LayoutSection>
 

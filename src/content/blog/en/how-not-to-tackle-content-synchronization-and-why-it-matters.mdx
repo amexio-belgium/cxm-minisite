@@ -42,37 +42,25 @@ import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
     </ul>
     <h2>5 major pitfalls related to content synchronization</h2>
     <p>While the correct procedures are pretty straight forward, problems do occur if the content sync is not being set up correctly. Here’s a (non-exhaustive) list of what you need to avoid:</p>
-
     <h3>1. No ownership defined for content creation</h3>
     <p>As content can be created in different environments, it’s sometimes unclear who the owner or maintainer of the created content is. To avoid such situations, clarify beforehand: Where should you create the content? Who will make sure that it gets synced to the other environments?</p>
-
     <h3>2. Content abandoned in a sync process</h3>
     <p>Not only in times of multitasking, this scenario becomes real: Content, forgotten after the process of copying. This can have a business-critical impact if the content is necessary for a complete user journey. Most of the times, the cause is the lack of a clear conspectus which content is in scope to be copied. A miscommunication can also be a result of the involvement of parties who don’t have the necessary overview of what their exact tasks are.</p>
-
-
     <h3>3. No backup of the previous content available</h3>
     <p>Whenever copying content that will replace existing one, make sure that there’s a backup. Lost content will have to be recreated from scratch.</p>
-
     <h3>4. Content not immediately synced, handled as a batch job</h3>
     <p>This can lead to misinterpretation and confusion among the different users of the system; it should be immediately clear when the content will be available for a sync job.</p>
-
     <h3>5. Configuration not kept up to date</h3>
     <p>Environment specific configuration can also have an influence on the copied content. Clear procedures should be in place, to specify when and how the configuration is kept up to date!</p>
-
-
     <h2>How to tackle content synchronization</h2>
-            <p>It’s not always easy to set up all necessary requirements for the business goals. A good start is to get together all parties involved in the different environments: from developers to functional analysists, to quality assurance teams and copywriters. Everyone has another motivation to want content synchronization.</p>
-            <p>The easiest way to get going is to divide the content in two separate groups: one of content being newly created, the other one with existing content to be updated.</p>
-
+    <p>It’s not always easy to set up all necessary requirements for the business goals. A good start is to get together all parties involved in the different environments: from developers to functional analysists, to quality assurance teams and copywriters. Everyone has another motivation to want content synchronization.</p>
+    <p>The easiest way to get going is to divide the content in two separate groups: one of content being newly created, the other one with existing content to be updated.</p>
     <h2>Newly created content</h2>
-            <p>This group of content is easier to handle, as there´s no risk of breaking something existing, with any potential business impact associated. The only hurdle here is to define when to transfer from one environment to the other, ensuring that the proper migrations are in place – for the content to work smoothly with the new code running in the respective environment.</p>
-            <p>To synchronize from production to the subsequent environments, the copywriter needs to make sure to integrate the necessary considerations early in the process. In Adobe Experience Manager, this can mean a step as simple as setting up a replication/ distribution agent. It will publish the newly created content in the consecutive environment, and a system can be put in place to migrate the content to the new code.</p>
-            <p>To synchronize from acceptance to production, on the other hand, a release coordinator should make sure that an aggregation of all newly created, production ready content is available, as a list. This can be done by tagging the content in the acceptance environment, to create a content package which will be installed with the new code.</p>
-
-
+    <p>This group of content is easier to handle, as there´s no risk of breaking something existing, with any potential business impact associated. The only hurdle here is to define when to transfer from one environment to the other, ensuring that the proper migrations are in place – for the content to work smoothly with the new code running in the respective environment.</p>
+    <p>To synchronize from production to the subsequent environments, the copywriter needs to make sure to integrate the necessary considerations early in the process. In Adobe Experience Manager, this can mean a step as simple as setting up a replication/ distribution agent. It will publish the newly created content in the consecutive environment, and a system can be put in place to migrate the content to the new code.</p>
+    <p>To synchronize from acceptance to production, on the other hand, a release coordinator should make sure that an aggregation of all newly created, production ready content is available, as a list. This can be done by tagging the content in the acceptance environment, to create a content package which will be installed with the new code.</p>
     <h2>Existing content</h2>
     <p>For existing content, clear guidelines and procedures need to be defined between the copywriter and the other parties involved: When can existing content be synced? Should this only happen after a release? Should the content first be reviewed, before doing the import? It all comes down to clear communication! There’s no golden solution set in stone, to synchronize existing content hassle free for all parties involved.</p>
-    
     <h2>In a nutshell</h2>
     <p>Now you’ve seen it for yourself. There are a lot of requirements to take into account, to make sure the chosen solution doesn’t jeopardize any aspect, of any department involved. A lot of parties come into play when spanning a process over multiple environments – from developers and functional analysts, via quality assurance to copywriters. Keeping them all happy is a fine line to walk. It needs to be thoroughly documented when and at what stage which content can be synced. Defining the ownership of the content well is one of the most important steps to be done.</p>
     <p>This overview can serve as a good guideline how to ensure the best Customer Experience safely, without content, features or customer engagement being jeopardized. Ensure the best overall quality, effectivity and coherence of all content related processes. Don’t hesitate to ask for professional help! We here at AmeXio pride ourselves in paving the way to success for many international leaders across industries. Always with expert knowledge and the best technology at hand.</p>
