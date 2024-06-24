@@ -1,0 +1,28 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+export interface Props {
+    src: string,
+    imageFolder?: string,
+    alt?:string,
+    loading?: "lazy" | "eager" | null | undefined,
+    class?: string,
+    width?: number,
+    height?: number,
+}
+
+const { 
+    class: className, 
+    src: srcFile,
+    imageFolder = '/src/assets/images/*.{jpeg,jpg,png,gif}',
+    alt: altText = '',
+    width,
+    height,
+    loading = 'lazy',
+} = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
+if (!images[srcFile]) throw new Error(`"${srcFile}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+---
+<Image class={className} src={images[srcFile]()} loading={loading} alt={altText} width={width} height={height} />
