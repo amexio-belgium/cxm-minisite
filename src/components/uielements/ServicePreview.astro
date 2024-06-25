@@ -11,8 +11,8 @@ const {
 } = Astro.props;
 
 const t = useTranslations(lang, 'services');
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
+if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
 
 ---
 <div class="group/service flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto mb-8 shadow-xl">
