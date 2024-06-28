@@ -46,10 +46,10 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                 </div>
                 <div>
                     <div class="mb-4 mt-4 md:mt-8 flex flex-row items-center gap-4">
-                        <FormattedDate class="font-serif text-sm" date={blogData.pubDate} />
+                        <FormattedDate class=" text-xs" date={blogData.pubDate} />
                         {
                             blogData.tags && 
-                            <span class="c-post-tag font-serif uppercase text-sm before:mr-4 before:text-secondary">
+                            <span class="c-post-tag font-light uppercase text-xs before:mr-4 before:text-secondary">
                                 {blogData.tags}
                             </span>
                         }
@@ -63,7 +63,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                             }
                             <div class="flex flex-col justify-center gap-1">
                                 <p class="text-xs">{blogData.author}</p>
-                                <p class="text-xxs font-serif">{blogData.authorTitle}</p>
+                                <p class="text-xxs">{blogData.authorTitle}</p>
                             </div>
                         </div>
                     }
@@ -82,11 +82,11 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                 alt={blogData.altTextImage || ""} />
             </div> 
             <div class="p-2 py-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
-                <div class="flex flex-row items-center gap-4">
-                    <FormattedDate class="font-serif text-sm" date={blogData.pubDate} />
+                <div class="flex flex-row items-center gap-2">
+                    <FormattedDate class="font-light text-xs" date={blogData.pubDate} />
                     {
                         blogData.tags && 
-                        <span class="c-post-tag font-serif uppercase text-sm before:font-sans before:mr-4 before:text-secondary">
+                        <span class="c-post-tag text-xs uppercase before:font-sans before:mr-2 before:text-secondary">
                             {blogData.tags}
                         </span>
                     }
@@ -110,7 +110,7 @@ if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.auth
                         }
                         <div class="flex flex-col justify-center gap-1">
                             <p class="font-xs">{blogData.author}</p>
-                            <p class="text-xxs font-serif">{blogData.authorTitle}</p>
+                            <p class="text-xxs ">{blogData.authorTitle}</p>
                         </div>
                     </div>
                 }
