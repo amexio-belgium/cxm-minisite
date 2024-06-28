@@ -107,7 +107,8 @@ const t = useTranslations(lang, 'home');
         if (entry.isIntersecting && services) {
           const items = services.querySelectorAll(".service__item")
           items.forEach(item => {
-            item.classList.add('motion-safe:animate-fade-left lg:motion-safe:animate-fade-right');
+            item.classList.add('motion-safe:animate-fade-up');
+            item.classList.add('lg:motion-safe:animate-fade-right');
           })
           observer.unobserve(services);
         }
