@@ -82,8 +82,10 @@ mark {
     animation: background-position 600ms ease-out;
 }
 
-.caseheadline mark{
-    -webkit-text-fill-color: unset;
+.caseheadline, .projectcard {
+    mark {
+        -webkit-text-fill-color: unset;
+    }
 }
 
 .hero-gradient {
@@ -98,6 +100,7 @@ mark {
 summary::-webkit-details-marker {
     display: none;
 }
+
 
 /* Set / before post tag */
 @supports (content: "x" / "y") {

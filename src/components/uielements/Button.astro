@@ -31,15 +31,15 @@ const {
 
 const sizes = {
   sm: 'px-4 py-2 text-[1rem]',
-  md: "px-4 py-3.5 text-[1rem]",
-  lg: "px-4 py-3.5 text-[1rem] md:p-6 md:text-[1.375rem]",
+  md: "px-4 py-4 text-[1rem]",
+  lg: "px-4 py-5 text-[1rem] md:p-6 md:text-[1.375rem]",
 };
 
 const styles = {
     primary_dark:
-      "gap-2 bg-tertiary text-black hover:bg-orange-300 border border-transparent focus-visible:outline-tertiary          ",
+      "gap-2 bg-tertiary text-black hover:bg-orange-300 border border-transparent focus-visible:outline-tertiary",
     primary_light:
-      "gap-2 bg-blue-500 text-white hover:bg-blue-700 border border-transparent  focus-visible:outline-orange",
+      "gap-2 bg-blue-500 text-white hover:bg-blue-700 border border-transparent focus-visible:outline-orange",
     secondary_dark:
       "gap-2 bg-transparant text-tertiary border-2 border-white hover:bg-blue-200 hover:border-tertiary box-border focus-visible:outline-tertiary",
     secondary_light:
@@ -68,7 +68,7 @@ const TagName = decorative ? "span" : "a";
 <TagName
   {...rest}
   class:list={[
-    "group/icon inline-flex font-light items-center flex-row text-center rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-2 outline-offset-2",
+    "group/icon inline-flex items-center flex-row text-center rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-2 outline-offset-2",
     style === "tertiary" || iconOnly || longText ? '' : sizes[size],
     (iconOnly && size == "md") && 'p-4',
     (iconOnly && size == "lg") && 'p-8',
