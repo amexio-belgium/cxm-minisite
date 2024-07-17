@@ -9,79 +9,71 @@ authorTitle: "XXXX"
 authorProfileImg: '/src/assets/people/placeholder_small.png'
 ---
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
-import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
-import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
-import ContentText  from "@components/uielements/ContentText.astro"
-import Link from "@components/uielements/Link.astro"
+import ContentImage  from "@components/uielements/ContentImage.astro"
 
 <LayoutSection backgroundColor="dark">
-    <LayoutSubsection>
-        <ContentText>
-            <p>Conversion Rate Optimization (CRO) is the systematic process to improve the conversions of your digital touch points. In other words, it ensures that the goals you have outlined for your digital touchpoints are maximized. In this context, “conversion” is interpreted in the broad form and is heavily dependent on the industry in which you are operating; these conversions may be purchases, referrals, contact information, or other types of engagement. It all depends on what your organization values.</p>
-        </ContentText>
-    </LayoutSubsection>
+    <p>Conversion Rate Optimization (CRO) is the systematic process to improve the conversions of your digital touch points. In other words, it ensures that the goals you have outlined for your digital touchpoints are maximized. In this context, “conversion” is interpreted in the broad form and is heavily dependent on the industry in which you are operating; these conversions may be purchases, referrals, contact information, or other types of engagement. It all depends on what your organization values.</p>
 </LayoutSection>
 
 <LayoutSection>
-    <LayoutSubsection imageSrc='/src/assets/images/the-beginners-guide-to-conversion-rate-optimization-cro.jpg'></LayoutSubsection>
+    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+            src='/src/assets/images/the-beginners-guide-to-conversion-rate-optimization-cro.jpg' 
+            width="800"
+            height="600"
+    />
+    <h2>Conversion rate optimization: How?</h2>
+    <p>Start with a problem:</p>
+    <p>The CRO process boils down to two key questions:</p>
+    <ul>
+        <li>Which digital touchpoints are currently less effective than you would like?</li>
+        <li>Which types of potential customers or users are you unable to reach or convert?</li>
+    </ul>
+    <p>Finding the answers to these questions will help target easy areas for improvement.</p>
+    <p>A good place to start is with analytics. Understanding the pain points of your digital touchpoints will help you uncover opportunities that can lead to improved experiences. This helps identify:</p>
+    <ul>
+        <li>Where are users dropping out of the conversion funnel?</li>
+        <li>Where do users leave the digital touchpoints and why?</li>
+        <li>What are the top landing pages of your digital touchpoint and what are users doing next? Are those landing pages converting?</li>
+        <li>Are users finding the information they are looking for?</li>
+    </ul>
 
-    <ContentHeadline headlineTag="h2">Conversion rate optimization: How?</ContentHeadline>
-        <ContentText>
-            <p>Start with a problem:</p>
-            <p>The CRO process boils down to two key questions:</p>
-            <ul>
-                <li>Which digital touchpoints are currently less effective than you would like?</li>
-                <li>Which types of potential customers or users are you unable to reach or convert?</li>
-            </ul>
-            <p>Finding the answers to these questions will help target easy areas for improvement.</p>
-            <p>A good place to start is with analytics. Understanding the pain points of your digital touchpoints will help you uncover opportunities that can lead to improved experiences. This helps identify:</p>
-            <ul>
-                <li>Where are users dropping out of the conversion funnel?</li>
-                <li>Where do users leave the digital touchpoints and why?</li>
-                <li>What are the top landing pages of your digital touchpoint and what are users doing next? Are those landing pages converting?</li>
-                <li>Are users finding the information they are looking for?</li>
-            </ul>
+    <p>These are known as “pain points” and will help uncover the possible areas for improvement.</p>
+    <p>The next step is to understand which users are facing these issues, and what they have in common. Is it simply all visitors of a particular page, or do users have certain characteristics? Do users in certain segments have bigger issues than other users? For example:</p>
+    <ul>
+        <li>Mobile vs non-mobile users – are there conversion differences between them?</li>
+        <li>New visitor vs returning users – does the interface take some getting used to? Or is it intuitive for even first-time visitors?</li>
+        <li>Demographic – do the missed opportunities have a specific demographic characteristic in common?</li>
+        <li>Loyalty – is there a different behavior between frequent buyers compared to non- frequent buyers?</li>
+        <li>Interest – do users with a specific interest in certain products or services behave differently?</li>
+        <li>Referral – where are the visits coming from? do visitors behave differently?</li>
+        <li>Etc.</li>
+    </ul>
 
-            <p>These are known as “pain points” and will help uncover the possible areas for improvement.</p>
-            <p>The next step is to understand which users are facing these issues, and what they have in common. Is it simply all visitors of a particular page, or do users have certain characteristics? Do users in certain segments have bigger issues than other users? For example:</p>
-           <ul>
-                <li>Mobile vs non-mobile users – are there conversion differences between them?</li>
-                <li>New visitor vs returning users – does the interface take some getting used to? Or is it intuitive for even first-time visitors?</li>
-                <li>Demographic – do the missed opportunities have a specific demographic characteristic in common?</li>
-                <li>Loyalty – is there a different behavior between frequent buyers compared to non- frequent buyers?</li>
-                <li>Interest – do users with a specific interest in certain products or services behave differently?</li>
-                <li>Referral – where are the visits coming from? do visitors behave differently?</li>
-                <li>Etc.</li>
-            </ul>
-        </ContentText>
-
-    <ContentHeadline headlineTag="h2">Let the optimization begin: A/B vs MVT test</ContentHeadline>
-    <ContentText>
-        <p>Once we understand the problem areas, and who they affect, the fun part can begin: optimizing experiences.</p>
-        <p>Within the optimization process, both A/B and Multivariate (MVT) tests are powerful tools. They can help you to design the best experience for your users.</p>
-        <p><strong>A/B tests</strong></p>
-        <p>An A/B test allows you to test one element of content against another to determine which variant performs best. It’s possible to test more than two variants against one another, as long as you only change one element of your content. For example, changing the call-to-action button on a particular page, changing a product detail description, changing colors, etc.</p>
-        <p>To define a winner, you can choose which element you want your test to be scored against. This can be based on an action on the page, adding a product to a cart, an actual purchase, a filled-out contact form, or based on your goals.</p>
-        <p>An A/B test is best to use when you already have a clear hypothesis of how to improve the experience based on particular KPIs. In other words, when doing an A/B test, you already know which element of the page needs to be improved. The results of the test will reveal the best performing experience (A/B/n).</p>
-        <p><strong>MVT tests</strong></p>
-        <p>An MVT test allows you to test multiple elements in a piece of content to determine which version combination performs best, and to identify which element contributes to the content’s success the most. For each element changed, a combination of these elements will be tested. For example, if you are doing an MVT on a Product Detail page, you are changing three elements:</p>
-        <ul>
-            <li>Element 1: Call-to-action button</li>
-            <li>Element 2: Product description</li>
-            <li>Element 3: Product description details</li>
-        </ul>
-        <p>Changing 3 elements will result in eight different combinations to be tested:</p>
-        <p>The results of the test will reveal which combinations work best, but also which element contributes mostly to the winning experience. An MVT test can be used best when you are in a discovery phase. You may already know a particular page or touchpoint that isn’t converting well, but you don’t have a clear understanding of why it isn’t converting. The results of your MVT test can be further finetuned and optimized with an A/B test. For example, if your MVT reveals that “element 1” has the biggest contribution to the winning experience, you can further test “element 1” with an A/B test.</p>
-        <p><strong>Insights vs time</strong></p>
-        <p>It is clear that MVT tests will give you more insights, but there is one important catch. When changing multiple elements on a page or touchpoint, the number of different combinations will grow rapidly. When changing three elements, you will have eight different combinations to test. When changing four elements, it will be 15 combinations. When changing five elements, it will be 31 combinations. More combinations mean more traffic needed, and more traffic needed means more time to obtain a significant winner.</p>
-        <p>For example, if you want to do an MVT test on a webpage that has 10,000 daily visitors and a current conversion rate of 1.5%, the number of days to obtain a significant winner will grow rapidly:</p>
-        <p>In situations where it takes a long time to acquire significant results, the long test period can influence your results (especially when there are seasonality aspects at play). It’s important to be pragmatic in such cases. Try to reduce the number of elements you want to test (less is more). A good way to sharpen your hypothesis is to do a short face-to-face test with a very small group of users. Use these quick insights to perform an MVT with a reduced number of combinations, but with a bigger audience.</p>
-        <p>Useful tools to do A/B or MVT tests:</p>
-        <ul>
-            <li>Adobe Target</li>
-            <li>Google Optimize</li>
-        </ul>
-        <p>MVT and A/B tests are the best way to determine your next course of action when it comes to CRO. Based on the outcomes of these tests, you will have a clearer understanding of how to move forward with some data-driven insights on how to improve your client-facing digital touchpoints, thereby converting more leads into revenue.</p>
-        <p>Are you on the right track with your digital strategy? <a href="/en/contact">Find out now!</a></p>
-    </ContentText>
+    <h2>Let the optimization begin: A/B vs MVT test</h2>
+    <p>Once we understand the problem areas, and who they affect, the fun part can begin: optimizing experiences.</p>
+    <p>Within the optimization process, both A/B and Multivariate (MVT) tests are powerful tools. They can help you to design the best experience for your users.</p>
+    <p><strong>A/B tests</strong></p>
+    <p>An A/B test allows you to test one element of content against another to determine which variant performs best. It’s possible to test more than two variants against one another, as long as you only change one element of your content. For example, changing the call-to-action button on a particular page, changing a product detail description, changing colors, etc.</p>
+    <p>To define a winner, you can choose which element you want your test to be scored against. This can be based on an action on the page, adding a product to a cart, an actual purchase, a filled-out contact form, or based on your goals.</p>
+    <p>An A/B test is best to use when you already have a clear hypothesis of how to improve the experience based on particular KPIs. In other words, when doing an A/B test, you already know which element of the page needs to be improved. The results of the test will reveal the best performing experience (A/B/n).</p>
+    <p><strong>MVT tests</strong></p>
+    <p>An MVT test allows you to test multiple elements in a piece of content to determine which version combination performs best, and to identify which element contributes to the content’s success the most. For each element changed, a combination of these elements will be tested. For example, if you are doing an MVT on a Product Detail page, you are changing three elements:</p>
+    <ul>
+        <li>Element 1: Call-to-action button</li>
+        <li>Element 2: Product description</li>
+        <li>Element 3: Product description details</li>
+    </ul>
+    <p>Changing 3 elements will result in eight different combinations to be tested:</p>
+    <p>The results of the test will reveal which combinations work best, but also which element contributes mostly to the winning experience. An MVT test can be used best when you are in a discovery phase. You may already know a particular page or touchpoint that isn’t converting well, but you don’t have a clear understanding of why it isn’t converting. The results of your MVT test can be further finetuned and optimized with an A/B test. For example, if your MVT reveals that “element 1” has the biggest contribution to the winning experience, you can further test “element 1” with an A/B test.</p>
+    <p><strong>Insights vs time</strong></p>
+    <p>It is clear that MVT tests will give you more insights, but there is one important catch. When changing multiple elements on a page or touchpoint, the number of different combinations will grow rapidly. When changing three elements, you will have eight different combinations to test. When changing four elements, it will be 15 combinations. When changing five elements, it will be 31 combinations. More combinations mean more traffic needed, and more traffic needed means more time to obtain a significant winner.</p>
+    <p>For example, if you want to do an MVT test on a webpage that has 10,000 daily visitors and a current conversion rate of 1.5%, the number of days to obtain a significant winner will grow rapidly:</p>
+    <p>In situations where it takes a long time to acquire significant results, the long test period can influence your results (especially when there are seasonality aspects at play). It’s important to be pragmatic in such cases. Try to reduce the number of elements you want to test (less is more). A good way to sharpen your hypothesis is to do a short face-to-face test with a very small group of users. Use these quick insights to perform an MVT with a reduced number of combinations, but with a bigger audience.</p>
+    <p>Useful tools to do A/B or MVT tests:</p>
+    <ul>
+        <li>Adobe Target</li>
+        <li>Google Optimize</li>
+    </ul>
+    <p>MVT and A/B tests are the best way to determine your next course of action when it comes to CRO. Based on the outcomes of these tests, you will have a clearer understanding of how to move forward with some data-driven insights on how to improve your client-facing digital touchpoints, thereby converting more leads into revenue.</p>
+    <p>Are you on the right track with your digital strategy? <a href="/en/contact">Find out now!</a></p>
 </LayoutSection>

@@ -12,6 +12,7 @@ interface Props {
     headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
     style?: "yellow" | "lightblue";
     image: string;
+    class?: string;
 }
 const { 
     title, 
@@ -21,6 +22,7 @@ const {
     buttonLink,
     headlineTag = "h4",
     style = "yellow",
+    class: className,
 } = Astro.props;
 
 const styles = {
@@ -30,15 +32,15 @@ const styles = {
       "bg-lightest-blue-500 ml-4 -mt-8 relative shadow-xl p-8 md:absolute md:right-8 md:-bottom-20 w-11/12 md:w-8/12 rounded-xl",
 };
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.{jpeg,jpg,png,gif}');
-if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
+if (!images[image]) throw new Error(`"${image}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
 const id = "id_" + Math.random().toString(36).slice(2, 11);
 
 const HeadlineTagName = headlineTag;
 
 ---
 
-<div class="relative flex flex-col my-20 md:my-40 isolate group">
+<div class:list={["relative flex flex-col my-20 md:my-40 isolate",className]}>
   <div class="flex items-center justify-center ml-[-150%] w-[400%] max-h-[400px] lg:max-h-[unset] lg:ml-[unset] lg:w-full rounded-xl overflow-hidden">
       <Image loading="lazy" class="group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform ease-in-out duration-300" src={images[image]()}  alt={title} />
     </div>

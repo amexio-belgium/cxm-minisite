@@ -9,74 +9,52 @@ authorTitle: "XXXX"
 authorProfileImg: '/src/assets/people/jan-lemmens.png'
 ---
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
-import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
-import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
-import ContentText  from "@components/uielements/ContentText.astro"
-import Link from "@components/uielements/Link.astro"
+import ContentImage  from "@components/uielements/ContentImage.astro"
+
 
 <LayoutSection backgroundColor="dark">
-    <LayoutSubsection>
-        <ContentText>
-            <p>We believe people deserve great digital experiences. However, producing digital customer experiences at larger organizations often involves challenges concerning scaling internal operations and collaboration. Content Hubs and Design Systems are two complementary tools which can help in this area. In this blog post, we want to recap what they are and how they can enable <a href="ui-and-ux-achieving-consistency-across-digital-touchpoints.html" rel="noopener">seamless customer experiences</a></p>
-        </ContentText>
-    </LayoutSubsection>
+    <p>We believe people deserve great digital experiences. However, producing digital customer experiences at larger organizations often involves challenges concerning scaling internal operations and collaboration. Content Hubs and Design Systems are two complementary tools which can help in this area. In this blog post, we want to recap what they are and how they can enable <a href="ui-and-ux-achieving-consistency-across-digital-touchpoints.html" rel="noopener">seamless customer experiences</a></p>
 </LayoutSection>
 
 <LayoutSection>
-    <LayoutSubsection imageSrc="/src/assets/images/cxblog.png">
-        <ContentText>
-            <p>Before we dive into what it takes to build customer experiences, let’s quickly recap what we define as “a great customer experience”. The <a href="https://www.acolad.com/en/digital/customer-experience.html" rel="noopener">customer experience</a> is influenced by every interaction happening between the customer and the organization alongside the <strong>customer journey</strong>.</p>
-        </ContentText>
-    </LayoutSubsection>
-
-    <LayoutSubsection imageSrc="/src/assets/images/cxblo2022.png">
-        <ContentText>
-            <p>To contribute to a <a href="how-to-optimize-customer-experiences-at-scale.html" rel="noopener">seamless overall experience</a> , these interactions should:</p>
-                <ul>
-                    <li>
-                        <strong>Be personal</strong> : Serving highly relevant content, products, and services to the customer.
-                    </li>
-                    <li>
-                        <strong>Be consistent</strong> : Presenting the customer with a coherent experience in an omnichannel world.
-                    </li>
-                    <li>
-                        <strong>Be easy to use</strong> : Reducing friction in the customer journey and ensuring an effortless experience.
-                    </li>
-                    <li>
-                        <strong>Respect the customer’s privacy and time</strong> : Be transparent about how the customer’s data is put to use and be aware of the limited time a customer has available to interact with your organization.
-                    </li>
-                </ul>
-                <p>
-                To achieve this, we see that content has become an <strong>essential part of the <a href="how-to-optimize-customer-experiences-at-scale.html" rel="noopener">customer journey</a></strong> . It’s this content that is used to <strong>communicate</strong> your brand mission and values to the world and to <strong>interact</strong> with your audience in the clearest possible way.
-                </p>
-        </ContentText>
-    </LayoutSubsection>
-
-    <LayoutSubsection imageSrc="/src/assets/images/contenthubs.png">
-        <ContentText>
-            <p>The importance of content has rapidly increased over the years, so much that is has become a <strong>strategic asset for customer-centric organizations</strong>. Because of this, we believe that content deserves to live in what we like to call a “Content Hub”: a <strong>go-to place</strong> for all content in your organization.</p>
-			<p>How can a “Content Hub” help you? Its main goals are to facilitate efficient <strong>teamwork</strong> across potential organizational silos and to <strong>prevent content fragmentation</strong> . The hub not only serves as storage, but also provides <strong>tools and processes</strong> to work efficiently with content across its <strong>lifecycle</strong>. This starts with initial content creation up until content delivery and archiving.</p>        
-        </ContentText>
-    </LayoutSubsection>
-
-    <LayoutSubsection imageSrc="/src/assets/images/contenthubsanddesignsystems2.png">
-        <ContentText>
-            <p>The need for Content Hubs increases dramatically when working with personalized customer experiences, for which content <strong>volume is much higher and time-to-market is essential</strong> . It’s useful even to the most extreme use case in which personalization is done in <strong>real-time</strong> , since AI-based automations are in dire need for a Content Hub.</p>
-            <p>However, content isn’t everything. <strong>Great design</strong> is a second essential ingredient of a great customer experience. In this case, we mean design in a broad sense: not only what the experience looks like, but more importantly <strong>how it works</strong> . We believe a <a href="ux-ui-and-consistency-how-to-make-a-good-design-system-work-better.html" rel="noopener">Design System</a> is the ideal vehicle to centralize all design efforts of an organization in a single comprehensive tool.</p>
-        </ContentText>
-    </LayoutSubsection>
-    
-    <ContentText>
-        <p>The main purpose of a Design System is for larger teams to <strong>collaborate</strong> on the creation, maintenance, and usage of the Design System to produce customer experiences <strong>cost-effectively and at a rapid pace</strong>.</p>
-        <p>The <strong>resemblance</strong> between Content Hubs and Design Systems is striking: they both serve as a <strong>single source-of-truth</strong> in their own respect and serve the same goals for the most part: increased efficiently & collaboration, higher consistency, reducing operational costs, increased productivity and lower time-to-market. This makes both <strong>key enablers</strong> for producing great customer experiences at scale, working in a complementary way.</p>
-        <p>At Acolad Digital, we lay the groundwork for our CX projects by applying a <strong>holistic approach,</strong> combining both Content Hubs and Design Systems by deeply integrating them using <strong>Adobe's DXP offering (Adobe Experience Cloud)</strong>. Doing so, we consider <strong>people, processes, and technology</strong> . This means we ensure optimal adoption, use and advocacy of the technology at our clients. For this, a solid <strong>roadmap</strong> is essential, both from a CX perspective as well as a technology perspective. This translates to concrete <strong>KPIs</strong> to be defined, aligned with the broader vision of the organization, and an investment in <strong>robust and stable technology</strong> which is broadly supported in the market and fits well within the client’s technology landscape.</p>    
-    </ContentText>
+    <p>Before we dive into what it takes to build customer experiences, let’s quickly recap what we define as “a great customer experience”. The <a href="https://www.acolad.com/en/digital/customer-experience.html" rel="noopener">customer experience</a> is influenced by every interaction happening between the customer and the organization alongside the <strong>customer journey</strong>.</p>
+     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+            src='/src/assets/images/cxblog.png' 
+            width="548"
+            height="322"
+    />
+    <p>To contribute to a <a href="how-to-optimize-customer-experiences-at-scale.html" rel="noopener">seamless overall experience</a> , these interactions should:</p>
+    <ul>
+        <li><strong>Be personal</strong>: Serving highly relevant content, products, and services to the customer.</li>
+        <li><strong>Be consistent</strong>: Presenting the customer with a coherent experience in an omnichannel world.</li>
+        <li><strong>Be easy to use</strong>: Reducing friction in the customer journey and ensuring an effortless experience.</li>
+        <li><strong>Respect the customer’s privacy and time</strong>: Be transparent about how the customer’s data is put to use and be aware of the limited time a customer has available to interact with your organization.</li>
+    </ul>
+    <p>To achieve this, we see that content has become an <strong>essential part of the <a href="how-to-optimize-customer-experiences-at-scale.html" rel="noopener">customer journey</a></strong> . It’s this content that is used to <strong>communicate</strong> your brand mission and values to the world and to <strong>interact</strong> with your audience in the clearest possible way.</p>
+     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+           src='/src/assets/images/cxblo2022.png' 
+            width="768"
+            height="341"
+    />
+        <p>The importance of content has rapidly increased over the years, so much that is has become a <strong>strategic asset for customer-centric organizations</strong>. Because of this, we believe that content deserves to live in what we like to call a “Content Hub”: a <strong>go-to place</strong> for all content in your organization.</p>
+        <p>How can a “Content Hub” help you? Its main goals are to facilitate efficient <strong>teamwork</strong> across potential organizational silos and to <strong>prevent content fragmentation</strong> . The hub not only serves as storage, but also provides <strong>tools and processes</strong> to work efficiently with content across its <strong>lifecycle</strong>. This starts with initial content creation up until content delivery and archiving.</p>        
+     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+             src='/src/assets/images/contenthubs.png' 
+            width="850"
+            height="325"
+    />
+    <p>The need for Content Hubs increases dramatically when working with personalized customer experiences, for which content <strong>volume is much higher and time-to-market is essential</strong> . It’s useful even to the most extreme use case in which personalization is done in <strong>real-time</strong> , since AI-based automations are in dire need for a Content Hub.</p>
+    <p>However, content isn’t everything. <strong>Great design</strong> is a second essential ingredient of a great customer experience. In this case, we mean design in a broad sense: not only what the experience looks like, but more importantly <strong>how it works</strong> . We believe a <a href="ux-ui-and-consistency-how-to-make-a-good-design-system-work-better.html" rel="noopener">Design System</a> is the ideal vehicle to centralize all design efforts of an organization in a single comprehensive tool.</p>
+     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
+            src='/src/assets/images/contenthubsanddesignsystems2.png' 
+            width="582"
+            height="554"
+    />
+    <p>The main purpose of a Design System is for larger teams to <strong>collaborate</strong> on the creation, maintenance, and usage of the Design System to produce customer experiences <strong>cost-effectively and at a rapid pace</strong>.</p>
+    <p>The <strong>resemblance</strong> between Content Hubs and Design Systems is striking: they both serve as a <strong>single source-of-truth</strong> in their own respect and serve the same goals for the most part: increased efficiently & collaboration, higher consistency, reducing operational costs, increased productivity and lower time-to-market. This makes both <strong>key enablers</strong> for producing great customer experiences at scale, working in a complementary way.</p>
+    <p>At AmeXio, we lay the groundwork for our CX projects by applying a <strong>holistic approach,</strong> combining both Content Hubs and Design Systems by deeply integrating them using <strong>Adobe's DXP offering (Adobe Experience Cloud)</strong>. Doing so, we consider <strong>people, processes, and technology</strong> . This means we ensure optimal adoption, use and advocacy of the technology at our clients. For this, a solid <strong>roadmap</strong> is essential, both from a CX perspective as well as a technology perspective. This translates to concrete <strong>KPIs</strong> to be defined, aligned with the broader vision of the organization, and an investment in <strong>robust and stable technology</strong> which is broadly supported in the market and fits well within the client’s technology landscape.</p>    
 </LayoutSection>
 
 <LayoutSection backgroundColor="dark">
-    <LayoutSubsection>
-        <ContentText>
-            <p>Want to learn more about the importance of customer experience and how Content Hubs and Design Systems are serving this purpose? Our webinar series has all the best practices for you to deliver seamless customer experiences. <a href="ux-ui-and-consistency-how-to-make-a-good-design-system-work-better.html" rel="noopener">Watch now</a></p>
-        </ContentText>
-    </LayoutSubsection>
+    <p>Want to learn more about the importance of customer experience and how Content Hubs and Design Systems are serving this purpose? Our webinar series has all the best practices for you to deliver seamless customer experiences. <a href="ux-ui-and-consistency-how-to-make-a-good-design-system-work-better.html" rel="noopener">Watch now</a></p>
 </LayoutSection>

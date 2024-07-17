@@ -26,10 +26,10 @@ const {
     ...rest
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{jpeg,jpg,png,gif}');
-const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.{jpeg,jpg,png,gif}');
-if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-if (!logoimages[smallImage]) throw new Error(`"${smallImage}" does not exist in glob: "src/assets/logos/*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}');
+const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*{,**/}*.{jpeg,jpg,png,gif}');
+if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}"`);
+if (!logoimages[smallImage]) throw new Error(`"${smallImage}" does not exist in glob: "src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}"`);
 
 const id = "id_" + Math.random().toString(36).slice(2, 11)
 
@@ -39,6 +39,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
       <h3 class="mb-2 text-black font-serif text-xl">
         <Link 
           onWhite
+          hoverColor="orange"
           class="no-underline	outline-none text-black content-none before:absolute before:z-20 before:inset-x-0 before:inset-y-0" 
           href={link} 
           set:html={name}>
