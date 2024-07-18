@@ -8,7 +8,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://dreamy-trifle-7f42a6.netlify.app',
+  site: 'https://partytown-test--dreamy-trifle-7f42a6.netlify.app',
   integrations: [mdx(), sitemap(), qwikdev(), tailwind({
     nesting: true
   }), partytown({
@@ -27,7 +27,7 @@ export default defineConfig({
     server: {
       proxy: {
         '/cookiebot': {
-          tager: 'https://consent.cookiebot.com',
+          target: 'https://consent.cookiebot.com',
           changeOrigin: true,
         }
       }
