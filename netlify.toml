@@ -15,3 +15,8 @@
   to = "https://consentcdn.cookiebot.eu/:splat"
   status = 200
   force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' https://partytown-test--dreamy-trifle-7f42a6.netlify.app;"
