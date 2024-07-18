@@ -1,0 +1,17 @@
+[[redirects]]
+  from = "/cookiebot/*"
+  to = "https://consent.cookiebot.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cookiebotcdn/*"
+  to = "https://consentcdn.cookiebot.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cookiebotcdneu/*"
+  to = "https://consentcdn.cookiebot.eu/:splat"
+  status = 200
+  force = true
