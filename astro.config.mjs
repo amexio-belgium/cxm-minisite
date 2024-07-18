@@ -5,8 +5,6 @@ import tailwind from "@astrojs/tailwind";
 import qwikdev from '@qwikdev/astro';
 
 import partytown from "@astrojs/partytown";
-import { loadEnv } from "vite";
-const { SITE_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 // https://astro.build/config
 export default defineConfig({
   site: 'https://partytown-test--dreamy-trifle-7f42a6.netlify.app',
@@ -22,10 +20,9 @@ export default defineConfig({
           'consentcdn.cookiebot.eu': '/cookiebotcdneu'
         }
         
-        console.log('siteurl: ' + SITE_URL);
-        
+
         if(proxyMap[url.hostname] && proxyMap[url.hostname] !== ''){
-          const newUrl = new URL(SITE_URL);
+          const newUrl = new URL('https://partytown-test--dreamy-trifle-7f42a6.netlify.app');
           newUrl.pathname = proxyMap[url.hostname] + url.pathname;
           newUrl.search = url.search;
           newUrl.searchParams = url.searchParams;
@@ -33,7 +30,7 @@ export default defineConfig({
         }
         
         if(url.pathname.startsWith('/3f5a3037-fd04-4d20-9b59-cd8759bfacf9/') && url.hostname === 'partytown-test--dreamy-trifle-7f42a6.netlify.app'){
-          const newUrl = new URL(SITE_URL);
+          const newUrl = new URL('https://partytown-test--dreamy-trifle-7f42a6.netlify.app');
           newUrl.pathname = '/cookiebot' + url.pathname;
           newUrl.search = url.search;
           newUrl.searchParams = url.searchParams;
