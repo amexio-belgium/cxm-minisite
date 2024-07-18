@@ -1,15 +1,29 @@
 ---
 
 ---
-<script defer is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+<!--<script type="text/partytown" defer is:inline>-->
+<!--    window.dataLayer = window.dataLayer || [];-->
+<!--    function gtag() {-->
+<!--      dataLayer.push(arguments);-->
+<!--    }-->
 
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TMZBQX4');
+<!--    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':-->
+<!--    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],-->
+<!--    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=-->
+<!--    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);-->
+<!--    })(window,document,'script','dataLayer','GTM-TMZBQX4');-->
+<!--</script>-->
+
+
+
+<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=GTM-TMZBQX4"></script>
+<script type="text/partytown" defer is:inline>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'GTM-TMZBQX4');
 </script>
+
+
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3f5a3037-fd04-4d20-9b59-cd8759bfacf9"  type="text/javascript"></script>
