@@ -19,4 +19,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' https://partytown-test--dreamy-trifle-7f42a6.netlify.app;"
+    Content-Security-Policy = "script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' 'unsafe-inline' 'inline-speculation-rules' https://partytown-test--dreamy-trifle-7f42a6.netlify.app;"
