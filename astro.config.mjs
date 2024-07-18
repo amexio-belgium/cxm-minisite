@@ -13,23 +13,49 @@ export default defineConfig({
     nesting: true
   }), partytown({
     config: {
-      resolveUrl(url, location, type) {
-        const proxyMap = {
-          'https://consent.cookiebot.com': 'http://localhost:4321/cookiebot',
-        }
-        url.hostname = proxyMap[url.hostname] || url.hostname;
-        return url;
-      },
+      // resolveUrl(url, location, type) {
+      //   const proxyMap = {
+      //     'https://consent.cookiebot.com/uc.js': 'http://localhost:4321/cookiebot',
+      //     'https://consentcdn.cookiebot.com': 'http://localhost:4321/cookiebotcdn'
+      //   }
+      //   url.hostname = proxyMap[url.hostname] || url.hostname;
+      //   return url;
+      // },
       forward: ['datalayer.push']
     }
   })],
   vite: {
     server: {
       proxy: {
-        '/cookiebot': {
+        '/cookiebot/': {
           target: 'https://consent.cookiebot.com',
           changeOrigin: true,
-        }
+          rewrite: (path) => {
+            const newpath = path.slice(10)
+            console.log(newpath)
+            return newpath
+          },
+        },
+        '/cookiebotcdn/': {
+          target: 'https://consentcdn.cookiebot.com',
+          changeOrigin: true,
+          rewrite: (path) => {
+            const newpath = path.slice(13)
+            console.log('cookiebotcdn.com: ' + newpath)
+            return newpath
+          },
+        },
+        '/cookiebotcdneu/': {
+          target: 'https://consentcdn.cookiebot.com',
+          changeOrigin: true,
+          rewrite: (path) => {
+            const newpath = path.slice(15)
+            console.log('hi')
+            console.log(newpath)
+            return newpath
+          },
+        },
+
       }
     }
   }
