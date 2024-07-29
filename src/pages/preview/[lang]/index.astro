@@ -1,0 +1,35 @@
+---
+
+import {type Navigation, type NavigationQueryResult, type SiteConfig} from 'src/sanity/sanity.types';
+import {navigationQuery, siteConfigQuery} from 'src/api/queries';
+import {loadQuery} from 'src/api/sanity';
+import Header from '@components/layoutcomponents/Header.astro';
+import BaseHead from '@components/layoutcomponents/BaseHead.astro';
+import Footer from '@components/layoutcomponents/Footer.astro';
+import Tracking from '@components/uielements/Tracking.astro';
+import TrackingFooter from '@components/uielements/TrackingFooter.astro';
+export const prerender = false;
+const { lang } = Astro.params;
+if(!lang) {
+    return Astro.redirect('/404');
+}
+const {data: siteConfig} = await loadQuery<SiteConfig>({query: siteConfigQuery, params: {language: lang.toLowerCase()}} );
+
+const {data: header} = await loadQuery<NavigationQueryResult>({query: navigationQuery, params: {navigationId: siteConfig.headerNavigation?._ref!}} );
+const {data: footer} = await loadQuery<NavigationQueryResult>({query: navigationQuery, params: {navigationId: siteConfig.footerNavigation?._ref!}} );
+---
+
+<html class="overflow-x-clip" lang={lang} >
+    <head>
+        <BaseHead title={'test'} description={'test'} />
+        <Tracking />
+    </head>
+    <body class="overflow-x-clip bg-blue-800">
+        <Header language={lang} navigation={header} />
+        <main id="main-content" class="max-w-[1304px] mx-auto px-6 sm:px-8">
+            <slot />
+        </main>
+        <TrackingFooter />
+        <Footer language={lang} navigation={header} secondaryNavigation={footer} isContactPage={false} footerText={siteConfig.copyrightText} />
+    </body>
+</html>
