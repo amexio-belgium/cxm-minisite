@@ -1,32 +1,47 @@
 ---
-import { getLangFromUrl } from '../i18n/utils';
 import BaseHead from '@components/layoutcomponents/BaseHead.astro';
 import Header from '@components/layoutcomponents/Header.astro';
 import Footer from '@components/layoutcomponents/Footer.astro';
 import TrackingFooter from '@components/uielements/TrackingFooter.astro';
 import Tracking from '@components/uielements/Tracking.astro';
+import { siteConfigQuery, navigationQuery } from 'src/api/queries';
+import type { SiteConfig, NavigationQueryResult } from 'src/sanity/sanity.types';
+import { loadQuery } from 'src/api/sanity';
+import {VisualEditing} from '@sanity/astro/visual-editing';
+export const prerender = false;
 
-const { title, description, page } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  language: string;
+}
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-const lang = getLangFromUrl(Astro.url);
+
+const { title, description, slug, language } = Astro.props;
+
+const {data: siteConfig} = await loadQuery<SiteConfig>({query: siteConfigQuery, params: {language: language.toLowerCase()}} );
+
+const {data: header} = await loadQuery<NavigationQueryResult>({query: navigationQuery, params: {navigationId: siteConfig.headerNavigation?._ref!}} );
+const {data: footer} = await loadQuery<NavigationQueryResult>({query: navigationQuery, params: {navigationId: siteConfig.footerNavigation?._ref!}} );
 
 ---
-<html class="overflow-x-clip" lang={lang} >
+<html class="overflow-x-clip" lang={language.toLowerCase()} >
     <head>
-        <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
+        <BaseHead title={title} description={description} />
         {
-            page == "contact" && 
+            slug === "contact" && 
             <link rel="preload" href="https://js-eu1.hsforms.net/forms/embed/v2.js" as="script" /> 
         }
         <Tracking />
     </head>
     <body class="overflow-x-clip bg-blue-800">
-        <Header />
+        <VisualEditing enabled={true} zIndex={1000} />
+        <Header language={language} navigation={header} />
         <main id="main-content" class="max-w-[1304px] mx-auto px-6 sm:px-8">
             <slot />
         </main>
-        <Footer page={page} />
+        <Footer language={language} navigation={header} secondaryNavigation={footer} isContactPage={false} footerText={siteConfig.copyrightText} />
         <TrackingFooter />
     </body>
 </html>

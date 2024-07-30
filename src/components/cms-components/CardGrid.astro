@@ -1,0 +1,23 @@
+---
+import TilesContainer from "@components/uicomposition/TilesContainer.astro";
+import SmallTile from "@components/uielements/SmallTile.astro";
+import type { Card, Intro } from "@sanity/sanity.types";
+
+interface Props {
+    intro: Intro,
+    cards: Card[]|undefined,
+}
+
+const {intro, cards} = Astro.props;
+
+
+---
+
+<TilesContainer 
+    headline={intro.title}
+    description={intro.intro}>
+    
+    {cards?.map(card => 
+      <SmallTile headline={card.title || ''} description={card.content}/>
+    )}
+</TilesContainer>

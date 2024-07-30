@@ -1,8 +1,6 @@
 import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
-import qwikdev from '@qwikdev/astro';
 import netlify from "@astrojs/netlify";
 
 import sanity from "@sanity/astro";
@@ -15,9 +13,7 @@ const { SANITY_API_READ_TOKEN, SANITY_STUDIO_DATASET, SANITY_STUDIO_PROJECT_ID }
 export default defineConfig({
   site: 'https://dreamy-trifle-7f42a6.netlify.app',
   integrations: [
-    mdx(),
     sitemap(),
-    qwikdev(),
     tailwind({
       nesting: true
     }),
@@ -27,11 +23,11 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       stega: {
-        studioUrl: '/',
+        studioUrl: 'http://localhost:3333',
       },
     }),
     react()
   ],
-  output: "hybrid",
+  output: "server",
   adapter: netlify()
 });

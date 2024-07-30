@@ -8,7 +8,9 @@
         "@components/*": ["src/components/*"],
         "@layouts/*": ["src/layouts/*"],
         "@assets/*": ["src/assets/*"],
-        "@lib/*": ["src/lib/*"]
+        "@lib/*": ["src/lib/*"],
+        "@api/*": ["src/api/*"],
+        "@sanity/*": ["src/sanity/*"]
       },
       "jsx": "react-jsx",
       "jsxImportSource": "@builder.io/qwik"

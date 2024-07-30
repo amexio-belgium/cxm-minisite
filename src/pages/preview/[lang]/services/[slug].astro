@@ -1,0 +1,24 @@
+---
+import Base from '@layouts/Base.astro';
+import { serviceQuery } from '@api/queries';
+import { loadQuery } from '@api/sanity';
+import type {ServiceQueryResult} from '@sanity/sanity.types'
+import CardGrid from '@components/cms-components/CardGrid.astro';
+export const prerender = false;
+const { lang, slug } = Astro.params;
+if(!lang || !slug) {
+    return Astro.redirect('/404');
+}
+
+const {data: servicePage} = await loadQuery<ServiceQueryResult>({query: serviceQuery, params: {language: lang, slug: slug}});
+---
+
+<Base title={servicePage?.metadata?.seo?.title || servicePage?.intro?.title!} description={servicePage?.metadata?.seo?.description || ''} language={lang.toLowerCase()} slug={slug}>
+    {servicePage?.content?.map(content => {
+        switch(content._type) {
+            case 'cardGrid': {
+                return <CardGrid intro={content.intro!} cards={content.cards}></CardGrid>;
+            }
+        }
+    })}
+</Base>

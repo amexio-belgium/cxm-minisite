@@ -9,7 +9,6 @@ const Newsletter = component$((props: Props) => {
     const canSignUp = useSignal(true);
     
     const handleSubmit: QRL = $((values) => {
-        console.log(values);
         canSignUp.value = false;
     });
 

@@ -6,7 +6,6 @@ export const getHrefFromLinkObject = (linkObject: CustomLinkObject|null, languag
       href = `/preview/${language}/${linkObject.internalLink?.metadata?.slug?.current}`;
     }
     else if (linkObject?.type === 'external'){
-        console.log(linkObject.url)
       href = linkObject.url || '';
     }
     else if (linkObject?.type === 'email'){
