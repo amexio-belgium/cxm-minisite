@@ -2,6 +2,7 @@
 import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
 import type { Card, Intro } from "@sanity/sanity.types";
+import {imageBuilder} from 'src/api/sanity';
 
 interface Props {
     intro: Intro,
@@ -18,6 +19,10 @@ const {intro, cards} = Astro.props;
     description={intro.intro}>
     
     {cards?.map(card => 
-      <SmallTile headline={card.title || ''} description={card.content}/>
+            <SmallTile headline={card.title || ''} description={card.content}>
+                {card.icon?.asset &&
+                    <img src={imageBuilder.image(card.icon.asset).height(96).url()} alt="" class="h-24 w-auto" width="300" height="150" loading="lazy" decoding="async"/>
+                }
+                </SmallTile>
     )}
 </TilesContainer>

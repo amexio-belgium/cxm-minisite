@@ -1,5 +1,6 @@
 import {type QueryParams} from 'sanity'
 import {sanityClient} from 'sanity:client'
+import imageUrlBuilder from '@sanity/image-url'
 
 const visualEditingEnabled = import.meta.env.SANITY_VISUAL_EDITING_ENABLED === 'true'
 const token = import.meta.env.SANITY_API_READ_TOKEN
@@ -32,3 +33,5 @@ export async function loadQuery<QueryResponse>({
         perspective,
     }
 }
+
+export const imageBuilder = imageUrlBuilder(sanityClient)
