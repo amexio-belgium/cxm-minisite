@@ -3,7 +3,7 @@ export const contact = {
         'contact.title': "Contact - AmeXio Fuse",
         'contact.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': '<mark>Contact</mark> us',
-        'hero.subheadline': 'We are happy to discuss your content challenge! Let\'s discover how we can help you to remove impediments from your content lifecycle and improve the way your team deals with content and scales its operations.<br /><br />Sure there are ways to get more <strong><mark>value</mark></strong> from your content?',
+        'hero.subheadline': 'We’d love to talk about your content challenges! Let’s explore how we can remove obstacles from your content lifecycle and help your team manage and scale operations more effectively.<br /><br />Are you ready to unlock more <strong><mark>value</mark></strong> from your content?',
         'form.headline': 'Let\'s discuss your content challenge',
         'highlight.headline': 'Visit us on-site',
         'highlight.text': 'Drop by one of our offices and meet with our teams in person!',
