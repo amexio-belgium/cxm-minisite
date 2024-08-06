@@ -68,6 +68,27 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type ReferenceCase = {
+  _id: string;
+  _type: "referenceCase";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+};
+
+export type WorkCardList = {
+  _type: "workCardList";
+  intro?: Intro;
+  referenceCases?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "referenceCase";
+  }>;
+};
+
 export type SiteConfig = {
   _id: string;
   _type: "siteConfig";
@@ -175,6 +196,49 @@ export type Technology = {
   };
 };
 
+export type Tabs = {
+  _type: "tabs";
+  intro?: Intro;
+  tabsOverview?: Array<{
+    tab?: Array<{
+      title?: string;
+      richText?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _type: "tabTextObject";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+      _key: string;
+    }>;
+    _type: "tabContent";
+    _key: string;
+  }>;
+};
+
 export type SolutionDomain = {
   _id: string;
   _type: "solutionDomain";
@@ -244,27 +308,47 @@ export type SolutionDomain = {
   }>;
 };
 
-export type ServicesCardListGroup = {
-  _type: "servicesCardListGroup";
-  title?: string;
-  service?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  };
-};
-
 export type ServicesCardList = {
   _type: "servicesCardList";
   intro?: Intro;
   groups?: Array<{
+    title?: string;
+    services?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "service";
+    }>;
+    _type: "servicesCardListGroup";
     _key: string;
-  } & ServicesCardListGroup>;
+  }>;
 };
 
-export type HighlightBlock = {
-  _type: "highlightBlock";
+export type Person = {
+  _id: string;
+  _type: "person";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  jobTitle?: string;
+  contactLink?: Link;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type Highlight = {
+  _type: "highlight";
   intro?: Intro;
   cta?: string;
   backgroundImage?: {
@@ -303,81 +387,49 @@ export type LongFormText = {
   }>;
 };
 
-export type Customer = {
-  _id: string;
-  _type: "customer";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  link?: Link;
-  logo?: {
-    default?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    light?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    dark?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-};
-
 export type CardGrid = {
   _type: "cardGrid";
   intro?: Intro;
   cards?: Array<{
-    _key: string;
-  } & Card>;
-};
-
-export type Card = {
-  _type: "card";
-  title?: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+    title?: string;
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
       _key: string;
     }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+    icon?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _type: "card";
     _key: string;
   }>;
-  icon?: {
+};
+
+export type Callout = {
+  _type: "callout";
+  intro?: Intro;
+  content?: Array<{
     asset?: {
       _ref: string;
       _type: "reference";
@@ -387,43 +439,27 @@ export type Card = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  };
-};
-
-export type CalloutBlock = {
-  _type: "calloutBlock";
-  intro?: Intro;
-  callout?: Array<{
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    alignment?: "left" | "right";
-    _type: "imageObject";
     _key: string;
   } | {
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+    richText?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
       _key: string;
     }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+    _type: "textObject";
     _key: string;
   }>;
 };
@@ -468,6 +504,32 @@ export type InternationalizedArrayReferenceValue = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "contentPage";
   };
+};
+
+export type ContentPage = {
+  _id: string;
+  _type: "contentPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  content?: Array<({
+    _key: string;
+  } & Highlight) | ({
+    _key: string;
+  } & CardGrid) | ({
+    _key: string;
+  } & Callout) | ({
+    _key: string;
+  } & LongFormText) | ({
+    _key: string;
+  } & ServicesCardList) | ({
+    _key: string;
+  } & Tabs) | ({
+    _key: string;
+  } & WorkCardList)>;
+  metadata?: Metadata;
+  language?: string;
 };
 
 export type Navigation = {
@@ -566,56 +628,6 @@ export type AnswerQuestion = {
   language?: string;
 };
 
-export type InternationalizedArrayReference = Array<{
-  _key: string;
-} & InternationalizedArrayReferenceValue>;
-
-export type Link = {
-  _type: "link";
-  text?: string;
-  type?: string;
-  internalLink?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "contentPage";
-  };
-  url?: string;
-  email?: string;
-  phone?: string;
-  value?: string;
-  blank?: boolean;
-  parameters?: string;
-  anchor?: string;
-};
-
-export type ContentPage = {
-  _id: string;
-  _type: "contentPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  content?: Array<({
-    _key: string;
-  } & HighlightBlock) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & CalloutBlock) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList)>;
-  metadata?: Metadata;
-  language?: string;
-};
-
 export type Service = {
   _id: string;
   _type: "service";
@@ -638,15 +650,19 @@ export type Service = {
   cta?: string;
   content?: Array<({
     _key: string;
-  } & HighlightBlock) | ({
+  } & Highlight) | ({
     _key: string;
   } & CardGrid) | ({
     _key: string;
-  } & CalloutBlock) | ({
+  } & Callout) | ({
     _key: string;
   } & LongFormText) | ({
     _key: string;
-  } & ServicesCardList)>;
+  } & ServicesCardList) | ({
+    _key: string;
+  } & Tabs) | ({
+    _key: string;
+  } & WorkCardList)>;
   faqs?: Faq;
   customerReferences?: Array<{
     _ref: string;
@@ -707,6 +723,78 @@ export type Faq = {
   }>;
 };
 
+export type Intro = {
+  _type: "intro";
+  title?: string;
+  intro?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type InternationalizedArrayReference = Array<{
+  _key: string;
+} & InternationalizedArrayReferenceValue>;
+
+export type Customer = {
+  _id: string;
+  _type: "customer";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  link?: Link;
+  logo?: {
+    default?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    light?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    dark?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+};
+
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -764,27 +852,23 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Intro = {
-  _type: "intro";
-  title?: string;
-  intro?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+export type Link = {
+  _type: "link";
+  text?: string;
+  type?: string;
+  internalLink?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "customer";
+  };
+  url?: string;
+  email?: string;
+  phone?: string;
+  value?: string;
+  blank?: boolean;
+  parameters?: string;
+  anchor?: string;
 };
 
 export type MediaTag = {
@@ -879,25 +963,116 @@ export type NavigationQueryResult = {
       type?: string;
       internalLink: {
         _id: string;
-        _type: "contentPage";
+        _type: "customer";
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
-        intro?: Intro;
-        content?: Array<({
+        name?: string;
+        link?: Link;
+        logo?: {
+          default?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          light?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          dark?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+        };
+      } | null;
+      url?: string;
+      email?: string;
+      phone?: string;
+      value?: string;
+      blank?: boolean;
+      parameters?: string;
+      anchor?: string;
+    } | null;
+  }> | null;
+  language?: string;
+} | null;
+// Variable: serviceQuery
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  servicePillar->{...},  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,        }      }    },    defined(cards) => {      cards[] {        ...,        icon->{icon}      }    }  }}
+export type ServiceQueryResult = {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  challenge?: string;
+  cta?: string;
+  content: Array<{
+    _key: string;
+    groups: null;
+    cards: null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: Array<{
+      title?: string;
+      content?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
           _key: string;
-        } & CalloutBlock) | ({
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
           _key: string;
-        } & CardGrid) | ({
-          _key: string;
-        } & HighlightBlock) | ({
-          _key: string;
-        } & LongFormText) | ({
-          _key: string;
-        } & ServicesCardList)>;
-        metadata?: Metadata;
-        language?: string;
-      } | {
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      icon: null;
+      _type: "card";
+    }> | null;
+  } | {
+    _key: string;
+    groups: Array<{
+      title?: string;
+      services: Array<{
         _id: string;
         _type: "service";
         _createdAt: string;
@@ -919,15 +1094,19 @@ export type NavigationQueryResult = {
         cta?: string;
         content?: Array<({
           _key: string;
-        } & CalloutBlock) | ({
+        } & Callout) | ({
           _key: string;
         } & CardGrid) | ({
           _key: string;
-        } & HighlightBlock) | ({
+        } & Highlight) | ({
           _key: string;
         } & LongFormText) | ({
           _key: string;
-        } & ServicesCardList)>;
+        } & ServicesCardList) | ({
+          _key: string;
+        } & Tabs) | ({
+          _key: string;
+        } & WorkCardList)>;
         faqs?: Faq;
         customerReferences?: Array<{
           _ref: string;
@@ -944,51 +1123,11 @@ export type NavigationQueryResult = {
         };
         language?: string;
         metadata?: Metadata;
-      } | null;
-      url?: string;
-      email?: string;
-      phone?: string;
-      value?: string;
-      blank?: boolean;
-      parameters?: string;
-      anchor?: string;
-    } | null;
+      }> | null;
+      _type: "servicesCardListGroup";
+    }> | null;
+    cards: null;
   }> | null;
-  language?: string;
-} | null;
-// Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]
-export type ServiceQueryResult = {
-  _id: string;
-  _type: "service";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  challenge?: string;
-  cta?: string;
-  content?: Array<({
-    _key: string;
-  } & CalloutBlock) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & HighlightBlock) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList)>;
   faqs?: Faq;
   customerReferences?: Array<{
     _ref: string;
@@ -997,12 +1136,14 @@ export type ServiceQueryResult = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "customer";
   }>;
-  servicePillar?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "servicePillar";
-  };
+  servicePillar: {
+    _id: string;
+    _type: "servicePillar";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+  } | null;
   language?: string;
   metadata?: Metadata;
 } | null;

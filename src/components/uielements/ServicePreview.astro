@@ -1,41 +1,51 @@
 ---
 import { useTranslations } from 'src/i18n/utils';
 import Button from '@components/uielements/Button.astro';
-import { Picture } from "astro:assets";
+import { PortableText } from "astro-portabletext";
+import type { ServiceWithReferences } from '@sanity/custom.sanity.types';
+import { imageBuilder } from '@api/sanity';
+import {stegaClean} from "@sanity/client/stega";
 
 const { lang } = Astro.params;
 
-const { 
-    serviceData,
-    link
-} = Astro.props;
+interface Props {
+    service: ServiceWithReferences,
+}
+
+
+const { service} = Astro.props;
 
 const t = useTranslations(lang, 'services');
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
-if (!images[serviceData.heroImage]) throw new Error(`"${serviceData}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
 
 ---
+{service &&
 <div class="projectcard group/service flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto mb-8 shadow-xl">
     <div class="relative w-full flex flex-col items-start justify-between gap-8 md:gap-20 p-4 sm:p-8 h-1/2 md:h-full md:w-2/3">
         <div class="flex flex-col">
-            <h3 class="mb-2 font-serif text-lg [&>mark]:text-black" set:html={serviceData.previewTitle || serviceData.title}></h3>
-            <p class="text-sm font-light [&>mark]:text-black" set:html={serviceData.description}></p>
+            <h3 class="mb-2 font-serif text-lg [&>mark]:text-black">{service?.intro?.title}</h3>
+            {service.intro?.intro &&
+                <div class="text-sm font-light [&>mark]:text-black">
+                    <PortableText value={service?.intro?.intro}></PortableText>
+                </div>
+            }
         </div>
-        <Button link={link} longText style="primary" size="sm" color="light" class="z-10 md:max-w-xs lg:max-w-md xl:max-w-sm">
-            {serviceData.cta || t('overview.backupcta')}
+        <Button link={`/${service.language}/${service.metadata?.slug}`} longText style="primary" size="sm" color="light" class="z-10 md:max-w-xs lg:max-w-md xl:max-w-sm">
+            {service.cta}
         </Button>
     </div>
     <div class="bg-blue-100 relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project max-h-[200px] md:max-h-[unset] md:w-1/2 md:-right-1/12 md:h-full md:absolute object-cover">
-        <Picture
-            src={images[serviceData.heroImage]()} 
-            alt={serviceData.altTextImage || ""}
-            widths={[400, 600, 790]}
+
+        <img
+            src={imageBuilder.image(service.image!).width(790).url()}
+            alt="ddd"
             sizes="(max-width: 790px) 100vw, 790px"
-            class="motion-safe:group-hover/service:scale-110 transition-transform md:absolute left-0 top-0 ease-in-out duration-300 max-w-[unset] w-full md:w-auto   min-w-full shrink-0 md:h-full" 
+            class="motion-safe:group-hover/service:scale-110 transition-transform md:absolute left-0 top-0 ease-in-out duration-300 max-w-[unset] w-full md:w-auto   min-w-full shrink-0 md:h-full"
             loading="eager"
         />
-    </div> 
+        </div> 
 </div>
+
+}
 
 <style>
     .mask-project {

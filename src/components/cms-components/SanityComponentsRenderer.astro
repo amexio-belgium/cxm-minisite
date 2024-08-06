@@ -1,29 +1,24 @@
 ---
-import type { CalloutBlock, CardGrid as CardGridType, ContentPage, HighlightBlock, LongFormText, ServicesCardList } from '@sanity/sanity.types';
+import type { CardGrid as CardGridType, LongFormText, ServicesCardList } from '@sanity/sanity.types';
 import CardGrid from '@components/cms-components/CardGrid.astro';
+import ServiceCardList from './ServiceCardList.astro';
 
 interface Props {
-  content: Array<({
-        _key: string;
-    } & HighlightBlock) | ({
-        _key: string;
-    } & CardGridType) | ({
-        _key: string;
-    } & CalloutBlock) | ({
-        _key: string;
-    } & LongFormText) | ({
-        _key: string;
-    } & ServicesCardList)>|undefined;
+  content: Array<ServicesCardList|CardGridType>|undefined,
+  language: string,
 }
 
-const {content} = Astro.props;
+const {content, language} = Astro.props;
 
 ---
 
 {content?.map(content => {
     switch(content._type) {
         case 'cardGrid': {
-            return <CardGrid intro={content.intro!} cards={content.cards}></CardGrid>;
+            return <CardGrid cardGrid={content} language={language}></CardGrid>;
+        }
+        case 'servicesCardList': {
+            return <ServiceCardList serviceCardList={content}></ServiceCardList>
         }
     }
 })}

@@ -1,4 +1,4 @@
-import type { CalloutBlock, CardGrid, Faq, HighlightBlock, internalGroqTypeReferenceTo, Intro, LongFormText, Metadata, SanityImageCrop, SanityImageHotspot, ServicesCardList } from "./sanity.types";
+import type { CardGrid, Faq, internalGroqTypeReferenceTo, Intro, LongFormText, Metadata, SanityImageAsset, SanityImageCrop, SanityImageHotspot, ServicePillar, ServicesCardList } from "./sanity.types";
 
 export type CustomLinkObject = {
     _type: "link";
@@ -13,11 +13,7 @@ export type CustomLinkObject = {
       intro?: Intro;
       content?: Array<({
         _key: string;
-      } & CalloutBlock) | ({
-        _key: string;
       } & CardGrid) | ({
-        _key: string;
-      } & HighlightBlock) | ({
         _key: string;
       } & LongFormText) | ({
         _key: string;
@@ -80,3 +76,24 @@ export type CustomLinkObject = {
     parameters?: string;
     anchor?: string;
   }
+
+
+  export type i18nImageAsset = SanityImageAsset & {
+    titles: {[key: string]: string}[],
+    descriptions: {[key: string]: string}[],
+    altTexts: {[key: string]: string}[]
+  }
+
+  export interface ServiceWithReferences {
+    _type: 'service',
+    challange?: string,
+    language?: string,
+    cta?: string,
+    content?: Array<ServicesCardList|CardGrid>,
+    metadata?: Metadata,
+    image?: i18nImageAsset,
+    _updatedAt?: string,
+    _id: string,
+    intro?: Intro,
+    servicePillar?: ServicePillar
+}

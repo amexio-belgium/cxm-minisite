@@ -1,28 +1,34 @@
 ---
 import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
-import type { Card, Intro } from "@sanity/sanity.types";
+import type { i18nImageAsset } from "@sanity/custom.sanity.types";
+import type { CardGrid, SanityImageAsset } from "@sanity/sanity.types";
 import {imageBuilder} from 'src/api/sanity';
+import {stegaClean} from "@sanity/client/stega";
 
 interface Props {
-    intro: Intro,
-    cards: Card[]|undefined,
+    cardGrid: CardGrid,
+    language: string,
 }
 
-const {intro, cards} = Astro.props;
+const {cardGrid, language} = Astro.props;
 
 
 ---
 
 <TilesContainer 
-    headline={intro.title}
-    description={intro.intro}>
+    headline={cardGrid?.intro?.title }
+    description={cardGrid?.intro?.intro}>
     
-    {cards?.map(card => 
-            <SmallTile headline={card.title || ''} description={card.content}>
-                {card.icon?.asset &&
-                    <img src={imageBuilder.image(card.icon.asset).height(96).url()} alt="" class="h-24 w-auto" width="300" height="150" loading="lazy" decoding="async"/>
-                }
-                </SmallTile>
+    {cardGrid?.cards?.map(card => {
+        const asset = card?.icon?.asset as any as i18nImageAsset;
+        return (
+        <SmallTile headline={card.title || ''} description={card.content}>
+            {card.icon?.asset &&
+                <img src={imageBuilder.image(asset).height(192).url()} alt={stegaClean(asset?.altTexts?.[language])} class="h-24 w-auto" width="300" height="150" loading="lazy" decoding="async"/>
+            }
+        </SmallTile>
+        )
+    }
     )}
 </TilesContainer>

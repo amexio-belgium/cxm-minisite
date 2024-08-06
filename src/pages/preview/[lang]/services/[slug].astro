@@ -2,18 +2,20 @@
 import Base from '@layouts/Base.astro';
 import { serviceQuery } from '@api/queries';
 import { loadQuery } from '@api/sanity';
-import type {ServiceQueryResult} from '@sanity/sanity.types'
-import CardGrid from '@components/cms-components/CardGrid.astro';
 import SanityComponentsRenderer from '@components/cms-components/SanityComponentsRenderer.astro';
+import {type ServiceWithReferences} from 'src/sanity/custom.sanity.types';
+
 export const prerender = false;
 const { lang, slug } = Astro.params;
 if(!lang || !slug) {
     return Astro.redirect('/404');
 }
 
-const {data: servicePage} = await loadQuery<ServiceQueryResult>({query: serviceQuery, params: {language: lang, slug: slug}});
+
+
+const {data: servicePage} = await loadQuery<ServiceWithReferences>({query: serviceQuery, params: {language: lang, slug: slug}});
 ---
 
 <Base title={servicePage?.metadata?.seo?.title || servicePage?.intro?.title!} description={servicePage?.metadata?.seo?.description || ''} language={lang.toLowerCase()} slug={slug}>
-    <SanityComponentsRenderer content={servicePage?.content}></SanityComponentsRenderer>
+    <SanityComponentsRenderer content={servicePage?.content} language={servicePage.language!}></SanityComponentsRenderer>
 </Base>

@@ -9,4 +9,29 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
                                     }
                                     `;
 
-export const serviceQuery = groq`*[_type == "service" && language == $language && metadata.slug.current == $slug][0]`;
+export const serviceQuery = groq`*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{
+  ...,
+  servicePillar->{...},
+  content[] {
+    ...,
+    defined(groups) => {
+      groups[] {
+        ...,
+        'services': services[]->{
+          ...,
+        }
+      }
+    },
+    defined(cards) => {
+      cards[] {
+        ...,
+        icon{
+          ...,
+          asset->{
+            ...,
+          }
+        }
+      }
+    }
+  }
+}`;
