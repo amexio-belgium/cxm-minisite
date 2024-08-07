@@ -1,6 +1,19 @@
 import groq from 'groq';
 
-export const siteConfigQuery = groq`*[_type == "siteConfig" && language == $language][0]`;
+export const siteConfigQuery = groq`*[_type == "siteConfig" && language == $language][0]{
+  ...,
+  socials[]{
+    ...,
+    icon{
+      asset->{
+        ...,
+        altTexts{...},
+        descriptions{...},
+        titles{...}
+      }
+    },
+  }
+}`;
 
 export const navigationQuery = groq`*[_type == "navigation" && _id == $navigationId][0]
                                     {

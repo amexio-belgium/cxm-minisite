@@ -22,7 +22,13 @@ const {data: servicePage} = await loadQuery<ServiceWithReferences>({query: servi
 
 ---
 
-<Base title={servicePage?.metadata?.seo?.title || servicePage?.intro?.title!} description={servicePage?.metadata?.seo?.description || ''} language={lang.toLowerCase()} slug={slug}>
+<Base 
+    title={servicePage?.metadata?.seo?.title || servicePage?.intro?.title!} 
+    description={servicePage?.metadata?.seo?.description || ''} 
+    language={lang.toLowerCase()} 
+    slug={slug}
+    preview={true}
+>
     <HeroHeader 
         headline={servicePage.intro?.title }
         text={servicePage.intro?.intro} 
