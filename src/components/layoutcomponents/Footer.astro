@@ -85,7 +85,7 @@ const t = useTranslations(language.toLowerCase());
           <div class="z-50 inline-flex items-center justify-start h-12 gap-[1px] md:w-1/3">
             {socials?.map(social => 
               <Link class="focus-visible:!px-0 border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href={social.link} rel="noopener">
-                <img class="w-8 h-8" src={imageBuilder.image(social.iconImageID).width(32).height(32).url()} alt={social.alt}/>
+                <img class="w-7 h-7" src={imageBuilder.image(social.iconImageID).width(27).height(27).url()} alt={social.alt}/>
                 <span class="sr-only">{t('footer.srvisit')} {social.name}</span>
               </Link>
             )}
