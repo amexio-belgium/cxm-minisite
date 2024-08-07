@@ -12,6 +12,28 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
 export const serviceQuery = groq`*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{
   ...,
   servicePillar->{...},
+  image{
+    ...,
+    asset->{...}
+  },
+  customerReferences[]->{
+    ...,
+    logo{
+      ...,
+      default{
+        ...,
+        asset->{...}
+      },
+      dark{
+        ...,
+        asset->{...}
+      },
+      light{
+        ...,
+        asset->{...}
+      }
+    }
+  },
   content[] {
     ...,
     defined(groups) => {
@@ -19,6 +41,10 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
         ...,
         'services': services[]->{
           ...,
+          image{
+            ...,
+            asset->{...}
+          },
         }
       }
     },

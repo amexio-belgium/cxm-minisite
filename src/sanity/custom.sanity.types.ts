@@ -1,4 +1,4 @@
-import type { CardGrid, Faq, internalGroqTypeReferenceTo, Intro, LongFormText, Metadata, SanityImageAsset, SanityImageCrop, SanityImageHotspot, ServicePillar, ServicesCardList } from "./sanity.types";
+import type { CardGrid, Faq, internalGroqTypeReferenceTo, Intro, Link, LongFormText, Metadata, SanityImageAsset, SanityImageCrop, SanityImageHotspot, ServicePillar, ServicesCardList } from "./sanity.types";
 
 export type CustomLinkObject = {
     _type: "link";
@@ -40,13 +40,9 @@ export type CustomLinkObject = {
       };
       challenge?: string;
       cta?: string;
-      content?: Array<({
-        _key: string;
-      } & CalloutBlock) | ({
+      content?: Array< ({
         _key: string;
       } & CardGrid) | ({
-        _key: string;
-      } & HighlightBlock) | ({
         _key: string;
       } & LongFormText) | ({
         _key: string;
@@ -78,22 +74,43 @@ export type CustomLinkObject = {
   }
 
 
-  export type i18nImageAsset = SanityImageAsset & {
-    titles: {[key: string]: string}[],
-    descriptions: {[key: string]: string}[],
-    altTexts: {[key: string]: string}[]
-  }
+export type i18nImageAsset = SanityImageAsset & {
+  titles: {[key: string]: string}[],
+  descriptions: {[key: string]: string}[],
+  altTexts: {[key: string]: string}[]
+}
 
-  export interface ServiceWithReferences {
-    _type: 'service',
-    challange?: string,
-    language?: string,
-    cta?: string,
-    content?: Array<ServicesCardList|CardGrid>,
-    metadata?: Metadata,
-    image?: i18nImageAsset,
-    _updatedAt?: string,
-    _id: string,
-    intro?: Intro,
-    servicePillar?: ServicePillar
+export type i18nImage = {
+  asset: i18nImageAsset | null;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+}
+
+export interface ServiceWithReferences {
+  _type: 'service',
+  challange?: string,
+  language?: string,
+  cta?: string,
+  content?: Array<ServicesCardList|CardGrid>,
+  metadata?: Metadata,
+  image?: i18nImage,
+  _updatedAt?: string,
+  _id: string,
+  intro?: Intro,
+  servicePillar?: ServicePillar,
+  customerReferences: Array<{
+    _id: string;
+    _type: "customer";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    link?: Link;
+    logo: {
+      default: i18nImage | null;
+      light: i18nImage | null;
+      dark: i18nImage | null;
+    } | null;
+  }> | null;
 }

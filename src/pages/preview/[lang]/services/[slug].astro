@@ -1,9 +1,11 @@
 ---
 import Base from '@layouts/Base.astro';
 import { serviceQuery } from '@api/queries';
-import { loadQuery } from '@api/sanity';
+import { imageBuilder, loadQuery } from '@api/sanity';
 import SanityComponentsRenderer from '@components/cms-components/SanityComponentsRenderer.astro';
 import {type ServiceWithReferences} from 'src/sanity/custom.sanity.types';
+import HeroHeader from '@components/uicomposition/HeroHeader.astro';
+import Customers from '@components/uicomposition/Customers.astro';
 
 export const prerender = false;
 const { lang, slug } = Astro.params;
@@ -12,10 +14,31 @@ if(!lang || !slug) {
 }
 
 
-
 const {data: servicePage} = await loadQuery<ServiceWithReferences>({query: serviceQuery, params: {language: lang, slug: slug}});
+
+
 ---
 
 <Base title={servicePage?.metadata?.seo?.title || servicePage?.intro?.title!} description={servicePage?.metadata?.seo?.description || ''} language={lang.toLowerCase()} slug={slug}>
+    <HeroHeader 
+        headline={servicePage.intro?.title }
+        text={servicePage.intro?.intro} 
+        backgroundImage={servicePage?.image?.asset?._id}
+    >
+        <Customers headline="Customers we advised">
+            {servicePage.customerReferences?.map(customer => 
+                <>
+                    {customer.logo?.default?.asset && 
+                        <img 
+                            src={imageBuilder.image(customer.logo?.default?.asset).height(80).url()} 
+                            alt={customer.logo.default.asset.altTexts?.[servicePage.language||'en']||''} 
+                            class="h-10 w-auto"
+                        />
+                    }
+                </>
+                
+            )}
+        </Customers> 
+    </HeroHeader>
     <SanityComponentsRenderer content={servicePage?.content} language={servicePage.language!}></SanityComponentsRenderer>
 </Base>

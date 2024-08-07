@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 import netlify from "@astrojs/netlify";
+import sanityImg from "@otterstack/sanity-img-astro/integration";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
@@ -26,7 +27,8 @@ export default defineConfig({
         studioUrl: 'http://localhost:3333',
       },
     }),
-    react()
+    react(),
+    sanityImg({options: {auto: 'format'}}),
   ],
   output: "server",
   adapter: netlify()

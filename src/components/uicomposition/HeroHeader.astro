@@ -1,11 +1,14 @@
 ---
 import LogoSlant from '@components/graphicelements/LogoSlant.astro';
-import { Picture } from "astro:assets";
 import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
+import { PortableText } from "astro-portabletext";
+import SanityImg from "@otterstack/sanity-img-astro";
+import { imageBuilder } from '@api/sanity';
+
 interface Props {
-    headline: string;
+    headline?: string;
     client?: string;
-    text?: string;
+    text?: any;
     buttonText?: string;
     homepage?: boolean;
     backgroundImage?: string;
@@ -21,33 +24,7 @@ const {
     backgroundImageAltText = ''
 } = Astro.props;
 
-let backgroundImageFound;
 
-if (backgroundImage && backgroundImage.includes("/projects/")) {
-    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}');
-    if (!projectImages[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-    backgroundImageFound = projectImages[backgroundImage]
-} else if (backgroundImage) {
-    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
-    if (!images[backgroundImage]) throw new Error(`"${backgroundImage}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-    backgroundImageFound = images[backgroundImage]
-}
-
-let headlineWithSpeed = ""
-
-if (headline.includes("<mark")){
-    const textLength = headline.length;
-    const baseSpeed = 10; 
-    headlineWithSpeed = headline.replace("<mark", `<mark style="animation-duration: ${textLength*baseSpeed}ms" `)
-}
-
-let textWithSpeed = ""
-
-if (text && text.includes("<mark")){
-    const textLength = text.length;
-    const baseSpeed = 3; 
-    textWithSpeed = text.replace("<mark", `<mark style="animation-duration: ${textLength*baseSpeed}ms" `)
-}
 ---
 <div class:list={[
         "relative pt-10 text-white pb-20 md:pb-32 lg:pb-40", 
@@ -63,27 +40,28 @@ if (text && text.includes("<mark")){
         }
         <h1 class:list={["font-serif text-pretty font-bold w-full lg:w-11/12 xl:w-2/3",
             homepage ? "text-3xl md:text-4xl" : "text-3xl md:text-4xl "
-        ]} 
-            set:html={headlineWithSpeed || headline}>
+        ]}>
+        {headline}
         </h1>
     </div>
     <div class:list={["relative ", homepage && "w-full xl:w-1/2"]}>
         <div class:list={[" text-left w-full md:w-[80ch]", homepage && "md:w-full"]}>
             { text && 
-                <p class="text-lg font-light md:text-xl" set:html={textWithSpeed || text}></p> 
+                <div class="text-lg font-light md:text-xl"><PortableText value={text}></PortableText></div> 
             }
             <slot />
         </div>
     </div>
     { 
         backgroundImage ? 
-            <Picture
-                src={backgroundImageFound()}
+            <SanityImg
+                src={backgroundImage}
                 alt={backgroundImageAltText}
                 widths={[400, 800, 1200]}
                 sizes="(max-width: 1200px) 100vw, 1200px"
-                class="absolute top-0 -z-10 object-cover h-full w-100vw -right-1/4"
+                class="absolute top-0 -z-10 object-cover h-full w-full max-w-100vw -right-1/4"
                 loading="eager"
+                imageUrlBuilder={imageBuilder}
             />
         :
             <div class:list={

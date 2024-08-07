@@ -1017,7 +1017,7 @@ export type NavigationQueryResult = {
   language?: string;
 } | null;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  servicePillar->{...},  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,        }      }    },    defined(cards) => {      cards[] {        ...,        icon->{icon}      }    }  }}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  servicePillar->{...},  customerReferences[]->{    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    }  }}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -1065,7 +1065,33 @@ export type ServiceQueryResult = {
         _type: "block";
         _key: string;
       }>;
-      icon: null;
+      icon: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
       _type: "card";
     }> | null;
   } | {
@@ -1129,13 +1155,98 @@ export type ServiceQueryResult = {
     cards: null;
   }> | null;
   faqs?: Faq;
-  customerReferences?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "customer";
-  }>;
+  customerReferences: Array<{
+    _id: string;
+    _type: "customer";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    link?: Link;
+    logo: {
+      default: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      light: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      dark: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+    } | null;
+  }> | null;
   servicePillar: {
     _id: string;
     _type: "servicePillar";
