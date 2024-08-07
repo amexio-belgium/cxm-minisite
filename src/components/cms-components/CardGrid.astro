@@ -2,9 +2,8 @@
 import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImageAsset } from "@sanity/custom.sanity.types";
-import type { CardGrid, SanityImageAsset } from "@sanity/sanity.types";
+import type { CardGrid } from "@sanity/sanity.types";
 import {imageBuilder} from 'src/api/sanity';
-import {stegaClean} from "@sanity/client/stega";
 
 interface Props {
     cardGrid: CardGrid,
@@ -25,7 +24,7 @@ const {cardGrid, language} = Astro.props;
         return (
         <SmallTile headline={card.title || ''} description={card.content}>
             {card.icon?.asset &&
-                <img src={imageBuilder.image(asset).height(192).url()} alt={stegaClean(asset?.altTexts?.[language])} class="h-24 w-auto" width="300" height="150" loading="lazy" decoding="async"/>
+                <img src={imageBuilder.image(asset).height(192).url()} alt={asset?.altTexts?.[language]} class="h-24 w-auto" width="300" height="150" loading="lazy" decoding="async"/>
             }
         </SmallTile>
         )
