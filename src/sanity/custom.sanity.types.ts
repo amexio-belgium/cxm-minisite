@@ -1,4 +1,4 @@
-import type { CardGrid, Faq, internalGroqTypeReferenceTo, Intro, Link, LongFormText, Metadata, SanityImageAsset, SanityImageCrop, SanityImageHotspot, ServicePillar, ServicesCardList } from "./sanity.types";
+import type { AnswerQuestion, CardGrid, Faq, internalGroqTypeReferenceTo, Intro, Link, LongFormText, Metadata, SanityImageAsset, SanityImageCrop, SanityImageHotspot, ServicePillar, ServicesCardList } from "./sanity.types";
 
 export type CustomLinkObject = {
     _type: "link";
@@ -99,18 +99,27 @@ export interface ServiceWithReferences {
   _id: string,
   intro?: Intro,
   servicePillar?: ServicePillar,
-  customerReferences: Array<{
-    _id: string;
-    _type: "customer";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    name?: string;
-    link?: Link;
-    logo: {
-      default: i18nImage | null;
-      light: i18nImage | null;
-      dark: i18nImage | null;
-    } | null;
-  }> | null;
+  customerReferences: CustomerReferenced,
+  faqs: FaqsReferenced
+}
+
+export type CustomerReferenced = Array<{
+  _id: string;
+  _type: "customer";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  link?: Link;
+  logo: {
+    default: i18nImage | null;
+    light: i18nImage | null;
+    dark: i18nImage | null;
+  } | null;
+}> | null;
+
+export type FaqsReferenced = {
+  _type: "faq";
+  title?: string;
+  questions?: AnswerQuestion[]
 }
