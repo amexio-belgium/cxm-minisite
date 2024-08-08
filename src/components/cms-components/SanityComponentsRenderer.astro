@@ -1,10 +1,12 @@
 ---
-import type { CardGrid as CardGridType, LongFormText, ServicesCardList } from '@sanity/sanity.types';
+import type { CardGrid as CardGridType, ServicesCardList } from '@sanity/sanity.types';
 import CardGrid from '@components/cms-components/CardGrid.astro';
-import ServiceCardList from './ServiceCardList.astro';
+import ServiceCardList from '@components/cms-components/ServiceCardList.astro';
+import type { CalloutReferenced } from '@sanity/custom.sanity.types';
+import Callout from '@components/cms-components/Callout.astro';
 
 interface Props {
-  content: Array<ServicesCardList|CardGridType>|undefined,
+  content: Array<ServicesCardList|CardGridType|CalloutReferenced>|undefined,
   language: string,
 }
 
@@ -19,6 +21,9 @@ const {content, language} = Astro.props;
         }
         case 'servicesCardList': {
             return <ServiceCardList serviceCardList={content}></ServiceCardList>
+        }
+        case 'callout': {
+            return <Callout callout={content} language={language}></Callout>
         }
     }
 })}

@@ -177,8 +177,6 @@ export interface LinkObjectReferenced {
   anchor?: string;
 };
 
-  
-
 
 export type i18nImageAsset = SanityImageAsset & {
   titles: {[key: string]: string}[],
@@ -193,12 +191,44 @@ export type i18nImage = {
   _type: "image";
 }
 
+export type CalloutReferenced = {
+  _type: "callout";
+  intro?: Intro;
+  content?: Array<i18nImage | {
+    richText?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        reference?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contentPage";
+        };
+        _type: "internalLink";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "textObject";
+    _key: string;
+  }>;
+}
+
 export interface ServiceWithReferences {
   _type: 'service',
   challange?: string,
   language?: string,
   cta?: string,
-  content?: Array<ServicesCardList|CardGrid>,
+  content?: Array<ServicesCardList|CardGrid|CalloutReferenced>,
   metadata?: Metadata,
   image?: i18nImage,
   _updatedAt?: string,

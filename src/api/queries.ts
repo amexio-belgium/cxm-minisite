@@ -75,6 +75,15 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
           }
         }
       }
+    },
+    _type == "callout" => {
+      ...,
+      content[]{
+        ...,
+        defined(asset) => {
+          asset->{...}
+        }
+      }
     }
   }
 }`;
