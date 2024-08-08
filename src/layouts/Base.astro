@@ -50,7 +50,7 @@ const socials:Social[]|undefined = siteConfig.socials?.map(social=>{
     </head>
     <body class="overflow-x-clip bg-blue-800">
         <VisualEditing enabled={true} zIndex={1000} />
-        <Header language={language} navigation={header} />
+        <Header language={language} navigation={header} preview={preview} />
         <main id="main-content" class="max-w-[1304px] mx-auto px-6 sm:px-8">
             <slot />
         </main>

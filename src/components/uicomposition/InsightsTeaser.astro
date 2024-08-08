@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 import { useTranslations } from '../../i18n/utils';
 import BlogPreview from '@components/uielements/BlogPreview.astro';
 import CasePreview from '@components/uielements/CasePreview.astro';
@@ -17,32 +16,32 @@ const {
     current
 } = Astro.props;
 
-const posts = await getPosts();
+const posts = [];
 
-async function getPosts() {
-    if (collection == "cases") {
-        return (await getCollection('cases',
-            (post) => {
-                return !post.data.draft 
-                        && getPostLangAndSlug(post).lang === lang 
-                        && (!tag || (tag && post.data.tags && post.data.tags.includes(tag)))
-                        && (!current || (current && post.data.title !== current))
-            }))
-        .splice(0,2);
-    } 
-
-    return (await getCollection('blog', 
-        (post) => {
-            return !post.data.draft 
-                && getPostLangAndSlug(post).lang === lang 
-                && (!tag || (tag && post.data.tags && post.data.tags.includes(tag))) 
-                && (!current || (current && post.data.title !== current))
-        }))
-        .sort(
-            (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-        )
-        .splice(0,3);
-} 
+// async function getPosts() {
+//     if (collection == "cases") {
+//         return (await getCollection('cases',
+//             (post) => {
+//                 return !post.data.draft 
+//                         && getPostLangAndSlug(post).lang === lang 
+//                         && (!tag || (tag && post.data.tags && post.data.tags.includes(tag)))
+//                         && (!current || (current && post.data.title !== current))
+//             }))
+//         .splice(0,2);
+//     } 
+//
+//     return (await getCollection('blog', 
+//         (post) => {
+//             return !post.data.draft 
+//                 && getPostLangAndSlug(post).lang === lang 
+//                 && (!tag || (tag && post.data.tags && post.data.tags.includes(tag))) 
+//                 && (!current || (current && post.data.title !== current))
+//         }))
+//         .sort(
+//             (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+//         )
+//         .splice(0,3);
+// } 
 
 function getPostLangAndSlug(post) {
 	const [lang, ...slug] = post.slug.split('/');
@@ -62,17 +61,17 @@ const t = useTranslations(lang);
         collection == "insights" ? 
           <div class="text-black relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
             {
-                posts.map((post) => (
-                    <BlogPreview blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />
-                ))
+                // posts.map((post) => (
+                //     <BlogPreview blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />
+                // ))
             }
             </div>
         : 
         <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8">
             {
-                posts.map((post) => (
-                    <CasePreview small caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
-                ))
+                // posts.map((post) => (
+                //     <CasePreview small caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
+                // ))
             }
         </div>
     }
