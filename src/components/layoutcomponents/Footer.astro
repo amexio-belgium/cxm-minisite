@@ -1,21 +1,21 @@
 ---
-import { Image } from 'astro:assets';
-import Button from '@components/uielements/Button.astro';
-import Link from '@components/uielements/Link.astro';
-import FooterLink from '@components/uielements/FooterLink.astro';
-import footerimage from "@assets/images/flag.png"
-import { useTranslations } from '../../i18n/utils.ts';
-import type { NavigationQueryResult } from 'src/sanity/sanity.types';
+import { Image } from "astro:assets";
+import Button from "@components/uielements/Button.astro";
+import Link from "@components/uielements/Link.astro";
+import FooterLink from "@components/uielements/FooterLink.astro";
+import footerimage from "@assets/images/flag.png";
+import { useTranslations } from "../../i18n/utils.ts";
+import type { NavigationQueryResult } from "src/sanity/sanity.types";
 import { PortableText } from "astro-portabletext";
-import { getHrefFromLinkObject } from '@lib/sanityHelpers';
-import { imageBuilder } from '@api/sanity';
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import { imageBuilder } from "@api/sanity";
 
 export type Social = {
-  name: string,
-  iconImageID: string,
-  link: string,
-  alt: string,
-}
+  name: string;
+  iconImageID: string;
+  link: string;
+  alt: string;
+};
 
 interface Props {
   language: string;
@@ -24,93 +24,164 @@ interface Props {
   isContactPage: boolean;
   footerText: any;
   preview: boolean;
-  socials: Social[]|undefined;
+  socials: Social[] | undefined;
 }
 
-const { language, navigation, secondaryNavigation, isContactPage, footerText, preview, socials } = Astro.props;
+const {
+  language,
+  navigation,
+  secondaryNavigation,
+  isContactPage,
+  footerText,
+  preview,
+  socials,
+} = Astro.props;
 
 const t = useTranslations(language.toLowerCase());
-
 ---
-<footer class="group/image relative inline-flex flex-col items-start justify-start w-full overflow-hidden isolate">
+
+<footer
+  class="group/image relative isolate inline-flex w-full flex-col items-start justify-start overflow-hidden"
+>
   {
-    !isContactPage &&
-      <div class="relative flex flex-col items-start justify-start w-full bg-quaternary">
-        <div class="relative max-w-[1304px] w-full mx-auto px-8 py-20 justify-start items-center gap-[90px] inline-flex ">
-          <div class="inline-flex flex-col items-start justify-start w-full gap-2 sm:w-1/2 ">
+    !isContactPage && (
+      <div class="relative flex w-full flex-col items-start justify-start bg-quaternary">
+        <div class="relative mx-auto inline-flex w-full max-w-[1304px] items-center justify-start gap-[90px] px-8 py-20">
+          <div class="inline-flex w-full flex-col items-start justify-start gap-2 sm:w-1/2">
             <h2 class="font-serif text-3xl text-black">
-              {t('footer.headline')}
+              {t("footer.headline")}
             </h2>
-            <p class="text-base font-light text-black md:text-lg text-pretty">
-              {t('footer.subheadline')}
+            <p class="text-pretty text-base font-light text-black md:text-lg">
+              {t("footer.subheadline")}
             </p>
-            <Button link="/contact" class="mt-8" size="lg" icon="email" style="secondary" color="light">{t('footer.button')}</Button>
+            <Button
+              link="/contact"
+              class="mt-8"
+              size="lg"
+              icon="email"
+              style="secondary"
+              color="light"
+            >
+              {t("footer.button")}
+            </Button>
           </div>
-          <div class="absolute flex justify-center w-7/12 sm:w-5/12 md:w-4/12 overflow-hidden rounded-full top-[320px] md:top-[250px] lg:top-40 -right-24 md:right-16 aspect-square">
-            <Image loading="lazy" 
-              class="hidden md:block md:group-hover/image:scale-105 motion-reduce:md:group-hover/image:scale-100 transition-transform ease-in-out duration-300 z-50 min-h-full max-h-full max-w-none" 
-              src={footerimage} 
+          <div class="absolute -right-24 top-[320px] flex aspect-square w-7/12 justify-center overflow-hidden rounded-full sm:w-5/12 md:right-16 md:top-[250px] md:w-4/12 lg:top-40">
+            <Image
+              loading="lazy"
+              class="z-50 hidden max-h-full min-h-full max-w-none transition-transform duration-300 ease-in-out md:block md:group-hover/image:scale-105 motion-reduce:md:group-hover/image:scale-100"
+              src={footerimage}
               width={436}
               height={436}
-              alt="A nice foto of a person in a crowd" />
+              alt="A nice foto of a person in a crowd"
+            />
           </div>
         </div>
       </div>
+    )
   }
-  <div class="relative flex flex-col items-start justify-start w-full bg-sky-900">
-    <div class="relative max-w-[1304px] py-10 w-screen mx-auto px-8 gap-14 justify-start items-center inline-flex">
-      <div class:list={["pointer-events-none absolute z-40",
-         isContactPage ? "h-[636px] -right-[240px] min-[400px]:-right-[120px] min-[500px]:-right-[80px] -bottom-[400px] sm:right-[5px] md:right-[21px] lg:right-[40px]" : "h-[691px] sm:h-[636px] -right-[36.25rem] min-[400px]:-right-[32.25rem] min-[500px]:-right-[26.25rem] -bottom-20 sm:right-[-391px] md:right-[-291px] lg:right-0"
-      ]}>
-        <svg class="h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 881 811">
-          {
-            isContactPage ? 
-            <defs><style>.orangeFillFooter{fill:var(--color-secondary);}.orangeFillFooter,.bluefillfooter{stroke-width:0px;}.bluefillfooter{fill:var(--color-secondary);}</style></defs>
-            :
-            <defs><style>.orangeFillFooter{fill:var(--color-secondary);}.orangeFillFooter,.bluefillfooter{stroke-width:0px;}.bluefillfooter{fill:var(--color-primary);}</style></defs>
-          }
-          <path class="bluefillfooter" d="M730.66.33c-32.16,2.38-53.65,19.43-70.8,37.39-2.65,2.94-3.78,4.29-5.51,6.55,0,0-309.38,362.32-309.38,362.32l5.5.14c1.83-2.26,306.97-359.66,308.39-361.73,5.28-6.31,10.13-11.46,19.05-18.74,11.74-9.39,30.46-20.82,52.85-21.93,0,0,141.56-.31,141.56-.31l-343.04,402.64h5.02L881,0l-150.34.33Z"/>
-          <path class="orangeFillFooter" d="M529.28,406.66c-55.31,62.04-265.05,315.55-326.19,378.08-11.74,9.39-30.46,20.82-52.85,21.93,0,0-141.56.31-141.56.31l341.79-400.24c-1.25-.06-4.22-.12-5.5-.14L0,811s150.34-.33,150.34-.33c23.55-1.16,43.04-13.05,55.24-22.81,64.11-65.88,270.05-315.68,328.71-381.2h-5.02Z"/>
+  <div
+    class="bg-sky-900 relative flex w-full flex-col items-start justify-start"
+  >
+    <div
+      class="relative mx-auto inline-flex w-screen max-w-[1304px] items-center justify-start gap-14 px-8 py-10"
+    >
+      <div
+        class:list={[
+          "pointer-events-none absolute z-40",
+          isContactPage
+            ? "-bottom-[400px] -right-[240px] h-[636px] min-[400px]:-right-[120px] min-[500px]:-right-[80px] sm:right-[5px] md:right-[21px] lg:right-[40px]"
+            : "-bottom-20 -right-[36.25rem] h-[691px] min-[400px]:-right-[32.25rem] min-[500px]:-right-[26.25rem] sm:right-[-391px] sm:h-[636px] md:right-[-291px] lg:right-0",
+        ]}
+      >
+        <svg
+          class="h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 881 811"
+        >
+          <path
+            class={isContactPage ? "fill-secondary" : "fill-primary"}
+            d="M730.66.33c-32.16,2.38-53.65,19.43-70.8,37.39-2.65,2.94-3.78,4.29-5.51,6.55,0,0-309.38,362.32-309.38,362.32l5.5.14c1.83-2.26,306.97-359.66,308.39-361.73,5.28-6.31,10.13-11.46,19.05-18.74,11.74-9.39,30.46-20.82,52.85-21.93,0,0,141.56-.31,141.56-.31l-343.04,402.64h5.02L881,0l-150.34.33Z"
+          ></path>
+          <path
+            class={isContactPage ? "fill-primary" : "fill-secondary"}
+            d="M529.28,406.66c-55.31,62.04-265.05,315.55-326.19,378.08-11.74,9.39-30.46,20.82-52.85,21.93,0,0-141.56.31-141.56.31l341.79-400.24c-1.25-.06-4.22-.12-5.5-.14L0,811s150.34-.33,150.34-.33c23.55-1.16,43.04-13.05,55.24-22.81,64.11-65.88,270.05-315.68,328.71-381.2h-5.02Z"
+          ></path>
         </svg>
       </div>
-      <div class="flex items-start justify-start w-full py-4 md:w-9/12 lg:w-5/12">
-        <div class="grid grid-cols-2 gap-x-8 md:gap-x-0 md:inline-flex flex-wrap items-start justify-start gap-y-2 md:gap-y-8 md:flex-row">
-          {navigation?.links?.map(link => 
-            <FooterLink 
-              href={getHrefFromLinkObject(link.linkObject, language, false)}
-            >
-              {link.title}
+      <div
+        class="flex w-full items-start justify-start py-4 md:w-9/12 lg:w-5/12"
+      >
+        <div
+          class="grid grid-cols-2 flex-wrap items-start justify-start gap-x-8 gap-y-2 md:inline-flex md:flex-row md:gap-x-0 md:gap-y-8"
+        >
+          {
+            navigation?.links?.map((link) => (
+              <FooterLink
+                href={getHrefFromLinkObject(link.linkObject, language, false)}
+              >
+                {link.title}
               </FooterLink>
-          )}
-          <div class="z-50 inline-flex items-center justify-start h-12 gap-[1px] md:w-1/3">
-            {socials?.map(social => 
-              <Link class="focus-visible:!px-0 border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href={social.link} rel="noopener">
-                <img class="w-7 h-7" src={imageBuilder.image(social.iconImageID).width(27).height(27).url()} alt={social.alt}/>
-                <span class="sr-only">{t('footer.srvisit')} {social.name}</span>
-              </Link>
-            )}
+            ))
+          }
+          <div
+            class="z-50 inline-flex h-12 items-center justify-start gap-[1px] md:w-1/3"
+          >
+            {
+              socials?.map((social) => (
+                <Link
+                  class="border-transparant rounded-full border-2 hover:border-secondary focus-visible:rounded-full focus-visible:!px-0"
+                  href={social.link}
+                  rel="noopener"
+                >
+                  <img
+                    class="h-7 w-7"
+                    src={imageBuilder
+                      .image(social.iconImageID)
+                      .width(27)
+                      .height(27)
+                      .url()}
+                    alt={social.alt}
+                  />
+                  <span class="sr-only">
+                    {t("footer.srvisit")} {social.name}
+                  </span>
+                </Link>
+              ))
+            }
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="relative z-50 flex flex-col items-start justify-start w-full bg-blue-900">
-    <div class="max-w-[1304px] w-screen mx-auto gap-4 md:gap-8 px-8 py-8 md:py-4 justify-between items-center inline-flex flex-col xl:flex-row">
-      <div class="text-xs font-light text-center text-white md:text-left md:text-xs xl:w-1/2">
-        <PortableText value={footerText}></PortableText>
+  <div
+    class="relative z-50 flex w-full flex-col items-start justify-start bg-blue-900"
+  >
+    <div
+      class="mx-auto inline-flex w-screen max-w-[1304px] flex-col items-center justify-between gap-4 px-8 py-8 md:gap-8 md:py-4 xl:flex-row"
+    >
+      <div
+        class="text-center text-xs font-light text-white md:text-left md:text-xs xl:w-1/2"
+      >
+        <PortableText value={footerText} />
       </div>
-      <div class="relative flex flex-wrap items-center justify-center gap-4 md:gap-8 lg:justify-end md:mt-0 xl:w-1/2">
-        
-        {secondaryNavigation?.links?.map(link => 
-          <Link class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary"  href={getHrefFromLinkObject(link.linkObject, language, preview)}>
-            {link.title}
-          </Link>
-        )}
+      <div
+        class="relative flex flex-wrap items-center justify-center gap-4 md:mt-0 md:gap-8 lg:justify-end xl:w-1/2"
+      >
+        {
+          secondaryNavigation?.links?.map((link) => (
+            <Link
+              class="underline decoration-white decoration-1 underline-offset-2 hover:decoration-secondary"
+              href={getHrefFromLinkObject(link.linkObject, language, preview)}
+            >
+              {link.title}
+            </Link>
+          ))
+        }
         <div class="inline-flex items-center gap-8">
-          <svg class="fill-secondary w-6 h-6">
+          <svg class="h-6 w-6 fill-secondary">
             <use xlink:href="/icons/icon-sprite.svg#icon-slant"></use>
-          </svg>  
+          </svg>
         </div>
       </div>
     </div>

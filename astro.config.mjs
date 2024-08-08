@@ -1,5 +1,5 @@
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import netlify from "@astrojs/netlify";
 import sanityImg from "@otterstack/sanity-img-astro/integration";
@@ -8,15 +8,19 @@ import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import { loadEnv } from "vite";
 
-const { SANITY_API_READ_TOKEN, SANITY_STUDIO_DATASET, SANITY_STUDIO_PROJECT_ID } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
+const {
+  SANITY_API_READ_TOKEN,
+  SANITY_STUDIO_DATASET,
+  SANITY_STUDIO_PROJECT_ID,
+} = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://dreamy-trifle-7f42a6.netlify.app',
+  site: "https://dreamy-trifle-7f42a6.netlify.app",
   integrations: [
     sitemap(),
     tailwind({
-      nesting: true
+      nesting: true,
     }),
     sanity({
       projectId: SANITY_STUDIO_PROJECT_ID,
@@ -24,12 +28,12 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       stega: {
-        studioUrl: 'http://localhost:3333',
+        studioUrl: "http://localhost:3333",
       },
     }),
     react(),
-    sanityImg({options: {auto: 'format'}}),
+    sanityImg({ options: { auto: "format" } }),
   ],
   output: "server",
-  adapter: netlify()
+  adapter: netlify(),
 });

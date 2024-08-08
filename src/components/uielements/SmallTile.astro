@@ -1,27 +1,38 @@
 ---
-import { PortableText } from 'astro-portabletext';
+import { PortableText } from "astro-portabletext";
 
 interface Props {
-    headline: string | undefined;
-    description: any;
-    headlineTag?: "h3" | "h4" | "h5";
-    class?: string;
+  headline: string | undefined;
+  description: any;
+  headlineTag?: "h3" | "h4" | "h5";
+  class?: string;
 }
-const { 
-    headline, 
-    description,
-    headlineTag = "h3", 
-    class: className 
+const {
+  headline,
+  description,
+  headlineTag = "h3",
+  class: className,
 } = Astro.props;
 
 const HeadlineTagName = headlineTag;
 ---
-<div class:list={["smalltile inline-flex flex-col items-center justify-start w-full gap-8 px-4 md:px-12 py-6 border-blue-500 shadow backdrop-blur-lg lg:w-1/3 bg-gradient-to-l from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border-1", className]}>
-    <slot />
-    <div class="flex flex-col items-center justify-start gap-2 md:gap-4">
-        <HeadlineTagName class:list={["mx-8 sm:mx-0 font-serif text-lg md:text-xl md:leading-9	text-center text-white"]} set:html={headline}></HeadlineTagName>
-        <span class="text-sm font-light text-center text-white">
-            <PortableText value={description}/>
-        </span>
-    </div>
+
+<div
+  class:list={[
+    "smalltile border-1 inline-flex w-full flex-col items-center justify-start gap-8 rounded-2xl border-blue-500 bg-gradient-to-l from-blue-600/70 to-blue-800/70 px-4 py-6 shadow shadow-blue-200 backdrop-blur-lg md:px-12 lg:w-1/3",
+    className,
+  ]}
+>
+  <slot />
+  <div class="flex flex-col items-center justify-start gap-2 md:gap-4">
+    <HeadlineTagName
+      class:list={[
+        "mx-8 text-center font-serif text-lg text-white sm:mx-0 md:text-xl md:leading-9",
+      ]}
+      set:html={headline}
+    />
+    <span class="text-center text-sm font-light text-white">
+      <PortableText value={description} />
+    </span>
+  </div>
 </div>

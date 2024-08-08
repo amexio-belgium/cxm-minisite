@@ -1,118 +1,154 @@
 ---
-import Button from './Button.astro';
-import { Image } from 'astro:assets';
-import Link from './Link.astro'
-import { useTranslations } from 'src/i18n/utils';
+import Button from "./Button.astro";
+import { Image } from "astro:assets";
+import Link from "./Link.astro";
+import { useTranslations } from "src/i18n/utils";
 
 const { lang } = Astro.params;
 interface Props {
-    profileImg?: string;
-    content?: string;
-    name: string;
-    title?: string;
-    color?: "light" | "dark";
-    direction?: "right" | "left";
-    buttonText?: string;
-    sharing?: boolean;
-    s?: boolean;
-    class?: string;
-    [x: string]: any;
+  profileImg?: string;
+  content?: string;
+  name: string;
+  title?: string;
+  color?: "light" | "dark";
+  direction?: "right" | "left";
+  buttonText?: string;
+  sharing?: boolean;
+  s?: boolean;
+  class?: string;
+  [x: string]: any;
 }
 
 const {
-    profileImg,
-    content,
-    name,
-    title,
-    buttonText = "Book a meeting",
-    color = "dark",
-    direction = "left",
-    hideButton = false,
-    sharing = false,
-    block,
-    class: className,
-    ...rest
+  profileImg,
+  content,
+  name,
+  title,
+  buttonText = "Book a meeting",
+  color = "dark",
+  direction = "left",
+  hideButton = false,
+  sharing = false,
+  block,
+  class: className,
+  ...rest
 } = Astro.props;
 
 const styles = {
-    light:
-        "bg-white",
-    dark:
-        "from-blue-600/70 to-blue-800/70 shadow-blue-200",
+  light: "bg-white",
+  dark: "from-blue-600/70 to-blue-800/70 shadow-blue-200",
 };
 
 const directions = {
-    left: "bg-gradient-to-r ml-16 md:ml-0 ",
-    right: "bg-gradient-to-l mr-16 md:mr-0",
-}
+  left: "bg-gradient-to-r ml-16 md:ml-0 ",
+  right: "bg-gradient-to-l mr-16 md:mr-0",
+};
 
 const t = useTranslations(lang);
-const twitterText = t('share.twitter')
+const twitterText = t("share.twitter");
 
-const profileImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/*.{jpeg,jpg,png,gif}');
-if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`);
-
+const profileImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/people/*.{jpeg,jpg,png,gif}",
+);
+if (profileImg && !profileImages[profileImg])
+  throw new Error(
+    `"${profileImg}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`,
+  );
 ---
+
 <div
   {...rest}
   class:list={[
-    "text-white relative p-8 rounded-2xl shadow border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit backdrop-blur-sm",
+    "relative inline-block h-fit flex-col items-start justify-start rounded-2xl border border-blue p-8 text-white shadow shadow-sm backdrop-blur-sm",
     styles[color],
     directions[direction],
     className,
   ]}
-  >
-    {
-        content && 
-            <p class="text-base font-light mb-8 " set:html={content}></p>
-    }
+>
+  {content && <p class="mb-8 text-base font-light" set:html={content} />}
 
-    <div class="flex gap-4 md:items-center flex-col md:flex-row md:justify-between">
-        <div class="flex gap-4 items-center">
-            {profileImg && <Image loading="eager" src={profileImages[profileImg]()} class="w-10 h-10 rounded-full sm:w-14 sm:h-14" width={50} height={50} alt={name + " " + title} /> }
-            <div class="flex flex-col justify-center gap-1">
-                <p class="text-xs font-medium">{name}</p>
-                <p class="text-xxs">{title}</p>
-            </div>
-        </div>
-        { sharing && 
-            <div class="flex md:gap items-center">
-                <span class="mr-2 text-sm">{t('share.message')}</span>
-                <Link id="linkedin-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
-                    <svg class="fill-white w-8 h-8">
-                        <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
-                    </svg>
-                    <span class="sr-only">LinkedIn</span>
-                </Link>
-                <Link id="twitter-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
-                    <svg class="fill-white w-8 h-8">
-                        <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
-                    </svg>
-                    <span class="sr-only">X(twitter)</span>
-                </Link>
-           </div>
-          
-          }
+  <div
+    class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+  >
+    <div class="flex items-center gap-4">
+      {
+        profileImg && (
+          <Image
+            loading="eager"
+            src={profileImages[profileImg]()}
+            class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
+            width={50}
+            height={50}
+            alt={name + " " + title}
+          />
+        )
+      }
+      <div class="flex flex-col justify-center gap-1">
+        <p class="text-xs font-medium">{name}</p>
+        <p class="text-xxs">{title}</p>
+      </div>
     </div>
-   
-    <slot />
-    { !hideButton && <Button class="absolute right-8 -bottom-6" icon="info" link="/contact" style="primary" color="dark">{buttonText}</Button> }
+    {
+      sharing && (
+        <div class="md:gap flex items-center">
+          <span class="mr-2 text-sm">{t("share.message")}</span>
+          <Link
+            id="linkedin-share-button"
+            class="border-transparant rounded-full border-2 hover:border-secondary focus-visible:rounded-full"
+            href="#"
+          >
+            <svg class="h-8 w-8 fill-white">
+              <use xlink:href="/icons/icon-sprite.svg#icon-linkedin" />
+            </svg>
+            <span class="sr-only">LinkedIn</span>
+          </Link>
+          <Link
+            id="twitter-share-button"
+            class="border-transparant rounded-full border-2 hover:border-secondary focus-visible:rounded-full"
+            href="#"
+          >
+            <svg class="h-8 w-8 fill-white">
+              <use xlink:href="/icons/icon-sprite.svg#icon-twitter" />
+            </svg>
+            <span class="sr-only">X(twitter)</span>
+          </Link>
+        </div>
+      )
+    }
+  </div>
+
+  <slot />
+  {
+    !hideButton && (
+      <Button
+        class="absolute -bottom-6 right-8"
+        icon="info"
+        link="/contact"
+        style="primary"
+        color="dark"
+      >
+        {buttonText}
+      </Button>
+    )
+  }
 </div>
 
-<script define:vars={{twitterText}}>
-    const linkedIn = document.getElementById('linkedin-share-button')
-    linkedIn && linkedIn.addEventListener('click', function(event) {
-        event.preventDefault();
-        const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
+<script define:vars={{ twitterText }}>
+  const linkedIn = document.getElementById("linkedin-share-button");
+  linkedIn &&
+    linkedIn.addEventListener("click", function (event) {
+      event.preventDefault();
+      const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`;
+      window.open(shareUrl, "_blank", "width=600,height=400");
     });
 
-    const twitter = document.getElementById('twitter-share-button')
-    twitter && twitter.addEventListener('click', function(event) {
-        event.preventDefault();
-        const pageUrl = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(twitterText);
-        const shareUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${text}`;
-        window.open(shareUrl, '_blank', 'width=600,height=400');
+  const twitter = document.getElementById("twitter-share-button");
+  twitter &&
+    twitter.addEventListener("click", function (event) {
+      event.preventDefault();
+      const pageUrl = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(twitterText);
+      const shareUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${text}`;
+      window.open(shareUrl, "_blank", "width=600,height=400");
     });
 </script>

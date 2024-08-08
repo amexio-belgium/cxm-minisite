@@ -2,7 +2,7 @@
   /*----------------------------
 HUBSPOT form
 ------------------------------*/
-.cxm-hbs-form {
+  .cxm-hbs-form {
     --error-bg: #ffebe8;
     --error-color: #cc0000;
     --label-color: #0b1215;
@@ -12,18 +12,18 @@ HUBSPOT form
     --input-border-color-hover: #ed6c25;
     --required-indicator-color: #ed6c25;
     --consent-container-bg: #eef4fa;
-    --cta-bg-color:#084772;
-    --cta-bg-color-hover: #04273F;
-    --cta-color:#fbfdfe;
+    --cta-bg-color: #084772;
+    --cta-bg-color-hover: #04273f;
+    --cta-color: #fbfdfe;
     --icon-check: url("data:image/svg+xml, %3Csvg%20width=%2716%27%20height=%2716%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20fill-rule=%27evenodd%27%20clip-rule=%27evenodd%27%20d=%27M5.87866%2010.5371L12.2442%204.17159C12.6347%203.78106%2013.2679%203.78106%2013.6584%204.17159C14.0489%204.56211%2014.0489%205.19528%2013.6584%205.5858L6.58733%2012.6569C6.39166%2012.8525%206.13508%2012.9502%205.87863%2012.9498C5.6222%2012.9502%205.36564%2012.8525%205.16999%2012.6569L2.34156%209.82844C1.95104%209.43792%201.95104%208.80475%202.34156%208.41423C2.73209%208.0237%203.36525%208.0237%203.75578%208.41423L5.87866%2010.5371Z%27%20fill=%27%23101D40%27%2F%3E%3C%2Fsvg%3E");
     clear: both;
   }
 
-  /* --> Layout --*/ 
+  /* --> Layout --*/
   .cxm-hbs-form fieldset + fieldset {
     margin-top: 1.5rem;
   }
-   
+
   .cxm-hbs-form .form-columns-2 {
     display: flex;
     flex-wrap: wrap;
@@ -46,7 +46,7 @@ HUBSPOT form
     margin-top: 1.5rem;
   }
 
-   /* --> Form field styling --*/ 
+  /* --> Form field styling --*/
   .cxm-hbs-form label {
     color: var(--label-color);
     font-size: 1.125rem;
@@ -84,8 +84,10 @@ HUBSPOT form
   }
 
   .cxm-hbs-form .hs-input[type="text"]:hover,
-  .cxm-hbs-form .hs-input[type="email"]:hover
-  .cxm-hbs-form .hs-input[type="tel"]:hover,
+  .cxm-hbs-form
+    .hs-input[type="email"]:hover
+    .cxm-hbs-form
+    .hs-input[type="tel"]:hover,
   .cxm-hbs-form .hs-input[type="text"]:focus,
   .cxm-hbs-form .hs-input[type="email"]:focus,
   .cxm-hbs-form .hs-input[type="tel"]:focus,
@@ -95,8 +97,10 @@ HUBSPOT form
   }
 
   .cxm-hbs-form .hs-input[type="text"]:focus-visible,
-  .cxm-hbs-form .hs-input[type="email"]:focus-visible
-  .cxm-hbs-form .hs-input[type="tel"]:focus-visible,
+  .cxm-hbs-form
+    .hs-input[type="email"]:focus-visible
+    .cxm-hbs-form
+    .hs-input[type="tel"]:focus-visible,
   .cxm-hbs-form textarea:focus-visible {
     outline: 1px solid var(--input-border-color-hover);
     box-shadow: 0px 0px 8px 0px rgba(0, 36, 74, 0.15);
@@ -104,15 +108,16 @@ HUBSPOT form
 
   .cxm-hbs-form .hs-input.invalid[type="text"],
   .cxm-hbs-form .hs-input.invalid[type="email"],
-  .cxm-hbs-form .hs-input.invalid[type="tel"]
-  .cxm-hbs-form textarea.invalid,
-  .cxm-hbs-form select.invalid  {
+  .cxm-hbs-form .hs-input.invalid[type="tel"] .cxm-hbs-form textarea.invalid,
+  .cxm-hbs-form select.invalid {
     border: 1px solid var(--error-color);
   }
 
   .cxm-hbs-form .hs-input.invalid[type="text"]:focus,
-  .cxm-hbs-form .hs-input.invalid[type="email"]:focus
-  .cxm-hbs-form .hs-input.invalid[type="tel"]:focus,
+  .cxm-hbs-form
+    .hs-input.invalid[type="email"]:focus
+    .cxm-hbs-form
+    .hs-input.invalid[type="tel"]:focus,
   .cxm-hbs-form textarea.invalid:focus,
   .cxm-hbs-form select.invalid:focus {
     outline: none;
@@ -123,11 +128,11 @@ HUBSPOT form
   .cxm-hbs-form .hs-input.invalid[type="email"]:focus-visible,
   .cxm-hbs-form .hs-input.invalid[type="tel"]:focus-visible,
   .cxm-hbs-form textarea.invalid:focus-visible,
-  .cxm-hbs-form select.invalid:focus-visible  {
+  .cxm-hbs-form select.invalid:focus-visible {
     outline: 2px solid var(--error-color);
   }
 
-  .cxm-hbs-form textarea  {
+  .cxm-hbs-form textarea {
     min-height: 15rem;
   }
   /* --> Custom select styling*/
@@ -136,11 +141,13 @@ HUBSPOT form
     --select-background-image-disabled: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m11.837 5.837-3.812 3.95-3.813-3.95" stroke="%23586179" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     --select-background-image-size: 1rem;
     --select-padding: 1rem;
-  
+
     appearance: none;
     background-color: var(--select-background-color);
     background-image: var(--select-background-image);
-    background-position: right var(--select-padding) top 50%, 0 0;
+    background-position:
+      right var(--select-padding) top 50%,
+      0 0;
     background-repeat: no-repeat, repeat;
     background-size: var(--select-background-image-size), 100%;
     border: 1px solid var(--input-border-color);
@@ -153,33 +160,32 @@ HUBSPOT form
     max-width: 100%;
     outline: none;
     padding: var(--select-padding);
-    padding-inline-end: calc((var(--select-padding) * 2) + var(--select-background-image-size));
+    padding-inline-end: calc(
+      (var(--select-padding) * 2) + var(--select-background-image-size)
+    );
     width: 100%;
   }
-  
-    @media (prefers-reduced-motion: no-preference) {
-      .cxm-hbs-form select{
-        transition: border-color 0.15s linear;
-      }
-        
-    }
 
-    .cxm-hbs-form select::-ms-expand {
-        display: none;
+  @media (prefers-reduced-motion: no-preference) {
+    .cxm-hbs-form select {
+      transition: border-color 0.15s linear;
     }
+  }
 
-    .cxm-hbs-form select:hover {
-        border-color: var(--input-border-color-hover);
-    }
+  .cxm-hbs-form select::-ms-expand {
+    display: none;
+  }
 
-    .cxm-hbs-form select:focus-visible {
-        outline: 2px solid var(--input-border-color-hover);
-        
-    }
-    .cxm-hbs-form select option {
-        font-weight: normal;
-    }
+  .cxm-hbs-form select:hover {
+    border-color: var(--input-border-color-hover);
+  }
 
+  .cxm-hbs-form select:focus-visible {
+    outline: 2px solid var(--input-border-color-hover);
+  }
+  .cxm-hbs-form select option {
+    font-weight: normal;
+  }
 
   /* --> Custom checkbox styling*/
   .cxm-hbs-form .hs-form-booleancheckbox label {
@@ -252,7 +258,7 @@ HUBSPOT form
     background-color: var(--input-border-color-hover);
   }
 
-  /* --> Error styling --*/ 
+  /* --> Error styling --*/
   .cxm-hbs-form .hs_error_rollup {
     padding: 1rem;
     border-radius: 0.25rem;
@@ -261,7 +267,7 @@ HUBSPOT form
     background-color: var(--error-bg);
     border: 1px solid var(--error-color);
   }
-  
+
   .cxm-hbs-form .hs_error_rollup .hs-error-msgs {
     margin-top: 0;
   }
@@ -279,8 +285,8 @@ HUBSPOT form
     margin-top: 1rem;
   }
 
-  /* --> Button styling --*/ 
-  .cxm-hbs-form .hs-button.primary  {
+  /* --> Button styling --*/
+  .cxm-hbs-form .hs-button.primary {
     padding: 0.875rem 1rem;
     border-radius: 3.125rem;
     background: var(--cta-bg-color);
@@ -288,15 +294,15 @@ HUBSPOT form
     cursor: pointer;
     min-width: 10rem;
   }
-  .cxm-hbs-form .hs-button.primary:hover  {
+  .cxm-hbs-form .hs-button.primary:hover {
     background: var(--cta-bg-color-hover);
   }
-  .cxm-hbs-form .hs-button.primary:focus-visible  {
+  .cxm-hbs-form .hs-button.primary:focus-visible {
     outline: 2px solid var(--input-border-color-hover);
     outline-offset: 2px;
   }
 
-  /* --> Legal consent container--*/ 
+  /* --> Legal consent container--*/
   .cxm-hbs-form .legal-consent-container {
     font-size: 1rem;
     margin-top: 1rem;
@@ -304,5 +310,4 @@ HUBSPOT form
     padding: 1rem;
     border-radius: 0.25rem;
   }
-
 </style>

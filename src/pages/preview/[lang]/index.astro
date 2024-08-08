@@ -1,12 +1,15 @@
 ---
-import Base from '@layouts/Base.astro';
+import Base from "@layouts/Base.astro";
 export const prerender = false;
 const { lang } = Astro.params;
-if(!lang) {
-    return Astro.redirect('/404');
+if (!lang) {
+  return Astro.redirect("/404");
 }
 ---
 
-<Base title={'update title'} description={'update description'} language={lang.toLowerCase()} slug='test'>
-
-</Base>
+<Base
+  title={"update title"}
+  description={"update description"}
+  language={lang.toLowerCase()}
+  slug="test"
+/>

@@ -1,13 +1,16 @@
 ---
 interface Props {
-    class?: string;
+  class?: string;
 }
 
-const {
-    class: className
-} = Astro.props;
-
+const { class: className } = Astro.props;
 ---
-<div class:list={["font-light text-base [&>*]:first:mt-0 [&>*]:last:mb-0", className]}>
-    <slot />
+
+<div
+  class:list={[
+    "text-base font-light [&>*]:first:mt-0 [&>*]:last:mb-0",
+    className,
+  ]}
+>
+  <slot />
 </div>

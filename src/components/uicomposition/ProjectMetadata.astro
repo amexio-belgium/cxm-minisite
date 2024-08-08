@@ -1,71 +1,80 @@
 ---
-import { useTranslations } from 'src/i18n/utils';
+import { useTranslations } from "src/i18n/utils";
 
 interface Props {
-    duration?: string;
-    collaboration?: string;
-    services?: string;
-    technologies?: string;
+  duration?: string;
+  collaboration?: string;
+  services?: string;
+  technologies?: string;
 }
 
-const { 
-    duration,
-    collaboration,
-    services,
-    technologies,
-} = Astro.props;
+const { duration, collaboration, services, technologies } = Astro.props;
 
 const { lang } = Astro.params;
-const t = useTranslations(lang, 'work');
+const t = useTranslations(lang, "work");
 ---
 
-<div class="-mt-16 motion-safe:animate-fade-up animate-delay-500 animate-ease-out  from-blue-600/70 to-blue-800/70 shadow-blue-200 bg-gradient-to-r mb-20 text-white relative p-4 md:p-8 rounded-2xl border border-blue shadow-sm flex-col justify-start items-start inline-block h-fit w-full">
-    <h2 class="text-lg font-serif mb-6" set:html={t('metadata.headline')}></h2>
-    <dl class="font-serif text-sm project-metadata flex flex-col lg:flex-row lg:flex-wrap gap-4 mb-8">
-        {
-            duration && <div class="flex lg:after:ml-4 after:text-secondary">
-                <dt class="inline lg:block">{t('metadata.duration')+ ":"}</dt>
-                <dd class="inline lg:block">{duration}</dd>
-            </div>
-        } 
-        {
-           collaboration && <div class="lg:flex lg:after:ml-4 after:text-secondary">
-                <dt class="inline lg:block">{t('metadata.collaboration')+ ":"}</dt>
-                <dd class="inline lg:block">{collaboration}</dd>
-            </div>
-        }
-        {
-            technologies && <div class="lg:flex lg:after:ml-4 after:text-secondary">
-                <dt class="inline lg:block">{t('metadata.technologies')+ ":"}</dt>
-                <dd class="inline lg:block">{technologies}</dd> 
-            </div>
-        }
-        {
-            services && <div class="lg:flex">
-                <dt class="inline lg:block">{t('metadata.services')+ ":"}</dt>
-                <dd class="inline lg:block">{ services}</dd> 
-            </div>
-        }
-    </dl>
-    <div class="grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-6 items-center">
-        <slot />
-    </div>
+<div
+  class="relative -mt-16 mb-20 inline-block h-fit w-full flex-col items-start justify-start rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 p-4 text-white shadow-sm shadow-blue-200 animate-delay-500 animate-ease-out motion-safe:animate-fade-up md:p-8"
+>
+  <h2 class="mb-6 font-serif text-lg" set:html={t("metadata.headline")} />
+  <dl
+    class="project-metadata mb-8 flex flex-col gap-4 font-serif text-sm lg:flex-row lg:flex-wrap"
+  >
+    {
+      duration && (
+        <div class="flex after:text-secondary lg:after:ml-4">
+          <dt class="inline lg:block">{t("metadata.duration") + ":"}</dt>
+          <dd class="inline lg:block">{duration}</dd>
+        </div>
+      )
+    }
+    {
+      collaboration && (
+        <div class="after:text-secondary lg:flex lg:after:ml-4">
+          <dt class="inline lg:block">{t("metadata.collaboration") + ":"}</dt>
+          <dd class="inline lg:block">{collaboration}</dd>
+        </div>
+      )
+    }
+    {
+      technologies && (
+        <div class="after:text-secondary lg:flex lg:after:ml-4">
+          <dt class="inline lg:block">{t("metadata.technologies") + ":"}</dt>
+          <dd class="inline lg:block">{technologies}</dd>
+        </div>
+      )
+    }
+    {
+      services && (
+        <div class="lg:flex">
+          <dt class="inline lg:block">{t("metadata.services") + ":"}</dt>
+          <dd class="inline lg:block">{services}</dd>
+        </div>
+      )
+    }
+  </dl>
+  <div
+    class="grid items-center gap-x-2 gap-y-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+  >
+    <slot />
+  </div>
 </div>
 <style>
-@media (min-width: 1024px) { 
+  @media (min-width: 1024px) {
     .project-metadata dt {
-        padding-inline-end: 1ch;
+      padding-inline-end: 1ch;
     }
     @supports (content: "x" / "y") {
-            .project-metadata > div:not(:last-child):after {
-                content: "/" / "";
-            }
+      .project-metadata > div:not(:last-child):after {
+        content: "/" / "";
+      }
     }
     @supports not (content: "x" / "y") {
-        .project-metadata > div:not(:last-child):after {
-                content: "/";
-                alt: "";
-        }
+      .project-metadata > div:not(:last-child):after {
+        content: "/";
+        alt: "";
+      }
     }
-}
+  }
 </style>
