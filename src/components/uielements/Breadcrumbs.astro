@@ -1,47 +1,69 @@
 ---
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const { pathname } = Astro.url;
-const paths = pathname.split('/').filter(x => x);
+const paths = pathname.split("/").filter((x) => x);
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 let parts = [
   {
-    text: t('breadcrumb.home'),
-    href: '/' + lang + '/',
-  }
+    text: t("breadcrumb.home"),
+    href: "/" + lang + "/",
+  },
 ];
 
 paths.forEach((text, i) => {
-  const href = `/${paths.slice(0, i + 1).join('/')}`;
+  const href = `/${paths.slice(0, i + 1).join("/")}`;
   if (i !== 0) {
-    const translatedText = t('nav.' + text.replace(/[-_]/g, ' '))
-    parts.push({ text: translatedText || text.replace(/[-_]/g, ' '), href: (href + "/") })
+    const translatedText = t("nav." + text.replace(/[-_]/g, " "));
+    parts.push({
+      text: translatedText || text.replace(/[-_]/g, " "),
+      href: href + "/",
+    });
   }
-})
-
+});
 ---
-{ parts.length > 1 &&
-    <nav aria-label={t('breadcrumb.label')}>
-        <ol class="mb-8 pl-2 md:mb-0 flex flex-row flex-wrap text-white gap-1 md:-ms-2" role="list">
-            {parts.map(({ text, href, ...attrs }, index) => (
-                <li class="text-regular flex items-center gap-2" role="listitem"> 
 
-                    { index !== parts.length - 1 ? 
-                      <a href={href} {...attrs} aria-current={(href === pathname) && "page"}
-                        class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-tertiary text-xs capitalize outline-none md:py-2 bg-clip-text duration-300 bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] transition-all motion-reduce:transition-none bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% to-white to-50% text-transparent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
-                        {text}
-                      </a> 
-                      <svg class="w-6 h-6 fill-white" aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-chevron-right"></use></svg>
-                      :
-                      <span {...attrs} aria-current={(href === pathname) && "page"}
-                      class="text-xs capitalize outline-none md:py-2">
-                        {text}
-                      </span> 
-                    }
-                </li>
-            ))}
-        </ol>
+{
+  parts.length > 1 && (
+    <nav aria-label={t("breadcrumb.label")}>
+      <ol
+        class="mb-8 flex flex-row flex-wrap gap-1 pl-2 text-white md:-ms-2 md:mb-0"
+        role="list"
+      >
+        {parts.map(({ text, href, ...attrs }, index) => (
+          <li class="text-regular flex items-center gap-2" role="listitem">
+            {index !== parts.length - 1 ? (
+              <>
+                <a
+                  href={href}
+                  {...attrs}
+                  aria-current={href === pathname && "page"}
+                  class="bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-xs capitalize text-transparent underline decoration-white decoration-1 underline-offset-2 outline-none transition-all duration-300 hover:bg-[0%_100%] hover:decoration-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 motion-reduce:transition-none md:py-2"
+                >
+                  {text}
+                </a>
+                <svg
+                  class="h-6 w-6 fill-white"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <use xlink:href="/icons/icon-sprite.svg#icon-chevron-right" />
+                </svg>
+              </>
+            ) : (
+              <span
+                {...attrs}
+                aria-current={href === pathname && "page"}
+                class="text-xs capitalize outline-none md:py-2"
+              >
+                {text}
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
     </nav>
+  )
 }

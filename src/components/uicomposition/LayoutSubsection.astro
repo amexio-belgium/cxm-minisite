@@ -1,57 +1,72 @@
 ---
-import type { ImageMetadata } from 'astro';
+import type { ImageMetadata } from "astro";
 
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 interface Props {
-    alignment?: "column" | "row";
-    imageSrc?: string;
-    imageAlt?: string;
-    class?: string;
-    fullWidth?: boolean;
+  alignment?: "column" | "row";
+  imageSrc?: string;
+  imageAlt?: string;
+  class?: string;
+  fullWidth?: boolean;
 }
 
-const { 
-    alignment = "column",
-    imageSrc,
-    imageAlt = '',
-    fullWidth = false,
-    class: className,
+const {
+  alignment = "column",
+  imageSrc,
+  imageAlt = "",
+  fullWidth = false,
+  class: className,
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
-if (imageSrc && !images[imageSrc]) throw new Error(`"${imageSrc}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}",
+);
+if (imageSrc && !images[imageSrc])
+  throw new Error(
+    `"${imageSrc}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`,
+  );
 ---
-<div class:list={[
-    'relative my-4',
-    alignment == 'row' && '',
-    className,
-]}> 
-    { (alignment == 'row' && imageSrc) &&
-        <Image loading="lazy" class='w-1/2 shape-wrap xl:float-right my-8 mx-auto xl:ml-4 xl:mt-[8vh] xl:mb-4 xl:-mr-32 shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src={images[imageSrc]()} 
-            alt={imageAlt} />
+
+<div class:list={["relative my-4", alignment == "row" && "", className]}>
+  {
+    alignment == "row" && imageSrc && (
+      <>
+        <Image
+          loading="lazy"
+          class="shape-wrap mx-auto my-8 w-1/2 overflow-hidden rounded-xl shadow-xl shadow-primary/20 xl:float-right xl:-mr-32 xl:mb-4 xl:ml-4 xl:mt-[8vh]"
+          src={images[imageSrc]()}
+          alt={imageAlt}
+        />
         <div>
-            <slot />
+          <slot />
         </div>
-    }
+      </>
+    )
+  }
 
-    { (alignment == 'column' && imageSrc)  &&
+  {
+    alignment == "column" && imageSrc && (
+      <>
         <slot />
-        <Image loading="lazy" class:list={[' mx-auto my-8 shadow-xl shadow-primary/20 rounded-xl overflow-hidden',
-            fullWidth ? "w-full" : "w-1/2"
-        ]}
-            src={images[imageSrc]()} 
-            alt={imageAlt} />
-    }
+        <Image
+          loading="lazy"
+          class:list={[
+            "mx-auto my-8 overflow-hidden rounded-xl shadow-xl shadow-primary/20",
+            fullWidth ? "w-full" : "w-1/2",
+          ]}
+          src={images[imageSrc]()}
+          alt={imageAlt}
+        />
+      </>
+    )
+  }
 
-    {
-        !imageSrc && <slot />
-    }
+  {!imageSrc && <slot />}
 </div>
 
 <style>
-    .shape-wrap {
-        shape-outside: content-box;
-        shape-margin: 1rem;
-    }
+  .shape-wrap {
+    shape-outside: content-box;
+    shape-margin: 1rem;
+  }
 </style>

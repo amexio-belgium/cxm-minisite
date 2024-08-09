@@ -1,77 +1,86 @@
 ---
-import LogoSlant from '@components/graphicelements/LogoSlant.astro';
-import Breadcrumbs  from "@components/uielements/Breadcrumbs.astro";
+import LogoSlant from "@components/graphicelements/LogoSlant.astro";
+import Breadcrumbs from "@components/uielements/Breadcrumbs.astro";
 import { PortableText } from "astro-portabletext";
 import SanityImg from "@otterstack/sanity-img-astro";
-import { imageBuilder } from '@api/sanity';
+import { imageBuilder } from "@api/sanity";
 
 interface Props {
-    headline?: string;
-    client?: string;
-    text?: any;
-    buttonText?: string;
-    homepage?: boolean;
-    backgroundImage?: string;
-    backgroundImageAltText?: string;
+  headline?: string;
+  client?: string;
+  text?: any;
+  buttonText?: string;
+  homepage?: boolean;
+  backgroundImage?: string;
+  backgroundImageAltText?: string;
 }
 
-const { 
-    headline, 
-    text, 
-    homepage, 
-    backgroundImage,
-    client,
-    backgroundImageAltText = ''
+const {
+  headline,
+  text,
+  homepage,
+  backgroundImage,
+  client,
+  backgroundImageAltText = "",
 } = Astro.props;
-
-
 ---
-<div class:list={[
-        "relative pt-10 text-white pb-20 md:pb-32 lg:pb-40", 
-        !backgroundImage && "hero-gradient",
-        homepage && "md:mb-0",
-        backgroundImage && "from-blue-800 to-blue-800/0 from-[33%] from-70% bg-gradient-to-r"
-    ]}>
-    <Breadcrumbs />
 
-    <div class="text-white mt-2 mb-10">
-        {
-            client && <p class="uppercase font-serif text-xl" set:html={client}></p>
-        }
-        <h1 class:list={["font-serif text-pretty font-bold w-full lg:w-11/12 xl:w-2/3",
-            homepage ? "text-3xl md:text-4xl" : "text-3xl md:text-4xl "
-        ]}>
-        {headline}
-        </h1>
+<div
+  class:list={[
+    "relative pb-20 pt-10 text-white md:pb-32 lg:pb-40",
+    !backgroundImage && "hero-gradient",
+    homepage && "md:mb-0",
+    backgroundImage &&
+      "bg-gradient-to-r from-blue-800 from-70% from-[33%] to-blue-800/0",
+  ]}
+>
+  <Breadcrumbs />
+
+  <div class="mb-10 mt-2 text-white">
+    {client && <p class="font-serif text-xl uppercase" set:html={client} />}
+    <h1
+      class:list={[
+        "w-full text-pretty font-serif font-bold lg:w-11/12 xl:w-2/3",
+        homepage ? "text-3xl md:text-4xl" : "text-3xl md:text-4xl",
+      ]}
+    >
+      {headline}
+    </h1>
+  </div>
+  <div class:list={["relative", homepage && "w-full xl:w-1/2"]}>
+    <div class:list={["w-full text-left md:w-[80ch]", homepage && "md:w-full"]}>
+      {
+        text && (
+          <div class="text-lg font-light md:text-xl">
+            <PortableText value={text} />
+          </div>
+        )
+      }
+      <slot />
     </div>
-    <div class:list={["relative ", homepage && "w-full xl:w-1/2"]}>
-        <div class:list={[" text-left w-full md:w-[80ch]", homepage && "md:w-full"]}>
-            { text && 
-                <div class="text-lg font-light md:text-xl"><PortableText value={text}></PortableText></div> 
-            }
-            <slot />
-        </div>
-    </div>
-    { 
-        backgroundImage ? 
-            <SanityImg
-                src={backgroundImage}
-                alt={backgroundImageAltText}
-                widths={[400, 800, 1200]}
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                class="absolute top-0 -z-10 object-cover h-full w-full max-w-100vw -right-1/4"
-                loading="eager"
-                imageUrlBuilder={imageBuilder}
-            />
-        :
-            <div class:list={
-                ["absolute object-cover h-auto opacity-30 lg:opacity-100",
-                    homepage ? 
-                    "-top-10 lg:-top-20 -z-10 w-[400%] lg:w-full -right-full lg:-right-[40%]"
-                        : 
-                    "-bottom-1/2 md:-bottom-full lg:top-10 -z-10 w-[400%] md:w-[300%] lg:w-8/12 -right-full lg:-right-[10%]"
-                ]}>
-                <LogoSlant homepageAnimation={homepage} />
-            </div>
-    }
+  </div>
+  {
+    backgroundImage ? (
+      <SanityImg
+        src={backgroundImage}
+        alt={backgroundImageAltText}
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 1200px) 100vw, 1200px"
+        class="max-w-100vw absolute -right-1/4 top-0 -z-10 h-full w-full object-cover"
+        loading="eager"
+        imageUrlBuilder={imageBuilder}
+      />
+    ) : (
+      <div
+        class:list={[
+          "absolute h-auto object-cover opacity-30 lg:opacity-100",
+          homepage
+            ? "-right-full -top-10 -z-10 w-[400%] lg:-right-[40%] lg:-top-20 lg:w-full"
+            : "-bottom-1/2 -right-full -z-10 w-[400%] md:-bottom-full md:w-[300%] lg:-right-[10%] lg:top-10 lg:w-8/12",
+        ]}
+      >
+        <LogoSlant homepageAnimation={homepage} />
+      </div>
+    )
+  }
 </div>

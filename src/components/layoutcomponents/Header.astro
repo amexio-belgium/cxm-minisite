@@ -1,187 +1,248 @@
 ---
-import type { NavigationQueryResult } from 'src/sanity/sanity.types';
-import { useTranslations } from '../../i18n/utils';
-import HeaderLink from '../uielements/HeaderLink.astro';
-import SkipLink from '../uielements/Skiplink.astro';
-import AmexioFuse from '@components/graphicelements/AmexioFuse.astro';
-import { getHrefFromLinkObject } from '@lib/sanityHelpers';
+import type { NavigationQueryResult } from "src/sanity/sanity.types";
+import { useTranslations } from "../../i18n/utils";
+import HeaderLink from "../uielements/HeaderLink.astro";
+import SkipLink from "../uielements/Skiplink.astro";
+import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 
 interface Props {
   language: string;
   navigation: NavigationQueryResult;
-	preview: boolean;
+  preview: boolean;
 }
-
 
 const { language, navigation, preview } = Astro.props;
 const t = useTranslations(language.toLowerCase());
-
 ---
-<SkipLink href="#main-content">{t('main.skiplink')}</SkipLink>
+
+<SkipLink href="#main-content">{t("main.skiplink")}</SkipLink>
 <header>
-	<nav class="flex items-center justify-center w-screen pr-2 md:pr-4 xl:pr-0 py-4 md:pt-6 lg:pt-8 ">
-		<div class="px-6 sm:px-8 md:px-6 max-w-[1304px] w-screen h-full flex flex-wrap items-center justify-between ">
-			<a href={`/${language}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
-				<AmexioFuse class="w-auto h-[36px] md:h-[50px]" />
-			</a>
-			<button id="main-menu-trigger"
-				type="button" 
-				class="inline-flex items-center justify-center w-12 h-12 p-2 -mr-2 text-white md:hidden hover:text-yellow-500 focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500 transition-transform ease-in-out"
-				aria-controls="main-menu" 
-				aria-expanded="false">
-				<span class="sr-only">{t('mainmenu.open')}</span>
-				<svg class="w-14 h-14 fill-white"  aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-menu"></use></svg>
-			</button>
-			<dialog class="main-navigation-dialog open:bg-blue-800 motion-safe:open:animate-fade motion-safe:open:animate-once motion-safe:open:animate-duration-500 open:animate-ease-out" class="m-0" id="main-menu">
-				<div class="flex items-center justify-center w-screen border-b border-transparent py-4 md:hidden">
-					<div class="w-screen px-6 sm:px-8 h-full flex flex-wrap items-center justify-between ">
-						<a href={`/${language}/`} class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
-							<AmexioFuse class="w-auto h-[36px] md:h-[50px]" />
-						</a>
-						<button id="close-main-menu"
-							type="button" 
-							class="inline-flex items-center justify-center w-12 h-12 p-2 -mr-2 text-white hover:text-yellow-500 md:hidden focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500"
-							aria-controls="main-menu">
-							<span class="sr-only">{t('mainmenu.close')}</span>
-							<svg class="w-14 h-14 fill-white"  aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-close"></use></svg>
-						</button>
-					</div>
-				</div>
-				<div class="relative pr-8 ml-auto w-fit md:pr-0" style="--n-of-headerlinks:5">
-					<ul class="main-navigation scroll-mt-20 flex flex-col text-right items-start gap-0 md:text-left md:gap-6 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0 lg:justify-end lg:gap-8">
-						{navigation?.links?.map(link => <HeaderLink href={getHrefFromLinkObject(link.linkObject, language, preview)}>{link.title}</HeaderLink>)}
-					</ul>
-					<span class="js-active-page-idicator hidden top-0 right-4 absolute bg-orange-500 md:top-auto md:left-0 md:right:auto md:-bottom-3 w-[6px] h-[6px] rounded-full transition-transform ease-in-out duration-500"></span>
-				</div>
-			</dialog>
-			</div>
-		</div>
-	</nav>
+  <nav
+    class="flex w-screen items-center justify-center py-4 pr-2 md:pr-4 md:pt-6 lg:pt-8 xl:pr-0"
+  >
+    <div
+      class="flex h-full w-screen max-w-[1304px] flex-wrap items-center justify-between px-6 sm:px-8 md:px-6"
+    >
+      <a
+        href={`/${language}/`}
+        class="flex justify-center text-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
+      >
+        <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
+      </a>
+      <button
+        id="main-menu-trigger"
+        type="button"
+        class="-mr-2 inline-flex h-12 w-12 items-center justify-center p-2 text-white transition-transform ease-in-out hover:text-yellow-500 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:hidden"
+        aria-controls="main-menu"
+        aria-expanded="false"
+      >
+        <span class="sr-only">{t("mainmenu.open")}</span>
+        <svg class="h-14 w-14 fill-white" aria-hidden="true" focusable="false"
+          ><use xlink:href="/icons/icon-sprite.svg#icon-menu"></use></svg
+        >
+      </button>
+      <dialog
+        class="main-navigation-dialog open:bg-blue-800 open:animate-ease-out motion-safe:open:animate-fade motion-safe:open:animate-duration-500 motion-safe:open:animate-once"
+        class="m-0"
+        id="main-menu"
+      >
+        <div
+          class="flex w-screen items-center justify-center border-b border-transparent py-4 md:hidden"
+        >
+          <div
+            class="flex h-full w-screen flex-wrap items-center justify-between px-6 sm:px-8"
+          >
+            <a
+              href={`/${language}/`}
+              class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
+            >
+              <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
+            </a>
+            <button
+              id="close-main-menu"
+              type="button"
+              class="-mr-2 inline-flex h-12 w-12 items-center justify-center p-2 text-white hover:text-yellow-500 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 md:hidden"
+              aria-controls="main-menu"
+            >
+              <span class="sr-only">{t("mainmenu.close")}</span>
+              <svg
+                class="h-14 w-14 fill-white"
+                aria-hidden="true"
+                focusable="false"
+                ><use xlink:href="/icons/icon-sprite.svg#icon-close"></use></svg
+              >
+            </button>
+          </div>
+        </div>
+        <div
+          class="relative ml-auto w-fit pr-8 md:pr-0"
+          style="--n-of-headerlinks:5"
+        >
+          <ul
+            class="main-navigation flex scroll-mt-20 flex-col items-start gap-0 text-right md:mt-0 md:flex-row md:gap-6 md:px-0 md:text-left lg:justify-end lg:gap-8 rtl:space-x-reverse"
+          >
+            {
+              navigation?.links?.map((link) => (
+                <HeaderLink
+                  href={getHrefFromLinkObject(
+                    link.linkObject,
+                    language,
+                    preview,
+                  )}
+                >
+                  {link.title}
+                </HeaderLink>
+              ))
+            }
+          </ul>
+          <span
+            class="js-active-page-idicator md:right:auto absolute right-4 top-0 hidden h-[6px] w-[6px] rounded-full bg-orange-500 transition-transform duration-500 ease-in-out md:-bottom-3 md:left-0 md:top-auto"
+          ></span>
+        </div>
+      </dialog>
+    </div>
+  </nav>
 </header>
+
 <script>
-	import setFocus from "@lib/setFocus.js";
-	const mainMenu = document.getElementById('main-menu') as HTMLDialogElement;;
-	const mainMenuTrigger = document.getElementById('main-menu-trigger') as HTMLButtonElement;
+  import setFocus from "@lib/setFocus.js";
+  const mainMenu = document.getElementById("main-menu") as HTMLDialogElement;
+  const mainMenuTrigger = document.getElementById(
+    "main-menu-trigger",
+  ) as HTMLButtonElement;
 
-	if(mainMenu && mainMenuTrigger) {
-		const isSmallScreen = window.matchMedia("(max-width: 767px)");
-		const mainNav = mainMenu.querySelector('.main-navigation'); 
-		const mainNavLinks = mainNav!.querySelectorAll('a');
-		const activeMainNavLink = mainNav!.querySelector('a[aria-current="page"');
-		const dotIndicator = mainMenu.querySelector('.js-active-page-idicator') as HTMLSpanElement;
-		const closeMainMenuTrigger = document.getElementById('close-main-menu');
+  if (mainMenu && mainMenuTrigger) {
+    const isSmallScreen = window.matchMedia("(max-width: 767px)");
+    const mainNav = mainMenu.querySelector(".main-navigation");
+    const mainNavLinks = mainNav!.querySelectorAll("a");
+    const activeMainNavLink = mainNav!.querySelector('a[aria-current="page"');
+    const dotIndicator = mainMenu.querySelector(
+      ".js-active-page-idicator",
+    ) as HTMLSpanElement;
+    const closeMainMenuTrigger = document.getElementById("close-main-menu");
 
-		const getCenterX = (el) => {
-            return el.getBoundingClientRect().width / 2
-        }
-		const getCenterY = (el) => {
-            return el.getBoundingClientRect().height / 2
-        }
+    const getCenterX = (el) => {
+      return el.getBoundingClientRect().width / 2;
+    };
+    const getCenterY = (el) => {
+      return el.getBoundingClientRect().height / 2;
+    };
 
-		const getLeft = (el) => {
-            return el.getBoundingClientRect().left
-        }
+    const getLeft = (el) => {
+      return el.getBoundingClientRect().left;
+    };
 
-		const getTop = (el) => {
-            return el.getBoundingClientRect().top
-        }
+    const getTop = (el) => {
+      return el.getBoundingClientRect().top;
+    };
 
-		const showDotIndicator = () => {
-			dotIndicator!.classList.remove('hidden');
-		}
-		const hideDotIndicator = () => {
-			dotIndicator!.classList.add('hidden');
-		}
+    const showDotIndicator = () => {
+      dotIndicator!.classList.remove("hidden");
+    };
+    const hideDotIndicator = () => {
+      dotIndicator!.classList.add("hidden");
+    };
 
-		const setInitialDotState = () => {
-			if(activeMainNavLink) {
-				handleDotPosition(activeMainNavLink,mainNav);
-				showDotIndicator();
-			}
-			else {
-				hideDotIndicator();
-			}
-		}
+    const setInitialDotState = () => {
+      if (activeMainNavLink) {
+        handleDotPosition(activeMainNavLink, mainNav);
+        showDotIndicator();
+      } else {
+        hideDotIndicator();
+      }
+    };
 
-		const mainNavigationResizeObserver = new ResizeObserver(entries => {
-			for (let entry of entries) {
-				setInitialDotState();
-			}
-		});
-	
-		const handleDotPosition = (element,wrapper) => {
-			if (isSmallScreen.matches) {
-				dotIndicator!.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
-			} else {
-				dotIndicator!.style.transform = `translateX(${getLeft(element) + getCenterX(element) - getLeft(wrapper)}px)`;
-			}
+    const mainNavigationResizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setInitialDotState();
+      }
+    });
 
-			if(!activeMainNavLink) {
-				showDotIndicator();
-			}
-		}
+    const handleDotPosition = (element, wrapper) => {
+      if (isSmallScreen.matches) {
+        dotIndicator!.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
+      } else {
+        dotIndicator!.style.transform = `translateX(${getLeft(element) + getCenterX(element) - getLeft(wrapper)}px)`;
+      }
 
-		const openMobileMenu = () => {
-			hideDotIndicator();
-			mainMenuTrigger.setAttribute('aria-expanded','true');
-			mainMenu.showModal();
-			setFocus(mainNav, {
-                onBeforeFocus() {
-                    mainNav!.classList.add("outline-none");
-                },
-                onBlur() {
-                    mainNav!.classList.remove("outline-none");
-                },
-            });
-			document.documentElement.style.overflowY = 'clip';
-        	document.documentElement.style.position = 'fixed';
-			document.documentElement.style.width = '100%';
-			setTimeout(() => {
-                setInitialDotState();
-            }, 500);
-			
-		}
+      if (!activeMainNavLink) {
+        showDotIndicator();
+      }
+    };
 
-		const handleOrientationChange = (mql) => {
-			hideDotIndicator();
-  			if(isSmallScreen.matches) {
-				mainMenu.removeAttribute("role");
-				mainMenu.close();
-			} else {
-				mainMenu.setAttribute("role","none");
-				mainMenu.close();
-			}
-			setInitialDotState();
-		}
+    const openMobileMenu = () => {
+      hideDotIndicator();
+      mainMenuTrigger.setAttribute("aria-expanded", "true");
+      mainMenu.showModal();
+      setFocus(mainNav, {
+        onBeforeFocus() {
+          mainNav!.classList.add("outline-none");
+        },
+        onBlur() {
+          mainNav!.classList.remove("outline-none");
+        },
+      });
+      document.documentElement.style.overflowY = "clip";
+      document.documentElement.style.position = "fixed";
+      document.documentElement.style.width = "100%";
+      setTimeout(() => {
+        setInitialDotState();
+      }, 500);
+    };
 
-		isSmallScreen.addEventListener("change", handleOrientationChange);
+    const handleOrientationChange = (mql) => {
+      hideDotIndicator();
+      if (isSmallScreen.matches) {
+        mainMenu.removeAttribute("role");
+        mainMenu.close();
+      } else {
+        mainMenu.setAttribute("role", "none");
+        mainMenu.close();
+      }
+      setInitialDotState();
+    };
 
-		closeMainMenuTrigger!.addEventListener('click',function(){
-			mainMenu.close();
-		},false);
+    isSmallScreen.addEventListener("change", handleOrientationChange);
 
-		mainMenu.addEventListener('close',function() {
-			document.documentElement.style.overflowY = '';
-        	document.documentElement.style.position = '';
-			document.documentElement.style.width = '';
-			mainMenuTrigger.setAttribute('aria-expanded','false');
-		},false);
+    closeMainMenuTrigger!.addEventListener(
+      "click",
+      function () {
+        mainMenu.close();
+      },
+      false,
+    );
 
-		mainMenuTrigger.addEventListener('click', function(event) {
-			openMobileMenu();
-		});
+    mainMenu.addEventListener(
+      "close",
+      function () {
+        document.documentElement.style.overflowY = "";
+        document.documentElement.style.position = "";
+        document.documentElement.style.width = "";
+        mainMenuTrigger.setAttribute("aria-expanded", "false");
+      },
+      false,
+    );
 
-		[...mainNavLinks].forEach(mainNavLink => {
-            mainNavLink.addEventListener('mouseenter',function (e){
-				handleDotPosition(e.target,mainNav);
-			},false);
-        });
+    mainMenuTrigger.addEventListener("click", function (event) {
+      openMobileMenu();
+    });
 
-		mainNav!.addEventListener("mouseleave",setInitialDotState,false);
-		setInitialDotState();
-		
-		if(mainNav){
-			mainNavigationResizeObserver.observe(mainNav);
-		}
-	}
+    [...mainNavLinks].forEach((mainNavLink) => {
+      mainNavLink.addEventListener(
+        "mouseenter",
+        function (e) {
+          handleDotPosition(e.target, mainNav);
+        },
+        false,
+      );
+    });
+
+    mainNav!.addEventListener("mouseleave", setInitialDotState, false);
+    setInitialDotState();
+
+    if (mainNav) {
+      mainNavigationResizeObserver.observe(mainNav);
+    }
+  }
 </script>

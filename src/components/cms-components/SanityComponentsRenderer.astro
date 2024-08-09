@@ -1,29 +1,35 @@
 ---
-import type { CardGrid as CardGridType, ServicesCardList } from '@sanity/sanity.types';
-import CardGrid from '@components/cms-components/CardGrid.astro';
-import ServiceCardList from '@components/cms-components/ServiceCardList.astro';
-import type { CalloutReferenced } from '@sanity/custom.sanity.types';
-import Callout from '@components/cms-components/Callout.astro';
+import type {
+  CardGrid as CardGridType,
+  ServicesCardList,
+} from "@sanity/sanity.types";
+import CardGrid from "@components/cms-components/CardGrid.astro";
+import ServiceCardList from "@components/cms-components/ServiceCardList.astro";
+import type { CalloutReferenced } from "@sanity/custom.sanity.types";
+import Callout from "@components/cms-components/Callout.astro";
 
 interface Props {
-  content: Array<ServicesCardList|CardGridType|CalloutReferenced>|undefined,
-  language: string,
+  content:
+    | Array<ServicesCardList | CardGridType | CalloutReferenced>
+    | undefined;
+  language: string;
 }
 
-const {content, language} = Astro.props;
-
+const { content, language } = Astro.props;
 ---
 
-{content?.map(content => {
-    switch(content._type) {
-        case 'cardGrid': {
-            return <CardGrid cardGrid={content} language={language}></CardGrid>;
-        }
-        case 'servicesCardList': {
-            return <ServiceCardList serviceCardList={content}></ServiceCardList>
-        }
-        case 'callout': {
-            return <Callout callout={content} language={language}></Callout>
-        }
+{
+  content?.map((content) => {
+    switch (content._type) {
+      case "cardGrid": {
+        return <CardGrid cardGrid={content} language={language} />;
+      }
+      case "servicesCardList": {
+        return <ServiceCardList serviceCardList={content} />;
+      }
+      case "callout": {
+        return <Callout callout={content} language={language} />;
+      }
     }
-})}
+  })
+}

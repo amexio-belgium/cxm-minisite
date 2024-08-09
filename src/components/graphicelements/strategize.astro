@@ -2,14 +2,23 @@
 interface Props {
   class?: string;
 }
-const { 
-  class: className,
-} = Astro.props;
-
+const { class: className } = Astro.props;
 ---
-<svg class={className} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 81 80">
-  <path class="hexagon" d="M8.6,30.6l8.2,4.7c.5.3,1,.4,1.5.4s1.1-.1,1.5-.4l8.2-4.7c.5-.3.8-.6,1.1-1.1.3-.5.4-1,.4-1.5v-9.4c0-.6-.1-1.1-.4-1.5-.3-.5-.6-.8-1.1-1.1l-8.2-4.7c-.5-.3-1-.4-1.5-.4s-1.1.1-1.5.4l-8.2,4.7c-.5.3-.8.6-1.1,1.1-.3.5-.4,1-.4,1.5v9.4c0,.6.1,1.1.4,1.5.3.5.6.8,1.1,1.1ZM25.8,27.6l-7.5,4.3-7.5-4.3v-8.6l7.5-4.3,7.5,4.3v8.6ZM56.9,32.1v4.3l6.5,3.8v19.8l-16.9,9.8-16.9-9.8v-19.8l6.5-3.8v-4.3l-7.2,4.2c-1,.6-1.7,1.3-2.2,2.2-.5.9-.8,1.9-.8,3v17.2c0,1.1.3,2,.8,3,.5.9,1.3,1.7,2.2,2.2l14.6,8.5c.9.5,2,.8,3,.8s2.1-.3,3-.8l14.6-8.5c1-.6,1.7-1.3,2.2-2.2.5-.9.8-1.9.8-3v-17.2c0-1.1-.3-2-.8-3-.5-.9-1.3-1.7-2.2-2.2l-7.2-4.2Z"/>
-  <path class="flag" d="M48.4,25.5v20.7c0,.5-.2,1-.5,1.3-.4.4-.8.5-1.3.5s-1-.2-1.3-.5c-.4-.4-.5-.8-.5-1.3V9.7c0-.9.3-1.6.9-2.2.6-.6,1.3-.9,2.2-.9h21.4c1.2,0,2.1.5,2.7,1.6.6,1.1.6,2.1-.1,3.1l-2,2.9c-.3.5-.5,1.1-.5,1.7s.2,1.2.5,1.7l2,2.9c.7,1,.7,2.1.1,3.1-.6,1.1-1.5,1.6-2.7,1.6h-20.6Z"/>
+
+<svg
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  viewBox="0 0 81 80"
+>
+  <path
+    class="hexagon"
+    d="M8.6,30.6l8.2,4.7c.5.3,1,.4,1.5.4s1.1-.1,1.5-.4l8.2-4.7c.5-.3.8-.6,1.1-1.1.3-.5.4-1,.4-1.5v-9.4c0-.6-.1-1.1-.4-1.5-.3-.5-.6-.8-1.1-1.1l-8.2-4.7c-.5-.3-1-.4-1.5-.4s-1.1.1-1.5.4l-8.2,4.7c-.5.3-.8.6-1.1,1.1-.3.5-.4,1-.4,1.5v9.4c0,.6.1,1.1.4,1.5.3.5.6.8,1.1,1.1ZM25.8,27.6l-7.5,4.3-7.5-4.3v-8.6l7.5-4.3,7.5,4.3v8.6ZM56.9,32.1v4.3l6.5,3.8v19.8l-16.9,9.8-16.9-9.8v-19.8l6.5-3.8v-4.3l-7.2,4.2c-1,.6-1.7,1.3-2.2,2.2-.5.9-.8,1.9-.8,3v17.2c0,1.1.3,2,.8,3,.5.9,1.3,1.7,2.2,2.2l14.6,8.5c.9.5,2,.8,3,.8s2.1-.3,3-.8l14.6-8.5c1-.6,1.7-1.3,2.2-2.2.5-.9.8-1.9.8-3v-17.2c0-1.1-.3-2-.8-3-.5-.9-1.3-1.7-2.2-2.2l-7.2-4.2Z"
+  ></path>
+  <path
+    class="flag"
+    d="M48.4,25.5v20.7c0,.5-.2,1-.5,1.3-.4.4-.8.5-1.3.5s-1-.2-1.3-.5c-.4-.4-.5-.8-.5-1.3V9.7c0-.9.3-1.6.9-2.2.6-.6,1.3-.9,2.2-.9h21.4c1.2,0,2.1.5,2.7,1.6.6,1.1.6,2.1-.1,3.1l-2,2.9c-.3.5-.5,1.1-.5,1.7s.2,1.2.5,1.7l2,2.9c.7,1,.7,2.1.1,3.1-.6,1.1-1.5,1.6-2.7,1.6h-20.6Z"
+  ></path>
 </svg>
 
 <style is:global>
@@ -22,7 +31,7 @@ const {
     transform-origin: bottom left;
     animation-timing-function: ease-out;
   }
-  
+
   .flag {
     fill: #0b1215;
     stroke-width: 0px;
@@ -34,28 +43,36 @@ const {
   }
 
   @keyframes flag-wave {
-    from {transform: translate(-10px) scale(0.5) rotate(-25deg);}
-    to {transform: translate(-0px) scale(1) rotate(0);}
+    from {
+      transform: translate(-10px) scale(0.5) rotate(-25deg);
+    }
+    to {
+      transform: translate(-0px) scale(1) rotate(0);
+    }
   }
 
   @keyframes hex-grow {
-    from {transform: scale(0.5);}
-    to {transform: rotate(1);}
-  }
-  
-  .service__item:has(.flag):hover .flag {
-    transform: scale(1.2) rotate(-10deg)
+    from {
+      transform: scale(0.5);
+    }
+    to {
+      transform: rotate(1);
+    }
   }
 
+  .service__item:has(.flag):hover .flag {
+    transform: scale(1.2) rotate(-10deg);
+  }
 
   @media (prefers-reduced-motion) {
-    .hexagon, .flag {
+    .hexagon,
+    .flag {
       animation: none;
     }
     .service__item:has(.flag):hover {
       .flag {
         transform: unset;
       }
-    } 
+    }
   }
 </style>
