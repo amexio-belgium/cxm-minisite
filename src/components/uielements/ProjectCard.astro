@@ -1,100 +1,170 @@
 ---
-import type { ImageMetadata } from 'astro';
+import type { ImageMetadata } from "astro";
 
-import Button from '../uielements/Button.astro';
-import { Image } from 'astro:assets';
-import Link from './Link.astro';
+import Button from "../uielements/Button.astro";
+import { Image } from "astro:assets";
+import Link from "./Link.astro";
 interface Props {
-    projectImage: string;
-    smallImage: string;
-    content: string;
-    name: string;
-    buttonText: string;
-    link?: string;
-    class?: string;
-    [x: string]: any;
+  projectImage: string;
+  smallImage: string;
+  content: string;
+  name: string;
+  buttonText: string;
+  link?: string;
+  class?: string;
+  [x: string]: any;
 }
 
 const {
-    projectImage,
-    smallImage,
-    content,
-    name,
-    class: className,
-    link,
-    buttonText,
-    ...rest
+  projectImage,
+  smallImage,
+  content,
+  name,
+  class: className,
+  link,
+  buttonText,
+  ...rest
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}');
-const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*{,**/}*.{jpeg,jpg,png,gif}');
-if (!images[projectImage]) throw new Error(`"${projectImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}"`);
-if (!logoimages[smallImage]) throw new Error(`"${smallImage}" does not exist in glob: "src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}",
+);
+const logoimages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/logos/*{,**/}*.{jpeg,jpg,png,gif}",
+);
+if (!images[projectImage])
+  throw new Error(
+    `"${projectImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}"`,
+  );
+if (!logoimages[smallImage])
+  throw new Error(
+    `"${smallImage}" does not exist in glob: "src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}"`,
+  );
 
-const id = "id_" + Math.random().toString(36).slice(2, 11)
-
+const id = "id_" + Math.random().toString(36).slice(2, 11);
 ---
-<div {...rest} class:list={["group animate-delay-300 flex flex-col justify-between bg-quaternary rounded-2xl overflow-hidden relative w-full h-auto lg:min-h-[470px] mb-8 shadow-lg", id]}>
-  <div class="w-full p-4 sm:p-8 h-1/2 lg:h-full lg:w-1/2">
-      <h3 class="mb-2 text-black font-serif text-xl">
-        <Link 
-          onWhite
-          hoverColor="orange"
-          class="no-underline	outline-none text-black content-none before:absolute before:z-20 before:inset-x-0 before:inset-y-0" 
-          href={link} 
-          set:html={name}>
-        </Link>
-      </h3>
-      <p class="text-black font-light text-sm" set:html={content}></p>
-      <Button class="" decorative style="tertiary" color="dark">
-        {buttonText}
-      </Button>
+
+<div
+  {...rest}
+  class:list={[
+    "group relative mb-8 flex h-auto w-full flex-col justify-between overflow-hidden rounded-2xl bg-quaternary shadow-lg animate-delay-300 lg:min-h-[470px]",
+    id,
+  ]}
+>
+  <div class="h-1/2 w-full p-4 sm:p-8 lg:h-full lg:w-1/2">
+    <h3 class="mb-2 font-serif text-xl text-black">
+      <Link
+        onWhite
+        hoverColor="orange"
+        class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 before:z-20"
+        href={link}
+        set:html={name}
+      />
+    </h3>
+    <p class="text-sm font-light text-black" set:html={content} />
+    <Button class="" decorative style="tertiary" color="dark">
+      {buttonText}
+    </Button>
   </div>
-  <div class="relative bottom-0 right-0 inline-flex flex-col items-center justify-center w-full overflow-hidden mask-project lg:w-3/4 h-[300px] lg:h-full lg:absolute z-10">
-    <Image 
-      src={images[projectImage]()} 
-      class="md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] object-cover" 
-      loading="lazy" 
-      width={790} height={470} 
-      alt={name}/>
-    { smallImage && 
-      <Image 
-        loading="eager" 
-        src={logoimages[smallImage]()} 
-        class="absolute w-auto h-20 top-4 right-4 md:top-8 md:right-8" 
-        height={80}
-        alt={name} /> 
-      }
-  </div> 
+  <div
+    class="mask-project relative bottom-0 right-0 z-10 inline-flex h-[300px] w-full flex-col items-center justify-center overflow-hidden lg:absolute lg:h-full lg:w-3/4"
+  >
+    <Image
+      src={images[projectImage]()}
+      class="h-[unset] min-h-full min-w-full max-w-[unset] shrink-0 object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100"
+      loading="lazy"
+      width={790}
+      height={470}
+      alt={name}
+    />
+    {
+      smallImage && (
+        <Image
+          loading="eager"
+          src={logoimages[smallImage]()}
+          class="absolute right-4 top-4 h-20 w-auto md:right-8 md:top-8"
+          height={80}
+          alt={name}
+        />
+      )
+    }
+  </div>
 </div>
 <style>
+  .mask-project {
+    clip-path: polygon(
+      100% 100%,
+      100% 0%,
+      21.705% 0%,
+      21.705% 0.029%,
+      21.705% 0.029%,
+      19.048% 0.522%,
+      16.589% 1.543%,
+      14.348% 2.954%,
+      12.343% 4.62%,
+      10.594% 6.404%,
+      9.12% 8.17%,
+      7.94% 9.78%,
+      7.074% 11.1%,
+      6.54% 11.991%,
+      6.358% 12.319%,
+      0% 22.694%,
+      0% 100%,
+      100% 100%
+    );
+    mask-size: cover;
+    mask-size: 200% auto;
+    mask-position: top right;
+  }
+
+  @media only screen and (min-width: 1024px) {
     .mask-project {
-		clip-path: polygon( 100% 100%,100% 0%,21.705% 0%,21.705% 0.029%,21.705% 0.029%,19.048% 0.522%,16.589% 1.543%,14.348% 2.954%,12.343% 4.62%,10.594% 6.404%,9.12% 8.17%,7.94% 9.78%,7.074% 11.1%,6.54% 11.991%,6.358% 12.319%,0% 22.694%,0% 100%,100% 100% );
-        mask-size: cover; 
-        mask-size: 200% auto;
-        mask-position: top right;
+      clip-path: polygon(
+        54.806% 0.062%,
+        54.806% 0.062%,
+        53.272% 0.408%,
+        51.853% 1.125%,
+        50.559% 2.116%,
+        49.402% 3.286%,
+        48.392% 4.539%,
+        47.541% 5.779%,
+        46.86% 6.911%,
+        46.36% 7.837%,
+        46.052% 8.464%,
+        45.947% 8.694%,
+        -0.036% 100%,
+        99.927% 99.938%,
+        99.927% 99.938%,
+        99.934% 99.938%,
+        99.942% 99.938%,
+        99.949% 99.938%,
+        99.956% 99.938%,
+        99.964% 99.938%,
+        99.971% 99.938%,
+        99.978% 99.938%,
+        99.985% 99.938%,
+        99.993% 99.938%,
+        100% 99.938%,
+        100% 0.041%,
+        54.806% 0.041%
+      );
+      mask-size: cover;
+      mask-position: unset;
     }
-    
-    @media only screen and (min-width: 1024px) {
-        .mask-project {
-            clip-path: polygon( 54.806% 0.062%,54.806% 0.062%,53.272% 0.408%,51.853% 1.125%,50.559% 2.116%,49.402% 3.286%,48.392% 4.539%,47.541% 5.779%,46.86% 6.911%,46.36% 7.837%,46.052% 8.464%,45.947% 8.694%,-0.036% 100%,99.927% 99.938%,99.927% 99.938%,99.934% 99.938%,99.942% 99.938%,99.949% 99.938%,99.956% 99.938%,99.964% 99.938%,99.971% 99.938%,99.978% 99.938%,99.985% 99.938%,99.993% 99.938%,100% 99.938%,100% 0.041%,54.806% 0.041% );
-            mask-size: cover; 
-            mask-position: unset;
-        }
-    }
+  }
 </style>
 
-<script define:vars={{id}}>
-    const textBlock = document.querySelector(`.${id}`);
-  
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && textBlock) {
-          textBlock.classList.add('motion-safe:animate-fade-up');
-          observer.unobserve(textBlock);
-        }
-      });
+<script define:vars={{ id }}>
+  const textBlock = document.querySelector(`.${id}`);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && textBlock) {
+        textBlock.classList.add("motion-safe:animate-fade-up");
+        observer.unobserve(textBlock);
+      }
     });
-  
-    textBlock && observer.observe(textBlock);
+  });
+
+  textBlock && observer.observe(textBlock);
 </script>

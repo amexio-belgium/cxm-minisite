@@ -1,22 +1,19 @@
 ---
-import Details from '../uielements/Details.astro'
+import Details from "../uielements/Details.astro";
 
 interface Props {
-    headline: string;
-    headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
-    class?: string;
+  headline: string;
+  headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
+  class?: string;
 }
 
-const { 
-	headline,
-    headlineTag = "h3",
-    class: className	
-} = Astro.props;
-
+const { headline, headlineTag = "h3", class: className } = Astro.props;
 ---
-<Details 
-	headline={headline}
-    headlineTag={headlineTag}
-    class:list={["border-b border-gray-500", className]}>
-    <slot/>
+
+<Details
+  headline={headline}
+  headlineTag={headlineTag}
+  class:list={["border-gray-500 border-b text-white", className]}
+>
+  <slot />
 </Details>

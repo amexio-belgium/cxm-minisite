@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+.idea
+.astro
+.vscode
+dist
+public
+src/sanity/sanity.types.ts
+src/sanity/schema.json

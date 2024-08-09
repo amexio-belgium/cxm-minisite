@@ -1,79 +1,79 @@
 ---
-import { getCollection } from 'astro:content';
-import { useTranslations } from '../../i18n/utils';
-import BlogPreview from '@components/uielements/BlogPreview.astro';
-import CasePreview from '@components/uielements/CasePreview.astro';
+import { useTranslations } from "../../i18n/utils";
+import BlogPreview from "@components/uielements/BlogPreview.astro";
+import CasePreview from "@components/uielements/CasePreview.astro";
 
 const { lang } = Astro.params;
 interface Props {
-    collection?: 'insights' | 'cases';
-    current?: string;
-    tag?: string;
+  collection?: "insights" | "cases";
+  current?: string;
+  tag?: string;
 }
 
-const { 
-    collection = "insights",
-    tag = '',
-    current
-} = Astro.props;
+const { collection = "insights", tag = "", current } = Astro.props;
 
-const posts = await getPosts();
+const posts = [];
 
-async function getPosts() {
-    if (collection == "cases") {
-        return (await getCollection('cases',
-            (post) => {
-                return !post.data.draft 
-                        && getPostLangAndSlug(post).lang === lang 
-                        && (!tag || (tag && post.data.tags && post.data.tags.includes(tag)))
-                        && (!current || (current && post.data.title !== current))
-            }))
-        .splice(0,2);
-    } 
-
-    return (await getCollection('blog', 
-        (post) => {
-            return !post.data.draft 
-                && getPostLangAndSlug(post).lang === lang 
-                && (!tag || (tag && post.data.tags && post.data.tags.includes(tag))) 
-                && (!current || (current && post.data.title !== current))
-        }))
-        .sort(
-            (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-        )
-        .splice(0,3);
-} 
+// async function getPosts() {
+//     if (collection == "cases") {
+//         return (await getCollection('cases',
+//             (post) => {
+//                 return !post.data.draft
+//                         && getPostLangAndSlug(post).lang === lang
+//                         && (!tag || (tag && post.data.tags && post.data.tags.includes(tag)))
+//                         && (!current || (current && post.data.title !== current))
+//             }))
+//         .splice(0,2);
+//     }
+//
+//     return (await getCollection('blog',
+//         (post) => {
+//             return !post.data.draft
+//                 && getPostLangAndSlug(post).lang === lang
+//                 && (!tag || (tag && post.data.tags && post.data.tags.includes(tag)))
+//                 && (!current || (current && post.data.title !== current))
+//         }))
+//         .sort(
+//             (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+//         )
+//         .splice(0,3);
+// }
 
 function getPostLangAndSlug(post) {
-	const [lang, ...slug] = post.slug.split('/');
-	return {lang, slug}
+  const [lang, ...slug] = post.slug.split("/");
+  return { lang, slug };
 }
 
 const t = useTranslations(lang);
-
 ---
-<div class="relative xl:mb-40 flex flex-col py-20 xl:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 xl:before:right-0 before:h-full before:w-[3000px] xl:before:rounded-xl">
-    <h2 class="mb-8 font-serif text-2xl md:text-3xl text-black">
-        {  
-            (collection === "insights") ? t('insightsteaser.headline') : t('casesteaser.headline')
-        }
-    </h2>
+
+<div
+  class="relative flex flex-col py-20 before:absolute before:-right-24 before:bottom-0 before:top-0 before:-z-10 before:h-full before:w-[3000px] before:bg-light-blue-50 xl:mb-40 xl:pr-12 xl:before:right-0 xl:before:rounded-xl"
+>
+  <h2 class="mb-8 font-serif text-2xl text-black md:text-3xl">
     {
-        collection == "insights" ? 
-          <div class="text-black relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
-            {
-                posts.map((post) => (
-                    <BlogPreview blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />
-                ))
-            }
-            </div>
-        : 
-        <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8">
-            {
-                posts.map((post) => (
-                    <CasePreview small caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
-                ))
-            }
-        </div>
+      collection === "insights"
+        ? t("insightsteaser.headline")
+        : t("casesteaser.headline")
     }
+  </h2>
+  {
+    collection == "insights" ? (
+      <div class="relative grid w-full grid-cols-1 gap-8 text-black md:grid-cols-2 lg:grid-cols-3">
+        {
+          // posts.map((post) => (
+          //     <BlogPreview blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />
+          // ))
+        }
+      </div>
+    ) : (
+      <div class="relative grid w-full grid-cols-1 gap-8 text-black lg:grid-cols-2">
+        {
+          // posts.map((post) => (
+          //     <CasePreview small caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
+          // ))
+        }
+      </div>
+    )
+  }
 </div>
