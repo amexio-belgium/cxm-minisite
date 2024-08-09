@@ -1,18 +1,14 @@
 ---
-import BaseHead from "@components/layoutcomponents/BaseHead.astro";
-import Header from "@components/layoutcomponents/Header.astro";
-import Footer, { type Social } from "@components/layoutcomponents/Footer.astro";
-import TrackingFooter from "@components/uielements/TrackingFooter.astro";
-import Tracking from "@components/uielements/Tracking.astro";
-import { siteConfigQuery, navigationQuery } from "src/api/queries";
-import type {
-  SiteConfig,
-  NavigationQueryResult,
-  SiteConfigQueryResult,
-} from "src/sanity/sanity.types";
-import { loadQuery } from "src/api/sanity";
-import { VisualEditing } from "@sanity/astro/visual-editing";
-import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import BaseHead from '@components/layoutcomponents/BaseHead.astro';
+import Header from '@components/layoutcomponents/Header.astro';
+import Footer, { type Social } from '@components/layoutcomponents/Footer.astro';
+import TrackingFooter from '@components/uielements/TrackingFooter.astro';
+import Tracking from '@components/uielements/Tracking.astro';
+import { siteConfigQuery, navigationQuery } from 'src/api/queries';
+import type { SiteConfig, NavigationQueryResult, SiteConfigQueryResult } from 'src/sanity/sanity.types';
+import { loadQuery } from 'src/api/sanity';
+import {VisualEditing} from '@sanity/astro/visual-editing';
+import { getHrefFromLinkObject } from '@lib/sanityHelpers';
 export const prerender = false;
 
 interface Props {
@@ -23,65 +19,50 @@ interface Props {
   preview: boolean;
 }
 
+
 const { title, description, slug, language, preview } = Astro.props;
 
-const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
-  query: siteConfigQuery,
-  params: { language: language.toLowerCase() },
-});
-if (!siteConfig) {
-  return new Response(null, { status: 404 });
+const {data: siteConfig} = await loadQuery<SiteConfigQueryResult>({query: siteConfigQuery, params: {language: language.toLowerCase()}} );
+if(!siteConfig){
+    return new Response(null, { status: 404 });
 }
-const { data: header } = await loadQuery<NavigationQueryResult>({
-  query: navigationQuery,
-  params: { navigationId: siteConfig.headerNavigation?._ref! },
-});
-const { data: footer } = await loadQuery<NavigationQueryResult>({
-  query: navigationQuery,
-  params: { navigationId: siteConfig.footerNavigation?._ref! },
-});
+const {data: header} = await loadQuery<NavigationQueryResult>({query: navigationQuery, params: {navigationId: siteConfig.headerNavigation?._ref!}} );
+const {data: footer} = await loadQuery<NavigationQueryResult>({query: navigationQuery, params: {navigationId: siteConfig.footerNavigation?._ref!}} );
 
-const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
-  return {
-    name: social.name || "",
-    iconImageID: social.icon?.asset?._id || "",
-    link: social.link
-      ? getHrefFromLinkObject(social.link, language, preview)
-      : "",
-    alt: social.icon?.asset?.altTexts?.[language] || "",
-  };
-});
+const socials:Social[]|undefined = siteConfig.socials?.map(social=>{
+    return {
+        name: social.name || '',
+        iconImageID: social.icon?.asset?._id || '',
+        link: social.link ? getHrefFromLinkObject(social.link, language, preview) : '',
+        alt: social.icon?.asset?.altTexts?.[language] || ''
+    };
+})
+
 ---
-
-<html class="overflow-x-clip" lang={language.toLowerCase()}>
-  <head>
-    <BaseHead title={title} description={description} />
-    {
-      slug === "contact" && (
-        <link
-          rel="preload"
-          href="https://js-eu1.hsforms.net/forms/embed/v2.js"
-          as="script"
-        />
-      )
-    }
-    <Tracking />
-  </head>
-  <body class="overflow-x-clip bg-blue-800">
-    <VisualEditing enabled={true} zIndex={1000} />
-    <Header language={language} navigation={header} />
-    <main id="main-content" class="mx-auto max-w-[1304px] px-6 sm:px-8">
-      <slot />
-    </main>
-    <Footer
-      language={language}
-      navigation={header}
-      secondaryNavigation={footer}
-      isContactPage={false}
-      footerText={siteConfig.copyrightText}
-      socials={socials}
-      preview={preview}
-    />
-    <TrackingFooter />
-  </body>
+<html class="overflow-x-clip" lang={language.toLowerCase()} >
+    <head>
+        <BaseHead title={title} description={description} />
+        {
+            slug === "contact" && 
+            <link rel="preload" href="https://js-eu1.hsforms.net/forms/embed/v2.js" as="script" /> 
+        }
+        <Tracking />
+    </head>
+    <body class="overflow-x-clip bg-blue-800">
+        <VisualEditing enabled={true} zIndex={1000} />
+        <Header language={language} navigation={header} preview={preview} />
+        <main id="main-content" class="max-w-[1304px] mx-auto px-6 sm:px-8">
+            <slot />
+        </main>
+        <Footer 
+            language={language} 
+            navigation={header} 
+            secondaryNavigation={footer} 
+            isContactPage={false} 
+            footerText={siteConfig.copyrightText} 
+            socials={socials}
+            preview={preview}
+            />
+        <TrackingFooter />
+    </body>
 </html>
