@@ -5,31 +5,46 @@ import type {
 } from "@sanity/sanity.types";
 import CardGrid from "@components/cms-components/CardGrid.astro";
 import ServiceCardList from "@components/cms-components/ServiceCardList.astro";
-import type { CalloutReferenced } from "@sanity/custom.sanity.types";
+import type {
+  CalloutReferenced,
+  LongFormTextReferenced,
+} from "@sanity/custom.sanity.types";
 import Callout from "@components/cms-components/Callout.astro";
+import LongFormText from "@components/cms-components/LongFormText.astro";
+import { siteLanguage } from "src/stores/global-store";
 
 interface Props {
   content:
-    | Array<ServicesCardList | CardGridType | CalloutReferenced>
+    | Array<
+        | ServicesCardList
+        | CardGridType
+        | CalloutReferenced
+        | LongFormTextReferenced
+      >
     | undefined;
-  language: string;
 }
 
-const { content, language } = Astro.props;
+const language = siteLanguage.get();
+const { content } = Astro.props;
 ---
 
-{
-  content?.map((content) => {
-    switch (content._type) {
-      case "cardGrid": {
-        return <CardGrid cardGrid={content} language={language} />;
+<div class="flex flex-col gap-y-20">
+  {
+    content?.map((content) => {
+      switch (content._type) {
+        case "cardGrid": {
+          return <CardGrid cardGrid={content} />;
+        }
+        case "servicesCardList": {
+          return <ServiceCardList serviceCardList={content} />;
+        }
+        case "callout": {
+          return <Callout callout={content} />;
+        }
+        case "longFormText": {
+          return <LongFormText longFormText={content} />;
+        }
       }
-      case "servicesCardList": {
-        return <ServiceCardList serviceCardList={content} />;
-      }
-      case "callout": {
-        return <Callout callout={content} language={language} />;
-      }
-    }
-  })
-}
+    })
+  }
+</div>

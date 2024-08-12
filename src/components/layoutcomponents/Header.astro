@@ -5,15 +5,15 @@ import HeaderLink from "../uielements/HeaderLink.astro";
 import SkipLink from "../uielements/Skiplink.astro";
 import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import { siteLanguage } from "src/stores/global-store";
 
 interface Props {
-  language: string;
   navigation: NavigationQueryResult;
   preview: boolean;
 }
-
-const { language, navigation, preview } = Astro.props;
-const t = useTranslations(language.toLowerCase());
+const language = siteLanguage.get();
+const { navigation, preview } = Astro.props;
+const t = useTranslations(language);
 ---
 
 <SkipLink href="#main-content">{t("main.skiplink")}</SkipLink>

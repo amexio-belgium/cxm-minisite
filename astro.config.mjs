@@ -34,6 +34,6 @@ export default defineConfig({
     react(),
     sanityImg({ options: { auto: "format" } }),
   ],
-  output: "server",
+  output: "hybrid",
   adapter: netlify(),
 });

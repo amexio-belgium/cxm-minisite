@@ -9,6 +9,7 @@ import type { NavigationQueryResult } from "src/sanity/sanity.types";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { imageBuilder } from "@api/sanity";
+import { siteLanguage } from "src/stores/global-store";
 
 export type Social = {
   name: string;
@@ -18,7 +19,6 @@ export type Social = {
 };
 
 interface Props {
-  language: string;
   navigation: NavigationQueryResult;
   secondaryNavigation: NavigationQueryResult;
   isContactPage: boolean;
@@ -28,7 +28,6 @@ interface Props {
 }
 
 const {
-  language,
   navigation,
   secondaryNavigation,
   isContactPage,
@@ -36,8 +35,9 @@ const {
   preview,
   socials,
 } = Astro.props;
+const language = siteLanguage.get();
 
-const t = useTranslations(language.toLowerCase());
+const t = useTranslations(language);
 ---
 
 <footer

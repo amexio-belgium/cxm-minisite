@@ -84,6 +84,18 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
           asset->{...}
         }
       }
-    }
+    },
+    _type == "longFormText" => {
+      ...,
+      defined(content) => {
+        content[]{
+          ...,
+           _type == "image" => {
+            ...,
+             asset->{...}
+           }
+        }
+      }
+   },
   }
 }`;
