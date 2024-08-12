@@ -22,6 +22,7 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import assessment_framework from '@assets/images/assessment-framework.svg';
 import kbc from '@assets/logos/kbc_logo.png';
 import telenet from '@assets/logos/telenet_logo.png';
 import mediafin from '@assets/logos/mediafin_logo.png';
@@ -45,34 +46,56 @@ import Strategize from '@components/graphicelements/strategize.astro';
 
 <TeaserWithImage 
 	headline="Is Your Content Strategy Ready for the Future?"
-	description="In today's fast-paced digital landscape, having a robust content strategy is essential for maintaining a competitive edge. However, many organizations struggle to understand where they truly stand in terms of content maturity. Are your digital channels fully optimized? Are your people and processes aligned to support a cohesive strategy? Is your technology up-to-date and capable of supporting your content goals?
-<br>
-At AmeXio, we help you answer these critical questions through our comprehensive Content Assessment. We evaluate your content maturity across five key axes: Strategy, Digital Channels, People & Processes, Optimization (Personalization), and Technology. Our goal is to provide you with a clear picture of where your strengths lie, which areas need attention, and how to achieve high-impact improvements with minimal effort.">
+	description="In today’s digital landscape, outdated content strategies can lead to missed opportunities, disengaged audiences, and stagnant growth. Are you struggling with inconsistent messaging across channels, low engagement rates, or content that no longer aligns with your business objectives? Our Content Assessment service goes beyond identifying gaps—it’s the first step in transforming your content into a strategic asset that drives measurable results.">
 	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
+<TeaserWithImage 
+	headline="Our Content Assessment Framework"
+	description="
+		<p>Our Content Assessment framework is designed to evaluate your content strategy across critical dimensions. We identify gaps and opportunities to enhance your content’s effectiveness and alignment with your business goals.</p>
+
+		<h4>Strategy</h4>
+		<p>Aligns content strategy with business objectives, ensuring every piece supports strategic goals.</p>
+
+		<h4>Digital Channels</h4>
+		<p>Examines content distribution across digital channels, focusing on consistency and engagement.</p>
+
+		<h4>People & Processes</h4>
+		<p>Identifies inefficiencies in content creation workflows to improve team alignment.</p>
+
+		<h4>Optimization (Personalization)</h4>
+		<p>Assesses content personalization for different audience segments to boost engagement.</p>
+
+		<h4>Technology</h4>
+		<p>Reviews content tools and technologies, identifying improvements to support strategic goals.</p>
+	"
+	align="left">
+	<Image src={assessment_framework} alt="" width={1024} height={1024} class="rounded-xl" />
+</TeaserWithImage>
+
 <TilesContainer 
-    headline="How We Assess Your Content Maturity"
-    description="Our Content Assessment framework is designed to provide a comprehensive evaluation of your organization’s content maturity across five critical areas. Each axis is carefully examined to identify strengths, areas for improvement, and opportunities for low-effort, high-impact enhancements. Here’s how we break it down:">
+    headline="Our Content Maturity Assessment Process"
+    description="Our structured approach ensures that your content strategy is thoroughly evaluated and optimized for success. By following a clear and systematic process, we deliver actionable insights and tailored recommendations, paving the way for effective implementation and long-term improvement. This process guarantees that every action we take is aligned with your business goals and designed to drive measurable outcomes.">
     <SmallTile 
-		headline="Strategy"
-		description="Is your content approach aligned with business goals?" >
+		headline="Discovery"
+		description="" >
     </SmallTile>
     <SmallTile 
-		headline="Digital Channels"
-		description="Are your digital platforms effectively reaching and engaging your target audience?" >
+		headline="Maturity Assessment"
+		description="" >
     </SmallTile>
     <SmallTile 
-		headline="People & Processes"
-		description="Do your teams have the right structure and workflows to support content creation?" >
+		headline="Insights & Recommendations"
+		description="" >
     </SmallTile>
     <SmallTile 
-		headline="Optimization"
-		description="Is your content tailored to engage different audience segments and enhance user experience?" >
+		headline="Roadmap Development"
+		description="" >
     </SmallTile>
     <SmallTile 
-		headline="Technology"
-		description="Are your tools and systems capable of supporting your current and future content needs?" >
+		headline="Implementation & Support"
+		description="" >
     </SmallTile>
 </TilesContainer>
   
