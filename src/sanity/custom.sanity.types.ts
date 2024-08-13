@@ -3,6 +3,7 @@ import type {
   Callout,
   CardGrid,
   Faq,
+  Geopoint,
   Highlight,
   internalGroqTypeReferenceTo,
   Intro,
@@ -16,6 +17,7 @@ import type {
   ServicesCardList,
   Tabs,
   WorkCardList,
+  Youtube,
 } from "./sanity.types";
 
 export interface LinkObjectReferenced {
@@ -253,12 +255,52 @@ export type CalloutReferenced = {
   >;
 };
 
+export type LongFormTextReferenced = {
+  _type: "longFormText";
+  intro?: Intro;
+  standOut: boolean;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          reference?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "contentPage";
+          };
+          _type: "internalLink";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | i18nImage
+    | ({
+        _key: string;
+      } & Youtube)
+    | ({
+        _key: string;
+      } & Geopoint)
+  >;
+};
+
 export interface ServiceWithReferences {
   _type: "service";
   challange?: string;
   language?: string;
   cta?: string;
-  content?: Array<ServicesCardList | CardGrid | CalloutReferenced>;
+  content?: Array<
+    ServicesCardList | CardGrid | CalloutReferenced | LongFormTextReferenced
+  >;
   metadata?: Metadata;
   image?: i18nImage;
   _updatedAt?: string;

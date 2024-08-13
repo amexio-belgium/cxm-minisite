@@ -6,7 +6,6 @@ import TrackingFooter from "@components/uielements/TrackingFooter.astro";
 import Tracking from "@components/uielements/Tracking.astro";
 import { siteConfigQuery, navigationQuery } from "src/api/queries";
 import type {
-  SiteConfig,
   NavigationQueryResult,
   SiteConfigQueryResult,
 } from "src/sanity/sanity.types";
@@ -14,20 +13,21 @@ import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 export const prerender = false;
+import { siteLanguage } from "src/stores/global-store";
+
+const language = siteLanguage.get();
 
 interface Props {
   title: string;
   description: string;
   slug: string;
-  language: string;
   preview: boolean;
 }
 
-const { title, description, slug, language, preview } = Astro.props;
-
+const { title, description, slug, preview } = Astro.props;
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: language.toLowerCase() },
+  params: { language: language },
 });
 if (!siteConfig) {
   return new Response(null, { status: 404 });
@@ -69,12 +69,11 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
   </head>
   <body class="overflow-x-clip bg-blue-800">
     <VisualEditing enabled={true} zIndex={1000} />
-    <Header language={language} navigation={header} preview={preview} />
+    <Header navigation={header} preview={preview} />
     <main id="main-content" class="mx-auto max-w-[1304px] px-6 sm:px-8">
       <slot />
     </main>
     <Footer
-      language={language}
       navigation={header}
       secondaryNavigation={footer}
       isContactPage={false}

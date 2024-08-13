@@ -4,13 +4,14 @@ import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImageAsset } from "@sanity/custom.sanity.types";
 import type { CardGrid } from "@sanity/sanity.types";
 import { imageBuilder } from "src/api/sanity";
+import { siteLanguage } from "src/stores/global-store";
 
 interface Props {
   cardGrid: CardGrid;
-  language: string;
 }
 
-const { cardGrid, language } = Astro.props;
+const { cardGrid } = Astro.props;
+const language = siteLanguage.get();
 ---
 
 <TilesContainer
