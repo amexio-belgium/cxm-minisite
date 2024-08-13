@@ -2306,14 +2306,39 @@
           },
           "optional": true
         },
-        "cta": {
+        "style": {
           "type": "objectAttribute",
           "value": {
-            "type": "string"
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "subtle"
+              },
+              {
+                "type": "string",
+                "value": "popping"
+              }
+            ]
           },
           "optional": true
         },
-        "backgroundImage": {
+        "ctaVisible": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "cta": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "cta"
+          },
+          "optional": true
+        },
+        "image": {
           "type": "objectAttribute",
           "value": {
             "type": "object",
@@ -4390,36 +4415,6 @@
         },
         "optional": true
       },
-      "serviceReference": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "_ref": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              }
-            },
-            "_type": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string",
-                "value": "reference"
-              }
-            },
-            "_weak": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "boolean"
-              },
-              "optional": true
-            }
-          },
-          "dereferencesTo": "service"
-        },
-        "optional": true
-      },
       "language": {
         "type": "objectAttribute",
         "value": {
@@ -5156,7 +5151,8 @@
       "cta": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "inline",
+          "name": "cta"
         },
         "optional": true
       },
@@ -5481,6 +5477,37 @@
                 }
               }
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "cta",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "cta"
+          }
+        },
+        "text": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "link": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "link"
           },
           "optional": true
         }

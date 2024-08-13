@@ -1,0 +1,93 @@
+---
+import type { HighlightReferenced } from "@sanity/custom.sanity.types";
+import { imageBuilder } from "@api/sanity";
+import { siteLanguage } from "src/stores/global-store";
+import { PortableText } from "astro-portabletext";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import Button from "@components/uielements/Button.astro";
+import { portableHighlightComponents } from "@components/cms-components/HighlightBlock/PortableText/helper";
+
+interface Props {
+  highlight: HighlightReferenced;
+}
+
+const { highlight } = Astro.props;
+const language = siteLanguage.get();
+const styles = {
+  popping:
+    "yellow py-6 pr-6 sm:pr-20 -mt-6 md:mr-8 relative md:absolute md:bottom-12 w-full md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
+  subtle:
+    "bg-lightest-blue-500 ml-4 -mt-8 relative shadow-xl p-8 md:absolute md:right-8 md:-bottom-20 w-11/12 md:w-8/12 rounded-xl",
+};
+
+const id = "id_" + Math.random().toString(36).slice(2, 11);
+---
+
+<div class:list={["relative isolate my-20 flex flex-col md:my-40"]}>
+  <div
+    class="ml-[-150%] flex max-h-[400px] w-[400%] items-center justify-center overflow-hidden rounded-xl lg:ml-[unset] lg:max-h-[unset] lg:w-full"
+  >
+    {
+      highlight.image && (
+        <img
+          loading="lazy"
+          class="transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
+          src={imageBuilder.image(highlight.image).url()}
+          alt={highlight.image.asset?.altTexts?.[language]}
+        />
+      )
+    }
+  </div>
+  <div
+    class:list={[
+      "z-20 flex flex-col items-start text-black animate-delay-500 animate-once animate-ease-out",
+      styles[highlight.style!],
+      id,
+    ]}
+  >
+    <h2 class="text-balance font-serif text-lg font-medium sm:text-xl">
+      {highlight.intro?.title}
+    </h2>
+    <div class="font-sm prose font-light"></div>
+    {
+      highlight.intro?.intro && (
+        <PortableText
+          value={highlight.intro?.intro}
+          components={portableHighlightComponents}
+        />
+      )
+    }
+
+    {
+      highlight.ctaVisible && highlight.cta?.link && (
+        <Button
+          class="mt-6"
+          color="light"
+          link={getHrefFromLinkObject(highlight.cta?.link, language, true)}
+        >
+          {highlight.cta.text}
+        </Button>
+      )
+    }
+  </div>
+</div>
+
+<script define:vars={{ id }}>
+  const textBlock = document.querySelector(`.${id}`);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && textBlock) {
+        if (textBlock.classList.contains("yellow")) {
+          textBlock.classList.add("motion-safe:animate-fade-right");
+        } else {
+          textBlock.classList.add("motion-safe:animate-fade-up");
+        }
+
+        observer.unobserve(textBlock);
+      }
+    });
+  });
+
+  textBlock && observer.observe(textBlock);
+</script>

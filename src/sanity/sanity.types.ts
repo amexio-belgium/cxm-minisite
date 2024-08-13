@@ -382,8 +382,10 @@ export type ServicesCardList = {
 export type Highlight = {
   _type: "highlight";
   intro?: Intro;
-  cta?: string;
-  backgroundImage?: {
+  style?: "subtle" | "popping";
+  ctaVisible?: boolean;
+  cta?: Cta;
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -699,12 +701,6 @@ export type AnswerQuestion = {
     _type: "block";
     _key: string;
   }>;
-  serviceReference?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  };
   language?: string;
 };
 
@@ -832,7 +828,7 @@ export type Service = {
     _type: "image";
   };
   challenge?: string;
-  cta?: string;
+  cta?: Cta;
   content?: Array<({
     _key: string;
   } & Highlight) | ({
@@ -885,6 +881,12 @@ export type Faq = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "answerQuestion";
   }>;
+};
+
+export type Cta = {
+  _type: "cta";
+  text?: string;
+  link?: Link;
 };
 
 export type ContentPage = {
@@ -1302,7 +1304,7 @@ export type NavigationQueryResult = {
           _type: "image";
         };
         challenge?: string;
-        cta?: string;
+        cta?: Cta;
         content?: Array<({
           _key: string;
         } & Callout) | ({
@@ -1347,7 +1349,7 @@ export type NavigationQueryResult = {
   language?: string;
 } | null;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    }  }}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    },    _type == "highlight" => {      ...,      defined(image) => {        image{          ...,          asset->{...}        }      }    },     _type == "longFormText" => {      ...,      defined(content) => {        content[]{          ...,           _type == "image" => {            ...,             asset->{...}           }        }      }    },  }}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -1383,8 +1385,62 @@ export type ServiceQueryResult = {
     _type: "image";
   } | null;
   challenge?: string;
-  cta?: string;
+  cta?: Cta;
   content: Array<{
+    _key: string;
+    groups: null;
+    cards: null;
+    content: Array<{
+      _key: string;
+    } | {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        reference?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contentPage";
+        };
+        _type: "internalLink";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+    }> | null;
+  } | {
     _key: string;
     groups: null;
     cards: null;
@@ -1441,6 +1497,37 @@ export type ServiceQueryResult = {
       _type: "textObject";
       asset: null;
     }> | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
   } | {
     _key: string;
     groups: null;
@@ -1541,7 +1628,7 @@ export type ServiceQueryResult = {
           _type: "image";
         } | null;
         challenge?: string;
-        cta?: string;
+        cta?: Cta;
         content?: Array<({
           _key: string;
         } & Callout) | ({
@@ -1611,12 +1698,6 @@ export type ServiceQueryResult = {
         _type: "block";
         _key: string;
       }>;
-      serviceReference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "service";
-      };
       language?: string;
     }> | null;
   } | null;

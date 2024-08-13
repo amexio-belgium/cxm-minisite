@@ -2,6 +2,7 @@ import type {
   AnswerQuestion,
   Callout,
   CardGrid,
+  Cta,
   Faq,
   Geopoint,
   Highlight,
@@ -293,13 +294,26 @@ export type LongFormTextReferenced = {
   >;
 };
 
+export type HighlightReferenced = {
+  _type: "highlight";
+  intro?: Intro;
+  style?: "subtle" | "popping";
+  ctaVisible?: boolean;
+  cta?: Cta;
+  image?: i18nImage;
+};
+
 export interface ServiceWithReferences {
   _type: "service";
   challange?: string;
   language?: string;
   cta?: string;
   content?: Array<
-    ServicesCardList | CardGrid | CalloutReferenced | LongFormTextReferenced
+    | ServicesCardList
+    | CardGrid
+    | CalloutReferenced
+    | LongFormTextReferenced
+    | HighlightReferenced
   >;
   metadata?: Metadata;
   image?: i18nImage;
