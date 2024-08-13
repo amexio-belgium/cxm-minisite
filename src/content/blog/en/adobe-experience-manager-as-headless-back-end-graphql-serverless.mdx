@@ -12,7 +12,7 @@ import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
 import Link from "@components/uielements/Link.astro"
 
 <LayoutSection backgroundColor="dark">
-    <p>I’ve been working on a GraphQL interface that serves content from <a href="https://www.acolad.com/en/digital/adobe.html" rel="noopener">Adobe Experience Manager</a> and some other systems in a Back-end For Front-end (BFF) architecture for about a year now.</p>
+    <p>I’ve been working on a GraphQL interface that serves content from <a href="../aem-stabilize-optimize/" rel="noopener">Adobe Experience Manager</a> and some other systems in a Back-end For Front-end (BFF) architecture for about a year now.</p>
     <p>Along this way, I've learning some best practices to move to AEM as a headless back-end.  In this blog, I go through the details on how I tackled these 3 challenges so you can avoid the most common pitfalls in the process.</p>
 </LayoutSection>
 
@@ -22,7 +22,7 @@ import Link from "@components/uielements/Link.astro"
     <p>You can provide additional code to expose pages and other structures, but when you require content from other API’s such as personalized content, a dedicated GraphQL server seems like the go-to alternative to make this process smoother.</p> 
     <p>In this case, we introduced Apollo Server as the GraphQL implementation of choice, implemented in a serverless environment.</p> 
     <p>To back it up on the AEM side, Sling Models with their Exporters are used to generate the appropriate JSON representations of pages and components. This had the added benefit of being able to re-use many of the Sling Models, as they were already used to serve JSON content.</p>
-    <p>Some other external API’s are also in place, mainly used for <a href="https://www.acolad.com/en/events/digital-experience-tuesdays-sessions/episode-2.html" rel="noopener">personalized enrichment of the delivered content</a></p>
+    <p>Some other external API’s are also in place, mainly used for personalized enrichment of the delivered content</p>
 
     <h2>Setting up a cache mechanism compatible with your serverless environment and content personalization</h2>
     <p>With the serverless environment and personalized content, caching immediately comes to mind as a risk. As the personalized content is prone to change often, we can’t cache it. This effectively renders Apollo’s TTL-based caching mechanism useless, as nearly all requests will have a net TTL of zero. As we can’t cache the entire GraphQL response we send back to the user, it becomes important to cache the generic data we need from the backend, and that all personalized, uncached content is delivered fast.</p>

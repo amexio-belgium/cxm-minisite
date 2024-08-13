@@ -4,7 +4,7 @@ export const services = {
         'services.title': "Services - AmeXio Fuse",
         'services.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'Services',
-        'hero.subheadline': 'A streamlined <strong>content lifecycle</strong> is at the core of your Customer Experience Management (CXM) process, and goes beyond the implementation of a Content Management System (CMS). Therefore, we provide a broad spectrum of services to help you meet concrete <mark><strong>business outcomes</strong></mark>.',
+        'hero.subheadline': 'Optimizing your content operations is key to provide great customer experiences. We offer a range of services to help you go beyond just implementing a CMS and achieve real <mark><strong>business results</strong></mark>.',
         'overview.headline': 'We can help you to',
         'overview.group1': 'Strategize',
         'overview.group1description': 'Craft a tailored CX roadmap by identifying key challenges and prioritizing high-impact projects.',
@@ -22,7 +22,7 @@ export const services = {
         'collaborate.description3': 'If you already have a solution in place and you need to upscale your expertise, we can provide you with access to a pool of highly skilled professionals who can <strong>seamlessly integrate into your team</strong>. We can provide short-term support for a specific project but also long-term expertise to drive your digital initiatives.',
         'collaborate.description4': 'Next to consultancy and project-based delivery, our Managed Service offering is designed to <strong>take the burden off your shoulders</strong>, allowing you to focus on your core business activities. We provide comprehensive governance and support for your systems, ensuring they run smoothly and efficiently at all times. Services include regular maintenance, updates, security monitoring, troubleshooting and proactive data-driven advisory.',
         'explainer.headline': 'Integrating people, processes and tools',
-        'explainer.description': "When it comes to integrating people, processes, and tools, Amexio takes a <strong>holistic</strong> approach. We don't just focus on implementation since that's only one piece of the puzzle. Our expertise spans three critical areas to ensure your CXM program is successful and delivers a solid <strong>ROI</strong>. We guide and support your team to embrace new systems, refine your processes for seamless integration, and leverage the latest technologies to fit your needs. By building a <strong>long-term vision</strong> with you, we ensure all aspects of your CXM program work together harmoniously for lasting success.",
+        'explainer.description': "<p>At AmeXio, we take a <strong>holistic</strong> approach to integrating people, processes, and tools. We go beyond just implementation, focusing on three key areas to ensure your CXM program succeeds and delivers real <strong>return on investment (ROI)</strong>. We help your team adapt to new systems, streamline processes for smooth integration, and use the latest technologies to meet your needs.</p><p>By creating a <strong>long-term vision</strong> with you, with you, we make sure every part of your CXM program works together seamlessly for lasting success.</p>",
         'explainer.imagealt': 'People processes tools'
     },
     fr: {
