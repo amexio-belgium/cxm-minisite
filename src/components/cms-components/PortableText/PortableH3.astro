@@ -6,6 +6,6 @@ interface Props extends PortableProps<Block> {}
 const props = Astro.props;
 ---
 
-<h2 class="text-balance font-serif text-2xl sm:text-3xl">
+<h3 class="text-balance font-serif text-xl font-medium sm:text-2xl">
   {props.node.children[0].text}
-</h2>
+</h3>
