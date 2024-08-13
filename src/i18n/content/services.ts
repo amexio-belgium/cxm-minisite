@@ -15,7 +15,7 @@ export const services = {
         'collaborate.headline': 'How do we usually collaborate?',
         'collaborate.title1': 'Consultancy & advisory',
         'collaborate.title2': 'Project based',
-        'collaborate.title3': 'Expert staffing',
+        'collaborate.title3': 'Expert staffing.',
         'collaborate.title4': 'Managed service',
         'collaborate.description1': 'We can bring industry expertise and technical know-how to the table to provide you with <strong>actionable insights</strong> and <strong>strategic recommendations</strong>. Whether you’re looking to optimize your current systems, implement new technologies, or develop a comprehensive CX strategy, we are able to provide <strong>technology-agnostic</strong> advice.',
         'collaborate.description2': 'When you have a specific digital initiative defined, we work closely with you to understand your project requirements, timelines, and desired outcomes. From initial concept to final delivery, our team ensures that your project is delivered to the highest standards. Leveraging our <strong>FusionCX approach</strong>, we make sure to drive real business value.',
