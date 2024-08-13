@@ -2,7 +2,7 @@ export const home = {
     en: {
         'home.title': "AmeXio Fuse",
         'home.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
-        'hero.headline': 'Your <mark><strong>content is gold</strong></mark>. Ready to put it to work for your customers?',
+        'hero.headline': 'Connecting the dots, from <mark><strong>your content</strong></mark> to experience.',
         'hero.text': 'AmeXio Fuse helps you get the most out of your content, making your experience platform smarter, faster, and more affordable.',
         'hero.button': 'Talk to us about your content challenge',
         'heroprofile1.text': "A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future.",
