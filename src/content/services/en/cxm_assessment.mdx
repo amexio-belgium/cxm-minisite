@@ -1,8 +1,8 @@
 ---
-title: 'CXM Content Assessment'
-previewTitle: 'Audit your current CXM landscape'
-description: 'Unlock the full potential of your CXM content strategy. With our comprehensive Content Assessment, we evaluate your content maturity across key areas, providing you with clear insights and actionable improvements to drive your digital success.'
-pubDate: 'May 26 2024'
+title: 'CX Assessment'
+previewTitle: 'Assess your current CXM ecosystem'
+description: 'We help you evaluate your existing content processes and tooling, providing you with an improvement roadmap to drive your digital success.'
+pubDate: 'May 30 2024'
 heroImage: '/src/assets/images/development.jpg'
 altTextImage: 'The alt text for the hero image'
 cta: 'Discover CX Assessment'
@@ -23,9 +23,8 @@ import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
 import assessment_framework from '@assets/images/assessment-framework.svg';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
+import beaulieu from '@assets/logos/deceuninck_logo_white.png';
+import deceuninck from '@assets/logos/beaulieu_logo_white.png';
 import Button from '@components/uielements/Button.astro';
 import Design from '@components/graphicelements/design.astro';
 import Realize from '@components/graphicelements/realize.astro';
@@ -37,21 +36,20 @@ import Strategize from '@components/graphicelements/strategize.astro';
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we advised on strategy">
-		<Image src={kbc} alt="" class="h-10 w-auto"/>
-		<Image src={telenet} alt="" class="h-10 w-auto"/>
-		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+	<Customers headline="Customers we supported with an assessment">
+		<Image src={beaulieu} alt="Beaulieu International Group" class="h-10 w-auto"/>
+		<Image src={deceuninck} alt="Deceuninck" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Is Your Content Strategy Ready for the Future?"
-	description="In today’s digital landscape, outdated content strategies can lead to missed opportunities, disengaged audiences, and stagnant growth. Are you struggling with inconsistent messaging across channels, low engagement rates, or content that no longer aligns with your business objectives? Our Content Assessment service goes beyond identifying gaps—it’s the first step in transforming your content into a strategic asset that drives measurable results.">
+	headline="Is your content strategy ready for the future?"
+	description="In today’s digital landscape, an outdated content strategy can lead to wasted time, increased overhead costs, and eventually a disrupted customer experience. Are you struggling with inconsistent messaging across channels, low engagement rates, or content that no longer aligns with your business objectives? Our Content Assessment service goes beyond identifying gaps—it’s the first step in transforming your content into a strategic asset that drives measurable results.">
 	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
 <TeaserWithImage 
-	headline="Our Content Assessment Framework"
+	headline="The CX Assessment Framework"
 	description="
 		<p>Our Content Assessment framework is designed to evaluate your content strategy across critical dimensions. We identify gaps and opportunities to enhance your content’s effectiveness and alignment with your business goals.</p>
 
@@ -65,20 +63,20 @@ import Strategize from '@components/graphicelements/strategize.astro';
 		<p>Identifies inefficiencies in content creation workflows to improve team alignment.</p>
 
 		<h4>Optimization (Personalization)</h4>
-		<p>Assesses content personalization for different audience segments to boost engagement.</p>
+		<p>Assess content personalization for different audience segments to boost engagement.</p>
 
 		<h4>Technology</h4>
-		<p>Reviews content tools and technologies, identifying improvements to support strategic goals.</p>
+		<p>Reviews content management tools and technologies, identifying improvements to support strategic goals.</p>
 	"
 	align="left">
 	<Image src={assessment_framework} alt="" width={1024} height={1024} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
-    headline="Our Content Maturity Assessment Process"
-    description="Our structured approach ensures that your content strategy is thoroughly evaluated and optimized for success. By following a clear and systematic process, we deliver actionable insights and tailored recommendations, paving the way for effective implementation and long-term improvement. This process guarantees that every action we take is aligned with your business goals and designed to drive measurable outcomes.">
+    headline="A structured assessment methodology"
+    description="We propose a structured approach to ensure your content strategy is thoroughly evaluated and optimized for success. By following a systematic process, we deliver actionable insights and tailored recommendations, paving the way for effective implementation and long-term improvement. This process guarantees that every action we take is aligned with your business goals and designed to drive measurable outcomes.">
     <SmallTile 
-		headline="Discovery"
+		headline="Initial Discovery"
 		description="" >
     </SmallTile>
     <SmallTile 
@@ -86,11 +84,7 @@ import Strategize from '@components/graphicelements/strategize.astro';
 		description="" >
     </SmallTile>
     <SmallTile 
-		headline="Insights & Recommendations"
-		description="" >
-    </SmallTile>
-    <SmallTile 
-		headline="Roadmap Development"
+		headline="Recommendations & improvement roadmap"
 		description="" >
     </SmallTile>
     <SmallTile 
@@ -100,13 +94,26 @@ import Strategize from '@components/graphicelements/strategize.astro';
 </TilesContainer>
   
 <Highlight 
-	title="Maximize Your Content’s Potential"
-	text="Our Content Assessment doesn’t just stop at evaluation. We identify low-effort, high-impact improvements that can dramatically enhance your content strategy. Whether it's optimizing your use of digital channels or refining your personalization efforts, we provide you with actionable insights that drive real results."
+	title="An actionable improvement roadmap"
+	text="Our Assessment doesn’t just stop at evaluation. We identify low-effort, high-impact improvements that can dramatically enhance your content strategy. Whether it's optimizing your use of digital channels or refining your personalization efforts, we provide you with actionable insights that drive real results."
 	image='/src/assets/images/highlight.png'
 	buttonText="Discover"
 	/>
 
 <Faq headline="Questions we usually get">
+	<FaqQuestion
+		headline="How do I know if my organization needs an assessment?"
+		headlineTag="h3">
+		<p>If you’re experiencing any of the following, it may be time for an assessment:</p>
+		<ul>
+			<li>Your website traffic is high, but conversion rates remain low, indicating content may not be resonating with your audience.</li>
+			<li>You’re investing heavily in multiple digital channels, but struggling to maintain a consistent brand message across them.</li>
+			<li>Your attempts at content personalization are resulting in generic, one-size-fits-all messaging rather than targeted engagement.</li>
+			<li>You are looking for a vendor-agnostic audit of your current technology landscape and assess its scalability and future-proofness.</li>
+		</ul>
+		<p>Our assessment can provide the clarity and direction you need to address these issues.</p>
+	</FaqQuestion>
+
 	<FaqQuestion
 		headline="What can I expect from the assessment process?"
 		headlineTag="h3">
@@ -114,37 +121,16 @@ import Strategize from '@components/graphicelements/strategize.astro';
 	</FaqQuestion>
 
 	<FaqQuestion
-		headline="How long does the Content Assessment take?"
+		headline="How long does the assessment take?"
 		headlineTag="h3">
-		<p>The duration of the assessment depends on the size and complexity of your content ecosystem, but typically it can be completed within a 4 weeks.</p>
+		<p>The duration of the assessment depends on the size and complexity of your content ecosystem, but typically it can be completed within 4 weeks.</p>
 	</FaqQuestion>
 
 	<FaqQuestion
-		headline="What industries does AmeXio specialize in for Content Assessment?"
+		headline="What industries does AmeXio specialize in for assessment?"
 		headlineTag="h3">
 		<p>AmeXio works across various industries, including finance, retail, manufacturing, and public, tailoring our assessment to meet the unique needs of each sector.</p>
 	</FaqQuestion>
-
-	<FaqQuestion
-		headline="How do I know if my organization needs a Content Assessment?"
-		headlineTag="h3">
-		<p>If you’re experiencing any of the following, it may be time for a Content Assessment:</p>
-		<ul>
-			<li>Your website traffic is high, but conversion rates remain low, indicating content may not be resonating with your audience.</li>
-			<li>You’re investing heavily in multiple digital channels, but struggling to maintain a consistent brand message across them.</li>
-			<li>Your attempts at content personalization are resulting in generic, one-size-fits-all messaging rather than targeted engagement.</li>
-		</ul>
-		<p>A Content Assessment can provide the clarity and direction you need to address these issues.</p>
-	</FaqQuestion>
-
 </Faq>
 
 <InsightsTeaser />
-
-<Quote 
-    quote="The new website of L’Echo appeals to a broad audience and boasts extended customisation possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
-    name='Johan Condijts'
-    jobtitle="editor"
-    profileImage='/src/assets/people/placeholder_small.png'
-	class="mt-40"
-    /> 
