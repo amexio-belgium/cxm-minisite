@@ -29,6 +29,7 @@ import leuven from '@assets/logos/leuven_logo_white.png';
 import mediafin from '@assets/logos/mediafin_logo_white.png';
 import oecd from '@assets/logos/oecd_logo_white.png';
 import deceuninck from '@assets/logos/beaulieu_logo_white.png';
+import slant from "@assets/images/slantwithimage.png"
 
 <HeroHeader 
 	headline={frontmatter.title}
@@ -49,7 +50,7 @@ import deceuninck from '@assets/logos/beaulieu_logo_white.png';
 		<p>Choosing the right technology today can significantly impact your business’s success tomorrow. More than ever, it's essential to ensure your technology ecosystem is <strong>adaptable and resilient</strong> to change.</p>
 		<p>With our Technology Advisory service, we use a <strong>forward-thinking</strong> approach to help you build a CXM ecosystem that is able to grow along with your business.</p>
 	">
-	<Image src={referenceframework} alt="" width={512} height={512} class="rounded-xl" />
+	<Image src={referenceframework} alt="" width={1024} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
@@ -74,6 +75,9 @@ import deceuninck from '@assets/logos/beaulieu_logo_white.png';
 		headline="Recommend technology"
 		description="Define architecture & technology, mapping to identified capabilities<br /><br /><mark>Vendor assessment</mark>">
     </SmallTile>
+    <div slot="bg-image" class="absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat">
+      <Image loading="lazy" src={slant} alt="" />
+    </div>
 </TilesContainer>
 
 <TeaserWithImage
@@ -84,7 +88,7 @@ import deceuninck from '@assets/logos/beaulieu_logo_white.png';
 		<p>Next to that, there is the continuous drive for more flexibility and agility: <strong>Composability</strong> gives organizations the ability to compose their own Digital Experience Platform (DXP) using a best-of-breed mindset. It involves an increased use of Microservices, API’s, Cloud-native solutions, and Headless content delivery (<a href='https://machalliance.org/mach-technology'>MACH</a>). Although this pattern can provide real business value, it’s not equally applicable to all use cases. It is highly dependent on the specific business needs, content management and delivery scenarios and the way your organization is structured.</p>
 		<p>These trends have a substantial impact on your CXM ecosystem. With our Technology Advisory service, we help you to get a grip on what the market is offering, and to look at solutions fitting <strong>your unique needs and context</strong>.</p>
 	">
-	<Image src={shifts} alt="" width={512} height={512} class="rounded-xl" />
+	<Image src={shifts} alt="" width={796} class="rounded-xl" />
 </TeaserWithImage>
 
 <Faq headline="Questions we usually get">
@@ -139,6 +143,3 @@ import deceuninck from '@assets/logos/beaulieu_logo_white.png';
 		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
 	</FaqQuestion>
 </Faq>
-
-<InsightsTeaser />
-

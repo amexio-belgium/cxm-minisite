@@ -1,11 +1,11 @@
 ---
-title: 'FusionCX'
+title: 'FusionCX approach'
 previewTitle: 'Design and launch your content platform'
-description: 'We help you build a unified content platform that effortlessly connects with your customers across channels and supports your internal content processes.'
+description: 'By establishing a joint multidisciplinary team, we aim to design and build a content platform that aligns with your domain-specific content processes and integrates seamlessly with your customer touchpoints.'
 pubDate: 'May 28 2024'
-heroImage: '/src/assets/images/presentatie.jpg'
-altTextImage: 'The alt text for the hero image'
-cta: 'Discover FusionCX'
+heroImage: '/src/assets/images/leuvenoffice_3.jpg'
+altTextImage: '2 team members collaborating on a project, looking at a single laptop screen.'
+cta: 'Discover our FusionCX approach'
 groupType: 'Design & Realize'
 
 ---
@@ -23,6 +23,7 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import fusioncx from '@assets/images/fusioncx.png';
 import kbc from '@assets/logos/kbc_logo.png';
 import telenet from '@assets/logos/telenet_logo.png';
 import mediafin from '@assets/logos/mediafin_logo.png';
@@ -32,7 +33,7 @@ import mediafin from '@assets/logos/mediafin_logo.png';
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we advised on strategy">
+	<Customers headline="Customers we supported with their content platform">
 		<Image src={kbc} alt="" class="h-10 w-auto"/>
 		<Image src={telenet} alt="" class="h-10 w-auto"/>
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
@@ -40,77 +41,57 @@ import mediafin from '@assets/logos/mediafin_logo.png';
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+	headline="Customer Experience Management is not a pure technical story"
+	description="
+	<p>The only way to achieve tangible business outcomes, is to use a <strong>holistic</strong> approach that spans from user experience (UX) design and technical implementation all the way to strategic guidance and team enablement.</p>
+	<p>Therefore, we implement our FusionCX approach in your project, in which we closely <strong>collaborate</strong> with key stakeholders at your organization (IT, business, author teams and marketing) to define clear business goals, streamline content processes, and cultivate a culture of continuous optimization and experimentation.</p>
+	<p>To ensure proper rollout and user adoption, we provide thorough onboarding and training for your teams, sharing best practices to ensure <strong>sustained</strong> success and a deep understanding of the tools and strategies at their disposal.</p>
+	">
+	<Image src={fusioncx} alt="" width={768} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
-    headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    headline="Measure, learn, and adapt"
+    description="
+    <p>Successful CXM projects thrive on early and continuous feedback from business stakeholders and real end users. A traditional phased 'waterfall' approach, with its linear process of gathering requirements, designing, developing, and testing, is ill-suited for these projects. The risks associated with a waterfall process are significant: it can lead to extensive delays, unanticipated costs, and late discovery of critical issues, which may result in costly changes and ultimately deliver value only towards the end of the project.</p>
+	<p>Therefore, we use Agile best-practices like DevOps and Test Automation in our FusionCX approach. This allows us to release early and often, facilitating a constant feedback loop. This enables us to gather real-world data, measure outcomes, and adapt our solutions to changing market trends, business requirements, and technological advancements.</p>
+	<p>Launching a Minimum Marketable Product (MMP) early in the project lifecycle is central to this approach. It allows us to collect valuable data from actual users, which informs iterative improvements.</p>
+    ">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Focus on actual business value"
+		description="Delivering business value instead of merely a list of features">
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Continuous prioritization"
+		description="The Product Owner (PO) is tasked with deciding on the business value per user story, deciding on where available budget and time is best spent.">
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Fusion Teams"
+		description="A multidisciplary team ensures the right expertise is available to fully research, analyse, design, build and roll out the backlog stories.">
     </SmallTile>
 </TilesContainer>
-  
-<Highlight 
-	title="In the picture"
-	text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."
-	image='/src/assets/images/highlight.png'
-	buttonText="discover"
-	/>
 
 <Faq headline="Questions we usually get">
 	<FaqQuestion
-		headline="Can you help me with services for development only?"
+		headline="How can we define our initial project scope?"
 		headlineTag="h3"> 
-		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-    	<ul> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ul>
+		<p>The Product Owner (PO) plays a crucial role in maintaining the product vision by identifying the problems to solve and the target audience. The PO gathers and curates stakeholder ideas as user stories, determining what should be built and what should be deferred or excluded. These user stories are then organized into a product backlog, prioritized based on business value and cost. The product backlog is continuously evolving, reflecting new ideas or changes, and is built iteratively to ensure the project remains aligned with its goals.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you help me with services for development only?"
+		headline="How can we estimate initial project budget?"
 		headlineTag="h3" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
+		<p>We calculate the cost of running a Scrum Team over a specified period. This involves determining the full-time equivalent (FTE) roles required, such as Business Consultants, Technical Leads, Developers, Testers, Architects, DevOps Engineers, and Project Managers. It is important to note that maintaining a stable Scrum Team is a core principle, as increasing team size does not linearly increase velocity due to the overhead involved. This careful estimation ensures that the project is adequately resourced while remaining cost-effective.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="What makes you different from other agencies?" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-    	<ol> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ol>
+		headline="How can we estimate the cost per user story?" >
+		<p>Each story is assigned a value in Story Points using a technique called Planning Poker. Story Points help determine the amount of work that can be accomplished by the Scrum Team within a single sprint, which is referred to as the team's Velocity. Velocity is calculated as the total Story Points completed per sprint and is a key metric for forecasting future work. After each sprint, Velocity is measured, and the forecast is adjusted, becoming more accurate over time. This iterative estimation process helps ensure that project planning remains realistic and adaptable.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you support my in-house team?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
+		headline="How can we make sure project deadlines are met?">
+		<p>It's crucial to recognize that, in an Agile approach, scope details are not fixed. By breaking down larger tasks into smaller, manageable pieces and frequently revisiting their estimates, teams can adapt to changes and ensure that the most critical elements are completed on time. Backlog Grooming plays a key role in this process, helping to prioritize tasks so that the maximum business value is delivered at any given moment, ensuring that deadlines are not just met, but that they also align with delivering the most impactful outcomes.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Do you work for startups?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
+		headline="How much time should we spent analysing up-front?">
+		<p>To reduce risk and uncertainty in Agile projects, it's essential to build knowledge up-front through activities like technical analysis, prototyping, and feasibility studies. This early investment in understanding the project's landscape helps mitigate business, technical, and cost/schedule risks. However, decision-making should be deferred until it's absolutely necessary, allowing the project to adapt to new information as it becomes available. High-level architecture should be established early, with further refinements made during the sprints, ensuring that the project remains flexible and aligned with customer value throughout its lifecycle.</p>
 	</FaqQuestion>
 </Faq>
-
-<InsightsTeaser />
-
-<Quote 
-    quote="The new website of L’Echo appeals to a broad audience and boasts extended customisation possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
-    name='Johan Condijts'
-    jobtitle="editor"
-    profileImage='/src/assets/people/placeholder_small.png'
-	class="mt-40"
-    /> 
