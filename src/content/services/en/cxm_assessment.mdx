@@ -1,8 +1,8 @@
 ---
-title: 'CX Assessment'
-previewTitle: 'Assess your current CXM ecosystem'
-description: 'When trying to enhance customer experiences, limits in your current setup tend to become apparent. We’ll help you identify what’s working and what’s not.'
-pubDate: 'May 30 2024'
+title: 'CXM Content Assessment'
+previewTitle: 'Audit your current CXM landscape'
+description: 'Unlock the full potential of your CXM content strategy. With our comprehensive Content Assessment, we evaluate your content maturity across key areas, providing you with clear insights and actionable improvements to drive your digital success.'
+pubDate: 'May 26 2024'
 heroImage: '/src/assets/images/development.jpg'
 altTextImage: 'The alt text for the hero image'
 cta: 'Discover CX Assessment'
@@ -22,9 +22,15 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import assessment_framework from '@assets/images/assessment-framework.svg';
 import kbc from '@assets/logos/kbc_logo.png';
 import telenet from '@assets/logos/telenet_logo.png';
 import mediafin from '@assets/logos/mediafin_logo.png';
+import Button from '@components/uielements/Button.astro';
+import Design from '@components/graphicelements/design.astro';
+import Realize from '@components/graphicelements/realize.astro';
+import Optimize from '@components/graphicelements/optimize.astro';
+import Strategize from '@components/graphicelements/strategize.astro';
 
 
 <HeroHeader 
@@ -39,69 +45,98 @@ import mediafin from '@assets/logos/mediafin_logo.png';
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
+	headline="Is Your Content Strategy Ready for the Future?"
+	description="In today’s digital landscape, outdated content strategies can lead to missed opportunities, disengaged audiences, and stagnant growth. Are you struggling with inconsistent messaging across channels, low engagement rates, or content that no longer aligns with your business objectives? Our Content Assessment service goes beyond identifying gaps—it’s the first step in transforming your content into a strategic asset that drives measurable results.">
 	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
+<TeaserWithImage 
+	headline="Our Content Assessment Framework"
+	description="
+		<p>Our Content Assessment framework is designed to evaluate your content strategy across critical dimensions. We identify gaps and opportunities to enhance your content’s effectiveness and alignment with your business goals.</p>
+
+		<h4>Strategy</h4>
+		<p>Aligns content strategy with business objectives, ensuring every piece supports strategic goals.</p>
+
+		<h4>Digital Channels</h4>
+		<p>Examines content distribution across digital channels, focusing on consistency and engagement.</p>
+
+		<h4>People & Processes</h4>
+		<p>Identifies inefficiencies in content creation workflows to improve team alignment.</p>
+
+		<h4>Optimization (Personalization)</h4>
+		<p>Assesses content personalization for different audience segments to boost engagement.</p>
+
+		<h4>Technology</h4>
+		<p>Reviews content tools and technologies, identifying improvements to support strategic goals.</p>
+	"
+	align="left">
+	<Image src={assessment_framework} alt="" width={1024} height={1024} class="rounded-xl" />
+</TeaserWithImage>
+
 <TilesContainer 
-    headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    headline="Our Content Maturity Assessment Process"
+    description="Our structured approach ensures that your content strategy is thoroughly evaluated and optimized for success. By following a clear and systematic process, we deliver actionable insights and tailored recommendations, paving the way for effective implementation and long-term improvement. This process guarantees that every action we take is aligned with your business goals and designed to drive measurable outcomes.">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Discovery"
+		description="" >
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Maturity Assessment"
+		description="" >
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Insights & Recommendations"
+		description="" >
+    </SmallTile>
+    <SmallTile 
+		headline="Roadmap Development"
+		description="" >
+    </SmallTile>
+    <SmallTile 
+		headline="Implementation & Support"
+		description="" >
     </SmallTile>
 </TilesContainer>
   
 <Highlight 
-	title="In the picture"
-	text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."
+	title="Maximize Your Content’s Potential"
+	text="Our Content Assessment doesn’t just stop at evaluation. We identify low-effort, high-impact improvements that can dramatically enhance your content strategy. Whether it's optimizing your use of digital channels or refining your personalization efforts, we provide you with actionable insights that drive real results."
 	image='/src/assets/images/highlight.png'
-	buttonText="discover"
+	buttonText="Discover"
 	/>
 
 <Faq headline="Questions we usually get">
 	<FaqQuestion
-		headline="Can you help me with services for development only?"
-		headlineTag="h3"> 
-		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-    	<ul> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
+		headline="What can I expect from the assessment process?"
+		headlineTag="h3">
+		<p>A thorough evaluation of your current content maturity, identification of areas for improvement, and recommendations for low-effort, high-impact changes.</p>
+	</FaqQuestion>
+
+	<FaqQuestion
+		headline="How long does the Content Assessment take?"
+		headlineTag="h3">
+		<p>The duration of the assessment depends on the size and complexity of your content ecosystem, but typically it can be completed within a 4 weeks.</p>
+	</FaqQuestion>
+
+	<FaqQuestion
+		headline="What industries does AmeXio specialize in for Content Assessment?"
+		headlineTag="h3">
+		<p>AmeXio works across various industries, including finance, retail, manufacturing, and public, tailoring our assessment to meet the unique needs of each sector.</p>
+	</FaqQuestion>
+
+	<FaqQuestion
+		headline="How do I know if my organization needs a Content Assessment?"
+		headlineTag="h3">
+		<p>If you’re experiencing any of the following, it may be time for a Content Assessment:</p>
+		<ul>
+			<li>Your website traffic is high, but conversion rates remain low, indicating content may not be resonating with your audience.</li>
+			<li>You’re investing heavily in multiple digital channels, but struggling to maintain a consistent brand message across them.</li>
+			<li>Your attempts at content personalization are resulting in generic, one-size-fits-all messaging rather than targeted engagement.</li>
 		</ul>
+		<p>A Content Assessment can provide the clarity and direction you need to address these issues.</p>
 	</FaqQuestion>
-	<FaqQuestion 
-		headline="Can you help me with services for development only?"
-		headlineTag="h3" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="What makes you different from other agencies?" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-    	<ol> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ol>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Can you support my in-house team?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Do you work for startups?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-	</FaqQuestion>
+
 </Faq>
 
 <InsightsTeaser />
