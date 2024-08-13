@@ -73,49 +73,6 @@ export type Youtube = {
   url?: string;
 };
 
-export type ReferenceCase = {
-  _id: string;
-  _type: "referenceCase";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  duration?: number;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList)>;
-  technology?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "technology";
-  };
-  service?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  };
-  relatedCases?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "referenceCase";
-  };
-};
-
 export type WorkCardList = {
   _type: "workCardList";
   intro?: Intro;
@@ -171,18 +128,11 @@ export type SiteConfig = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -253,18 +203,11 @@ export type Tabs = {
           _type: "span";
           _key: string;
         }>;
-        style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+        style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
@@ -302,18 +245,11 @@ export type SolutionDomain = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -381,7 +317,25 @@ export type ServicesCardList = {
 
 export type Highlight = {
   _type: "highlight";
-  intro?: Intro;
+  intro?: {
+    title?: string;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h3" | "h4" | "h5" | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
   style?: "subtle" | "popping";
   ctaVisible?: boolean;
   cta?: Cta;
@@ -408,18 +362,11 @@ export type LongFormText = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -436,9 +383,7 @@ export type LongFormText = {
     _key: string;
   } | ({
     _key: string;
-  } & Youtube) | ({
-    _key: string;
-  } & Geopoint)>;
+  } & Youtube)>;
 };
 
 export type CardGrid = {
@@ -453,18 +398,11 @@ export type CardGrid = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+      style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
       markDefs?: Array<{
-        reference?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "contentPage";
-        };
-        _type: "internalLink";
         _key: string;
-      }>;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -507,18 +445,11 @@ export type Callout = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+      style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
       markDefs?: Array<{
-        reference?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "contentPage";
-        };
-        _type: "internalLink";
         _key: string;
-      }>;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -572,7 +503,71 @@ export type InternationalizedArrayReferenceValue = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "blogPost";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "referenceCase";
   };
+};
+
+export type ReferenceCase = {
+  _id: string;
+  _type: "referenceCase";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  introImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  duration?: number;
+  content?: Array<({
+    _key: string;
+  } & Highlight) | ({
+    _key: string;
+  } & CardGrid) | ({
+    _key: string;
+  } & Callout) | ({
+    _key: string;
+  } & LongFormText) | ({
+    _key: string;
+  } & ServicesCardList) | ({
+    _key: string;
+  } & Tabs) | ({
+    _key: string;
+  } & WorkCardList)>;
+  technologies?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "technology";
+  }>;
+  services?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "service";
+  }>;
+  relatedCases?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "referenceCase";
+  }>;
+  metadata?: Metadata;
+  language?: string;
 };
 
 export type BlogPost = {
@@ -685,18 +680,11 @@ export type AnswerQuestion = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -707,6 +695,32 @@ export type AnswerQuestion = {
 export type InternationalizedArrayReference = Array<{
   _key: string;
 } & InternationalizedArrayReferenceValue>;
+
+export type ContentPage = {
+  _id: string;
+  _type: "contentPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  content?: Array<({
+    _key: string;
+  } & Highlight) | ({
+    _key: string;
+  } & CardGrid) | ({
+    _key: string;
+  } & Callout) | ({
+    _key: string;
+  } & LongFormText) | ({
+    _key: string;
+  } & ServicesCardList) | ({
+    _key: string;
+  } & Tabs) | ({
+    _key: string;
+  } & WorkCardList)>;
+  metadata?: Metadata;
+  language?: string;
+};
 
 export type Company = {
   _id: string;
@@ -862,6 +876,25 @@ export type Service = {
   metadata?: Metadata;
 };
 
+export type Metadata = {
+  _type: "metadata";
+  slug?: Slug;
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  noIndex?: boolean;
+};
+
 export type ServicePillar = {
   _id: string;
   _type: "servicePillar";
@@ -887,53 +920,6 @@ export type Cta = {
   _type: "cta";
   text?: string;
   link?: Link;
-};
-
-export type ContentPage = {
-  _id: string;
-  _type: "contentPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList)>;
-  metadata?: Metadata;
-  language?: string;
-};
-
-export type Metadata = {
-  _type: "metadata";
-  slug?: Slug;
-  seo?: {
-    title?: string;
-    description?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  noIndex?: boolean;
 };
 
 export type SanityImageCrop = {
@@ -1003,18 +989,11 @@ export type Intro = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -1158,18 +1137,11 @@ export type SiteConfigQueryResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -1425,18 +1397,11 @@ export type ServiceQueryResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+      style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
       listItem?: "bullet" | "number";
       markDefs?: Array<{
-        reference?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "contentPage";
-        };
-        _type: "internalLink";
         _key: string;
-      }>;
+      } & Link>;
       level?: number;
       _type: "block";
     }> | null;
@@ -1478,18 +1443,11 @@ export type ServiceQueryResult = {
           _type: "span";
           _key: string;
         }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
@@ -1544,18 +1502,11 @@ export type ServiceQueryResult = {
           _type: "span";
           _key: string;
         }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
@@ -1682,18 +1633,11 @@ export type ServiceQueryResult = {
           _type: "span";
           _key: string;
         }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;

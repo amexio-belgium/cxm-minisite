@@ -10,6 +10,7 @@ import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { imageBuilder } from "@api/sanity";
 import { siteLanguage } from "src/stores/global-store";
+import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 
 export type Social = {
   name: string;
@@ -117,7 +118,11 @@ const t = useTranslations(language);
           {
             navigation?.links?.map((link) => (
               <FooterLink
-                href={getHrefFromLinkObject(link.linkObject, language, false)}
+                href={getHrefFromLinkObject(
+                  link.linkObject as LinkObjectReferenced,
+                  language,
+                  false,
+                )}
               >
                 {link.title}
               </FooterLink>
@@ -172,7 +177,11 @@ const t = useTranslations(language);
           secondaryNavigation?.links?.map((link) => (
             <Link
               class="underline decoration-white decoration-1 underline-offset-2 hover:decoration-secondary"
-              href={getHrefFromLinkObject(link.linkObject, language, preview)}
+              href={getHrefFromLinkObject(
+                link.linkObject as LinkObjectReferenced,
+                language,
+                preview,
+              )}
             >
               {link.title}
             </Link>
