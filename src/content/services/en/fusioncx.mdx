@@ -24,10 +24,16 @@ import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
 import fusioncx from '@assets/images/fusioncx.png';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
-
+import kbc from '@assets/logos/kbc_logo_square_white.png';
+import mediafin from '@assets/logos/mediafin_logo_white.png';
+import argenta from '@assets/logos/argenta_logo_white.png';
+import daikin from '@assets/logos/daikin_logo_white.png';
+import deceuninck from '@assets/logos/deceuninck_logo_white.png';
+import deme from '@assets/logos/demegroup_logo_white.png';
+import kdg from '@assets/logos/kdghogeschool_logo_white.png';
+import leuven from '@assets/logos/leuven_logo_white.png';
+import oecd from '@assets/logos/oecd_logo_white.png';
+import sligro from '@assets/logos/sligro_logo_wit.png';
 
 <HeroHeader 
 	headline={frontmatter.title}
@@ -35,8 +41,15 @@ import mediafin from '@assets/logos/mediafin_logo.png';
     backgroundImage={frontmatter.heroImage} >	
 	<Customers headline="Customers we supported with their content platform">
 		<Image src={kbc} alt="" class="h-10 w-auto"/>
-		<Image src={telenet} alt="" class="h-10 w-auto"/>
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+		<Image src={argenta} alt="" class="h-10 w-auto"/>
+		<Image src={daikin} alt="" class="h-10 w-auto"/>
+		<Image src={deceuninck} alt="" class="h-10 w-auto"/>
+		<Image src={deme} alt="" class="h-10 w-auto"/>
+		<Image src={kdg} alt="" class="h-10 w-auto"/>
+		<Image src={leuven} alt="" class="h-10 w-auto"/>
+		<Image src={oecd} alt="" class="h-10 w-auto"/>
+		<Image src={sligro} alt="" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
 
