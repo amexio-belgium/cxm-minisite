@@ -1,0 +1,81 @@
+---
+import type { TabsReferenced } from "@sanity/custom.sanity.types";
+import { imageBuilder } from "@api/sanity";
+import { PortableText } from "astro-portabletext";
+import { siteLanguage } from "src/stores/global-store";
+
+interface Props {
+  tabsContent: TabsReferenced;
+}
+
+const { tabsContent } = Astro.props;
+const language = siteLanguage.get();
+---
+
+<div class="mb-20 text-white md:mb-40">
+  <h2 class="mb-8 text-balance font-serif text-3xl">
+    {tabsContent.intro?.title}
+  </h2>
+  {
+    tabsContent.intro?.intro && (
+      <div class="mb-4">
+        <PortableText value={tabsContent.intro.intro} />
+      </div>
+    )
+  }
+  <script
+    is:inline
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab/tab.js"
+  ></script>
+  <script
+    is:inline
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-group/tab-group.js"
+  ></script>
+  <script
+    is:inline
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/tab-panel/tab-panel.js"
+  ></script>
+
+  <sl-tab-group>
+    {
+      tabsContent?.tabsOverview?.map((tab, index) => (
+        <sl-tab
+          class="w-1/4 text-center text-lg aria-selected:border-b-2 aria-selected:border-secondary"
+          slot="nav"
+          panel={`model${index + 1}`}
+        >
+          {tab.title}
+        </sl-tab>
+      ))
+    }
+
+    {
+      tabsContent?.tabsOverview?.map((tab, index) => (
+        <sl-tab-panel name={`model${index + 1}`}>
+          <div class="mt-8 flex flex-col-reverse gap-8 lg:flex-row">
+            {tab.content?.map((content) => (
+              <>
+                {content._type == "content" && content.content && (
+                  <div class="w-full font-light lg:w-1/2">
+                    <PortableText value={content.content} />
+                  </div>
+                )}
+                {content._type == "image" && content.asset && (
+                  <img
+                    loading="lazy"
+                    src={imageBuilder.image(content.asset).url()}
+                    alt={content.asset.altTexts?.[language]}
+                    class="h-fit w-full overflow-hidden rounded-2xl shadow-sm shadow-primary lg:w-1/2"
+                  />
+                )}
+              </>
+            ))}
+          </div>
+        </sl-tab-panel>
+      ))
+    }
+  </sl-tab-group>
+</div>

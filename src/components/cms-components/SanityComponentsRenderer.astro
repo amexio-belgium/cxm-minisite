@@ -9,10 +9,12 @@ import type {
   CalloutReferenced,
   HighlightReferenced,
   LongFormTextReferenced,
+  TabsReferenced,
 } from "@sanity/custom.sanity.types";
 import Callout from "@components/cms-components/Callout.astro";
 import LongFormText from "@components/cms-components/LongFormText.astro";
-import HighlightBlock from "./HighlightBlock/HighlightBlock.astro";
+import HighlightBlock from "@components/cms-components/HighlightBlock/HighlightBlock.astro";
+import Tabs from "@components/cms-components/Tabs.astro";
 
 interface Props {
   content:
@@ -22,6 +24,7 @@ interface Props {
         | CalloutReferenced
         | LongFormTextReferenced
         | HighlightReferenced
+        | TabsReferenced
       >
     | undefined;
 }
@@ -44,6 +47,9 @@ const { content } = Astro.props;
         }
         case "longFormText": {
           return <LongFormText longFormText={content} />;
+        }
+        case "tabs": {
+          return <Tabs tabsContent={content} />;
         }
         case "highlight": {
           return <HighlightBlock highlight={content} />;
