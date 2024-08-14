@@ -7,11 +7,13 @@ import CardGrid from "@components/cms-components/CardGrid.astro";
 import ServiceCardList from "@components/cms-components/ServiceCardList.astro";
 import type {
   CalloutReferenced,
+  HighlightReferenced,
   LongFormTextReferenced,
+  TabsReferenced,
 } from "@sanity/custom.sanity.types";
 import Callout from "@components/cms-components/Callout.astro";
 import LongFormText from "@components/cms-components/LongFormText.astro";
-import { siteLanguage } from "src/stores/global-store";
+import Tabs from "./Tabs.astro";
 
 interface Props {
   content:
@@ -20,11 +22,12 @@ interface Props {
         | CardGridType
         | CalloutReferenced
         | LongFormTextReferenced
+        | HighlightReferenced
+        | TabsReferenced
       >
     | undefined;
 }
 
-const language = siteLanguage.get();
 const { content } = Astro.props;
 ---
 
@@ -43,6 +46,9 @@ const { content } = Astro.props;
         }
         case "longFormText": {
           return <LongFormText longFormText={content} />;
+        }
+        case "tabs": {
+          return <Tabs tabsContent={content} />;
         }
       }
     })

@@ -2,6 +2,7 @@ import type {
   AnswerQuestion,
   Callout,
   CardGrid,
+  Cta,
   Faq,
   Geopoint,
   Highlight,
@@ -293,13 +294,67 @@ export type LongFormTextReferenced = {
   >;
 };
 
+export type HighlightReferenced = {
+  _type: "highlight";
+  intro?: Intro;
+  style?: "subtle" | "popping";
+  ctaVisible?: boolean;
+  cta?: Cta;
+  image?: i18nImage;
+};
+
+export type TabReferenced = {
+  _type: "tab";
+  title?: string;
+  content?: Array<
+    | {
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal" | "h3" | "h4" | "h5" | "h6";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<
+            {
+              _key: string;
+            } & Link
+          >;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "content";
+        _key: string;
+      }
+    | i18nImage
+  >;
+};
+
+export type TabsReferenced = {
+  _type: "tabs";
+  intro?: Intro;
+  tabsOverview?: Array<
+    {
+      _key: string;
+    } & TabReferenced
+  >;
+};
+
 export interface ServiceWithReferences {
   _type: "service";
   challange?: string;
   language?: string;
   cta?: string;
   content?: Array<
-    ServicesCardList | CardGrid | CalloutReferenced | LongFormTextReferenced
+    | ServicesCardList
+    | CardGrid
+    | CalloutReferenced
+    | LongFormTextReferenced
+    | HighlightReferenced
+    | TabsReferenced
   >;
   metadata?: Metadata;
   image?: i18nImage;
