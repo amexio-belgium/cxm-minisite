@@ -1,8 +1,4 @@
 ---
-import { getLangFromUrl } from "../../i18n/utils";
-
-const lang = getLangFromUrl(Astro.url);
-
 interface Props {
   size?: "sm" | "md" | "lg";
   icon?: "phone" | "info" | "email" | "none";
@@ -73,7 +69,7 @@ const TagName = decorative ? "span" : "a";
     styles[style + "_" + color],
     className,
   ]}
-  href={`/${lang + link}`}
+  href={link}
 >
   {
     icon !== "none" && (

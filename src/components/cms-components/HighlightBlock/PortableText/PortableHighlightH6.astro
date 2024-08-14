@@ -1,0 +1,11 @@
+---
+import type { Block, Props as PortableProps } from "astro-portabletext/types";
+
+interface Props extends PortableProps<Block> {}
+
+const props = Astro.props;
+---
+
+<h6 class="text-balance font-serif text-sm font-normal sm:text-base">
+  {props.node.children[0].text}
+</h6>
