@@ -130,6 +130,7 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
   }
 }`;
 
+
 export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $language][0]{
   homePage->{
     "slug": metadata.slug.current
