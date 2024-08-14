@@ -6,6 +6,7 @@ import SkipLink from "../uielements/Skiplink.astro";
 import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { siteLanguage } from "src/stores/global-store";
+import type { LinkObjectReferenced } from "@sanity/custom.sanity.types";
 
 interface Props {
   navigation: NavigationQueryResult;
@@ -86,7 +87,7 @@ const t = useTranslations(language);
               navigation?.links?.map((link) => (
                 <HeaderLink
                   href={getHrefFromLinkObject(
-                    link.linkObject,
+                    link.linkObject as LinkObjectReferenced,
                     language,
                     preview,
                   )}
