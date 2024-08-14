@@ -68,52 +68,45 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Tab = {
+  _type: "tab";
+  title?: string;
+  content?: Array<{
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h3" | "h4" | "h5" | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "content";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type Youtube = {
   _type: "youtube";
   url?: string;
-};
-
-export type ReferenceCase = {
-  _id: string;
-  _type: "referenceCase";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  duration?: number;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList)>;
-  technology?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "technology";
-  };
-  service?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  };
-  relatedCases?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "referenceCase";
-  };
 };
 
 export type WorkCardList = {
@@ -171,18 +164,11 @@ export type SiteConfig = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -244,48 +230,8 @@ export type Tabs = {
   _type: "tabs";
   intro?: Intro;
   tabsOverview?: Array<{
-    tab?: Array<{
-      title?: string;
-      richText?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-      _type: "tabTextObject";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-      _key: string;
-    }>;
-    _type: "tabContent";
     _key: string;
-  }>;
+  } & Tab>;
 };
 
 export type SolutionDomain = {
@@ -302,18 +248,11 @@ export type SolutionDomain = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -381,9 +320,29 @@ export type ServicesCardList = {
 
 export type Highlight = {
   _type: "highlight";
-  intro?: Intro;
-  cta?: string;
-  backgroundImage?: {
+  intro?: {
+    title?: string;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h3" | "h4" | "h5" | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  style?: "subtle" | "popping";
+  ctaVisible?: boolean;
+  cta?: Cta;
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -406,18 +365,11 @@ export type LongFormText = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -434,9 +386,7 @@ export type LongFormText = {
     _key: string;
   } | ({
     _key: string;
-  } & Youtube) | ({
-    _key: string;
-  } & Geopoint)>;
+  } & Youtube)>;
 };
 
 export type CardGrid = {
@@ -451,18 +401,11 @@ export type CardGrid = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+      style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
       markDefs?: Array<{
-        reference?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "contentPage";
-        };
-        _type: "internalLink";
         _key: string;
-      }>;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -505,18 +448,11 @@ export type Callout = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+      style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
       markDefs?: Array<{
-        reference?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "contentPage";
-        };
-        _type: "internalLink";
         _key: string;
-      }>;
+      } & Link>;
       level?: number;
       _type: "block";
       _key: string;
@@ -570,7 +506,71 @@ export type InternationalizedArrayReferenceValue = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "blogPost";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "referenceCase";
   };
+};
+
+export type ReferenceCase = {
+  _id: string;
+  _type: "referenceCase";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  introImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  duration?: number;
+  content?: Array<({
+    _key: string;
+  } & Highlight) | ({
+    _key: string;
+  } & CardGrid) | ({
+    _key: string;
+  } & Callout) | ({
+    _key: string;
+  } & LongFormText) | ({
+    _key: string;
+  } & ServicesCardList) | ({
+    _key: string;
+  } & Tabs) | ({
+    _key: string;
+  } & WorkCardList)>;
+  technologies?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "technology";
+  }>;
+  services?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "service";
+  }>;
+  relatedCases?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "referenceCase";
+  }>;
+  metadata?: Metadata;
+  language?: string;
 };
 
 export type BlogPost = {
@@ -683,34 +683,47 @@ export type AnswerQuestion = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
   }>;
-  serviceReference?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  };
   language?: string;
 };
 
 export type InternationalizedArrayReference = Array<{
   _key: string;
 } & InternationalizedArrayReferenceValue>;
+
+export type ContentPage = {
+  _id: string;
+  _type: "contentPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  content?: Array<({
+    _key: string;
+  } & Highlight) | ({
+    _key: string;
+  } & CardGrid) | ({
+    _key: string;
+  } & Callout) | ({
+    _key: string;
+  } & LongFormText) | ({
+    _key: string;
+  } & ServicesCardList) | ({
+    _key: string;
+  } & Tabs) | ({
+    _key: string;
+  } & WorkCardList)>;
+  metadata?: Metadata;
+  language?: string;
+};
 
 export type Company = {
   _id: string;
@@ -832,7 +845,7 @@ export type Service = {
     _type: "image";
   };
   challenge?: string;
-  cta?: string;
+  cta?: Cta;
   content?: Array<({
     _key: string;
   } & Highlight) | ({
@@ -866,6 +879,25 @@ export type Service = {
   metadata?: Metadata;
 };
 
+export type Metadata = {
+  _type: "metadata";
+  slug?: Slug;
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  noIndex?: boolean;
+};
+
 export type ServicePillar = {
   _id: string;
   _type: "servicePillar";
@@ -887,51 +919,10 @@ export type Faq = {
   }>;
 };
 
-export type ContentPage = {
-  _id: string;
-  _type: "contentPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList)>;
-  metadata?: Metadata;
-  language?: string;
-};
-
-export type Metadata = {
-  _type: "metadata";
-  slug?: Slug;
-  seo?: {
-    title?: string;
-    description?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  noIndex?: boolean;
+export type Cta = {
+  _type: "cta";
+  text?: string;
+  link?: Link;
 };
 
 export type SanityImageCrop = {
@@ -1001,18 +992,11 @@ export type Intro = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -1156,18 +1140,11 @@ export type SiteConfigQueryResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      reference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-      _type: "internalLink";
       _key: string;
-    }>;
+    } & Link>;
     level?: number;
     _type: "block";
     _key: string;
@@ -1302,7 +1279,7 @@ export type NavigationQueryResult = {
           _type: "image";
         };
         challenge?: string;
-        cta?: string;
+        cta?: Cta;
         content?: Array<({
           _key: string;
         } & Callout) | ({
@@ -1347,7 +1324,7 @@ export type NavigationQueryResult = {
   language?: string;
 } | null;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    }  }}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    },    _type == "highlight" => {      ...,      defined(image) => {        image{          ...,          asset->{...}        }      }    },     _type == "tabs" => {      ...,      defined(tabsOverview) => {        tabsOverview[]{          ...,          _type == "tab" => {            ...,            "test":"test",            content[]{              ...,              _type == "image" => {                asset->{...}              }            }          }        }      }    },     _type == "longFormText" => {      ...,      defined(content) => {        content[]{          ...,           _type == "image" => {            ...,             asset->{...}           }        }      }    },  }}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -1383,8 +1360,55 @@ export type ServiceQueryResult = {
     _type: "image";
   } | null;
   challenge?: string;
-  cta?: string;
+  cta?: Cta;
   content: Array<{
+    _key: string;
+    groups: null;
+    cards: null;
+    content: Array<{
+      _key: string;
+    } | {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        _key: string;
+      } & Link>;
+      level?: number;
+      _type: "block";
+    }> | null;
+  } | {
     _key: string;
     groups: null;
     cards: null;
@@ -1422,24 +1446,101 @@ export type ServiceQueryResult = {
           _type: "span";
           _key: string;
         }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
       }>;
       _type: "textObject";
       asset: null;
+    }> | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    tabsOverview: Array<{
+      _key: string;
+      test: "test";
+      content: Array<{
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | {
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h3" | "h4" | "h5" | "h6" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            _key: string;
+          } & Link>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "content";
+      }> | null;
     }> | null;
   } | {
     _key: string;
@@ -1457,18 +1558,11 @@ export type ServiceQueryResult = {
           _type: "span";
           _key: string;
         }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
@@ -1541,7 +1635,7 @@ export type ServiceQueryResult = {
           _type: "image";
         } | null;
         challenge?: string;
-        cta?: string;
+        cta?: Cta;
         content?: Array<({
           _key: string;
         } & Callout) | ({
@@ -1595,28 +1689,15 @@ export type ServiceQueryResult = {
           _type: "span";
           _key: string;
         }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
         markDefs?: Array<{
-          reference?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "contentPage";
-          };
-          _type: "internalLink";
           _key: string;
-        }>;
+        } & Link>;
         level?: number;
         _type: "block";
         _key: string;
       }>;
-      serviceReference?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "service";
-      };
       language?: string;
     }> | null;
   } | null;
