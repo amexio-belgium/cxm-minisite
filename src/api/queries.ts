@@ -94,24 +94,6 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
         }
       }
     }, 
-    _type == "tabs" => {
-      ...,
-      defined(tabsOverview) => {
-        tabsOverview[]{
-          ...,
-          _type == "tab" => {
-            ...,
-            "test":"test",
-            content[]{
-              ...,
-              _type == "image" => {
-                asset->{...}
-              }
-            }
-          }
-        }
-      }
-    }, 
     _type == "longFormText" => {
       ...,
       defined(content) => {
