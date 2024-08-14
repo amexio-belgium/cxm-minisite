@@ -21,17 +21,16 @@ interface Props {
   title: string;
   description: string;
   slug: string;
+  siteConfig: SiteConfigQueryResult;
 }
 
 const preview = isPreview.get();
-const { title, description, slug } = Astro.props;
-const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
-  query: siteConfigQuery,
-  params: { language: language },
-});
+const { title, description, slug, siteConfig } = Astro.props;
+
 if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
+
 const { data: header } = await loadQuery<NavigationQueryResult>({
   query: navigationQuery,
   params: { navigationId: siteConfig.headerNavigation?._ref! },
@@ -69,7 +68,7 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
   </head>
   <body class="overflow-x-clip bg-blue-800">
     <VisualEditing enabled={true} zIndex={1000} />
-    <Header navigation={header} preview={preview} />
+    <Header navigation={header} />
     <main id="main-content" class="mx-auto max-w-[1304px] px-6 sm:px-8">
       <slot />
     </main>
@@ -79,7 +78,6 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
       isContactPage={false}
       footerText={siteConfig.copyrightText}
       socials={socials}
-      preview={preview}
     />
     <TrackingFooter />
   </body>

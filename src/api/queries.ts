@@ -2,6 +2,9 @@ import groq from "groq";
 
 export const siteConfigQuery = groq`*[_type == "siteConfig" && language == $language][0]{
   ...,
+  homePage->{
+    "slug": metadata.slug.current
+  },
   socials[]{
     ...,
     icon{
@@ -126,6 +129,12 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
    },
   }
 }`;
+
+export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $language][0]{
+  homePage->{
+    "slug": metadata.slug.current
+  }
+}.homePage.slug`;
 
 export const contentPageQuery = groq`*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{
   ...,

@@ -1,6 +1,6 @@
 ---
 import Base from "@layouts/Base.astro";
-import { serviceQuery } from "@api/queries";
+import { serviceQuery, siteConfigQuery } from "@api/queries";
 import { imageBuilder, loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ServiceWithReferences } from "src/sanity/custom.sanity.types";
@@ -10,11 +10,21 @@ import Faq from "@components/uicomposition/Faq.astro";
 import FaqQuestion from "@components/uielements/FaqQuestion.astro";
 import { PortableText } from "astro-portabletext";
 import { isPreview, siteLanguage } from "src/stores/global-store";
+import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 
 export const prerender = false;
 const { lang, slug } = Astro.params;
 if (!lang || !slug) {
   return Astro.redirect("/404");
+}
+
+const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
+  query: siteConfigQuery,
+  params: { language: lang.toLowerCase() },
+});
+
+if (!siteConfig) {
+  return new Response(null, { status: 404 });
 }
 
 const { data: servicePage } = await loadQuery<ServiceWithReferences>({
@@ -27,9 +37,10 @@ isPreview.set(true);
 ---
 
 <Base
-  title={servicePage?.metadata?.title || servicePage?.intro?.title!}
+  title={`${servicePage?.metadata?.title || servicePage?.intro?.title!} - ${siteConfig.siteName}`}
   description={servicePage?.metadata?.description || ""}
   slug={slug}
+  siteConfig={siteConfig}
 >
   <HeroHeader
     headline={servicePage.intro?.title}
