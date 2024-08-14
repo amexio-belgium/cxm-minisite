@@ -1,0 +1,35 @@
+---
+import Base from "@layouts/Base.astro";
+import { contentPageQuery } from "@api/queries";
+import { loadQuery } from "@api/sanity";
+import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
+import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
+import HeroHeader from "@components/uicomposition/HeroHeader.astro";
+import { isPreview, siteLanguage } from "src/stores/global-store";
+
+export const prerender = false;
+const { lang, slug } = Astro.params;
+if (!lang || !slug) {
+  return Astro.redirect("/404");
+}
+
+const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
+  query: contentPageQuery,
+  params: { language: lang, slug: slug },
+});
+
+siteLanguage.set(lang.toLowerCase());
+isPreview.set(true);
+---
+
+<Base
+  title={contentPage?.metadata?.title || contentPage?.intro?.title!}
+  description={contentPage?.metadata?.description || ""}
+  slug={slug}
+>
+  <HeroHeader
+    headline={contentPage.intro?.title}
+    text={contentPage.intro?.intro}
+  />
+  <SanityComponentsRenderer content={contentPage?.content} />
+</Base>

@@ -343,9 +343,26 @@ export type TabsReferenced = {
   >;
 };
 
+export interface ContentPageWithReferences {
+  _type: "contentPage";
+  content?: Array<
+    | ServicesCardList
+    | CardGrid
+    | CalloutReferenced
+    | LongFormTextReferenced
+    | HighlightReferenced
+    | TabsReferenced
+  >;
+  metadata?: Metadata;
+  _updatedAt?: string;
+  _id: string;
+  intro?: Intro;
+}
+
 export interface ServiceWithReferences {
   _type: "service";
-  challange?: string;
+  challenge?: string;
+  customerReferencesText?: string;
   language?: string;
   cta?: string;
   content?: Array<

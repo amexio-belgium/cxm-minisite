@@ -13,7 +13,7 @@ import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 export const prerender = false;
-import { siteLanguage } from "src/stores/global-store";
+import { isPreview, siteLanguage } from "src/stores/global-store";
 
 const language = siteLanguage.get();
 
@@ -21,10 +21,10 @@ interface Props {
   title: string;
   description: string;
   slug: string;
-  preview: boolean;
 }
 
-const { title, description, slug, preview } = Astro.props;
+const preview = isPreview.get();
+const { title, description, slug } = Astro.props;
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
   params: { language: language },
