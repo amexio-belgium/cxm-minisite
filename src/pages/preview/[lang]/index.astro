@@ -14,13 +14,10 @@ import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 
 export const prerender = false;
 const { lang } = Astro.params;
-if (!lang) {
-  return Astro.redirect("/404");
-}
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang.toLowerCase() },
+  params: { language: lang!.toLowerCase() },
 });
 
 if (!siteConfig) {
@@ -31,10 +28,10 @@ const slug = siteConfig.homePage.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: lang, slug: slug },
+  params: { language: lang!, slug: slug },
 });
 
-siteLanguage.set(lang.toLowerCase());
+siteLanguage.set(lang!.toLowerCase());
 isPreview.set(true);
 ---
 
