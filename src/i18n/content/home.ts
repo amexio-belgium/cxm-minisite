@@ -9,7 +9,7 @@ export const home = {
         'heroprofile1.title': 'test title 1',
         'heroprofile2.text': "A Senior Solution Consultant doesn't just solve problems; they illuminate pathways to innovation, architecting tailored solutions that transcend challenges. They are the orchestrators of transformation, bridging technology and strategy to empower businesses for the future.",
         'heroprofile2.title': 'test title',
-        'projectoverview.headline': 'Recent projects',
+        'projectoverview.headline': 'Recent work',
         'projectoverview.button': 'Discover all our work',
         'project1.description': 'Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.',
         'project1.button': 'Discover more about KBC',

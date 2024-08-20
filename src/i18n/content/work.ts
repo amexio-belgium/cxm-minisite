@@ -3,7 +3,7 @@ export const work = {
         'work.title': "Our work - AmeXio Fuse",
         'work.seoDescription': "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
         'hero.headline': 'Our work',
-        'hero.subheadline': 'For over two decades, we have been <mark><strong>partnering</strong></mark> with our ambitious clients, turning their content into value through highly scalable content platforms.',
+        'hero.subheadline': 'For over 20 years, we have been <mark><strong>partnering</strong></mark> with our ambitious clients, turning their content into value through highly scalable content platforms.',
         'overview.headline': 'Some of our clients',
         'overview.cta': 'Read the reference case',
         'metadata.headline': 'Project metadata',
