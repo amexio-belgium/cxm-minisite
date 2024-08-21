@@ -1131,6 +1131,7 @@ export type SiteConfigQueryResult = {
   _updatedAt: string;
   _rev: string;
   siteName?: string;
+  homePage: {slug: string};
   headerNavigation?: {
     _ref: string;
     _type: "reference";

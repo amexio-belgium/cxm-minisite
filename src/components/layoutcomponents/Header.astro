@@ -5,16 +5,16 @@ import HeaderLink from "../uielements/HeaderLink.astro";
 import SkipLink from "../uielements/Skiplink.astro";
 import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-import { siteLanguage } from "src/stores/global-store";
+import { isPreview, siteLanguage } from "src/stores/global-store";
 import type { LinkObjectReferenced } from "@sanity/custom.sanity.types";
 
 interface Props {
   navigation: NavigationQueryResult;
-  preview: boolean;
 }
 const language = siteLanguage.get();
-const { navigation, preview } = Astro.props;
+const { navigation } = Astro.props;
 const t = useTranslations(language);
+const preview = isPreview.get();
 ---
 
 <SkipLink href="#main-content">{t("main.skiplink")}</SkipLink>
@@ -26,7 +26,7 @@ const t = useTranslations(language);
       class="flex h-full w-screen max-w-[1304px] flex-wrap items-center justify-between px-6 sm:px-8 md:px-6"
     >
       <a
-        href={`/${language}/`}
+        href={`${preview ? "/preview" : ""}/${language}/`}
         class="flex justify-center text-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
       >
         <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
