@@ -1,14 +1,14 @@
 ---
-title: 'Mediafin'
-description: 'Lorem ipsum dolor sit amet'
+title: 'Engaging readers in the digital age'
+client: 'Mediafin'
+description: 'We helped Mediafin find innovative ways to customize online experiences for media consumers and keep readers engaged with their brand. '
 draft: false
 heroImage: '/src/assets/images/office.jpg'
 logo: '/src/assets/logos/mediafin_logo.png'
 tags: 'finance, media, government, retail, manufacturing'
-duration: "12 weeks"
-collaboration: 'test'
-services: 'Development'
-technologies: 'Vuejs, aem'
+duration: "Partnership since 2019"
+collaboration: 'Expert staffing'
+technologies: 'Adobe Experience Manager'
 ---
 import HeroHeader from '@components/uicomposition/HeroHeader.astro';
 import ProjectMetadata from '@components/uicomposition/ProjectMetadata.astro'
@@ -18,12 +18,18 @@ import Quote from "@components/uicomposition/Quote.astro"
 import TilesContainer from "@components/uicomposition/TilesContainer.astro"
 import SmallTile from "@components/uielements/SmallTile.astro"
 import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
+import TechnologyIcon from '@components/uielements/TechnologyIcon.astro';
+import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
+import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
+import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
+import ContentText  from "@components/uielements/ContentText.astro"
+import Youtube from '@components/uielements/Youtube.astro'
 
 import { Image } from 'astro:assets';
-import explainer from '@assets/images/explainer.jpg';
 import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
+import explainer from '@assets/images/explainer.jpg';
+import aem_square from '@assets/logos/technologies/aem_square.png';
+import react_square from '@assets/logos/technologies/react_square.png'; 
 
 <HeroHeader 
     headline={frontmatter.title}
@@ -35,56 +41,72 @@ import mediafin from '@assets/logos/mediafin_logo.png';
 <ProjectMetadata
     duration={frontmatter.duration}
     collaboration={frontmatter.collaboration}
-    services={frontmatter.services}
     technologies={frontmatter.technologies}>
-    <Image src={kbc} alt="kbc" class="h-10 w-auto"/>
-    <Image src={telenet} alt="telenet" class="h-10 w-auto"/>
-    <Image src={mediafin} alt="mediafin" class="h-10 w-auto"/>
-    <Image src={kbc} alt="" class="h-10 w-auto"/>
-    <Image src={telenet} alt="" class="h-10 w-auto"/>
-    <Image src={mediafin} alt="" class="h-10 w-auto"/>
+    <TechnologyIcon>
+        <Image src={aem_square} alt="" />
+        Adobe Experience Manager
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={react_square} alt="" />
+        React
+    </TechnologyIcon>
 </ProjectMetadata>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+    headline="The challenge"
+    description="
+    <p>As digital technology changes the relationship between readers and the media, Mediafin looked for new ways to customize online experiences, engage readers and convert them into loyal media consumers.</p>
+    ">
+    <Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
-<TeaserWithImage 
-    fullWidth
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-    
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
-</TeaserWithImage>
-
-<TilesContainer 
-    headline="Approach and techniques"
-    description="Fusce dapibus, <b>tellus ac cursus commodo, tortor mauris</b> condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
-    <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
-    </SmallTile>
-    <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
-    </SmallTile>
-    <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
-    </SmallTile>
-</TilesContainer>
+<LayoutSection>
+    <LayoutSubsection>
+        <ContentHeadline headlineTag="h2">Solution overview</ContentHeadline>
+        <ContentText>
+            <p>AmeXio has launched the news portals for De Tijd and L'Echo, the Dutch and French news titles for Mediafin, the innovative media publisher from Belgium. Offering a multimedia approach to business, financial markets and political content, these media outlets reach the most influential and most affluent audience in Belgium, with over 300.000 readers every day: entrepreneurs, managers and investors, decision makers with considerable spending power.</p>
+            <p>The two websites built on Adobe Experience Manager (AEM) were initially launched in public beta (“primeur”), meaning visitors could switch from the new to the old version and vice versa if desired.</p>
+        </ContentText>
+    </LayoutSubsection>
+</LayoutSection>
 
 <Quote 
-    quote="The new website of L’Echo appeals to a broad audience and boasts extended customisation possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
-    name='Johan Condijts'
-    jobtitle="editor"
-    profileImage='/src/assets/people/placeholder_small.png'
-	class="mt-40"
-    /> 
+    quote="Simpler and clearer. So you're at a glance along with the news that matters. The new tijd.be provides more room for depth, analysis and multimedia stories than ever. Our new website is tailored to readers’ needs with new and personalized tools."
+    name='Stephanie De Smedt'
+    jobtitle="Editor for tijd.be"
+    profileImage='/src/assets/people/stephanie-de-smedt.png'
+    class="mt-40"
+    />
 
-this needs to be the case teaser
-<InsightsTeaser />
+<LayoutSection>
+    <LayoutSubsection>
+        <ContentHeadline headlineTag="h2">Result</ContentHeadline>
+        <ContentText>
+            <ContentHeadline headlineTag="h3">An ideal news reading experience on any device</ContentHeadline>
+            <p>The renewed channels offer the “ideal reading experience on any device” with a fresh, new and responsive web design. From smartphone or tablet through PC, the new multimedia communications are enriched with foto-sliders, videos, quotes and other multimedia.</p>
+            <p>Users can now navigate quickly and easily on all screens, customize their own newsfeed with selected keywords, their stocks wallet and share their preferred insights with integrated social media tools.</p>
+            <p>A renewed “Markets” section and “portfolio tool” present financial information and stock and fund prices for a quick and convenient overview in real time. A new “Investment Assistant” also makes investing a lot easier, offering step by step tips on financial investments.</p>
+        </ContentText>
+    </LayoutSubsection>
+</LayoutSection>
+
+<Quote 
+    quote="The new website of L’Echo fits all ands boasts extended customization possibilities for readers, making it more readable and simpler to use. On the menu we the same insight relevance and analysis, with new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
+    name='Joan Condijts'
+    jobtitle="Editor for lecho.be"
+    profileImage='/src/assets/people/joan-condijts.jpg'
+    class="mt-40"
+    />
+
+<LayoutSection>
+    <LayoutSubsection>
+        <ContentText>
+            <ContentHeadline headlineTag="h3">A more flexible and powerful editorial workflow</ContentHeadline>
+            <strong>There are also two important highlights on the content side.</strong>
+            <p>First of all, all the editorial content is still managed in Mediafin’s legacy systems. The workflow is so specific to their business that it wouldn’t be efficient to change their core business system.</p>
+            <p>This was also the reason why they chose Adobe: AEM allows content managers to shuffle the content around between the homepage and landing pages to make the whole presentation much more dynamic. Authors can also easily assemble news “dossier” packages related to a certain topic and create the dossier page “on-the-fly” in almost any layout they want, without any impact on the editorial teams.</p>
+            <p>Secondly, the fact that the new websites are Mediafin’s sales channels and their product at the same time means they’re business critical. Needless to say that a lot of focus has been given to infrastructure and performance tuning.</p>
+            <p>AmeXio's team of more than 15 digital experts will continue to work on developing new functionalities to improve readers’ experience as well as authoring experience for the content managers.</p>
+        </ContentText>
+    </LayoutSubsection>
+</LayoutSection>
