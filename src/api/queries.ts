@@ -311,7 +311,7 @@ export const blogPostQuery = groq`*[_type == "blogPost" && language == $language
 
 export const blogsListQuery = groq`
 {
-  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...3]{
+  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...$itemsPerTime]{
     _id,
     featuredImage{
       asset->{...}
@@ -343,7 +343,7 @@ export const blogsListQuery = groq`
 `;
 
 export const blogsListQueryPaginating = groq`
-*[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...3]{
+*[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...$itemsPerTime]{
   _id,
   featuredImage{
     asset->{...}
@@ -370,7 +370,6 @@ export const blogsListQueryPaginating = groq`
   _createdAt,
   intro
 }`;
-
 
 export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $language][0]{
   homePage->{

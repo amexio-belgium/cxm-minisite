@@ -6,10 +6,11 @@ import type {
   BlogHighlightReferenced,
   BlogPostWithReferences,
 } from "@sanity/custom.sanity.types";
-import { siteLanguage } from "src/stores/global-store";
+import { isPreview, siteLanguage } from "src/stores/global-store";
 import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
+import { stegaClean } from "@sanity/client/stega";
 
 interface Props {
   blogPost: BlogHighlightReferenced;
@@ -17,6 +18,7 @@ interface Props {
 
 const blogPost = Astro.props.blogPost.blogPost;
 const lang = siteLanguage.get();
+const preview = isPreview.get();
 const t = useTranslations(lang, "work");
 ---
 
@@ -45,8 +47,8 @@ const t = useTranslations(lang, "work");
           <h2 class="mb-2 font-serif text-lg [&>mark]:text-black">
             <Link
               class="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
-              href={`/${lang}/blog/${blogPost.metadata?.slug?.current}`}
-              textLength={blogPost.intro?.title?.length}
+              href={`${isPreview ? "/preview" : ""}/${lang}/blog/${blogPost.metadata?.slug?.current}`}
+              textLength={stegaClean(blogPost.intro?.title)?.length}
               hoverColor="yellow"
             >
               {blogPost.intro?.title}
