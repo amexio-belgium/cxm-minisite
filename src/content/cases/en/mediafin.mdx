@@ -23,6 +23,7 @@ import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
 import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
 import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
 import ContentText  from "@components/uielements/ContentText.astro"
+import ContentImage  from "@components/uielements/ContentImage.astro"
 import Youtube from '@components/uielements/Youtube.astro'
 
 import { Image } from 'astro:assets';
@@ -81,6 +82,13 @@ import react_square from '@assets/logos/technologies/react_square.png';
 <LayoutSection>
     <LayoutSubsection>
         <ContentHeadline headlineTag="h2">Result</ContentHeadline>
+
+         <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
+            src='/src/assets/images/mediafin-2.jpg' 
+            width="796"
+            height="322"
+    />
+
         <ContentText>
             <ContentHeadline headlineTag="h3">An ideal news reading experience on any device</ContentHeadline>
             <p>The renewed channels offer the “ideal reading experience on any device” with a fresh, new and responsive web design. From smartphone or tablet through PC, the new multimedia communications are enriched with foto-sliders, videos, quotes and other multimedia.</p>
