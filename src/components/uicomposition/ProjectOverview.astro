@@ -17,12 +17,19 @@ const t = useTranslations(lang, 'home');
     </div>
     <div class="flex flex-col w-full gap-2 xl:w-9/12">
         <ProjectCard 
+            projectImage='/src/assets/projects/oecd.png'
+            smallImage='/src/assets/logos/oecd_logo_white.png' 
+            name="OECD" 
+            content={t('project3.description')}
+            buttonText={t('project2.button')} 
+            link="cases/oecd/"/>
+        <ProjectCard 
             projectImage='/src/assets/projects/kbc.jpg'
             smallImage='/src/assets/logos/kbc_logo_square_white.png' 
             name="KBC" 
             content={t('project1.description')}
             buttonText={t('project1.button')} 
-            link="/cases/euroclear/"/>
+            link="cases/kbc/"/>
 
         <ProjectCard 
             projectImage='/src/assets/projects/telenet.jpg'
@@ -30,15 +37,6 @@ const t = useTranslations(lang, 'home');
             name="Mediafin" 
             content={t('project2.description')} 
             buttonText={t('project2.button')}  
-            link="/cases/kbc/"/>
-
-        <ProjectCard 
-            projectImage='/src/assets/projects/telenet.jpg'
-            smallImage='/src/assets/logos/telenet_logo_square_white.png' 
-            name="Telenet" 
-            content={t('project3.description')}
-            buttonText={t('project2.button')} 
-            link="/cases/telenet/"/>
-            
+            link="cases/telenet/"/>
     </div>
 </div>
