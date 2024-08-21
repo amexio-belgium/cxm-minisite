@@ -2,6 +2,9 @@ import groq from "groq";
 
 export const siteConfigQuery = groq`*[_type == "siteConfig" && language == $language][0]{
   ...,
+  homePage->{
+    "slug": metadata.slug.current
+  },
   socials[]{
     ...,
     icon{
@@ -51,6 +54,91 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
       }
     }
   },
+  content[] {
+    ...,
+    defined(groups) => {
+      groups[] {
+        ...,
+        'services': services[]->{
+          ...,
+          image{
+            ...,
+            asset->{...}
+          },
+        }
+      }
+    },
+    defined(cards) => {
+      cards[] {
+        ...,
+        icon{
+          ...,
+          asset->{
+            ...,
+          }
+        }
+      }
+    },
+    _type == "callout" => {
+      ...,
+      content[]{
+        ...,
+        defined(asset) => {
+          asset->{...}
+        }
+      }
+    },
+    _type == "highlight" => {
+      ...,
+      defined(image) => {
+        image{
+          ...,
+          asset->{...}
+        }
+      }
+    }, 
+    _type == "tabs" => {
+      ...,
+      defined(tabsOverview) => {
+        tabsOverview[]{
+          ...,
+          _type == "tab" => {
+            ...,
+            "test":"test",
+            content[]{
+              ...,
+              _type == "image" => {
+                asset->{...}
+              }
+            }
+          }
+        }
+      }
+    }, 
+    _type == "longFormText" => {
+      ...,
+      defined(content) => {
+        content[]{
+          ...,
+           _type == "image" => {
+            ...,
+             asset->{...}
+           }
+        }
+      } 
+   },
+  }
+}`;
+
+
+export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $language][0]{
+  homePage->{
+    "slug": metadata.slug.current
+  }
+}.homePage.slug`;
+
+export const contentPageQuery = groq`*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{
+  ...,
   content[] {
     ...,
     defined(groups) => {
