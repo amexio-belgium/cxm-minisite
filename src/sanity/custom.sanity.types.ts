@@ -1,5 +1,6 @@
 import type {
   AnswerQuestion,
+  BlogPost,
   Callout,
   CardGrid,
   Cta,
@@ -11,6 +12,7 @@ import type {
   Link,
   LongFormText,
   Metadata,
+  Person,
   SanityImageAsset,
   SanityImageCrop,
   SanityImageHotspot,
@@ -333,6 +335,12 @@ export type TabReferenced = {
   >;
 };
 
+export type BlogHighlightReferenced = {
+  _type: "blogHighlight";
+  blogType?: "latest" | "specific";
+  blogPost?: BlogPostWithReferences;
+};
+
 export type TabsReferenced = {
   _type: "tabs";
   intro?: Intro;
@@ -341,6 +349,55 @@ export type TabsReferenced = {
       _key: string;
     } & TabReferenced
   >;
+};
+
+export type PersonReferenced = {
+  _id: string;
+  _type: "person";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  jobTitle?: string;
+  contactLink?: Link;
+  image?: i18nImage;
+};
+
+export interface BlogPostWithReferences {
+  _type: "blogPost";
+  language?: string;
+  content?: Array<
+    | ServicesCardList
+    | CardGrid
+    | CalloutReferenced
+    | LongFormTextReferenced
+    | HighlightReferenced
+    | TabsReferenced
+    | BlogHighlightReferenced
+    | BlogsListReferenced
+  >;
+  metadata?: Metadata;
+  featuredImage?: i18nImage;
+  _updatedAt?: string;
+  _id: string;
+  _createdAt: string;
+  intro?: Intro;
+  publicationDate?: string;
+  author?: PersonReferenced;
+  postType: Array<{
+    prefLabel: string | null;
+    definition: string | null;
+  }> | null;
+  topic: Array<{
+    prefLabel: string | null;
+    definition: string | null;
+  }> | null;
+}
+
+export type BlogsListReferenced = {
+  _type: "blogsList";
+  blogsType?: "latest" | "specific";
+  blogPosts?: BlogPostWithReferences[];
 };
 
 export interface ServiceWithReferences {
@@ -355,6 +412,8 @@ export interface ServiceWithReferences {
     | LongFormTextReferenced
     | HighlightReferenced
     | TabsReferenced
+    | BlogHighlightReferenced
+    | BlogsListReferenced
   >;
   metadata?: Metadata;
   image?: i18nImage;

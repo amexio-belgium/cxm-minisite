@@ -1,0 +1,350 @@
+---
+import { blogsListQuery } from "@api/queries";
+import { imageBuilder, loadQuery } from "@api/sanity";
+import type {
+  BlogPostWithReferences,
+  BlogsListReferenced,
+} from "@sanity/custom.sanity.types";
+import { siteLanguage } from "src/stores/global-store";
+import { toHTML } from "@portabletext/to-html";
+import { v4 as uuidv4 } from "uuid";
+interface Props {
+  blogsList: BlogsListReferenced;
+}
+const itemsPerTime = 15;
+const { blogsList } = Astro.props;
+const lang = siteLanguage.get();
+
+let blogs: BlogPostWithReferences[] | undefined = [];
+let totalItems;
+if (blogsList.blogsType === "latest") {
+  const { data: blogsFetched } = await loadQuery<{
+    blogPosts: BlogPostWithReferences[];
+    totalItems: number;
+  }>({
+    query: blogsListQuery,
+    params: { language: lang },
+  });
+  blogs = blogsFetched.blogPosts;
+  totalItems = blogsFetched.totalItems;
+} else {
+  blogs = blogsList.blogPosts;
+  totalItems = blogs?.length;
+}
+
+// UUID for giving the divs and buttons unique ID's we can select them in JS
+const uuid = uuidv4();
+
+// If we are fetching the newest blogs, or if we are using specific blogs and no fetching is needed then.
+const isLatestBlogs = blogsList.blogsType === "latest";
+// If we are fetching the latestblogs, give the amount of items from the api which can be max itemsPerTime
+// If we are fetching specific blogs, give the lenght of the blogs, with a maximum of the itemsPerTime.
+const items = isLatestBlogs
+  ? blogs?.length
+  : blogs
+    ? blogs?.length > itemsPerTime
+      ? itemsPerTime
+      : blogs?.length
+    : 0;
+---
+
+<script>
+  await import.meta.glob("../../webcomponents/*.js", {
+    eager: true,
+  });
+</script>
+
+{
+  blogs && (
+    <astro-blogs-list
+      data-blogs={JSON.stringify(blogs)}
+      data-lang={lang}
+      data-totalitems={totalItems}
+      data-items={items}
+      data-uuid={uuid}
+      data-itemspertime={itemsPerTime}
+      data-islatestblogs={JSON.stringify(isLatestBlogs)}
+    >
+      <div class="relative w-full gap-8 py-20 before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl before:bg-light-blue-50 marker:before:h-full motion-safe:animate-fade-up motion-safe:animate-delay-1000">
+        <div
+          id={`blogs-preview-list-${uuid}`}
+          class="grid auto-rows-fr grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {blogs?.slice(0, 3).map((blog) => (
+            <blog-preview-web
+              tabindex="-1"
+              title={blog.intro?.title}
+              publicationDate={JSON.stringify(
+                new Date(blog.publicationDate || blog._createdAt),
+              )}
+              authorName={blog.author?.name}
+              link={`/${lang}/blog/${blog.metadata?.slug?.current}`}
+              introHTML={blog.intro?.intro ? toHTML(blog.intro.intro) : ""}
+              topics={JSON.stringify(blog.topic)}
+              jobTitle={blog.author?.jobTitle}
+              previewImageUrl={
+                blog.featuredImage?.asset
+                  ? imageBuilder
+                      .image(blog.featuredImage?.asset)
+                      .width(400)
+                      .height(400)
+                      .url()
+                  : ""
+              }
+              authorImageUrl={
+                blog.author?.image?.asset
+                  ? imageBuilder
+                      .image(blog.author.image?.asset)
+                      .width(54)
+                      .height(54)
+                      .url()
+                  : ""
+              }
+            />
+          ))}
+        </div>
+
+        <div class="flex flex-col items-center justify-center py-4">
+          <span
+            id={`total-viewed-${uuid}`}
+            class="font-sans text-[14px] text-black focus-visible:outline-orange"
+            tabindex="0"
+          >
+            You've viewed{" "}
+            {itemsPerTime > totalItems ? totalItems : itemsPerTime} of the{" "}
+            {totalItems} blogposts
+          </span>
+          <div class="bg-gray-200 dark:bg-gray-700 mx-0.5 mb-6 mt-[15px] h-[3px] w-[216px] bg-lightest-blue-800">
+            <div
+              id={`progress-bar-${uuid}`}
+              class="h-[3px] bg-orange"
+              style={`width: ${((itemsPerTime > totalItems ? totalItems : itemsPerTime) / totalItems!) * 100}%`}
+            />
+          </div>
+          {(isLatestBlogs
+            ? items! < totalItems
+            : itemsPerTime < totalItems) && (
+            <button
+              id={`load-more-btn-${uuid}`}
+              class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
+            >
+              Load more
+            </button>
+          )}
+        </div>
+      </div>
+    </astro-blogs-list>
+  )
+}
+
+<script>
+  import { blogsListQueryPaginating } from "@api/queries";
+  import { imageBuilder, loadQuery } from "@api/sanity";
+  import type { BlogPostWithReferences } from "@sanity/custom.sanity.types";
+  import { toHTML } from "@portabletext/to-html";
+  import { BlogPreviewWeb } from "@components/webcomponents/BlogPreviewWeb";
+
+  class AstroBlogsList extends HTMLElement {
+    constructor() {
+      super();
+
+      let blogs: BlogPostWithReferences[] = [];
+
+      // Get all the initial data from the serverside
+      const itemsPerTime = Number(this.dataset.itemspertime);
+      let items = Number(this.dataset.items);
+      let totalItems = Number(this.dataset.totalitems);
+      const lang = this.dataset.lang;
+      const uuid = this.dataset.uuid;
+      const isLatestBlogs = JSON.parse(this.dataset.islatestblogs!);
+
+      const blogsPreviewList = document.getElementById(
+        `blogs-preview-list-${uuid}`,
+      );
+      const progressBar = document.getElementById(`progress-bar-${uuid}`);
+      const loadMoreButton = document.getElementById(`load-more-btn-${uuid}`);
+      const totalViewed = document.getElementById(`total-viewed-${uuid}`);
+
+      if (this.dataset.blogs) {
+        blogs = JSON.parse(this.dataset.blogs) as BlogPostWithReferences[];
+      }
+      // Get the id of the last item in the existing items so we can filter from there in the query
+      let lastId = blogs[blogs.length - 1]._id;
+
+      function GetBlogpostPreviewWebComponent(blog: BlogPostWithReferences) {
+        const el = new BlogPreviewWeb();
+        el.tabIndex = -1;
+        el.setAttribute("title", blog.intro?.title || "");
+        el.setAttribute(
+          "publicationDate",
+          JSON.stringify(new Date(blog.publicationDate || blog._createdAt)),
+        );
+        el.setAttribute("authorName", blog.author?.name || "");
+        el.setAttribute(
+          "link",
+          `/${lang}/blog/${blog.metadata?.slug?.current}`,
+        );
+        el.setAttribute(
+          "introHTML",
+          blog.intro?.intro ? toHTML(blog.intro.intro) : "",
+        );
+        el.setAttribute("topics", JSON.stringify(blog.topic));
+        el.setAttribute("jobTitle", blog.author?.jobTitle || "");
+        el.setAttribute(
+          "previewImageUrl",
+          blog.featuredImage?.asset
+            ? imageBuilder
+                .image(blog.featuredImage?.asset)
+                .width(400)
+                .height(400)
+                .url()
+            : "",
+        );
+        el.setAttribute(
+          "authorImageUrl",
+          blog.author?.image?.asset
+            ? imageBuilder
+                .image(blog.author.image?.asset)
+                .width(400)
+                .height(400)
+                .url()
+            : "",
+        );
+
+        return el;
+      }
+
+      async function handleLoadMoreLatestBlogs(accessible?: boolean) {
+        // Fetch new blogs
+        const { data: blogsFetched } = await loadQuery<
+          BlogPostWithReferences[]
+        >({
+          query: blogsListQueryPaginating,
+          params: { language: lang!, lastId: lastId },
+        });
+
+        // Create a new webcomponent for every blog
+        blogsFetched.forEach((blog) =>
+          blogsPreviewList?.appendChild(GetBlogpostPreviewWebComponent(blog)),
+        );
+
+        items += itemsPerTime;
+        // Check if we've fetched all the items yet
+        if (items >= totalItems) {
+          // Set progressbar to 100 and set text correctly
+          progressBar?.style.setProperty("width", `100%`);
+          totalViewed!.textContent = `You've viewed ${totalItems} of the ${totalItems} blogposts`;
+
+          // Unsubscribe from eventlisteners for the loadmorebutton
+          loadMoreButton?.removeEventListener("click", () =>
+            handleLoadMoreLatestBlogs(),
+          );
+          loadMoreButton?.removeEventListener("keydown", (event) =>
+            handleAccessibleLoadMoreLatestBlogs(event),
+          );
+          loadMoreButton?.remove();
+        } else {
+          const percentage = (items / totalItems) * 100;
+          progressBar?.style.setProperty("width", `${percentage.toString()}%`);
+          totalViewed!.textContent = `You've viewed ${items} of the ${totalItems} blogposts`;
+        }
+
+        // If click came from enter key, get the last
+        // article that was there before loading new ones and focus on them for accessibility
+        if (accessible) {
+          lastId = blogsFetched[blogsFetched.length - 1]._id;
+          const lastElement = blogsPreviewList?.children[
+            items - 1 - itemsPerTime
+          ] as HTMLElement;
+
+          const lastElementATag = lastElement.getElementsByTagName("a")[0];
+
+          lastElementATag?.focus();
+        }
+      }
+
+      function handleAccessibleLoadMoreLatestBlogs(event: KeyboardEvent) {
+        if (event.key === "Enter") {
+          handleLoadMoreLatestBlogs(true);
+          // Prevents default behavior
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      }
+
+      async function handleLoadMoreSpecificBlogs(accessible?: boolean) {
+        // Fetch new blogs
+        const newBlogs = blogs.slice(items, items + 3);
+        // Create a new webcomponent for every blog
+        newBlogs.forEach((blog) => {
+          blogsPreviewList?.appendChild(GetBlogpostPreviewWebComponent(blog));
+        });
+
+        items += itemsPerTime;
+        // Check if we've fetched all the items yet
+        if (items >= totalItems) {
+          // Set progressbar to 100 and set text correctly
+          progressBar?.style.setProperty("width", `100%`);
+          totalViewed!.textContent = `You've viewed ${totalItems} of the ${totalItems} blogposts`;
+
+          // Unsubscribe from eventlisteners for the loadmorebutton
+          loadMoreButton?.removeEventListener("click", () =>
+            handleLoadMoreSpecificBlogs(),
+          );
+          loadMoreButton?.removeEventListener("keydown", (event) =>
+            handleAccessibleLoadMoreSpecificBlogs(event),
+          );
+          loadMoreButton?.remove();
+        } else {
+          const percentage = (items / totalItems) * 100;
+          progressBar?.style.setProperty("width", `${percentage.toString()}%`);
+          totalViewed!.textContent = `You've viewed ${items} of the ${totalItems} blogposts`;
+        }
+
+        // If click came from enter key, get the last
+        // article that was there before loading new ones and focus on them for accessibility
+        if (accessible) {
+          const lastElement = blogsPreviewList?.children[
+            items - 1 - itemsPerTime
+          ] as HTMLElement;
+
+          const lastElementATag = lastElement.getElementsByTagName("a")[0];
+
+          lastElementATag?.focus();
+        }
+      }
+
+      function handleAccessibleLoadMoreSpecificBlogs(event: KeyboardEvent) {
+        if (event.key === "Enter") {
+          handleLoadMoreSpecificBlogs(true);
+          // Prevents default behavior
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      }
+
+      // If we've gotten any blogs add the listeners
+      if (blogs.length > 0) {
+        if (isLatestBlogs) {
+          loadMoreButton?.addEventListener("keydown", (event) =>
+            handleAccessibleLoadMoreLatestBlogs(event),
+          );
+          loadMoreButton?.addEventListener("click", () =>
+            handleLoadMoreLatestBlogs(),
+          );
+        } else {
+          loadMoreButton?.addEventListener("keydown", (event) =>
+            handleAccessibleLoadMoreSpecificBlogs(event),
+          );
+          loadMoreButton?.addEventListener("click", () =>
+            handleLoadMoreSpecificBlogs(),
+          );
+        }
+      }
+    }
+  }
+
+  customElements.define("astro-blogs-list", AstroBlogsList);
+</script>

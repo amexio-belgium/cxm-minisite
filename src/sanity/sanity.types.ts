@@ -68,6 +68,29 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type BlogsList = {
+  _type: "blogsList";
+  blogsType?: "latest" | "specific";
+  blogPosts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "blogPost";
+  }>;
+};
+
+export type BlogHighlight = {
+  _type: "blogHighlight";
+  blogType?: "latest" | "specific";
+  blogPost?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "blogPost";
+  };
+};
+
 export type Tab = {
   _type: "tab";
   title?: string;
@@ -81,9 +104,7 @@ export type Tab = {
       }>;
       style?: "normal" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        _key: string;
-      } & Link>;
+      markDefs?: null;
       level?: number;
       _type: "block";
       _key: string;
@@ -166,9 +187,7 @@ export type SiteConfig = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -250,9 +269,7 @@ export type SolutionDomain = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -331,9 +348,7 @@ export type Highlight = {
       }>;
       style?: "normal" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        _key: string;
-      } & Link>;
+      markDefs?: null;
       level?: number;
       _type: "block";
       _key: string;
@@ -358,6 +373,7 @@ export type Highlight = {
 export type LongFormText = {
   _type: "longFormText";
   intro?: Intro;
+  standOut?: boolean;
   content?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -367,9 +383,7 @@ export type LongFormText = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -403,9 +417,7 @@ export type CardGrid = {
       }>;
       style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        _key: string;
-      } & Link>;
+      markDefs?: null;
       level?: number;
       _type: "block";
       _key: string;
@@ -450,9 +462,7 @@ export type Callout = {
       }>;
       style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        _key: string;
-      } & Link>;
+      markDefs?: null;
       level?: number;
       _type: "block";
       _key: string;
@@ -547,7 +557,11 @@ export type ReferenceCase = {
     _key: string;
   } & Tabs) | ({
     _key: string;
-  } & WorkCardList)>;
+  } & WorkCardList) | ({
+    _key: string;
+  } & BlogHighlight) | ({
+    _key: string;
+  } & BlogsList)>;
   technologies?: Array<{
     _ref: string;
     _type: "reference";
@@ -579,7 +593,23 @@ export type BlogPost = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  intro?: Intro;
+  intro?: {
+    title?: string;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
   featuredImage?: {
     asset?: {
       _ref: string;
@@ -626,7 +656,11 @@ export type BlogPost = {
     _key: string;
   } & Tabs) | ({
     _key: string;
-  } & WorkCardList)>;
+  } & WorkCardList) | ({
+    _key: string;
+  } & BlogHighlight) | ({
+    _key: string;
+  } & BlogsList)>;
   metadata?: Metadata;
   language?: string;
 };
@@ -685,9 +719,7 @@ export type AnswerQuestion = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -720,7 +752,11 @@ export type ContentPage = {
     _key: string;
   } & Tabs) | ({
     _key: string;
-  } & WorkCardList)>;
+  } & WorkCardList) | ({
+    _key: string;
+  } & BlogHighlight) | ({
+    _key: string;
+  } & BlogsList)>;
   metadata?: Metadata;
   language?: string;
 };
@@ -782,7 +818,11 @@ export type Company = {
     _key: string;
   } & Tabs) | ({
     _key: string;
-  } & WorkCardList)>;
+  } & WorkCardList) | ({
+    _key: string;
+  } & BlogHighlight) | ({
+    _key: string;
+  } & BlogsList)>;
   type?: {
     _ref: string;
     _type: "reference";
@@ -860,7 +900,11 @@ export type Service = {
     _key: string;
   } & Tabs) | ({
     _key: string;
-  } & WorkCardList)>;
+  } & WorkCardList) | ({
+    _key: string;
+  } & BlogHighlight) | ({
+    _key: string;
+  } & BlogsList)>;
   faqs?: Faq;
   customerReferences?: Array<{
     _ref: string;
@@ -994,9 +1038,7 @@ export type Intro = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -1142,9 +1184,7 @@ export type SiteConfigQueryResult = {
     }>;
     style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -1211,6 +1251,10 @@ export type NavigationQueryResult = {
         };
         content?: Array<({
           _key: string;
+        } & BlogHighlight) | ({
+          _key: string;
+        } & BlogsList) | ({
+          _key: string;
         } & Callout) | ({
           _key: string;
         } & CardGrid) | ({
@@ -1244,6 +1288,10 @@ export type NavigationQueryResult = {
         _rev: string;
         intro?: Intro;
         content?: Array<({
+          _key: string;
+        } & BlogHighlight) | ({
+          _key: string;
+        } & BlogsList) | ({
           _key: string;
         } & Callout) | ({
           _key: string;
@@ -1281,6 +1329,10 @@ export type NavigationQueryResult = {
         challenge?: string;
         cta?: Cta;
         content?: Array<({
+          _key: string;
+        } & BlogHighlight) | ({
+          _key: string;
+        } & BlogsList) | ({
           _key: string;
         } & Callout) | ({
           _key: string;
@@ -1402,9 +1454,7 @@ export type ServiceQueryResult = {
       }>;
       style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        _key: string;
-      } & Link>;
+      markDefs?: null;
       level?: number;
       _type: "block";
     }> | null;
@@ -1448,9 +1498,7 @@ export type ServiceQueryResult = {
         }>;
         style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          _key: string;
-        } & Link>;
+        markDefs?: null;
         level?: number;
         _type: "block";
         _key: string;
@@ -1532,9 +1580,7 @@ export type ServiceQueryResult = {
           }>;
           style?: "h3" | "h4" | "h5" | "h6" | "normal";
           listItem?: "bullet" | "number";
-          markDefs?: Array<{
-            _key: string;
-          } & Link>;
+          markDefs?: null;
           level?: number;
           _type: "block";
           _key: string;
@@ -1560,9 +1606,7 @@ export type ServiceQueryResult = {
         }>;
         style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          _key: string;
-        } & Link>;
+        markDefs?: null;
         level?: number;
         _type: "block";
         _key: string;
@@ -1638,6 +1682,10 @@ export type ServiceQueryResult = {
         cta?: Cta;
         content?: Array<({
           _key: string;
+        } & BlogHighlight) | ({
+          _key: string;
+        } & BlogsList) | ({
+          _key: string;
         } & Callout) | ({
           _key: string;
         } & CardGrid) | ({
@@ -1691,9 +1739,7 @@ export type ServiceQueryResult = {
         }>;
         style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          _key: string;
-        } & Link>;
+        markDefs?: null;
         level?: number;
         _type: "block";
         _key: string;
@@ -1794,6 +1840,10 @@ export type ServiceQueryResult = {
     } | null;
     content?: Array<({
       _key: string;
+    } & BlogHighlight) | ({
+      _key: string;
+    } & BlogsList) | ({
+      _key: string;
     } & Callout) | ({
       _key: string;
     } & CardGrid) | ({
@@ -1831,4 +1881,838 @@ export type ServiceQueryResult = {
   language?: string;
   metadata?: Metadata;
 } | null;
+// Variable: blogPostQuery
+// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  content[] {    ...,    _type == "blogsList" => {      ...,      blogsType == "specific" => {        blogPosts[]->{          ...,          featuredImage{            asset->{...}          },          postType[]->{            prefLabel,            definition          },          author->{            ...,            image{              ...,              asset->{                ...              }            }          },          topic[]->{            prefLabel,            definition          },        }      },    },    _type == "blogHighlight" => {      ...,      blogType == "latest" => {        "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{          ...,          featuredImage{            asset->{...}          },          postType[]->{            prefLabel,            definition          },          author->{            ...,            image{              ...,              asset->{                ...              }            }          },          topic[]->{            prefLabel,            definition          },        }      },      blogType == "specific" => {        blogPost->{          ...,          featuredImage{            asset->{...}          },          postType[]->{            prefLabel,            definition          },          author->{            ...,            image{              ...,              asset->{                ...              }            }          },          topic[]->{            prefLabel,            definition          },        }      },    },    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    },    _type == "highlight" => {      ...,      defined(image) => {        image{          ...,          asset->{...}        }      }    },     _type == "tabs" => {      ...,      defined(tabsOverview) => {        tabsOverview[]{          ...,          _type == "tab" => {            ...,            "test":"test",            content[]{              ...,              _type == "image" => {                asset->{...}              }            }          }        }      }    },     _type == "longFormText" => {      ...,      defined(content) => {        content[]{          ...,           _type == "image" => {            ...,             asset->{...}           }        }      }    },  }}
+export type BlogPostQueryResult = {
+  _id: string;
+  _type: "blogPost";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: {
+    title?: string;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  featuredImage: {
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  publicationDate?: string;
+  author: {
+    _id: string;
+    _type: "person";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    jobTitle?: string;
+    contactLink?: Link;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  postType: Array<{
+    prefLabel: string | null;
+    definition: string | null;
+  }> | null;
+  topic: Array<{
+    prefLabel: string | null;
+    definition: string | null;
+  }> | null;
+  content: Array<{
+    _key: string;
+    blogPost: {
+      _id: string;
+      _type: "blogPost";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      intro?: {
+        title?: string;
+        intro?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+      };
+      featuredImage: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+      } | null;
+      publicationDate?: string;
+      author: {
+        _id: string;
+        _type: "person";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        name?: string;
+        jobTitle?: string;
+        contactLink?: Link;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+      } | null;
+      postType: Array<{
+        prefLabel: string | null;
+        definition: string | null;
+      }> | null;
+      topic: Array<{
+        prefLabel: string | null;
+        definition: string | null;
+      }> | null;
+      content?: Array<({
+        _key: string;
+      } & BlogHighlight) | ({
+        _key: string;
+      } & BlogsList) | ({
+        _key: string;
+      } & Callout) | ({
+        _key: string;
+      } & CardGrid) | ({
+        _key: string;
+      } & Highlight) | ({
+        _key: string;
+      } & LongFormText) | ({
+        _key: string;
+      } & ServicesCardList) | ({
+        _key: string;
+      } & Tabs) | ({
+        _key: string;
+      } & WorkCardList)>;
+      metadata?: Metadata;
+      language?: string;
+    } | null;
+    groups: null;
+    cards: null;
+  } | {
+    _key: string;
+    blogPosts: Array<{
+      _id: string;
+      _type: "blogPost";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      intro?: {
+        title?: string;
+        intro?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+      };
+      featuredImage: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+      } | null;
+      publicationDate?: string;
+      author: {
+        _id: string;
+        _type: "person";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        name?: string;
+        jobTitle?: string;
+        contactLink?: Link;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+      } | null;
+      postType: Array<{
+        prefLabel: string | null;
+        definition: string | null;
+      }> | null;
+      topic: Array<{
+        prefLabel: string | null;
+        definition: string | null;
+      }> | null;
+      content?: Array<({
+        _key: string;
+      } & BlogHighlight) | ({
+        _key: string;
+      } & BlogsList) | ({
+        _key: string;
+      } & Callout) | ({
+        _key: string;
+      } & CardGrid) | ({
+        _key: string;
+      } & Highlight) | ({
+        _key: string;
+      } & LongFormText) | ({
+        _key: string;
+      } & ServicesCardList) | ({
+        _key: string;
+      } & Tabs) | ({
+        _key: string;
+      } & WorkCardList)>;
+      metadata?: Metadata;
+      language?: string;
+    }> | null;
+    groups: null;
+    cards: null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    content: Array<{
+      _key: string;
+    } | {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+    }> | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    content: Array<{
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | {
+      richText?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _type: "textObject";
+      asset: null;
+    }> | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+    tabsOverview: Array<{
+      _key: string;
+      test: "test";
+      content: Array<{
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | {
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h3" | "h4" | "h5" | "h6" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "content";
+      }> | null;
+    }> | null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: null;
+  } | {
+    _key: string;
+    groups: null;
+    cards: Array<{
+      title?: string;
+      content?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      icon: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      _type: "card";
+    }> | null;
+  } | {
+    _key: string;
+    groups: Array<{
+      title?: string;
+      services: Array<{
+        _id: string;
+        _type: "service";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        intro?: Intro;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        challenge?: string;
+        cta?: Cta;
+        content?: Array<({
+          _key: string;
+        } & BlogHighlight) | ({
+          _key: string;
+        } & BlogsList) | ({
+          _key: string;
+        } & Callout) | ({
+          _key: string;
+        } & CardGrid) | ({
+          _key: string;
+        } & Highlight) | ({
+          _key: string;
+        } & LongFormText) | ({
+          _key: string;
+        } & ServicesCardList) | ({
+          _key: string;
+        } & Tabs) | ({
+          _key: string;
+        } & WorkCardList)>;
+        faqs?: Faq;
+        customerReferences?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "company";
+        }>;
+        servicePillar?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "servicePillar";
+        };
+        language?: string;
+        metadata?: Metadata;
+      }> | null;
+      _type: "servicesCardListGroup";
+    }> | null;
+    cards: null;
+  }> | null;
+  metadata?: Metadata;
+  language?: string;
+} | null;
+// Variable: blogsListQuery
+// Query: {  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...3]{    _id,    featuredImage{      asset->{...}    },    postType[]->{      prefLabel,      definition    },    author->{      ...,      image{        ...,        asset->{          ...        }      }    },    topic[]->{      prefLabel,      definition    },    metadata,    publicationDate,    _createdAt,    intro  },  "totalItems": count(*[_type == "blogPost" && language == $language])}
+export type BlogsListQueryResult = {
+  blogPosts: Array<{
+    _id: string;
+    featuredImage: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+    } | null;
+    postType: Array<{
+      prefLabel: string | null;
+      definition: string | null;
+    }> | null;
+    author: {
+      _id: string;
+      _type: "person";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      name?: string;
+      jobTitle?: string;
+      contactLink?: Link;
+      image: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+    } | null;
+    topic: Array<{
+      prefLabel: string | null;
+      definition: string | null;
+    }> | null;
+    metadata: Metadata | null;
+    publicationDate: string | null;
+    _createdAt: string;
+    intro: {
+      title?: string;
+      intro?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+    } | null;
+  }>;
+  totalItems: unknown;
+};
+// Variable: blogsListQueryPaginating
+// Query: *[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...3]{  _id,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  metadata,  publicationDate,  _createdAt,  intro}
+export type BlogsListQueryPaginatingResult = Array<{
+  _id: string;
+  featuredImage: {
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  postType: Array<{
+    prefLabel: string | null;
+    definition: string | null;
+  }> | null;
+  author: {
+    _id: string;
+    _type: "person";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    jobTitle?: string;
+    contactLink?: Link;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  topic: Array<{
+    prefLabel: string | null;
+    definition: string | null;
+  }> | null;
+  metadata: Metadata | null;
+  publicationDate: string | null;
+  _createdAt: string;
+  intro: {
+    title?: string;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  } | null;
+}>;
 

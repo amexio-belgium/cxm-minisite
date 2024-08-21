@@ -1,0 +1,66 @@
+---
+import Base from "@layouts/Base.astro";
+import { blogPostQuery } from "@api/queries";
+import { loadQuery } from "@api/sanity";
+import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
+import { type BlogPostWithReferences } from "src/sanity/custom.sanity.types";
+import HeroHeader from "@components/uicomposition/HeroHeader.astro";
+import { siteLanguage } from "src/stores/global-store";
+import ProfileCard from "@components/uielements/ProfileCard.astro";
+import FormattedDate from "@components/uielements/FormattedDate.astro";
+
+export const prerender = false;
+const { lang, slug } = Astro.params;
+if (!lang || !slug) {
+  return Astro.redirect("/404");
+}
+
+const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
+  query: blogPostQuery,
+  params: { language: lang, slug: slug },
+});
+
+siteLanguage.set(lang.toLowerCase());
+---
+
+<Base
+  title={blogPost?.metadata?.title || blogPost?.intro?.title!}
+  description={blogPost?.metadata?.description || ""}
+  slug={slug}
+  preview={true}
+>
+  <HeroHeader
+    headline={blogPost.intro?.title}
+    text={blogPost.intro?.intro}
+    backgroundImage={blogPost?.featuredImage?.asset?._id}
+  >
+    <div class="mt-8 flex flex-row items-center gap-4 text-white">
+      <FormattedDate
+        class="font-serif text-base"
+        date={new Date(blogPost.publicationDate || blogPost._createdAt)}
+        transition:name={blogPost.metadata?.slug?.current + "_date"}
+      />
+      {
+        blogPost.topic && (
+          <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
+            {blogPost.topic.map((topic) => topic.prefLabel)}
+          </p>
+        )
+      }
+    </div>
+  </HeroHeader>
+  {
+    blogPost.author && blogPost.author.name && (
+      <ProfileCard
+        name={blogPost.author.name}
+        title={blogPost.author.jobTitle}
+        direction="right"
+        profileImg={blogPost.author.image}
+        hideButton
+        sharing
+        class="-mt-8 mb-8 w-full motion-safe:animate-fade-up motion-safe:animate-delay-500 lg:-mt-16 lg:mb-8"
+      />
+    )
+  }
+  <SanityComponentsRenderer content={blogPost?.content} />
+</Base>

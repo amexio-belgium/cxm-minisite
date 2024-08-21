@@ -126,3 +126,244 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
    },
   }
 }`;
+
+export const blogPostQuery = groq`*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{
+  ...,
+  featuredImage{
+    asset->{...}
+  },
+  postType[]->{
+    prefLabel,
+    definition
+  },
+  author->{
+    ...,
+    image{
+      ...,
+      asset->{
+        ...
+      }
+    }
+  },
+  topic[]->{
+    prefLabel,
+    definition
+  },
+  content[] {
+    ...,
+    _type == "blogsList" => {
+      ...,
+      blogsType == "specific" => {
+        blogPosts[]->{
+          ...,
+          featuredImage{
+            asset->{...}
+          },
+          postType[]->{
+            prefLabel,
+            definition
+          },
+          author->{
+            ...,
+            image{
+              ...,
+              asset->{
+                ...
+              }
+            }
+          },
+          topic[]->{
+            prefLabel,
+            definition
+          },
+        }
+      },
+    },
+    _type == "blogHighlight" => {
+      ...,
+      blogType == "latest" => {
+        "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{
+          ...,
+          featuredImage{
+            asset->{...}
+          },
+          postType[]->{
+            prefLabel,
+            definition
+          },
+          author->{
+            ...,
+            image{
+              ...,
+              asset->{
+                ...
+              }
+            }
+          },
+          topic[]->{
+            prefLabel,
+            definition
+          },
+        }
+      },
+      blogType == "specific" => {
+        blogPost->{
+          ...,
+          featuredImage{
+            asset->{...}
+          },
+          postType[]->{
+            prefLabel,
+            definition
+          },
+          author->{
+            ...,
+            image{
+              ...,
+              asset->{
+                ...
+              }
+            }
+          },
+          topic[]->{
+            prefLabel,
+            definition
+          },
+        }
+      },
+    },
+    defined(groups) => {
+      groups[] {
+        ...,
+        'services': services[]->{
+          ...,
+          image{
+            ...,
+            asset->{...}
+          },
+        }
+      }
+    },
+    defined(cards) => {
+      cards[] {
+        ...,
+        icon{
+          ...,
+          asset->{
+            ...,
+          }
+        }
+      }
+    },
+    _type == "callout" => {
+      ...,
+      content[]{
+        ...,
+        defined(asset) => {
+          asset->{...}
+        }
+      }
+    },
+    _type == "highlight" => {
+      ...,
+      defined(image) => {
+        image{
+          ...,
+          asset->{...}
+        }
+      }
+    }, 
+    _type == "tabs" => {
+      ...,
+      defined(tabsOverview) => {
+        tabsOverview[]{
+          ...,
+          _type == "tab" => {
+            ...,
+            "test":"test",
+            content[]{
+              ...,
+              _type == "image" => {
+                asset->{...}
+              }
+            }
+          }
+        }
+      }
+    }, 
+    _type == "longFormText" => {
+      ...,
+      defined(content) => {
+        content[]{
+          ...,
+           _type == "image" => {
+            ...,
+             asset->{...}
+           }
+        }
+      } 
+   },
+  }
+}`;
+
+export const blogsListQuery = groq`
+{
+  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...3]{
+    _id,
+    featuredImage{
+      asset->{...}
+    },
+    postType[]->{
+      prefLabel,
+      definition
+    },
+    author->{
+      ...,
+      image{
+        ...,
+        asset->{
+          ...
+        }
+      }
+    },
+    topic[]->{
+      prefLabel,
+      definition
+    },
+    metadata,
+    publicationDate,
+    _createdAt,
+    intro
+  },
+  "totalItems": count(*[_type == "blogPost" && language == $language])
+}
+`;
+
+export const blogsListQueryPaginating = groq`
+*[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...3]{
+  _id,
+  featuredImage{
+    asset->{...}
+  },
+  postType[]->{
+    prefLabel,
+    definition
+  },
+  author->{
+    ...,
+    image{
+      ...,
+      asset->{
+        ...
+      }
+    }
+  },
+  topic[]->{
+    prefLabel,
+    definition
+  },
+  metadata,
+  publicationDate,
+  _createdAt,
+  intro
+}`;

@@ -3,10 +3,12 @@ import Button from "./Button.astro";
 import { Image } from "astro:assets";
 import Link from "./Link.astro";
 import { useTranslations } from "src/i18n/utils";
+import type { i18nImage } from "@sanity/custom.sanity.types";
+import { imageBuilder } from "@api/sanity";
 
 const { lang } = Astro.params;
 interface Props {
-  profileImg?: string;
+  profileImg?: i18nImage;
   content?: string;
   name: string;
   title?: string;
@@ -46,14 +48,6 @@ const directions = {
 
 const t = useTranslations(lang);
 const twitterText = t("share.twitter");
-
-const profileImages = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/people/*.{jpeg,jpg,png,gif}",
-);
-if (profileImg && !profileImages[profileImg])
-  throw new Error(
-    `"${profileImg}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif}"`,
-  );
 ---
 
 <div
@@ -72,10 +66,14 @@ if (profileImg && !profileImages[profileImg])
   >
     <div class="flex items-center gap-4">
       {
-        profileImg && (
-          <Image
+        profileImg && profileImg.asset && (
+          <img
             loading="eager"
-            src={profileImages[profileImg]()}
+            src={imageBuilder
+              .image(profileImg.asset)
+              .width(54)
+              .height(54)
+              .url()}
             class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
             width={50}
             height={50}
