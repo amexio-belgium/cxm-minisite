@@ -1,5 +1,6 @@
 export const services = {
   en: {
+    "services.discover": "Discover",
     "services.title": "Services - AmeXio Fuse",
     "services.seoDescription":
       "Enter a concise summary of the page content here, highlighting key information and benefits. Include relevant keywords and end with a clear call to action.",
@@ -35,6 +36,7 @@ export const services = {
     "explainer.imagealt": "People processes tools",
   },
   fr: {
+    "services.discover": "Discover",
     "services.title": "Services - AmeXio Fuse",
     "services.seoDescription":
       "Entrez un résumé concis du contenu de la page ici, en mettant en évidence les informations et avantages clés. Incluez des mots-clés pertinents et terminez par un appel à l'action clair.",
@@ -71,6 +73,7 @@ export const services = {
     "explainer.imagealt": "Personnes processus outils",
   },
   nl: {
+    "services.discover": "Découvrir",
     "services.title": "Diensten - AmeXio Fuse",
     "services.seoDescription":
       "Voer hier een beknopte samenvatting van de inhoud van de pagina in, waarin belangrijke informatie en voordelen worden benadrukt. Inclusief relevante zoekwoorden en eindig met een duidelijke oproep tot actie.",

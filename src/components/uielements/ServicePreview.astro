@@ -42,7 +42,7 @@ const preview = isPreview.get();
           color="light"
           class="z-10 md:max-w-xs lg:max-w-md xl:max-w-sm"
         >
-          Discover {service?.intro?.title}
+          {`${t("services.discover")} ${service?.intro?.title}`}
         </Button>
       </div>
       <div class="mask-project md:-right-1/12 relative bottom-0 right-0 inline-flex max-h-[200px] w-full flex-col items-center justify-center overflow-hidden bg-blue-100 object-cover md:absolute md:h-full md:max-h-[unset] md:w-1/2">
