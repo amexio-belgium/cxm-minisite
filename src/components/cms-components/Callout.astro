@@ -32,13 +32,9 @@ if (callout?.content?.[0]._type == "textObject") {
         <img
           src={imageBuilder
             .image(imageObject.asset?._id)
-            .width(512)
-            .height(512)
             .url()}
           alt={imageObject.asset.altTexts[language] || ""}
-          width={512}
-          height={512}
-          class="max-w-fit rounded-xl"
+          class="rounded-xl"
         />
       )}
     </TeaserWithImage>
