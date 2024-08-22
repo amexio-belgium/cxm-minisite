@@ -82,7 +82,7 @@ isPreview.set(true);
             technologies={workPage.technologies}>
         {
             workPage.technologies?.map((technology) => (
-            <TechnologyIcon link={getHrefFromLinkObject(technology?.partner?.link, lang, true)}>
+            <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, lang, true) : undefined}>
                 <SanityImg
                         src={technology.logo.default}
                         alt={technology.logo.toString() || ""}
