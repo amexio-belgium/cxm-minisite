@@ -1,13 +1,6 @@
 ---
 import { useTranslations } from "src/i18n/utils";
 
-interface Props {
-  duration?: string;
-  collaboration?: string[{collaborationTabs: string}];
-  services?: string[{metadata: {title: string}}];
-  technologies?: string[{name: string}];
-}
-
 const { duration, collaboration, services, technologies } = Astro.props;
 
 const { lang } = Astro.params;
