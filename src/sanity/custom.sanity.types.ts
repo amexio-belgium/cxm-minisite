@@ -1,24 +1,24 @@
 import type {
-  AnswerQuestion,
-  Callout,
-  CardGrid,
-  Cta,
-  Faq,
-  Geopoint,
-  Highlight,
-  internalGroqTypeReferenceTo,
-  Intro,
-  Link,
-  LongFormText,
-  Metadata,
-  SanityImageAsset,
-  SanityImageCrop,
-  SanityImageHotspot,
-  ServicePillar,
-  ServicesCardList,
-  Tabs,
-  WorkCardList,
-  Youtube,
+    AnswerQuestion,
+    Callout,
+    CardGrid,
+    Cta,
+    Faq,
+    Geopoint,
+    Highlight,
+    internalGroqTypeReferenceTo,
+    Intro,
+    Link,
+    LongFormText,
+    Metadata,
+    SanityImageAsset,
+    SanityImageCrop,
+    SanityImageHotspot,
+    ServicePillar,
+    ServicesCardList,
+    Tabs,
+    WorkCardList,
+    Youtube,
 } from "./sanity.types";
 
 export interface LinkObjectReferenced {
@@ -352,6 +352,7 @@ export interface ContentPageWithReferences {
     | LongFormTextReferenced
     | HighlightReferenced
     | TabsReferenced
+    | WorkCardList
   >;
   metadata?: Metadata;
   _updatedAt?: string;
@@ -372,6 +373,7 @@ export interface ServiceWithReferences {
     | LongFormTextReferenced
     | HighlightReferenced
     | TabsReferenced
+    | WorkCardList
   >;
   metadata?: Metadata;
   image?: i18nImage;
@@ -381,6 +383,25 @@ export interface ServiceWithReferences {
   servicePillar?: ServicePillar;
   customerReferences: CustomerReferenced;
   faqs: FaqsReferenced;
+}
+
+export interface WorkWithReferences {
+    _type: "works";
+    language?: string;
+    content?: Array<
+        | ServicesCardList
+        | CardGrid
+        | CalloutReferenced
+        | LongFormTextReferenced
+        | HighlightReferenced
+        | TabsReferenced
+        | WorkCardList
+    >;
+    metadata?: Metadata;
+    image?: i18nImage;
+    _updatedAt?: string;
+    _id: string;
+    intro?: Intro;
 }
 
 export type CustomerReferenced = Array<{
