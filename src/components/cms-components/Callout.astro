@@ -1,8 +1,8 @@
 ---
-import { imageBuilder } from "@api/sanity";
 import TeaserWithImage from "@components/uicomposition/TeaserWithImage.astro";
 import type { CalloutReferenced, i18nImage } from "@sanity/custom.sanity.types";
 import { siteLanguage } from "src/stores/global-store";
+import {imageBuilder} from "../../api/sanity";
 
 interface Props {
   callout: CalloutReferenced;
@@ -35,10 +35,10 @@ if (callout?.content?.[0]._type == "textObject") {
             .width(512)
             .height(512)
             .url()}
-          alt={imageObject.asset.altTexts[language]}
+          alt={imageObject.asset.altTexts[language] || ""}
           width={512}
           height={512}
-          class="rounded-xl"
+          class="max-w-fit rounded-xl"
         />
       )}
     </TeaserWithImage>

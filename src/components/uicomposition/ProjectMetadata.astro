@@ -33,7 +33,7 @@ const t = useTranslations(lang, "work");
       collaboration && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
           <dt class="inline lg:block">{t("metadata.collaboration") + ":"}</dt>
-          <dd class="inline lg:block">{collaboration}</dd>
+          <dd class="inline lg:block">{collaboration.collaborationTabs.map(tab => tab.concept.prefLabel).join(', ')}</dd>
         </div>
       )
     }
@@ -41,7 +41,7 @@ const t = useTranslations(lang, "work");
       technologies && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
           <dt class="inline lg:block">{t("metadata.technologies") + ":"}</dt>
-          <dd class="inline lg:block">{technologies}</dd>
+          <dd class="inline lg:block">{technologies.map(technology => technology.name).join(', ')}</dd>
         </div>
       )
     }
@@ -49,7 +49,7 @@ const t = useTranslations(lang, "work");
       services && (
         <div class="lg:flex">
           <dt class="inline lg:block">{t("metadata.services") + ":"}</dt>
-          <dd class="inline lg:block">{services}</dd>
+          <dd class="inline lg:block">{services.map(service => service.metadata.title).join(', ')}</dd>
         </div>
       )
     }
@@ -73,7 +73,6 @@ const t = useTranslations(lang, "work");
     @supports not (content: "x" / "y") {
       .project-metadata > div:not(:last-child):after {
         content: "/";
-        alt: "";
       }
     }
   }
