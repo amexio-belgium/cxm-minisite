@@ -18,7 +18,7 @@ import Quote from "@components/uicomposition/Quote.astro"
 import TilesContainer from "@components/uicomposition/TilesContainer.astro"
 import SmallTile from "@components/uielements/SmallTile.astro"
 import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
-import TechnologyIcon from '@components/uielements/TechnologyIcon.astro';
+import TechnologyIcon from "@components/uielements/TechnologyIcon.astro";
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
 import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
 import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
@@ -56,7 +56,9 @@ import react_square from '@assets/logos/technologies/react_square.png';
 <TeaserWithImage 
     headline="The challenge"
     description="
-    <p>As digital technology changes the relationship between readers and the media, Mediafin looked for new ways to customize online experiences, engage readers and convert them into loyal media consumers.</p>
+    <p>As digital technology changes the relationship between readers and media outlets, Mediafin looked for new ways to customize online experiences, engage readers and convert them into loyal media consumers.</p>
+    <p>One of the main challenges was therefore to develop a system in which experiences could be composed in a <strong>flexible and easy-to-use</strong> way, starting from a diverse landscape of content and data sources and ensuring <strong>fast delivery</strong> of these experiences to the reader.</p>
+    <p>When it comes to the content authoring side, Mediafin is using a specialized CMS, tailored to the editorial workflow of it's journalists and editors. The goal was not to replace this CMS, but rather to built an actual <strong>News Delivery Platform</strong>, focused on composing experiences based on the content managed in the existing CMS.</p>
     ">
     <Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
@@ -65,56 +67,59 @@ import react_square from '@assets/logos/technologies/react_square.png';
     <LayoutSubsection>
         <ContentHeadline headlineTag="h2">Solution overview</ContentHeadline>
         <ContentText>
-            <p>AmeXio has launched the news portals for De Tijd and L'Echo, the Dutch and French news titles for Mediafin, the innovative media publisher from Belgium. Offering a multimedia approach to business, financial markets and political content, these media outlets reach the most influential and most affluent audience in Belgium, with over 300.000 readers every day: entrepreneurs, managers and investors, decision makers with considerable spending power.</p>
-            <p>The two websites built on Adobe Experience Manager (AEM) were initially launched in public beta (“primeur”), meaning visitors could switch from the new to the old version and vice versa if desired.</p>
+            <p>In the first phase of the project, AmeXio launched the news portals for De Tijd and L’Echo, the Dutch and French Mediafin newspapers. Offering a multimedia approach to business, financial markets and political content, these media outlets reach the most influential and most affluent audience in Belgium, with <strong>over 300 000 readers</strong> every day: entrepreneurs, managers and investors, decision makers with considerable spending power.</p>
+            <ContentHeadline headlineTag="h3">A robust and flexible News Delivery Platform</ContentHeadline>
+            <p>The objective was to provide Mediafin with a robust and flexible <strong>News Delivery Platform</strong> that can integrate various content sources and allow non-technical authors to optimize and customize the reader's experience. Mediafin's financial newspapers combine news articles, financial data, and relevant advertisements.</p>
+            <p>The two websites initially launched in public beta (“primeur”), meaning visitors could switch from the new to the old version and vice versa if desired.</p>
+            <ContentHeadline headlineTag="h3">Architecture</ContentHeadline>
+            <p>After research, AmeXio proposed to develop a decoupled architecture. On the back-end, the existing authoring environment for news articles could be preserved. This environment already allowed headless access via APIs.</p>
+            <p>For the front-end, a solution based on <strong>Adobe Experience Manager</strong> (AEM) was chosen. Although AEM is best known for extensive content management capabilities, in this context we were mainly interested in the <strong>state-of-the-art "experience management & composition"</strong> capabilities: the ability for a non-technical business user to quickly and efficiently build experiences (pages). Note that this was an essential part of the solution: journalists and content editors work in an authoring environment specifically designed for them, while a separate marketing team is responsible for managing the experience as presented to the reader.</p>
+            <p>Although the headless authoring environment provides the necessary APIs for accessing news articles to various channels (website, app, print, etc.), it was decided not to  set up a direct point-to-point integration with the AEM front-end. This would entail some important limitations:</p>
+            <ul>
+                <li>The authoring system is a critical environment for Mediafin, so <strong>performance, stability and continuity</strong> had to be guaranteed at all times. However, in the case of a direct integration, a high load on the website(s) would have a direct impact on the performance of the authoring environment.</li>
+                <li>This also applies in the other direction: the continuity of the website should not depend on the availability of the Headless CMS.</li>
+                <li>Problems with <strong>scalability</strong>: the coupling of the front-end with several of the back-end systems (author environment, stock market database, stock market radar, etc.) would mean an increased number of integrations (no Loose Coupling).</li>
+            </ul>
+            <p>For these reasons, it was decided to integrate via an <strong>API Gateway</strong>. This abstraction layer allows for the aggregation of data and content from the various data sources and provides <strong>caching</strong>. All this data is then made available to the various front-ends via a single API. This includes the news websites, the native apps and the various campaign websites.</p>
+            <ContentHeadline headlineTag="h3">Front-end management</ContentHeadline>
+            <p>The AEM front-end is continuously improved to meet changing needs and insights. That's why the platform has a <strong>short release cycle</strong> of at least two deployments per month.</p>
+            <p>The attractive front-end of the website is fully <strong>responsive</strong> and optimized for performance and maintainability. React was used to render and display <strong>real-time information</strong> such as stock market figures and search pages. This React code is highly optimized for performance, as the websites process more than <strong>10 million page views</strong> every day. Next to that, the front-end was also highly optimized for SEO.</p>
+            <p>After the delivery of the initial version of the websites, additional features were developed according to the priorities as laid down in the backlog. Thanks to this approach, the go-live was realized in a very short time. In the meantime, <strong>additional channels</strong> have also been launched on the platform, such as the new Sabato website.</p>
+            <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
+            src='/src/assets/images/mediafin-sabato.png' 
+            width="796"
+            height="322" />
+            <p>In addition to technical expertise, clear communication between the various (external) parties and stakeholders was essential.</p>
         </ContentText>
     </LayoutSubsection>
 </LayoutSection>
 
-<Quote 
-    quote="Simpler and clearer. So you're at a glance along with the news that matters. The new tijd.be provides more room for depth, analysis and multimedia stories than ever. Our new website is tailored to readers’ needs with new and personalized tools."
+<Quote
+    quote="Simpler and clearer, so you get the news that matters at a glance. The new tijd.be offers more room for in-depth analysis and multimedia stories than ever before. Our new website is tailored to readers’ needs with personalized tools."
     name='Stephanie De Smedt'
     jobtitle="Editor for tijd.be"
     profileImage='/src/assets/people/stephanie-de-smedt.png'
-    class="mt-40"
-    />
+    class="mt-40" />
 
 <LayoutSection>
     <LayoutSubsection>
-        <ContentHeadline headlineTag="h2">Result</ContentHeadline>
-
-         <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
+        <ContentHeadline headlineTag="h2">Results</ContentHeadline>
+        <ContentText>
+            <p>For end-users, the updated channels offer an <strong>ideal reader experience across devices</strong>, with a fresh and new responsive web design. From a compact and intuitive smartphone interface to an immersive experience on large screens, content is enriched with photo sliders, videos, quotes, and other media integrated into the page itself. Users can navigate quickly and easily, customize their own dashboards based on selected keywords, manage their stock market portfolio and subscribe to a personalized newsletter.</p>
+            <p>A new "Market" section and a "Portfolio Tool" display financial information and stock prices in real-time in a quick and easy overview, allowing users to compare stock prices. A new "Investment Assistant" makes it easier to invest, thanks to step by step tips for financial investments.</p>
+            <p>There are also two major advantages in terms of content. First of all, the editing of articles is still done in the Mediafin Headless CMS. The workflow in this system is so specific to the business that it was not advantageous to place the editing process in a new system. This is why Mediafin went for an Adobe-based platform: AEM allows business users to easily provide content to the experience on the homepage and landing pages, making the display <strong>much more dynamic</strong> than in the past. Furthermore, authors can also easily compile news "Dossiers" around a certain topic and bundle relevant articles on-the-fly in any layout without impacting the editorial teams. In the past, this last process required a three-day development work by the web team.</p>
+            <p>Because the websites are both Mediafin's product and sales channel, means that they are <strong>business-critical</strong>. It goes without saying that a major focus was therefore placed on optimising the infrastructure and performance when setting up the architecture behind the website. The various components of the news delivery system run in Amazon Web Services (AWS).</p>
+        </ContentText>
+        <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
             src='/src/assets/images/mediafin-2.jpg' 
             width="796"
-            height="322"
-    />
-
-        <ContentText>
-            <ContentHeadline headlineTag="h3">An ideal news reading experience on any device</ContentHeadline>
-            <p>The renewed channels offer the “ideal reading experience on any device” with a fresh, new and responsive web design. From smartphone or tablet through PC, the new multimedia communications are enriched with foto-sliders, videos, quotes and other multimedia.</p>
-            <p>Users can now navigate quickly and easily on all screens, customize their own newsfeed with selected keywords, their stocks wallet and share their preferred insights with integrated social media tools.</p>
-            <p>A renewed “Markets” section and “portfolio tool” present financial information and stock and fund prices for a quick and convenient overview in real time. A new “Investment Assistant” also makes investing a lot easier, offering step by step tips on financial investments.</p>
-        </ContentText>
+            height="322" />
     </LayoutSubsection>
 </LayoutSection>
 
 <Quote 
-    quote="The new website of L’Echo fits all ands boasts extended customization possibilities for readers, making it more readable and simpler to use. On the menu we the same insight relevance and analysis, with new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
+    quote="The new website of De Tijd boasts extended customization possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
     name='Joan Condijts'
     jobtitle="Editor for lecho.be"
     profileImage='/src/assets/people/joan-condijts.jpg'
-    class="mt-40"
-    />
-
-<LayoutSection>
-    <LayoutSubsection>
-        <ContentText>
-            <ContentHeadline headlineTag="h3">A more flexible and powerful editorial workflow</ContentHeadline>
-            <strong>There are also two important highlights on the content side.</strong>
-            <p>First of all, all the editorial content is still managed in Mediafin’s legacy systems. The workflow is so specific to their business that it wouldn’t be efficient to change their core business system.</p>
-            <p>This was also the reason why they chose Adobe: AEM allows content managers to shuffle the content around between the homepage and landing pages to make the whole presentation much more dynamic. Authors can also easily assemble news “dossier” packages related to a certain topic and create the dossier page “on-the-fly” in almost any layout they want, without any impact on the editorial teams.</p>
-            <p>Secondly, the fact that the new websites are Mediafin’s sales channels and their product at the same time means they’re business critical. Needless to say that a lot of focus has been given to infrastructure and performance tuning.</p>
-            <p>AmeXio's team of more than 15 digital experts will continue to work on developing new functionalities to improve readers’ experience as well as authoring experience for the content managers.</p>
-        </ContentText>
-    </LayoutSubsection>
-</LayoutSection>
+    class="mt-40" />
