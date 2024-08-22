@@ -3,7 +3,7 @@ title: 'Omnichannel digital experience platform'
 client: 'KBC'
 description: 'Digital experience transformation at KBC sets the bar for financial sector, providing a hybrid one-stop shop for bank-insurance customers, providing seamless high-value interaction across channels.'
 draft: false
-heroImage: '/src/assets/images/office.jpg'
+heroImage: '/src/assets/projects/kbc.jpg'
 logo: '/src/assets/logos/kbc_logo_square.png'
 tags: 'finance, media, government, retail, manufacturing'
 duration: "Partnership since 2005"
@@ -23,11 +23,12 @@ import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
 import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
 import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
 import ContentText  from "@components/uielements/ContentText.astro"
+import ContentImage  from "@components/uielements/ContentImage.astro"
 import Youtube from '@components/uielements/Youtube.astro'
 
 import { Image } from 'astro:assets';
 import kbc from '@assets/logos/kbc_logo.png';
-import explainer from '@assets/images/explainer.jpg';
+import explainer from '@assets/projects/kbc-2.jpg';
 import analytics_square from '@assets/logos/technologies/adobe_analytics_square.png';
 import target_square from '@assets/logos/technologies/adobe_target_square.png';
 import aem_square from '@assets/logos/technologies/aem_square.png';
@@ -81,6 +82,13 @@ import aem_square from '@assets/logos/technologies/aem_square.png';
         </ContentText>
 
         <ContentHeadline headlineTag="h2">Results</ContentHeadline>
+
+ <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
+            src='/src/assets/images/kbc-3.jpg' 
+            width="796"
+            height="322"
+    />
+
         <ContentText>
             <ContentHeadline headlineTag="h3">A full blown digital experience ecosystem</ContentHeadline>
             <p>Through their close, strategic cooperation with AmeXio, KBC transformed a dispersed portfolio of online services into a hybrid one-stop shop for bank-insurance customers, providing <strong>seamless high-value interaction across channels</strong>: branch, call center, online and mobile. Empowered with a full-blown digital experience ecosystem, KBC team can now manage websites and content in apps in Adobe Experience Manager, A/B test conversion rates with Adobe Target, deploy digital campaigns, newsletters and eMessaging systems in Adobe Campaign, all while Adobe Analytics measures data and customer interactions in real time.</p>
