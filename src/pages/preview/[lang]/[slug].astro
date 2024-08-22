@@ -25,17 +25,21 @@ if (!siteConfig) {
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: lang, slug: slug },
+  params: { language: lang, slug: slug! },
 });
 
-siteLanguage.set(lang.toLowerCase());
+if (contentPage == null) {
+  return new Response(null, { status: 404 });
+}
+
+siteLanguage.set(lang!.toLowerCase());
 isPreview.set(true);
 ---
 
 <Base
   title={`${contentPage?.metadata?.title || contentPage?.intro?.title!} - ${siteConfig.siteName}`}
   description={contentPage?.metadata?.description || ""}
-  slug={slug}
+  slug={slug!}
   siteConfig={siteConfig}
 >
   <HeroHeader

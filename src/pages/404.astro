@@ -8,16 +8,24 @@ export function getStaticPaths() {
   return i18nParams;
 }
 import { getLangFromUrl } from "../i18n/utils";
+import { siteConfigQuery } from "@api/queries";
+import { loadQuery } from "@api/sanity";
+import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 const lang = getLangFromUrl(Astro.url);
 
 const t = useTranslations(lang);
+
+const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
+  query: siteConfigQuery,
+  params: { language: lang!.toLowerCase() },
+});
 ---
 
 <Base
   title={t("404.title")}
   description={t("404.title")}
   slug="404"
-  preview={true}
+  siteConfig={siteConfig}
 >
   <section class="">
     <div class="mx-auto max-w-screen-xl px-4 py-40 lg:px-6 lg:py-40">

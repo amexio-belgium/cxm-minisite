@@ -29,7 +29,7 @@ if (!siteConfig) {
 
 const { data: servicePage } = await loadQuery<ServiceWithReferences>({
   query: serviceQuery,
-  params: { language: lang, slug: slug },
+  params: { language: lang!, slug: slug! },
 });
 
 siteLanguage.set(lang.toLowerCase());
@@ -39,7 +39,7 @@ isPreview.set(true);
 <Base
   title={`${servicePage?.metadata?.title || servicePage?.intro?.title!} - ${siteConfig.siteName}`}
   description={servicePage?.metadata?.description || ""}
-  slug={slug}
+  slug={slug!}
   siteConfig={siteConfig}
 >
   <HeroHeader
