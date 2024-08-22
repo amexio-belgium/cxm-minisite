@@ -24,7 +24,7 @@ if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
 
-const slug = siteConfig.homePage.slug;
+const slug = siteConfig?.homePage.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,

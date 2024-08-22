@@ -7,7 +7,7 @@ import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import Customers from "@components/uicomposition/Customers.astro";
 import { isPreview, siteLanguage } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import {WorkWithReferences} from "../../../../sanity/custom.sanity.types";
+import type {WorkWithReferences} from "@sanity/custom.sanity.types";
 import ProjectMetadata from "../../../../components/uicomposition/ProjectMetadata.astro";
 import TechnologyIcon from "../../../../components/uielements/TechnologyIcon.astro";
 import SanityImg from "@otterstack/sanity-img-astro";
@@ -55,7 +55,7 @@ isPreview.set(true);
           <Customers headline={workPage.customerReferencesText}>
             {workPage.customerReferences?.map((customer) => (
               <>
-                {customer.logo?.default?.asset && (
+                {customer?.logo?.default?.asset && (
                   <img
                     src={imageBuilder
                       .image(customer.logo?.default?.asset)
@@ -84,8 +84,8 @@ isPreview.set(true);
             workPage.technologies?.map((technology) => (
             <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, lang, true) : undefined}>
                 <SanityImg
-                        src={technology.logo.default}
-                        alt={technology.logo.toString() || ""}
+                        src={technology?.logo?.default}
+                        alt={technology?.logo?.default?.asset?.altTexts?.[workPage.language || "en"] || ""}
                         sizes="200px"
                         class="h-[unset] w-auto max-w-[unset] transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
                         loading="lazy"

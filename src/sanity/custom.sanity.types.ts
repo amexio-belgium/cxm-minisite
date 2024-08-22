@@ -2,6 +2,7 @@ import type {
     AnswerQuestion,
     Callout,
     CardGrid,
+    CollaborationModel,
     Cta,
     Faq,
     Geopoint,
@@ -11,12 +12,14 @@ import type {
     Link,
     LongFormText,
     Metadata,
+    ReferenceCase,
     SanityImageAsset,
     SanityImageCrop,
     SanityImageHotspot,
     ServicePillar,
     ServicesCardList,
     Tabs,
+    Technology,
     WorkCardList,
     Youtube,
 } from "./sanity.types";
@@ -388,6 +391,7 @@ export interface ServiceWithReferences {
 export interface WorkWithReferences {
     _type: "works";
     language?: string;
+    customerReferencesText?: string;
     content?: Array<
         | ServicesCardList
         | CardGrid
@@ -397,11 +401,23 @@ export interface WorkWithReferences {
         | TabsReferenced
         | WorkCardList
     >;
+    logo?: {
+        default: i18nImage | null;
+        light: i18nImage | null;
+        dark: i18nImage | null;
+    } | null;
+    link?: Link;
     metadata?: Metadata;
     image?: i18nImage;
     _updatedAt?: string;
     _id: string;
     intro?: Intro;
+    duration?: string;
+    collaborationModel?: CollaborationModel;
+    customerReferences?: CustomerReferenced[];
+    services?: ServiceWithReferences[];
+    technologies?: Technology[];
+    relatedCases?: ReferenceCase[];
 }
 
 export type CustomerReferenced = Array<{

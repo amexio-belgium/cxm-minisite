@@ -10,6 +10,7 @@ const { lang } = Astro.params;
 
 interface Props {
     caseData: ReferenceCase;
+    small: boolean;
 }
 
 const { caseData, small } = Astro.props;
@@ -29,8 +30,8 @@ const language = siteLanguage.get();
           small ? "max-h-[400px]" : "md:w-1/2 md:rounded-tr-none md:rounded-l-xl"
         ]}>
       <SanityImg
-          src={caseData.introImage}
-          alt={caseData.introImage.asset.altTexts?.[language] || ""}
+          src={caseData?.introImage}
+          alt={caseData?.introImage?.asset?.altTexts?.[language] || ""}
           widths={[400, 600, 790]}
           sizes="(max-width: 790px) 100vw, 790px"
           class:list={["motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full max-w-[unset] h-[unset] w-auto",
@@ -45,26 +46,26 @@ const language = siteLanguage.get();
     <div class="flex flex-col gap-2">
       <div class="mb-4 flex flex-row items-start justify-between gap-8">
         <div class="flex flex-col">
-          <span class="font-serif text-primary" set:html={caseData.metadata.title} />
+          <span class="font-serif text-primary" set:html={caseData?.metadata?.title} />
           <h2
             class="caseheadline mb-2 font-serif text-xl [&>mark]:bg-none [&>mark]:bg-clip-border [&>mark]:text-black"
-            set:html={caseData.intro.title}
+            set:html={caseData?.intro?.title}
           />
         </div>
         {
           caseData?.metadata?.image && (
             <SanityImg
               loading="lazy"
-              src={caseData?.metadata?.image?.asset.url}
+              src={caseData?.metadata?.image?.asset?.url}
               class="h-12 w-auto shrink-0 sm:h-16 md:h-12 xl:h-16"
               height={60}
-              alt={caseData.metadata?.image?.asset.altTexts?.[language] || ""}
+              alt={caseData?.metadata?.image?.asset?.altTexts?.[language] || ""}
             />
           )
         }
       </div>
       <div class="text-sm font-light [&>mark]:text-black">
-        <PortableText value={caseData.intro.intro} />
+        <PortableText value={caseData?.intro?.intro} />
       </div>
       <ol class="mt-2 list-inside list-disc font-serif text-sm">
         {
