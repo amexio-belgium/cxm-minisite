@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 interface Props {
   blogsList: BlogsListReferenced;
 }
-const itemsPerTime = 15;
+const itemsPerTime = 3;
 const { blogsList } = Astro.props;
 const lang = siteLanguage.get();
 const preview = isPreview.get();
@@ -256,10 +256,11 @@ const items = isLatestBlogs
           totalViewed!.textContent = `You've viewed ${items} of the ${totalItems} blogposts`;
         }
 
+        lastId = blogsFetched[blogsFetched.length - 1]._id;
+
         // If click came from enter key, get the last
         // article that was there before loading new ones and focus on them for accessibility
         if (accessible) {
-          lastId = blogsFetched[blogsFetched.length - 1]._id;
           const lastElement = blogsPreviewList?.children[
             items - 1 - itemsPerTime
           ] as HTMLElement;
