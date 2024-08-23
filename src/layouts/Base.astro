@@ -11,9 +11,13 @@ const { title, description, page } = Astro.props;
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const lang = getLangFromUrl(Astro.url);
 
+const base = import.meta.env.PUBLIC_ASTRO_BASE_PATH;
+const contane = base + '/fonts/ContaneMediumRegular.woff2';
 ---
 <html class="overflow-x-clip" lang={lang} >
+
     <head>
+        
         <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
         {
             page == "contact" && 

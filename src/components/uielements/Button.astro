@@ -78,7 +78,7 @@ const TagName = decorative ? "span" : "a";
     styles[style + "_" + color],
     className,
   ]}
-  href={`${import.meta.env.BASE_URL}/${lang+link}`}
+  href={`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/${lang+link}`}
   >
   { icon !== "none" && 
     <svg class:list={[iconFill[style + "_" + color], 
@@ -86,7 +86,7 @@ const TagName = decorative ? "span" : "a";
       size == "lg" && "w-8 h-8 mr-2",
       longText && "hidden sm:inline"]}
        fill="none" xmlns="http://www.w3.org/2000/svg">
-      <use xlink:href={`${import.meta.env.BASE_URL}/icons/icon-sprite.svg#icon-${icon}`}></use>
+      <use xlink:href={`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-${icon}`}></use>
     </svg>
   }
   {
@@ -95,7 +95,7 @@ const TagName = decorative ? "span" : "a";
   {
     style == "tertiary" &&
       <svg class="will-change-transform	group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none animate-ease-out w-6 h-6 fill-current" aria-hidden="true" focusable="false">
-        <use xlink:href=`${import.meta.env.BASE_URL}/icons/icon-sprite.svg#icon-chevron-right`></use>
+        <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-chevron-right`></use>
       </svg>
   }
 </TagName>

@@ -33,24 +33,25 @@ if (Astro.url.pathname.includes("/blog/")){
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.url);
 const { lang } = Astro.params;
-const { title, description, overrideCanonical, image = `${import.meta.env.BASE_URL}/share-image.jpg` } = Astro.props;
+const { title, description, overrideCanonical, image = `${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/share-image.jpg` } = Astro.props;
 ---
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href=`${import.meta.env.BASE_URL}/favicon.ico` />
-<link rel="mask-icon" href=`${import.meta.env.BASE_URL}/safari-pinned-tab.svg`>
-<link rel="apple-touch-icon" sizes="180x180" href=`${import.meta.env.BASE_URL}/apple-touch-icon.png`>
-<link rel="icon" type="image/png" sizes="32x32" href=`${import.meta.env.BASE_URL}/favicon-32x32.png`>
-<link rel="icon" type="image/png" sizes="16x16" href=`${import.meta.env.BASE_URL}/favicon-16x16.png`>
+<link rel="icon" type="image/svg+xml" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/favicon.ico` />
+<link rel="mask-icon" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/safari-pinned-tab.svg`>
+<link rel="apple-touch-icon" sizes="180x180" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/apple-touch-icon.png`>
+<link rel="icon" type="image/png" sizes="32x32" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/favicon-32x32.png`>
+<link rel="icon" type="image/png" sizes="16x16" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/favicon-16x16.png`>
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
-<link rel="preload" href=`${import.meta.env.BASE_URL}/fonts/Lexend-Light.woff2` as="font" type="font/woff2" crossorigin>
-<link rel="preload" href=`${import.meta.env.BASE_URL}/fonts/Lexend-Regular.woff2` as="font" type="font/woff2" crossorigin>
-<link rel="preload" href=`${import.meta.env.BASE_URL}/fonts/Lexend-Bold.woff2` as="font" type="font/woff2" crossorigin>
-<link rel="preload" href=`${import.meta.env.BASE_URL}/fonts/ContaneMediumRegular.woff2` as="font" type="font/woff2" crossorigin />
-<link rel="preload" href=`${import.meta.env.BASE_URL}/fonts/ContaneRegular.woff2` as="font" type="font/woff2" crossorigin />
+<!--Font preloads -->
+<link rel="preload" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/Lexend-Light.woff2` as="font" type="font/woff2" crossorigin>
+<link rel="preload" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/Lexend-Regular.woff2` as="font" type="font/woff2" crossorigin>
+<link rel="preload" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/Lexend-Bold.woff2` as="font" type="font/woff2" crossorigin>
+<link rel="preload" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/ContaneMediumRegular.woff2` as="font" type="font/woff2" crossorigin />
+<link rel="preload" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/ContaneRegular.woff2` as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/fonts.css`>
 
 <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
 <link href="https://www.googletagmanager.com/gtag/js?id=GTM-K53M4ZGH" rel="preload" as="script">
@@ -61,11 +62,11 @@ const { title, description, overrideCanonical, image = `${import.meta.env.BASE_U
 		<link rel="alternate" hreflang={getPostLangAndSlug(post).lang} href={Astro.site + post.slug} /> 
 	))
 	:
-	<link rel="alternate" hreflang="en" href={Astro.url.toString().replace(import.meta.env.BASE_URL+"/"+lang+"/",`${import.meta.env.BASE_URL}/en/`)} /> 
-	<link rel="alternate" hreflang="nl" href={Astro.url.toString().replace(import.meta.env.BASE_URL+"/"+lang+"/",`${import.meta.env.BASE_URL}/nl/`)} /> 
-	<link rel="alternate" hreflang="fr" href={Astro.url.toString().replace(import.meta.env.BASE_URL+"/"+lang+"/",`${import.meta.env.BASE_URL}/fr/`)} /> 
+	<link rel="alternate" hreflang="en" href={Astro.url.toString().replace(import.meta.env.PUBLIC_ASTRO_BASE_PATH+"/"+lang+"/",`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/en/`)} /> 
+	<link rel="alternate" hreflang="nl" href={Astro.url.toString().replace(import.meta.env.PUBLIC_ASTRO_BASE_PATH+"/"+lang+"/",`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/nl/`)} /> 
+	<link rel="alternate" hreflang="fr" href={Astro.url.toString().replace(import.meta.env.PUBLIC_ASTRO_BASE_PATH+"/"+lang+"/",`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fr/`)} /> 
 }
-<link rel="canonical" href={overrideCanonical ? (import.meta.env.BASE_URL + overrideCanonical) : canonicalURL} />
+<link rel="canonical" href={overrideCanonical ? (import.meta.env.PUBLIC_ASTRO_BASE_PATH + overrideCanonical) : canonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

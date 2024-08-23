@@ -1,29 +1,37 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
+import { parseHref } from "src/helpers";
 
-interface Props extends HTMLAttributes<'a'> {
-  hoverColor?: "yellow" | "orange",
-  onWhite?: boolean,
-  textLength?: number,
+interface Props extends HTMLAttributes<"a"> {
+  hoverColor?: "yellow" | "orange";
+  onWhite?: boolean;
+  textLength?: number;
 }
 
-const { 
-    href, 
-    class: className, 
-    hoverColor = "orange",
-    onWhite,
-    textLength = 12,
-    ...props 
+const {
+  href,
+  class: className,
+  hoverColor = "orange",
+  onWhite,
+  textLength = 12,
+  ...props
 } = Astro.props;
 
 ---
-<a href={import.meta.env.BASE_URL+href} class:list={[
-    "underline decoration-1 underline-offset-2 decoration-white bg-clip-text bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] motion-reduce:transition-none  text-transparent focus-visible:outline-none focus-visible:rounded focus-visible:px-2 focus-visible:ring-2",
-    hoverColor == "orange" && "transition-all bg-gradient-to-r from-secondary from-0% via-secondary via-50% hover:decoration-secondary focus-visible:ring-secondary ",
-    hoverColor == "yellow" && "transition-all bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% hover:decoration-tertiary focus-visible:ring-tertiary",
-    onWhite ? "to-black to-50%" : "to-white to-50%"
-    , className ]} 
-    style={`transition-duration: ${textLength * 20}ms`}
-    {...props}>
-    <slot />
+
+<a
+  href={parseHref(href.toString())}
+  class:list={[
+    "bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 hover:bg-[0%_100%] focus-visible:rounded focus-visible:px-2 focus-visible:outline-none focus-visible:ring-2 motion-reduce:transition-none",
+    hoverColor == "orange" &&
+      "bg-gradient-to-r from-secondary from-0% via-secondary via-50% transition-all hover:decoration-secondary focus-visible:ring-secondary",
+    hoverColor == "yellow" &&
+      "bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% transition-all hover:decoration-tertiary focus-visible:ring-tertiary",
+    onWhite ? "to-black to-50%" : "to-white to-50%",
+    className,
+  ]}
+  style={`transition-duration: ${textLength * 20}ms`}
+  {...props}
+>
+  <slot />
 </a>
