@@ -53,7 +53,7 @@ isPreview.set(true);
           <Customers headline={servicePage.customerReferencesText}>
             {servicePage.customerReferences?.map((customer) => (
               <>
-                {customer.logo?.default?.asset && (
+                {customer?.logo?.default?.asset && (
                   <img
                     src={imageBuilder
                       .image(customer.logo?.default?.asset)

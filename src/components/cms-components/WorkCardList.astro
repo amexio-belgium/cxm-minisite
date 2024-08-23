@@ -1,9 +1,9 @@
 ---
-import {WorkCardList} from "../../sanity/sanity.types";
+import type { WorkCardListReferenced } from "@sanity/custom.sanity.types";
 import CasePreview from "../uielements/CasePreview.astro";
 
 interface Props {
-  workCardList: WorkCardList;
+  workCardList: WorkCardListReferenced;
 }
 
 const { workCardList } = Astro.props;

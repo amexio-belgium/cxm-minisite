@@ -13,6 +13,7 @@ import TechnologyIcon from "../../../../components/uielements/TechnologyIcon.ast
 import SanityImg from "@otterstack/sanity-img-astro";
 import {getHrefFromLinkObject} from "../../../../lib/sanityHelpers";
 import CasePreview from "../../../../components/uielements/CasePreview.astro";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export const prerender = false;
 const { lang, slug } = Astro.params;
@@ -58,7 +59,7 @@ isPreview.set(true);
                 {customer?.logo?.default?.asset && (
                   <img
                     src={imageBuilder
-                      .image(customer.logo?.default?.asset)
+                      .image(customer?.logo?.default?.asset)
                       .height(80)
                       .url()}
                     alt={
@@ -84,7 +85,7 @@ isPreview.set(true);
             workPage.technologies?.map((technology) => (
             <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, lang, true) : undefined}>
                 <SanityImg
-                        src={technology?.logo?.default}
+                        src={technology?.logo?.default as SanityImageSource}
                         alt={technology?.logo?.default?.asset?.altTexts?.[workPage.language || "en"] || ""}
                         sizes="200px"
                         class="h-[unset] w-auto max-w-[unset] transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
@@ -96,7 +97,7 @@ isPreview.set(true);
         }
     </ProjectMetadata>
   <SanityComponentsRenderer content={workPage?.content} />
-  {workPage?.relatedCases?.length > 1 && (
+  {workPage?.relatedCases && workPage?.relatedCases?.length > 1 && (
     <div
         class="relative xl:mb-40 flex flex-col py-20 xl:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 xl:before:right-0 before:h-full before:w-[3000px] xl:before:rounded-xl">
       <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8">

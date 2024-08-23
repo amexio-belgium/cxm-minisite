@@ -7,4 +7,4 @@ interface Props extends PortableProps<Block> {}
 const props: Props = Astro.props;
 
 ---
-<YouTube class="w-screen" id={(props.node as { url: string }).url} />
+<YouTube class="w-screen" id={(props.node as unknown as { url: string }).url} />

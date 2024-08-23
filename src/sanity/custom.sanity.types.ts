@@ -3,6 +3,7 @@ import type {
     Callout,
     CardGrid,
     CollaborationModel,
+    CollabTab,
     Cta,
     Faq,
     Geopoint,
@@ -18,6 +19,7 @@ import type {
     SanityImageHotspot,
     ServicePillar,
     ServicesCardList,
+    SkosConcept,
     Tabs,
     Technology,
     WorkCardList,
@@ -355,7 +357,7 @@ export interface ContentPageWithReferences {
     | LongFormTextReferenced
     | HighlightReferenced
     | TabsReferenced
-    | WorkCardList
+    | WorkCardListReferenced
   >;
   metadata?: Metadata;
   _updatedAt?: string;
@@ -376,7 +378,7 @@ export interface ServiceWithReferences {
     | LongFormTextReferenced
     | HighlightReferenced
     | TabsReferenced
-    | WorkCardList
+    | WorkCardListReferenced
   >;
   metadata?: Metadata;
   image?: i18nImage;
@@ -384,7 +386,7 @@ export interface ServiceWithReferences {
   _id: string;
   intro?: Intro;
   servicePillar?: ServicePillar;
-  customerReferences: CustomerReferenced;
+  customerReferences: CustomerReferenced[];
   faqs: FaqsReferenced;
 }
 
@@ -399,7 +401,7 @@ export interface WorkWithReferences {
         | LongFormTextReferenced
         | HighlightReferenced
         | TabsReferenced
-        | WorkCardList
+        | WorkCardListReferenced
     >;
     logo?: {
         default: i18nImage | null;
@@ -416,11 +418,11 @@ export interface WorkWithReferences {
     collaborationModel?: CollaborationModel;
     customerReferences?: CustomerReferenced[];
     services?: ServiceWithReferences[];
-    technologies?: Technology[];
-    relatedCases?: ReferenceCase[];
+    technologies?: TechnologyReferenced[];
+    relatedCases?: ReferenceCaseReferenced[];
 }
 
-export type CustomerReferenced = Array<{
+export type CustomerReferenced = {
   _id: string;
   _type: "customer";
   _createdAt: string;
@@ -433,10 +435,44 @@ export type CustomerReferenced = Array<{
     light: i18nImage | null;
     dark: i18nImage | null;
   } | null;
-}> | null;
+} | null;
 
 export type FaqsReferenced = {
   _type: "faq";
   title?: string;
   questions?: AnswerQuestion[];
 };
+
+export type TechnologyReferenced = Omit<Technology, 'logo' | 'partner'> & {
+  logo?: {
+    default: i18nImage | null;
+    light: i18nImage | null;
+    dark: i18nImage | null;
+  } | null;
+  partner: {link: Link};
+}
+
+export type ReferenceCaseReferenced = Omit<ReferenceCase, "introImage" | "metadata" | "collaborationModel" | "technologies" | "services"> & {
+  introImage?: i18nImage;
+  metadata?: MetadataReferenced;
+  collaborationModel?: CollaborationModelReferenced;
+  technologies?: TechnologyReferenced[];
+  services?: ServiceWithReferences[];
+}
+
+export type MetadataReferenced = Omit<Metadata, "image"> & {
+  image: i18nImage | null;
+}
+
+export type CollaborationModelReferenced = Omit<CollaborationModel, "collaborationTabs"> & {
+  collaborationTabs: CollabTabReferenced[];
+}
+
+export type CollabTabReferenced = Omit<CollabTab, "concept"> & {
+  concept: SkosConcept;
+}
+
+export type WorkCardListReferenced = Omit<WorkCardList, "referenceCases"> & {
+  referenceCases: ReferenceCaseReferenced[];
+}
+
