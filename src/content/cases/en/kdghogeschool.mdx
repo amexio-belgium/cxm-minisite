@@ -1,11 +1,17 @@
 ---
-title: 'Karel de Grote Hogeschool Antwerpen	'
-description: 'Lorem ipsum dolor sit amet'
+client: 'KdG'
+title: 'Drupal multisite platform'
+description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet'
 draft: false
 heroImage: '/src/assets/images/leuvenoffice_2.jpg'
 logo: '/src/assets/logos/kdghogeschool_logo.png'
 tags: 'finance, media, government, retail, manufacturing'
+duration: "12 weeks"
+collaboration: 'test'
+services: 'Development'
+technologies: 'Vuejs, aem'
 ---
+
 import HeroHeader from '@components/uicomposition/HeroHeader.astro';
 import ProjectMetadata from '@components/uicomposition/ProjectMetadata.astro'
 import Customers from "@components/uicomposition/Customers.astro"
@@ -14,13 +20,35 @@ import Quote from "@components/uicomposition/Quote.astro"
 import TilesContainer from "@components/uicomposition/TilesContainer.astro"
 import SmallTile from "@components/uielements/SmallTile.astro"
 import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
+import TechnologyIcon from '@components/uielements/TechnologyIcon.astro';
 
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
-
+import analytics from '@assets/logos/technologies/adobe_analytics_white.png';
+import target from '@assets/logos/technologies/adobe_target_white.png';
+import aem from '@assets/logos/technologies/aem_white.png';
+import angular from '@assets/logos/technologies/angular.png';
+import astro from '@assets/logos/technologies/astro.png';
+import contentsquare from '@assets/logos/technologies/contentsquare.png';
+import drupal from '@assets/logos/technologies/drupal.png';
+import kontentai from '@assets/logos/technologies/kontentai_white.png';
+import google from '@assets/logos/technologies/googlemarketingplatform.png';
+import nextjs from '@assets/logos/technologies/nextjs_white.png';
+import react from '@assets/logos/technologies/react_white.png'; 
+import vue from '@assets/logos/technologies/vue_white.png';
+import sanity from '@assets/logos/technologies/sanity.png';
+import analytics_square from '@assets/logos/technologies/adobe_analytics_square.png';
+import target_square from '@assets/logos/technologies/adobe_target_square.png';
+import aem_square from '@assets/logos/technologies/aem_square.png';
+import angular_square from '@assets/logos/technologies/angular_square.png';
+import astro_square from '@assets/logos/technologies/astro_square.png';
+import contentsquare_square from '@assets/logos/technologies/contentsquare_square.png';
+import drupal_square from '@assets/logos/technologies/drupal_square.png';
+import kontentai_square from '@assets/logos/technologies/kontentai_square.png';
+import nextjs_square from '@assets/logos/technologies/nextjs_square_white.png';
+import react_square from '@assets/logos/technologies/react_square.png'; 
+import vue_square from '@assets/logos/technologies/vue_square.png';
+import sanity_square from '@assets/logos/technologies/sanity_square.png';
 
 <HeroHeader 
     headline={frontmatter.title}
@@ -34,44 +62,175 @@ import mediafin from '@assets/logos/mediafin_logo.png';
     collaboration={frontmatter.collaboration}
     services={frontmatter.services}
     technologies={frontmatter.technologies}>
-    <Image src={kbc} alt="" class="h-10 w-auto"/>
-    <Image src={telenet} alt="" class="h-10 w-auto"/>
-    <Image src={mediafin} alt="" class="h-10 w-auto"/>
-    <Image src={kbc} alt="" class="h-10 w-auto"/>
-    <Image src={telenet} alt="" class="h-10 w-auto"/>
-    <Image src={mediafin} alt="" class="h-10 w-auto"/>
+    <TechnologyIcon link="https://business.adobe.com/products/analytics/adobe-analytics.html">
+        <Image src={analytics_square} alt="" />
+        Adobe analytics
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={target_square} alt="" />
+        Adobe target
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={aem_square} alt="" />
+        Adobe Experience Manager
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={angular_square} alt="" />
+        Angular
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={astro_square} alt="" />
+        Astro
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={contentsquare_square} alt="" />
+        Contentsquare
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={drupal_square} alt="" />
+        Drupal
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={kontentai_square} alt="" />
+        Kontent.ai
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={google} alt="" />
+        Google Marketing Platform
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={nextjs_square} alt="" />
+        Next.js
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={react_square} alt="" />
+        React
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={vue_square} alt="" />
+        Vue
+    </TechnologyIcon>
+    <TechnologyIcon>
+        <Image src={sanity_square} alt="" />
+        Sanity.io
+    </TechnologyIcon>
 </ProjectMetadata>
 
+import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
+import LayoutSubsection  from "@components/uicomposition/LayoutSubsection.astro"
+import ContentHeadline  from "@components/uielements/ContentHeadline.astro"
+import ContentText  from "@components/uielements/ContentText.astro"
+import Youtube from '@components/uielements/Youtube.astro'
+
+<Youtube 
+    title="Tech Talk | Deceuninck | AmeXio | Building the foundation for B2B2C lead generation"
+    videoId="QhYPBIZF_Ms"
+    class="mx-auto mb-8" />
+
+<LayoutSection>
+    <ContentHeadline headlineTag="h2">The Challenge</ContentHeadline>
+    <ContentHeadline>The Challenge</ContentHeadline>
+    <ContentHeadline  headlineTag="h4">The Challenge</ContentHeadline>
+
+    <LayoutSubsection
+        imageSrc='/src/assets/images/explainer.jpg'
+        imageAlt='Subsection Alt'
+        
+    >
+        <ContentHeadline>The challenge</ContentHeadline>
+        <ContentText>
+        <p>AmeXio was tapped to do the implementation of the platform with Adobe Experience Manager in close 
+        collaboration with Internet Architects, which was responsible for the first steps of the project – concept, 
+        functional analysis and graphic design. Adobe Experience Manager is very suited for the tasks at hand, with 
+        functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges 
+        of this project was the large amount of websites that needed to be rolled-out in a relatively short time. By 
+        the time the project was finished, 18 websites needed to be built.
+        The new websites were aimed at the general public, so there were extensive guidelines concerning responsiveness and 
+        accessibility which needed to be followed. For example: according to Belgian government policies, the website needed to 
+        adhere to Anysurfer guidelines. Some of the websites also required more than one language version, something which is easily 
+        implementable in Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to 
+        tourists and offers information in English, French, German and of course Dutch.
+        On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum would add a news item 
+        about an upcoming event, it should be possible to display the item on the main website of the Province, for instance. 
+        AmeXio was also asked not only to build the platform and get 18 sites operational, but also to provide a toolkit so the 
+        IT department of the Province itself could easily create further sites themselves in the future, if necessary. In the end the 
+        platform would be used by about 80 different departments of the Province, all of which would be managing some pages on specific sites. 
+        This highlights the complexity of underlying projects like this that on the surface seem simple, but can become complex because of the
+        great amount of users and different usages.</p>
+        </ContentText>
+
+    </LayoutSubsection>
+    <LayoutSubsection
+        imageSrc='/src/assets/images/tab.jpg'
+        imageAlt='Subsection Alt'
+        alignment='row'
+    >
+        <ContentHeadline>test</ContentHeadline>
+        <ContentText>Adobe Experience Manager is very suited for the tasks at hand, with 
+        functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges of 
+        this project was the large amount of websites that needed to be rolled-out in a relatively short time. 
+        By the time the project was finished, 18 websites needed to be built.
+        The new websites were aimed at the general public, so there
+        were extensive guidelines concerning responsiveness and accessibility which needed to be followed.
+        For example: according to Belgian government policies, the website needed to adhere to Anysurfer guidelines. 
+        Some of the websites also required more than one language version, something which is easily implementable in 
+        Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to 
+        tourists and offers information in English, French, German and of course Dutch.
+        On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum     </ContentText>
+    </LayoutSubsection>
+    <LayoutSubsection>
+        <ContentHeadline>test</ContentHeadline>
+        <ContentText>Adobe Experience Manager is very suited for the tasks at hand, with 
+        functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges of 
+        this project was the large amount of websites that needed to be rolled-out in a relatively short time. 
+        By the time the project was finished, 18 websites needed to be built.
+        The new websites were aimed at the general public, so there
+        were extensive guidelines concerning responsiveness and accessibility which needed to be followed.
+        For example: according to Belgian government policies, the website needed to adhere to Anysurfer guidelines. 
+        Some of the websites also required more than one language version, something which is easily implementable in 
+        Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to 
+        tourists and offers information in English, French, German and of course Dutch.
+        On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum     </ContentText>
+    </LayoutSubsection>
+</LayoutSection>
+
+<LayoutSection backgroundColor='dark'>
+    <ContentHeadline>test</ContentHeadline>
+    <ContentText>Adobe Experience Manager is very suited for the tasks at hand, with functionalities such as in-line editing and good asset management. Without a doubt one of the main challenges of this project was the large amount of websites that needed to be rolled-out in a relatively short time. By the time the project was finished, 18 websites needed to be built.
+    The new websites were aimed at the general public, so there were extensive guidelines concerning responsiveness and accessibility which needed to be followed. For example: according to Belgian government policies, the website needed to adhere to Anysurfer guidelines. Some of the websites also required more than one language version, something which is easily implementable in Adobe Experience Manager. This is the case, for example, for the Photography Museum website, which appeals to tourists and offers information in English, French, German and of course Dutch.
+    On top of that, it was important that sharing content between sites would be easy. If the Fashion Museum </ContentText>
+</LayoutSection>
+
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+    headline="Why work with us?"
+    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
+        Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
+    <Image src={explainer} alt="" width={512} height={512}/>
 </TeaserWithImage>
 
 <TeaserWithImage 
-    fullWidth
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-    
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+    align="left"
+    class="md:mb-0"
+    headline="Why work with us?"
+    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
+        Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
+    <Image src={explainer} alt="" width={512} height={512}/>
 </TeaserWithImage>
 
 <TilesContainer 
     headline="Approach and techniques"
     description="Fusce dapibus, <b>tellus ac cursus commodo, tortor mauris</b> condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+        headline="Cum Solis"
+        description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+        headline="Nulla Vitae"
+        description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+        headline="Aenean eu leo quam"
+        description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
     </SmallTile>
 </TilesContainer>
 
@@ -80,8 +239,10 @@ import mediafin from '@assets/logos/mediafin_logo.png';
     name='Johan Condijts'
     jobtitle="editor"
     profileImage='/src/assets/people/placeholder_small.png'
-	class="mt-40"
     /> 
 
-this needs to be the case teaser
-<InsightsTeaser />
+<InsightsTeaser 
+    collection='cases'
+    tag='government'
+    current='Euroclear'
+/>
