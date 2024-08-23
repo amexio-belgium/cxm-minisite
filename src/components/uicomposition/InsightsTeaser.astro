@@ -63,7 +63,7 @@ const t = useTranslations(lang);
           <div class="text-black relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
             {
                 posts.map((post) => (
-                    <BlogPreview blogData={post.data} link={`/${lang}/blog/${getPostLangAndSlug(post).slug}/`} />
+                    <BlogPreview blogData={post.data} link={`/${lang}/insights/${getPostLangAndSlug(post).slug}/`} />
                 ))
             }
             </div>
@@ -71,7 +71,7 @@ const t = useTranslations(lang);
         <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8">
             {
                 posts.map((post) => (
-                    <CasePreview small caseData={post.data} link={`/cases/${getPostLangAndSlug(post).slug}/`} />
+                    <CasePreview small caseData={post.data} link={`/work/${getPostLangAndSlug(post).slug}/`} />
                 ))
             }
         </div>

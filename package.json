@@ -6,7 +6,7 @@
     "prebuild": "node src/scripts/fontscript.js",
     "dev": "npm run prebuild && astro dev",
     "start": "npm run prebuild && astro dev",
-    "build": "npm run prebuild && astro check && astro build",
+    "build": "astro check && astro build",
     "preview": "npm run prebuild && astro preview",
     "astro": "astro"
   },

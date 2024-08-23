@@ -17,11 +17,11 @@ function getPostLangAndSlug(post) {
 
 let urls
 
-if (Astro.url.pathname.includes("/blog/")){
+if (Astro.url.pathname.includes("/insights/")){
 	urls = (await getCollection('blog', (post) => {
 			return  Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
 		}))
-} else if (Astro.url.pathname.includes("/cases/")){
+} else if (Astro.url.pathname.includes("/work/")){
 	urls = (await getCollection('cases', (post) => {
 			return Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
 		}))

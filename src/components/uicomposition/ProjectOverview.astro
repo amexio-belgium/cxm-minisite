@@ -11,7 +11,7 @@ const t = useTranslations(lang, 'home');
         <h2 class="mb-2 font-serif font-bold text-3xl">
             {t('projectoverview.headline')}
         </h2>
-        <Button link="/cases" class="" style="secondary" color="light">
+        <Button link=`/${lang}/work` class="" style="secondary" color="light">
             {t('projectoverview.button')}
         </Button>
     </div>
@@ -22,14 +22,14 @@ const t = useTranslations(lang, 'home');
             name="OECD" 
             content={t('project3.description')}
             buttonText={t('project2.button')} 
-            link="cases/oecd/"/>
+            link=`/${lang}/work/oecd/`/>
         <ProjectCard 
             projectImage='/src/assets/projects/kbc-small.jpg'
             smallImage='/src/assets/logos/kbc_logo_square_white.png' 
             name="KBC" 
             content={t('project1.description')}
             buttonText={t('project1.button')} 
-            link="cases/kbc/"/>
+            link=`/${lang}/work/kbc/`/>
 
         <ProjectCard 
             projectImage='/src/assets/projects/mediafin-small.jpg'
@@ -37,6 +37,6 @@ const t = useTranslations(lang, 'home');
             name="Mediafin" 
             content={t('project2.description')} 
             buttonText={t('project2.button')}  
-            link="cases/mediafin/"/>
+            link=`/${lang}/work/mediafin/`/>
     </div>
 </div>
