@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 let parts = [
   {
     text: t('breadcrumb.home'),
-    href: '/' + lang + '/',
+    href: `/${lang}/` 
   }
 ];
 
@@ -33,7 +33,7 @@ paths.forEach((text, i) => {
                         class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-tertiary text-xs capitalize outline-none md:py-2 bg-clip-text duration-300 bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] transition-all motion-reduce:transition-none bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% to-white to-50% text-transparent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
                         {text}
                       </a> 
-                      <svg class="w-6 h-6 fill-white" aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-chevron-right"></use></svg>
+                      <svg class="w-6 h-6 fill-white" aria-hidden="true" focusable="false"><use xlink:href=`${import.meta.env.BASE_URL}/icons/icon-sprite.svg#icon-chevron-right`></use></svg>
                       :
                       <span {...attrs} aria-current={(href === pathname) && "page"}
                       class="text-xs capitalize outline-none md:py-2">
