@@ -3,21 +3,20 @@ import Base from "@layouts/Base.astro";
 import { i18nParams } from "../i18n/consts";
 import { useTranslations } from "../i18n/utils";
 import Button from "@components/uielements/Button.astro";
+import { getLocale } from "i18n:astro";
 
 export function getStaticPaths() {
   return i18nParams;
 }
-import { getLangFromUrl } from "../i18n/utils";
 import { siteConfigQuery } from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-const lang = getLangFromUrl(Astro.url);
 
-const t = useTranslations(lang);
+const t = useTranslations(getLocale());
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang!.toLowerCase() },
+  params: { language: getLocale().toLowerCase() },
 });
 ---
 
@@ -42,8 +41,8 @@ const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
           {t("404.text")}
         </p>
         <Button class="mt-4 inline-block" link="/" style="primary" color="dark"
-          >{t("404.button")}</Button
-        >
+          >{t("404.button")}
+        </Button>
       </div>
     </div>
   </section>

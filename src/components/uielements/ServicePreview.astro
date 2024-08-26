@@ -6,8 +6,7 @@ import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
 import { isPreview } from "src/stores/global-store";
-
-const { lang } = Astro.params;
+import { getLocale } from "i18n:astro";
 
 interface Props {
   service: ServiceWithReferences;
@@ -15,7 +14,7 @@ interface Props {
 
 const { service } = Astro.props;
 
-const t = useTranslations(lang, "services");
+const t = useTranslations(getLocale(), "services");
 
 const preview = isPreview.get();
 ---
@@ -35,7 +34,7 @@ const preview = isPreview.get();
           )}
         </div>
         <Button
-          link={`${preview ? "/preview" : ""}/${service.language}/services/${service.metadata?.slug?.current}`}
+          link={`/${getLocale()}/${preview ? "preview/" : ""}services/${service.metadata?.slug?.current}`}
           longText
           style="primary"
           size="sm"
@@ -49,7 +48,7 @@ const preview = isPreview.get();
         {service.image?.asset?._id && (
           <SanityImg
             src={service.image?.asset?._id}
-            alt={service.image?.asset?.altTexts?.[lang || "en"]}
+            alt={service.image?.asset?.altTexts?.[getLocale()]}
             widths={[400, 600, 790]}
             sizes="(max-width: 790px) 100vw, 790px"
             class="left-0 top-0 w-full min-w-full max-w-[unset] shrink-0 transition-transform duration-300 ease-in-out motion-safe:group-hover/service:scale-110 md:absolute md:h-full md:w-auto"

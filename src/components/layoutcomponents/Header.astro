@@ -5,15 +5,16 @@ import HeaderLink from "../uielements/HeaderLink.astro";
 import SkipLink from "../uielements/Skiplink.astro";
 import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
 import type { LinkObjectReferenced } from "@sanity/custom.sanity.types";
+import { getLocale } from "i18n:astro";
 
 interface Props {
   navigation: NavigationQueryResult;
 }
-const language = siteLanguage.get();
+
 const { navigation } = Astro.props;
-const t = useTranslations(language);
+const t = useTranslations(getLocale());
 const preview = isPreview.get();
 ---
 
@@ -26,7 +27,7 @@ const preview = isPreview.get();
       class="flex h-full w-screen max-w-[1304px] flex-wrap items-center justify-between px-6 sm:px-8 md:px-6"
     >
       <a
-        href={`${preview ? "/preview" : ""}/${language}/`}
+        href={`/${getLocale()}${preview ? "/preview" : ""}`}
         class="flex justify-center text-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
       >
         <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
@@ -55,7 +56,7 @@ const preview = isPreview.get();
             class="flex h-full w-screen flex-wrap items-center justify-between px-6 sm:px-8"
           >
             <a
-              href={`/${language}/`}
+              href={`${preview ? "/preview" : ""}/${getLocale()}/`}
               class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
             >
               <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
@@ -88,7 +89,7 @@ const preview = isPreview.get();
                 <HeaderLink
                   href={getHrefFromLinkObject(
                     link.linkObject as LinkObjectReferenced,
-                    language,
+                    getLocale(),
                     preview,
                   )}
                 >

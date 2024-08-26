@@ -2,24 +2,20 @@
 import { useTranslations } from "src/i18n/utils";
 import Link from "@components/uielements/Link.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
-import type {
-  BlogHighlightReferenced,
-  BlogPostWithReferences,
-} from "@sanity/custom.sanity.types";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import type { BlogHighlightReferenced } from "@sanity/custom.sanity.types";
+import { isPreview } from "src/stores/global-store";
 import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
 import { stegaClean } from "@sanity/client/stega";
-
+import { getLocale } from "i18n:astro";
 interface Props {
   blogPost: BlogHighlightReferenced;
 }
 
 const blogPost = Astro.props.blogPost.blogPost;
-const lang = siteLanguage.get();
-const preview = isPreview.get();
-const t = useTranslations(lang, "work");
+
+const t = useTranslations(getLocale(), "work");
 ---
 
 {
@@ -36,7 +32,7 @@ const t = useTranslations(lang, "work");
               .url()}
             class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt={blogPost.featuredImage?.asset.altTexts?.[lang]}
+            alt={blogPost.featuredImage?.asset.altTexts?.[getLocale()]}
             width={400}
             height={400}
           />
@@ -47,7 +43,7 @@ const t = useTranslations(lang, "work");
           <h2 class="mb-2 font-serif text-lg [&>mark]:text-black">
             <Link
               class="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
-              href={`${isPreview ? "/preview" : ""}/${lang}/blog/${blogPost.metadata?.slug?.current}`}
+              href={`/${getLocale()}/${isPreview.get() ? "preview/" : ""}/blog/${blogPost.metadata?.slug?.current}`}
               textLength={stegaClean(blogPost.intro?.title)?.length}
               hoverColor="yellow"
             >

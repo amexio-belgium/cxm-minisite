@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true,
+    "struct": true,
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],

@@ -1,4 +1,5 @@
 import type { Link } from "@sanity/sanity.types";
+import { getLocale } from "i18n:astro";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 
 export const getHrefFromLinkObject = (
@@ -6,14 +7,14 @@ export const getHrefFromLinkObject = (
   language: string,
   preview: boolean,
 ) => {
-  let href = preview ? "/preview/" : "";
+  let href = preview ? `/${getLocale()}/preview/` : "";
   if (
     linkObject?.type === "internal" &&
     linkObject.internalLink &&
     (linkObject.internalLink?._type == "contentPage" ||
       linkObject.internalLink._type == "service")
   ) {
-    href = `/preview/${language}/${linkObject.internalLink.metadata?.slug?.current}`;
+    href = `/${language}/${preview ? "preview/" : ""}${linkObject.internalLink.metadata?.slug?.current}`;
   } else if (linkObject?.type === "external") {
     href = linkObject.url || "";
   } else if (linkObject?.type === "email") {

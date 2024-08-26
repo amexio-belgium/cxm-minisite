@@ -1,13 +1,12 @@
 ---
 import Link from "@components/uielements/Link.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
-import { siteLanguage } from "src/stores/global-store";
 import type { BlogPostWithReferences } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
 import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
 import { PortableText } from "astro-portabletext";
-
-const lang = siteLanguage.get();
+import { getLocale } from "i18n:astro";
+import { isPreview } from "src/stores/global-store";
 
 interface Props {
   blogPost: BlogPostWithReferences;
@@ -30,7 +29,7 @@ const { blogPost } = Astro.props;
               .url()}
             class="w-full transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt={blogPost.featuredImage?.asset.altTexts?.[lang]}
+            alt={blogPost.featuredImage?.asset.altTexts?.[getLocale()]}
             width={400}
             height={400}
           />
@@ -54,7 +53,7 @@ const { blogPost } = Astro.props;
             onWhite
             textLength={blogPost.intro?.title?.length}
             class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
-            href={`/${lang}/blog/${blogPost.metadata?.slug?.current}`}
+            href={`/${getLocale()}/${isPreview.get() ? "preview/" : ""}blog/${blogPost.metadata?.slug?.current}`}
           >
             {blogPost.intro?.title}
           </Link>
