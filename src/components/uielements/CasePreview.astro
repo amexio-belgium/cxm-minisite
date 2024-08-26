@@ -3,9 +3,8 @@ import { useTranslations } from "src/i18n/utils";
 import Button from "@components/uielements/Button.astro";
 import SanityImg from "@otterstack/sanity-img-astro";
 import {PortableText} from "astro-portabletext";
-import { siteLanguage } from "src/stores/global-store";
 import type { ReferenceCaseReferenced } from "@sanity/custom.sanity.types";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { isPreview, siteLanguage } from "src/stores/global-store";
 
 const { lang } = Astro.params;
 
@@ -18,6 +17,7 @@ const { caseData, small } = Astro.props;
 
 const t = useTranslations(lang, "work");
 const language = siteLanguage.get();
+const preview = isPreview.get();
 
 ---
 
@@ -57,7 +57,7 @@ const language = siteLanguage.get();
           caseData?.metadata?.image && (
             <SanityImg
               loading="lazy"
-              src={caseData?.metadata?.image?.asset?.url as SanityImageSource}
+              src={caseData?.metadata?.image}
               class="h-12 w-auto shrink-0 sm:h-16 md:h-12 xl:h-16"
               height={60}
               alt={caseData?.metadata?.image?.asset?.altTexts?.[language] || ""}
@@ -74,7 +74,7 @@ const language = siteLanguage.get();
       }
       <ol class="mt-2 list-inside list-disc font-serif text-sm">
         {
-          caseData.duration != null && (
+          caseData.duration && (
             <li class="">
               {t("metadata.duration") + ": " + caseData.duration}
             </li>
@@ -83,21 +83,21 @@ const language = siteLanguage.get();
         {
           caseData.collaborationModel && (
             <li class="">
-              {t("metadata.collaboration") + ": " + caseData.collaborationModel.collaborationTabs.map(tab => tab?.concept?.prefLabel).join(', ')}
+              {t("metadata.collaboration") + ": " + caseData.collaborationModel?.collaborationTabs?.map(tab => tab?.concept?.prefLabel).join(', ')}
             </li>
           )
         }
         {
           caseData.technologies && (
             <li class="">
-              {t("metadata.technologies") + ": " + caseData.technologies.map(technology => technology.name).join(', ')}
+              {t("metadata.technologies") + ": " + caseData.technologies?.map(technology => technology?.name).join(', ')}
             </li>
           )
         }
         {
           caseData.services && (
             <li class="">
-              {t("metadata.services") + ": " + caseData.services.map(service => service.metadata?.title).join(', ')}
+              {t("metadata.services") + ": " + caseData.services?.map(service => service?.metadata?.title).join(', ')}
             </li>
           )
         }
@@ -105,7 +105,7 @@ const language = siteLanguage.get();
     </div>
     <Button
       class="self-end"
-      link={`/preview/en/cases/${caseData?.metadata?.slug?.current}`}
+      link={`${preview ? "/preview" : ""}/${language}/cases/${caseData?.metadata?.slug?.current}`}
       size="sm"
       color="light"
     >

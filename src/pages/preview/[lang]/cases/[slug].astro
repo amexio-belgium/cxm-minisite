@@ -8,11 +8,11 @@ import Customers from "@components/uicomposition/Customers.astro";
 import { isPreview, siteLanguage } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 import type {WorkWithReferences} from "@sanity/custom.sanity.types";
-import ProjectMetadata from "../../../../components/uicomposition/ProjectMetadata.astro";
-import TechnologyIcon from "../../../../components/uielements/TechnologyIcon.astro";
+import ProjectMetadata from "@components/uicomposition/ProjectMetadata.astro";
+import TechnologyIcon from "@components/uielements/TechnologyIcon.astro";
 import SanityImg from "@otterstack/sanity-img-astro";
-import {getHrefFromLinkObject} from "../../../../lib/sanityHelpers";
-import CasePreview from "../../../../components/uielements/CasePreview.astro";
+import {getHrefFromLinkObject} from "@lib/sanityHelpers";
+import CasePreview from '@components/uielements/CasePreview.astro';
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export const prerender = false;
