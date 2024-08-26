@@ -1,5 +1,4 @@
 ---
-import { useTranslations } from "src/i18n/utils";
 import Link from "@components/uielements/Link.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
 import type { BlogHighlightReferenced } from "@sanity/custom.sanity.types";
@@ -14,8 +13,6 @@ interface Props {
 }
 
 const blogPost = Astro.props.blogPost.blogPost;
-
-const t = useTranslations(getLocale(), "work");
 ---
 
 {

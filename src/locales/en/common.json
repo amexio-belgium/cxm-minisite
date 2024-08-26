@@ -1,6 +1,32 @@
 {
-  "testvertaling": "dit is een test",
-  "share": {
-    "twitter": "Check out this great blog from AmeXio!"
-  }
+    "metadata.services": "Services",
+    "footer.srvisit": "Visit us on",
+    "blogslist.loadmore": "Load more",
+    "metadata.headline": "Project metadata",
+    "mainmenu.close": "Close main menu",
+    "footer.headline": "Let's talk",
+    "footer.button": "Get in touch",
+    "footer.subheadline": "Do you have a specific content challenge you want to discuss?",
+    "share.twitter": "Check out this great blog from AmeXio!",
+    "footer.privacy": "Privacy Policy",
+    "mainmenu.open": "Open main menu",
+    "main.skiplink": "Skip to main content",
+    "nav.contact": "Contact",
+    "nav.preview": "Preview",
+    "nav.services": "Services",
+    "breadcrumb.home": "Home",
+    "footer.copyright": "Copyright © 2024 - AmeXio Fuse is part of ",
+    "test2": "second trans",
+    "footer.cookies": "Cookies",
+    "metadata.technologies": "Core technologies",
+    "blogslist.totalviewed": "You've viewed {{viewedItems}} of the {{totalItems}} blogposts",
+    "test.item": "test item",
+    "nav.blog": "Insights",
+    "nav.about": "About",
+    "metadata.collaboration": "Collaborations",
+    "services.discover": "Discover",
+    "youtube.play.prefix": "Play Video",
+    "nav.cases": "Work",
+    "share.message": "Share this on",
+    "metadata.duration": "Duration"
 }

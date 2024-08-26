@@ -1,20 +1,18 @@
 ---
 import type { NavigationQueryResult } from "src/sanity/sanity.types";
-import { useTranslations } from "../../i18n/utils";
 import HeaderLink from "../uielements/HeaderLink.astro";
 import SkipLink from "../uielements/Skiplink.astro";
 import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { isPreview } from "src/stores/global-store";
 import type { LinkObjectReferenced } from "@sanity/custom.sanity.types";
-import { getLocale } from "i18n:astro";
+import { getLocale, t } from "i18n:astro";
 
 interface Props {
   navigation: NavigationQueryResult;
 }
 
 const { navigation } = Astro.props;
-const t = useTranslations(getLocale());
 const preview = isPreview.get();
 ---
 

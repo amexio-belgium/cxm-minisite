@@ -1,20 +1,17 @@
 ---
-import { useTranslations } from "src/i18n/utils";
 import Button from "@components/uielements/Button.astro";
 import { PortableText } from "astro-portabletext";
 import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
 import { isPreview } from "src/stores/global-store";
-import { getLocale } from "i18n:astro";
+import { getLocale, t } from "i18n:astro";
 
 interface Props {
   service: ServiceWithReferences;
 }
 
 const { service } = Astro.props;
-
-const t = useTranslations(getLocale(), "services");
 
 const preview = isPreview.get();
 ---

@@ -1,12 +1,11 @@
 ---
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getLocale, t } from "i18n:astro";
 
 const { pathname } = Astro.url;
 const paths = pathname.split("/").filter((x) => x);
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLocale();
 
-let parts = [
+let parts: { text: string; href: string }[] = [
   {
     text: t("breadcrumb.home"),
     href: "/" + lang + "/",
@@ -16,7 +15,7 @@ let parts = [
 paths.forEach((text, i) => {
   const href = `/${paths.slice(0, i + 1).join("/")}`;
   if (i !== 0) {
-    const translatedText = t("nav." + text.replace(/[-_]/g, " "));
+    const translatedText: string = t("nav." + text.replace(/[-_]/g, " "));
     parts.push({
       text: translatedText || text.replace(/[-_]/g, " "),
       href: href + "/",

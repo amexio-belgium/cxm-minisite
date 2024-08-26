@@ -3,6 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "generate-translations": "node src/scripts/generateTranslations.js",
+    "prebuild": "npm run generate-translations",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -32,6 +34,7 @@
     "@types/react-dom": "^18.3.0",
     "astro": "^4.12.2",
     "astro-portabletext": "^0.10.0",
+    "dotenv": "^16.4.5",
     "groq": "^3.52.2",
     "i18next": "^23.14.0",
     "lite-youtube-embed": "^0.3.2",
@@ -48,6 +51,7 @@
     "@tailwindcss/typography": "^0.5.12",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tsx": "^4.18.0"
   }
 }
