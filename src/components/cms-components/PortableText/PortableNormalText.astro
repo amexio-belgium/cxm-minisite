@@ -41,6 +41,7 @@ const markTags = {
       return <Link
           className="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
           href={href}
+          target={linkMarkDef.blank}
           hoverColor="yellow"
           set:html={openingTags + child.text + closingTags}
         />
