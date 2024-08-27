@@ -55,6 +55,18 @@ const contentQuery = groq`content[] {
       ...,
       defined(asset) => {
         asset->{...}
+      },
+      _type == "textObject" => {
+        ...,
+        richText[]{
+          ...,
+          markDefs[]{
+            ...,
+            defined(internalLink) => {
+              internalLink -> {...}
+            }
+          }
+        }
       }
     }
   },
@@ -89,10 +101,16 @@ const contentQuery = groq`content[] {
     defined(content) => {
       content[]{
         ...,
-          _type == "image" => {
+        _type == "image" => {
           ...,
-            asset->{...}
+          asset->{...}
+        },
+        markDefs[]{
+          ...,
+          defined(internalLink) => {
+            internalLink -> {...}
           }
+        }
       }
     } 
   },
