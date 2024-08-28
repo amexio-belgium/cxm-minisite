@@ -1,57 +1,43 @@
 ---
-import type { ImageMetadata } from "astro";
-
-import { Image } from "astro:assets";
+import SanityImg from "@otterstack/sanity-img-astro";
+import {siteLanguage} from "../../stores/global-store";
+import {defaultComponents} from "../cms-components/PortableText/helper";
+import {PortableText} from "astro-portabletext";
 
 interface Props {
-  quote: string;
-  name: string;
-  jobtitle?: string;
-  profileImage: string;
-  variant?: "flat" | "glass" | "content-glass";
+  testimonial
   class?: string;
 }
+
 const {
-  quote,
-  name,
-  jobtitle,
-  profileImage,
-  variant = "glass",
-  class: className,
+  testimonial,
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/people/{,**/}*.{jpeg,jpg,png,gif}",
-);
-if (!images[profileImage])
-  throw new Error(
-    `"${profileImage}" does not exist in glob: "src/assets/people/{,**/}*.{jpeg,jpg,png,gif}"`,
-  );
+const lang = siteLanguage.get();
+
 const id = "id_" + Math.random().toString(36).slice(2, 11);
+const variant = testimonial.variant ? testimonial.variant : "glass";
 ---
 
 <blockquote
   class:list={[
-    className,
-    variant == "content-glass"
-      ? "not-prose mt-28 first:mt-20 lg:mt-0"
-      : "mb-40",
-    "group/quote mt-20 flex flex-col justify-end gap-8 md:flex-row lg:mt-0 lg:first:mt-0",
+    "mb-40 group/quote mt-20 flex flex-col justify-end gap-8 md:flex-row lg:mt-0 lg:first:mt-0",
   ]}
 >
   {
     variant == "flat" && (
       <div class="flex flex-col items-center justify-center text-white md:w-4/12">
-        <Image
-          loading="lazy"
+        <SanityImg
+          src={testimonial.person?.image?.asset?._id}
+          alt={testimonial.person?.image?.asset?.altTexts?.[lang || "en"] || ""}
           class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
-          src={images[profileImage]()}
-          alt={name}
+          loading="lazy"
+          sizes="(min-width:768px) 50vw, 100vw"
         />
         <footer>
           <cite class="flex flex-col items-center justify-center not-italic">
-            <span class="text-xs" set:html={name} />
-            <span class="text-xxs" set:html={jobtitle} />
+            <span class="text-xs" set:html={testimonial.person?.name} />
+            <span class="text-xxs" set:html={testimonial.person?.jobTitle} />
           </cite>
         </footer>
       </div>
@@ -63,9 +49,6 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
       variant == "flat" && "bg-lightest-blue-500 p-12 text-black lg:w-8/12",
       variant == "glass" &&
         "relative w-full rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 p-4 py-8 pt-40 text-white shadow-sm shadow-blue-200 backdrop-blur-sm sm:p-12 sm:pt-40 lg:w-11/12 lg:pl-40 lg:pt-12",
-      variant == "content-glass" &&
-        "relative w-full rounded-2xl border border-blue bg-gradient-to-r from-blue-600 to-blue-800 p-4 py-8 pt-40 text-white shadow-sm shadow-blue-200 sm:p-12 sm:pt-40 lg:w-full lg:pl-40 lg:pt-12",
-      ,
       id,
     ]}
   >
@@ -77,15 +60,19 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
               <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
             </svg>
           </div>
-          <span class="text-sm font-light" set:html={quote} />
+          <PortableText
+            components={defaultComponents}
+            value={testimonial.textObject?.richText}
+          />
         </>
       ) : (
         <>
-          <Image
-            loading="lazy"
+          <SanityImg
+            src={testimonial.person?.image?.asset?._id}
+            alt={testimonial.person?.image?.asset?.altTexts?.[lang || "en"] || ""}
             class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
-            src={images[profileImage]()}
-            alt={name}
+            loading="lazy"
+            sizes="(min-width:768px) 50vw, 100vw"
           />
           <div class="relative p-4">
             <svg
@@ -97,7 +84,10 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
             >
               <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
             </svg>
-            <span class="text-sm font-light" set:html={quote} />
+            <PortableText
+              components={defaultComponents}
+              value={testimonial.textObject?.richText}
+            />
             <svg
               class="absolute -bottom-0 -right-0 h-4 w-4 rotate-180"
               width="40"
@@ -110,8 +100,8 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
           </div>
           <footer>
             <cite class="flex flex-col pl-4 not-italic text-white sm:pl-4">
-              <span class="text-xs" set:html={name} />
-              <span class="font-serif text-xxs" set:html={jobtitle} />
+              <span class="text-xs" set:html={testimonial.person?.name} />
+              <span class="font-serif text-xxs" set:html={testimonial.person?.jobTitle} />
             </cite>
           </footer>
         </>

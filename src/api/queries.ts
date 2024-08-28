@@ -153,6 +153,15 @@ export const contentPageQuery = groq`*[_type == "contentPage" && language == $la
         }
       }
     },
+    _type == "testimonial" => {
+      person->{
+        ...,
+        image {
+          ...,
+          asset->{...}
+        }
+      }
+    },
     defined(cards) => {
       cards[] {
         ...,
