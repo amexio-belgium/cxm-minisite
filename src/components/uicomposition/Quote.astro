@@ -3,9 +3,10 @@ import SanityImg from "@otterstack/sanity-img-astro";
 import {siteLanguage} from "../../stores/global-store";
 import {defaultComponents} from "../cms-components/PortableText/helper";
 import {PortableText} from "astro-portabletext";
+import {Testimonial} from "../../sanity/sanity.types";
 
 interface Props {
-  testimonial
+  testimonial: Testimonial,
   class?: string;
 }
 
