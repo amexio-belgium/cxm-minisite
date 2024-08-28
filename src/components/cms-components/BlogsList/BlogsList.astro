@@ -83,7 +83,7 @@ const preview = isPreview.get();
                 new Date(blog.publicationDate || blog._createdAt),
               )}
               authorName={blog.author?.name}
-              link={`/${getLocale()}/${preview ? "preview/" : ""}blog/${blog.metadata?.slug?.current}`}
+              link={`/${getLocale()}/${preview ? "preview/" : ""}insights/${blog.metadata?.slug?.current}`}
               introHTML={blog.intro?.intro ? toHTML(blog.intro.intro) : ""}
               topics={JSON.stringify(blog.topic)}
               jobTitle={blog.author?.jobTitle}
@@ -190,7 +190,7 @@ const preview = isPreview.get();
         el.setAttribute("authorName", blog.author?.name || "");
         el.setAttribute(
           "link",
-          `/${lang}/${isPreview ? "preview/" : ""}blog/${blog.metadata?.slug?.current}`,
+          `/${lang}/${isPreview ? "preview/" : ""}insights/${blog.metadata?.slug?.current}`,
         );
         el.setAttribute(
           "introHTML",

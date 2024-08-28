@@ -53,7 +53,7 @@ const { blogPost } = Astro.props;
             onWhite
             textLength={blogPost.intro?.title?.length}
             class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
-            href={`/${getLocale()}/${isPreview.get() ? "preview/" : ""}blog/${blogPost.metadata?.slug?.current}`}
+            href={`/${getLocale()}/${isPreview.get() ? "preview/" : ""}insights/${blogPost.metadata?.slug?.current}`}
           >
             {blogPost.intro?.title}
           </Link>

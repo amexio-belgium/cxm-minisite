@@ -1,23 +1,40 @@
 ---
 import { getLocale, t } from "i18n:astro";
+import { isPreview } from "src/stores/global-store";
 
 const { pathname } = Astro.url;
 const paths = pathname.split("/").filter((x) => x);
 const lang = getLocale();
+const preview = isPreview.get();
+
+const servicesPat = /\/services\/\S+/;
+const casesPat = /\/cases\/\S+/;
+const insightsPat = /\/insights\/\S+/;
 
 let parts: { text: string; href: string }[] = [
   {
     text: t("breadcrumb.home"),
-    href: "/" + lang + "/",
+    href: `/${lang}/${preview ? "preview/" : ""}`,
   },
 ];
 
 paths.forEach((text, i) => {
   const href = `/${paths.slice(0, i + 1).join("/")}`;
   if (i !== 0) {
-    const translatedText: string = t("nav." + text.replace(/[-_]/g, " "));
+    let translatedText: string = "";
+    if (
+      i == paths.length - 1 &&
+      (servicesPat.test(pathname) ||
+        casesPat.test(pathname) ||
+        insightsPat.test(pathname))
+    ) {
+      translatedText = text.replace(/[-_]/g, " ");
+    } else {
+      translatedText = t("nav." + text.replace(/[-_]/g, " "));
+    }
+
     parts.push({
-      text: translatedText || text.replace(/[-_]/g, " "),
+      text: translatedText,
       href: href + "/",
     });
   }
