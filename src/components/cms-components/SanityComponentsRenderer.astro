@@ -10,13 +10,13 @@ import type {
   HighlightReferenced,
   LongFormTextReferenced,
   TabsReferenced,
+  TestimonialReferenced
 } from "@sanity/custom.sanity.types";
 import Callout from "@components/cms-components/Callout.astro";
 import LongFormText from "@components/cms-components/LongFormText.astro";
 import HighlightBlock from "@components/cms-components/HighlightBlock/HighlightBlock.astro";
 import Tabs from "@components/cms-components/Tabs.astro";
 import Quote from "@components/uicomposition/Quote.astro";
-import {Testimonial} from "../../sanity/sanity.types";
 
 interface Props {
   content:
@@ -27,7 +27,7 @@ interface Props {
         | LongFormTextReferenced
         | HighlightReferenced
         | TabsReferenced
-        | Testimonial
+        | TestimonialReferenced
       >
     | undefined;
 }

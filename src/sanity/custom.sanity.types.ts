@@ -11,12 +11,14 @@ import type {
   Link,
   LongFormText,
   Metadata,
+  Person,
   SanityImageAsset,
   SanityImageCrop,
   SanityImageHotspot,
   ServicePillar,
   ServicesCardList,
   Tabs,
+  Testimonial,
   WorkCardList,
   Youtube,
 } from "./sanity.types";
@@ -403,3 +405,11 @@ export type FaqsReferenced = {
   title?: string;
   questions?: AnswerQuestion[];
 };
+
+export type TestimonialReferenced = Omit<Testimonial, 'person'> & {
+  person: PersonReferenced
+}
+
+export type PersonReferenced = Omit<Person, 'image'> & {
+  image: i18nImage
+}

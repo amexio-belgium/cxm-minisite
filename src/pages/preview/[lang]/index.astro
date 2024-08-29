@@ -20,11 +20,11 @@ const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   params: { language: lang!.toLowerCase() },
 });
 
-if (!siteConfig) {
+if (!siteConfig || !siteConfig?.homePage?.slug) {
   return new Response(null, { status: 404 });
 }
 
-const slug = siteConfig.homePage.slug;
+const slug = siteConfig?.homePage?.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
