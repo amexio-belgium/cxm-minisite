@@ -1,10 +1,9 @@
 ---
 import ProjectCard from "../uielements/ProjectCard.astro";
 import Button from "../uielements/Button.astro";
-import { useTranslations } from "../../i18n/utils";
+import {t} from "i18next";
 const { lang } = Astro.params;
 
-const t = useTranslations(lang, "home");
 ---
 
 <div

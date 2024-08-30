@@ -1,7 +1,6 @@
 ---
 import Base from "@layouts/Base.astro";
-import { i18nParams } from "../i18n/consts";
-import { useTranslations } from "../i18n/utils";
+import { i18nParams } from "../locales/consts";
 import Button from "@components/uielements/Button.astro";
 import { getLocale } from "i18n:astro";
 
@@ -11,8 +10,7 @@ export function getStaticPaths() {
 import { siteConfigQuery } from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-
-const t = useTranslations(getLocale());
+import {t} from "i18next";
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,

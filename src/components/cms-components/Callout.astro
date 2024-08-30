@@ -32,7 +32,7 @@ if (callout?.content?.[0]._type == "textObject") {
           src={imageBuilder
             .image(imageObject.asset?._id)
             .url()}
-          alt={imageObject.asset.altTexts[language] || ""}
+          alt={imageObject.asset.altTexts[getLocale()] || ""}
           class="rounded-xl"
         />
       )}

@@ -1,9 +1,8 @@
 ---
-import { useTranslations } from "src/i18n/utils";
 import "../../styles/yt-embed.css";
+import {t} from "i18next";
 
 const { lang } = Astro.params;
-const t = useTranslations(lang);
 
 interface Props {
   videoId: string;

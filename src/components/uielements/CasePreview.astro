@@ -1,10 +1,11 @@
 ---
-import { useTranslations } from "src/i18n/utils";
 import Button from "@components/uielements/Button.astro";
 import SanityImg from "@otterstack/sanity-img-astro";
 import {PortableText} from "astro-portabletext";
 import type { ReferenceCaseReferenced } from "@sanity/custom.sanity.types";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
+import { getLocale } from "i18n:astro";
+import {t} from "i18next";
 
 const { lang } = Astro.params;
 
@@ -15,8 +16,6 @@ interface Props {
 
 const { caseData, small } = Astro.props;
 
-const t = useTranslations(lang, "work");
-const language = siteLanguage.get();
 const preview = isPreview.get();
 
 ---
@@ -32,7 +31,7 @@ const preview = isPreview.get();
         ]}>
       <SanityImg
           src={caseData?.introImage}
-          alt={caseData?.introImage?.asset?.altTexts?.[language] || ""}
+          alt={caseData?.introImage?.asset?.altTexts?.[getLocale()] || ""}
           widths={[400, 600, 790]}
           sizes="(max-width: 790px) 100vw, 790px"
           class:list={["motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full max-w-[unset] h-[unset] w-auto",
@@ -60,7 +59,7 @@ const preview = isPreview.get();
               src={caseData?.metadata?.image}
               class="h-12 w-auto shrink-0 sm:h-16 md:h-12 xl:h-16"
               height={60}
-              alt={caseData?.metadata?.image?.asset?.altTexts?.[language] || ""}
+              alt={caseData?.metadata?.image?.asset?.altTexts?.[getLocale()] || ""}
             />
           )
         }
@@ -105,7 +104,7 @@ const preview = isPreview.get();
     </div>
     <Button
       class="self-end"
-      link={`${preview ? "/preview" : ""}/${language}/cases/${caseData?.metadata?.slug?.current}`}
+      link={`${preview ? "/preview" : ""}/${getLocale()}/cases/${caseData?.metadata?.slug?.current}`}
       size="sm"
       color="light"
     >

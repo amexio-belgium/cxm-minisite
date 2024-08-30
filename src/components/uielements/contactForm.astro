@@ -1,13 +1,11 @@
 ---
-import { useTranslations } from "src/i18n/utils";
+import {t} from "i18next";
 const { lang } = Astro.params;
 import ContactFormStyling from "src/styles/contact-form-styling.astro";
 interface Props {
   headline: string;
 }
 const { headline } = Astro.props;
-
-const t = useTranslations(lang);
 ---
 
 <ContactFormStyling />
