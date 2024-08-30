@@ -11,6 +11,7 @@ import FaqQuestion from "@components/uielements/FaqQuestion.astro";
 import { PortableText } from "astro-portabletext";
 import { isPreview, siteLanguage } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import {defaultComponents} from "../../../../components/cms-components/PortableText/helper";
 
 export const prerender = false;
 const { lang, slug } = Astro.params;
@@ -82,7 +83,7 @@ isPreview.set(true);
           <>
             {question.question && (
               <FaqQuestion headline={question.question} headlineTag="h3">
-                {question.answer && <PortableText value={question.answer} />}
+                {question.answer && <PortableText components={defaultComponents} value={question.answer} />}
               </FaqQuestion>
             )}
           </>

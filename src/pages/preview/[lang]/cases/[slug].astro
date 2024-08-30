@@ -51,7 +51,7 @@ isPreview.set(true);
     backgroundImage={workPage?.image?.asset?._id}
   >
     {
-      workPage.customerReferences &&
+      workPage?.customerReferences &&
         workPage.customerReferences.length > 0 && (
           <Customers headline={workPage.customerReferencesText}>
             {workPage.customerReferences?.map((customer) => (
@@ -77,12 +77,12 @@ isPreview.set(true);
     }
   </HeroHeader>
     <ProjectMetadata
-            duration={workPage.duration}
-            collaboration={workPage.collaborationModel}
-            services={workPage.services}
-            technologies={workPage.technologies}>
+            duration={workPage?.duration}
+            collaboration={workPage?.collaborationModel}
+            services={workPage?.services}
+            technologies={workPage?.technologies}>
         {
-            workPage.technologies?.map((technology) => (
+            workPage?.technologies?.map((technology) => (
             <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, lang, true) : undefined}>
                 <SanityImg
                         src={technology?.logo?.default as SanityImageSource}

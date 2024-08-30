@@ -13,6 +13,7 @@ const {
   hoverColor = "orange",
   onWhite,
   textLength = 12,
+  target = false,
   ...props
 } = Astro.props;
 ---
@@ -29,7 +30,6 @@ const {
     className,
   ]}
   style={`transition-duration: ${textLength * 20}ms`}
+  target={target ? "_blank" : undefined}
   {...props}
->
-  <slot />
-</a>
+><slot /></a>

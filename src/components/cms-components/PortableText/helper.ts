@@ -20,5 +20,5 @@ export const defaultComponents: SomePortableTextComponents = {
     h5: PortableH5,
     h6: PortableH6,
     normal: PortableNormalText,
-  },
+  }
 };
