@@ -7,9 +7,9 @@ const paths = pathname.split("/").filter((x) => x);
 const lang = getLocale();
 const preview = isPreview.get();
 
-const servicesPat = /\/services\/\S+/;
-const casesPat = /\/cases\/\S+/;
-const insightsPat = /\/insights\/\S+/;
+const servicesPath = /\/services\/\S+/;
+const casesPath = /\/cases\/\S+/;
+const insightsPath = /\/insights\/\S+/;
 
 let parts: { text: string; href: string }[] = [
   {
@@ -24,9 +24,9 @@ paths.forEach((text, i) => {
     let translatedText: string = "";
     if (
       i == paths.length - 1 &&
-      (servicesPat.test(pathname) ||
-        casesPat.test(pathname) ||
-        insightsPat.test(pathname))
+      (servicesPath.test(pathname) ||
+        casesPath.test(pathname) ||
+        insightsPath.test(pathname))
     ) {
       translatedText = text.replace(/[-_]/g, " ");
     } else {
