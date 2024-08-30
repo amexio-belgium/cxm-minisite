@@ -5,46 +5,42 @@ import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import { getLocale } from "i18n:astro";
 
 export const prerender = false;
-const { lang, slug } = Astro.params;
-if (!lang || !slug) {
-  return Astro.redirect("/404");
-}
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang.toLowerCase() },
+  params: { language: getLocale() },
 });
 
-if (!siteConfig) {
+if (!siteConfig || !siteConfig.homePage.slug) {
   return new Response(null, { status: 404 });
 }
+
+// @ts-ignore: homepage structure not yet in scheme
+const slug = siteConfig?.homePage?.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: lang, slug: slug! },
+  params: { language: getLocale(), slug: slug },
 });
 
-if (contentPage == null) {
-  return new Response(null, { status: 404 });
-}
-
-siteLanguage.set(lang!.toLowerCase());
 isPreview.set(true);
 ---
 
 <Base
-  title={`${contentPage?.metadata?.title || contentPage?.intro?.title!} - ${siteConfig.siteName}`}
+  title={siteConfig.siteName || ""}
   description={contentPage?.metadata?.description || ""}
   slug={slug!}
   siteConfig={siteConfig}
 >
   <HeroHeader
-    headline={contentPage?.intro?.title}
-    text={contentPage?.intro?.intro}
+    headline={contentPage.intro?.title}
+    text={contentPage.intro?.intro}
+    homepage={true}
   />
   <SanityComponentsRenderer content={contentPage?.content} />
 </Base>

@@ -13,9 +13,9 @@ import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 export const prerender = false;
-import { isPreview, siteLanguage } from "src/stores/global-store";
-
-const language = siteLanguage.get();
+import { isPreview } from "src/stores/global-store";
+import I18nClient from "@astrolicious/i18n/components/I18nClient.astro";
+import { getLocale } from "i18n:astro";
 
 interface Props {
   title: string;
@@ -45,15 +45,16 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     name: social.name || "",
     iconImageID: social.icon?.asset?._id || "",
     link: social.link
-      ? getHrefFromLinkObject(social.link, language, preview)
+      ? getHrefFromLinkObject(social.link, getLocale(), preview)
       : "",
-    alt: social.icon?.asset?.altTexts?.[language] || "",
+    alt: social.icon?.asset?.altTexts?.[getLocale()] || "",
   };
 });
 ---
 
-<html class="overflow-x-clip" lang={language.toLowerCase()}>
+<html class="overflow-x-clip" lang={getLocale().toLowerCase()}>
   <head>
+    <I18nClient />
     <BaseHead title={title} description={description} />
     {
       slug === "contact" && (

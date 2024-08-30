@@ -1,10 +1,9 @@
 ---
-import { useTranslations } from "src/i18n/utils";
+import { t } from "i18n:astro";
 
 const { duration, collaboration, services, technologies } = Astro.props;
 
 const { lang } = Astro.params;
-const t = useTranslations(lang, "work");
 ---
 
 <div

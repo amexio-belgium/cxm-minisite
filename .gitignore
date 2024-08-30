@@ -25,3 +25,5 @@ pnpm-debug.log*
 /.vscode/
 *.local
 /.netlify/
+
+src/locales/*/

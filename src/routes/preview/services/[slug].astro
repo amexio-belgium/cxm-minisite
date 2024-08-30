@@ -9,18 +9,16 @@ import Customers from "@components/uicomposition/Customers.astro";
 import Faq from "@components/uicomposition/Faq.astro";
 import FaqQuestion from "@components/uielements/FaqQuestion.astro";
 import { PortableText } from "astro-portabletext";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import { getLocale } from "i18n:astro";
 
 export const prerender = false;
-const { lang, slug } = Astro.params;
-if (!lang || !slug) {
-  return Astro.redirect("/404");
-}
+const { slug } = Astro.params;
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang.toLowerCase() },
+  params: { language: getLocale() },
 });
 
 if (!siteConfig) {
@@ -29,10 +27,13 @@ if (!siteConfig) {
 
 const { data: servicePage } = await loadQuery<ServiceWithReferences>({
   query: serviceQuery,
-  params: { language: lang!, slug: slug! },
+  params: { language: getLocale(), slug: slug! },
 });
 
-siteLanguage.set(lang.toLowerCase());
+if (servicePage == null) {
+  return new Response(null, { status: 404 });
+}
+
 isPreview.set(true);
 ---
 
@@ -60,9 +61,7 @@ isPreview.set(true);
                       .height(80)
                       .url()}
                     alt={
-                      customer.logo.default.asset.altTexts?.[
-                        servicePage.language || "en"
-                      ] || ""
+                      customer.logo.default.asset.altTexts?.[getLocale()] || ""
                     }
                     class="h-10 w-auto"
                   />

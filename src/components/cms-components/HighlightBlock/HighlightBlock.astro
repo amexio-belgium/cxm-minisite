@@ -1,7 +1,7 @@
 ---
 import type { HighlightReferenced } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
-import { siteLanguage } from "src/stores/global-store";
+import { getLocale } from "i18n:astro";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import Button from "@components/uielements/Button.astro";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { highlight } = Astro.props;
-const language = siteLanguage.get();
+
 const styles = {
   popping:
     "yellow py-6 pr-6 sm:pr-20 -mt-6 md:mr-8 relative md:absolute md:bottom-12 w-full md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
@@ -33,7 +33,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
           loading="lazy"
           class="transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
           src={imageBuilder.image(highlight.image).url()}
-          alt={highlight.image.asset?.altTexts?.[language]}
+          alt={highlight.image.asset?.altTexts?.[getLocale()]}
         />
       )
     }
@@ -63,7 +63,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
         <Button
           class="mt-6"
           color="light"
-          link={getHrefFromLinkObject(highlight.cta?.link, language, true)}
+          link={getHrefFromLinkObject(highlight.cta?.link, getLocale(), true)}
         >
           {highlight.cta.text}
         </Button>

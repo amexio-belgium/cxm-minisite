@@ -5,20 +5,21 @@ import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type BlogPostWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import { siteLanguage } from "src/stores/global-store";
+
 import ProfileCard from "@components/uielements/ProfileCard.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import { getLocale } from "i18n:astro";
 
 export const prerender = false;
-const { lang, slug } = Astro.params;
-if (!lang || !slug) {
+const { slug } = Astro.params;
+if (!slug) {
   return Astro.redirect("/404");
 }
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang!.toLowerCase() },
+  params: { language: getLocale() },
 });
 
 if (!siteConfig) {
@@ -27,10 +28,8 @@ if (!siteConfig) {
 
 const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   query: blogPostQuery,
-  params: { language: lang, slug: slug },
+  params: { language: getLocale(), slug: slug },
 });
-
-siteLanguage.set(lang.toLowerCase());
 ---
 
 <Base
