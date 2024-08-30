@@ -21,10 +21,10 @@ if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
 
-let pageSlug = slug;
+let pageSlug: string | null | undefined = slug;
 
 if (!slug) {
-  pageSlug = siteConfig.homePage.slug;
+  pageSlug = siteConfig?.homePage?.slug;
 }
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({

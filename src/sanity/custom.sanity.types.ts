@@ -1,3 +1,4 @@
+import type {Locale} from "i18n:astro";
 import type {
   AnswerQuestion,
   Callout,
@@ -216,7 +217,7 @@ export interface LinkObjectReferenced {
 export type i18nImageAsset = SanityImageAsset & {
   titles: { [key: string]: string }[];
   descriptions: { [key: string]: string }[];
-  altTexts: { [key: string]: string }[];
+  altTexts: { [key in Locale]: string }[];
 };
 
 export type i18nImage = {
@@ -449,7 +450,7 @@ export interface ServiceWithReferences {
 
 export interface WorkWithReferences {
     _type: "works";
-    language?: "en" | "nl" | "fr";
+    language?: string;
     customerReferencesText?: string;
     content?: Array<
         | ServicesCardList

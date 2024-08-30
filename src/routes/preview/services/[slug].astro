@@ -52,7 +52,7 @@ isPreview.set(true);
       servicePage.customerReferences &&
         servicePage.customerReferences.length > 0 && (
           <Customers headline={servicePage.customerReferencesText}>
-            {servicePage.customerReferences?.map((customer) => (
+            {servicePage.customerReferences?.map((customer: any) => (
               <>
                 {customer?.logo?.default?.asset && (
                   <img

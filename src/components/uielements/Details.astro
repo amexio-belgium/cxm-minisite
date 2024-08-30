@@ -78,7 +78,7 @@ const HeadlineTagName = headlineTag;
       let animation: Animation | null = null;
       let isExpanding = false;
 
-      const onAnimationFinish = (open) => {
+      const onAnimationFinish = (open: any) => {
         // Set the open attribute based on the parameter
         details.open = open;
         // Clear the stored animation
@@ -163,7 +163,7 @@ const HeadlineTagName = headlineTag;
         window.requestAnimationFrame(() => expand());
       };
 
-      const clickHandler = (e) => {
+      const clickHandler = (e: any) => {
         if (!reducedMotion.matches) {
           // Stop default behaviour from the browser
           e.preventDefault();

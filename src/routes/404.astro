@@ -19,8 +19,8 @@ const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
 ---
 
 <Base
-  title={t("404.title")}
-  description={t("404.title")}
+  title={t("404.title", { defaultValue: "Page Not Found" })}
+  description={t("404.title", { defaultValue: "" })}
   slug="404"
   siteConfig={siteConfig}
 >
@@ -33,13 +33,13 @@ const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
           404
         </h1>
         <p class="mb-4 text-xl font-bold text-white md:text-4xl">
-          {t("404.headline")}
+          {t("404.headline", { defaultValue: "" })}
         </p>
         <p class="mb-4 text-lg font-light text-white">
-          {t("404.text")}
+          {t("404.text", { defaultValue: "" })}
         </p>
         <Button class="mt-4 inline-block" link="/" style="primary" color="dark"
-          >{t("404.button")}
+          >{t("404.button", { defaultValue: "" })}
         </Button>
       </div>
     </div>

@@ -7,8 +7,6 @@ import { isPreview } from "src/stores/global-store";
 import { getLocale } from "i18n:astro";
 import {t} from "i18next";
 
-const { lang } = Astro.params;
-
 interface Props {
     caseData: ReferenceCaseReferenced;
     small?: boolean;
@@ -106,7 +104,7 @@ const { caseData, small } = Astro.props;
       size="sm"
       color="light"
     >
-      {t("overview.cta")}
+      {t("overview.cta", { defaultValue: "" })}
     </Button>
   </div>
 </div>

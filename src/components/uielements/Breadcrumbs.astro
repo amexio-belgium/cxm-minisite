@@ -30,7 +30,7 @@ paths.forEach((text, i) => {
     ) {
       translatedText = text.replace(/[-_]/g, " ");
     } else {
-      translatedText = t("nav." + text.replace(/[-_]/g, " "));
+      translatedText = t("nav." + text.replace(/[-_]/g, " "), { defaultValue: "" });
     }
 
     parts.push({

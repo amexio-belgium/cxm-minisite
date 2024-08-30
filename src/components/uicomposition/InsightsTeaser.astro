@@ -52,8 +52,8 @@ function getPostLangAndSlug(post) {
   <h2 class="mb-8 font-serif text-2xl text-black md:text-3xl">
     {
       collection === "insights"
-        ? t("insightsteaser.headline")
-        : t("casesteaser.headline")
+        ? t("insightsteaser.headline", { defaultValue: "" })
+        : t("casesteaser.headline", { defaultValue: "" })
     }
   </h2>
   {

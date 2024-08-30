@@ -1,6 +1,5 @@
 ---
 import {t} from "i18next";
-const { lang } = Astro.params;
 import ContactFormStyling from "src/styles/contact-form-styling.astro";
 interface Props {
   headline: string;
@@ -71,7 +70,7 @@ const { headline } = Astro.props;
             class="pointer-events-none mt-8 h-[52px] w-[160px] rounded-full bg-lightest-blue-500"
           >
           </div>
-          <span class="sr-only">{t("skeleton.loading")}</span>
+          <span class="sr-only">{t("skeleton.loading", { defaultValue: "loading"})}</span>
         </div>
         <div id="cxm-contact-form" aria-busy="true"></div>
         <script src="@lib/hubSpotForm.js"></script>
