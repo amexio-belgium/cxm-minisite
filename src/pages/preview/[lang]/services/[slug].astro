@@ -14,10 +14,13 @@ import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 
 export const prerender = false;
 const { lang, slug } = Astro.params;
+if (!lang || !slug) {
+  return Astro.redirect("/404");
+}
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang!.toLowerCase() },
+  params: { language: lang.toLowerCase() },
 });
 
 if (!siteConfig) {
@@ -29,11 +32,7 @@ const { data: servicePage } = await loadQuery<ServiceWithReferences>({
   params: { language: lang!, slug: slug! },
 });
 
-if (servicePage == null) {
-  return new Response(null, { status: 404 });
-}
-
-siteLanguage.set(lang!.toLowerCase());
+siteLanguage.set(lang.toLowerCase());
 isPreview.set(true);
 ---
 
@@ -54,7 +53,7 @@ isPreview.set(true);
           <Customers headline={servicePage.customerReferencesText}>
             {servicePage.customerReferences?.map((customer) => (
               <>
-                {customer.logo?.default?.asset && (
+                {customer?.logo?.default?.asset && (
                   <img
                     src={imageBuilder
                       .image(customer.logo?.default?.asset)

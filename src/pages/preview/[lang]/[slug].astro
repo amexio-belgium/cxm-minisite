@@ -10,10 +10,13 @@ import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 
 export const prerender = false;
 const { lang, slug } = Astro.params;
+if (!lang || !slug) {
+  return Astro.redirect("/404");
+}
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang!.toLowerCase() },
+  params: { language: lang.toLowerCase() },
 });
 
 if (!siteConfig) {
@@ -22,7 +25,7 @@ if (!siteConfig) {
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: lang!, slug: slug! },
+  params: { language: lang, slug: slug! },
 });
 
 if (contentPage == null) {
@@ -40,8 +43,8 @@ isPreview.set(true);
   siteConfig={siteConfig}
 >
   <HeroHeader
-    headline={contentPage.intro?.title}
-    text={contentPage.intro?.intro}
+    headline={contentPage?.intro?.title}
+    text={contentPage?.intro?.intro}
   />
   <SanityComponentsRenderer content={contentPage?.content} />
 </Base>

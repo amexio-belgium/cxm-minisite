@@ -18,12 +18,113 @@ export const siteConfigQuery = groq`*[_type == "siteConfig" && language == $lang
   }
 }`;
 
-export const navigationQuery = groq`*[_type == "navigation" && _id == $navigationId][0]
-                                    {
+export const navigationQuery = groq`*[_type == "navigation" && _id == $navigationId][0]{
                                         ..., 
                                         links[]{title, linkObject{..., internalLink->{...}}}
                                     }
                                     `;
+
+const contentQuery = groq`content[] {
+  ...,
+  defined(groups) => {
+    groups[] {
+      ...,
+      'services': services[]->{
+        ...,
+        image{
+          ...,
+          asset->{...}
+        },
+      }
+    }
+  },
+  defined(cards) => {
+    cards[] {
+      ...,
+      icon{
+        ...,
+        asset->{
+          ...,
+        }
+      }
+    }
+  },
+  _type == "callout" => {
+    ...,
+    content[]{
+      ...,
+      defined(asset) => {
+        asset->{...}
+      }
+    }
+  },
+  _type == "highlight" => {
+    ...,
+    defined(image) => {
+      image{
+        ...,
+        asset->{...}
+      }
+    }
+  }, 
+  _type == "tabs" => {
+    ...,
+    defined(tabsOverview) => {
+      tabsOverview[]{
+        ...,
+        _type == "tab" => {
+          ...,
+          content[]{
+            ...,
+            _type == "image" => {
+              asset->{...}
+            }
+          }
+        }
+      }
+    }
+  }, 
+  _type == "longFormText" => {
+    ...,
+    defined(content) => {
+      content[]{
+        ...,
+          _type == "image" => {
+          ...,
+            asset->{...}
+          }
+      }
+    } 
+  },
+  _type == "workCardList" => {
+    ...,
+    defined(referenceCases) => {
+      referenceCases[]-> {
+        ...,
+        introImage {
+          ...,
+          asset->{...}
+        },
+        technologies[]->{...},
+        services[]->{...},
+        metadata{
+          ...,
+          image{
+            ...,
+            asset->{...}
+          }
+        },
+        collaborationModel-> {
+          ...,
+          collaborationTabs[]{
+            ...,
+            concept->{...}
+          }
+        }
+      } 
+    }
+  }
+}`
 
 export const serviceQuery = groq`*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{
   ...,
@@ -38,6 +139,28 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
   },
   customerReferences[]->{
     ...,
+  },
+  ${contentQuery}
+}`;
+
+
+export const workQuery = groq`*[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{
+  ...,
+  collaborationModel-> {
+    ...,
+    collaborationTabs[]{
+      ...,
+      concept->{...}
+    }
+  },
+  introImage {
+    asset->{...}
+  },
+  technologies[]->{
+    ...,
+    partner->{
+      ...
+    },
     logo{
       ...,
       default{
@@ -54,82 +177,38 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
       }
     }
   },
-  content[] {
+  relatedCases[]->{
     ...,
-    defined(groups) => {
-      groups[] {
+    collaborationModel-> {
+      ...,
+      collaborationTabs[]{
         ...,
-        'services': services[]->{
-          ...,
-          image{
-            ...,
-            asset->{...}
-          },
-        }
+        concept->{...}
       }
     },
-    defined(cards) => {
-      cards[] {
+    introImage {
+      asset->{...}
+    },
+    technologies[]->{...},
+    services[]->{...},
+    metadata{
+      ...,
+      image{
         ...,
-        icon{
-          ...,
-          asset->{
-            ...,
-          }
-        }
+        asset->{...}
       }
     },
-    _type == "callout" => {
+  },
+  services[]->{...},
+  metadata{
+    ...,
+    image{
       ...,
-      content[]{
-        ...,
-        defined(asset) => {
-          asset->{...}
-        }
-      }
-    },
-    _type == "highlight" => {
-      ...,
-      defined(image) => {
-        image{
-          ...,
-          asset->{...}
-        }
-      }
-    }, 
-    _type == "tabs" => {
-      ...,
-      defined(tabsOverview) => {
-        tabsOverview[]{
-          ...,
-          _type == "tab" => {
-            ...,
-            "test":"test",
-            content[]{
-              ...,
-              _type == "image" => {
-                asset->{...}
-              }
-            }
-          }
-        }
-      }
-    }, 
-    _type == "longFormText" => {
-      ...,
-      defined(content) => {
-        content[]{
-          ...,
-           _type == "image" => {
-            ...,
-             asset->{...}
-           }
-        }
-      } 
-   },
-  }
+      asset->{...}
+    }
+  },
+  ${contentQuery}
 }`;
-
 
 export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $language][0]{
   homePage->{
@@ -139,78 +218,5 @@ export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $la
 
 export const contentPageQuery = groq`*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{
   ...,
-  content[] {
-    ...,
-    defined(groups) => {
-      groups[] {
-        ...,
-        'services': services[]->{
-          ...,
-          image{
-            ...,
-            asset->{...}
-          },
-        }
-      }
-    },
-    defined(cards) => {
-      cards[] {
-        ...,
-        icon{
-          ...,
-          asset->{
-            ...,
-          }
-        }
-      }
-    },
-    _type == "callout" => {
-      ...,
-      content[]{
-        ...,
-        defined(asset) => {
-          asset->{...}
-        }
-      }
-    },
-    _type == "highlight" => {
-      ...,
-      defined(image) => {
-        image{
-          ...,
-          asset->{...}
-        }
-      }
-    }, 
-    _type == "tabs" => {
-      ...,
-      defined(tabsOverview) => {
-        tabsOverview[]{
-          ...,
-          _type == "tab" => {
-            ...,
-            "test":"test",
-            content[]{
-              ...,
-              _type == "image" => {
-                asset->{...}
-              }
-            }
-          }
-        }
-      }
-    }, 
-    _type == "longFormText" => {
-      ...,
-      defined(content) => {
-        content[]{
-          ...,
-           _type == "image" => {
-            ...,
-             asset->{...}
-           }
-        }
-      } 
-   },
-  }
+  ${contentQuery}
 }`;

@@ -2,7 +2,6 @@
 import Base from "@layouts/Base.astro";
 import {
   contentPageQuery,
-  homePageSlugQuery,
   siteConfigQuery,
 } from "@api/queries";
 import { loadQuery } from "@api/sanity";
@@ -24,11 +23,12 @@ if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
 
-const slug = siteConfig.homePage.slug;
+// @ts-ignore: homepage structure not yet in scheme
+const slug = siteConfig?.homePage?.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: lang!, slug: slug },
+  params: { language: lang!, slug: slug! },
 });
 
 siteLanguage.set(lang!.toLowerCase());
@@ -38,9 +38,10 @@ isPreview.set(true);
 <Base
   title={siteConfig.siteName || ""}
   description={contentPage?.metadata?.description || ""}
-  slug={slug}
+  slug={slug!}
   siteConfig={siteConfig}
 >
+
   <HeroHeader
     headline={contentPage.intro?.title}
     text={contentPage.intro?.intro}
