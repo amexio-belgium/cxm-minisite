@@ -2,14 +2,12 @@
 import type { TabsReferenced } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
-import { siteLanguage } from "src/stores/global-store";
-
+import { getLocale } from "i18n:astro";
 interface Props {
   tabsContent: TabsReferenced;
 }
 
 const { tabsContent } = Astro.props;
-const language = siteLanguage.get();
 ---
 
 <div class="mb-20 text-white md:mb-40">
@@ -67,7 +65,7 @@ const language = siteLanguage.get();
                   <img
                     loading="lazy"
                     src={imageBuilder.image(content.asset).url()}
-                    alt={content.asset.altTexts?.[language]}
+                    alt={content.asset.altTexts?.[getLocale()]}
                     class="h-fit w-full overflow-hidden rounded-2xl shadow-sm shadow-primary lg:w-1/2"
                   />
                 )}

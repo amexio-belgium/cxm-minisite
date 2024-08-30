@@ -4,12 +4,12 @@ import Button from "@components/uielements/Button.astro";
 import Link from "@components/uielements/Link.astro";
 import FooterLink from "@components/uielements/FooterLink.astro";
 import footerimage from "@assets/images/flag.png";
-import { useTranslations } from "../../i18n/utils.ts";
 import type { NavigationQueryResult } from "src/sanity/sanity.types";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { imageBuilder } from "@api/sanity";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
+import { getLocale, t } from "i18n:astro";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 
 export type Social = {
@@ -29,9 +29,7 @@ interface Props {
 
 const { navigation, secondaryNavigation, isContactPage, footerText, socials } =
   Astro.props;
-const language = siteLanguage.get();
 
-const t = useTranslations(language);
 const preview = isPreview.get();
 ---
 
@@ -114,7 +112,7 @@ const preview = isPreview.get();
               <FooterLink
                 href={getHrefFromLinkObject(
                   link.linkObject as LinkObjectReferenced,
-                  language,
+                  getLocale(),
                   false,
                 )}
               >
@@ -173,7 +171,7 @@ const preview = isPreview.get();
               class="underline decoration-white decoration-1 underline-offset-2 hover:decoration-secondary"
               href={getHrefFromLinkObject(
                 link.linkObject as LinkObjectReferenced,
-                language,
+                getLocale(),
                 preview,
               )}
             >

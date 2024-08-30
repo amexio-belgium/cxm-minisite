@@ -5,16 +5,17 @@ import type {
   BlogPostWithReferences,
   BlogsListReferenced,
 } from "@sanity/custom.sanity.types";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
 import { toHTML } from "@portabletext/to-html";
 import { v4 as uuidv4 } from "uuid";
+import { getLocale } from "i18n:astro";
+import { t } from "i18next";
+
 interface Props {
   blogsList: BlogsListReferenced;
 }
 const itemsPerTime = 3;
 const { blogsList } = Astro.props;
-const lang = siteLanguage.get();
-const preview = isPreview.get();
 
 let blogs: BlogPostWithReferences[] | undefined = [];
 let totalItems;
@@ -24,7 +25,7 @@ if (blogsList.blogsType === "latest") {
     totalItems: number;
   }>({
     query: blogsListQuery,
-    params: { language: lang, itemsPerTime: itemsPerTime },
+    params: { language: getLocale(), itemsPerTime: itemsPerTime },
   });
   blogs = blogsFetched.blogPosts;
   totalItems = blogsFetched.totalItems;
@@ -47,6 +48,8 @@ const items = isLatestBlogs
       ? itemsPerTime
       : blogs?.length
     : 0;
+
+const preview = isPreview.get();
 ---
 
 <script>
@@ -59,13 +62,13 @@ const items = isLatestBlogs
   blogs && (
     <astro-blogs-list
       data-blogs={JSON.stringify(blogs)}
-      data-lang={lang}
+      data-lang={getLocale()}
       data-totalitems={totalItems}
       data-items={items}
       data-uuid={uuid}
       data-itemspertime={itemsPerTime}
       data-islatestblogs={JSON.stringify(isLatestBlogs)}
-      data-ispreview={JSON.stringify(isPreview)}
+      data-ispreview={JSON.stringify(preview)}
     >
       <div class="relative w-full gap-8 py-20 before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl before:bg-light-blue-50 marker:before:h-full motion-safe:animate-fade-up motion-safe:animate-delay-1000">
         <div
@@ -80,7 +83,7 @@ const items = isLatestBlogs
                 new Date(blog.publicationDate || blog._createdAt),
               )}
               authorName={blog.author?.name}
-              link={`${isPreview ? "/preview" : ""}/${lang}/blog/${blog.metadata?.slug?.current}`}
+              link={`/${getLocale()}/${preview ? "preview/" : ""}insights/${blog.metadata?.slug?.current}`}
               introHTML={blog.intro?.intro ? toHTML(blog.intro.intro) : ""}
               topics={JSON.stringify(blog.topic)}
               jobTitle={blog.author?.jobTitle}
@@ -112,9 +115,11 @@ const items = isLatestBlogs
             class="font-sans text-[14px] text-black focus-visible:outline-orange"
             tabindex="0"
           >
-            You've viewed{" "}
-            {itemsPerTime > totalItems ? totalItems : itemsPerTime} of the{" "}
-            {totalItems} blogposts
+            {t("blogslist.totalviewed", {
+              viewedItems:
+                itemsPerTime > totalItems ? totalItems : itemsPerTime,
+              totalItems,
+            })}
           </span>
           <div class="bg-gray-200 dark:bg-gray-700 mx-0.5 mb-6 mt-[15px] h-[3px] w-[216px] bg-lightest-blue-800">
             <div
@@ -130,7 +135,7 @@ const items = isLatestBlogs
               id={`load-more-btn-${uuid}`}
               class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
             >
-              Load more
+              {t("blogslist.loadmore")}
             </button>
           )}
         </div>
@@ -185,7 +190,7 @@ const items = isLatestBlogs
         el.setAttribute("authorName", blog.author?.name || "");
         el.setAttribute(
           "link",
-          `${isPreview ? "/preview" : ""}/${lang}/blog/${blog.metadata?.slug?.current}`,
+          `/${lang}/${isPreview ? "preview/" : ""}insights/${blog.metadata?.slug?.current}`,
         );
         el.setAttribute(
           "introHTML",
