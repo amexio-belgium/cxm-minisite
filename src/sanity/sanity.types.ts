@@ -68,61 +68,91 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type BlogsList = {
-  _type: "blogsList";
-  blogsType?: "latest" | "specific";
-  blogPosts?: Array<{
+export type CollabTab = {
+  _type: "collabTab";
+  concept?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "blogPost";
-  }>;
-};
-
-export type BlogHighlight = {
-  _type: "blogHighlight";
-  blogType?: "latest" | "specific";
-  blogPost?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "blogPost";
+    [internalGroqTypeReferenceTo]?: "skosConcept";
   };
+  content?: Array<
+    | {
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal" | "h3" | "h4" | "h5" | "h6";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<
+            {
+              _key: string;
+            } & Link
+          >;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "content";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+        _key: string;
+      }
+  >;
 };
 
 export type Tab = {
   _type: "tab";
   title?: string;
-  content?: Array<{
-    content?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  content?: Array<
+    | {
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal" | "h3" | "h4" | "h5" | "h6";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<
+            {
+              _key: string;
+            } & Link
+          >;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "content";
         _key: string;
-      }>;
-      style?: "normal" | "h3" | "h4" | "h5" | "h6";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    _type: "content";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+        _key: string;
+      }
+  >;
 };
 
 export type Youtube = {
@@ -187,7 +217,11 @@ export type SiteConfig = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: null;
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
     level?: number;
     _type: "block";
     _key: string;
@@ -248,9 +282,11 @@ export type Technology = {
 export type Tabs = {
   _type: "tabs";
   intro?: Intro;
-  tabsOverview?: Array<{
-    _key: string;
-  } & Tab>;
+  tabsOverview?: Array<
+    {
+      _key: string;
+    } & Tab
+  >;
 };
 
 export type SolutionDomain = {
@@ -269,7 +305,11 @@ export type SolutionDomain = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: null;
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
     level?: number;
     _type: "block";
     _key: string;
@@ -348,7 +388,11 @@ export type Highlight = {
       }>;
       style?: "normal" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
-      markDefs?: null;
+      markDefs?: Array<
+        {
+          _key: string;
+        } & Link
+      >;
       level?: number;
       _type: "block";
       _key: string;
@@ -374,33 +418,41 @@ export type LongFormText = {
   _type: "longFormText";
   intro?: Intro;
   standOut?: boolean;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
-    listItem?: "bullet" | "number";
-    markDefs?: null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  } | ({
-    _key: string;
-  } & Youtube)>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<
+          {
+            _key: string;
+          } & Link
+        >;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Youtube)
+  >;
 };
 
 export type CardGrid = {
@@ -417,7 +469,11 @@ export type CardGrid = {
       }>;
       style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
       listItem?: "bullet" | "number";
-      markDefs?: null;
+      markDefs?: Array<
+        {
+          _key: string;
+        } & Link
+      >;
       level?: number;
       _type: "block";
       _key: string;
@@ -441,35 +497,42 @@ export type CardGrid = {
 export type Callout = {
   _type: "callout";
   intro?: Intro;
-  content?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  } | {
-    richText?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  content?: Array<
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
         _key: string;
-      }>;
-      style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    _type: "textObject";
-    _key: string;
-  }>;
+      }
+    | {
+        richText?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<
+            {
+              _key: string;
+            } & Link
+          >;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "textObject";
+        _key: string;
+      }
+  >;
 };
 
 export type TranslationMetadata = {
@@ -478,50 +541,59 @@ export type TranslationMetadata = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  translations?: Array<{
-    _key: string;
-  } & InternationalizedArrayReferenceValue>;
+  translations?: Array<
+    {
+      _key: string;
+    } & InternationalizedArrayReferenceValue
+  >;
   schemaTypes?: Array<string>;
 };
 
 export type InternationalizedArrayReferenceValue = {
   _type: "internationalizedArrayReferenceValue";
-  value?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "answerQuestion";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "company";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "navigation";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "contentPage";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "blogPost";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "referenceCase";
-  };
+  value?:
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "service";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "answerQuestion";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "company";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "navigation";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contentPage";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "blogPost";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "referenceCase";
+      };
 };
 
 export type ReferenceCase = {
@@ -542,26 +614,30 @@ export type ReferenceCase = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  duration?: number;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList) | ({
-    _key: string;
-  } & BlogHighlight) | ({
-    _key: string;
-  } & BlogsList)>;
+  duration?: string;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & WorkCardList)
+  >;
   technologies?: Array<{
     _ref: string;
     _type: "reference";
@@ -576,6 +652,12 @@ export type ReferenceCase = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "service";
   }>;
+  collaborationModel?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "collaborationModel";
+  };
   relatedCases?: Array<{
     _ref: string;
     _type: "reference";
@@ -587,29 +669,27 @@ export type ReferenceCase = {
   language?: string;
 };
 
+export type CollaborationModel = {
+  _id: string;
+  _type: "collaborationModel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  collaborationTabs?: Array<
+    {
+      _key: string;
+    } & CollabTab
+  >;
+};
+
 export type BlogPost = {
   _id: string;
   _type: "blogPost";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  intro?: {
-    title?: string;
-    intro?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  };
+  intro?: Intro;
   featuredImage?: {
     asset?: {
       _ref: string;
@@ -642,25 +722,29 @@ export type BlogPost = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "skosConcept";
   }>;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList) | ({
-    _key: string;
-  } & BlogHighlight) | ({
-    _key: string;
-  } & BlogsList)>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & WorkCardList)
+  >;
   metadata?: Metadata;
   language?: string;
 };
@@ -719,7 +803,11 @@ export type AnswerQuestion = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: null;
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
     level?: number;
     _type: "block";
     _key: string;
@@ -727,9 +815,11 @@ export type AnswerQuestion = {
   language?: string;
 };
 
-export type InternationalizedArrayReference = Array<{
-  _key: string;
-} & InternationalizedArrayReferenceValue>;
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayReferenceValue
+>;
 
 export type ContentPage = {
   _id: string;
@@ -738,25 +828,29 @@ export type ContentPage = {
   _updatedAt: string;
   _rev: string;
   intro?: Intro;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList) | ({
-    _key: string;
-  } & BlogHighlight) | ({
-    _key: string;
-  } & BlogsList)>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & WorkCardList)
+  >;
   metadata?: Metadata;
   language?: string;
 };
@@ -804,25 +898,29 @@ export type Company = {
       _type: "image";
     };
   };
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList) | ({
-    _key: string;
-  } & BlogHighlight) | ({
-    _key: string;
-  } & BlogsList)>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & WorkCardList)
+  >;
   type?: {
     _ref: string;
     _type: "reference";
@@ -841,22 +939,25 @@ export type Link = {
   _type: "link";
   text?: string;
   type?: string;
-  internalLink?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "service";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "company";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "contentPage";
-  };
+  internalLink?:
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "service";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "company";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contentPage";
+      };
   url?: string;
   email?: string;
   phone?: string;
@@ -886,25 +987,29 @@ export type Service = {
   };
   challenge?: string;
   cta?: Cta;
-  content?: Array<({
-    _key: string;
-  } & Highlight) | ({
-    _key: string;
-  } & CardGrid) | ({
-    _key: string;
-  } & Callout) | ({
-    _key: string;
-  } & LongFormText) | ({
-    _key: string;
-  } & ServicesCardList) | ({
-    _key: string;
-  } & Tabs) | ({
-    _key: string;
-  } & WorkCardList) | ({
-    _key: string;
-  } & BlogHighlight) | ({
-    _key: string;
-  } & BlogsList)>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & WorkCardList)
+  >;
   faqs?: Faq;
   customerReferences?: Array<{
     _ref: string;
@@ -1038,7 +1143,11 @@ export type Intro = {
     }>;
     style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
     listItem?: "bullet" | "number";
-    markDefs?: null;
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
     level?: number;
     _type: "block";
     _key: string;
@@ -1119,11 +1228,57 @@ export type SkosConcept = {
   editorialNote?: string;
   changeNote?: string;
 };
-export declare const internalGroqTypeReferenceTo: unique symbol;
 
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityFileAsset
+  | Geopoint
+  | CollabTab
+  | Tab
+  | Youtube
+  | WorkCardList
+  | SiteConfig
+  | Technology
+  | Tabs
+  | SolutionDomain
+  | ServicesCardList
+  | Highlight
+  | LongFormText
+  | CardGrid
+  | Callout
+  | TranslationMetadata
+  | InternationalizedArrayReferenceValue
+  | ReferenceCase
+  | CollaborationModel
+  | BlogPost
+  | Person
+  | Navigation
+  | AnswerQuestion
+  | InternationalizedArrayReference
+  | ContentPage
+  | Company
+  | Link
+  | Service
+  | Metadata
+  | ServicePillar
+  | Faq
+  | Cta
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
+  | SanityAssetSourceData
+  | SanityImageMetadata
+  | Intro
+  | MediaTag
+  | Slug
+  | SkosConceptScheme
+  | SkosConcept;
+export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/api/queries.ts
 // Variable: siteConfigQuery
-// Query: *[_type == "siteConfig" && language == $language][0]{  ...,  socials[]{    ...,    icon{      asset->{        ...,        altTexts{...},        descriptions{...},        titles{...}      }    },  }}
+// Query: *[_type == "siteConfig" && language == $language][0]{  ...,  homePage->{    "slug": metadata.slug.current  },  socials[]{    ...,    icon{      asset->{        ...,        altTexts{...},        descriptions{...},        titles{...}      }    },  }}
 export type SiteConfigQueryResult = {
   _id: string;
   _type: "siteConfig";
@@ -1131,7 +1286,6 @@ export type SiteConfigQueryResult = {
   _updatedAt: string;
   _rev: string;
   siteName?: string;
-  homePage: {slug: string};
   headerNavigation?: {
     _ref: string;
     _type: "reference";
@@ -1175,6 +1329,7 @@ export type SiteConfigQueryResult = {
       } | null;
     } | null;
     _type: "social";
+    _key: string;
   }> | null;
   copyrightText?: Array<{
     children?: Array<{
@@ -1185,15 +1340,20 @@ export type SiteConfigQueryResult = {
     }>;
     style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
     listItem?: "bullet" | "number";
-    markDefs?: null;
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
     level?: number;
     _type: "block";
     _key: string;
   }>;
   language?: string;
+  homePage: null;
 } | null;
 // Variable: navigationQuery
-// Query: *[_type == "navigation" && _id == $navigationId][0]                                    {                                        ...,                                         links[]{title, linkObject{..., internalLink->{...}}}                                    }                                    
+// Query: *[_type == "navigation" && _id == $navigationId][0]{                                        ...,                                         links[]{title, linkObject{..., internalLink->{...}}}                                    }                                    
 export type NavigationQueryResult = {
   _id: string;
   _type: "navigation";
@@ -1207,164 +1367,180 @@ export type NavigationQueryResult = {
       _type: "link";
       text?: string;
       type?: string;
-      internalLink: {
-        _id: string;
-        _type: "company";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        name?: string;
-        link?: Link;
-        logo?: {
-          default?: {
-            asset?: {
+      internalLink:
+        | {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            type?: {
               _ref: string;
               _type: "reference";
               _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              [internalGroqTypeReferenceTo]?: "skosConcept";
             };
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-          light?: {
-            asset?: {
+            industryVertical?: {
               _ref: string;
               _type: "reference";
               _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              [internalGroqTypeReferenceTo]?: "skosConcept";
             };
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-          dark?: {
-            asset?: {
+          }
+        | {
+            _id: string;
+            _type: "contentPage";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            metadata?: Metadata;
+            language?: string;
+          }
+        | {
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
               _ref: string;
               _type: "reference";
               _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
             };
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
-        content?: Array<({
-          _key: string;
-        } & BlogHighlight) | ({
-          _key: string;
-        } & BlogsList) | ({
-          _key: string;
-        } & Callout) | ({
-          _key: string;
-        } & CardGrid) | ({
-          _key: string;
-        } & Highlight) | ({
-          _key: string;
-        } & LongFormText) | ({
-          _key: string;
-        } & ServicesCardList) | ({
-          _key: string;
-        } & Tabs) | ({
-          _key: string;
-        } & WorkCardList)>;
-        type?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "skosConcept";
-        };
-        industryVertical?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "skosConcept";
-        };
-      } | {
-        _id: string;
-        _type: "contentPage";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        intro?: Intro;
-        content?: Array<({
-          _key: string;
-        } & BlogHighlight) | ({
-          _key: string;
-        } & BlogsList) | ({
-          _key: string;
-        } & Callout) | ({
-          _key: string;
-        } & CardGrid) | ({
-          _key: string;
-        } & Highlight) | ({
-          _key: string;
-        } & LongFormText) | ({
-          _key: string;
-        } & ServicesCardList) | ({
-          _key: string;
-        } & Tabs) | ({
-          _key: string;
-        } & WorkCardList)>;
-        metadata?: Metadata;
-        language?: string;
-      } | {
-        _id: string;
-        _type: "service";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        intro?: Intro;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-        challenge?: string;
-        cta?: Cta;
-        content?: Array<({
-          _key: string;
-        } & BlogHighlight) | ({
-          _key: string;
-        } & BlogsList) | ({
-          _key: string;
-        } & Callout) | ({
-          _key: string;
-        } & CardGrid) | ({
-          _key: string;
-        } & Highlight) | ({
-          _key: string;
-        } & LongFormText) | ({
-          _key: string;
-        } & ServicesCardList) | ({
-          _key: string;
-        } & Tabs) | ({
-          _key: string;
-        } & WorkCardList)>;
-        faqs?: Faq;
-        customerReferences?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "company";
-        }>;
-        servicePillar?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "servicePillar";
-        };
-        language?: string;
-        metadata?: Metadata;
-      } | null;
+            language?: string;
+            metadata?: Metadata;
+          }
+        | null;
       url?: string;
       email?: string;
       phone?: string;
@@ -1376,8 +1552,11 @@ export type NavigationQueryResult = {
   }> | null;
   language?: string;
 } | null;
+// Variable: contentQuery
+// Query: content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}
+export type ContentQueryResult = never;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  content[] {    ...,    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    },    _type == "highlight" => {      ...,      defined(image) => {        image{          ...,          asset->{...}        }      }    },     _type == "tabs" => {      ...,      defined(tabsOverview) => {        tabsOverview[]{          ...,          _type == "tab" => {            ...,            "test":"test",            content[]{              ...,              _type == "image" => {                asset->{...}              }            }          }        }      }    },     _type == "longFormText" => {      ...,      defined(content) => {        content[]{          ...,           _type == "image" => {            ...,             asset->{...}           }        }      }    },  }}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -1414,244 +1593,637 @@ export type ServiceQueryResult = {
   } | null;
   challenge?: string;
   cta?: Cta;
-  content: Array<{
-    _key: string;
-    groups: null;
-    cards: null;
-    content: Array<{
-      _key: string;
-    } | {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  content: Array<
+    | {
         _key: string;
-      }>;
-      style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-    }> | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    content: Array<{
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | {
-      richText?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: null;
-        level?: number;
-        _type: "block";
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        groups: null;
+        cards: null;
+      }
+    | {
         _key: string;
-      }>;
-      _type: "textObject";
-      asset: null;
-    }> | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    tabsOverview: Array<{
-      _key: string;
-      test: "test";
-      content: Array<{
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards?: Array<{
           title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      } | {
-        content?: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
             _key: string;
           }>;
-          style?: "h3" | "h4" | "h5" | "h6" | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: null;
-          level?: number;
-          _type: "block";
+          icon?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          _type: "card";
           _key: string;
         }>;
-        _type: "content";
-      }> | null;
-    }> | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: Array<{
-      title?: string;
-      content?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: null;
-        level?: number;
-        _type: "block";
+        groups: null;
+      }
+    | {
         _key: string;
-      }>;
-      icon: {
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      } | null;
-      _type: "card";
-    }> | null;
-  } | {
-    _key: string;
-    groups: Array<{
-      title?: string;
-      services: Array<{
-        _id: string;
-        _type: "service";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
+        _type: "cardGrid";
         intro?: Intro;
+        cards?: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          _type: "card";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          _type: "card";
+          _key: string;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          _type: "card";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
         image: {
           asset: {
             _id: string;
@@ -1679,48 +2251,2444 @@ export type ServiceQueryResult = {
           crop?: SanityImageCrop;
           _type: "image";
         } | null;
-        challenge?: string;
-        cta?: Cta;
-        content?: Array<({
-          _key: string;
-        } & BlogHighlight) | ({
-          _key: string;
-        } & BlogsList) | ({
-          _key: string;
-        } & Callout) | ({
-          _key: string;
-        } & CardGrid) | ({
-          _key: string;
-        } & Highlight) | ({
-          _key: string;
-        } & LongFormText) | ({
-          _key: string;
-        } & ServicesCardList) | ({
-          _key: string;
-        } & Tabs) | ({
-          _key: string;
-        } & WorkCardList)>;
-        faqs?: Faq;
-        customerReferences?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "company";
-        }>;
-        servicePillar?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "servicePillar";
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
         };
-        language?: string;
-        metadata?: Metadata;
-      }> | null;
-      _type: "servicesCardListGroup";
-    }> | null;
-    cards: null;
-  }> | null;
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups?: Array<{
+          title?: string;
+          services?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "service";
+          }>;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }>;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups: Array<{
+          title?: string;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups?: Array<{
+          title?: string;
+          services?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "service";
+          }>;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups: Array<{
+          title?: string;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+      }
+  > | null;
   faqs: {
     _type: "faq";
     title?: string;
@@ -1740,7 +4708,11 @@ export type ServiceQueryResult = {
         }>;
         style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
         listItem?: "bullet" | "number";
-        markDefs?: null;
+        markDefs?: Array<
+          {
+            _key: string;
+          } & Link
+        >;
         level?: number;
         _type: "block";
         _key: string;
@@ -1756,6 +4728,3225 @@ export type ServiceQueryResult = {
     _rev: string;
     name?: string;
     link?: Link;
+    logo?: {
+      default?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      light?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      dark?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    content?: Array<
+      | ({
+          _key: string;
+        } & Callout)
+      | ({
+          _key: string;
+        } & CardGrid)
+      | ({
+          _key: string;
+        } & Highlight)
+      | ({
+          _key: string;
+        } & LongFormText)
+      | ({
+          _key: string;
+        } & ServicesCardList)
+      | ({
+          _key: string;
+        } & Tabs)
+      | ({
+          _key: string;
+        } & WorkCardList)
+    >;
+    type?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "skosConcept";
+    };
+    industryVertical?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "skosConcept";
+    };
+  }> | null;
+  servicePillar: {
+    _id: string;
+    _type: "servicePillar";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+  } | null;
+  language?: string;
+  metadata?: Metadata;
+} | null;
+// Variable: workQuery
+// Query: *[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{  ...,  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
+export type WorkQueryResult = {
+  _id: string;
+  _type: "referenceCase";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  introImage: {
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  duration?: string;
+  content: Array<
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards?: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          _type: "card";
+          _key: string;
+        }>;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards?: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          _type: "card";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          _type: "card";
+          _key: string;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          _type: "card";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups?: Array<{
+          title?: string;
+          services?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "service";
+          }>;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }>;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups: Array<{
+          title?: string;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups?: Array<{
+          title?: string;
+          services?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "service";
+          }>;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups: Array<{
+          title?: string;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+      }
+  > | null;
+  technologies: Array<{
+    _id: string;
+    _type: "technology";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
     logo: {
       default: {
         asset: {
@@ -1839,734 +8030,482 @@ export type ServiceQueryResult = {
         _type: "image";
       } | null;
     } | null;
-    content?: Array<({
-      _key: string;
-    } & BlogHighlight) | ({
-      _key: string;
-    } & BlogsList) | ({
-      _key: string;
-    } & Callout) | ({
-      _key: string;
-    } & CardGrid) | ({
-      _key: string;
-    } & Highlight) | ({
-      _key: string;
-    } & LongFormText) | ({
-      _key: string;
-    } & ServicesCardList) | ({
-      _key: string;
-    } & Tabs) | ({
-      _key: string;
-    } & WorkCardList)>;
-    type?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "skosConcept";
-    };
-    industryVertical?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "skosConcept";
-    };
-  }> | null;
-  servicePillar: {
-    _id: string;
-    _type: "servicePillar";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-  } | null;
-  language?: string;
-  metadata?: Metadata;
-} | null;
-// Variable: blogPostQuery
-// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  content[] {    ...,    _type == "blogsList" => {      ...,      blogsType == "specific" => {        blogPosts[]->{          ...,          featuredImage{            asset->{...}          },          postType[]->{            prefLabel,            definition          },          author->{            ...,            image{              ...,              asset->{                ...              }            }          },          topic[]->{            prefLabel,            definition          },        }      },    },    _type == "blogHighlight" => {      ...,      blogType == "latest" => {        "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{          ...,          featuredImage{            asset->{...}          },          postType[]->{            prefLabel,            definition          },          author->{            ...,            image{              ...,              asset->{                ...              }            }          },          topic[]->{            prefLabel,            definition          },        }      },      blogType == "specific" => {        blogPost->{          ...,          featuredImage{            asset->{...}          },          postType[]->{            prefLabel,            definition          },          author->{            ...,            image{              ...,              asset->{                ...              }            }          },          topic[]->{            prefLabel,            definition          },        }      },    },    defined(groups) => {      groups[] {        ...,        'services': services[]->{          ...,          image{            ...,            asset->{...}          },        }      }    },    defined(cards) => {      cards[] {        ...,        icon{          ...,          asset->{            ...,          }        }      }    },    _type == "callout" => {      ...,      content[]{        ...,        defined(asset) => {          asset->{...}        }      }    },    _type == "highlight" => {      ...,      defined(image) => {        image{          ...,          asset->{...}        }      }    },     _type == "tabs" => {      ...,      defined(tabsOverview) => {        tabsOverview[]{          ...,          _type == "tab" => {            ...,            "test":"test",            content[]{              ...,              _type == "image" => {                asset->{...}              }            }          }        }      }    },     _type == "longFormText" => {      ...,      defined(content) => {        content[]{          ...,           _type == "image" => {            ...,             asset->{...}           }        }      }    },  }}
-export type BlogPostQueryResult = {
-  _id: string;
-  _type: "blogPost";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: {
-    title?: string;
-    intro?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  };
-  featuredImage: {
-    asset: {
+    partner: {
       _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
-  } | null;
-  publicationDate?: string;
-  author: {
-    _id: string;
-    _type: "person";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    name?: string;
-    jobTitle?: string;
-    contactLink?: Link;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | null;
-  postType: Array<{
-    prefLabel: string | null;
-    definition: string | null;
-  }> | null;
-  topic: Array<{
-    prefLabel: string | null;
-    definition: string | null;
-  }> | null;
-  content: Array<{
-    _key: string;
-    blogPost: {
-      _id: string;
-      _type: "blogPost";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      intro?: {
-        title?: string;
-        intro?: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?: "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: null;
-          level?: number;
-          _type: "block";
-          _key: string;
-        }>;
-      };
-      featuredImage: {
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-      } | null;
-      publicationDate?: string;
-      author: {
-        _id: string;
-        _type: "person";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        name?: string;
-        jobTitle?: string;
-        contactLink?: Link;
-        image: {
-          asset: {
-            _id: string;
-            _type: "sanity.imageAsset";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            originalFilename?: string;
-            label?: string;
-            title?: string;
-            description?: string;
-            altText?: string;
-            sha1hash?: string;
-            extension?: string;
-            mimeType?: string;
-            size?: number;
-            assetId?: string;
-            uploadId?: string;
-            path?: string;
-            url?: string;
-            metadata?: SanityImageMetadata;
-            source?: SanityAssetSourceData;
-          } | null;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        } | null;
-      } | null;
-      postType: Array<{
-        prefLabel: string | null;
-        definition: string | null;
-      }> | null;
-      topic: Array<{
-        prefLabel: string | null;
-        definition: string | null;
-      }> | null;
-      content?: Array<({
-        _key: string;
-      } & BlogHighlight) | ({
-        _key: string;
-      } & BlogsList) | ({
-        _key: string;
-      } & Callout) | ({
-        _key: string;
-      } & CardGrid) | ({
-        _key: string;
-      } & Highlight) | ({
-        _key: string;
-      } & LongFormText) | ({
-        _key: string;
-      } & ServicesCardList) | ({
-        _key: string;
-      } & Tabs) | ({
-        _key: string;
-      } & WorkCardList)>;
-      metadata?: Metadata;
-      language?: string;
-    } | null;
-    groups: null;
-    cards: null;
-  } | {
-    _key: string;
-    blogPosts: Array<{
-      _id: string;
-      _type: "blogPost";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      intro?: {
-        title?: string;
-        intro?: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?: "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: null;
-          level?: number;
-          _type: "block";
-          _key: string;
-        }>;
-      };
-      featuredImage: {
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-      } | null;
-      publicationDate?: string;
-      author: {
-        _id: string;
-        _type: "person";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        name?: string;
-        jobTitle?: string;
-        contactLink?: Link;
-        image: {
-          asset: {
-            _id: string;
-            _type: "sanity.imageAsset";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            originalFilename?: string;
-            label?: string;
-            title?: string;
-            description?: string;
-            altText?: string;
-            sha1hash?: string;
-            extension?: string;
-            mimeType?: string;
-            size?: number;
-            assetId?: string;
-            uploadId?: string;
-            path?: string;
-            url?: string;
-            metadata?: SanityImageMetadata;
-            source?: SanityAssetSourceData;
-          } | null;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        } | null;
-      } | null;
-      postType: Array<{
-        prefLabel: string | null;
-        definition: string | null;
-      }> | null;
-      topic: Array<{
-        prefLabel: string | null;
-        definition: string | null;
-      }> | null;
-      content?: Array<({
-        _key: string;
-      } & BlogHighlight) | ({
-        _key: string;
-      } & BlogsList) | ({
-        _key: string;
-      } & Callout) | ({
-        _key: string;
-      } & CardGrid) | ({
-        _key: string;
-      } & Highlight) | ({
-        _key: string;
-      } & LongFormText) | ({
-        _key: string;
-      } & ServicesCardList) | ({
-        _key: string;
-      } & Tabs) | ({
-        _key: string;
-      } & WorkCardList)>;
-      metadata?: Metadata;
-      language?: string;
-    }> | null;
-    groups: null;
-    cards: null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    content: Array<{
-      _key: string;
-    } | {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-    }> | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    content: Array<{
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | {
-      richText?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: null;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-      _type: "textObject";
-      asset: null;
-    }> | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-    tabsOverview: Array<{
-      _key: string;
-      test: "test";
-      content: Array<{
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      } | {
-        content?: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?: "h3" | "h4" | "h5" | "h6" | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: null;
-          level?: number;
-          _type: "block";
-          _key: string;
-        }>;
-        _type: "content";
-      }> | null;
-    }> | null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: null;
-  } | {
-    _key: string;
-    groups: null;
-    cards: Array<{
-      title?: string;
-      content?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: null;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-      icon: {
-        asset: {
-          _id: string;
-          _type: "sanity.imageAsset";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      } | null;
-      _type: "card";
-    }> | null;
-  } | {
-    _key: string;
-    groups: Array<{
-      title?: string;
-      services: Array<{
-        _id: string;
-        _type: "service";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        intro?: Intro;
-        image: {
-          asset: {
-            _id: string;
-            _type: "sanity.imageAsset";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            originalFilename?: string;
-            label?: string;
-            title?: string;
-            description?: string;
-            altText?: string;
-            sha1hash?: string;
-            extension?: string;
-            mimeType?: string;
-            size?: number;
-            assetId?: string;
-            uploadId?: string;
-            path?: string;
-            url?: string;
-            metadata?: SanityImageMetadata;
-            source?: SanityAssetSourceData;
-          } | null;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        } | null;
-        challenge?: string;
-        cta?: Cta;
-        content?: Array<({
-          _key: string;
-        } & BlogHighlight) | ({
-          _key: string;
-        } & BlogsList) | ({
-          _key: string;
-        } & Callout) | ({
-          _key: string;
-        } & CardGrid) | ({
-          _key: string;
-        } & Highlight) | ({
-          _key: string;
-        } & LongFormText) | ({
-          _key: string;
-        } & ServicesCardList) | ({
-          _key: string;
-        } & Tabs) | ({
-          _key: string;
-        } & WorkCardList)>;
-        faqs?: Faq;
-        customerReferences?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "company";
-        }>;
-        servicePillar?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "servicePillar";
-        };
-        language?: string;
-        metadata?: Metadata;
-      }> | null;
-      _type: "servicesCardListGroup";
-    }> | null;
-    cards: null;
-  }> | null;
-  metadata?: Metadata;
-  language?: string;
-} | null;
-// Variable: blogsListQuery
-// Query: {  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...3]{    _id,    featuredImage{      asset->{...}    },    postType[]->{      prefLabel,      definition    },    author->{      ...,      image{        ...,        asset->{          ...        }      }    },    topic[]->{      prefLabel,      definition    },    metadata,    publicationDate,    _createdAt,    intro  },  "totalItems": count(*[_type == "blogPost" && language == $language])}
-export type BlogsListQueryResult = {
-  blogPosts: Array<{
-    _id: string;
-    featuredImage: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
-      } | null;
-    } | null;
-    postType: Array<{
-      prefLabel: string | null;
-      definition: string | null;
-    }> | null;
-    author: {
-      _id: string;
-      _type: "person";
+      _type: "company";
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       name?: string;
-      jobTitle?: string;
-      contactLink?: Link;
+      link?: Link;
+      logo?: {
+        default?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        light?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        dark?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      };
+      content?: Array<
+        | ({
+            _key: string;
+          } & Callout)
+        | ({
+            _key: string;
+          } & CardGrid)
+        | ({
+            _key: string;
+          } & Highlight)
+        | ({
+            _key: string;
+          } & LongFormText)
+        | ({
+            _key: string;
+          } & ServicesCardList)
+        | ({
+            _key: string;
+          } & Tabs)
+        | ({
+            _key: string;
+          } & WorkCardList)
+      >;
+      type?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "skosConcept";
+      };
+      industryVertical?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "skosConcept";
+      };
+    } | null;
+  }> | null;
+  services: Array<{
+    _id: string;
+    _type: "service";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    intro?: Intro;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    challenge?: string;
+    cta?: Cta;
+    content?: Array<
+      | ({
+          _key: string;
+        } & Callout)
+      | ({
+          _key: string;
+        } & CardGrid)
+      | ({
+          _key: string;
+        } & Highlight)
+      | ({
+          _key: string;
+        } & LongFormText)
+      | ({
+          _key: string;
+        } & ServicesCardList)
+      | ({
+          _key: string;
+        } & Tabs)
+      | ({
+          _key: string;
+        } & WorkCardList)
+    >;
+    faqs?: Faq;
+    customerReferences?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "company";
+    }>;
+    servicePillar?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "servicePillar";
+    };
+    language?: string;
+    metadata?: Metadata;
+  }> | null;
+  collaborationModel: {
+    _id: string;
+    _type: "collaborationModel";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    intro?: Intro;
+    collaborationTabs: Array<{
+      _key: string;
+      _type: "collabTab";
+      concept: {
+        _id: string;
+        _type: "skosConcept";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        prefLabel?: string;
+        definition?: string;
+        example?: string;
+        scopeNote?: string;
+        altLabel?: Array<string>;
+        hiddenLabel?: Array<string>;
+        baseIri?: string;
+        conceptId?: string;
+        broader?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "skosConcept";
+        }>;
+        related?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "skosConcept";
+        }>;
+        historyNote?: string;
+        editorialNote?: string;
+        changeNote?: string;
+      } | null;
+      content?: Array<
+        | {
+            content?: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }>;
+            _type: "content";
+            _key: string;
+          }
+        | {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+            _key: string;
+          }
+      >;
+    }> | null;
+  } | null;
+  relatedCases: Array<{
+    _id: string;
+    _type: "referenceCase";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    intro?: Intro;
+    introImage: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        originalFilename?: string;
+        label?: string;
+        title?: string;
+        description?: string;
+        altText?: string;
+        sha1hash?: string;
+        extension?: string;
+        mimeType?: string;
+        size?: number;
+        assetId?: string;
+        uploadId?: string;
+        path?: string;
+        url?: string;
+        metadata?: SanityImageMetadata;
+        source?: SanityAssetSourceData;
+      } | null;
+    } | null;
+    duration?: string;
+    content?: Array<
+      | ({
+          _key: string;
+        } & Callout)
+      | ({
+          _key: string;
+        } & CardGrid)
+      | ({
+          _key: string;
+        } & Highlight)
+      | ({
+          _key: string;
+        } & LongFormText)
+      | ({
+          _key: string;
+        } & ServicesCardList)
+      | ({
+          _key: string;
+        } & Tabs)
+      | ({
+          _key: string;
+        } & WorkCardList)
+    >;
+    technologies: Array<{
+      _id: string;
+      _type: "technology";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      name?: string;
+      logo?: {
+        default?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        light?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        dark?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      };
+      partner?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "company";
+      };
+    }> | null;
+    services: Array<{
+      _id: string;
+      _type: "service";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      intro?: Intro;
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      challenge?: string;
+      cta?: Cta;
+      content?: Array<
+        | ({
+            _key: string;
+          } & Callout)
+        | ({
+            _key: string;
+          } & CardGrid)
+        | ({
+            _key: string;
+          } & Highlight)
+        | ({
+            _key: string;
+          } & LongFormText)
+        | ({
+            _key: string;
+          } & ServicesCardList)
+        | ({
+            _key: string;
+          } & Tabs)
+        | ({
+            _key: string;
+          } & WorkCardList)
+      >;
+      faqs?: Faq;
+      customerReferences?: Array<{
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        _key: string;
+        [internalGroqTypeReferenceTo]?: "company";
+      }>;
+      servicePillar?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "servicePillar";
+      };
+      language?: string;
+      metadata?: Metadata;
+    }> | null;
+    collaborationModel: {
+      _id: string;
+      _type: "collaborationModel";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      intro?: Intro;
+      collaborationTabs: Array<{
+        _key: string;
+        _type: "collabTab";
+        concept: {
+          _id: string;
+          _type: "skosConcept";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          prefLabel?: string;
+          definition?: string;
+          example?: string;
+          scopeNote?: string;
+          altLabel?: Array<string>;
+          hiddenLabel?: Array<string>;
+          baseIri?: string;
+          conceptId?: string;
+          broader?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "skosConcept";
+          }>;
+          related?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "skosConcept";
+          }>;
+          historyNote?: string;
+          editorialNote?: string;
+          changeNote?: string;
+        } | null;
+        content?: Array<
+          | {
+              content?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "content";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+      }> | null;
+    } | null;
+    relatedCases?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "referenceCase";
+    }>;
+    metadata: {
+      _type: "metadata";
+      slug?: Slug;
+      title?: string;
+      description?: string;
       image: {
         asset: {
           _id: string;
@@ -2594,75 +8533,15 @@ export type BlogsListQueryResult = {
         crop?: SanityImageCrop;
         _type: "image";
       } | null;
+      noIndex?: boolean;
     } | null;
-    topic: Array<{
-      prefLabel: string | null;
-      definition: string | null;
-    }> | null;
-    metadata: Metadata | null;
-    publicationDate: string | null;
-    _createdAt: string;
-    intro: {
-      title?: string;
-      intro?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: null;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-    } | null;
-  }>;
-  totalItems: unknown;
-};
-// Variable: blogsListQueryPaginating
-// Query: *[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...3]{  _id,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  metadata,  publicationDate,  _createdAt,  intro}
-export type BlogsListQueryPaginatingResult = Array<{
-  _id: string;
-  featuredImage: {
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
-  } | null;
-  postType: Array<{
-    prefLabel: string | null;
-    definition: string | null;
+    language?: string;
   }> | null;
-  author: {
-    _id: string;
-    _type: "person";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    name?: string;
-    jobTitle?: string;
-    contactLink?: Link;
+  metadata: {
+    _type: "metadata";
+    slug?: Slug;
+    title?: string;
+    description?: string;
     image: {
       asset: {
         _id: string;
@@ -2690,30 +8569,3118 @@ export type BlogsListQueryPaginatingResult = Array<{
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
+    noIndex?: boolean;
   } | null;
-  topic: Array<{
-    prefLabel: string | null;
-    definition: string | null;
-  }> | null;
-  metadata: Metadata | null;
-  publicationDate: string | null;
+  language?: string;
+} | null;
+// Variable: homePageSlugQuery
+// Query: *[_type == 'siteConfig' && language == $language][0]{  homePage->{    "slug": metadata.slug.current  }}.homePage.slug
+export type HomePageSlugQueryResult = null;
+// Variable: contentPageQuery
+// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
+export type ContentPageQueryResult = {
+  _id: string;
+  _type: "contentPage";
   _createdAt: string;
-  intro: {
-    title?: string;
-    intro?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  content: Array<
+    | {
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  } | null;
-}>;
-
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "callout";
+        intro?: Intro;
+        content: Array<
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+              asset: null;
+            }
+          | {
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "textObject";
+              _key: string;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards?: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          _type: "card";
+          _key: string;
+        }>;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards?: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          _type: "card";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          _type: "card";
+          _key: string;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "cardGrid";
+        intro?: Intro;
+        cards: Array<{
+          title?: string;
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          icon: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          _type: "card";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "highlight";
+        intro?: {
+          title?: string;
+          intro?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h3" | "h4" | "h5" | "h6" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<
+              {
+                _key: string;
+              } & Link
+            >;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        style?: "popping" | "subtle";
+        ctaVisible?: boolean;
+        cta?: Cta;
+        image: {
+          asset: {
+            _id: string;
+            _type: "sanity.imageAsset";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            originalFilename?: string;
+            label?: string;
+            title?: string;
+            description?: string;
+            altText?: string;
+            sha1hash?: string;
+            extension?: string;
+            mimeType?: string;
+            size?: number;
+            assetId?: string;
+            uploadId?: string;
+            path?: string;
+            url?: string;
+            metadata?: SanityImageMetadata;
+            source?: SanityAssetSourceData;
+          } | null;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Youtube)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+        >;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "longFormText";
+        intro?: Intro;
+        standOut?: boolean;
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<
+                {
+                  _key: string;
+                } & Link
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "youtube";
+              url?: string;
+            }
+        > | null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups?: Array<{
+          title?: string;
+          services?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "service";
+          }>;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }>;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups: Array<{
+          title?: string;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups?: Array<{
+          title?: string;
+          services?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "service";
+          }>;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "servicesCardList";
+        intro?: Intro;
+        groups: Array<{
+          title?: string;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          _type: "servicesCardListGroup";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview?: Array<
+          {
+            _key: string;
+          } & Tab
+        >;
+      }
+    | {
+        _key: string;
+        _type: "tabs";
+        intro?: Intro;
+        tabsOverview: Array<{
+          _key: string;
+          _type: "tab";
+          title?: string;
+          content: Array<
+            | {
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<
+                    {
+                      _key: string;
+                    } & Link
+                  >;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "content";
+                _key: string;
+              }
+            | {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                _key: string;
+              }
+          > | null;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases?: Array<{
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          _key: string;
+          [internalGroqTypeReferenceTo]?: "referenceCase";
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "workCardList";
+        intro?: Intro;
+        referenceCases: Array<{
+          _id: string;
+          _type: "referenceCase";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          intro?: Intro;
+          introImage: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          duration?: string;
+          content?: Array<
+            | ({
+                _key: string;
+              } & Callout)
+            | ({
+                _key: string;
+              } & CardGrid)
+            | ({
+                _key: string;
+              } & Highlight)
+            | ({
+                _key: string;
+              } & LongFormText)
+            | ({
+                _key: string;
+              } & ServicesCardList)
+            | ({
+                _key: string;
+              } & Tabs)
+            | ({
+                _key: string;
+              } & WorkCardList)
+          >;
+          technologies: Array<{
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo?: {
+              default?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              light?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+              dark?: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              };
+            };
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          }> | null;
+          services: Array<{
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            cta?: Cta;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            faqs?: Faq;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
+          }> | null;
+          collaborationModel: {
+            _id: string;
+            _type: "collaborationModel";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            collaborationTabs: Array<{
+              _key: string;
+              _type: "collabTab";
+              concept: {
+                _id: string;
+                _type: "skosConcept";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                prefLabel?: string;
+                definition?: string;
+                example?: string;
+                scopeNote?: string;
+                altLabel?: Array<string>;
+                hiddenLabel?: Array<string>;
+                baseIri?: string;
+                conceptId?: string;
+                broader?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                related?: Array<{
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  _key: string;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                }>;
+                historyNote?: string;
+                editorialNote?: string;
+                changeNote?: string;
+              } | null;
+              content?: Array<
+                | {
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "content";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    _key: string;
+                  }
+              >;
+            }> | null;
+          } | null;
+          relatedCases?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "referenceCase";
+          }>;
+          metadata: {
+            _type: "metadata";
+            slug?: Slug;
+            title?: string;
+            description?: string;
+            image: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+              } | null;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            } | null;
+            noIndex?: boolean;
+          } | null;
+          language?: string;
+        }> | null;
+      }
+  > | null;
+  metadata?: Metadata;
+  language?: string;
+} | null;

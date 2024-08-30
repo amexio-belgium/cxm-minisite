@@ -1,7 +1,7 @@
 ---
 import type {
   CardGrid as CardGridType,
-  ServicesCardList,
+  ServicesCardList
 } from "@sanity/sanity.types";
 import CardGrid from "@components/cms-components/CardGrid.astro";
 import ServiceCardList from "@components/cms-components/ServiceCardList.astro";
@@ -12,10 +12,12 @@ import type {
   HighlightReferenced,
   LongFormTextReferenced,
   TabsReferenced,
+  WorkCardListReferenced,
 } from "@sanity/custom.sanity.types";
 import Callout from "@components/cms-components/Callout.astro";
 import LongFormText from "@components/cms-components/LongFormText.astro";
 import HighlightBlock from "@components/cms-components/HighlightBlock/HighlightBlock.astro";
+import WorkCardList from "@components/cms-components/WorkCardList.astro";
 import Tabs from "@components/cms-components/Tabs.astro";
 import BlogHighlight from "@components/cms-components/BlogHighlight/BlogHighlight.astro";
 import BlogsList from "@components/cms-components/BlogsList/BlogsList.astro";
@@ -29,6 +31,7 @@ interface Props {
         | LongFormTextReferenced
         | HighlightReferenced
         | TabsReferenced
+        | WorkCardListReferenced
         | BlogHighlightReferenced
         | BlogsListReferenced
       >
@@ -59,6 +62,9 @@ const { content } = Astro.props;
         }
         case "highlight": {
           return <HighlightBlock highlight={content} />;
+        }
+        case "workCardList": {
+          return <WorkCardList workCardList={content} />;
         }
         case "blogHighlight": {
           return <BlogHighlight blogPost={content} />;
