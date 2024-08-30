@@ -16,8 +16,6 @@ interface Props {
 
 const { caseData, small } = Astro.props;
 
-const preview = isPreview.get();
-
 ---
 
 <div class:list={["motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col justify-stretch gap-8",
@@ -104,7 +102,7 @@ const preview = isPreview.get();
     </div>
     <Button
       class="self-end"
-      link={`${preview ? "/preview" : ""}/${getLocale()}/cases/${caseData?.metadata?.slug?.current}`}
+      link={`/${getLocale()}/${isPreview ? "preview/" : ""}cases/${caseData?.metadata?.slug?.current}`}
       size="sm"
       color="light"
     >

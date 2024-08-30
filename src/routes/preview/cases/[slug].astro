@@ -1,29 +1,29 @@
 ---
-import Base from "@layouts/Base.astro";
-import { workQuery, siteConfigQuery } from "@api/queries";
-import { imageBuilder, loadQuery } from "@api/sanity";
-import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
-import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import Customers from "@components/uicomposition/Customers.astro";
-import { isPreview, siteLanguage } from "src/stores/global-store";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import type {WorkWithReferences} from "@sanity/custom.sanity.types";
-import ProjectMetadata from "@components/uicomposition/ProjectMetadata.astro";
-import TechnologyIcon from "@components/uielements/TechnologyIcon.astro";
+import Base from "../../../layouts/Base.astro";
+import { workQuery, siteConfigQuery } from "../../../api/queries";
+import { imageBuilder, loadQuery } from "../../../api/sanity";
+import SanityComponentsRenderer from "../../../components/cms-components/SanityComponentsRenderer.astro";
+import HeroHeader from "../../../components/uicomposition/HeroHeader.astro";
+import Customers from "../../../components/uicomposition/Customers.astro";
+import type { SiteConfigQueryResult } from "../../../sanity/sanity.types";
+import type {WorkWithReferences} from "../../../sanity/custom.sanity.types";
+import ProjectMetadata from "../../../components/uicomposition/ProjectMetadata.astro";
+import TechnologyIcon from "../../../components/uielements/TechnologyIcon.astro";
 import SanityImg from "@otterstack/sanity-img-astro";
-import {getHrefFromLinkObject} from "@lib/sanityHelpers";
-import CasePreview from '@components/uielements/CasePreview.astro';
+import {getHrefFromLinkObject} from "../../../lib/sanityHelpers";
+import CasePreview from '../../../components/uielements/CasePreview.astro';
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import {getLocale} from "i18n:astro";
 
 export const prerender = false;
-const { lang, slug } = Astro.params;
-if (!lang || !slug) {
+const { slug } = Astro.params;
+if (!slug) {
   return Astro.redirect("/404");
 }
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang.toLowerCase() },
+  params: { language: getLocale() },
 });
 
 if (!siteConfig) {
@@ -32,11 +32,8 @@ if (!siteConfig) {
 
 const { data: workPage } = await loadQuery<WorkWithReferences>({
   query: workQuery,
-  params: { language: lang, slug: slug },
+  params: { language: getLocale(), slug: slug },
 });
-
-siteLanguage.set(lang.toLowerCase());
-isPreview.set(true);
 ---
 
 <Base
@@ -83,7 +80,7 @@ isPreview.set(true);
             technologies={workPage.technologies}>
         {
             workPage.technologies?.map((technology) => (
-            <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, lang, true) : undefined}>
+            <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, getLocale(), true) : undefined}>
                 <SanityImg
                         src={technology?.logo?.default as SanityImageSource}
                         alt={technology?.logo?.default?.asset?.altTexts?.[workPage.language || "en"] || ""}

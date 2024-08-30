@@ -1,30 +1,29 @@
 import type {
-    AnswerQuestion,
-    BlogPost,
-    Callout,
-    CardGrid,
-    CollaborationModel,
-    CollabTab,
-    Cta,
-    Faq,
-    Geopoint,
-    Highlight,
-    internalGroqTypeReferenceTo,
-    Intro,
-    Link,
-    LongFormText,
-    Metadata,
-    ReferenceCase,
-    SanityImageAsset,
-    SanityImageCrop,
-    SanityImageHotspot,
-    ServicePillar,
-    ServicesCardList,
-    SkosConcept,
-    Tabs,
-    Technology,
-    WorkCardList,
-    Youtube,
+  AnswerQuestion,
+  Callout,
+  CardGrid,
+  CollaborationModel,
+  CollabTab,
+  Cta,
+  Faq,
+  Geopoint,
+  Highlight,
+  internalGroqTypeReferenceTo,
+  Intro,
+  Link,
+  LongFormText,
+  Metadata,
+  ReferenceCase,
+  SanityImageAsset,
+  SanityImageCrop,
+  SanityImageHotspot,
+  ServicePillar,
+  ServicesCardList,
+  SkosConcept,
+  Tabs,
+  Technology,
+  WorkCardList,
+  Youtube,
 } from "./sanity.types";
 
 export interface LinkObjectReferenced {
@@ -450,7 +449,7 @@ export interface ServiceWithReferences {
 
 export interface WorkWithReferences {
     _type: "works";
-    language?: string;
+    language?: "en" | "nl" | "fr";
     customerReferencesText?: string;
     content?: Array<
         | ServicesCardList
