@@ -73,7 +73,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
         <>
           <SanityImg
             src={testimonial.person?.image?.asset?._id as SanityImageSource}
-            alt={testimonial.person?.image?.asset?.altTexts?.[getLocale() || "en"] || ""}
+            alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
             class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
             loading="lazy"
             sizes="(min-width:768px) 50vw, 100vw"
