@@ -14,6 +14,7 @@ import type {
   Link,
   LongFormText,
   Metadata,
+  Person,
   ReferenceCase,
   SanityImageAsset,
   SanityImageCrop,
@@ -23,6 +24,7 @@ import type {
   SkosConcept,
   Tabs,
   Technology,
+  Testimonial,
   WorkCardList,
   Youtube,
 } from "./sanity.types";
@@ -500,6 +502,10 @@ export type FaqsReferenced = {
   title?: string;
   questions?: AnswerQuestion[];
 };
+
+export type TestimonialReferenced = Omit<Testimonial, 'person'> & {
+  person: PersonReferenced
+}
 
 export type TechnologyReferenced = Omit<Technology, 'logo' | 'partner'> & {
   logo?: {
