@@ -13,7 +13,9 @@ const lang = getLangFromUrl(Astro.url);
 
 ---
 <html class="overflow-x-clip" lang={lang} >
+
     <head>
+        
         <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
         {
             page == "contact" && 

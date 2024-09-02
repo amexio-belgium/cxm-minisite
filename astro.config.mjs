@@ -4,8 +4,9 @@ import sitemap from '@astrojs/sitemap';
 
 import tailwind from "@astrojs/tailwind";
 import qwikdev from '@qwikdev/astro';
-
-// https://astro.build/config
+import { loadEnv } from "vite";
+const { PUBLIC_ASTRO_BASE_PATH } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
+const basePath = PUBLIC_ASTRO_BASE_PATH && PUBLIC_ASTRO_BASE_PATH !== '' ? PUBLIC_ASTRO_BASE_PATH : '/'
 export default defineConfig({
   site: 'https://dreamy-trifle-7f42a6.netlify.app',
   integrations: [
@@ -15,5 +16,6 @@ export default defineConfig({
     tailwind({
        nesting: true,
     })
-  ]
+  ],
+  base: basePath
 });
