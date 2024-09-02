@@ -38,6 +38,15 @@ const contentQuery = groq`content[] {
       }
     }
   },
+  _type == "testimonial" => {
+    person->{
+      ...,
+      image {
+        ...,
+        asset->{...}
+      }
+    }
+  },
   defined(cards) => {
     cards[] {
       ...,

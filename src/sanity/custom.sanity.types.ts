@@ -1,29 +1,31 @@
 import type {
-    AnswerQuestion,
-    Callout,
-    CardGrid,
-    CollaborationModel,
-    CollabTab,
-    Cta,
-    Faq,
-    Geopoint,
-    Highlight,
-    internalGroqTypeReferenceTo,
-    Intro,
-    Link,
-    LongFormText,
-    Metadata,
-    ReferenceCase,
-    SanityImageAsset,
-    SanityImageCrop,
-    SanityImageHotspot,
-    ServicePillar,
-    ServicesCardList,
-    SkosConcept,
-    Tabs,
-    Technology,
-    WorkCardList,
-    Youtube,
+  AnswerQuestion,
+  Callout,
+  CardGrid,
+  CollaborationModel,
+  CollabTab,
+  Cta,
+  Faq,
+  Geopoint,
+  Highlight,
+  internalGroqTypeReferenceTo,
+  Intro,
+  Link,
+  LongFormText,
+  Metadata,
+  Person,
+  ReferenceCase,
+  SanityImageAsset,
+  SanityImageCrop,
+  SanityImageHotspot,
+  ServicePillar,
+  ServicesCardList,
+  SkosConcept,
+  Tabs,
+  Technology,
+  Testimonial,
+  WorkCardList,
+  Youtube,
 } from "./sanity.types";
 
 export interface LinkObjectReferenced {
@@ -443,6 +445,13 @@ export type FaqsReferenced = {
   questions?: AnswerQuestion[];
 };
 
+export type TestimonialReferenced = Omit<Testimonial, 'person'> & {
+  person: PersonReferenced
+}
+
+export type PersonReferenced = Omit<Person, 'image'> & {
+  image: i18nImage
+}
 export type TechnologyReferenced = Omit<Technology, 'logo' | 'partner'> & {
   logo?: {
     default: i18nImage | null;

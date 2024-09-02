@@ -19,11 +19,10 @@ const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   params: { language: lang!.toLowerCase() },
 });
 
-if (!siteConfig) {
+if (!siteConfig || !siteConfig?.homePage?.slug) {
   return new Response(null, { status: 404 });
 }
 
-// @ts-ignore: homepage structure not yet in scheme
 const slug = siteConfig?.homePage?.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
@@ -41,7 +40,6 @@ isPreview.set(true);
   slug={slug!}
   siteConfig={siteConfig}
 >
-
   <HeroHeader
     headline={contentPage.intro?.title}
     text={contentPage.intro?.intro}
