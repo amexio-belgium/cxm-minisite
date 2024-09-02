@@ -1,0 +1,10 @@
+---
+import type { Block, Props as PortableProps } from "astro-portabletext/types";
+import { YouTube } from 'astro-embed';
+
+interface Props extends PortableProps<Block> {}
+
+const props: Props = Astro.props;
+
+---
+<YouTube class="w-screen" id={(props.node as unknown as { url: string }).url} />
