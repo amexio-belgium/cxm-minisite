@@ -179,6 +179,12 @@ export type SiteConfig = {
   _updatedAt: string;
   _rev: string;
   siteName?: string;
+  homePage?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "contentPage";
+  };
   headerNavigation?: {
     _ref: string;
     _type: "reference";
@@ -227,6 +233,34 @@ export type SiteConfig = {
     _key: string;
   }>;
   language?: string;
+};
+
+export type Testimonial = {
+  _type: "testimonial";
+  intro?: Intro;
+  textObject?: {
+    richText?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  person?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "person";
+  };
+  variant?: "flat" | "glass";
 };
 
 export type Technology = {
@@ -636,6 +670,9 @@ export type ReferenceCase = {
       } & Tabs)
     | ({
         _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
       } & WorkCardList)
   >;
   technologies?: Array<{
@@ -743,6 +780,9 @@ export type BlogPost = {
       } & Tabs)
     | ({
         _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
       } & WorkCardList)
   >;
   metadata?: Metadata;
@@ -784,74 +824,6 @@ export type Navigation = {
     _type: "linkObject";
     _key: string;
   }>;
-  language?: string;
-};
-
-export type AnswerQuestion = {
-  _id: string;
-  _type: "answerQuestion";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  question?: string;
-  answer?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<
-      {
-        _key: string;
-      } & Link
-    >;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  language?: string;
-};
-
-export type InternationalizedArrayReference = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayReferenceValue
->;
-
-export type ContentPage = {
-  _id: string;
-  _type: "contentPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: Intro;
-  content?: Array<
-    | ({
-        _key: string;
-      } & Highlight)
-    | ({
-        _key: string;
-      } & CardGrid)
-    | ({
-        _key: string;
-      } & Callout)
-    | ({
-        _key: string;
-      } & LongFormText)
-    | ({
-        _key: string;
-      } & ServicesCardList)
-    | ({
-        _key: string;
-      } & Tabs)
-    | ({
-        _key: string;
-      } & WorkCardList)
-  >;
-  metadata?: Metadata;
   language?: string;
 };
 
@@ -919,6 +891,9 @@ export type Company = {
       } & Tabs)
     | ({
         _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
       } & WorkCardList)
   >;
   type?: {
@@ -935,36 +910,32 @@ export type Company = {
   };
 };
 
-export type Link = {
-  _type: "link";
-  text?: string;
-  type?: string;
-  internalLink?:
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "service";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "company";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      };
-  url?: string;
-  email?: string;
-  phone?: string;
-  value?: string;
-  blank?: boolean;
-  parameters?: string;
-  anchor?: string;
+export type AnswerQuestion = {
+  _id: string;
+  _type: "answerQuestion";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  question?: string;
+  answer?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  language?: string;
 };
 
 export type Service = {
@@ -1008,9 +979,13 @@ export type Service = {
       } & Tabs)
     | ({
         _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
       } & WorkCardList)
   >;
   faqs?: Faq;
+  customerReferencesText?: string;
   customerReferences?: Array<{
     _ref: string;
     _type: "reference";
@@ -1026,25 +1001,6 @@ export type Service = {
   };
   language?: string;
   metadata?: Metadata;
-};
-
-export type Metadata = {
-  _type: "metadata";
-  slug?: Slug;
-  title?: string;
-  description?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  noIndex?: boolean;
 };
 
 export type ServicePillar = {
@@ -1072,6 +1028,87 @@ export type Cta = {
   _type: "cta";
   text?: string;
   link?: Link;
+};
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayReferenceValue
+>;
+
+export type Link = {
+  _type: "link";
+  text?: string;
+  type?: string;
+  internalLink?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "contentPage";
+  };
+  url?: string;
+  email?: string;
+  phone?: string;
+  value?: string;
+  blank?: boolean;
+  parameters?: string;
+  anchor?: string;
+};
+
+export type ContentPage = {
+  _id: string;
+  _type: "contentPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: Intro;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
+      } & WorkCardList)
+  >;
+  metadata?: Metadata;
+  language?: string;
+};
+
+export type Metadata = {
+  _type: "metadata";
+  slug?: Slug;
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  noIndex?: boolean;
 };
 
 export type SanityImageCrop = {
@@ -1240,6 +1277,7 @@ export type AllSanitySchemaTypes =
   | Youtube
   | WorkCardList
   | SiteConfig
+  | Testimonial
   | Technology
   | Tabs
   | SolutionDomain
@@ -1255,16 +1293,16 @@ export type AllSanitySchemaTypes =
   | BlogPost
   | Person
   | Navigation
-  | AnswerQuestion
-  | InternationalizedArrayReference
-  | ContentPage
   | Company
-  | Link
+  | AnswerQuestion
   | Service
-  | Metadata
   | ServicePillar
   | Faq
   | Cta
+  | InternationalizedArrayReference
+  | Link
+  | ContentPage
+  | Metadata
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
@@ -1286,6 +1324,9 @@ export type SiteConfigQueryResult = {
   _updatedAt: string;
   _rev: string;
   siteName?: string;
+  homePage: {
+    slug: string | null;
+  } | null;
   headerNavigation?: {
     _ref: string;
     _type: "reference";
@@ -1350,10 +1391,9 @@ export type SiteConfigQueryResult = {
     _key: string;
   }>;
   language?: string;
-  homePage: null;
 } | null;
 // Variable: navigationQuery
-// Query: *[_type == "navigation" && _id == $navigationId][0]{                                        ...,                                         links[]{title, linkObject{..., internalLink->{...}}}                                    }                                    
+// Query: *[_type == "navigation" && _id == $navigationId][0]{                                        ...,                                         links[]{title, linkObject{..., internalLink->{...}}}                                    }
 export type NavigationQueryResult = {
   _id: string;
   _type: "navigation";
@@ -1367,180 +1407,42 @@ export type NavigationQueryResult = {
       _type: "link";
       text?: string;
       type?: string;
-      internalLink:
-        | {
-            _id: string;
-            _type: "company";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            link?: Link;
-            logo?: {
-              default?: {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
-              light?: {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
-              dark?: {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                _type: "image";
-              };
-            };
-            content?: Array<
-              | ({
-                  _key: string;
-                } & Callout)
-              | ({
-                  _key: string;
-                } & CardGrid)
-              | ({
-                  _key: string;
-                } & Highlight)
-              | ({
-                  _key: string;
-                } & LongFormText)
-              | ({
-                  _key: string;
-                } & ServicesCardList)
-              | ({
-                  _key: string;
-                } & Tabs)
-              | ({
-                  _key: string;
-                } & WorkCardList)
-            >;
-            type?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "skosConcept";
-            };
-            industryVertical?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "skosConcept";
-            };
-          }
-        | {
-            _id: string;
-            _type: "contentPage";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            intro?: Intro;
-            content?: Array<
-              | ({
-                  _key: string;
-                } & Callout)
-              | ({
-                  _key: string;
-                } & CardGrid)
-              | ({
-                  _key: string;
-                } & Highlight)
-              | ({
-                  _key: string;
-                } & LongFormText)
-              | ({
-                  _key: string;
-                } & ServicesCardList)
-              | ({
-                  _key: string;
-                } & Tabs)
-              | ({
-                  _key: string;
-                } & WorkCardList)
-            >;
-            metadata?: Metadata;
-            language?: string;
-          }
-        | {
-            _id: string;
-            _type: "service";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            intro?: Intro;
-            image?: {
-              asset?: {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-              };
-              hotspot?: SanityImageHotspot;
-              crop?: SanityImageCrop;
-              _type: "image";
-            };
-            challenge?: string;
-            cta?: Cta;
-            content?: Array<
-              | ({
-                  _key: string;
-                } & Callout)
-              | ({
-                  _key: string;
-                } & CardGrid)
-              | ({
-                  _key: string;
-                } & Highlight)
-              | ({
-                  _key: string;
-                } & LongFormText)
-              | ({
-                  _key: string;
-                } & ServicesCardList)
-              | ({
-                  _key: string;
-                } & Tabs)
-              | ({
-                  _key: string;
-                } & WorkCardList)
-            >;
-            faqs?: Faq;
-            customerReferences?: Array<{
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
+      internalLink: {
+        _id: string;
+        _type: "contentPage";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        intro?: Intro;
+        content?: Array<
+          | ({
               _key: string;
-              [internalGroqTypeReferenceTo]?: "company";
-            }>;
-            servicePillar?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "servicePillar";
-            };
-            language?: string;
-            metadata?: Metadata;
-          }
-        | null;
+            } & Callout)
+          | ({
+              _key: string;
+            } & CardGrid)
+          | ({
+              _key: string;
+            } & Highlight)
+          | ({
+              _key: string;
+            } & LongFormText)
+          | ({
+              _key: string;
+            } & ServicesCardList)
+          | ({
+              _key: string;
+            } & Tabs)
+          | ({
+              _key: string;
+            } & Testimonial)
+          | ({
+              _key: string;
+            } & WorkCardList)
+        >;
+        metadata?: Metadata;
+        language?: string;
+      } | null;
       url?: string;
       email?: string;
       phone?: string;
@@ -1553,10 +1455,10 @@ export type NavigationQueryResult = {
   language?: string;
 } | null;
 // Variable: contentQuery
-// Query: content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}
+// Query: content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}
 export type ContentQueryResult = never;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -3029,9 +2931,13 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -3133,9 +3039,13 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -3454,6 +3364,246 @@ export type ServiceQueryResult = {
       }
     | {
         _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+      }
+    | {
+        _key: string;
         _type: "workCardList";
         intro?: Intro;
         referenceCases?: Array<{
@@ -3524,6 +3674,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & Testimonial)
             | ({
                 _key: string;
               } & WorkCardList)
@@ -3618,9 +3771,13 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -3836,6 +3993,9 @@ export type ServiceQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -3928,9 +4088,13 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -4145,6 +4309,9 @@ export type ServiceQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -4237,9 +4404,13 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -4453,6 +4624,9 @@ export type ServiceQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -4545,9 +4719,13 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -4720,6 +4898,7 @@ export type ServiceQueryResult = {
       language?: string;
     }> | null;
   } | null;
+  customerReferencesText?: string;
   customerReferences: Array<{
     _id: string;
     _type: "company";
@@ -4784,6 +4963,9 @@ export type ServiceQueryResult = {
         } & Tabs)
       | ({
           _key: string;
+        } & Testimonial)
+      | ({
+          _key: string;
         } & WorkCardList)
     >;
     type?: {
@@ -4811,7 +4993,7 @@ export type ServiceQueryResult = {
   metadata?: Metadata;
 } | null;
 // Variable: workQuery
-// Query: *[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{  ...,  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
+// Query: *[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{  ...,  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
 export type WorkQueryResult = {
   _id: string;
   _type: "referenceCase";
@@ -6280,9 +6462,13 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -6384,9 +6570,13 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -6705,6 +6895,246 @@ export type WorkQueryResult = {
       }
     | {
         _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+      }
+    | {
+        _key: string;
         _type: "workCardList";
         intro?: Intro;
         referenceCases?: Array<{
@@ -6775,6 +7205,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & Testimonial)
             | ({
                 _key: string;
               } & WorkCardList)
@@ -6869,9 +7302,13 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -7087,6 +7524,9 @@ export type WorkQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -7179,9 +7619,13 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -7396,6 +7840,9 @@ export type WorkQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -7488,9 +7935,13 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -7704,6 +8155,9 @@ export type WorkQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -7796,9 +8250,13 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -8094,6 +8552,9 @@ export type WorkQueryResult = {
           } & Tabs)
         | ({
             _key: string;
+          } & Testimonial)
+        | ({
+            _key: string;
           } & WorkCardList)
       >;
       type?: {
@@ -8151,9 +8612,13 @@ export type WorkQueryResult = {
         } & Tabs)
       | ({
           _key: string;
+        } & Testimonial)
+      | ({
+          _key: string;
         } & WorkCardList)
     >;
     faqs?: Faq;
+    customerReferencesText?: string;
     customerReferences?: Array<{
       _ref: string;
       _type: "reference";
@@ -8303,6 +8768,9 @@ export type WorkQueryResult = {
         } & Tabs)
       | ({
           _key: string;
+        } & Testimonial)
+      | ({
+          _key: string;
         } & WorkCardList)
     >;
     technologies: Array<{
@@ -8395,9 +8863,13 @@ export type WorkQueryResult = {
           } & Tabs)
         | ({
             _key: string;
+          } & Testimonial)
+        | ({
+            _key: string;
           } & WorkCardList)
       >;
       faqs?: Faq;
+      customerReferencesText?: string;
       customerReferences?: Array<{
         _ref: string;
         _type: "reference";
@@ -8575,9 +9047,9 @@ export type WorkQueryResult = {
 } | null;
 // Variable: homePageSlugQuery
 // Query: *[_type == 'siteConfig' && language == $language][0]{  homePage->{    "slug": metadata.slug.current  }}.homePage.slug
-export type HomePageSlugQueryResult = null;
+export type HomePageSlugQueryResult = string | null;
 // Variable: contentPageQuery
-// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
+// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  content[] {  ...,  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
 export type ContentPageQueryResult = {
   _id: string;
   _type: "contentPage";
@@ -10021,9 +10493,13 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -10125,9 +10601,13 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -10446,6 +10926,246 @@ export type ContentPageQueryResult = {
       }
     | {
         _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "testimonial";
+        intro?: Intro;
+        textObject?: {
+          richText?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+        };
+        person: {
+          _id: string;
+          _type: "person";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          jobTitle?: string;
+          contactLink?: Link;
+          image: {
+            asset: {
+              _id: string;
+              _type: "sanity.imageAsset";
+              _createdAt: string;
+              _updatedAt: string;
+              _rev: string;
+              originalFilename?: string;
+              label?: string;
+              title?: string;
+              description?: string;
+              altText?: string;
+              sha1hash?: string;
+              extension?: string;
+              mimeType?: string;
+              size?: number;
+              assetId?: string;
+              uploadId?: string;
+              path?: string;
+              url?: string;
+              metadata?: SanityImageMetadata;
+              source?: SanityAssetSourceData;
+            } | null;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+        variant?: "flat" | "glass";
+      }
+    | {
+        _key: string;
         _type: "workCardList";
         intro?: Intro;
         referenceCases?: Array<{
@@ -10516,6 +11236,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & Testimonial)
             | ({
                 _key: string;
               } & WorkCardList)
@@ -10610,9 +11333,13 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -10828,6 +11555,9 @@ export type ContentPageQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -10920,9 +11650,13 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -11137,6 +11871,9 @@ export type ContentPageQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -11229,9 +11966,13 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -11445,6 +12186,9 @@ export type ContentPageQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & Testimonial)
+            | ({
+                _key: string;
               } & WorkCardList)
           >;
           technologies: Array<{
@@ -11537,9 +12281,13 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
                 } & WorkCardList)
             >;
             faqs?: Faq;
+            customerReferencesText?: string;
             customerReferences?: Array<{
               _ref: string;
               _type: "reference";
@@ -11684,3 +12432,17 @@ export type ContentPageQueryResult = {
   metadata?: Metadata;
   language?: string;
 } | null;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    '*[_type == "siteConfig" && language == $language][0]{\n  ...,\n  homePage->{\n    "slug": metadata.slug.current\n  },\n  socials[]{\n    ...,\n    icon{\n      asset->{\n        ...,\n        altTexts{...},\n        descriptions{...},\n        titles{...}\n      }\n    },\n  }\n}': SiteConfigQueryResult;
+    '*[_type == "navigation" && _id == $navigationId][0]{\n                                        ..., \n                                        links[]{title, linkObject{..., internalLink->{...}}}\n                                    }\n                                    ': NavigationQueryResult;
+    'content[] {\n  ...,\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}': ContentQueryResult;
+    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  content[] {\n  ...,\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': ServiceQueryResult;
+    '*[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{\n  ...,\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  content[] {\n  ...,\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': WorkQueryResult;
+    "*[_type == 'siteConfig' && language == $language][0]{\n  homePage->{\n    \"slug\": metadata.slug.current\n  }\n}.homePage.slug": HomePageSlugQueryResult;
+    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  content[] {\n  ...,\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': ContentPageQueryResult;
+  }
+}
