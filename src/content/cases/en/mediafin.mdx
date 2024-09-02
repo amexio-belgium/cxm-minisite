@@ -27,8 +27,6 @@ import ContentImage  from "@components/uielements/ContentImage.astro"
 import Youtube from '@components/uielements/Youtube.astro'
 
 import { Image } from 'astro:assets';
-import kbc from '@assets/logos/kbc_logo.png';
-import explainer from '@assets/images/mediafin-story.jpg';
 import aem_square from '@assets/logos/technologies/aem_square.png';
 import react_square from '@assets/logos/technologies/react_square.png'; 
 
@@ -53,18 +51,20 @@ import react_square from '@assets/logos/technologies/react_square.png';
     </TechnologyIcon>
 </ProjectMetadata>
 
-<TeaserWithImage 
-    headline="The challenge"
-    description="
-    <p>As digital technology changes the relationship between readers and media outlets, Mediafin looked for new ways to customize online experiences, engage readers and convert them into loyal media consumers.</p>
-    <p>One of the main challenges was therefore to develop a system in which experiences could be composed in a <strong>flexible and easy-to-use</strong> way, starting from a diverse landscape of content and data sources and ensuring <strong>fast delivery</strong> of these experiences to the reader.</p>
-    <p>When it comes to the content authoring side, Mediafin is using a specialized CMS, tailored to the editorial workflow of it's journalists and editors. The goal was not to replace this CMS, but rather to built an actual <strong>News Delivery Platform</strong>, focused on composing experiences based on the content managed in the existing CMS.</p>
-    ">
-    <Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
-</TeaserWithImage>
-
 <LayoutSection>
     <LayoutSubsection>
+        <ContentHeadline headlineTag="h2">The challenge</ContentHeadline>
+        <ContentText>
+            <p>As digital technology changes the relationship between readers and media outlets, Mediafin looked for new ways to customize online experiences, engage readers and convert them into loyal media consumers.</p>
+            <p>One of the main challenges was therefore to develop a system in which experiences could be composed in a <strong>flexible and easy-to-use</strong> way, starting from a diverse landscape of content and data sources and ensuring <strong>fast delivery</strong> of these experiences to the reader.</p>
+
+            <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
+                src='/src/assets/images/mediafin-story.jpg' 
+                width="796"
+                height="322"/>
+
+            <p>When it comes to the content authoring side, Mediafin is using a specialized CMS, tailored to the editorial workflow of it's journalists and editors. The goal was not to replace this CMS, but rather to built an actual <strong>News Delivery Platform</strong>, focused on composing experiences based on the content managed in the existing CMS.</p>
+        </ContentText>
         <ContentHeadline headlineTag="h2">Solution overview</ContentHeadline>
         <ContentText>
             <p>In the first phase of the project, AmeXio launched the news portals for De Tijd and L’Echo, the Dutch and French Mediafin newspapers. Offering a multimedia approach to business, financial markets and political content, these media outlets reach the most influential and most affluent audience in Belgium, with <strong>over 300 000 readers</strong> every day: entrepreneurs, managers and investors, decision makers with considerable spending power.</p>
@@ -73,10 +73,9 @@ import react_square from '@assets/logos/technologies/react_square.png';
             <p>The two websites initially launched in public beta (“primeur”), meaning visitors could switch from the new to the old version and vice versa if desired.</p>
 
             <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
-                        src='/src/assets/images/mediafin-2.jpg' 
-                        width="796"
-                        height="322"
-                />
+                src='/src/assets/images/mediafin-2.jpg' 
+                width="796"
+                height="322"/>
 
             <ContentHeadline headlineTag="h3">Architecture</ContentHeadline>
             <p>After research, AmeXio proposed to develop a decoupled architecture. On the back-end, the existing authoring environment for news articles could be preserved. This environment already allowed headless access via APIs.</p>
@@ -92,13 +91,14 @@ import react_square from '@assets/logos/technologies/react_square.png';
             <p>The AEM front-end is continuously improved to meet changing needs and insights. That's why the platform has a <strong>short release cycle</strong> of at least two deployments per month.</p>
             <p>The attractive front-end of the website is fully <strong>responsive</strong> and optimized for performance and maintainability. React was used to render and display <strong>real-time information</strong> such as stock market figures and search pages. This React code is highly optimized for performance, as the websites process more than <strong>10 million page views</strong> every day. Next to that, the front-end was also highly optimized for SEO.</p>
             <p>After the delivery of the initial version of the websites, additional features were developed according to the priorities as laid down in the backlog. Thanks to this approach, the go-live was realized in a very short time. In the meantime, <strong>additional channels</strong> have also been launched on the platform, such as the new Sabato website.</p>
+
             <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
-            src='/src/assets/images/mediafin-sabato.png' 
-            width="796"
-            height="322" />
+                src='/src/assets/images/mediafin-sabato.png' 
+                width="796"
+                height="322" />
+
             <p>In addition to technical expertise, clear communication between the various (external) parties and stakeholders was essential.</p>
         </ContentText>
-
     </LayoutSubsection>
 </LayoutSection>
 
@@ -118,10 +118,12 @@ import react_square from '@assets/logos/technologies/react_square.png';
             <p>There are also two major advantages in terms of content. First of all, the editing of articles is still done in the Mediafin Headless CMS. The workflow in this system is so specific to the business that it was not advantageous to place the editing process in a new system. This is why Mediafin went for an Adobe-based platform: AEM allows business users to easily provide content to the experience on the homepage and landing pages, making the display <strong>much more dynamic</strong> than in the past. Furthermore, authors can also easily compile news "Dossiers" around a certain topic and bundle relevant articles on-the-fly in any layout without impacting the editorial teams. In the past, this last process required a three-day development work by the web team.</p>
             <p>Because the websites are both Mediafin's product and sales channel, means that they are <strong>business-critical</strong>. It goes without saying that a major focus was therefore placed on optimising the infrastructure and performance when setting up the architecture behind the website. The various components of the news delivery system run in Amazon Web Services (AWS).</p>
         </ContentText>
+
         <ContentImage loading="lazy" class='mx-auto rounded-xl overflow-hidden'
             src='/src/assets/images/mediafin-2.jpg' 
             width="796"
             height="322" />
+
     </LayoutSubsection>
 </LayoutSection>
 
