@@ -6,6 +6,7 @@ import FooterLink from '@components/uielements/FooterLink.astro';
 import LanguageMenu from '@components/qwik/LanguageMenu.tsx'
 import footerimage from "@assets/images/flag.png"
 import { getLangFromUrl, useTranslations } from '../../i18n/utils.ts';
+import { PUBLIC_ASTRO_BASE_PATH } from "../../consts";
 
 const { page } = Astro.props;
 
@@ -64,25 +65,25 @@ const t = useTranslations(lang);
           <div class="z-50 inline-flex items-center justify-start h-12 gap-[1px] md:w-1/3">
             <Link class="focus-visible:!px-0 border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.facebook.com/Amexio/" rel="noopener">
               <svg class="fill-white w-8 h-8">
-                <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-facebook`></use>
+                <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-facebook`></use>
               </svg>
               <span class="sr-only">{t('footer.srvisit')} Facebook</span>
             </Link>
             <Link class="focus-visible:!px-0 border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://twitter.com/AmexioExpertECM" rel="noopener">
               <svg class="fill-white w-8 h-8">
-                <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-twitter`></use>
+                <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-twitter`></use>
               </svg> 
               <span class="sr-only">{t('footer.srvisit')} X (twitter)</span> 
             </Link>
             <Link class="focus-visible:!px-0 border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.linkedin.com/company/amexio/mycompany/verification/" rel="noopener">
               <svg class="fill-white w-8 h-8">
-                <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-linkedin`></use>
+                <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-linkedin`></use>
               </svg>
               <span class="sr-only">{t('footer.srvisit')} LinkedIn</span>
             </Link>
             <Link class="focus-visible:!px-0 border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="https://www.youtube.com/channel/UC3Gu3APHTiyV3ZjVihs488w" rel="noopener">
               <svg class="fill-white w-8 h-8">
-                <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-youtube`></use>
+                <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-youtube`></use>
               </svg>  
               <span class="sr-only">{t('footer.srvisit')} Youtube</span>
             </Link>
@@ -110,7 +111,7 @@ const t = useTranslations(lang);
         </Link>
         <div class="inline-flex items-center gap-8">
           <svg class="fill-secondary w-6 h-6">
-            <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-slant`></use>
+            <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-slant`></use>
           </svg>  
           <LanguageMenu currentLang={lang} />
         </div>

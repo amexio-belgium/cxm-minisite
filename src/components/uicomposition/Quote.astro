@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 
 import { Image } from 'astro:assets';
+import { PUBLIC_ASTRO_BASE_PATH } from "../../consts";
 
 interface Props {
     quote: string;
@@ -47,7 +48,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
             variant == "flat" ? 
             <div class="flex items-center justify-center w-20 h-20 p-4 bg-white rounded-full motion-safe:group-hover/quote:scale-110 transition-transform ease-in-out duration-300 delay-200">
                 <svg width="40" height="30" aria-hidden="true" focusable="false">
-                    <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
+                    <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
                 </svg>
             </div> 
             <span class="text-sm font-light" set:html={quote}></span>
@@ -55,11 +56,11 @@ const id = "id_" + Math.random().toString(36).slice(2, 11)
             <Image loading="lazy" class="motion-safe:group-hover/quote:scale-105 transition-transform ease-in-out duration-300 absolute rounded-full aspect-square -top-20 left-4 lg:top-[unset] lg:-left-20 w-52 h-52" src={images[profileImage]()} alt={name} />
             <div class="relative p-4">
                 <svg class="absolute w-4 h-4 top-0 left-0"  width="40" height="30" aria-hidden="true" focusable="false">
-                    <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
+                    <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
                 </svg>    
                 <span class="text-sm font-light" set:html={quote}></span>
                 <svg class="rotate-180 absolute w-4 h-4 -bottom-0 -right-0"  width="40" height="30" aria-hidden="true" focusable="false">
-                    <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
+                    <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
                 </svg>    
             </div>
             <footer>

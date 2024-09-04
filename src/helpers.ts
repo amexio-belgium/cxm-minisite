@@ -1,3 +1,5 @@
+import {PUBLIC_ASTRO_BASE_PATH} from "./consts.ts";
+
 export const parseHref = (href: string | URL | undefined | null) => {
   if (href) {
     const hrefString = href.toString();
@@ -10,7 +12,7 @@ export const parseHref = (href: string | URL | undefined | null) => {
       hrefString.startsWith("./") ||
       hrefString.startsWith("../")
       ? href
-      : import.meta.env.PUBLIC_ASTRO_BASE_PATH + href;
+      : PUBLIC_ASTRO_BASE_PATH + href;
   }
   return "";
 };

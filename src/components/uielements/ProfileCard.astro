@@ -3,6 +3,7 @@ import Button from './Button.astro';
 import { Image } from 'astro:assets';
 import Link from './Link.astro'
 import { useTranslations } from 'src/i18n/utils';
+import { PUBLIC_ASTRO_BASE_PATH } from "../../consts";
 
 const { lang } = Astro.params;
 interface Props {
@@ -80,13 +81,13 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
                 <span class="mr-2 text-sm">{t('share.message')}</span>
                 <Link id="linkedin-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
-                        <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-linkedin`></use>
+                        <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-linkedin`></use>
                     </svg>
                     <span class="sr-only">LinkedIn</span>
                 </Link>
                 <Link id="twitter-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
-                        <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-twitter`></use>
+                        <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-twitter`></use>
                     </svg>
                     <span class="sr-only">X(twitter)</span>
                 </Link>
