@@ -9,7 +9,7 @@ const { lang } = Astro.params;
 <div
   class="relative -mt-16 mb-20 inline-block h-fit w-full flex-col items-start justify-start rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 p-4 text-white shadow-sm shadow-blue-200 animate-delay-500 animate-ease-out motion-safe:animate-fade-up md:p-8"
 >
-  <h2 class="mb-6 font-serif text-lg" set:html={t("metadata.headline")} />
+  <h2 class="mb-6 font-serif text-lg">{t("metadata.headline")}</h2>
   <dl
     class="project-metadata mb-8 flex flex-col gap-4 font-serif text-sm lg:flex-row lg:flex-wrap"
   >
@@ -25,7 +25,11 @@ const { lang } = Astro.params;
       collaboration && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
           <dt class="inline lg:block">{t("metadata.collaboration") + ":"}</dt>
-          <dd class="inline lg:block">{collaboration.collaborationTabs.map(tab => tab.concept.prefLabel).join(', ')}</dd>
+          <dd class="inline lg:block">
+            {collaboration.collaborationTabs
+              .map((tab) => tab.concept.prefLabel)
+              .join(", ")}
+          </dd>
         </div>
       )
     }
@@ -33,7 +37,9 @@ const { lang } = Astro.params;
       technologies && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
           <dt class="inline lg:block">{t("metadata.technologies") + ":"}</dt>
-          <dd class="inline lg:block">{technologies.map(technology => technology.name).join(', ')}</dd>
+          <dd class="inline lg:block">
+            {technologies.map((technology) => technology.name).join(", ")}
+          </dd>
         </div>
       )
     }
@@ -41,7 +47,9 @@ const { lang } = Astro.params;
       services && (
         <div class="lg:flex">
           <dt class="inline lg:block">{t("metadata.services") + ":"}</dt>
-          <dd class="inline lg:block">{services.map(service => service.metadata.title).join(', ')}</dd>
+          <dd class="inline lg:block">
+            {services.map((service) => service.metadata.title).join(", ")}
+          </dd>
         </div>
       )
     }
