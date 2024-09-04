@@ -1,21 +1,23 @@
 ---
 import { blogsListQuery } from "@api/queries";
-import { imageBuilder, loadQuery } from "@api/sanity";
+import { loadQuery } from "@api/sanity";
 import type {
   BlogPostWithReferences,
   BlogsListReferenced,
 } from "@sanity/custom.sanity.types";
 import { isPreview } from "src/stores/global-store";
-import { toHTML } from "@portabletext/to-html";
 import { v4 as uuidv4 } from "uuid";
 import { getLocale } from "i18n:astro";
 import { t } from "i18next";
+import BlogPreview from "@components/uielements/BlogPreview.astro";
 
 interface Props {
   blogsList: BlogsListReferenced;
 }
-const itemsPerTime = 3;
+
 const { blogsList } = Astro.props;
+
+const itemsPerTime = blogsList.maxPerPage || 15;
 
 let blogs: BlogPostWithReferences[] | undefined = [];
 let totalItems;
@@ -76,36 +78,7 @@ const preview = isPreview.get();
           class="grid auto-rows-fr grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {blogs?.slice(0, itemsPerTime).map((blog) => (
-            <blog-preview-web
-              tabindex="-1"
-              title={blog.intro?.title}
-              publicationDate={JSON.stringify(
-                new Date(blog.publicationDate || blog._createdAt),
-              )}
-              authorName={blog.author?.name}
-              link={`/${getLocale()}/${preview ? "preview/" : ""}insights/${blog.metadata?.slug?.current}`}
-              introHTML={blog.intro?.intro ? toHTML(blog.intro.intro) : ""}
-              topics={JSON.stringify(blog.topic)}
-              jobTitle={blog.author?.jobTitle}
-              previewImageUrl={
-                blog.featuredImage?.asset
-                  ? imageBuilder
-                      .image(blog.featuredImage?.asset)
-                      .width(400)
-                      .height(400)
-                      .url()
-                  : ""
-              }
-              authorImageUrl={
-                blog.author?.image?.asset
-                  ? imageBuilder
-                      .image(blog.author.image?.asset)
-                      .width(54)
-                      .height(54)
-                      .url()
-                  : ""
-              }
-            />
+            <BlogPreview blogPost={blog} />
           ))}
         </div>
 

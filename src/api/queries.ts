@@ -214,7 +214,7 @@ const contentQuery = groq`content[] {
       } 
     }
   }
-}`
+}`;
 
 export const serviceQuery = groq`*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{
   ...,
@@ -396,3 +396,13 @@ export const contentPageQuery = groq`*[_type == "contentPage" && language == $la
   ...,
   ${contentQuery}
 }`;
+
+export const rssBlogPostsQuery = groq`
+*[_type == "blogPost" && language == $language]{
+  "title": metadata.title,
+  "slug": metadata.slug.current,
+  "author": author->{name}.name,
+  "description": metadata.description,
+  "pubDate": publicationDate
+}
+`;

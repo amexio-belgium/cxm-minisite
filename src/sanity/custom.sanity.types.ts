@@ -1,4 +1,4 @@
-import type {Locale} from "i18n:astro";
+import type { Locale } from "i18n:astro";
 import type {
   AnswerQuestion,
   Callout,
@@ -421,6 +421,7 @@ export type BlogsListReferenced = {
   _type: "blogsList";
   blogsType?: "latest" | "specific";
   blogPosts?: BlogPostWithReferences[];
+  maxPerPage?: number;
 };
 
 export interface ServiceWithReferences {
@@ -451,35 +452,35 @@ export interface ServiceWithReferences {
 }
 
 export interface WorkWithReferences {
-    _type: "works";
-    language?: string;
-    customerReferencesText?: string;
-    content?: Array<
-        | ServicesCardList
-        | CardGrid
-        | CalloutReferenced
-        | LongFormTextReferenced
-        | HighlightReferenced
-        | TabsReferenced
-        | WorkCardListReferenced
-    >;
-    logo?: {
-        default: i18nImage | null;
-        light: i18nImage | null;
-        dark: i18nImage | null;
-    } | null;
-    link?: Link;
-    metadata?: Metadata;
-    image?: i18nImage;
-    _updatedAt?: string;
-    _id: string;
-    intro?: Intro;
-    duration?: string;
-    collaborationModel?: CollaborationModel;
-    customerReferences?: CustomerReferenced[];
-    services?: ServiceWithReferences[];
-    technologies?: TechnologyReferenced[];
-    relatedCases?: ReferenceCaseReferenced[];
+  _type: "works";
+  language?: string;
+  customerReferencesText?: string;
+  content?: Array<
+    | ServicesCardList
+    | CardGrid
+    | CalloutReferenced
+    | LongFormTextReferenced
+    | HighlightReferenced
+    | TabsReferenced
+    | WorkCardListReferenced
+  >;
+  logo?: {
+    default: i18nImage | null;
+    light: i18nImage | null;
+    dark: i18nImage | null;
+  } | null;
+  link?: Link;
+  metadata?: Metadata;
+  image?: i18nImage;
+  _updatedAt?: string;
+  _id: string;
+  intro?: Intro;
+  duration?: string;
+  collaborationModel?: CollaborationModel;
+  customerReferences?: CustomerReferenced[];
+  services?: ServiceWithReferences[];
+  technologies?: TechnologyReferenced[];
+  relatedCases?: ReferenceCaseReferenced[];
 }
 
 export type CustomerReferenced = {
@@ -503,40 +504,45 @@ export type FaqsReferenced = {
   questions?: AnswerQuestion[];
 };
 
-export type TestimonialReferenced = Omit<Testimonial, 'person'> & {
-  person: PersonReferenced
-}
+export type TestimonialReferenced = Omit<Testimonial, "person"> & {
+  person: PersonReferenced;
+};
 
-export type TechnologyReferenced = Omit<Technology, 'logo' | 'partner'> & {
+export type TechnologyReferenced = Omit<Technology, "logo" | "partner"> & {
   logo?: {
     default: i18nImage | null;
     light: i18nImage | null;
     dark: i18nImage | null;
   } | null;
-  partner: {link: Link};
-}
+  partner: { link: Link };
+};
 
-export type ReferenceCaseReferenced = Omit<ReferenceCase, "introImage" | "metadata" | "collaborationModel" | "technologies" | "services"> & {
+export type ReferenceCaseReferenced = Omit<
+  ReferenceCase,
+  "introImage" | "metadata" | "collaborationModel" | "technologies" | "services"
+> & {
   introImage?: i18nImage;
   metadata?: MetadataReferenced;
   collaborationModel?: CollaborationModelReferenced;
   technologies?: TechnologyReferenced[];
   services?: ServiceWithReferences[];
-}
+};
 
 export type MetadataReferenced = Omit<Metadata, "image"> & {
   image: i18nImage | null;
-}
+};
 
-export type CollaborationModelReferenced = Omit<CollaborationModel, "collaborationTabs"> & {
+export type CollaborationModelReferenced = Omit<
+  CollaborationModel,
+  "collaborationTabs"
+> & {
   collaborationTabs: CollabTabReferenced[];
-}
+};
 
 export type CollabTabReferenced = Omit<CollabTab, "concept"> & {
   concept: SkosConcept;
-}
+};
 
 export type WorkCardListReferenced = Omit<WorkCardList, "referenceCases"> & {
   referenceCases: ReferenceCaseReferenced[];
-}
-
+};

@@ -30,7 +30,9 @@ paths.forEach((text, i) => {
     ) {
       translatedText = text.replace(/[-_]/g, " ");
     } else {
-      translatedText = t("nav." + text.replace(/[-_]/g, " "), { defaultValue: "" });
+      translatedText = t("nav." + text.replace(/[-_]/g, " "), {
+        defaultValue: "",
+      });
     }
 
     parts.push({
@@ -39,6 +41,10 @@ paths.forEach((text, i) => {
     });
   }
 });
+
+const removeTrailingSlash = (text: string) => {
+  return text.endsWith("/") && text.length > 1 ? text.slice(0, -1) : text;
+};
 ---
 
 {
@@ -71,7 +77,10 @@ paths.forEach((text, i) => {
             ) : (
               <span
                 {...attrs}
-                aria-current={href === pathname && "page"}
+                aria-current={
+                  removeTrailingSlash(href) === removeTrailingSlash(pathname) &&
+                  "page"
+                }
                 class="text-xs capitalize outline-none md:py-2"
               >
                 {text}

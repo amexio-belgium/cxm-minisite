@@ -338,6 +338,13 @@
             "value": "blogsList"
           }
         },
+        "maxPerPage": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
         "blogsType": {
           "type": "objectAttribute",
           "value": {
@@ -1173,6 +1180,13 @@
         }
       },
       "siteName": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "siteDescription": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

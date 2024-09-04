@@ -1,5 +1,9 @@
 ---
-
+const visualEditingEnabled =
+  import.meta.env.SANITY_VISUAL_EDITING_ENABLED === "true";
 ---
 
-<meta http-equiv="refresh" content="0;url=/en/" />
+<meta
+  http-equiv="refresh"
+  content={`0;url=/en/${visualEditingEnabled ? "preview" : ""}`}
+/>

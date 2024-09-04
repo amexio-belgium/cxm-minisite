@@ -9,6 +9,7 @@ import { loadEnv } from "vite";
 import liciousI18n from "@astrolicious/i18n";
 const {
   SANITY_API_READ_TOKEN,
+  ASTRO_SITE_URL,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_PROJECT_ID
 } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
@@ -16,7 +17,7 @@ const {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://dreamy-trifle-7f42a6.netlify.app",
+  site: ASTRO_SITE_URL,
   integrations: [sitemap(), tailwind({
     nesting: true
   }), sanity({

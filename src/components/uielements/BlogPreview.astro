@@ -17,7 +17,7 @@ const { blogPost } = Astro.props;
 
 {
   blogPost && (
-    <article class="group relative flex flex-col justify-stretch has-[:focus-visible]:rounded-xl has-[:focus-visible]:outline has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-offset-0 has-[:focus-visible]:outline-orange-500">
+    <article class="group relative flex h-full flex-col justify-stretch has-[:focus-visible]:rounded-xl has-[:focus-visible]:outline has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-offset-0 has-[:focus-visible]:outline-orange-500">
       <div class="flex aspect-[5/3] w-full shrink-0 items-center justify-center overflow-hidden rounded-t-xl">
         {blogPost.featuredImage?.asset && (
           <img
