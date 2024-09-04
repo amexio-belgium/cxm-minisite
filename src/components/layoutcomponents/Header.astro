@@ -12,7 +12,7 @@ const t = useTranslations(lang);
 <header>
 	<nav class="flex items-center justify-center w-screen pr-2 md:pr-4 xl:pr-0 py-4 md:pt-6 lg:pt-8 ">
 		<div class="px-6 sm:px-8 md:px-6 max-w-[1304px] w-screen h-full flex flex-wrap items-center justify-between ">
-			<a href={`/${lang}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
+			<a href={`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/${lang}/`} class="flex justify-center text-xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
 				<AmexioFuse class="w-auto h-[36px] md:h-[50px]" />
 			</a>
 			<button id="main-menu-trigger"
@@ -21,12 +21,12 @@ const t = useTranslations(lang);
 				aria-controls="main-menu" 
 				aria-expanded="false">
 				<span class="sr-only">{t('mainmenu.open')}</span>
-				<svg class="w-14 h-14 fill-white"  aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-menu"></use></svg>
+				<svg class="w-14 h-14 fill-white"  aria-hidden="true" focusable="false"><use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-menu`></use></svg>
 			</button>
 			<dialog class="main-navigation-dialog open:bg-blue-800 motion-safe:open:animate-fade motion-safe:open:animate-once motion-safe:open:animate-duration-500 open:animate-ease-out" class="m-0" id="main-menu">
 				<div class="flex items-center justify-center w-screen border-b border-transparent py-4 md:hidden">
 					<div class="w-screen px-6 sm:px-8 h-full flex flex-wrap items-center justify-between ">
-						<a href={`/${lang}/`} class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
+						<a href={`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/${lang}/`} class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
 							<AmexioFuse class="w-auto h-[36px] md:h-[50px]" />
 						</a>
 						<button id="close-main-menu"
@@ -34,15 +34,15 @@ const t = useTranslations(lang);
 							class="inline-flex items-center justify-center w-12 h-12 p-2 -mr-2 text-white hover:text-yellow-500 md:hidden focus:outline-none focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500"
 							aria-controls="main-menu">
 							<span class="sr-only">{t('mainmenu.close')}</span>
-							<svg class="w-14 h-14 fill-white"  aria-hidden="true" focusable="false"><use xlink:href="/icons/icon-sprite.svg#icon-close"></use></svg>
+							<svg class="w-14 h-14 fill-white"  aria-hidden="true" focusable="false"><use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-close`></use></svg>
 						</button>
 					</div>
 				</div>
 				<div class="relative pr-8 ml-auto w-fit md:pr-0" style="--n-of-headerlinks:5">
 					<ul class="main-navigation scroll-mt-20 flex flex-col text-right items-start gap-0 md:text-left md:gap-6 md:flex-row rtl:space-x-reverse md:mt-0 md:px-0 lg:justify-end lg:gap-8">
 						<HeaderLink href={`/${lang}/services/`}>{t('nav.services')}</HeaderLink>
-						<HeaderLink href={`/${lang}/blog/`}>{t('nav.blog')}</HeaderLink>
-						<HeaderLink href={`/${lang}/cases/`}>{t('nav.cases')}</HeaderLink>
+						<HeaderLink href={`/${lang}/insights/`}>{t('nav.blog')}</HeaderLink>
+						<HeaderLink href={`/${lang}/work/`}>{t('nav.cases')}</HeaderLink>
 						<HeaderLink href={`/${lang}/about/`}>{t('nav.about')}</HeaderLink>
 						<HeaderLink href={`/${lang}/contact/`}>{t('nav.contact')}</HeaderLink>
 					</ul>

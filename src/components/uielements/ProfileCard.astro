@@ -80,13 +80,13 @@ if (profileImg && !profileImages[profileImg]) throw new Error(`"${profileImg}" d
                 <span class="mr-2 text-sm">{t('share.message')}</span>
                 <Link id="linkedin-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
-                        <use xlink:href="/icons/icon-sprite.svg#icon-linkedin"></use>
+                        <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-linkedin`></use>
                     </svg>
                     <span class="sr-only">LinkedIn</span>
                 </Link>
                 <Link id="twitter-share-button" class="border-2 border-transparant rounded-full  hover:border-secondary focus-visible:rounded-full" href="#">
                     <svg class="fill-white w-8 h-8">
-                        <use xlink:href="/icons/icon-sprite.svg#icon-twitter"></use>
+                        <use xlink:href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-twitter`></use>
                     </svg>
                     <span class="sr-only">X(twitter)</span>
                 </Link>

@@ -2,7 +2,7 @@
 title: "Quick start guide for multilingual websites in Adobe Experience Manager"
 description: 'One of the major challenges in large digital experience projects is organizing content over multiple websites and languages. While most web content management systems (WCMS) have some kind of support tools for multilingual websites, this is where Adobe Experience Manager (AEM) shines, with its implementation of Live Copy and Language Copy features.'
 pubDate: 2023-08-25
-heroImage: '/src/assets/images/blog/glenn-carstens-peters.jpg'
+heroImage: '/src/assets/images/insights/glenn-carstens-peters.jpg'
 tags: 'XXXX'
 author: "Maartje Groenen"
 authorTitle: "XXXX"
@@ -23,7 +23,7 @@ import ContentImage from "@components/uielements/ContentImage.astro"
     <p>This is often the main metric for determining the approach for multilingual websites. Let’s imagine a car dealership that has 3 branches in a single country with 2 official languages. Branch A and B are in the English-speaking part of the country and branch C is in the French speaking part.</p>
     <p>If the dealership sells the same cars in all 3 branches, the only difference between branches will be the language of the area they are in. In this case, the best method would be to just build one website in English and perform a Language Copy in AEM for the French version (see table below).</p>
     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-        src='/src/assets/images/blog/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager-1---multisite-vs-multilanguage.png' 
+        src='/src/assets/images/insights/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager-1---multisite-vs-multilanguage.png' 
         alt='Quick start guide for multilingual websites in AEM: multi-site vs multi-language'
         width="512"
         height="476"
@@ -31,7 +31,7 @@ import ContentImage from "@components/uielements/ContentImage.astro"
     <p>In essence, a multi-language website has pages translated into other languages, but the content remains the same, hence the term Language Copy.</p>
     <p>Let&#8217;s now consider the case where all of the branches are in the same language region but do not sell the same cars. Branch A sells consumers cars, branch B sells commercial vehicles and branch C sells both consumer and commercial vehicles. In this scenario, no translation is necessary, but since the offering is different, the content of each website will also differ. This time the solution will be to build a base website, containing all information of the three branches, and use Live Copy to create each individual branch website.</p>
     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-        src='/src/assets/images/blog/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager---2---multilingual-websites-aem.png' 
+        src='/src/assets/images/insights/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager---2---multilingual-websites-aem.png' 
         alt='Multilingual websites in AEM'
         width="512"
         height="476"
@@ -42,7 +42,7 @@ import ContentImage from "@components/uielements/ContentImage.astro"
     <p>Imagine an organization with global presence that has websites specifically designed to target certain geographical regions (North America, EMEA, Asia, and so on). Within these regions, the differences between each country are minimal and mostly limited to the languages used. It makes sense to create a global base website using only one language. This base website can then be used as a blueprint to provide basic structure and general content to the different regional websites which are all live copies.</p>
     <p>Within each region, language copies can then be used to distribute translated content to specific country websites. You can find an example of the content structure for this organization below.</p>
     <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-        src='/src/assets/images/blog/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager---3---aem-combinationb-language-copy-live-copy.png' 
+        src='/src/assets/images/insights/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager/quick-start-guide-for-multilingual-websites-in-adobe-experience-manager---3---aem-combinationb-language-copy-live-copy.png' 
         alt='Quick start guide for multilingual websites in AEM: language copy and live copy'
         width="512"
         height="476"
