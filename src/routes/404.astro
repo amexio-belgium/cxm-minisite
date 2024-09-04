@@ -9,8 +9,6 @@ import { loadQuery } from "src/api/sanity";
 import type { SiteConfigQueryResult } from "src/sanity/sanity.types";
 import { t } from "i18next";
 
-console.log("Locale:");
-console.log(getLocale());
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
   params: { language: getLocale().toLowerCase() },
