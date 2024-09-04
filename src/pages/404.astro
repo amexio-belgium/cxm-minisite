@@ -1,16 +1,16 @@
 ---
-import Base from "@layouts/Base.astro";
-import { i18nParams } from "../locales/consts";
-import Button from "@components/uielements/Button.astro";
+import Base from "src/layouts/Base.astro";
+import { i18nParams } from "src/locales/consts";
+import Button from "src/components/uielements/Button.astro";
 import { getLocale } from "i18n:astro";
 
 export function getStaticPaths() {
   return i18nParams;
 }
-import { siteConfigQuery } from "@api/queries";
-import { loadQuery } from "@api/sanity";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import {t} from "i18next";
+import { siteConfigQuery } from "src/api/queries";
+import { loadQuery } from "src/api/sanity";
+import type { SiteConfigQueryResult } from "src/sanity/sanity.types";
+import { t } from "i18next";
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
