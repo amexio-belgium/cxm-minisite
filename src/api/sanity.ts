@@ -29,7 +29,7 @@ export async function loadQuery<QueryResponse>({
       resultSourceMap: VISUAL_EDITING_ENABLED ? "withKeyArraySelector" : false,
       stega: VISUAL_EDITING_ENABLED,
       ...(VISUAL_EDITING_ENABLED ? { token } : {}),
-      useCdn: !VISUAL_EDITING_ENABLED,
+      useCdn: false,
     },
   );
 

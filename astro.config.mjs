@@ -8,11 +8,11 @@ import react from "@astrojs/react";
 import { loadEnv } from "vite";
 import liciousI18n from "@astrolicious/i18n";
 const {
-  SANITY_API_READ_TOKEN,
   ASTRO_SITE_URL,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_PROJECT_ID,
   SANITY_VISUAL_EDITING_ENABLED,
+  SANITY_STUDIO_URL
 } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
@@ -29,7 +29,7 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       stega: {
-        studioUrl: "http://localhost:3333",
+        studioUrl: SANITY_STUDIO_URL,
       },
     }),
     react(),
