@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true,
+    "strict": false, // see ticket CW-117 to fix this
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
@@ -10,7 +11,8 @@
       "@assets/*": ["src/assets/*"],
       "@lib/*": ["src/lib/*"],
       "@api/*": ["src/api/*"],
-      "@sanity/*": ["src/sanity/*"]
+      "@sanity/*": ["src/sanity/*"],
+      "@src/*": ["src/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "@builder.io/qwik"

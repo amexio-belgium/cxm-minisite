@@ -1,7 +1,7 @@
 ---
-import { useTranslations } from "../../i18n/utils";
 import BlogPreview from "@components/uielements/BlogPreview.astro";
 import CasePreview from "@components/uielements/CasePreview.astro";
+import {t} from "i18next";
 
 const { lang } = Astro.params;
 interface Props {
@@ -44,7 +44,6 @@ function getPostLangAndSlug(post) {
   return { lang, slug };
 }
 
-const t = useTranslations(lang);
 ---
 
 <div
@@ -53,8 +52,8 @@ const t = useTranslations(lang);
   <h2 class="mb-8 font-serif text-2xl text-black md:text-3xl">
     {
       collection === "insights"
-        ? t("insightsteaser.headline")
-        : t("casesteaser.headline")
+        ? t("insightsteaser.headline", { defaultValue: "" })
+        : t("casesteaser.headline", { defaultValue: "" })
     }
   </h2>
   {

@@ -1,24 +1,20 @@
 ---
 import Base from "@layouts/Base.astro";
-import {
-  contentPageQuery,
-  siteConfigQuery,
-} from "@api/queries";
+import { contentPageQuery, siteConfigQuery } from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import { isPreview, siteLanguage } from "src/stores/global-store";
+import { isPreview } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import { getLocale } from "i18n:astro";
 
 export const prerender = false;
-const { lang } = Astro.params;
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: lang!.toLowerCase() },
+  params: { language: getLocale() },
 });
-
 if (!siteConfig || !siteConfig?.homePage?.slug) {
   return new Response(null, { status: 404 });
 }
@@ -27,10 +23,9 @@ const slug = siteConfig?.homePage?.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: lang!, slug: slug! },
+  params: { language: getLocale(), slug: slug },
 });
 
-siteLanguage.set(lang!.toLowerCase());
 isPreview.set(true);
 ---
 

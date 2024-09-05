@@ -42,3 +42,5 @@ export async function loadQuery<QueryResponse>({
 }
 
 export const imageBuilder = imageUrlBuilder(sanityClient);
+
+export {};

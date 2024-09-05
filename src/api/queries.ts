@@ -26,6 +26,87 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
 
 const contentQuery = groq`content[] {
   ...,
+   _type == "blogsList" => {
+    ...,
+    blogsType == "specific" => {
+      blogPosts[]->{
+        ...,
+        featuredImage{
+          asset->{...}
+        },
+        postType[]->{
+          prefLabel,
+          definition
+        },
+        author->{
+          ...,
+          image{
+            ...,
+            asset->{
+              ...
+            }
+          }
+        },
+        topic[]->{
+          prefLabel,
+          definition
+        },
+      }
+    },
+  },
+  _type == "blogHighlight" => {
+    ...,
+    blogType == "latest" => {
+      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{
+        ...,
+        featuredImage{
+          asset->{...}
+        },
+        postType[]->{
+          prefLabel,
+          definition
+        },
+        author->{
+          ...,
+          image{
+            ...,
+            asset->{
+              ...
+            }
+          }
+        },
+        topic[]->{
+          prefLabel,
+          definition
+        },
+      }
+    },
+    blogType == "specific" => {
+      blogPost->{
+        ...,
+        featuredImage{
+          asset->{...}
+        },
+        postType[]->{
+          prefLabel,
+          definition
+        },
+        author->{
+          ...,
+          image{
+            ...,
+            asset->{
+              ...
+            }
+          }
+        },
+        topic[]->{
+          prefLabel,
+          definition
+        },
+      }
+    },
+  },
   defined(groups) => {
     groups[] {
       ...,
@@ -133,7 +214,7 @@ const contentQuery = groq`content[] {
       } 
     }
   }
-}`
+}`;
 
 export const serviceQuery = groq`*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{
   ...,
@@ -152,6 +233,92 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
   ${contentQuery}
 }`;
 
+export const blogPostQuery = groq`*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{
+  ...,
+  featuredImage{
+    asset->{...}
+  },
+  postType[]->{
+    prefLabel,
+    definition
+  },
+  author->{
+    ...,
+    image{
+      ...,
+      asset->{
+        ...
+      }
+    }
+  },
+  topic[]->{
+    prefLabel,
+    definition
+  },
+  ${contentQuery}
+}`;
+
+export const blogsListQuery = groq`
+{
+  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...$itemsPerTime]{
+    _id,
+    featuredImage{
+      asset->{...}
+    },
+    postType[]->{
+      prefLabel,
+      definition
+    },
+    author->{
+      ...,
+      image{
+        ...,
+        asset->{
+          ...
+        }
+      }
+    },
+    topic[]->{
+      prefLabel,
+      definition
+    },
+    metadata,
+    publicationDate,
+    _createdAt,
+    intro
+  },
+  "totalItems": count(*[_type == "blogPost" && language == $language])
+}
+`;
+
+export const blogsListQueryPaginating = groq`
+*[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...$itemsPerTime]{
+  _id,
+  featuredImage{
+    asset->{...}
+  },
+  postType[]->{
+    prefLabel,
+    definition
+  },
+  author->{
+    ...,
+    image{
+      ...,
+      asset->{
+        ...
+      }
+    }
+  },
+  topic[]->{
+    prefLabel,
+    definition
+  },
+  metadata,
+  publicationDate,
+  _createdAt,
+  intro
+}`;
 
 export const workQuery = groq`*[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{
   ...,
@@ -229,3 +396,13 @@ export const contentPageQuery = groq`*[_type == "contentPage" && language == $la
   ...,
   ${contentQuery}
 }`;
+
+export const rssBlogPostsQuery = groq`
+*[_type == "blogPost" && language == $language]{
+  "title": metadata.title,
+  "slug": metadata.slug.current,
+  "author": author->{name}.name,
+  "description": metadata.description,
+  "pubDate": publicationDate
+}
+`;

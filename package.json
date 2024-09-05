@@ -3,6 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "generate-translations": "node src/scripts/generateTranslations.js",
+    "prebuild": "npm run generate-translations",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -18,11 +20,14 @@
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrolicious/i18n": "^0.4.3",
     "@builder.io/qwik": "^1.7.1",
     "@otterstack/sanity-img-astro": "^0.2.6",
+    "@portabletext/react": "^3.1.0",
+    "@portabletext/to-html": "^2.0.13",
     "@qwikdev/astro": "^0.6.1",
     "@sanity/astro": "^3.1.4",
-    "@sanity/client": "^6.21.1",
+    "@sanity/client": "^6.21.3",
     "@sanity/image-url": "^1.0.2",
     "@sanity/visual-editing": "^2.1.6",
     "@types/node": "^20.14.12",
@@ -31,7 +36,9 @@
     "astro": "^4.12.2",
     "astro-embed": "^0.7.2",
     "astro-portabletext": "^0.10.0",
+    "dotenv": "^16.4.5",
     "groq": "^3.52.2",
+    "i18next": "^23.14.0",
     "lite-youtube-embed": "^0.3.2",
     "nanostores": "^0.11.2",
     "react": "^18.3.1",
@@ -39,12 +46,14 @@
     "sanity": "^3.52.2",
     "tailwindcss": "^3.4.3",
     "tailwindcss-animated": "^1.0.1",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tsx": "^4.18.0"
   }
 }

@@ -19,7 +19,7 @@ const { href, class: className, ...props } = Astro.props;
 <script>
   import setFocus from "@lib/setFocus.js";
   (function () {
-    const initializeSkipLink = function (skiplink) {
+    const initializeSkipLink = function (skiplink: any) {
       const targetId = skiplink.getAttribute("href").split("#").pop();
       const targetEl = document.getElementById(targetId);
       skiplink.addEventListener("click", () =>

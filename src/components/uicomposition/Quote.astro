@@ -1,10 +1,10 @@
 ---
 import SanityImg from "@otterstack/sanity-img-astro";
-import {siteLanguage} from "../../stores/global-store";
 import {defaultComponents} from "../cms-components/PortableText/helper";
 import {PortableText} from "astro-portabletext";
 import type {TestimonialReferenced} from "../../sanity/custom.sanity.types";
 import type {SanityImageSource} from "@sanity/image-url/lib/types/types";
+import {getLocale} from "@builder.io/qwik";
 
 interface Props {
   testimonial: TestimonialReferenced,
@@ -14,8 +14,6 @@ interface Props {
 const {
   testimonial,
 } = Astro.props;
-
-const lang = siteLanguage.get();
 
 const id = "id_" + Math.random().toString(36).slice(2, 11);
 const variant = testimonial.variant ? testimonial.variant : "glass";
@@ -31,7 +29,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
       <div class="flex flex-col items-center justify-center text-white md:w-4/12">
         <SanityImg
           src={testimonial.person?.image?.asset?._id as SanityImageSource}
-          alt={testimonial.person?.image?.asset?.altTexts?.[lang || "en"] || ""}
+          alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
           class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
           loading="lazy"
           sizes="(min-width:768px) 50vw, 100vw"
@@ -75,7 +73,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
         <>
           <SanityImg
             src={testimonial.person?.image?.asset?._id as SanityImageSource}
-            alt={testimonial.person?.image?.asset?.altTexts?.[lang || "en"] || ""}
+            alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
             class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
             loading="lazy"
             sizes="(min-width:768px) 50vw, 100vw"

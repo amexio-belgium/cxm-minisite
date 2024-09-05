@@ -1,0 +1,35 @@
+---
+import type { Block, Props as PortableProps } from "astro-portabletext/types";
+
+interface Props extends PortableProps<Block> {}
+
+const props = Astro.props;
+
+const markTags = {
+  strong: ["<strong class='font-semibold'>", "</strong>"],
+  em: ["<em>", "</em>"],
+  underline: ["<u>", "</u>"],
+  "strike-through": ["<s>", "</s>"],
+};
+---
+
+{
+  props.node.children.map((child) => {
+    let openingTags = "";
+    let closingTags = "";
+
+    child.marks?.forEach((mark: string) => {
+      if (markTags[mark]) {
+        openingTags += markTags[mark][0];
+        closingTags = markTags[mark][1] + closingTags;
+      }
+    });
+
+    return (
+      <span
+        class="font-sm font-light"
+        set:html={openingTags + child.text + closingTags}
+      />
+    );
+  })
+}

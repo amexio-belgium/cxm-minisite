@@ -1,15 +1,14 @@
 ---
+import { imageBuilder } from "@api/sanity";
 import TeaserWithImage from "@components/uicomposition/TeaserWithImage.astro";
 import type { CalloutReferenced, i18nImage } from "@sanity/custom.sanity.types";
-import { siteLanguage } from "src/stores/global-store";
-import {imageBuilder} from "../../api/sanity";
+import { getLocale } from "i18n:astro";
 
 interface Props {
   callout: CalloutReferenced;
 }
 
 const { callout } = Astro.props;
-const language = siteLanguage.get();
 
 let textObject;
 let imageObject: i18nImage;
@@ -33,7 +32,7 @@ if (callout?.content?.[0]._type == "textObject") {
           src={imageBuilder
             .image(imageObject.asset?._id)
             .url()}
-          alt={imageObject.asset.altTexts[language] || ""}
+          alt={imageObject.asset.altTexts[getLocale()] || ""}
           class="rounded-xl"
         />
       )}
