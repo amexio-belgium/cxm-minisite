@@ -8,14 +8,24 @@ import { loadEnv } from "vite";
 const { PUBLIC_ASTRO_BASE_PATH } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 const basePath = PUBLIC_ASTRO_BASE_PATH && PUBLIC_ASTRO_BASE_PATH !== '' ? PUBLIC_ASTRO_BASE_PATH : '/'
 export default defineConfig({
-  site: 'https://dreamy-trifle-7f42a6.netlify.app',
-  integrations: [
-    mdx(), 
-    sitemap(), 
-    qwikdev(),
-    tailwind({
-       nesting: true,
-    })
-  ],
-  base: basePath
+    site: 'https://dreamy-trifle-7f42a6.netlify.app',
+    outDir: "./dist/fuse",
+    integrations: [
+        mdx(),
+        sitemap(),
+        qwikdev(),
+        tailwind({
+            nesting: true,
+        })
+    ],
+    base: basePath,
+    vite: {
+        build: {
+            outDir: './dist/fuse',
+            emptyOutDir: true, // also necessary
+        },
+        optimizeDeps: {
+            exclude: ["fsevents"]
+        }
+    },
 });
