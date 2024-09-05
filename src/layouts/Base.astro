@@ -12,10 +12,9 @@ import type {
 import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-export const prerender = false;
-import { isPreview } from "src/stores/global-store";
 import I18nClient from "@astrolicious/i18n/components/I18nClient.astro";
 import { getLocale } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
 interface Props {
   title: string;
@@ -24,7 +23,6 @@ interface Props {
   siteConfig: SiteConfigQueryResult;
 }
 
-const preview = isPreview.get();
 const { title, description, slug, siteConfig } = Astro.props;
 
 if (!siteConfig) {
@@ -45,7 +43,7 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     name: social.name || "",
     iconImageID: social.icon?.asset?._id || "",
     link: social.link
-      ? getHrefFromLinkObject(social.link, getLocale(), preview)
+      ? getHrefFromLinkObject(social.link, getLocale())
       : "",
     alt: social.icon?.asset?.altTexts?.[getLocale()] || "",
   };
@@ -68,7 +66,8 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     <Tracking />
   </head>
   <body class="overflow-x-clip bg-blue-800">
-    <VisualEditing enabled={true} zIndex={1000} />
+    {VISUAL_EDITING_ENABLED && <VisualEditing enabled={true} zIndex={1000} />}
+
     <Header navigation={header} />
     <main id="main-content" class="mx-auto max-w-[1304px] px-6 sm:px-8">
       <slot />

@@ -1,15 +1,36 @@
 ---
 import Base from "@layouts/Base.astro";
-import { contentPageQuery, siteConfigQuery } from "@api/queries";
+import {
+  allContentPagesQuery,
+  contentPageQuery,
+  siteConfigQuery,
+} from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import { isPreview } from "src/stores/global-store";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+import type {
+  AllContentPagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
 
-export const prerender = false;
+import { getLocale } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
+
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const { data: blogs } = await loadQuery<AllContentPagesQueryResult>({
+      query: allContentPagesQuery,
+    });
+
+    return blogs.map((blog) => ({
+      params: { slug: blog },
+    }));
+  } else {
+    return [];
+  }
+}
+
 const { slug } = Astro.params;
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
@@ -35,8 +56,6 @@ const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
 if (contentPage == null) {
   return new Response(null, { status: 404 });
 }
-
-isPreview.set(true);
 ---
 
 <Base

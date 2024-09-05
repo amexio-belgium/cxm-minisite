@@ -1,0 +1,136 @@
+---
+import { allCasePagesQuery, siteConfigQuery, workQuery } from "@api/queries";
+import { loadQuery, imageBuilder } from "@api/sanity";
+import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
+import Customers from "@components/uicomposition/Customers.astro";
+import HeroHeader from "@components/uicomposition/HeroHeader.astro";
+import ProjectMetadata from "@components/uicomposition/ProjectMetadata.astro";
+import CasePreview from "@components/uielements/CasePreview.astro";
+import TechnologyIcon from "@components/uielements/TechnologyIcon.astro";
+import Base from "@layouts/Base.astro";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import SanityImg from "@otterstack/sanity-img-astro";
+import type { WorkWithReferences } from "@sanity/custom.sanity.types";
+
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type {
+  AllCasePagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import { getLocale } from "i18n:astro";
+
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const { data: blogs } = await loadQuery<AllCasePagesQueryResult>({
+      query: allCasePagesQuery,
+    });
+
+    return blogs.map((blog) => ({
+      params: { slug: blog },
+    }));
+  } else {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+if (!slug) {
+  return Astro.redirect("/404");
+}
+
+const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
+  query: siteConfigQuery,
+  params: { language: getLocale() },
+});
+
+if (!siteConfig) {
+  return new Response(null, { status: 404 });
+}
+
+const { data: workPage } = await loadQuery<WorkWithReferences>({
+  query: workQuery,
+  params: { language: getLocale(), slug: slug },
+});
+---
+
+<Base
+  title={`${workPage?.metadata?.title || workPage?.intro?.title!} - ${siteConfig.siteName}`}
+  description={workPage?.metadata?.description || ""}
+  slug={slug}
+  siteConfig={siteConfig}
+>
+  <HeroHeader
+    headline={workPage?.intro?.title}
+    text={workPage?.intro?.intro}
+    backgroundImage={workPage?.image?.asset?._id}
+  >
+    {
+      workPage.customerReferences && workPage.customerReferences.length > 0 && (
+        <Customers headline={workPage.customerReferencesText}>
+          {workPage.customerReferences?.map((customer) => (
+            <>
+              {customer?.logo?.default?.asset && (
+                <img
+                  src={imageBuilder
+                    .image(customer?.logo?.default?.asset)
+                    .height(80)
+                    .url()}
+                  alt={
+                    customer.logo.default.asset.altTexts?.[
+                      workPage.language || "en"
+                    ] || ""
+                  }
+                  class="h-10 w-auto"
+                />
+              )}
+            </>
+          ))}
+        </Customers>
+      )
+    }
+  </HeroHeader>
+  <ProjectMetadata
+    duration={workPage.duration}
+    collaboration={workPage.collaborationModel}
+    services={workPage.services}
+    technologies={workPage.technologies}
+  >
+    {
+      workPage.technologies?.map((technology) => (
+        <TechnologyIcon
+          link={
+            technology?.partner?.link
+              ? getHrefFromLinkObject(technology.partner.link, getLocale())
+              : undefined
+          }
+        >
+          <SanityImg
+            src={technology?.logo?.default as SanityImageSource}
+            alt={
+              technology?.logo?.default?.asset?.altTexts?.[
+                workPage.language || "en"
+              ] || ""
+            }
+            sizes="200px"
+            class="h-[unset] w-auto max-w-[unset] transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
+            loading="lazy"
+          />
+          <p>{technology.name}</p>
+        </TechnologyIcon>
+      ))
+    }
+  </ProjectMetadata>
+  <SanityComponentsRenderer content={workPage?.content} />
+  {
+    workPage?.relatedCases && workPage?.relatedCases?.length > 1 && (
+      <div class="relative flex flex-col py-20 before:absolute before:-right-24 before:bottom-0 before:top-0 before:-z-10 before:h-full before:w-[3000px] before:bg-light-blue-50 xl:mb-40 xl:pr-12 xl:before:right-0 xl:before:rounded-xl">
+        <div class="relative grid w-full grid-cols-1 gap-8 text-black lg:grid-cols-2">
+          {workPage?.relatedCases.splice(0, 2).map((casePost) => (
+            <CasePreview small caseData={casePost} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+</Base>

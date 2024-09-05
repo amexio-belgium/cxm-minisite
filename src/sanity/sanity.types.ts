@@ -21481,6 +21481,18 @@ export type RssBlogPostsQueryResult = Array<{
   description: string | null;
   pubDate: string | null;
 }>;
+// Variable: allContentPagesQuery
+// Query: *[_type == "contentPage" && language == $language]{  "slug": metadata.slug.current}.slug
+export type AllContentPagesQueryResult = Array<string | null>;
+// Variable: allServicePagesQuery
+// Query: *[_type == "service" && language == $language]{  "slug": metadata.slug.current}.slug
+export type AllServicePagesQueryResult = Array<string | null>;
+// Variable: allInsightPagesQuery
+// Query: *[_type == "blogPost" && language == $language]{  "slug": metadata.slug.current}.slug
+export type AllInsightPagesQueryResult = Array<string | null>;
+// Variable: allCasePagesQuery
+// Query: *[_type == "referenceCase" && language == $language]{  "slug": metadata.slug.current}.slug
+export type AllCasePagesQueryResult = Array<string | null>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -21497,5 +21509,9 @@ declare module "@sanity/client" {
     "*[_type == 'siteConfig' && language == $language][0]{\n  homePage->{\n    \"slug\": metadata.slug.current\n  }\n}.homePage.slug": HomePageSlugQueryResult;
     '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  content[] {\n  ...,\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': ContentPageQueryResult;
     '\n*[_type == "blogPost" && language == $language]{\n  "title": metadata.title,\n  "slug": metadata.slug.current,\n  "author": author->{name}.name,\n  "description": metadata.description,\n  "pubDate": publicationDate\n}\n': RssBlogPostsQueryResult;
+    '*[_type == "contentPage" && language == $language]{\n  "slug": metadata.slug.current\n}.slug': AllContentPagesQueryResult;
+    '*[_type == "service" && language == $language]{\n  "slug": metadata.slug.current\n}.slug': AllServicePagesQueryResult;
+    '*[_type == "blogPost" && language == $language]{\n  "slug": metadata.slug.current\n}.slug': AllInsightPagesQueryResult;
+    '*[_type == "referenceCase" && language == $language]{\n  "slug": metadata.slug.current\n}.slug': AllCasePagesQueryResult;
   }
 }

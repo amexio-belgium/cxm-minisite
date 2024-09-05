@@ -4,7 +4,6 @@ import { PortableText } from "astro-portabletext";
 import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
-import { isPreview } from "src/stores/global-store";
 import { getLocale, t } from "i18n:astro";
 
 interface Props {
@@ -13,7 +12,6 @@ interface Props {
 
 const { service } = Astro.props;
 
-const preview = isPreview.get();
 ---
 
 {
@@ -31,7 +29,7 @@ const preview = isPreview.get();
           )}
         </div>
         <Button
-          link={`/${getLocale()}/${preview ? "preview/" : ""}services/${service.metadata?.slug?.current}`}
+          link={`/${getLocale()}/services/${service.metadata?.slug?.current}`}
           longText
           style="primary"
           size="sm"

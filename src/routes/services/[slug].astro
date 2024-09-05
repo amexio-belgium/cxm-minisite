@@ -1,6 +1,10 @@
 ---
 import Base from "@layouts/Base.astro";
-import { serviceQuery, siteConfigQuery } from "@api/queries";
+import {
+  allServicePagesQuery,
+  serviceQuery,
+  siteConfigQuery,
+} from "@api/queries";
 import { imageBuilder, loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ServiceWithReferences } from "src/sanity/custom.sanity.types";
@@ -9,12 +13,33 @@ import Customers from "@components/uicomposition/Customers.astro";
 import Faq from "@components/uicomposition/Faq.astro";
 import FaqQuestion from "@components/uielements/FaqQuestion.astro";
 import { PortableText } from "astro-portabletext";
-import { isPreview } from "src/stores/global-store";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+import type {
+  AllServicePagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
-export const prerender = false;
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const locale = getLocalePlaceholder().toLowerCase();
+    const { data: services } = await loadQuery<AllServicePagesQueryResult>({
+      query: allServicePagesQuery,
+      params: { language: locale },
+    });
+
+    return services.map((blog) => ({
+      params: { slug: blog },
+      props: { locale: locale },
+    }));
+  } else {
+    return [];
+  }
+}
+
 const { slug } = Astro.params;
+console.log("slug");
+console.log(slug);
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
@@ -33,8 +58,6 @@ const { data: servicePage } = await loadQuery<ServiceWithReferences>({
 if (servicePage == null) {
   return new Response(null, { status: 404 });
 }
-
-isPreview.set(true);
 ---
 
 <Base

@@ -8,7 +8,6 @@ import type { NavigationQueryResult } from "src/sanity/sanity.types";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { imageBuilder } from "@api/sanity";
-import { isPreview } from "src/stores/global-store";
 import { getLocale, t } from "i18n:astro";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 
@@ -29,8 +28,6 @@ interface Props {
 
 const { navigation, secondaryNavigation, isContactPage, footerText, socials } =
   Astro.props;
-
-const preview = isPreview.get();
 ---
 
 <footer
@@ -172,7 +169,6 @@ const preview = isPreview.get();
               href={getHrefFromLinkObject(
                 link.linkObject as LinkObjectReferenced,
                 getLocale(),
-                preview,
               )}
             >
               {link.title}

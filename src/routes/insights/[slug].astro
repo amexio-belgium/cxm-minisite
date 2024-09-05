@@ -1,6 +1,10 @@
 ---
 import Base from "@layouts/Base.astro";
-import { blogPostQuery, siteConfigQuery } from "@api/queries";
+import {
+  allInsightPagesQuery,
+  blogPostQuery,
+  siteConfigQuery,
+} from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type BlogPostWithReferences } from "src/sanity/custom.sanity.types";
@@ -8,10 +12,27 @@ import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 
 import ProfileCard from "@components/uielements/ProfileCard.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import type {
+  AllInsightPagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
 import { getLocale } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
-export const prerender = false;
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const { data: blogs } = await loadQuery<AllInsightPagesQueryResult>({
+      query: allInsightPagesQuery,
+    });
+
+    return blogs.map((blog) => ({
+      params: { slug: blog },
+    }));
+  } else {
+    return [];
+  }
+}
+
 const { slug } = Astro.params;
 if (!slug) {
   return Astro.redirect("/404");

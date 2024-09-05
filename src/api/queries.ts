@@ -406,3 +406,19 @@ export const rssBlogPostsQuery = groq`
   "pubDate": publicationDate
 }
 `;
+
+export const allContentPagesQuery = groq`*[_type == "contentPage" && language == $language]{
+  "slug": metadata.slug.current
+}.slug`;
+
+export const allServicePagesQuery = groq`*[_type == "service" && language == $language]{
+  "slug": metadata.slug.current
+}.slug`;
+
+export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $language]{
+  "slug": metadata.slug.current
+}.slug`;
+
+export const allCasePagesQuery = groq`*[_type == "blogPost" && language == $language]{
+  "slug": metadata.slug.current
+}.slug`;
