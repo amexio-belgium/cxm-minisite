@@ -6,22 +6,35 @@ import SanityComponentsRenderer from "@components/cms-components/SanityComponent
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+import { locales } from "@src/locales/consts";
 
-const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
-  query: siteConfigQuery,
-  params: { language: getLocale() },
-});
-if (!siteConfig || !siteConfig?.homePage?.slug) {
+let siteConfig;
+let slug;
+let contentPage;
+
+// Remove all forward  slashes from the url
+const localeUrl = Astro.url.pathname.replace(/\//g, "");
+
+if (locales.includes(localeUrl)) {
+  const { data: siteConfigData } = await loadQuery<SiteConfigQueryResult>({
+    query: siteConfigQuery,
+    params: { language: localeUrl },
+  });
+  siteConfig = siteConfigData;
+  if (!siteConfig || !siteConfig?.homePage?.slug) {
+    return new Response(null, { status: 404 });
+  }
+
+  const slug = siteConfig?.homePage?.slug;
+
+  const { data: contentPageData } = await loadQuery<ContentPageWithReferences>({
+    query: contentPageQuery,
+    params: { language: localeUrl, slug: slug },
+  });
+  contentPage = contentPageData;
+} else {
   return new Response(null, { status: 404 });
 }
-
-const slug = siteConfig?.homePage?.slug;
-
-const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
-  query: contentPageQuery,
-  params: { language: getLocale(), slug: slug },
-});
 ---
 
 <Base

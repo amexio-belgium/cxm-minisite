@@ -7,12 +7,13 @@ import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import { loadEnv } from "vite";
 import liciousI18n from "@astrolicious/i18n";
+import { locales } from "./src/locales/consts";
 const {
   ASTRO_SITE_URL,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_PROJECT_ID,
   SANITY_VISUAL_EDITING_ENABLED,
-  SANITY_STUDIO_URL
+  SANITY_STUDIO_URL,
 } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
@@ -29,7 +30,7 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       stega: {
-        studioUrl: SANITY_STUDIO_URL,
+        studioUrl: SANITY_STUDIO_URL + "en",
       },
     }),
     react(),
@@ -41,7 +42,7 @@ export default defineConfig({
     liciousI18n({
       defaultLocale: "en",
       strategy: "prefix",
-      locales: ["en", "nl", "fr"], // must include the default locale
+      locales: locales, // must include the default locale
       client: {
         data: true,
         paths: true,
