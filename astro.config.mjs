@@ -18,6 +18,9 @@ const {
 
 // https://astro.build/config
 export default defineConfig({
+  build: {
+    format: 'directory'
+  },
   site: ASTRO_SITE_URL,
   integrations: [
     sitemap(),
