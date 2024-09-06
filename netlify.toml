@@ -1,10 +1,10 @@
 [[redirects]]
     from = "/fr"
     to = "/fr/"
-    status = 200
+    status = 301
     force = true
 [[redirects]]
     from = "/nl"
     to = "/nl/"
-    status = 200
+    status = 301
     force = true
