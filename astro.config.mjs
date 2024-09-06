@@ -19,6 +19,9 @@ const {
 // https://astro.build/config
 export default defineConfig({
   site: ASTRO_SITE_URL,
+  build: {
+    format: "file",
+  },
   integrations: [
     sitemap(),
     tailwind({
