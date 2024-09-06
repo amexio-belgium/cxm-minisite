@@ -18,16 +18,17 @@ import type {
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
-import { getLocale } from "i18n:astro";
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const { data: blogs } = await loadQuery<AllCasePagesQueryResult>({
+    const { data: cases } = await loadQuery<AllCasePagesQueryResult>({
       query: allCasePagesQuery,
+      params: { language: getLocalePlaceholder() },
     });
 
-    return blogs.map((blog) => ({
-      params: { slug: blog },
+    return cases.map((slug) => ({
+      params: { slug },
     }));
   } else {
     return [];

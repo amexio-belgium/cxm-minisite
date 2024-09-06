@@ -16,17 +16,18 @@ import type {
   AllInsightPagesQueryResult,
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const { data: blogs } = await loadQuery<AllInsightPagesQueryResult>({
+    const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
       query: allInsightPagesQuery,
+      params: { language: getLocalePlaceholder() },
     });
 
-    return blogs.map((blog) => ({
-      params: { slug: blog },
+    return insights.map((slug) => ({
+      params: { slug },
     }));
   } else {
     return [];

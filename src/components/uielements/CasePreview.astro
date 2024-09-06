@@ -21,7 +21,7 @@ const { caseData, small } = Astro.props;
   ]}
 >
   {
-    caseData.introImage && (
+    caseData?.introImage && (
       <div
         class:list={[
           "flex w-full items-center justify-center overflow-hidden rounded-t-xl transition-all motion-safe:group-hover:shadow-xl",
@@ -77,22 +77,22 @@ const { caseData, small } = Astro.props;
         }
       </div>
       {
-        caseData.intro?.intro && (
+        caseData?.intro?.intro && (
           <div class="text-sm font-light [&>mark]:text-black">
-            <PortableText value={caseData.intro?.intro} />
+            <PortableText value={caseData?.intro?.intro} />
           </div>
         )
       }
       <ol class="mt-2 list-inside list-disc font-serif text-sm">
         {
-          caseData.duration && (
+          caseData?.duration && (
             <li class="">
               {t("metadata.duration") + ": " + caseData.duration}
             </li>
           )
         }
         {
-          caseData.collaborationModel && (
+          caseData?.collaborationModel && (
             <li class="">
               {t("metadata.collaboration") +
                 ": " +
@@ -103,7 +103,7 @@ const { caseData, small } = Astro.props;
           )
         }
         {
-          caseData.technologies && (
+          caseData?.technologies && (
             <li class="">
               {t("metadata.technologies") +
                 ": " +
@@ -114,7 +114,7 @@ const { caseData, small } = Astro.props;
           )
         }
         {
-          caseData.services && (
+          caseData?.services && (
             <li class="">
               {t("metadata.services") +
                 ": " +

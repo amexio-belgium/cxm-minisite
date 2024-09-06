@@ -22,15 +22,13 @@ import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const locale = getLocalePlaceholder().toLowerCase();
     const { data: services } = await loadQuery<AllServicePagesQueryResult>({
       query: allServicePagesQuery,
-      params: { language: locale },
+      params: { language: getLocalePlaceholder() },
     });
 
-    return services.map((blog) => ({
-      params: { slug: blog },
-      props: { locale: locale },
+    return services.map((slug) => ({
+      params: { slug },
     }));
   } else {
     return [];
@@ -38,8 +36,6 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-console.log("slug");
-console.log(slug);
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
