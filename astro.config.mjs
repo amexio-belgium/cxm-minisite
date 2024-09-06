@@ -12,8 +12,8 @@ const {
   ASTRO_SITE_URL,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_PROJECT_ID,
-  SANITY_VISUAL_EDITING_ENABLED,
   SANITY_STUDIO_URL,
+  SANITY_VISUAL_EDITING_ENABLED,
 } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
@@ -55,6 +55,6 @@ export default defineConfig({
       },
     }),
   ],
-  output: SANITY_VISUAL_EDITING_ENABLED ? "server" : "static",
+  output: SANITY_VISUAL_EDITING_ENABLED === "true" ? "server" : "static",
   adapter: netlify(),
 });

@@ -320,7 +320,7 @@ export const blogsListQueryPaginating = groq`
   intro
 }`;
 
-export const workQuery = groq`*[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{
+export const workQuery = groq`*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{
   ...,
   collaborationModel-> {
     ...,
@@ -407,18 +407,18 @@ export const rssBlogPostsQuery = groq`
 }
 `;
 
-export const allContentPagesQuery = groq`*[_type == "contentPage" && language == $language]{
+export const allContentPagesQuery = groq`*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;
 
-export const allServicePagesQuery = groq`*[_type == "service" && language == $language]{
+export const allServicePagesQuery = groq`*[_type == "service" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;
 
-export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $language]{
+export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;
 
-export const allCasePagesQuery = groq`*[_type == "blogPost" && language == $language]{
+export const allCasePagesQuery = groq`*[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;

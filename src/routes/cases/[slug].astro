@@ -49,56 +49,57 @@ if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
 
-const { data: workPage } = await loadQuery<WorkWithReferences>({
+const { data: casePage } = await loadQuery<WorkWithReferences>({
   query: workQuery,
   params: { language: getLocale(), slug: slug },
 });
 ---
 
 <Base
-  title={`${workPage?.metadata?.title || workPage?.intro?.title!} - ${siteConfig.siteName}`}
-  description={workPage?.metadata?.description || ""}
+  title={`${casePage?.metadata?.title || casePage?.intro?.title!} - ${siteConfig.siteName}`}
+  description={casePage?.metadata?.description || ""}
   slug={slug}
   siteConfig={siteConfig}
 >
   <HeroHeader
-    headline={workPage?.intro?.title}
-    text={workPage?.intro?.intro}
-    backgroundImage={workPage?.image?.asset?._id}
+    headline={casePage?.intro?.title}
+    text={casePage?.intro?.intro}
+    backgroundImage={casePage?.image?.asset?._id}
   >
     {
-      workPage.customerReferences && workPage.customerReferences.length > 0 && (
-        <Customers headline={workPage.customerReferencesText}>
-          {workPage.customerReferences?.map((customer) => (
-            <>
-              {customer?.logo?.default?.asset && (
-                <img
-                  src={imageBuilder
-                    .image(customer?.logo?.default?.asset)
-                    .height(80)
-                    .url()}
-                  alt={
-                    customer.logo.default.asset.altTexts?.[
-                      workPage.language || "en"
-                    ] || ""
-                  }
-                  class="h-10 w-auto"
-                />
-              )}
-            </>
-          ))}
-        </Customers>
-      )
+      casePage?.customerReferences &&
+        casePage.customerReferences.length > 0 && (
+          <Customers headline={casePage.customerReferencesText}>
+            {casePage.customerReferences?.map((customer) => (
+              <>
+                {customer?.logo?.default?.asset && (
+                  <img
+                    src={imageBuilder
+                      .image(customer?.logo?.default?.asset)
+                      .height(80)
+                      .url()}
+                    alt={
+                      customer.logo.default.asset.altTexts?.[
+                        casePage.language || "en"
+                      ] || ""
+                    }
+                    class="h-10 w-auto"
+                  />
+                )}
+              </>
+            ))}
+          </Customers>
+        )
     }
   </HeroHeader>
   <ProjectMetadata
-    duration={workPage.duration}
-    collaboration={workPage.collaborationModel}
-    services={workPage.services}
-    technologies={workPage.technologies}
+    duration={casePage.duration}
+    collaboration={casePage.collaborationModel}
+    services={casePage.services}
+    technologies={casePage.technologies}
   >
     {
-      workPage.technologies?.map((technology) => (
+      casePage.technologies?.map((technology) => (
         <TechnologyIcon
           link={
             technology?.partner?.link
@@ -110,7 +111,7 @@ const { data: workPage } = await loadQuery<WorkWithReferences>({
             src={technology?.logo?.default as SanityImageSource}
             alt={
               technology?.logo?.default?.asset?.altTexts?.[
-                workPage.language || "en"
+                casePage.language || "en"
               ] || ""
             }
             sizes="200px"
@@ -122,12 +123,12 @@ const { data: workPage } = await loadQuery<WorkWithReferences>({
       ))
     }
   </ProjectMetadata>
-  <SanityComponentsRenderer content={workPage?.content} />
+  <SanityComponentsRenderer content={casePage?.content} />
   {
-    workPage?.relatedCases && workPage?.relatedCases?.length > 1 && (
+    casePage?.relatedCases && casePage?.relatedCases?.length > 1 && (
       <div class="relative flex flex-col py-20 before:absolute before:-right-24 before:bottom-0 before:top-0 before:-z-10 before:h-full before:w-[3000px] before:bg-light-blue-50 xl:mb-40 xl:pr-12 xl:before:right-0 xl:before:rounded-xl">
         <div class="relative grid w-full grid-cols-1 gap-8 text-black lg:grid-cols-2">
-          {workPage?.relatedCases.splice(0, 2).map((casePost) => (
+          {casePage?.relatedCases.splice(0, 2).map((casePost) => (
             <CasePreview small caseData={casePost} />
           ))}
         </div>
