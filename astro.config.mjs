@@ -19,9 +19,6 @@ const {
 // https://astro.build/config
 export default defineConfig({
   site: ASTRO_SITE_URL,
-  build: {
-    format: "directory",
-  },
   integrations: [
     sitemap(),
     tailwind({
@@ -60,5 +57,4 @@ export default defineConfig({
   ],
   output: SANITY_VISUAL_EDITING_ENABLED ? "server" : "static",
   adapter: netlify(),
-  trailingSlash: "always",
 });
