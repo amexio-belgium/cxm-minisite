@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import netlify from "@astrojs/netlify";
 import sanityImg from "@otterstack/sanity-img-astro/integration";
@@ -20,7 +19,6 @@ const {
 export default defineConfig({
   site: ASTRO_SITE_URL,
   integrations: [
-    sitemap(),
     tailwind({
       nesting: true,
     }),
@@ -42,6 +40,7 @@ export default defineConfig({
     liciousI18n({
       defaultLocale: "en",
       strategy: "prefix",
+      sitemap: true,
       locales: locales, // must include the default locale
       client: {
         data: true,

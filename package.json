@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "generate-translations": "node src/scripts/generateTranslations.js",
+    "fix-sitemap": "node src/scripts/fixSitemap.js",
     "prebuild": "npm run generate-translations",
+    "postbuild": "npm run fix-sitemap",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -18,7 +20,6 @@
     "@astrojs/netlify": "^5.4.0",
     "@astrojs/react": "^3.6.0",
     "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.0",
     "@astrolicious/i18n": "^0.5.1",
     "@builder.io/qwik": "^1.7.1",
@@ -47,7 +48,8 @@
     "tailwindcss": "^3.4.3",
     "tailwindcss-animated": "^1.0.1",
     "typescript": "^5.5.4",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",

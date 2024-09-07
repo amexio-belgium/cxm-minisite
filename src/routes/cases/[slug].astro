@@ -9,6 +9,7 @@ import CasePreview from "@components/uielements/CasePreview.astro";
 import TechnologyIcon from "@components/uielements/TechnologyIcon.astro";
 import Base from "@layouts/Base.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import { getSitemapParams } from "@lib/sitemap";
 import SanityImg from "@otterstack/sanity-img-astro";
 import type { WorkWithReferences } from "@sanity/custom.sanity.types";
 
@@ -19,12 +20,17 @@ import type {
 } from "@sanity/sanity.types";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import { getLocale, getLocalePlaceholder } from "i18n:astro";
+import sitemap from "i18n:astro/sitemap";
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
     const { data: cases } = await loadQuery<AllCasePagesQueryResult>({
       query: allCasePagesQuery,
       params: { language: getLocalePlaceholder() },
+    });
+
+    sitemap({
+      dynamicParams: getSitemapParams(cases, getLocalePlaceholder()),
     });
 
     return cases.map((slug) => ({

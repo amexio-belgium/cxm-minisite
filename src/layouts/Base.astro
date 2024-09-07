@@ -13,6 +13,8 @@ import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import I18nClient from "@astrolicious/i18n/components/I18nClient.astro";
+import I18nHead from "@astrolicious/i18n/components/I18nHead.astro";
+
 import { getLocale } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
@@ -52,6 +54,7 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
   <head>
     <meta charset="utf-8" />
     <I18nClient />
+    <I18nHead />
     <BaseHead title={title} description={description} />
     {
       slug === "contact" && (

@@ -18,12 +18,18 @@ import type {
 } from "@sanity/sanity.types";
 import { getLocale, getLocalePlaceholder } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import sitemap from "i18n:astro/sitemap";
+import { getSitemapParams } from "@lib/sitemap";
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
     const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
       query: allInsightPagesQuery,
       params: { language: getLocalePlaceholder() },
+    });
+
+    sitemap({
+      dynamicParams: getSitemapParams(insights, getLocalePlaceholder()),
     });
 
     return insights.map((slug) => ({

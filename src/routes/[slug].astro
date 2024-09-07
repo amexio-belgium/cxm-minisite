@@ -14,8 +14,10 @@ import type {
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
 
-import { getLocale, getLocalePlaceholder } from "i18n:astro";
+import { getLocale, getLocalePlaceholder, type Locale } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import sitemap from "i18n:astro/sitemap";
+import { getSitemapParams } from "@lib/sitemap";
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
@@ -24,6 +26,9 @@ export async function getStaticPaths() {
       params: { language: getLocalePlaceholder() },
     });
 
+    sitemap({
+      dynamicParams: getSitemapParams(contentPages, getLocalePlaceholder()),
+    });
     return contentPages.map((blog) => ({
       params: { slug: blog },
     }));
