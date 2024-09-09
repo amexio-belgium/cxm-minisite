@@ -1,0 +1,11 @@
+---
+import type { CodeEmbed } from "@sanity/sanity.types";
+
+interface Props {
+  code: CodeEmbed;
+}
+
+const { code } = Astro.props;
+---
+
+<Fragment set:html={code?.Code?.code} />

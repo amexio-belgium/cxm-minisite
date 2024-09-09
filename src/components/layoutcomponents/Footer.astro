@@ -21,13 +21,15 @@ export type Social = {
 interface Props {
   navigation: NavigationQueryResult;
   secondaryNavigation: NavigationQueryResult;
-  isContactPage: boolean;
   footerText: any;
   socials: Social[] | undefined;
 }
 
-const { navigation, secondaryNavigation, isContactPage, footerText, socials } =
-  Astro.props;
+const { navigation, secondaryNavigation, footerText, socials } = Astro.props;
+
+const { slug } = Astro.params;
+
+const isContactPage = slug == "contact";
 ---
 
 <footer
@@ -45,7 +47,7 @@ const { navigation, secondaryNavigation, isContactPage, footerText, socials } =
               {t("footer.subheadline")}
             </p>
             <Button
-              link="/contact"
+              link={`/${getLocale()}/contact/`}
               class="mt-8"
               size="lg"
               icon="email"
