@@ -119,18 +119,18 @@ const { navigation } = Astro.props;
     ) as HTMLSpanElement;
     const closeMainMenuTrigger = document.getElementById("close-main-menu");
 
-    const getCenterX = (el) => {
+    const getCenterX = (el: Element) => {
       return el.getBoundingClientRect().width / 2;
     };
-    const getCenterY = (el) => {
+    const getCenterY = (el: Element) => {
       return el.getBoundingClientRect().height / 2;
     };
 
-    const getLeft = (el) => {
+    const getLeft = (el: Element) => {
       return el.getBoundingClientRect().left;
     };
 
-    const getTop = (el) => {
+    const getTop = (el: Element) => {
       return el.getBoundingClientRect().top;
     };
 
@@ -143,7 +143,7 @@ const { navigation } = Astro.props;
 
     const setInitialDotState = () => {
       if (activeMainNavLink) {
-        handleDotPosition(activeMainNavLink, mainNav);
+        handleDotPosition(activeMainNavLink, mainNav!);
         showDotIndicator();
       } else {
         hideDotIndicator();
@@ -151,12 +151,12 @@ const { navigation } = Astro.props;
     };
 
     const mainNavigationResizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (let i = 0; i < entries.length; i++) {
         setInitialDotState();
       }
     });
 
-    const handleDotPosition = (element, wrapper) => {
+    const handleDotPosition = (element: Element, wrapper: Element) => {
       if (isSmallScreen.matches) {
         dotIndicator!.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
       } else {
@@ -188,7 +188,7 @@ const { navigation } = Astro.props;
       }, 500);
     };
 
-    const handleOrientationChange = (mql) => {
+    const handleOrientationChange = () => {
       hideDotIndicator();
       if (isSmallScreen.matches) {
         mainMenu.removeAttribute("role");
@@ -221,15 +221,15 @@ const { navigation } = Astro.props;
       false,
     );
 
-    mainMenuTrigger.addEventListener("click", function (event) {
+    mainMenuTrigger.addEventListener("click", () => {
       openMobileMenu();
     });
 
     [...mainNavLinks].forEach((mainNavLink) => {
       mainNavLink.addEventListener(
         "mouseenter",
-        function (e) {
-          handleDotPosition(e.target, mainNav);
+        (e) => {
+          handleDotPosition(e.target as Element, mainNav!);
         },
         false,
       );

@@ -14,7 +14,7 @@ import type {
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
 
-import { getLocale, getLocalePlaceholder, type Locale } from "i18n:astro";
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import sitemap from "i18n:astro/sitemap";
 import { getSitemapParams } from "@lib/sitemap";
@@ -48,12 +48,6 @@ if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
 
-let pageSlug: string | null | undefined = slug;
-
-if (!slug) {
-  pageSlug = siteConfig?.homePage?.slug;
-}
-
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
   params: { language: getLocale(), slug: slug! },
@@ -69,6 +63,7 @@ if (contentPage == null) {
   description={contentPage?.metadata?.description || ""}
   slug={slug!}
   siteConfig={siteConfig}
+  translations={contentPage._translations}
 >
   <HeroHeader
     headline={contentPage?.intro?.title}
