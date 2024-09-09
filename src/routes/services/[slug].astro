@@ -1,79 +1,117 @@
 ---
-import { t } from "i18n:astro";
+import Base from "@layouts/Base.astro";
+import {
+  allServicePagesQuery,
+  serviceQuery,
+  siteConfigQuery,
+} from "@api/queries";
+import { imageBuilder, loadQuery } from "@api/sanity";
+import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
+import { type ServiceWithReferences } from "src/sanity/custom.sanity.types";
+import HeroHeader from "@components/uicomposition/HeroHeader.astro";
+import Customers from "@components/uicomposition/Customers.astro";
+import Faq from "@components/uicomposition/Faq.astro";
+import FaqQuestion from "@components/uielements/FaqQuestion.astro";
+import { PortableText } from "astro-portabletext";
+import type {
+  AllServicePagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import sitemap from "i18n:astro/sitemap";
+import { getSitemapParams } from "@lib/sitemap";
 
-const { duration, collaboration, services, technologies } = Astro.props;
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const { data: services } = await loadQuery<AllServicePagesQueryResult>({
+      query: allServicePagesQuery,
+      params: { language: getLocalePlaceholder() },
+    });
 
-const { lang } = Astro.params;
+    sitemap({
+      dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
+    });
+
+    return services.map((slug) => ({
+      params: { slug },
+    }));
+  } else {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+
+const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
+  query: siteConfigQuery,
+  params: { language: getLocale() },
+});
+
+if (!siteConfig) {
+  return new Response(null, { status: 404 });
+}
+
+const { data: servicePage } = await loadQuery<ServiceWithReferences>({
+  query: serviceQuery,
+  params: { language: getLocale(), slug: slug! },
+});
+
+if (servicePage == null) {
+  return new Response(null, { status: 404 });
+}
 ---
 
-<div
-  class="relative -mt-16 mb-20 inline-block h-fit w-full flex-col items-start justify-start rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 p-4 text-white shadow-sm shadow-blue-200 animate-delay-500 animate-ease-out motion-safe:animate-fade-up md:p-8"
+<Base
+  title={`${servicePage?.metadata?.title || servicePage?.intro?.title!} - ${siteConfig.siteName}`}
+  description={servicePage?.metadata?.description || ""}
+  slug={slug!}
+  siteConfig={siteConfig}
 >
-  <h2 class="mb-6 font-serif text-lg" set:html={t("metadata.headline")} />
-  <dl
-    class="project-metadata mb-8 flex flex-col gap-4 font-serif text-sm lg:flex-row lg:flex-wrap"
+  <HeroHeader
+    headline={servicePage.intro?.title}
+    text={servicePage.intro?.intro}
+    backgroundImage={servicePage?.image?.asset?._id}
   >
     {
-      duration && (
-        <div class="flex after:text-secondary lg:after:ml-4">
-          <dt class="inline lg:block">{t("metadata.duration") + ":"}</dt>
-          <dd class="inline lg:block">{duration}</dd>
-        </div>
-      )
+      servicePage.customerReferences &&
+        servicePage.customerReferences.length > 0 && (
+          <Customers headline={servicePage.customerReferencesText}>
+            {servicePage.customerReferences?.map((customer: any) => (
+              <>
+                {customer?.logo?.default?.asset && (
+                  <img
+                    src={imageBuilder
+                      .image(customer.logo?.default?.asset)
+                      .height(80)
+                      .url()}
+                    alt={
+                      customer.logo.default.asset.altTexts?.[getLocale()] || ""
+                    }
+                    class="h-10 w-auto"
+                  />
+                )}
+              </>
+            ))}
+          </Customers>
+        )
     }
-    {
-      collaboration && (
-        <div class="after:text-secondary lg:flex lg:after:ml-4">
-          <dt class="inline lg:block">{t("metadata.collaboration") + ":"}</dt>
-          <dd class="inline lg:block">
-            {collaboration.collaborationTabs
-              .map((tab) => tab.concept.prefLabel)
-              .join(", ")}
-          </dd>
-        </div>
-      )
-    }
-    {
-      technologies && (
-        <div class="after:text-secondary lg:flex lg:after:ml-4">
-          <dt class="inline lg:block">{t("metadata.technologies") + ":"}</dt>
-          <dd class="inline lg:block">
-            {technologies.map((technology) => technology.name).join(", ")}
-          </dd>
-        </div>
-      )
-    }
-    {
-      services && (
-        <div class="lg:flex">
-          <dt class="inline lg:block">{t("metadata.services") + ":"}</dt>
-          <dd class="inline lg:block">
-            {services.map((service) => service.metadata.title).join(", ")}
-          </dd>
-        </div>
-      )
-    }
-  </dl>
-  <div
-    class="grid items-center gap-x-2 gap-y-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-  >
-    <slot />
-  </div>
-</div>
-<style>
-  @media (min-width: 1024px) {
-    .project-metadata dt {
-      padding-inline-end: 1ch;
-    }
-    @supports (content: "x" / "y") {
-      .project-metadata > div:not(:last-child):after {
-        content: "/" / "";
-      }
-    }
-    @supports not (content: "x" / "y") {
-      .project-metadata > div:not(:last-child):after {
-        content: "/";
-      }
-    }
+  </HeroHeader>
+  <SanityComponentsRenderer content={servicePage?.content} />
+
+  {
+    servicePage.faqs && (
+      <Faq headline={servicePage.faqs.title || ""}>
+        {servicePage.faqs.questions?.map((question) => (
+          <>
+            {question.question && (
+              <FaqQuestion headline={question.question} headlineTag="h3">
+                {question.answer && <PortableText value={question.answer} />}
+              </FaqQuestion>
+            )}
+          </>
+        ))}
+      </Faq>
+    )
   }
-</style>
+</Base>
