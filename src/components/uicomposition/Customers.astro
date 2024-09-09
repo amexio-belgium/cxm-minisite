@@ -1,9 +1,10 @@
 ---
 const { headline, ...props } = Astro.props;
 ---
-<div class="w-full mt-10" {...props}>
-    <h2 class="font-serif text-lg text-white mb-6">{headline}</h2>
-    <div class="flex flex-row gap-6">
-        <slot />
-    </div>
+
+<div class="mt-10 w-full" {...props}>
+  <h2 class="mb-6 font-serif text-lg text-white">{headline}</h2>
+  <div class="flex flex-row gap-6">
+    <slot />
+  </div>
 </div>

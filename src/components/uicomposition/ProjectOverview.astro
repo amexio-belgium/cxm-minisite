@@ -1,42 +1,50 @@
 ---
-import ProjectCard from '../uielements/ProjectCard.astro'
-import Button from '../uielements/Button.astro';
-import { useTranslations } from '../../i18n/utils';
+import ProjectCard from "../uielements/ProjectCard.astro";
+import Button from "../uielements/Button.astro";
+import {t} from "i18next";
 const { lang } = Astro.params;
 
-const t = useTranslations(lang, 'home');
 ---
-<div class="relative flex flex-col xl:flex-row py-8 md:py-20 xl:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 xl:before:right-0 marker:before:h-full before:w-[3000px] xl:before:rounded-xl">
-    <div class="flex flex-col items-start w-full gap-2 mb-8 md:mb-16 md:pr-12 xl:sticky xl:w-3/12 h-fit top-40">
-        <h2 class="mb-2 font-serif font-bold text-3xl">
-            {t('projectoverview.headline')}
-        </h2>
-        <Button link=`/${lang}/work` class="" style="secondary" color="light">
-            {t('projectoverview.button')}
-        </Button>
-    </div>
-    <div class="flex flex-col w-full gap-2 xl:w-9/12">
-        <ProjectCard 
-            projectImage='/src/assets/projects/oecd1.jpg'
-            smallImage='/src/assets/logos/oecd_logo_white.png' 
-            name="OECD" 
-            content={t('project3.description')}
-            buttonText={t('project2.button')} 
-            link=`/${lang}/work/oecd/`/>
-        <ProjectCard 
-            projectImage='/src/assets/projects/kbc-small.jpg'
-            smallImage='/src/assets/logos/kbc_logo_square_white.png' 
-            name="KBC" 
-            content={t('project1.description')}
-            buttonText={t('project1.button')} 
-            link=`/${lang}/work/kbc/`/>
 
-        <ProjectCard 
-            projectImage='/src/assets/projects/mediafin-small.jpg'
-            smallImage='/src/assets/logos/mediafin_logo_white.png' 
-            name="Mediafin" 
-            content={t('project2.description')} 
-            buttonText={t('project2.button')}  
-            link=`/${lang}/work/mediafin/`/>
-    </div>
+<div
+  class="relative flex flex-col py-8 before:absolute before:-right-24 before:bottom-0 before:top-0 before:-z-10 before:w-[3000px] before:bg-light-blue-50 marker:before:h-full md:py-20 xl:flex-row xl:pr-12 xl:before:right-0 xl:before:rounded-xl"
+>
+  <div
+    class="top-40 mb-8 flex h-fit w-full flex-col items-start gap-2 md:mb-16 md:pr-12 xl:sticky xl:w-3/12"
+  >
+    <h2 class="mb-2 font-serif text-3xl font-bold">
+      {t("projectoverview.headline", { defaultValue: "" })}
+    </h2>
+    <Button link="/cases" class="" style="secondary" color="light">
+      {t("projectoverview.button", { defaultValue: "" })}
+    </Button>
+  </div>
+  <div class="flex w-full flex-col gap-2 xl:w-9/12">
+    <ProjectCard
+      projectImage="/src/assets/projects/kbc.jpg"
+      smallImage="/src/assets/logos/kbc_logo_square_white.png"
+      name="KBC"
+      content={t("project1.description", { defaultValue: "" })}
+      buttonText={t("project1.button", { defaultValue: "" })}
+      link="/cases/euroclear/"
+    />
+
+    <ProjectCard
+      projectImage="/src/assets/projects/telenet.jpg"
+      smallImage="/src/assets/logos/mediafin_logo_white.png"
+      name="Mediafin"
+      content={t("project2.description", { defaultValue: "" })}
+      buttonText={t("project2.button", { defaultValue: "" })}
+      link="/cases/kbc/"
+    />
+
+    <ProjectCard
+      projectImage="/src/assets/projects/telenet.jpg"
+      smallImage="/src/assets/logos/telenet_logo_square_white.png"
+      name="Telenet"
+      content={t("project3.description", { defaultValue: "" })}
+      buttonText={t("project2.button", { defaultValue: "" })}
+      link="/cases/telenet/"
+    />
+  </div>
 </div>

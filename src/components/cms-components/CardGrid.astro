@@ -1,0 +1,40 @@
+---
+import TilesContainer from "@components/uicomposition/TilesContainer.astro";
+import SmallTile from "@components/uielements/SmallTile.astro";
+import type { i18nImageAsset } from "@sanity/custom.sanity.types";
+import type { CardGrid } from "@sanity/sanity.types";
+import { imageBuilder } from "src/api/sanity";
+import { getLocale } from "i18n:astro";
+
+interface Props {
+  cardGrid: CardGrid;
+}
+
+const { cardGrid } = Astro.props;
+---
+
+<TilesContainer
+  headline={cardGrid?.intro?.title}
+  description={cardGrid?.intro?.intro}
+>
+  {
+    cardGrid?.cards?.map((card) => {
+      const asset = card?.icon?.asset as any as i18nImageAsset;
+      return (
+        <SmallTile headline={card.title || ""} description={card.content}>
+          {card.icon?.asset && (
+            <img
+              src={imageBuilder.image(asset).height(192).url()}
+              alt={asset?.altTexts?.[getLocale()]}
+              class="h-24 w-auto"
+              width="300"
+              height="150"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </SmallTile>
+      );
+    })
+  }
+</TilesContainer>

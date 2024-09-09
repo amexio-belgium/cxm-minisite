@@ -1,19 +1,28 @@
 @media print {
-    /* All your print styles go here */
-    header,
-    footer,
-    nav {
-      display: none !important;
-    }
-    h1, h2, h3, h4, h5, p, mark, b, span, a {
-        color: black !important;
-    }
-    svg {
-        fill: black !important;
-    }
-    mark {
-        background-clip: initial;
-        background: none;
-        -webkit-text-fill-color: unset;
-    }
+  /* All your print styles go here */
+  header,
+  footer,
+  nav {
+    display: none !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  mark,
+  b,
+  span,
+  a {
+    color: black !important;
+  }
+  svg {
+    fill: black !important;
+  }
+  mark {
+    background-clip: initial;
+    background: none;
+    -webkit-text-fill-color: unset;
+  }
 }

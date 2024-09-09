@@ -1,90 +1,135 @@
 ---
-import type { ImageMetadata } from 'astro';
-
-import { Image } from 'astro:assets';
-import { PUBLIC_ASTRO_BASE_PATH } from "../../consts";
+import SanityImg from "@otterstack/sanity-img-astro";
+import {defaultComponents} from "../cms-components/PortableText/helper";
+import {PortableText} from "astro-portabletext";
+import type {TestimonialReferenced} from "../../sanity/custom.sanity.types";
+import type {SanityImageSource} from "@sanity/image-url/lib/types/types";
+import {getLocale} from "@builder.io/qwik";
 
 interface Props {
-    quote: string;
-    name: string;
-    jobtitle?: string;
-    profileImage: string;
-    variant?: 'flat' | 'glass' | 'content-glass' 
-    class?: string;
+  testimonial: TestimonialReferenced,
+  class?: string;
 }
-const { 
-    quote, 
-    name, 
-    jobtitle,
-    profileImage, 
-    variant = "glass",
-    class: className,
+
+const {
+  testimonial,
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/{,**/}*.{jpeg,jpg,png,gif}');
-if (!images[profileImage]) throw new Error(`"${profileImage}" does not exist in glob: "src/assets/people/{,**/}*.{jpeg,jpg,png,gif}"`);
-const id = "id_" + Math.random().toString(36).slice(2, 11)
-
+const id = "id_" + Math.random().toString(36).slice(2, 11);
+const variant = testimonial.variant ? testimonial.variant : "glass";
 ---
-<blockquote class:list={[className,variant == "content-glass" ? "not-prose mt-28 first:mt-20 lg:mt-0" : "mb-40", "group/quote flex flex-col justify-end gap-8 mt-20 lg:mt-0 lg:first:mt-0 md:flex-row"]}>
-    {
-        variant == "flat" && 
-        <div class="flex flex-col items-center justify-center text-white md:w-4/12 ">
-        <Image loading="lazy" class="motion-safe:group-hover/quote:scale-110 transition-transform ease-in-out duration-300  mb-8 rounded-full aspect-square w-52 h-52 sm:w-40 sm:h-40 lg:w-52 lg:h-52" src={images[profileImage]()} alt={name} />
-        <footer>
-            <cite class="flex flex-col items-center justify-center not-italic">
-                <span class="text-xs" set:html={name}></span>
-                <span class="text-xxs" set:html={jobtitle}></span>
-            </cite>
-        </footer>
-        </div>
-    }
-    <div class:list={["flex flex-col items-start w-full gap-8  text-lg rounded-xl ",
-     variant == "flat" && "text-black bg-lightest-blue-500 lg:w-8/12 p-12",
-     variant == "glass" && "py-8 p-4 pt-40 sm:p-12 sm:pt-40 lg:pt-12 w-full lg:w-11/12  relative text-white lg:pl-40 bg-gradient-to-r from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border border-blue shadow-sm backdrop-blur-sm ",
-     variant == "content-glass" && "py-8 p-4 pt-40 sm:p-12 sm:pt-40 lg:pt-12 w-full lg:w-full relative text-white lg:pl-40 bg-gradient-to-r from-blue-600 to-blue-800 shadow-blue-200 rounded-2xl border border-blue shadow-sm ",
-    , id]}> 
-        {
-            variant == "flat" ? 
-            <div class="flex items-center justify-center w-20 h-20 p-4 bg-white rounded-full motion-safe:group-hover/quote:scale-110 transition-transform ease-in-out duration-300 delay-200">
-                <svg width="40" height="30" aria-hidden="true" focusable="false">
-                    <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
-                </svg>
-            </div> 
-            <span class="text-sm font-light" set:html={quote}></span>
-            :
-            <Image loading="lazy" class="motion-safe:group-hover/quote:scale-105 transition-transform ease-in-out duration-300 absolute rounded-full aspect-square -top-20 left-4 lg:top-[unset] lg:-left-20 w-52 h-52" src={images[profileImage]()} alt={name} />
-            <div class="relative p-4">
-                <svg class="absolute w-4 h-4 top-0 left-0"  width="40" height="30" aria-hidden="true" focusable="false">
-                    <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
-                </svg>    
-                <span class="text-sm font-light" set:html={quote}></span>
-                <svg class="rotate-180 absolute w-4 h-4 -bottom-0 -right-0"  width="40" height="30" aria-hidden="true" focusable="false">
-                    <use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-quote`></use>
-                </svg>    
-            </div>
-            <footer>
-                <cite class="pl-4 sm:pl-4 flex flex-col text-white not-italic">
-                    <span class="text-xs" set:html={name}></span>
-                    <span class="text-xxs font-serif" set:html={jobtitle}></span>
-                </cite>
-            </footer>
-        }
 
-    </div>
+<blockquote
+  class:list={[
+    "mb-40 group/quote mt-20 flex flex-col justify-end gap-8 md:flex-row lg:mt-0 lg:first:mt-0",
+  ]}
+>
+  {
+    variant == "flat" && (
+      <div class="flex flex-col items-center justify-center text-white md:w-4/12">
+        <SanityImg
+          src={testimonial.person?.image?.asset?._id as SanityImageSource}
+          alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
+          class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
+          loading="lazy"
+          sizes="(min-width:768px) 50vw, 100vw"
+        />
+        <footer>
+          <cite class="flex flex-col items-center justify-center not-italic">
+            <span class="text-xs" set:html={testimonial.person?.name} />
+            <span class="text-xxs" set:html={testimonial.person?.jobTitle} />
+          </cite>
+        </footer>
+      </div>
+    )
+  }
+  <div
+    class:list={[
+      "flex w-full flex-col items-start gap-8 rounded-xl text-lg",
+      variant == "flat" && "bg-lightest-blue-500 p-12 text-black lg:w-8/12",
+      variant == "glass" &&
+        "relative w-full rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 p-4 py-8 pt-40 text-white shadow-sm shadow-blue-200 backdrop-blur-sm sm:p-12 sm:pt-40 lg:w-11/12 lg:pl-40 lg:pt-12",
+      id,
+    ]}
+  >
+    {
+      variant == "flat" ? (
+        <>
+          <div class="flex h-20 w-20 items-center justify-center rounded-full bg-white p-4 transition-transform delay-200 duration-300 ease-in-out motion-safe:group-hover/quote:scale-110">
+            <svg width="40" height="30" aria-hidden="true" focusable="false">
+              <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
+            </svg>
+          </div>
+          {
+            testimonial?.textObject?.richText && (
+              <PortableText
+                components={defaultComponents}
+                value={testimonial?.textObject?.richText}
+              />
+            )
+          }
+        </>
+      ) : (
+        <>
+          <SanityImg
+            src={testimonial.person?.image?.asset?._id as SanityImageSource}
+            alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
+            class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
+            loading="lazy"
+            sizes="(min-width:768px) 50vw, 100vw"
+          />
+          <div class="relative p-4">
+            <svg
+              class="absolute left-0 top-0 h-4 w-4"
+              width="40"
+              height="30"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
+            </svg>
+            {
+              testimonial?.textObject?.richText && (
+                <PortableText
+                  components={defaultComponents}
+                  value={testimonial.textObject?.richText}
+                />
+              )
+            }
+            />
+            <svg
+              class="absolute -bottom-0 -right-0 h-4 w-4 rotate-180"
+              width="40"
+              height="30"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
+            </svg>
+          </div>
+          <footer>
+            <cite class="flex flex-col pl-4 not-italic text-white sm:pl-4">
+              <span class="text-xs" set:html={testimonial.person?.name} />
+              <span class="font-serif text-xxs" set:html={testimonial.person?.jobTitle} />
+            </cite>
+          </footer>
+        </>
+      )
+    }
+  </div>
 </blockquote>
 
-<script define:vars={{id}} >
-    const textBlock = document.querySelector(`.${id}`);
-  
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && textBlock) {
-          textBlock.classList.add('motion-safe:animate-fade-up');
-          observer.unobserve(textBlock);
-        }
-      });
+<script define:vars={{ id }}>
+  const textBlock = document.querySelector(`.${id}`);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && textBlock) {
+        textBlock.classList.add("motion-safe:animate-fade-up");
+        observer.unobserve(textBlock);
+      }
     });
-  
-    textBlock && observer.observe(textBlock);
+  });
+
+  textBlock && observer.observe(textBlock);
 </script>

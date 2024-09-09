@@ -1,36 +1,53 @@
 ---
+import PortableH2 from "@components/cms-components/PortableText/PortableH2.astro";
+import { PortableText } from "astro-portabletext";
+import type { SomePortableTextComponents } from "astro-portabletext/types";
+
 interface Props {
-    headline: string;
-    description: string;
-    fullWidth?: boolean;
-    class?: string;
-    align?: "left" | "right";
+  text: any;
+  fullWidth?: boolean;
+  class?: string;
+  align?: "left" | "right";
 }
 
-const { 
-    headline, 
-    description,
-    fullWidth = false,
-    align = "right",
-    class: className 
+const {
+  text,
+  fullWidth = false,
+  align = "right",
+  class: className,
 } = Astro.props;
+
+const components: SomePortableTextComponents = {
+  block: {
+    h2: PortableH2,
+  },
+};
 ---
-<div class:list={[
-    "group relative flex flex-col py-8 md:py-20 justify-between gap-12 mb-20 before:-z-10 before:absolute before:top-0 before:bottom-0 before:h-full",
-    fullWidth ? 
-        "lg:flex-row-reverse before:bg-lightest-blue-500 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px]" 
-        : 
-        align == "right" ? 
-        "md:pl-0 lg:flex-row before:bg-light-blue-50 before:-left-12 before:w-[3000px] before:rounded-xl": 
-        "md:pl-0 lg:flex-row-reverse before:bg-light-blue-50 before:-right-12 before:w-[3000px] before:rounded-xl",
-    className]}>
-    <div class="flex flex-col justify-center gap-6 text-black text-left">
-        <h2 class="font-serif text-xl sm:text-3xl text-balance" set:html={headline}></h2>
-        <div class="prose text-sm sm:text-base font-light max-w-prose" set:html={description}></div>
+
+<div
+  class:list={[
+    "group relative mb-20 flex flex-col justify-between gap-12 py-8 before:absolute before:bottom-0 before:top-0 before:-z-10 before:h-full md:py-20 items-start",
+    fullWidth
+      ? "before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:w-[10000px] before:bg-lightest-blue-500 marker:before:h-full lg:flex-row-reverse"
+      : align == "right"
+        ? "before:-left-12 before:w-[3000px] before:rounded-xl before:bg-light-blue-50 md:pl-0 lg:flex-row"
+        : "before:-right-12 before:w-[3000px] before:rounded-xl before:bg-light-blue-50 md:pl-0 lg:flex-row-reverse",
+    className,
+  ]}
+>
+  <div class="flex flex-col justify-center gap-6 text-left text-black">
+    <!-- <h2 class="font-serif text-xl sm:text-3xl text-balance" set:html={headline}></h2> -->
+    <div class="prose max-w-prose text-sm font-light sm:text-base">
+      <PortableText value={text} components={components} />
     </div>
-    <div class="mx-auto w-fit shadow-xl shadow-primary/20 rounded-xl overflow-hidden">
-        <div class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300">
-            <slot />
-        </div>
+  </div>
+  <div
+    class="mx-auto w-fit overflow-hidden rounded-xl shadow-xl shadow-primary/20"
+  >
+    <div
+      class="transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
+    >
+      <slot />
     </div>
+  </div>
 </div>

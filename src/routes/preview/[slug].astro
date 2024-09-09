@@ -1,0 +1,53 @@
+---
+import Base from "@layouts/Base.astro";
+import { contentPageQuery, siteConfigQuery } from "@api/queries";
+import { loadQuery } from "@api/sanity";
+import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
+import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
+import HeroHeader from "@components/uicomposition/HeroHeader.astro";
+import { isPreview } from "src/stores/global-store";
+import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import { getLocale } from "i18n:astro";
+
+export const prerender = false;
+const { slug } = Astro.params;
+
+const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
+  query: siteConfigQuery,
+  params: { language: getLocale() },
+});
+
+if (!siteConfig) {
+  return new Response(null, { status: 404 });
+}
+
+let pageSlug: string | null | undefined = slug;
+
+if (!slug) {
+  pageSlug = siteConfig?.homePage?.slug;
+}
+
+const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
+  query: contentPageQuery,
+  params: { language: getLocale(), slug: slug! },
+});
+
+if (contentPage == null) {
+  return new Response(null, { status: 404 });
+}
+
+isPreview.set(true);
+---
+
+<Base
+  title={`${contentPage?.metadata?.title || contentPage?.intro?.title!} - ${siteConfig.siteName}`}
+  description={contentPage?.metadata?.description || ""}
+  slug={slug!}
+  siteConfig={siteConfig}
+>
+  <HeroHeader
+    headline={contentPage?.intro?.title}
+    text={contentPage?.intro?.intro}
+  />
+  <SanityComponentsRenderer content={contentPage?.content} />
+</Base>

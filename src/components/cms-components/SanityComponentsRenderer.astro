@@ -1,0 +1,84 @@
+---
+import type {
+  CardGrid as CardGridType,
+  ServicesCardList
+} from "@sanity/sanity.types";
+import CardGrid from "@components/cms-components/CardGrid.astro";
+import ServiceCardList from "@components/cms-components/ServiceCardList.astro";
+import type {
+  BlogHighlightReferenced,
+  BlogsListReferenced,
+  CalloutReferenced,
+  HighlightReferenced,
+  LongFormTextReferenced,
+  TabsReferenced,
+  WorkCardListReferenced,
+  TestimonialReferenced
+} from "@sanity/custom.sanity.types";
+import Callout from "@components/cms-components/Callout.astro";
+import LongFormText from "@components/cms-components/LongFormText.astro";
+import HighlightBlock from "@components/cms-components/HighlightBlock/HighlightBlock.astro";
+import WorkCardList from "@components/cms-components/WorkCardList.astro";
+import Tabs from "@components/cms-components/Tabs.astro";
+import BlogHighlight from "@components/cms-components/BlogHighlight/BlogHighlight.astro";
+import BlogsList from "@components/cms-components/BlogsList/BlogsList.astro";
+import Quote from "@components/uicomposition/Quote.astro";
+
+interface Props {
+  content:
+    | Array<
+        | ServicesCardList
+        | CardGridType
+        | CalloutReferenced
+        | LongFormTextReferenced
+        | HighlightReferenced
+        | TabsReferenced
+        | WorkCardListReferenced
+        | BlogHighlightReferenced
+        | BlogsListReferenced
+        | TestimonialReferenced
+      >
+    | undefined;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="flex flex-col gap-y-20">
+  {
+    content?.map((content) => {
+      switch (content._type) {
+        case "cardGrid": {
+          return <CardGrid cardGrid={content} />;
+        }
+        case "servicesCardList": {
+          return <ServiceCardList serviceCardList={content} />;
+        }
+        case "callout": {
+          return <Callout callout={content} />;
+        }
+        case "longFormText": {
+          return <LongFormText longFormText={content} />;
+        }
+        case "tabs": {
+          return <Tabs tabsContent={content} />;
+        }
+        case "highlight": {
+          return <HighlightBlock highlight={content} />;
+        }
+        case "workCardList": {
+          return <WorkCardList workCardList={content} />;
+        }
+        case "testimonial": {
+          return <Quote testimonial={content} />;
+        }
+        case "blogHighlight": {
+          return <BlogHighlight blogPost={content} />;
+        }
+        case "blogsList": {
+          return <BlogsList blogsList={content} />;
+        }
+      }
+    })
+  }
+</div>

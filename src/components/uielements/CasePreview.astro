@@ -1,89 +1,110 @@
 ---
-import { useTranslations } from 'src/i18n/utils';
-import { Picture, Image } from 'astro:assets';
-import Button from '@components/uielements/Button.astro';
+import Button from "@components/uielements/Button.astro";
+import SanityImg from "@otterstack/sanity-img-astro";
+import {PortableText} from "astro-portabletext";
+import type { ReferenceCaseReferenced } from "@sanity/custom.sanity.types";
+import { isPreview } from "src/stores/global-store";
+import { getLocale } from "i18n:astro";
+import {t} from "i18next";
 
-const { lang } = Astro.params;
-
-const { 
-    caseData,
-    small,
-    link
-} = Astro.props;
-
-const t = useTranslations(lang, 'work');
-
-let caseImage
-
-if (caseData.heroImage.includes("/projects/")) {
-    const projectImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}');
-    if (!projectImages[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/projects/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-    caseImage = projectImages[caseData.heroImage]()
-} else {
-    const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
-    if (!images[caseData.heroImage]) throw new Error(`"${caseData.heroImage}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}" or "src/assets/projects/*.{jpeg,jpg,png,gif}"`);
-    caseImage = images[caseData.heroImage]()
+interface Props {
+    caseData: ReferenceCaseReferenced;
+    small?: boolean;
 }
 
-const logoimages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}');
-if (!logoimages[caseData.logo]) throw new Error(`"${caseData.logo}" does not exist in glob: "src/assets/logos/{,**/}*.{jpeg,jpg,png,gif}"`);
+const { caseData, small } = Astro.props;
 
 ---
+
 <div class:list={["motion-safe:animate-fade-up motion-safe:animate-delay-1000 group flex flex-col justify-stretch gap-8",
-   small ? "items-stretch" : "w-full md:flex-row" 
+  small ? "items-stretch" : "w-full md:flex-row"
 ]}>
-    <div class:list={["w-full flex items-center justify-center rounded-t-xl transition-all overflow-hidden motion-safe:group-hover:shadow-xl ",
-     small ? "max-h-[400px]" : "md:w-1/2 md:rounded-tr-none md:rounded-l-xl" 
-    ]}>
-        <Picture
-            src={caseImage} 
-            alt={caseData.altTextImage || ""}
-            widths={[400, 600, 790]}
-            sizes="(max-width: 790px) 100vw, 790px"
-            class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full shrink-0 max-w-[unset] h-[unset] w-auto" 
-            loading="lazy"
-        />
-    </div> 
-    <div class:list={["pb-8 max-h-full w-full flex flex-col justify-between gap-8 border-b-2 border-y-quaternary",
-    small ? "h-3/4 md:px-4" : "px-4 md:w-1/2 md:p-8 md:border-y-2" 
-    ]}>
-        <div class="flex flex-col gap-2">
-            <div class="flex flex-row mb-4 gap-8 items-start justify-between">
-                <div class="flex flex-col">
-                    <span class="font-serif text-primary" set:html={caseData.client}></span>
-                    <h2 class="caseheadline mb-2 font-serif text-xl [&>mark]:text-black [&>mark]:bg-none [&>mark]:bg-clip-border" set:html={caseData.title}></h2>
-                </div>
-                {								
-                    caseData.logo && 
-                        <Image loading="lazy" src={logoimages[caseData.logo]()}  class="w-auto h-12 sm:h-16 md:h-12 xl:h-16 shrink-0" loading="lazy" height={60} alt={caseData.client || caseData.title}/>
-                }
-            </div>
-            <p class="text-sm font-light [&>mark]:text-black" set:html={caseData.description}></p>
-            <ol class="list-disc mt-2 text-sm font-serif list-inside">
-                {
-                    caseData.duration && <li class="">
-                        {t('metadata.duration') + ": " + caseData.duration} 
-                    </li>
-                } 
-                {
-                    caseData.collaboration && <li class="">
-                        {t('metadata.collaboration') + ": " + caseData.collaboration}
-                    </li>
-                }
-                {
-                    caseData.technologies && <li class="">
-                        {t('metadata.technologies') + ": " + caseData.technologies} 
-                    </li>
-                }
-                {
-                    caseData.services && <li class="">
-                        {t('metadata.services') + ": " + caseData.services} 
-                    </li>
-                }
-            </ol>
-        </div>
-        <Button class="self-end" link={link} style="primary" size="sm" color="light">
-            {t('overview.cta')}
-        </Button>
+  {
+    caseData.introImage &&
+    <div
+        class:list={["w-full flex items-center justify-center rounded-t-xl transition-all overflow-hidden motion-safe:group-hover:shadow-xl ",
+          small ? "max-h-[400px]" : "md:w-1/2 md:rounded-tr-none md:rounded-l-xl"
+        ]}>
+      <SanityImg
+          src={caseData?.introImage}
+          alt={caseData?.introImage?.asset?.altTexts?.[getLocale()] || ""}
+          widths={[400, 600, 790]}
+          sizes="(max-width: 790px) 100vw, 790px"
+          class:list={["motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full max-w-[unset] h-[unset] w-auto",
+            small ? "object-scale-down shrink-0" : ""]}
+          loading="lazy"
+      />
     </div>
+  }
+  <div class:list={["pb-8 max-h-full w-full flex flex-col justify-between gap-8 border-b-2 border-y-quaternary",
+    small ? "h-3/4 md:px-4" : "px-4 md:w-1/2 md:p-8 md:border-y-2"
+  ]}>
+    <div class="flex flex-col gap-2">
+      <div class="mb-4 flex flex-row items-start justify-between gap-8">
+        <div class="flex flex-col">
+          <span class="font-serif text-primary" set:html={caseData?.metadata?.title} />
+          <h2
+            class="caseheadline mb-2 font-serif text-xl [&>mark]:bg-none [&>mark]:bg-clip-border [&>mark]:text-black"
+            set:html={caseData?.intro?.title}
+          />
+        </div>
+        {
+          caseData?.metadata?.image && (
+            <SanityImg
+              loading="lazy"
+              src={caseData?.metadata?.image}
+              class="h-12 w-auto shrink-0 sm:h-16 md:h-12 xl:h-16"
+              height={60}
+              alt={caseData?.metadata?.image?.asset?.altTexts?.[getLocale()] || ""}
+            />
+          )
+        }
+      </div>
+      {      
+        caseData.intro?.intro && (
+          <div class="text-sm font-light [&>mark]:text-black">
+            <PortableText value={caseData.intro?.intro} />
+          </div>
+        )
+      }
+      <ol class="mt-2 list-inside list-disc font-serif text-sm">
+        {
+          caseData.duration && (
+            <li class="">
+              {t("metadata.duration") + ": " + caseData.duration}
+            </li>
+          )
+        }
+        {
+          caseData.collaborationModel && (
+            <li class="">
+              {t("metadata.collaboration") + ": " + caseData.collaborationModel?.collaborationTabs?.map(tab => tab?.concept?.prefLabel).join(', ')}
+            </li>
+          )
+        }
+        {
+          caseData.technologies && (
+            <li class="">
+              {t("metadata.technologies") + ": " + caseData.technologies?.map(technology => technology?.name).join(', ')}
+            </li>
+          )
+        }
+        {
+          caseData.services && (
+            <li class="">
+              {t("metadata.services") + ": " + caseData.services?.map(service => service?.metadata?.title).join(', ')}
+            </li>
+          )
+        }
+      </ol>
+    </div>
+    <Button
+      class="self-end"
+      link={`/${getLocale()}/${isPreview ? "preview/" : ""}cases/${caseData?.metadata?.slug?.current}`}
+      size="sm"
+      color="light"
+    >
+      {t("overview.cta", { defaultValue: "" })}
+    </Button>
+  </div>
 </div>

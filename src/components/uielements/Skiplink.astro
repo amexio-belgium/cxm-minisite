@@ -1,45 +1,43 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { parseHref } from "src/helpers";
-
 
 type Props = HTMLAttributes<"a">;
 
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<a 
-    href={parseHref(href)}
-    class:list={[
-        "sr-only underline focus:not-sr-only bg-yellow-500 text-black focus:px-4 focus:py-4 focus:block focus-visible:outline focus-visible:outline-offset-0 2focus-visible:outline-2 focus-visible:outline-yellow-500 js-skiplink",
-        className,
-    ]}
-    {...props}
+<a
+  href={href}
+  class:list={[
+    "2focus-visible:outline-2 js-skiplink sr-only bg-yellow-500 text-black underline focus:not-sr-only focus:block focus:px-4 focus:py-4 focus-visible:outline focus-visible:outline-offset-0 focus-visible:outline-yellow-500",
+    className,
+  ]}
+  {...props}
 >
-    <slot />
+  <slot />
 </a>
 <script>
-    import setFocus from "@lib/setFocus.js";
-    (function () {
-        const initializeSkipLink = function (skiplink) {
-            const targetId = skiplink.getAttribute("href").split("#").pop();
-            const targetEl = document.getElementById(targetId);
-            skiplink.addEventListener("click", () =>
-                setFocus(targetEl, {
-                    onBeforeFocus() {
-                        targetEl!.classList.add("outline-none");
-                    },
-                    onBlur() {
-                        targetEl!.classList.remove("outline-none");
-                    },
-                }),
-            );
-        };
+  import setFocus from "@lib/setFocus.js";
+  (function () {
+    const initializeSkipLink = function (skiplink: any) {
+      const targetId = skiplink.getAttribute("href").split("#").pop();
+      const targetEl = document.getElementById(targetId);
+      skiplink.addEventListener("click", () =>
+        setFocus(targetEl, {
+          onBeforeFocus() {
+            targetEl!.classList.add("outline-none");
+          },
+          onBlur() {
+            targetEl!.classList.remove("outline-none");
+          },
+        }),
+      );
+    };
 
-        const skiplinks = document.querySelectorAll(".js-skiplink");
+    const skiplinks = document.querySelectorAll(".js-skiplink");
 
-        [...skiplinks].forEach((skipLink) => {
-            initializeSkipLink(skipLink);
-        });
-    })();
+    [...skiplinks].forEach((skipLink) => {
+      initializeSkipLink(skipLink);
+    });
+  })();
 </script>

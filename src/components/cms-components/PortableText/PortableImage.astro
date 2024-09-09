@@ -1,0 +1,23 @@
+---
+import { imageBuilder } from "@api/sanity";
+import type { i18nImage } from "@sanity/custom.sanity.types";
+import type { Props as PortableProps } from "astro-portabletext/types";
+import { getLocale } from "i18n:astro";
+
+interface Props extends PortableProps<i18nImage> {}
+
+const image = Astro.props.node;
+---
+
+{
+  image.asset?._id && (
+    <img
+      src={imageBuilder.image(image.asset?._id).height(1024).url()}
+      loading="lazy"
+      decoding="async"
+      alt={image.asset.altTexts?.[getLocale()]}
+      class="mx-auto my-8 w-1/2 overflow-hidden rounded-xl shadow-xl shadow-primary/20"
+      height="1024"
+    />
+  )
+}

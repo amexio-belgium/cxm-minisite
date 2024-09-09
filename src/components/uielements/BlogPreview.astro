@@ -1,119 +1,95 @@
 ---
-import { useTranslations } from 'src/i18n/utils';
-import Link from '@components/uielements/Link.astro';
-import FormattedDate from '@components/uielements/FormattedDate.astro';
-import { Image } from 'astro:assets';
+import Link from "@components/uielements/Link.astro";
+import FormattedDate from "@components/uielements/FormattedDate.astro";
+import type { BlogPostWithReferences } from "@sanity/custom.sanity.types";
+import { imageBuilder } from "@api/sanity";
+import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
+import { PortableText } from "astro-portabletext";
+import { getLocale } from "i18n:astro";
+import { isPreview } from "src/stores/global-store";
 
-const { lang } = Astro.params;
+interface Props {
+  blogPost: BlogPostWithReferences;
+}
 
-const { 
-    blogData,
-    link,
-    highlighted = false,
-} = Astro.props;
-
-const t = useTranslations(lang, 'work');
-
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/{,**/}*.{jpeg,jpg,png,gif}');
-if (!images[blogData.heroImage]) throw new Error(`"${blogData.heroImage}" does not exist in glob: "src/assets/images/{,**/}*.{jpeg,jpg,png,gif}"`);
-const profileImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/people/{,**/}*.{jpeg,jpg,png,gif}');
-if (!profileImages[blogData.authorProfileImg]) throw new Error(`"${blogData.authorProfileImg}" does not exist in glob: "/src/assets/people/*.{jpeg,jpg,png,gif}"`);
+const { blogPost } = Astro.props;
 ---
+
 {
-    highlighted ? 
-        <article class="group relative overflow-hidden flex flex-col lg:flex-row w-full justify-stretch gap-8 has-[:focus-visible]:outline has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-yellow-500 bg-gradient-to-r  from-blue-600/70 to-blue-800/70 shadow-blue-200 rounded-2xl border border-blue shadow-sm ">
-            <div class="h-[300px] lg:h-[unset] lg:aspect-square lg:shrink-0 flex items-center justify-center shadow-xl shadow-primary/20 rounded-t-xl lg:rounded-tr-none lg:rounded-l-xl overflow-hidden">
-                <Image loading="eager" 
-                    src={images[blogData.heroImage]()} 
-                    class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 min-w-full min-h-full max-w-[unset] h-[unset] object-cover" 
-                    loading="lazy" 
-                    width={400} 
-                    height={400} 
-                    alt={blogData.altTextImage || ""} />
-            </div> 
-            <div class="mr-8 pb-8 px-4 md:px-8 pt-0 md:p-8 max-h-full w-full lg:w-fit flex flex-col justify-between gap-4 md:gap-8 text-white">
-                <div class="flex flex-col gap-4">
-                    <h2 class="mb-2 font-serif text-lg [&>mark]:text-black">
-                        <Link 
-                            class="no-underline	 outline-none focus-visible:ring-0 content-none before:absolute before:inset-x-0 before:inset-y-0" 
-                            href={link}
-                            textLength={blogData.title.length}
-                            hoverColor="yellow"
-                            set:html={blogData.title}>
-                        </Link>
-                    </h2>
-                    <p class="text-sm font-light" set:html={blogData.description}></p>
-                </div>
-                <div>
-                    <div class="mb-4 mt-4 md:mt-8 flex flex-row items-center gap-4">
-                        <FormattedDate class=" text-xs" date={blogData.pubDate} />
-                        {
-                            blogData.tags && 
-                            <span class="c-post-tag font-light uppercase text-xs before:mr-4 before:text-secondary">
-                                {blogData.tags}
-                            </span>
-                        }
-                    </div>
-                    {
-                        blogData.author &&
-                        <div class="flex gap-4 items-center">
-                            { blogData.authorProfileImg && 
-                                <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
-                                width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
-                            }
-                            <div class="flex flex-col justify-center gap-1">
-                                <p class="text-xs">{blogData.author}</p>
-                                <p class="text-xxs">{blogData.authorTitle}</p>
-                            </div>
-                        </div>
-                    }
-                </div>
-                
+  blogPost && (
+    <article class="group relative flex h-full flex-col justify-stretch has-[:focus-visible]:rounded-xl has-[:focus-visible]:outline has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-offset-0 has-[:focus-visible]:outline-orange-500">
+      <div class="flex aspect-[5/3] w-full shrink-0 items-center justify-center overflow-hidden rounded-t-xl">
+        {blogPost.featuredImage?.asset && (
+          <img
+            loading="eager"
+            src={imageBuilder
+              .image(blogPost.featuredImage?.asset)
+              .width(400)
+              .height(400)
+              .url()}
+            class="w-full transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
+            loading="lazy"
+            alt={blogPost.featuredImage?.asset.altTexts?.[getLocale()]}
+            width={400}
+            height={400}
+          />
+        )}
+      </div>
+      <div class="flex h-full min-w-full flex-col gap-2 border-b-2 border-y-quaternary p-2 py-6">
+        <div class="flex flex-row items-center gap-2">
+          <FormattedDate
+            class="text-xs font-light"
+            date={new Date(blogPost.publicationDate || blogPost._createdAt)}
+          />
+
+          {blogPost.topic && (
+            <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
+              {blogPost.topic.map((topic) => topic.prefLabel)}
+            </span>
+          )}
+        </div>
+        <h2 class="mb-2 font-serif text-lg font-bold [&>mark]:text-black">
+          <Link
+            onWhite
+            textLength={blogPost.intro?.title?.length}
+            class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
+            href={`/${getLocale()}/${isPreview.get() ? "preview/" : ""}insights/${blogPost.metadata?.slug?.current}`}
+          >
+            {blogPost.intro?.title}
+          </Link>
+        </h2>
+        <div class="text-sm font-light">
+          {blogPost.intro?.intro && (
+            <PortableText
+              components={portableBlogHighlightComponents}
+              value={blogPost.intro?.intro}
+            />
+          )}
+        </div>
+
+        {blogPost.author && (
+          <div class="self-bottom mt-auto flex items-center gap-4 pt-8">
+            {blogPost.author.image?.asset && (
+              <img
+                loading="eager"
+                src={imageBuilder
+                  .image(blogPost.author.image?.asset)
+                  .width(54)
+                  .height(54)
+                  .url()}
+                class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
+                width={50}
+                height={50}
+                alt={blogPost.author.name + " " + blogPost.author.jobTitle}
+              />
+            )}
+            <div class="flex flex-col justify-center gap-1">
+              <p class="font-xs">{blogPost.author.name}</p>
+              <p class="text-xxs">{blogPost.author.jobTitle}</p>
             </div>
-        </article>
-        :
-        <article class="group relative flex flex-col justify-stretch has-[:focus-visible]:outline  has-[:focus-visible]:rounded-xl has-[:focus-visible]:outline-offset-0 has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-orange-500">
-            <div class="w-full shrink-0 aspect-[5/3] flex items-center justify-center rounded-t-xl overflow-hidden">
-                <Image loading="lazy" 
-                src={images[blogData.heroImage]()}  
-                class="motion-safe:group-hover:scale-105 transition-transform ease-in-out duration-300 w-full" 
-                width={376} 
-                height={250} 
-                alt={blogData.altTextImage || ""} />
-            </div> 
-            <div class="p-2 py-6 h-full min-w-full flex flex-col gap-2 border-b-2 border-y-quaternary">
-                <div class="flex flex-row items-center gap-2">
-                    <FormattedDate class="font-light text-xs" date={blogData.pubDate} />
-                    {
-                        blogData.tags && 
-                        <span class="c-post-tag text-xs uppercase before:font-sans before:mr-2 before:text-secondary">
-                            {blogData.tags}
-                        </span>
-                    }
-                </div>
-                <h2 class="font-serif font-bold mb-2 text-lg [&>mark]:text-black">
-                    <Link 
-                    onWhite 
-                    textLength={blogData.title.length}
-                    class="no-underline outline-none text-black content-none before:absolute before:inset-x-0 before:inset-y-0" 
-                    href={link} 
-                    set:html={blogData.title}>
-                    </Link>
-                </h2>
-                <p class="text-sm font-light" set:html={blogData.description}></p>
-                {
-                    blogData.author &&
-                    <div class="self-bottom flex gap-4 mt-auto pt-8 items-center">
-                        { blogData.authorProfileImg && 
-                            <Image loading="eager" src={profileImages[blogData.authorProfileImg]()}  class="w-10 h-10 rounded-full sm:w-14 sm:h-14" 
-                            width={50} height={50} alt={blogData.author + " " + blogData.authorTitle} /> 
-                        }
-                        <div class="flex flex-col justify-center gap-1">
-                            <p class="font-xs">{blogData.author}</p>
-                            <p class="text-xxs ">{blogData.authorTitle}</p>
-                        </div>
-                    </div>
-                }
-            </div>
-        </article>
+          </div>
+        )}
+      </div>
+    </article>
+  )
 }

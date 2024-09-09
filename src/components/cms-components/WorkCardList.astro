@@ -1,0 +1,18 @@
+---
+import type { WorkCardListReferenced } from "@sanity/custom.sanity.types";
+import CasePreview from "../uielements/CasePreview.astro";
+
+interface Props {
+  workCardList: WorkCardListReferenced;
+}
+
+const { workCardList } = Astro.props;
+---
+
+  <div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col pt-20 pb-20 md:pb-40 w-full gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
+    {
+      workCardList?.referenceCases.map((casePost) => (
+          <CasePreview caseData={casePost} />
+      ))
+    }
+  </div>

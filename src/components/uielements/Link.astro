@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { parseHref } from "src/helpers";
 
 interface Props extends HTMLAttributes<"a"> {
   hoverColor?: "yellow" | "orange";
@@ -16,11 +15,10 @@ const {
   textLength = 12,
   ...props
 } = Astro.props;
-
 ---
 
 <a
-  href={parseHref(href?.toString())}
+  href={href}
   class:list={[
     "bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 hover:bg-[0%_100%] focus-visible:rounded focus-visible:px-2 focus-visible:outline-none focus-visible:ring-2 motion-reduce:transition-none",
     hoverColor == "orange" &&
