@@ -4,7 +4,8 @@ import {defaultComponents} from "../cms-components/PortableText/helper";
 import {PortableText} from "astro-portabletext";
 import type {TestimonialReferenced} from "../../sanity/custom.sanity.types";
 import type {SanityImageSource} from "@sanity/image-url/lib/types/types";
-import {getLocale} from "@builder.io/qwik";
+import { getLocale } from 'i18n:astro';
+
 
 interface Props {
   testimonial: TestimonialReferenced,

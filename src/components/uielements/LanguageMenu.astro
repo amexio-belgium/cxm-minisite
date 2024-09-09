@@ -1,0 +1,74 @@
+---
+import iconWorld from "@assets/icons/world.svg";
+import { languages } from "@src/locales/consts";
+import { getLocale } from "i18n:astro";
+
+const basePath = import.meta.env.PUBLIC_ASTRO_BASE_PATH;
+---
+
+<button
+  id="langmenu-btn"
+  aria-expanded="false"
+  type="button"
+  class="group inline-flex gap-2 bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent transition-all hover:bg-[0%_100%] focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tertiary motion-reduce:transition-none"
+>
+  <img
+    class="h-6 w-6 transition group-hover:scale-125 motion-reduce:transition-none"
+    src={iconWorld.src}
+    alt=""
+  />
+  {languages[getLocale()]}
+</button>
+
+<ul
+  id="langmenu-menu"
+  class="l absolute -right-2 bottom-0 hidden rounded-xl border border-blue-200 bg-primary/90 p-4 text-white shadow-sm backdrop-blur-sm"
+>
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <li>
+        <a
+          aria-current={getLocale() == lang}
+          class="bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 transition-all hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
+          href={`${basePath}/${lang}/`}
+          hreflang={`${lang}`}
+          lang={`${lang}`}
+        >
+          {label}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  const langBtn = document.getElementById("langmenu-btn");
+  const langMenu = document.getElementById("langmenu-menu");
+  let isOpen = false;
+
+  langBtn?.addEventListener("click", () => {
+    langMenu!.style.display = "block";
+    langBtn!.ariaExpanded = "true";
+    isOpen = true;
+  });
+
+  langMenu?.addEventListener("keyup", (event) => {
+    if (event.key == "Escape") {
+      langMenu!.style.display = "none";
+      isOpen = false;
+      langBtn!.ariaExpanded = "false";
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      isOpen &&
+      !langMenu!.contains(event.target as HTMLElement) &&
+      event.target !== langBtn
+    ) {
+      langMenu!.style.display = "none";
+      isOpen = false;
+      langBtn!.ariaExpanded = "false";
+    }
+  });
+</script>
