@@ -4,12 +4,12 @@ import Breadcrumbs from "@components/uielements/Breadcrumbs.astro";
 import { PortableText } from "astro-portabletext";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
+import {defaultComponents} from "../cms-components/PortableText/helper";
 
 interface Props {
   headline?: string;
   client?: string;
   text?: any;
-  buttonText?: string;
   homepage?: boolean;
   backgroundImage?: string;
   backgroundImageAltText?: string;
@@ -52,7 +52,7 @@ const {
       {
         text && (
           <div class="text-lg font-light md:text-xl">
-            <PortableText value={text} />
+            <PortableText components={defaultComponents} value={text} />
           </div>
         )
       }

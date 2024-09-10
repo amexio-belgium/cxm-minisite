@@ -11,17 +11,34 @@ interface Props {
 }
 
 const { cardGrid } = Astro.props;
+
+const stylesContainer = {
+  popping:
+    "text-black relative flex flex-col py-20 xl:mb-40 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:-left-12 marker:before:h-full before:w-[3000px] lg:before:rounded-xl",
+  subtle:
+    "text-white relative inline-flex flex-col items-start justify-start gap-20 bg-cover",
+};
+
+const stylesSmallTile = {
+  popping:
+    "services flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap text-black",
+  subtle:
+    "smalltile border-1 inline-flex w-full flex-col items-center justify-start gap-8 rounded-2xl border-blue-500 bg-gradient-to-l from-blue-600/70 to-blue-800/70 px-4 py-6 shadow shadow-blue-200 backdrop-blur-lg md:px-12 text-white",
+};
+
+
 ---
 
 <TilesContainer
   headline={cardGrid?.intro?.title}
   description={cardGrid?.intro?.intro}
+  class={stylesContainer[cardGrid.style!]}
 >
   {
     cardGrid?.cards?.map((card) => {
       const asset = card?.icon?.asset as any as i18nImageAsset;
       return (
-        <SmallTile headline={card.title || ""} description={card.content}>
+        <SmallTile headline={card.title || ""} description={card.content} class={stylesSmallTile[cardGrid.style!]}>
           {card.icon?.asset && (
             <img
               src={imageBuilder.image(asset).height(192).url()}

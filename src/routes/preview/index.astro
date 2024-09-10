@@ -8,6 +8,8 @@ import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import { isPreview } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 import { getLocale } from "i18n:astro";
+import Button from "../../components/uielements/Button.astro";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 
 export const prerender = false;
 
@@ -38,7 +40,11 @@ isPreview.set(true);
   <HeroHeader
     headline={contentPage.intro?.title}
     text={contentPage.intro?.intro}
-    homepage={true}
-  />
+    homepage={true}>
+    <Button class="mt-8" longText icon="email"
+            link={contentPage?.intro?.introCta?.link ? getHrefFromLinkObject(contentPage?.intro?.introCta?.link, getLocale(), true) : undefined}
+            color="dark">{contentPage?.intro?.introCta?.text}
+    </Button>
+  </HeroHeader>
   <SanityComponentsRenderer content={contentPage?.content} />
 </Base>

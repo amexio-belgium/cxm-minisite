@@ -26,6 +26,15 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
 
 const contentQuery = groq`content[] {
   ...,
+  intro {
+    ...,
+    introCta {
+      ...,
+      link {
+        internalLink->{...}
+      }
+    }
+  },
    _type == "blogsList" => {
     ...,
     blogsType == "specific" => {

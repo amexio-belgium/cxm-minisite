@@ -10,6 +10,14 @@ interface Props {
 }
 
 const { longFormText } = Astro.props;
+
+const styles = {
+  popping:
+    "yellow py-6 pr-6 sm:pr-20 -mt-6 md:mr-8 relative md:absolute md:bottom-12 w-full md:w-5/12 before:shadow-xl md:h-fit before:-z-10 md:before:h-full before:bg-tertiary before:absolute before:top-0 before:bottom-0 before:right-0 marker:before:h-full before:w-[3000px] before:rounded-xl",
+  subtle:
+    "bg-lightest-blue-500 ml-4 -mt-8 relative shadow-xl p-8 md:absolute md:right-8 md:-bottom-20 w-11/12 md:w-8/12 rounded-xl",
+};
+
 ---
 
 <LayoutSection backgroundColor={longFormText.standOut ? "light" : "dark"}>
