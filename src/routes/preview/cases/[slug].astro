@@ -48,10 +48,10 @@ const { data: workPage } = await loadQuery<WorkWithReferences>({
     backgroundImage={workPage?.image?.asset?._id}
   >
     {
-      workPage.customerReferences &&
-        workPage.customerReferences.length > 0 && (
-          <Customers headline={workPage.customerReferencesText}>
-            {workPage.customerReferences?.map((customer) => (
+      workPage?.customerReferences &&
+        workPage?.customerReferences?.length > 0 && (
+          <Customers headline={workPage?.customerReferencesText}>
+            {workPage?.customerReferences?.map((customer) => (
               <>
                 {customer?.logo?.default?.asset && (
                   <img
@@ -74,12 +74,12 @@ const { data: workPage } = await loadQuery<WorkWithReferences>({
     }
   </HeroHeader>
     <ProjectMetadata
-            duration={workPage.duration}
-            collaboration={workPage.collaborationModel}
-            services={workPage.services}
-            technologies={workPage.technologies}>
+            duration={workPage?.duration}
+            collaboration={workPage?.collaborationModel}
+            services={workPage?.services}
+            technologies={workPage?.technologies}>
         {
-            workPage.technologies?.map((technology) => (
+            workPage?.technologies?.map((technology) => (
             <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, getLocale(), true) : undefined}>
                 <SanityImg
                         src={technology?.logo?.default as SanityImageSource}

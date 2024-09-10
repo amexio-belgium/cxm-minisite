@@ -28,7 +28,7 @@ const markTags = {
 
     return (
       <span
-        set:html={openingTags + child.text + closingTags}
+        set:html={openingTags + child.text.replace(/\r\n|\r|\n/g, '<br>') + closingTags}
       />
     );
   })

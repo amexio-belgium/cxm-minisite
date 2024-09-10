@@ -137,7 +137,19 @@ const contentQuery = groq`content[] {
       }
     }
   },
-  defined(cards) => {
+  _type == "cardGrid" => {
+    backgroundImage{
+      asset->{...}
+    },
+    intro {
+      ...,
+      introCta {
+        ...,
+        link {
+          internalLink->{...}
+        }
+      }
+    },
     cards[] {
       ...,
       icon{
@@ -161,7 +173,6 @@ const contentQuery = groq`content[] {
     ...,
     defined(image) => {
       image{
-        ...,
         asset->{...}
       }
     }
@@ -189,7 +200,6 @@ const contentQuery = groq`content[] {
       content[]{
         ...,
           _type == "image" => {
-          ...,
             asset->{...}
           }
       }

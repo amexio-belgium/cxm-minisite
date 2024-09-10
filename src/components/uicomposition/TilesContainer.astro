@@ -1,6 +1,9 @@
 ---
 import { PortableText } from "astro-portabletext";
 import {defaultComponents} from "../cms-components/PortableText/helper";
+import {getHrefFromLinkObject} from "../../lib/sanityHelpers";
+import {getLocale} from "i18n:astro";
+import Button from "../uielements/Button.astro";
 
 interface Props {
   headline: string | undefined;
@@ -13,6 +16,7 @@ const {
   headline,
   description,
   orangeSlant = false,
+  cta,
   class: className,
 } = Astro.props;
 ---
@@ -30,16 +34,27 @@ const {
       <slot name="bg-image" />
     )
   }
-
-  <div class="flex flex-col items-start justify-start gap-6 lg:w-9/12">
+  <div class="flex flex-col items-start justify-start w-full">
     {
-      headline && (
-        <h2 class="text-balance font-serif text-3xl">{headline}</h2>
+      headline && !cta && (
+        <h2 class="font-serif text-2xl">{headline}</h2>
+      )
+    }
+    {
+      headline && cta && (
+        <div class="flex flex-col items-start justify-between w-full gap-4 mb-8 md:mb-4 md:items-center md:flex-row">
+            <h2 class="font-serif text-2xl">{headline}</h2>
+            <Button link={cta?.link ? getHrefFromLinkObject(cta.link, getLocale(), true) : undefined}
+                    style="primary"
+                    color="light">
+              {cta.text}
+            </Button>
+        </div>
       )
     }
     {
       description && (
-        <div class="max-w-prose text-base font-light">
+        <div class="max-w-prose text-base font-light lg:w-9/12">
           <PortableText components={defaultComponents} value={description} />
         </div>
       )
