@@ -5,6 +5,8 @@ import printcss from "../../styles/print.css?url";
 
 import { type PageTranslations } from "@sanity/custom.sanity.types";
 import { locales } from "@src/locales/consts";
+import { BASE_PATH } from "@src/consts";
+import { parseHref } from "@lib/helpers";
 interface Props {
   title: string;
   description: string;
@@ -24,56 +26,75 @@ const {
 } = Astro.props;
 
 // Remove the first / from the pathname, then you are left with en/fr/nl if it's a homepage
-const pathNameAsLocale = Astro.url.pathname.substring(1);
+const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
+const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
 
 const isHomePage = locales.includes(pathNameAsLocale);
 
 const canonicalURL = isHomePage
-  ? `${Astro.site?.origin}/${getLocale()}/`
-  : `${Astro.site?.origin}/${getLocale()}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
+  ? `${Astro.site?.origin}${BASE_PATH}/${getLocale()}/`
+  : `${Astro.site?.origin}${BASE_PATH}/${getLocale()}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
 ---
 
 <!-- Global Metadata -->
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-<link rel="mask-icon" href="/safari-pinned-tab.svg" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/svg+xml" href={parseHref("/favicon.ico")} />
+<link rel="mask-icon" href={parseHref("/safari-pinned-tab.svg")} />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href={parseHref("/apple-touch-icon.png")}
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href={parseHref("/favicon-32x32.png")}
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href={parseHref("/favicon-16x16.png")}
+/>
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
 <link
+  rel="stylesheet"
+  href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/fonts.css`
+/>
+<link
   rel="preload"
-  href="/fonts/Lexend-Light.woff2"
+  href={parseHref("/fonts/Lexend-Light.woff2")}
   as="font"
   type="font/woff2"
   crossorigin
 />
 <link
   rel="preload"
-  href="/fonts/Lexend-Regular.woff2"
+  href={parseHref("/fonts/Lexend-Regular.woff2")}
   as="font"
   type="font/woff2"
   crossorigin
 />
 <link
   rel="preload"
-  href="/fonts/Lexend-Bold.woff2"
+  href={parseHref("/fonts/Lexend-Bold.woff2")}
   as="font"
   type="font/woff2"
   crossorigin
 />
 <link
   rel="preload"
-  href="/fonts/ContaneMediumRegular.woff2"
+  href={parseHref("/fonts/ContaneMediumRegular.woff2")}
   as="font"
   type="font/woff2"
   crossorigin
 />
 <link
   rel="preload"
-  href="/fonts/ContaneRegular.woff2"
+  href={parseHref("/fonts/ContaneRegular.woff2")}
   as="font"
   type="font/woff2"
   crossorigin
@@ -97,7 +118,7 @@ const canonicalURL = isHomePage
           <link
             rel="alternate"
             hreflang={translation?.language}
-            href={`${Astro.site?.origin}/${translation?.language}${routeMap ? `/${routeMap}` : ""}/${translation?.slug}/`}
+            href={`${Astro.site?.origin}${BASE_PATH}/${translation?.language}${routeMap ? `/${routeMap}` : ""}/${translation?.slug}/`}
           />
         );
       }
@@ -110,7 +131,7 @@ const canonicalURL = isHomePage
       <link
         rel="alternate"
         hreflang={locale}
-        href={`${Astro.site?.origin}/${locale}/`}
+        href={`${Astro.site?.origin}${BASE_PATH}/${locale}/`}
       />
     ))
 }

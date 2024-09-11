@@ -65,7 +65,7 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   description={blogPost?.metadata?.description || ""}
   slug={slug}
   siteConfig={siteConfig}
-  translations={blogPost._translations}
+  translations={blogPost?._translations}
   routeMap="insights"
 >
   <HeroHeader

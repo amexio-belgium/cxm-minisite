@@ -1,9 +1,8 @@
 ---
 import iconWorld from "@assets/icons/world.svg";
+import { parseHref } from "@lib/helpers";
 import { languages } from "@src/locales/consts";
 import { getLocale } from "i18n:astro";
-
-const basePath = import.meta.env.PUBLIC_ASTRO_BASE_PATH;
 ---
 
 <button
@@ -30,7 +29,7 @@ const basePath = import.meta.env.PUBLIC_ASTRO_BASE_PATH;
         <a
           aria-current={getLocale() == lang}
           class="bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 transition-all hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
-          href={`${basePath}/${lang}/`}
+          href={parseHref(`/${lang}/`)}
           hreflang={`${lang}`}
           lang={`${lang}`}
         >

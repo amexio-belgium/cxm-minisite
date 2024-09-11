@@ -6,6 +6,7 @@ import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import type { LinkObjectReferenced } from "@sanity/custom.sanity.types";
 import { getLocale, t } from "i18n:astro";
+import { parseHref } from "@lib/helpers";
 
 interface Props {
   navigation: NavigationQueryResult;
@@ -23,7 +24,7 @@ const { navigation } = Astro.props;
       class="flex h-full w-screen max-w-[1304px] flex-wrap items-center justify-between px-6 sm:px-8 md:px-6"
     >
       <a
-        href={`/${getLocale()}`}
+        href={parseHref(`/${getLocale()}`)}
         class="flex justify-center text-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
       >
         <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
@@ -37,7 +38,8 @@ const { navigation } = Astro.props;
       >
         <span class="sr-only">{t("mainmenu.open")}</span>
         <svg class="h-14 w-14 fill-white" aria-hidden="true" focusable="false"
-          ><use xlink:href="/icons/icon-sprite.svg#icon-menu"></use></svg
+          ><use xlink:href={parseHref("/icons/icon-sprite.svg#icon-menu")}
+          ></use></svg
         >
       </button>
       <dialog
@@ -52,7 +54,7 @@ const { navigation } = Astro.props;
             class="flex h-full w-screen flex-wrap items-center justify-between px-6 sm:px-8"
           >
             <a
-              href={`/${getLocale()}`}
+              href={parseHref(`/${getLocale()}`)}
               class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
             >
               <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
@@ -68,7 +70,9 @@ const { navigation } = Astro.props;
                 class="h-14 w-14 fill-white"
                 aria-hidden="true"
                 focusable="false"
-                ><use xlink:href="/icons/icon-sprite.svg#icon-close"></use></svg
+                ><use
+                  xlink:href={parseHref("/icons/icon-sprite.svg#icon-close")}
+                ></use></svg
               >
             </button>
           </div>

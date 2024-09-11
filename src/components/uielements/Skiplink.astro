@@ -1,4 +1,5 @@
 ---
+import { parseHref } from "@lib/helpers";
 import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"a">;
@@ -7,7 +8,7 @@ const { href, class: className, ...props } = Astro.props;
 ---
 
 <a
-  href={href}
+  href={parseHref(href)}
   class:list={[
     "2focus-visible:outline-2 js-skiplink sr-only bg-yellow-500 text-black underline focus:not-sr-only focus:block focus:px-4 focus:py-4 focus-visible:outline focus-visible:outline-offset-0 focus-visible:outline-yellow-500",
     className,

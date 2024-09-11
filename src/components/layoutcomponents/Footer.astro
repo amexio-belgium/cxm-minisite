@@ -11,6 +11,7 @@ import { imageBuilder } from "@api/sanity";
 import { getLocale, t } from "i18n:astro";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 import LanguageMenu from "@components/uielements/LanguageMenu.astro";
+import { parseHref } from "@lib/helpers";
 
 export type Social = {
   name: string;
@@ -25,7 +26,6 @@ interface Props {
   footerText: any;
   socials: Social[] | undefined;
 }
-
 
 const { navigation, secondaryNavigation, footerText, socials } = Astro.props;
 
@@ -180,7 +180,8 @@ const isContactPage = slug == "contact";
         }
         <div class="inline-flex items-center gap-8">
           <svg class="h-6 w-6 fill-secondary">
-            <use xlink:href="/icons/icon-sprite.svg#icon-slant"></use>
+            <use xlink:href={parseHref("/icons/icon-sprite.svg#icon-slant")}
+            ></use>
           </svg>
           <LanguageMenu />
         </div>

@@ -66,7 +66,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
   description={casePage?.metadata?.description || ""}
   slug={slug}
   siteConfig={siteConfig}
-  translations={casePage._translations}
+  translations={casePage?._translations}
   routeMap="cases"
 >
   <HeroHeader
@@ -101,13 +101,13 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
     }
   </HeroHeader>
   <ProjectMetadata
-    duration={casePage.duration}
-    collaboration={casePage.collaborationModel}
-    services={casePage.services}
-    technologies={casePage.technologies}
+    duration={casePage?.duration}
+    collaboration={casePage?.collaborationModel}
+    services={casePage?.services}
+    technologies={casePage?.technologies}
   >
     {
-      casePage.technologies?.map((technology) => (
+      casePage?.technologies?.map((technology) => (
         <TechnologyIcon
           link={
             technology?.partner?.link

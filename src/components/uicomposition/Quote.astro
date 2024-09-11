@@ -5,6 +5,7 @@ import { PortableText } from "astro-portabletext";
 import type { TestimonialReferenced } from "../../sanity/custom.sanity.types";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { getLocale } from "i18n:astro";
+import { parseHref } from "@lib/helpers";
 
 interface Props {
   testimonial: TestimonialReferenced;
@@ -55,7 +56,9 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
         <>
           <div class="flex h-20 w-20 items-center justify-center rounded-full bg-white p-4 transition-transform delay-200 duration-300 ease-in-out motion-safe:group-hover/quote:scale-110">
             <svg width="40" height="30" aria-hidden="true" focusable="false">
-              <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-quote")}
+              />
             </svg>
           </div>
           {testimonial?.textObject?.richText && (
@@ -84,7 +87,9 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
               aria-hidden="true"
               focusable="false"
             >
-              <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-quote")}
+              />
             </svg>
             {testimonial?.textObject?.richText && (
               <PortableText
@@ -100,7 +105,9 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
               aria-hidden="true"
               focusable="false"
             >
-              <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-quote")}
+              />
             </svg>
           </div>
           <footer>

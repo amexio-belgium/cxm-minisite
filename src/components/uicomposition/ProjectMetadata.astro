@@ -7,10 +7,10 @@ import type {
 import { t } from "i18n:astro";
 
 interface Props {
-  duration: string | undefined;
-  collaboration: CollaborationModelReferenced | undefined;
-  services: ServiceWithReferences[] | undefined;
-  technologies: TechnologyReferenced[] | undefined;
+  duration: string | undefined | null;
+  collaboration: CollaborationModelReferenced | undefined | null;
+  services: ServiceWithReferences[] | undefined | null;
+  technologies: TechnologyReferenced[] | undefined | null;
 }
 
 const { duration, collaboration, services, technologies } = Astro.props;

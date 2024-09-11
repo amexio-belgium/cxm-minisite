@@ -63,7 +63,7 @@ if (contentPage == null) {
   description={contentPage?.metadata?.description || ""}
   slug={slug!}
   siteConfig={siteConfig}
-  translations={contentPage._translations}
+  translations={contentPage?._translations}
 >
   <HeroHeader
     headline={contentPage?.intro?.title}

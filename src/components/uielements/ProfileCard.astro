@@ -4,6 +4,7 @@ import Link from "./Link.astro";
 import type { i18nImage } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
 import { t } from "i18n:astro";
+import { parseHref } from "@lib/helpers";
 
 interface Props {
   profileImg?: i18nImage;
@@ -93,7 +94,9 @@ const twitterText = t("share.twitter");
             href="#"
           >
             <svg class="h-8 w-8 fill-white">
-              <use xlink:href="/icons/icon-sprite.svg#icon-linkedin" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-linkedin")}
+              />
             </svg>
             <span class="sr-only">LinkedIn</span>
           </Link>
@@ -103,7 +106,9 @@ const twitterText = t("share.twitter");
             href="#"
           >
             <svg class="h-8 w-8 fill-white">
-              <use xlink:href="/icons/icon-sprite.svg#icon-twitter" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-twitter")}
+              />
             </svg>
             <span class="sr-only">X(twitter)</span>
           </Link>
