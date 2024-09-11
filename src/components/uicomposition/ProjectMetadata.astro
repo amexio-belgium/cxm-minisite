@@ -1,9 +1,19 @@
 ---
+import type {
+  CollaborationModelReferenced,
+  ServiceWithReferences,
+  TechnologyReferenced,
+} from "@sanity/custom.sanity.types";
 import { t } from "i18n:astro";
 
-const { duration, collaboration, services, technologies } = Astro.props;
+interface Props {
+  duration: string | undefined;
+  collaboration: CollaborationModelReferenced | undefined;
+  services: ServiceWithReferences[] | undefined;
+  technologies: TechnologyReferenced[] | undefined;
+}
 
-const { lang } = Astro.params;
+const { duration, collaboration, services, technologies } = Astro.props;
 ---
 
 <div
@@ -22,12 +32,12 @@ const { lang } = Astro.params;
       )
     }
     {
-      collaboration && (
+      collaboration?.collaborationTabs && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
           <dt class="inline lg:block">{t("metadata.collaboration") + ":"}</dt>
           <dd class="inline lg:block">
             {collaboration.collaborationTabs
-              .map((tab) => tab.concept.prefLabel)
+              .map((tab) => tab?.concept?.prefLabel)
               .join(", ")}
           </dd>
         </div>
@@ -48,7 +58,7 @@ const { lang } = Astro.params;
         <div class="lg:flex">
           <dt class="inline lg:block">{t("metadata.services") + ":"}</dt>
           <dd class="inline lg:block">
-            {services.map((service) => service.metadata.title).join(", ")}
+            {services.map((service) => service?.metadata?.title).join(", ")}
           </dd>
         </div>
       )

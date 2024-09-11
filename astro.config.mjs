@@ -42,12 +42,6 @@ export default defineConfig({
       strategy: "prefix",
       sitemap: true,
       locales: locales, // must include the default locale
-      client: {
-        data: true,
-        paths: true,
-        translations: true,
-        getStaticPaths: true,
-      },
       rootRedirect: {
         status: 301,
         destination: "/en",

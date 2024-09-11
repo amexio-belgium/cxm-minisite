@@ -19,7 +19,7 @@ const { blogsList } = Astro.props;
 const itemsPerTime = blogsList.maxPerPage || 15;
 
 let blogs: BlogPostWithReferences[] | undefined = [];
-let totalItems;
+let totalItems: number;
 if (blogsList.blogsType === "latest") {
   const { data: blogsFetched } = await loadQuery<{
     blogPosts: BlogPostWithReferences[];
@@ -32,7 +32,7 @@ if (blogsList.blogsType === "latest") {
   totalItems = blogsFetched.totalItems;
 } else {
   blogs = blogsList.blogPosts;
-  totalItems = blogs?.length;
+  totalItems = blogs?.length || 0;
 }
 
 // UUID for giving the divs and buttons unique ID's we can select them in JS
@@ -52,7 +52,7 @@ const items = isLatestBlogs
 ---
 
 <script>
-  await import.meta.glob("../../webcomponents/*.js", {
+  import.meta.glob("../../webcomponents/*.js", {
     eager: true,
   });
 </script>

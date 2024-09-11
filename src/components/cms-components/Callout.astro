@@ -10,7 +10,7 @@ interface Props {
 
 const { callout } = Astro.props;
 
-let textObject;
+let textObject: any;
 let imageObject: i18nImage;
 if (callout?.content?.[0]._type == "textObject") {
   textObject = callout?.content?.[0];

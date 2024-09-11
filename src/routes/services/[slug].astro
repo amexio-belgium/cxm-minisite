@@ -67,6 +67,8 @@ if (servicePage == null) {
   description={servicePage?.metadata?.description || ""}
   slug={slug!}
   siteConfig={siteConfig}
+  routeMap="services"
+  translations={servicePage._translations}
 >
   <HeroHeader
     headline={servicePage.intro?.title}
