@@ -68,6 +68,12 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type CodeEmbed = {
+  _type: "codeEmbed";
+  title?: string;
+  Code?: Code;
+};
+
 export type BlogsList = {
   _type: "blogsList";
   maxPerPage?: number;
@@ -722,6 +728,9 @@ export type ReferenceCase = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   technologies?: Array<{
     _ref: string;
@@ -858,6 +867,9 @@ export type BlogPost = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   metadata?: Metadata;
   language?: string;
@@ -975,6 +987,9 @@ export type Company = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   type?: {
     _ref: string;
@@ -1069,6 +1084,9 @@ export type Service = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   faqs?: Faq;
   customerReferencesText?: string;
@@ -1179,6 +1197,9 @@ export type ContentPage = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   metadata?: Metadata;
   language?: string;
@@ -1358,6 +1379,14 @@ export type SkosConcept = {
   changeNote?: string;
 };
 
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
 export type SanityAssistInstructionTask = {
   _type: "sanity.assist.instructionTask";
   path?: string;
@@ -1499,6 +1528,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | CodeEmbed
   | BlogsList
   | BlogHighlight
   | CollabTab
@@ -1543,6 +1573,7 @@ export type AllSanitySchemaTypes =
   | Slug
   | SkosConceptScheme
   | SkosConcept
+  | Code
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -1670,6 +1701,9 @@ export type NavigationQueryResult = {
           | ({
               _key: string;
             } & CardGrid)
+          | ({
+              _key: string;
+            } & CodeEmbed)
           | ({
               _key: string;
             } & Highlight)
@@ -1909,6 +1943,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2048,6 +2085,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2186,6 +2226,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2322,6 +2365,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -2516,6 +2562,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -2658,6 +2707,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2797,6 +2849,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2934,6 +2989,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -3518,6 +3576,34 @@ export type ServiceQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -4386,6 +4472,9 @@ export type ServiceQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -4500,6 +4589,9 @@ export type ServiceQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -5143,6 +5235,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -5242,6 +5337,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -5472,6 +5570,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -5571,6 +5672,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -5800,6 +5904,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -5899,6 +6006,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -6127,6 +6237,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -6226,6 +6339,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -6476,6 +6592,9 @@ export type ServiceQueryResult = {
       | ({
           _key: string;
         } & CardGrid)
+      | ({
+          _key: string;
+        } & CodeEmbed)
       | ({
           _key: string;
         } & Highlight)
@@ -6783,6 +6902,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -6922,6 +7044,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7060,6 +7185,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7196,6 +7324,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -7390,6 +7521,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -7532,6 +7666,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7671,6 +7808,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7808,6 +7948,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -8392,6 +8535,34 @@ export type BlogPostQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -9260,6 +9431,9 @@ export type BlogPostQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -9374,6 +9548,9 @@ export type BlogPostQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -10017,6 +10194,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -10116,6 +10296,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -10346,6 +10529,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -10445,6 +10631,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -10674,6 +10863,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -10773,6 +10965,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -11001,6 +11196,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -11100,6 +11298,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -11465,7 +11666,7 @@ export type BlogsListQueryPaginatingResult = Array<{
   } | null;
 }>;
 // Variable: workQuery
-// Query: *[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{  ...,  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  content[] {  ...,   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
+// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  content[] {  ...,   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  defined(cards) => {    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        ...,        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,          _type == "image" => {          ...,            asset->{...}          }      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  }}}
 export type WorkQueryResult = {
   _id: string;
   _type: "referenceCase";
@@ -11663,6 +11864,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -11802,6 +12006,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -11940,6 +12147,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -12076,6 +12286,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -12270,6 +12483,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -12412,6 +12628,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -12551,6 +12770,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -12688,6 +12910,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -13272,6 +13497,34 @@ export type WorkQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -14140,6 +14393,9 @@ export type WorkQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -14254,6 +14510,9 @@ export type WorkQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -14897,6 +15156,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -14996,6 +15258,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -15226,6 +15491,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -15325,6 +15593,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -15554,6 +15825,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -15653,6 +15927,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -15881,6 +16158,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -15980,6 +16260,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -16290,6 +16573,9 @@ export type WorkQueryResult = {
           } & CardGrid)
         | ({
             _key: string;
+          } & CodeEmbed)
+        | ({
+            _key: string;
           } & Highlight)
         | ({
             _key: string;
@@ -16354,6 +16640,9 @@ export type WorkQueryResult = {
       | ({
           _key: string;
         } & CardGrid)
+      | ({
+          _key: string;
+        } & CodeEmbed)
       | ({
           _key: string;
         } & Highlight)
@@ -16518,6 +16807,9 @@ export type WorkQueryResult = {
         } & CardGrid)
       | ({
           _key: string;
+        } & CodeEmbed)
+      | ({
+          _key: string;
         } & Highlight)
       | ({
           _key: string;
@@ -16617,6 +16909,9 @@ export type WorkQueryResult = {
         | ({
             _key: string;
           } & CardGrid)
+        | ({
+            _key: string;
+          } & CodeEmbed)
         | ({
             _key: string;
           } & Highlight)
@@ -16990,6 +17285,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17129,6 +17427,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17267,6 +17568,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17403,6 +17707,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -17597,6 +17904,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -17739,6 +18049,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17878,6 +18191,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -18015,6 +18331,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -18599,6 +18918,34 @@ export type ContentPageQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -19467,6 +19814,9 @@ export type ContentPageQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -19581,6 +19931,9 @@ export type ContentPageQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -20224,6 +20577,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -20323,6 +20679,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -20553,6 +20912,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -20652,6 +21014,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -20881,6 +21246,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -20980,6 +21348,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -21208,6 +21579,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -21307,6 +21681,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -21481,6 +21858,18 @@ export type RssBlogPostsQueryResult = Array<{
   description: string | null;
   pubDate: string | null;
 }>;
+// Variable: allContentPagesQuery
+// Query: *[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{  "slug": metadata.slug.current}.slug
+export type AllContentPagesQueryResult = Array<string | null>;
+// Variable: allServicePagesQuery
+// Query: *[_type == "service" && language == $language && defined(metadata.slug.current)]{  "slug": metadata.slug.current}.slug
+export type AllServicePagesQueryResult = Array<string | null>;
+// Variable: allInsightPagesQuery
+// Query: *[_type == "blogPost" && language == $language && defined(metadata.slug.current)]{  "slug": metadata.slug.current}.slug
+export type AllInsightPagesQueryResult = Array<string | null>;
+// Variable: allCasePagesQuery
+// Query: *[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{  "slug": metadata.slug.current}.slug
+export type AllCasePagesQueryResult = Array<string | null>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -21493,9 +21882,13 @@ declare module "@sanity/client" {
     '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  content[] {\n  ...,\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': BlogPostQueryResult;
     '\n{\n  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...$itemsPerTime]{\n    _id,\n    featuredImage{\n      asset->{...}\n    },\n    postType[]->{\n      prefLabel,\n      definition\n    },\n    author->{\n      ...,\n      image{\n        ...,\n        asset->{\n          ...\n        }\n      }\n    },\n    topic[]->{\n      prefLabel,\n      definition\n    },\n    metadata,\n    publicationDate,\n    _createdAt,\n    intro\n  },\n  "totalItems": count(*[_type == "blogPost" && language == $language])\n}\n': BlogsListQueryResult;
     '\n*[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...$itemsPerTime]{\n  _id,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  metadata,\n  publicationDate,\n  _createdAt,\n  intro\n}': BlogsListQueryPaginatingResult;
-    '*[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{\n  ...,\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  content[] {\n  ...,\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': WorkQueryResult;
+    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  content[] {\n  ...,\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': WorkQueryResult;
     "*[_type == 'siteConfig' && language == $language][0]{\n  homePage->{\n    \"slug\": metadata.slug.current\n  }\n}.homePage.slug": HomePageSlugQueryResult;
     '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  content[] {\n  ...,\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  defined(cards) => {\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        ...,\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n          _type == "image" => {\n          ...,\n            asset->{...}\n          }\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  }\n}\n}': ContentPageQueryResult;
     '\n*[_type == "blogPost" && language == $language]{\n  "title": metadata.title,\n  "slug": metadata.slug.current,\n  "author": author->{name}.name,\n  "description": metadata.description,\n  "pubDate": publicationDate\n}\n': RssBlogPostsQueryResult;
+    '*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllContentPagesQueryResult;
+    '*[_type == "service" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllServicePagesQueryResult;
+    '*[_type == "blogPost" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllInsightPagesQueryResult;
+    '*[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllCasePagesQueryResult;
   }
 }

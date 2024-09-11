@@ -1,9 +1,12 @@
 ---
-export const prerender = true;
 import Base from "src/layouts/Base.astro";
+import { i18nParams } from "src/locales/consts";
 import Button from "src/components/uielements/Button.astro";
 import { getLocale } from "i18n:astro";
 
+export function getStaticPaths() {
+  return i18nParams;
+}
 import { siteConfigQuery } from "src/api/queries";
 import { loadQuery } from "src/api/sanity";
 import type { SiteConfigQueryResult } from "src/sanity/sanity.types";

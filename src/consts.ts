@@ -3,3 +3,5 @@
 
 export const SITE_TITLE = "AmeXio Fuse";
 export const SITE_DESCRIPTION = "Welcome to my website!";
+export const VISUAL_EDITING_ENABLED =
+  import.meta.env.SANITY_VISUAL_EDITING_ENABLED === "true";

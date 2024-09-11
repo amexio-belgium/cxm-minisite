@@ -1,9 +1,8 @@
 import { type QueryParams } from "sanity";
 import { sanityClient } from "sanity:client";
 import imageUrlBuilder from "@sanity/image-url";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
 
-const visualEditingEnabled =
-  import.meta.env.SANITY_VISUAL_EDITING_ENABLED === "true";
 const token = import.meta.env.SANITY_API_READ_TOKEN;
 
 export async function loadQuery<QueryResponse>({
@@ -13,13 +12,13 @@ export async function loadQuery<QueryResponse>({
   query: string;
   params?: QueryParams;
 }) {
-  if (visualEditingEnabled && !token) {
+  if (VISUAL_EDITING_ENABLED && !token) {
     throw new Error(
       "The `SANITY_API_READ_TOKEN` environment variable is required in Draft Mode.",
     );
   }
 
-  const perspective = visualEditingEnabled ? "previewDrafts" : "published";
+  const perspective = VISUAL_EDITING_ENABLED ? "previewDrafts" : "published";
 
   const { result, resultSourceMap } = await sanityClient.fetch<QueryResponse>(
     query,
@@ -27,10 +26,10 @@ export async function loadQuery<QueryResponse>({
     {
       filterResponse: false,
       perspective,
-      resultSourceMap: visualEditingEnabled ? "withKeyArraySelector" : false,
-      stega: visualEditingEnabled,
-      ...(visualEditingEnabled ? { token } : {}),
-      useCdn: !visualEditingEnabled,
+      resultSourceMap: VISUAL_EDITING_ENABLED ? "withKeyArraySelector" : false,
+      stega: VISUAL_EDITING_ENABLED,
+      ...(VISUAL_EDITING_ENABLED ? { token } : {}),
+      useCdn: false,
     },
   );
 
