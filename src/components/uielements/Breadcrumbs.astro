@@ -40,13 +40,13 @@ paths.forEach((text, i) => {
                 <li class="text-regular flex items-center gap-2" role="listitem"> 
 
                     { index !== parts.length - 1 ? 
-                      <a href={parseHref(href)} {...attrs} aria-current={(pathnameFormatted === pathname) && "page"}
+                      <a href={parseHref(href)} {...attrs} aria-current={(href === pathnameFormatted) && "page"}
                         class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-tertiary text-xs capitalize outline-none md:py-2 bg-clip-text duration-300 bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] transition-all motion-reduce:transition-none bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% to-white to-50% text-transparent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-2 focus-visible:outline-yellow-500">
                         {text}
                       </a> 
                       <svg class="w-6 h-6 fill-white" aria-hidden="true" focusable="false"><use xlink:href=`${PUBLIC_ASTRO_BASE_PATH}/icons/icon-sprite.svg#icon-chevron-right`></use></svg>
                       :
-                      <span {...attrs} aria-current={(pathnameFormatted === pathname) && "page"}
+                      <span {...attrs} aria-current={(href === pathnameFormatted) && "page"}
                       class="text-xs capitalize outline-none md:py-2">
                         {text}
                       </span> 
