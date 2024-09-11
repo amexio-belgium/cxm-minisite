@@ -12,10 +12,8 @@ const subpath = pathname.match(/[^\/]+/g);
 
 let pathnameFormatted = pathname;
 
-const basePath = import.meta.env.PUBLIC_ASTRO_BASE_PATH;
-
-if(basePath && basePath !== '' && basePath !== '/'){
-	pathnameFormatted = pathnameFormatted.slice(basePath.length)
+if(PUBLIC_ASTRO_BASE_PATH && PUBLIC_ASTRO_BASE_PATH !== '' && PUBLIC_ASTRO_BASE_PATH !== '/'){
+	pathnameFormatted = pathnameFormatted.slice(PUBLIC_ASTRO_BASE_PATH.length)
 }
 
 const isActive = href === pathnameFormatted || (href+"/") === pathname  || href === '/' + subpath?.[0];
