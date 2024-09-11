@@ -3,6 +3,7 @@ import type {
   AnswerQuestion,
   Callout,
   CardGrid,
+  CodeEmbed,
   CollaborationModel,
   CollabTab,
   Cta,
@@ -391,19 +392,24 @@ export type PersonReferenced = {
   image?: i18nImage;
 };
 
+export type Content = Array<
+  | ServicesCardList
+  | CardGrid
+  | CalloutReferenced
+  | LongFormTextReferenced
+  | HighlightReferenced
+  | TabsReferenced
+  | BlogHighlightReferenced
+  | BlogsListReferenced
+  | WorkCardListReferenced
+  | CodeEmbed
+  | TestimonialReferenced
+>;
+
 export interface BlogPostWithReferences {
   _type: "blogPost";
   language?: string;
-  content?: Array<
-    | ServicesCardList
-    | CardGrid
-    | CalloutReferenced
-    | LongFormTextReferenced
-    | HighlightReferenced
-    | TabsReferenced
-    | BlogHighlightReferenced
-    | BlogsListReferenced
-  >;
+  content?: Content;
   metadata?: Metadata;
   featuredImage?: i18nImage;
   _updatedAt?: string;
@@ -436,17 +442,7 @@ export interface ServiceWithReferences {
   customerReferencesText?: string;
   language?: string;
   cta?: string;
-  content?: Array<
-    | ServicesCardList
-    | CardGrid
-    | CalloutReferenced
-    | LongFormTextReferenced
-    | HighlightReferenced
-    | TabsReferenced
-    | BlogHighlightReferenced
-    | BlogsListReferenced
-    | WorkCardListReferenced
-  >;
+  content?: Content;
   metadata?: Metadata;
   image?: i18nImage;
   _updatedAt?: string;
@@ -462,15 +458,7 @@ export interface WorkWithReferences {
   _type: "works";
   language?: string;
   customerReferencesText?: string;
-  content?: Array<
-    | ServicesCardList
-    | CardGrid
-    | CalloutReferenced
-    | LongFormTextReferenced
-    | HighlightReferenced
-    | TabsReferenced
-    | WorkCardListReferenced
-  >;
+  content?: Content;
   logo?: {
     default: i18nImage | null;
     light: i18nImage | null;

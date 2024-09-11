@@ -12,7 +12,6 @@ import type {
 import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-
 import { getLocale } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import type { PageTranslations } from "@sanity/custom.sanity.types";
@@ -84,7 +83,6 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     <Footer
       navigation={header}
       secondaryNavigation={footer}
-      isContactPage={false}
       footerText={siteConfig.copyrightText}
       socials={socials}
     />
