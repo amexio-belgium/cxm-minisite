@@ -68,6 +68,12 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type CodeEmbed = {
+  _type: "codeEmbed";
+  title?: string;
+  Code?: Code;
+};
+
 export type BlogsList = {
   _type: "blogsList";
   maxPerPage?: number;
@@ -722,6 +728,9 @@ export type ReferenceCase = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   technologies?: Array<{
     _ref: string;
@@ -858,6 +867,9 @@ export type BlogPost = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   metadata?: Metadata;
   language?: string;
@@ -975,6 +987,9 @@ export type Company = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   type?: {
     _ref: string;
@@ -1069,6 +1084,9 @@ export type Service = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   faqs?: Faq;
   customerReferencesText?: string;
@@ -1179,6 +1197,9 @@ export type ContentPage = {
     | ({
         _key: string;
       } & Testimonial)
+    | ({
+        _key: string;
+      } & CodeEmbed)
   >;
   metadata?: Metadata;
   language?: string;
@@ -1358,6 +1379,14 @@ export type SkosConcept = {
   changeNote?: string;
 };
 
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
 export type SanityAssistInstructionTask = {
   _type: "sanity.assist.instructionTask";
   path?: string;
@@ -1499,6 +1528,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | CodeEmbed
   | BlogsList
   | BlogHighlight
   | CollabTab
@@ -1543,6 +1573,7 @@ export type AllSanitySchemaTypes =
   | Slug
   | SkosConceptScheme
   | SkosConcept
+  | Code
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -1670,6 +1701,9 @@ export type NavigationQueryResult = {
           | ({
               _key: string;
             } & CardGrid)
+          | ({
+              _key: string;
+            } & CodeEmbed)
           | ({
               _key: string;
             } & Highlight)
@@ -1909,6 +1943,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2048,6 +2085,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2186,6 +2226,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2322,6 +2365,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -2516,6 +2562,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -2658,6 +2707,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2797,6 +2849,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -2934,6 +2989,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -3518,6 +3576,34 @@ export type ServiceQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -4386,6 +4472,9 @@ export type ServiceQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -4500,6 +4589,9 @@ export type ServiceQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -5143,6 +5235,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -5242,6 +5337,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -5472,6 +5570,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -5571,6 +5672,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -5800,6 +5904,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -5899,6 +6006,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -6127,6 +6237,9 @@ export type ServiceQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -6226,6 +6339,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -6476,6 +6592,9 @@ export type ServiceQueryResult = {
       | ({
           _key: string;
         } & CardGrid)
+      | ({
+          _key: string;
+        } & CodeEmbed)
       | ({
           _key: string;
         } & Highlight)
@@ -6798,6 +6917,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -6937,6 +7059,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7075,6 +7200,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7211,6 +7339,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -7405,6 +7536,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -7547,6 +7681,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7686,6 +7823,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -7823,6 +7963,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -8407,6 +8550,34 @@ export type BlogPostQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -9275,6 +9446,9 @@ export type BlogPostQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -9389,6 +9563,9 @@ export type BlogPostQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -10032,6 +10209,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -10131,6 +10311,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -10361,6 +10544,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -10460,6 +10646,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -10689,6 +10878,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -10788,6 +10980,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -11016,6 +11211,9 @@ export type BlogPostQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -11115,6 +11313,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -11693,6 +11894,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -11832,6 +12036,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -11970,6 +12177,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -12106,6 +12316,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -12300,6 +12513,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -12442,6 +12658,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -12581,6 +12800,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -12718,6 +12940,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -13302,6 +13527,34 @@ export type WorkQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -14170,6 +14423,9 @@ export type WorkQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -14284,6 +14540,9 @@ export type WorkQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -14927,6 +15186,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -15026,6 +15288,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -15256,6 +15521,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -15355,6 +15623,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -15584,6 +15855,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -15683,6 +15957,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -15911,6 +16188,9 @@ export type WorkQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -16010,6 +16290,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -16320,6 +16603,9 @@ export type WorkQueryResult = {
           } & CardGrid)
         | ({
             _key: string;
+          } & CodeEmbed)
+        | ({
+            _key: string;
           } & Highlight)
         | ({
             _key: string;
@@ -16384,6 +16670,9 @@ export type WorkQueryResult = {
       | ({
           _key: string;
         } & CardGrid)
+      | ({
+          _key: string;
+        } & CodeEmbed)
       | ({
           _key: string;
         } & Highlight)
@@ -16548,6 +16837,9 @@ export type WorkQueryResult = {
         } & CardGrid)
       | ({
           _key: string;
+        } & CodeEmbed)
+      | ({
+          _key: string;
         } & Highlight)
       | ({
           _key: string;
@@ -16647,6 +16939,9 @@ export type WorkQueryResult = {
         | ({
             _key: string;
           } & CardGrid)
+        | ({
+            _key: string;
+          } & CodeEmbed)
         | ({
             _key: string;
           } & Highlight)
@@ -17035,6 +17330,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17174,6 +17472,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17312,6 +17613,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17448,6 +17752,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -17642,6 +17949,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -17784,6 +18094,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -17923,6 +18236,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -18060,6 +18376,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & CardGrid)
+            | ({
+                _key: string;
+              } & CodeEmbed)
             | ({
                 _key: string;
               } & Highlight)
@@ -18644,6 +18963,34 @@ export type ContentPageQueryResult = {
           _type: "card";
           _key: string;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        cards: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "codeEmbed";
+        title?: string;
+        Code?: Code;
       }
     | {
         _key: string;
@@ -19512,6 +19859,9 @@ export type ContentPageQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -19626,6 +19976,9 @@ export type ContentPageQueryResult = {
                 } & CardGrid)
               | ({
                   _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
                 } & Highlight)
               | ({
                   _key: string;
@@ -20269,6 +20622,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -20368,6 +20724,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -20598,6 +20957,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -20697,6 +21059,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -20926,6 +21291,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -21025,6 +21393,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
@@ -21253,6 +21624,9 @@ export type ContentPageQueryResult = {
               } & CardGrid)
             | ({
                 _key: string;
+              } & CodeEmbed)
+            | ({
+                _key: string;
               } & Highlight)
             | ({
                 _key: string;
@@ -21352,6 +21726,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
               | ({
                   _key: string;
                 } & Highlight)
