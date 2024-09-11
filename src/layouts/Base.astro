@@ -12,20 +12,21 @@ import type {
 import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-import I18nClient from "@astrolicious/i18n/components/I18nClient.astro";
-import I18nHead from "@astrolicious/i18n/components/I18nHead.astro";
-
 import { getLocale } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import type { PageTranslations } from "@sanity/custom.sanity.types";
 
 interface Props {
   title: string;
   description: string;
   slug: string;
   siteConfig: SiteConfigQueryResult;
+  translations: PageTranslations;
+  routeMap?: string;
 }
 
-const { title, description, slug, siteConfig } = Astro.props;
+const { title, description, slug, siteConfig, translations, routeMap } =
+  Astro.props;
 
 if (!siteConfig) {
   return new Response(null, { status: 404 });
@@ -53,9 +54,14 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
 <html class="overflow-x-clip" lang={getLocale().toLowerCase()}>
   <head>
     <meta charset="utf-8" />
-    <I18nClient />
-    <I18nHead />
-    <BaseHead title={title} description={description} />
+
+    <BaseHead
+      translations={translations}
+      slug={slug}
+      routeMap={routeMap}
+      title={title}
+      description={description}
+    />
     {
       slug === "contact" && (
         <link

@@ -1,44 +1,36 @@
 ---
+import { getLocale } from "i18n:astro";
 import css from "../../styles/global.css?url";
 import printcss from "../../styles/print.css?url";
-import { getCollection } from "astro:content";
 
+import { type PageTranslations } from "@sanity/custom.sanity.types";
+import { locales } from "@src/locales/consts";
 interface Props {
   title: string;
   description: string;
-  overrideCanonical?: string;
   image?: string;
+  translations: PageTranslations;
+  routeMap?: string;
+  slug: string;
 }
 
-function getPostLangAndSlug(post) {
-  const [lang, ...slug] = post.slug.split("/");
-  return { lang, slug };
-}
-
-let urls;
-// TODO fix this with sanity data
-// if (Astro.url.pathname.includes("/blog/")){
-// 	urls = (await getCollection('blog', (post) => {
-// 			return  Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
-// 		}))
-// } else if (Astro.url.pathname.includes("/cases/")){
-// 	urls = (await getCollection('cases', (post) => {
-// 			return Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
-// 		}))
-// } else if (Astro.url.pathname.includes("/services/")){
-// 	urls = (await getCollection('services', (post) => {
-// 			return Astro.url.pathname.includes(getPostLangAndSlug(post).slug)
-// 		}))
-// }
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.url);
-const { lang } = Astro.params;
 const {
   title,
   description,
-  overrideCanonical,
   image = "/share-image.jpg",
+  translations,
+  routeMap,
+  slug,
 } = Astro.props;
+
+// Remove the first / from the pathname, then you are left with en/fr/nl if it's a homepage
+const pathNameAsLocale = Astro.url.pathname.substring(1);
+
+const isHomePage = locales.includes(pathNameAsLocale);
+
+const canonicalURL = isHomePage
+  ? `${Astro.site?.origin}/${getLocale()}/`
+  : `${Astro.site?.origin}/${getLocale()}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
 ---
 
 <!-- Global Metadata -->
@@ -96,35 +88,34 @@ const {
 
 <!-- Canonical URL -->
 {
-  urls && urls.length > 0 ? (
-    urls.map((post, index) => (
+  !isHomePage &&
+    translations &&
+    translations.length > 0 &&
+    translations.map((translation) => {
+      if (translation?.slug && translation.language) {
+        return (
+          <link
+            rel="alternate"
+            hreflang={translation?.language}
+            href={`${Astro.site?.origin}/${translation?.language}${routeMap ? `/${routeMap}` : ""}/${translation?.slug}/`}
+          />
+        );
+      }
+    })
+}
+
+{
+  isHomePage &&
+    locales.map((locale) => (
       <link
         rel="alternate"
-        hreflang={getPostLangAndSlug(post).lang}
-        href={Astro.site + post.slug}
+        hreflang={locale}
+        href={`${Astro.site?.origin}/${locale}/`}
       />
     ))
-  ) : (
-    <>
-      <link
-        rel="alternate"
-        hreflang="en"
-        href={Astro.url.toString().replace("/" + lang + "/", "/en/")}
-      />
-      <link
-        rel="alternate"
-        hreflang="nl"
-        href={Astro.url.toString().replace("/" + lang + "/", "/nl/")}
-      />
-      <link
-        rel="alternate"
-        hreflang="fr"
-        href={Astro.url.toString().replace("/" + lang + "/", "/fr/")}
-      />
-    </>
-  )
 }
-<link rel="canonical" href={overrideCanonical || canonicalURL} />
+
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

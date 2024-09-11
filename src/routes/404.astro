@@ -1,6 +1,6 @@
 ---
 import Base from "src/layouts/Base.astro";
-import { i18nParams } from "src/locales/consts";
+import { i18nParams, locales } from "src/locales/consts";
 import Button from "src/components/uielements/Button.astro";
 import { getLocale } from "i18n:astro";
 
@@ -11,11 +11,17 @@ import { siteConfigQuery } from "src/api/queries";
 import { loadQuery } from "src/api/sanity";
 import type { SiteConfigQueryResult } from "src/sanity/sanity.types";
 import { t } from "i18next";
+import type { PageTranslations } from "@sanity/custom.sanity.types";
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
   params: { language: getLocale().toLowerCase() },
 });
+
+const translations: PageTranslations = locales.map((locale) => ({
+  slug: "404",
+  language: locale,
+}));
 ---
 
 <Base
@@ -23,6 +29,7 @@ const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   description={t("404.title", { defaultValue: "" })}
   slug="404"
   siteConfig={siteConfig}
+  translations={translations}
 >
   <section class="">
     <div class="mx-auto max-w-screen-xl px-4 py-40 lg:px-6 lg:py-40">

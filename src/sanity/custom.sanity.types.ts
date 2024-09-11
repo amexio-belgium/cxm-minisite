@@ -15,7 +15,6 @@ import type {
   Link,
   LongFormText,
   Metadata,
-  Person,
   ReferenceCase,
   SanityImageAsset,
   SanityImageCrop,
@@ -28,7 +27,12 @@ import type {
   Testimonial,
   WorkCardList,
   Youtube,
-} from "./sanity.types";
+} from "@sanity/sanity.types";
+
+export type PageTranslations = Array<{
+  slug: string | null;
+  language: string | null;
+} | null> | null;
 
 export interface LinkObjectReferenced {
   _type: "link";
@@ -373,6 +377,7 @@ export interface ContentPageWithReferences {
   _updatedAt?: string;
   _id: string;
   intro?: Intro;
+  _translations: PageTranslations;
 }
 
 export type PersonReferenced = {
@@ -421,6 +426,7 @@ export interface BlogPostWithReferences {
     prefLabel: string | null;
     definition: string | null;
   }> | null;
+  _translations: PageTranslations;
 }
 
 export type BlogsListReferenced = {
@@ -445,6 +451,7 @@ export interface ServiceWithReferences {
   servicePillar?: ServicePillar;
   customerReferences: CustomerReferenced[];
   faqs: FaqsReferenced;
+  _translations: PageTranslations;
 }
 
 export interface WorkWithReferences {
@@ -464,11 +471,12 @@ export interface WorkWithReferences {
   _id: string;
   intro?: Intro;
   duration?: string;
-  collaborationModel?: CollaborationModel;
+  collaborationModel?: CollaborationModelReferenced;
   customerReferences?: CustomerReferenced[];
   services?: ServiceWithReferences[];
   technologies?: TechnologyReferenced[];
   relatedCases?: ReferenceCaseReferenced[];
+  _translations: PageTranslations;
 }
 
 export type CustomerReferenced = {

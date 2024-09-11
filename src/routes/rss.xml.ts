@@ -6,8 +6,9 @@ import type {
   SiteConfigQueryResult,
 } from "@sanity/sanity.types.ts";
 import { rssBlogPostsQuery, siteConfigQuery } from "@api/queries.ts";
+import type { APIContext } from "astro";
 
-export async function GET(context) {
+export async function GET(context: APIContext) {
   const locale = getLocale().toLowerCase();
 
   const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({

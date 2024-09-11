@@ -66,6 +66,8 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
   description={casePage?.metadata?.description || ""}
   slug={slug}
   siteConfig={siteConfig}
+  translations={casePage._translations}
+  routeMap="cases"
 >
   <HeroHeader
     headline={casePage?.intro?.title}
