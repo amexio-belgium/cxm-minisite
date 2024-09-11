@@ -4,7 +4,7 @@ import Breadcrumbs from "@components/uielements/Breadcrumbs.astro";
 import { PortableText } from "astro-portabletext";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
-import {defaultComponents} from "../cms-components/PortableText/helper";
+import { defaultComponents } from "../cms-components/PortableText/helper";
 
 interface Props {
   headline?: string;
@@ -44,7 +44,13 @@ const {
         homepage ? "text-3xl md:text-4xl" : "text-3xl md:text-4xl",
       ]}
     >
-      {headline}
+      {
+        Array.isArray(headline) ? (
+          <PortableText components={defaultComponents} value={headline} />
+        ) : (
+          headline
+        )
+      }
     </h1>
   </div>
   <div class:list={["relative", homepage && "w-full xl:w-1/2"]}>
