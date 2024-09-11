@@ -76,9 +76,7 @@ class LiteYTEmbed extends HTMLElement {
     // so they don't autoplay automatically. Instead we must load an additional 2 sequential JS files (1KB + 165KB) (un-br) for the YT Player API
     // TODO: Try loading the the YT API in parallel with our iframe and then attaching/playing it. #82
     this.needsYTApi =
-      this.hasAttribute("js-api") ||
-      navigator.vendor.includes("Apple") ||
-      navigator.userAgent.includes("Mobi");
+      this.hasAttribute("js-api") || navigator.userAgent.includes("Mobi");
   }
 
   /**
