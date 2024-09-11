@@ -1,0 +1,61 @@
+---
+import iconWorld from '@assets/icons/world.svg'
+import { languages } from '../../i18n/consts';
+
+interface Props {
+    currentLang: string
+}
+
+const {currentLang} = Astro.props;
+const basePath = import.meta.env.PUBLIC_ASTRO_BASE_PATH;
+
+---
+
+
+<button id="langmenu-btn"
+aria-expanded="false"
+type="button"
+class="group inline-flex gap-2 focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-tertiary
+bg-clip-text bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] motion-reduce:transition-none  text-transparent 
+transition-all bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50%">
+    <img class="w-6 h-6 group-hover:scale-125 transition motion-reduce:transition-none" src={iconWorld.src} alt="" />
+    {languages[currentLang]}
+</button>
+
+<ul id="langmenu-menu" class="hidden absolute bottom-0 p-4 text-white border border-blue-200 shadow-sm -right-2 l backdrop-blur-sm bg-primary/90 rounded-xl">
+    {Object.entries(languages).map(([lang, label]) => (
+        <li>
+            <a aria-current={currentLang == lang} class="underline decoration-1 underline-offset-2 decoration-white hover:decoration-secondary bg-clip-text bg-[length:200%_100%] bg-[100%] hover:bg-[0%_100%] motion-reduce:transition-none text-transparent transition-all bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-secondary" href={`${basePath}/${lang}/`} hreflang={`${lang}`} lang={`${lang}`}>{label}</a>
+        </li>
+    ))}
+</ul>
+
+<script>
+
+    const langBtn = document.getElementById('langmenu-btn');
+    const langMenu = document.getElementById('langmenu-menu');
+    let isOpen = false;
+
+    langBtn?.addEventListener("click", ()=>{
+        langMenu!.style.display = 'block';
+        langBtn!.ariaExpanded = 'true';
+        isOpen = true;
+    })
+
+    langMenu?.addEventListener('keyup', (event)=>{
+        if(event.key == 'Escape'){
+            langMenu!.style.display = 'none';
+            isOpen = false;
+            langBtn!.ariaExpanded = 'false';
+        }
+    })
+
+
+    document.addEventListener('click', (event) => {
+      if (isOpen && !langMenu!.contains(event.target as HTMLElement) && event.target !== langBtn) {
+        langMenu!.style.display = 'none';
+        isOpen = false;
+        langBtn!.ariaExpanded = 'false';
+      }
+    });
+</script>
