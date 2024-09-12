@@ -26,6 +26,9 @@ const basePath =
 // https://astro.build/config
 export default defineConfig({
   site: ASTRO_SITE_URL,
+  output: SANITY_VISUAL_EDITING_ENABLED === "true" ? "server" : "static",
+  adapter: netlify(),
+  base: basePath,
   outDir: `./dist${PUBLIC_ASTRO_BASE_PATH}`,
   i18n: {
     defaultLocale: "en",
@@ -69,7 +72,4 @@ export default defineConfig({
       exclude: ["fsevents"],
     },
   },
-  output: SANITY_VISUAL_EDITING_ENABLED === "true" ? "server" : "static",
-  adapter: netlify(),
-  base: basePath,
 });
