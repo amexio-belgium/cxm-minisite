@@ -4,15 +4,17 @@
 */
 
 export const i18nParams = [
-    {params: {lang: 'en'}},
-    {params: {lang: 'nl'}},
-    {params: {lang: 'fr'}},
-]
+  { params: { lang: "en" } },
+  { params: { lang: "nl" } },
+  { params: { lang: "fr" } },
+];
+
+export const langCodes = i18nParams.map((param) => param.params.lang);
 
 export const languages = {
-    en: 'English',
-    fr: 'Français',
-    nl: 'Nederlands',
+  en: "English",
+  fr: "Français",
+  nl: "Nederlands",
 };
 
-export const defaultLang = 'en';
+export const defaultLang = "en";

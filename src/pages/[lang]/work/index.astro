@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import { i18nParams } from '../../../i18n/consts'
+import Base from '@layouts/Base.astro';
+import HeroHeader from '@components/uicomposition/HeroHeader.astro';
+import CasePreview from '@components/uielements/CasePreview.astro';
+import { useTranslations } from 'src/i18n/utils';
+
+const { lang } = Astro.params;
+
+const cases = (await getCollection('cases', (post) => {
+	return !post.data.draft 
+			&& getPostLangAndSlug(post).lang === lang 
+}))
+.sort((a, b) =>  {
+	let adate = 0
+	if(a.data.pubDate != null) { adate = a.data.pubDate.valueOf()}
+	let bdate = 0
+	if(b.data.pubDate != null) { bdate = b.data.pubDate.valueOf()}
+	return bdate - adate
+})
+
+export function getStaticPaths() {
+  return i18nParams;
+}
+
+function getPostLangAndSlug(post) {
+	const [lang, ...slug] = post.slug.split('/');
+	return {lang, slug}
+}
+
+const t = useTranslations(lang, 'work');
+
+---
+<Base title={t('work.title')} description={t('work.seoDescription')}>
+	<HeroHeader 
+		headline={t('hero.headline')}
+		text={t('hero.subheadline')}
+	/>
+
+	<div class="motion-safe:animate-fade-up motion-safe:animate-delay-500 relative flex flex-col pt-20 pb-20 md:pb-40 w-full gap-8 before:-z-10 before:bg-light-blue-50 before:absolute before:-left-[3000px] before:top-0 before:bottom-0 before:right-[1000px] marker:before:h-full before:w-[10000px] before:rounded-xl">
+		<!-- <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8"> -->
+
+		{
+			cases.map((casepost) => (
+				
+				<CasePreview caseData={casepost.data}  link={`/work/${getPostLangAndSlug(casepost).slug}/`} />
+			))
+		}
+		<!-- </div> -->
+	</div>
+</Base>

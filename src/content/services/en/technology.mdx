@@ -1,8 +1,8 @@
 ---
 title: 'Technology Advisory'
-previewTitle: 'Select the right technology for your use case'
-description: 'Today, organizations must navigate a complex array of tools and technologies to stay competitive and meet evolving customer expectations. With our Technology Advisory service, we help you to compose a CXM ecosystem, tailored to your specific context. We approach this exercise in a vendor-agnostic way.'
-pubDate: 'May 29 2024'
+previewTitle: 'Select the right CXM tools and architecture'
+description: 'In today’s fast-paced technology landscape, choosing the right tools can be challenging. We help you build a CXM ecosystem that fits your needs, without any vendor bias.'
+pubDate: 'May 26 2024'
 heroImage: '/src/assets/images/development.jpg'
 altTextImage: 'The alt text for the hero image'
 cta: 'Discover Technology Advisory'
@@ -21,59 +21,88 @@ import TeaserWithImage  from "@components/uicomposition/TeaserWithImage.astro"
 import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
-import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
+import shifts from '@assets/images/shifts.png';
+import referenceframework from '@assets/images/referenceframework.png';
+import chess from '@assets/images/chess1.jpg';
+import kbc from '@assets/logos/kbc_logo_white.png';
+import leuven from '@assets/logos/leuven_logo_white.png';
 import mediafin from '@assets/logos/mediafin_logo_white.png';
+import oecd from '@assets/logos/oecd_logo_white.png';
+import deceuninck from '@assets/logos/beaulieu_logo_white.png';
+import slant from "@assets/images/slantwithimage.png"
 
 <HeroHeader 
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
 	<Customers headline="Customers we advised on technology">
+		<Image src={kbc} alt="" class="h-10 w-auto"/>
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+		<Image src={leuven} alt="" class="h-10 w-auto"/>
+		<Image src={oecd} alt="" class="h-10 w-auto"/>
+		<Image src={deceuninck} alt="" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Not sure which technology fits best?"
-	description="Organizations often face several challenges in managing their content effectively:
-	<ul>
-		<li>Complexity of Current Systems: Traditional on-premises CMS solutions can be costly and complex to maintain.</li>
-		<li>Integration Issues: Integrating various business applications with public-facing channels while maintaining a consistent user experience is challenging.</li>
-		<li>Technological Shifts: The content management market is rapidly evolving with trends like low-code platforms, cloud/SaaS adoption, AI integrations, and composability.</li>
-		<li>Future-Proofing: Organizations need to ensure their content management solutions are scalable, maintainable, and cost-effective for future needs.</li>
-	</ul>">
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+	headline="Make technology choices for the coming decade"
+	description="
+		<p>Choosing the right technology today can significantly impact your business’s success tomorrow. More than ever, it's essential to ensure your technology ecosystem is <strong>adaptable and resilient</strong> to change.</p>
+		<p>Using our <a href='/en/insights/making-sense-of-composability'>CXM Reference Framework</a>, we put forward a structured and <strong>forward-thinking</strong> approach to help you build a CXM ecosystem that is able to grow along with your business.</p>">
+	<Image src={referenceframework} alt="" width={1024} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
     headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    description="
+    	<p>Too often, technology is evaluated by ticking feature checkboxes and comparing pricing models. Decisions made in such a context aren’t grounded in reality and have suboptimal <strong>return on investment</strong> (ROI).</p>
+    	<p>Therefore, it's essential to start from the your CX vision, your business goals and your domain-specific processes and work towards an architectural vision, technology choices and eventually implementation. This approach improves the value of the chosen technologies.</p>
+    ">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Identify CX vision"
+		description="Get a clear view on your CX strategy & business goals<br /><br /><mark>Benefits Mapping workshop</mark>">
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Map content processes"
+		description="Inspect your content lifecycle and delivery channels<br /><br /><mark>Business process workshop</mark>">
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Define architecture"
+		description="Define key capabilities aligning with your objectives<br /><br /><mark>AmeXio CXM Reference Framework</mark>">
     </SmallTile>
+    <SmallTile 
+		headline="Recommend technology"
+		description="Define architecture & technology, mapping to identified capabilities<br /><br /><mark>Vendor assessment</mark>">
+    </SmallTile>
+    <div slot="bg-image" class="absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat">
+      <Image loading="lazy" src={slant} alt="" />
+    </div>
 </TilesContainer>
-  
-<Highlight 
-	title="In the picture"
-	text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."
-	image='/src/assets/images/highlight.png'
-	buttonText="discover"
-	/>
+
+<TeaserWithImage
+	align="left"
+	headline="The technology market keeps evolving"
+	description="
+		<p>In recent years, the content management market has undergone considerable shifts, driven by trends such as low-code platforms, channel-agnostic content, cloud/SaaS adoption and AI capabilities.</p>
+		<p>Next to that, there is the continuous drive for more flexibility and agility: <strong>Composability</strong> gives organizations the ability to compose their own Digital Experience Platform (DXP) using a best-of-breed mindset. It involves an increased use of Microservices, API’s, Cloud-native solutions, and Headless content delivery (<a href='https://machalliance.org/mach-technology'>MACH</a>). Although this pattern can provide real business value, it’s not equally applicable to all use cases. It is highly dependent on the specific business needs, content management and delivery scenarios and the way your organization is structured.</p>
+		<p>These trends have a substantial impact on your CXM ecosystem. With our Technology Advisory service, we help you to get a grip on what the market is offering, and to look at solutions fitting <strong>your unique needs and context</strong>.</p>
+	">
+	<Image src={shifts} alt="" width={796} class="rounded-xl" />
+</TeaserWithImage>
 
 <Faq headline="Questions we usually get">
 	<FaqQuestion
-		headline="Can you help me with services for development only?"
+		headline="What are key the capabilities of a modern CXM ecosystem?"
+		headlineTag="h3"> 
+		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
+    	<ul> 
+			<li>item 1</li>
+			<li>item 1</li>
+			<li>item 1</li>
+		</ul>
+	</FaqQuestion>
+	<FaqQuestion
+		headline="Should we go for an integrated all-in-one solution, or is a composable stack more suited?"
 		headlineTag="h3"> 
 		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
     	<ul> 
@@ -83,12 +112,11 @@ import mediafin from '@assets/logos/mediafin_logo_white.png';
 		</ul>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you help me with services for development only?"
-		headlineTag="h3" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
+		headline="Is a composable architecture suitable for our business, given our limited IT capacity?">
+		<p>Where should we invest first? Are there specific capabilities which should be adopted before others?</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="What makes you different from other agencies?" >
+		headline="How can we prevent vendor lock-in?" >
 		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
     	<ol> 
 			<li>item 1</li>
@@ -97,21 +125,20 @@ import mediafin from '@assets/logos/mediafin_logo_white.png';
 		</ol>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you support my in-house team?">
+		headline="How can we limit fragmentation in our technology landscape?">
 		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Do you work for startups?">
+		headline="Should we adopt a headless-only CMS? What are the implications?"
+		headlineTag="h3" >
+		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="Can you help us with defining a roadmap for implementation and roll-out?">
+		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
+	</FaqQuestion>
+	<FaqQuestion 
+		headline="How can we calculate total cost-of-ownership?">
 		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
 	</FaqQuestion>
 </Faq>
-
-<InsightsTeaser />
-
-<Quote 
-    quote="The new website of L’Echo appeals to a broad audience and boasts extended customisation possibilities for readers, making it more readable and simpler to use. Furthermore, the system allows us to provide new media formats such as videos and infographics, ultimately leading to a more enjoyable customer experience."
-    name='Johan Condijts'
-    jobtitle="editor"
-    profileImage='/src/assets/people/placeholder_small.png'
-	class="mt-40"
-    /> 
