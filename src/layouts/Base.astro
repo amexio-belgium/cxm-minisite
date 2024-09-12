@@ -12,7 +12,6 @@ import type {
 import { loadQuery } from "src/api/sanity";
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-import { getLocale } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import type { PageTranslations } from "@sanity/custom.sanity.types";
 
@@ -24,6 +23,8 @@ interface Props {
   translations: PageTranslations;
   routeMap?: string;
 }
+
+const locale = Astro.currentLocale;
 
 const { title, description, slug, siteConfig, translations, routeMap } =
   Astro.props;
@@ -45,16 +46,16 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
   return {
     name: social.name || "",
     iconImageID: social.icon?.asset?._id || "",
-    link: social.link ? getHrefFromLinkObject(social.link, getLocale()) : "",
-    alt: social.icon?.asset?.altTexts?.[getLocale()] || "",
+    link: social.link ? getHrefFromLinkObject(social.link, locale!) : "",
+    alt: social.icon?.asset?.altTexts?.[locale!] || "",
   };
 });
 ---
 
-<html class="overflow-x-clip" lang={getLocale().toLowerCase()}>
+<html class="overflow-x-clip" lang={locale!}>
   <head>
     <meta charset="utf-8" />
-
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <BaseHead
       translations={translations}
       slug={slug}

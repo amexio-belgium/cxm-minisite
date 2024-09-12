@@ -1,5 +1,4 @@
 ---
-import { getLocale } from "i18n:astro";
 import css from "../../styles/global.css?url";
 import printcss from "../../styles/print.css?url";
 
@@ -15,6 +14,8 @@ interface Props {
   routeMap?: string;
   slug: string;
 }
+
+const locale = Astro.currentLocale;
 
 const {
   title,
@@ -32,8 +33,8 @@ const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
 const isHomePage = locales.includes(pathNameAsLocale);
 
 const canonicalURL = isHomePage
-  ? `${Astro.site?.origin}${BASE_PATH}/${getLocale()}/`
-  : `${Astro.site?.origin}${BASE_PATH}/${getLocale()}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
+  ? `${Astro.site?.origin}${BASE_PATH}/${locale}/`
+  : `${Astro.site?.origin}${BASE_PATH}/${locale}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
 ---
 
 <!-- Global Metadata -->

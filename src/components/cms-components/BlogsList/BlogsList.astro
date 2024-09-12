@@ -6,14 +6,14 @@ import type {
   BlogsListReferenced,
 } from "@sanity/custom.sanity.types";
 import { v4 as uuidv4 } from "uuid";
-import { getLocale } from "i18n:astro";
-import { t } from "i18next";
+import * as m from "@src/paraglide/messages";
 import BlogPreview from "@components/uielements/BlogPreview.astro";
 
 interface Props {
   blogsList: BlogsListReferenced;
 }
 
+const locale = Astro.currentLocale!;
 const { blogsList } = Astro.props;
 
 const itemsPerTime = blogsList.maxPerPage || 15;
@@ -26,7 +26,7 @@ if (blogsList.blogsType === "latest") {
     totalItems: number;
   }>({
     query: blogsListQuery,
-    params: { language: getLocale(), itemsPerTime: itemsPerTime },
+    params: { language: locale, itemsPerTime: itemsPerTime },
   });
   blogs = blogsFetched.blogPosts;
   totalItems = blogsFetched.totalItems;
@@ -61,7 +61,7 @@ const items = isLatestBlogs
   blogs && (
     <astro-blogs-list
       data-blogs={JSON.stringify(blogs)}
-      data-lang={getLocale()}
+      data-lang={locale}
       data-totalitems={totalItems}
       data-items={items}
       data-uuid={uuid}
@@ -84,10 +84,10 @@ const items = isLatestBlogs
             class="font-sans text-[14px] text-black focus-visible:outline-orange"
             tabindex="0"
           >
-            {t("blogslist.totalviewed", {
+            {m.blogslistTotalviewed({
               viewedItems:
                 itemsPerTime > totalItems ? totalItems : itemsPerTime,
-              totalItems,
+              totalItems: totalItems,
             })}
           </span>
           <div class="bg-gray-200 dark:bg-gray-700 mx-0.5 mb-6 mt-[15px] h-[3px] w-[216px] bg-lightest-blue-800">
@@ -104,7 +104,7 @@ const items = isLatestBlogs
               id={`load-more-btn-${uuid}`}
               class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
             >
-              {t("blogslist.loadmore")}
+              {m.blogslistLoadmore()}
             </button>
           )}
         </div>

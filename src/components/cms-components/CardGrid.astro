@@ -4,12 +4,12 @@ import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImageAsset } from "@sanity/custom.sanity.types";
 import type { CardGrid } from "@sanity/sanity.types";
 import { imageBuilder } from "src/api/sanity";
-import { getLocale } from "i18n:astro";
 
 interface Props {
   cardGrid: CardGrid;
 }
 
+const locale = Astro.currentLocale!;
 const { cardGrid } = Astro.props;
 ---
 
@@ -25,7 +25,7 @@ const { cardGrid } = Astro.props;
           {card.icon?.asset && (
             <img
               src={imageBuilder.image(asset).height(192).url()}
-              alt={asset?.altTexts?.[getLocale()]}
+              alt={asset?.altTexts?.[locale]}
               class="h-24 w-auto"
               width="300"
               height="150"

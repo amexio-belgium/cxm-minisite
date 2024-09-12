@@ -5,8 +5,9 @@ import sanityImg from "@otterstack/sanity-img-astro/integration";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import { loadEnv } from "vite";
-import liciousI18n from "@astrolicious/i18n";
 import { locales } from "./src/locales/consts";
+import paraglide from "@inlang/paraglide-astro";
+import sitemap from "@astrojs/sitemap";
 
 const {
   ASTRO_SITE_URL,
@@ -26,7 +27,20 @@ const basePath =
 export default defineConfig({
   site: ASTRO_SITE_URL,
   outDir: `./dist${PUBLIC_ASTRO_BASE_PATH}`,
+  i18n: {
+    defaultLocale: "en",
+    locales: locales,
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
   integrations: [
+    sitemap(),
+    paraglide({
+      // recommended settings
+      project: "./project.inlang",
+      outdir: "./src/paraglide", //where your files should be
+    }),
     tailwind({
       nesting: true,
     }),
@@ -43,16 +57,6 @@ export default defineConfig({
     sanityImg({
       options: {
         auto: "format",
-      },
-    }),
-    liciousI18n({
-      defaultLocale: "en",
-      strategy: "prefix",
-      sitemap: true,
-      locales: locales, // must include the default locale
-      rootRedirect: {
-        status: 301,
-        destination: `${PUBLIC_ASTRO_BASE_PATH}/en`,
       },
     }),
   ],

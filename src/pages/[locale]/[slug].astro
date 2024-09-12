@@ -14,24 +14,34 @@ import type {
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
 
-import { getLocale, getLocalePlaceholder } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
-import sitemap from "i18n:astro/sitemap";
-import { getSitemapParams } from "@lib/sitemap";
+import { locales } from "@src/locales/consts";
+
+const locale = Astro.currentLocale!;
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const { data: contentPages } = await loadQuery<AllContentPagesQueryResult>({
-      query: allContentPagesQuery,
-      params: { language: getLocalePlaceholder() },
-    });
+    let pages: { params: { slug: string; locale: string } }[] = [];
 
-    sitemap({
-      dynamicParams: getSitemapParams(contentPages, getLocalePlaceholder()),
-    });
-    return contentPages.map((blog) => ({
-      params: { slug: blog },
-    }));
+    for (const language of locales) {
+      const { data: contentPages } =
+        await loadQuery<AllContentPagesQueryResult>({
+          query: allContentPagesQuery,
+          params: { language: language },
+        });
+
+      const slugs = contentPages.map((slug) => ({
+        params: { slug: slug!, locale: language },
+      }));
+
+      pages = [...pages, ...slugs];
+    }
+
+    // sitemap({
+    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
+    // });
+
+    return pages;
   } else {
     return [];
   }
@@ -41,7 +51,7 @@ const { slug } = Astro.params;
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: getLocale() },
+  params: { language: locale },
 });
 
 if (!siteConfig) {
@@ -50,7 +60,7 @@ if (!siteConfig) {
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: getLocale(), slug: slug! },
+  params: { language: locale, slug: slug! },
 });
 
 if (contentPage == null) {

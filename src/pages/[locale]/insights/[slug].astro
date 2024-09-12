@@ -17,22 +17,31 @@ import type {
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import { locales } from "@src/locales/consts";
 
 const locale = Astro.currentLocale!;
+
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
-      query: allInsightPagesQuery,
-      params: { language: locale },
-    });
+    let pages: { params: { slug: string; locale: string } }[] = [];
+
+    for (const language of locales) {
+      const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
+        query: allInsightPagesQuery,
+        params: { language },
+      });
+
+      const slugs = insights.map((slug) => ({
+        params: { slug: slug!, locale: language },
+      }));
+      pages = pages.concat(slugs);
+    }
 
     // sitemap({
-    //   dynamicParams: getSitemapParams(insights, locale),
+    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
     // });
 
-    return insights.map((slug) => ({
-      params: { slug },
-    }));
+    return pages;
   } else {
     return [];
   }

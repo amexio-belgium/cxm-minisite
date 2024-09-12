@@ -8,10 +8,10 @@ import type { NavigationQueryResult } from "src/sanity/sanity.types";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { imageBuilder } from "@api/sanity";
-import { getLocale, t } from "i18n:astro";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 import LanguageMenu from "@components/uielements/LanguageMenu.astro";
 import { parseHref } from "@lib/helpers";
+import * as m from "@src/paraglide/messages";
 
 export type Social = {
   name: string;
@@ -26,6 +26,8 @@ interface Props {
   footerText: any;
   socials: Social[] | undefined;
 }
+
+const locale = Astro.currentLocale!;
 
 const { navigation, secondaryNavigation, footerText, socials } = Astro.props;
 
@@ -42,21 +44,19 @@ const isContactPage = slug == "contact";
       <div class="relative flex w-full flex-col items-start justify-start bg-quaternary">
         <div class="relative mx-auto inline-flex w-full max-w-[1304px] items-center justify-start gap-[90px] px-8 py-20">
           <div class="inline-flex w-full flex-col items-start justify-start gap-2 sm:w-1/2">
-            <h2 class="font-serif text-3xl text-black">
-              {t("footer.headline")}
-            </h2>
+            <h2 class="font-serif text-3xl text-black">{m.footerHeadline()}</h2>
             <p class="text-pretty text-base font-light text-black md:text-lg">
-              {t("footer.subheadline")}
+              {m.footerSubheadline()}
             </p>
             <Button
-              link={`/${getLocale()}/contact/`}
+              link={`/${locale}/contact/`}
               class="mt-8"
               size="lg"
               icon="email"
               style="secondary"
               color="light"
             >
-              {t("footer.button")}
+              {m.footerButton()}
             </Button>
           </div>
           <div class="absolute -right-24 top-[320px] flex aspect-square w-7/12 justify-center overflow-hidden rounded-full sm:w-5/12 md:right-16 md:top-[250px] md:w-4/12 lg:top-40">
@@ -113,7 +113,7 @@ const isContactPage = slug == "contact";
               <FooterLink
                 href={getHrefFromLinkObject(
                   link.linkObject as LinkObjectReferenced,
-                  getLocale(),
+                  locale,
                 )}
               >
                 {link.title}
@@ -140,7 +140,7 @@ const isContactPage = slug == "contact";
                     alt={social.alt}
                   />
                   <span class="sr-only">
-                    {t("footer.srvisit")} {social.name}
+                    {m.footerSrvisit()} {social.name}
                   </span>
                 </Link>
               ))
@@ -171,7 +171,7 @@ const isContactPage = slug == "contact";
               class="underline decoration-white decoration-1 underline-offset-2 hover:decoration-secondary"
               href={getHrefFromLinkObject(
                 link.linkObject as LinkObjectReferenced,
-                getLocale(),
+                locale,
               )}
             >
               {link.title}

@@ -17,25 +17,32 @@ import type {
   AllServicePagesQueryResult,
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
-import { getLocale, getLocalePlaceholder } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
-import sitemap from "i18n:astro/sitemap";
-import { getSitemapParams } from "@lib/sitemap";
+import { locales } from "@src/locales/consts";
+
+const locale = Astro.currentLocale!;
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const { data: services } = await loadQuery<AllServicePagesQueryResult>({
-      query: allServicePagesQuery,
-      params: { language: getLocalePlaceholder() },
-    });
+    let pages: { params: { slug: string; locale: string } }[] = [];
 
-    sitemap({
-      dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
-    });
+    for (const language of locales) {
+      const { data: services } = await loadQuery<AllServicePagesQueryResult>({
+        query: allServicePagesQuery,
+        params: { language },
+      });
 
-    return services.map((slug) => ({
-      params: { slug },
-    }));
+      const slugs = services.map((slug) => ({
+        params: { slug: slug!, locale: language },
+      }));
+      pages = pages.concat(slugs);
+    }
+
+    // sitemap({
+    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
+    // });
+
+    return pages;
   } else {
     return [];
   }
@@ -45,7 +52,7 @@ const { slug } = Astro.params;
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: getLocale() },
+  params: { language: locale },
 });
 
 if (!siteConfig) {
@@ -54,7 +61,7 @@ if (!siteConfig) {
 
 const { data: servicePage } = await loadQuery<ServiceWithReferences>({
   query: serviceQuery,
-  params: { language: getLocale(), slug: slug! },
+  params: { language: locale, slug: slug! },
 });
 
 if (servicePage == null) {
@@ -87,9 +94,7 @@ if (servicePage == null) {
                       .image(customer.logo?.default?.asset)
                       .height(80)
                       .url()}
-                    alt={
-                      customer.logo.default.asset.altTexts?.[getLocale()] || ""
-                    }
+                    alt={customer.logo.default.asset.altTexts?.[locale] || ""}
                     class="h-10 w-auto"
                   />
                 )}

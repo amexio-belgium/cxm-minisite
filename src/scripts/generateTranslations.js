@@ -1,5 +1,5 @@
 import "dotenv/config";
-import {createClient} from "@sanity/client";
+import { createClient } from "@sanity/client";
 import * as fs from "node:fs";
 
 export const client = createClient({
@@ -46,18 +46,18 @@ for (const locale of locales) {
     params: { lang: locale },
   });
 
-  const formatted = translations.reduce((acc, item) => {
-    acc[item.key] = item.translation;
-    return acc;
-  }, {});
+  const formatted = {
+    $schema: "https://inlang.com/schema/inlang-message-format",
+  };
 
-  const dir = `src/locales/${locale}`;
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
+  translations.forEach((item) => {
+    if (item.translation && item.key) {
+      formatted[item.key] = item.translation;
+    }
+  });
 
   fs.writeFile(
-    `${dir}/common.json`,
+    `messages/${locale}.json`,
     JSON.stringify(formatted, null, 4),
     { overwrite: true },
     (err) => {

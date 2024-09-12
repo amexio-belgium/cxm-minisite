@@ -2,20 +2,19 @@
 import Base from "src/layouts/Base.astro";
 import { i18nParams, locales } from "src/locales/consts";
 import Button from "src/components/uielements/Button.astro";
-import { getLocale } from "i18n:astro";
-
+import * as m from "@src/paraglide/messages";
 export function getStaticPaths() {
   return i18nParams;
 }
 import { siteConfigQuery } from "src/api/queries";
 import { loadQuery } from "src/api/sanity";
 import type { SiteConfigQueryResult } from "src/sanity/sanity.types";
-import { t } from "i18next";
 import type { PageTranslations } from "@sanity/custom.sanity.types";
 
+const locale = "en";
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: getLocale().toLowerCase() },
+  params: { language: locale },
 });
 
 const translations: PageTranslations = locales.map((locale) => ({
@@ -25,8 +24,8 @@ const translations: PageTranslations = locales.map((locale) => ({
 ---
 
 <Base
-  title={t("404.title", { defaultValue: "Page Not Found" })}
-  description={t("404.title", { defaultValue: "" })}
+  title={m.fourOFourHeadline()}
+  description={m.fourOFourHeadline()}
   slug="404"
   siteConfig={siteConfig}
   translations={translations}
@@ -40,17 +39,13 @@ const translations: PageTranslations = locales.map((locale) => ({
           404
         </h1>
         <p class="mb-4 text-xl font-bold text-white md:text-4xl">
-          {
-            t("404.headline", {
-              defaultValue: "404.headline translation missing",
-            })
-          }
+          {m.fourOFourHeadline()}
         </p>
         <p class="mb-4 text-lg font-light text-white">
-          {t("404.text", { defaultValue: "404.text translation missing" })}
+          {m.fourOFourText()}
         </p>
         <Button class="mt-4 inline-block" link="/" style="primary" color="dark"
-          >{t("404.button", { defaultValue: "404.button translation missing" })}
+          >{m.fourOFourText()}
         </Button>
       </div>
     </div>

@@ -1,13 +1,13 @@
 ---
 import { parseHref } from "@lib/helpers";
 import { BASE_PATH } from "@src/consts";
-import { getLocale, t } from "i18n:astro";
+import * as m from "@src/paraglide/messages";
 
 const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
 const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
 
 const paths = pathNameAsLocale.split("/").filter((x) => x);
-const lang = getLocale();
+const locale = Astro.currentLocale!;
 
 const servicesPath = /\/services\/\S+/;
 const casesPath = /\/cases\/\S+/;
@@ -15,10 +15,14 @@ const insightsPath = /\/insights\/\S+/;
 
 let parts: { text: string; href: string }[] = [
   {
-    text: t("breadcrumb.home"),
-    href: `/${lang}/`,
+    text: m.breadcrumbHome(),
+    href: `/${locale}/`,
   },
 ];
+
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 paths.forEach((text, i) => {
   const href = `/${paths.slice(0, i + 1).join("/")}`;
@@ -32,9 +36,8 @@ paths.forEach((text, i) => {
     ) {
       translatedText = text.replace(/[-_]/g, " ");
     } else {
-      translatedText = t("nav." + text.replace(/[-_]/g, " "), {
-        defaultValue: "",
-      });
+      translatedText =
+        m["nav" + capitalizeFirstLetter(text.replace(/[-_]/g, " "))];
     }
 
     parts.push({
@@ -51,7 +54,7 @@ const removeTrailingSlash = (text: string) => {
 
 {
   parts.length > 1 && (
-    <nav aria-label={t("breadcrumb.label")}>
+    <nav aria-label={m.breadcrumbLabel()}>
       <ol
         class="mb-8 flex flex-row flex-wrap gap-1 pl-2 text-white md:-ms-2 md:mb-0"
         role="list"

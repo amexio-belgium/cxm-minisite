@@ -1,4 +1,6 @@
 ---
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import { locales } from "@src/locales/consts";
 import Base from "@layouts/Base.astro";
 import { contentPageQuery, siteConfigQuery } from "@api/queries";
 import { loadQuery } from "@api/sanity";
@@ -6,11 +8,24 @@ import SanityComponentsRenderer from "@components/cms-components/SanityComponent
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+
+const locale = Astro.currentLocale!;
+
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    return locales.map((locale) => ({
+      params: {
+        locale: locale,
+      },
+    }));
+  } else {
+    return [];
+  }
+}
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: getLocale() },
+  params: { language: locale },
 });
 
 if (!siteConfig || !siteConfig?.homePage?.slug) {
@@ -21,7 +36,7 @@ const slug = siteConfig?.homePage?.slug;
 
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
-  params: { language: getLocale(), slug: slug },
+  params: { language: locale, slug: slug },
 });
 ---
 

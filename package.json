@@ -5,13 +5,13 @@
   "scripts": {
     "generate-translations": "node src/scripts/generateTranslations.js",
     "fix-sitemap": "node src/scripts/fixSitemap.js",
-    "prebuild": "node src/scripts/fontscript.js && npm run generate-translations",
-    "postbuild": "npm run fix-sitemap && node src/scripts/postbuild.js",
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
+    "font-script": "node src/scripts/fontscript.js",
+    "prebuild": "npm run font-script && npm run generate-translations",
+    "dev": "npm run font-script && astro dev",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && astro check && astro build",
     "preview": "npm run prebuild && astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.3",
@@ -20,8 +20,9 @@
     "@astrojs/netlify": "^5.4.0",
     "@astrojs/react": "^3.6.0",
     "@astrojs/rss": "^4.0.7",
+    "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrolicious/i18n": "^0.5.1",
+    "@inlang/paraglide-astro": "^0.2.2",
     "@otterstack/sanity-img-astro": "^0.2.6",
     "@portabletext/react": "^3.1.0",
     "@portabletext/to-html": "^2.0.13",
@@ -49,6 +50,7 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@inlang/paraglide-js": "1.11.2",
     "@tailwindcss/typography": "^0.5.12",
     "@types/xml2js": "^0.4.14",
     "prettier": "^3.3.3",

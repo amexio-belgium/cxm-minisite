@@ -1,5 +1,4 @@
 import rss from "@astrojs/rss";
-import { getLocale } from "i18n:astro";
 import { loadQuery } from "@api/sanity.ts";
 import type {
   RssBlogPostsQueryResult,
@@ -9,7 +8,7 @@ import { rssBlogPostsQuery, siteConfigQuery } from "@api/queries.ts";
 import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
-  const locale = getLocale().toLowerCase();
+  const locale = "en";
 
   const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
     query: siteConfigQuery,
