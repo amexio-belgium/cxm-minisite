@@ -1,0 +1,113 @@
+---
+import Button from "@components/uielements/Button.astro";
+import { PortableText } from "astro-portabletext";
+import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
+import SanityImg from "@otterstack/sanity-img-astro";
+import { imageBuilder } from "@api/sanity";
+import { isPreview } from "src/stores/global-store";
+import { getLocale, t } from "i18n:astro";
+
+interface Props {
+  caseData: ServiceWithReferences;
+}
+
+const { caseData } = Astro.props;
+
+const preview = isPreview.get();
+---
+
+{
+  caseData && (
+    <div class="case relative mb-8 flex h-auto w-full flex-col justify-between overflow-hidden rounded-2xl bg-quaternary shadow-lg animate-delay-300 motion-safe:animate-fade-up lg:min-h-[470px]">
+      <div class="h-1/2 w-full p-4 sm:p-8 lg:h-full lg:w-1/2">
+        <div class="flex flex-col">
+          <h3 class="mb-2 font-serif text-lg [&>mark]:text-black">
+            {caseData.intro.title}
+          </h3>
+          {caseData.intro?.intro && (
+            <div class="text-sm font-light [&>mark]:text-black">
+              <PortableText value={caseData?.intro?.intro} />
+            </div>
+          )}
+        </div>
+        <Button
+          link={`/${getLocale()}/${preview ? "preview/" : ""}services/${caseData.metadata?.slug?.current}`}
+          longText
+          style="primary"
+          size="sm"
+          color="light"
+          class="z-10 md:max-w-xs lg:max-w-md xl:max-w-sm"
+        >
+          {`${t("services.discover")} ${caseData?.intro?.title}`}
+        </Button>
+      </div>
+      <div class="mask-project relative bottom-0 right-0 z-10 inline-flex h-[300px] w-full flex-col items-center justify-center overflow-hidden lg:absolute lg:h-full lg:w-3/4">
+        {caseData.introImage?.asset?._id && (
+          <SanityImg
+            src={caseData.introImage?.asset?._id}
+            alt={caseData.introImage?.asset?.altTexts?.[getLocale()]}
+            widths={[400, 600, 790]}
+            sizes="(max-width: 790px) 100vw, 790px"
+            class="left-0 top-0 w-full min-w-full max-w-[unset] shrink-0 transition-transform duration-300 ease-in-out motion-safe:group-hover/service:scale-110 md:absolute md:h-full md:w-auto"
+            loading="eager"
+            imageUrlBuilder={imageBuilder}
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .mask-project {
+    clip-path: polygon(
+      100% 100%,
+      100% 0%,
+      21.705% 0%,
+      21.705% 0.029%,
+      21.705% 0.029%,
+      19.048% 0.522%,
+      16.589% 1.543%,
+      14.348% 2.954%,
+      12.343% 4.62%,
+      10.594% 6.404%,
+      9.12% 8.17%,
+      7.94% 9.78%,
+      7.074% 11.1%,
+      6.54% 11.991%,
+      6.358% 12.319%,
+      0% 22.694%,
+      0% 100%,
+      100% 100%
+    );
+    mask-size: 200% auto;
+    mask-position: top right;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .mask-project {
+      clip-path: polygon(
+        76.039% 0.021%,
+        76.039% 0.021%,
+        73.912% 0.367%,
+        71.944% 1.084%,
+        70.15% 2.076%,
+        68.546% 3.246%,
+        67.146% 4.5%,
+        65.967% 5.741%,
+        65.022% 6.872%,
+        64.329% 7.8%,
+        63.902% 8.426%,
+        63.756% 8.656%,
+        0% 100%,
+        99.899% 99.938%,
+        100% 99.938%,
+        100% 0%,
+        76.039% 0%,
+        76.039% 0.021%
+      );
+      mask-size: cover;
+      mask-position: unset;
+    }
+  }
+</style>

@@ -194,6 +194,7 @@ export type WorkCardList = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "referenceCase";
   }>;
+  style?: "basic" | "slanted";
 };
 
 export type SiteConfig = {
@@ -1198,7 +1199,20 @@ export type ContentPage = {
   _updatedAt: string;
   _rev: string;
   intro?: {
-    title?: string;
+    title?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
     intro?: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -1711,7 +1725,20 @@ export type NavigationQueryResult = {
         _updatedAt: string;
         _rev: string;
         intro?: {
-          title?: string;
+          title?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: never;
+            markDefs?: null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
           intro?: Array<{
             children?: Array<{
               marks?: Array<string>;
@@ -2649,7 +2676,20 @@ export type ServiceQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -2819,7 +2859,20 @@ export type ServiceQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -4090,6 +4143,7 @@ export type ServiceQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -4405,6 +4459,7 @@ export type ServiceQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -4440,6 +4495,7 @@ export type ServiceQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -4453,6 +4509,7 @@ export type ServiceQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -4767,6 +4824,7 @@ export type ServiceQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -4801,6 +4859,7 @@ export type ServiceQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
   > | null;
   faqs: {
@@ -5863,7 +5922,20 @@ export type BlogPostQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -6033,7 +6105,20 @@ export type BlogPostQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -7304,6 +7389,7 @@ export type BlogPostQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -7619,6 +7705,7 @@ export type BlogPostQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -7654,6 +7741,7 @@ export type BlogPostQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -7667,6 +7755,7 @@ export type BlogPostQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -7981,6 +8070,7 @@ export type BlogPostQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -8015,6 +8105,7 @@ export type BlogPostQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
   > | null;
   metadata?: Metadata;
@@ -9083,7 +9174,20 @@ export type WorkQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -9253,7 +9357,20 @@ export type WorkQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -10524,6 +10641,7 @@ export type WorkQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -10839,6 +10957,7 @@ export type WorkQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -10874,6 +10993,7 @@ export type WorkQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -10887,6 +11007,7 @@ export type WorkQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -11201,6 +11322,7 @@ export type WorkQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -11235,6 +11357,7 @@ export type WorkQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
   > | null;
   technologies: Array<{
@@ -11920,7 +12043,20 @@ export type ContentPageQueryResult = {
   _updatedAt: string;
   _rev: string;
   intro?: {
-    title?: string;
+    title?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
     intro?: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -12771,7 +12907,20 @@ export type ContentPageQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -12941,7 +13090,20 @@ export type ContentPageQueryResult = {
                 _updatedAt: string;
                 _rev: string;
                 intro?: {
-                  title?: string;
+                  title?: Array<{
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?: "normal";
+                    listItem?: never;
+                    markDefs?: null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }>;
                   intro?: Array<{
                     children?: Array<{
                       marks?: Array<string>;
@@ -14212,6 +14374,7 @@ export type ContentPageQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -14527,6 +14690,7 @@ export type ContentPageQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -14562,6 +14726,7 @@ export type ContentPageQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
         groups: null;
       }
     | {
@@ -14575,6 +14740,7 @@ export type ContentPageQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -14889,6 +15055,7 @@ export type ContentPageQueryResult = {
           } | null;
           language?: string;
         }> | null;
+        style?: "basic" | "slanted";
       }
     | {
         _key: string;
@@ -14923,6 +15090,7 @@ export type ContentPageQueryResult = {
           _key: string;
           [internalGroqTypeReferenceTo]?: "referenceCase";
         }>;
+        style?: "basic" | "slanted";
       }
   > | null;
   metadata?: Metadata;

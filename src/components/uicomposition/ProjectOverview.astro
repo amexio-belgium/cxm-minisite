@@ -1,9 +1,14 @@
 ---
+import type { WorkCardListReferenced } from "../../sanity/custom.sanity.types";
 import ProjectCard from "../uielements/ProjectCard.astro";
 import Button from "../uielements/Button.astro";
-import {t} from "i18next";
+import { t } from "i18next";
 const { lang } = Astro.params;
 
+interface Props {
+  workCardList: WorkCardListReferenced;
+}
+const { workCardList } = Astro.props;
 ---
 
 <div
@@ -15,36 +20,15 @@ const { lang } = Astro.params;
     <h2 class="mb-2 font-serif text-3xl font-bold">
       {t("projectoverview.headline", { defaultValue: "" })}
     </h2>
-    <Button link="/cases" class="" style="secondary" color="light">
+    <Button link="/work" class="" style="secondary" color="light">
       {t("projectoverview.button", { defaultValue: "" })}
     </Button>
   </div>
   <div class="flex w-full flex-col gap-2 xl:w-9/12">
-    <ProjectCard
-      projectImage="/src/assets/projects/kbc.jpg"
-      smallImage="/src/assets/logos/kbc_logo_square_white.png"
-      name="KBC"
-      content={t("project1.description", { defaultValue: "" })}
-      buttonText={t("project1.button", { defaultValue: "" })}
-      link="/cases/euroclear/"
-    />
-
-    <ProjectCard
-      projectImage="/src/assets/projects/telenet.jpg"
-      smallImage="/src/assets/logos/mediafin_logo_white.png"
-      name="Mediafin"
-      content={t("project2.description", { defaultValue: "" })}
-      buttonText={t("project2.button", { defaultValue: "" })}
-      link="/cases/kbc/"
-    />
-
-    <ProjectCard
-      projectImage="/src/assets/projects/telenet.jpg"
-      smallImage="/src/assets/logos/telenet_logo_square_white.png"
-      name="Telenet"
-      content={t("project3.description", { defaultValue: "" })}
-      buttonText={t("project2.button", { defaultValue: "" })}
-      link="/cases/telenet/"
-    />
+    {
+      workCardList?.referenceCases?.map((referenceCase) => (
+        <ProjectCard smallImage caseData={referenceCase} />
+      ))
+    }
   </div>
 </div>

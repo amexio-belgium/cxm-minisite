@@ -40,10 +40,21 @@ isPreview.set(true);
   <HeroHeader
     headline={contentPage.intro?.title}
     text={contentPage.intro?.intro}
-    homepage={true}>
-    <Button class="mt-8" longText icon="email"
-            link={contentPage?.intro?.introCta?.link ? getHrefFromLinkObject(contentPage?.intro?.introCta?.link, getLocale(), true) : undefined}
-            color="dark">{contentPage?.intro?.introCta?.text}
+    homepage={true}
+  >
+    <Button
+      class="mt-8"
+      longText
+      icon="email"
+      link={contentPage?.intro?.introCta?.link
+        ? getHrefFromLinkObject(
+            contentPage?.intro?.introCta?.link,
+            getLocale(),
+            true,
+          )
+        : undefined}
+      color="dark"
+      >{contentPage?.intro?.introCta?.text}
     </Button>
   </HeroHeader>
   <SanityComponentsRenderer content={contentPage?.content} />
