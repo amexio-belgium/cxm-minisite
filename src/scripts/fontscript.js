@@ -1,10 +1,6 @@
+import "dotenv/config";
 import fs from "node:fs";
-import { loadEnv } from "vite";
-const { PUBLIC_ASTRO_BASE_PATH } = loadEnv(
-  process.env.NODE_ENV,
-  process.cwd(),
-  "",
-);
+const PUBLIC_ASTRO_BASE_PATH = process.env.PUBLIC_ASTRO_BASE_PATH;
 
 const basePath = PUBLIC_ASTRO_BASE_PATH || "";
 

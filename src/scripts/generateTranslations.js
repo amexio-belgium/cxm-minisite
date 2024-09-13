@@ -2,7 +2,7 @@ import "dotenv/config";
 import { createClient } from "@sanity/client";
 import * as fs from "node:fs";
 
-export const client = createClient({
+const client = createClient({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID,
   dataset: process.env.SANITY_STUDIO_DATASET,
   useCdn: false, // set to `false` to bypass the edge cache
