@@ -79,6 +79,12 @@ console.log(VISUAL_EDITING_ENABLED);
   </head>
   <body class="overflow-x-clip bg-blue-800">
     <h1>{JSON.stringify(VISUAL_EDITING_ENABLED)}</h1>
+    <h1>
+      Visual editing env: {
+        JSON.stringify(import.meta.env.SANITY_VISUAL_EDITING_ENABLED)
+      }
+    </h1>
+    <h1>Env variables: {JSON.stringify(import.meta.env)}</h1>
     {VISUAL_EDITING_ENABLED && <VisualEditing enabled={true} zIndex={1000} />}
 
     <Header navigation={header} />
