@@ -54,6 +54,8 @@
   "devDependencies": {
     "@inlang/paraglide-js": "1.11.2",
     "@tailwindcss/typography": "^0.5.12",
+    "@types/fs-extra": "^11.0.4",
+    "@types/rss": "^0.0.32",
     "@types/xml2js": "^0.4.14",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",

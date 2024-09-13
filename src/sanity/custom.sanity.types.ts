@@ -1,5 +1,3 @@
-import { locales } from "../locales/consts";
-
 import type {
   AnswerQuestion,
   Callout,
