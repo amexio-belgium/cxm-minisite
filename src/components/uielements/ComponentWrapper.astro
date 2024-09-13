@@ -1,0 +1,14 @@
+---
+interface Props {
+  classes?: string;
+  bgClass?: string;
+}
+
+const { classes, bgClass } = Astro.props;
+---
+
+<div
+  class={`${bgClass ? `${bgClass} before:${bgClass}` : "bg-blue-800 before:bg-blue-800"} ${classes ? classes : ""} py-8 md:py-20 relative before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl  marker:before:h-full`}
+>
+  <slot />
+</div>

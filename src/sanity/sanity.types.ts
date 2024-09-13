@@ -71,6 +71,7 @@ export type Geopoint = {
 export type CodeEmbed = {
   _type: "codeEmbed";
   title?: string;
+  style?: "dark" | "light";
   Code?: Code;
 };
 
@@ -3581,6 +3582,7 @@ export type ServiceQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
         cards: null;
@@ -3589,6 +3591,7 @@ export type ServiceQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         cards: null;
       }
@@ -3596,6 +3599,7 @@ export type ServiceQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
       }
@@ -3603,6 +3607,7 @@ export type ServiceQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
       }
     | {
@@ -8555,6 +8560,7 @@ export type BlogPostQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
         cards: null;
@@ -8563,6 +8569,7 @@ export type BlogPostQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         cards: null;
       }
@@ -8570,6 +8577,7 @@ export type BlogPostQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
       }
@@ -8577,6 +8585,7 @@ export type BlogPostQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
       }
     | {
@@ -13532,6 +13541,7 @@ export type WorkQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
         cards: null;
@@ -13540,6 +13550,7 @@ export type WorkQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         cards: null;
       }
@@ -13547,6 +13558,7 @@ export type WorkQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
       }
@@ -13554,6 +13566,7 @@ export type WorkQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
       }
     | {
@@ -18968,6 +18981,7 @@ export type ContentPageQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
         cards: null;
@@ -18976,6 +18990,7 @@ export type ContentPageQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         cards: null;
       }
@@ -18983,6 +18998,7 @@ export type ContentPageQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
         groups: null;
       }
@@ -18990,6 +19006,7 @@ export type ContentPageQueryResult = {
         _key: string;
         _type: "codeEmbed";
         title?: string;
+        style?: "dark" | "light";
         Code?: Code;
       }
     | {

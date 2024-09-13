@@ -10,7 +10,7 @@ const locale = Astro.currentLocale!;
 const { tabsContent } = Astro.props;
 ---
 
-<div class="mb-20 text-white md:mb-40">
+<div class="text-white">
   <h2 class="mb-8 text-balance font-serif text-3xl">
     {tabsContent.intro?.title}
   </h2>
@@ -41,7 +41,7 @@ const { tabsContent } = Astro.props;
     {
       tabsContent?.tabsOverview?.map((tab, index) => (
         <sl-tab
-          class="w-1/4 text-center text-lg aria-selected:border-b-2 aria-selected:border-secondary"
+          class="min-w-1/4 text-center text-lg aria-selected:border-b-2 aria-selected:border-secondary"
           slot="nav"
           panel={`model${index + 1}`}
         >

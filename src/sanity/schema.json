@@ -345,6 +345,23 @@
           },
           "optional": true
         },
+        "style": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "dark"
+              },
+              {
+                "type": "string",
+                "value": "light"
+              }
+            ]
+          },
+          "optional": true
+        },
         "Code": {
           "type": "objectAttribute",
           "value": {
