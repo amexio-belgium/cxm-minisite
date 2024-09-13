@@ -32,7 +32,6 @@ fs.readFile(sitemapPath, "utf-8", (err, data) => {
       return;
     }
 
-    console.log(urlEntries[0].loc);
     // Filter out URLs ending with /"[slug]"/ or "/404/"
     const filteredUrls = urlEntries.filter(
       (entry) =>

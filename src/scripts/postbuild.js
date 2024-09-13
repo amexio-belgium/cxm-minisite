@@ -8,7 +8,9 @@ const { PUBLIC_ASTRO_BASE_PATH } = loadEnv(
   "",
 );
 
-if (PUBLIC_ASTRO_BASE_PATH && PUBLIC_ASTRO_BASE_PATH !== "") {
+const basePath = PUBLIC_ASTRO_BASE_PATH || "";
+
+if (basePath && basePath !== "") {
   // Source and destination directories
   if (!fs.existsSync("./build")) {
     fs.mkdirSync("./build");
@@ -17,9 +19,9 @@ if (PUBLIC_ASTRO_BASE_PATH && PUBLIC_ASTRO_BASE_PATH !== "") {
   fs.cpSync("./dist", "./build/", { recursive: true });
   fsExtra.emptyDirSync("./dist");
 
-  fs.mkdirSync(`./dist${PUBLIC_ASTRO_BASE_PATH}`);
+  fs.mkdirSync(`./dist${basePath}`);
 
-  fs.cpSync("./build", `./dist${PUBLIC_ASTRO_BASE_PATH}/`, { recursive: true });
+  fs.cpSync("./build", `./dist${basePath}/`, { recursive: true });
   fsExtra.emptyDirSync("./build");
   fs.rmdir("./build", (err) => {
     if (err) {

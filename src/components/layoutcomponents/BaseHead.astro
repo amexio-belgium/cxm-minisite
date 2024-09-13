@@ -63,10 +63,7 @@ const canonicalURL = isHomePage
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link
-  rel="stylesheet"
-  href=`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/fonts/fonts.css`
-/>
+<link rel="stylesheet" href=`${BASE_PATH}/fonts/fonts.css` />
 <link
   rel="preload"
   href={parseHref("/fonts/Lexend-Light.woff2")}

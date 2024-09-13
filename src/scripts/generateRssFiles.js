@@ -3,6 +3,14 @@ import { createClient } from "@sanity/client";
 import * as fs from "node:fs";
 import RSS from "rss";
 
+const { PUBLIC_ASTRO_BASE_PATH } = loadEnv(
+  process.env.NODE_ENV,
+  process.cwd(),
+  "",
+);
+
+const basePath = PUBLIC_ASTRO_BASE_PATH || "";
+
 export const client = createClient({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID,
   dataset: process.env.SANITY_STUDIO_DATASET,
@@ -93,7 +101,7 @@ for (const locale of locales) {
       description: post.description || "Post description missing",
       author: post.author || "No author",
       date: new Date(post.pubDate) || "No publication date",
-      url: `${process.env.ASTRO_SITE_URL.slice(0, -1)}${process.env.PUBLIC_ASTRO_BASE_PATH}/${locale}/insights/${post.slug}`,
+      url: `${process.env.ASTRO_SITE_URL.slice(0, -1)}${basePath}/${locale}/insights/${post.slug}`,
     });
   });
 
@@ -101,11 +109,11 @@ for (const locale of locales) {
     .xml()
     .replace(
       `<?xml version="1.0" encoding="UTF-8"?>`,
-      `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="${process.env.PUBLIC_ASTRO_BASE_PATH}/rss/styles.xsl" type="text/xsl"?>`,
+      `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="${basePath}/rss/styles.xsl" type="text/xsl"?>`,
     );
 
   fs.writeFile(
-    `dist${process.env.PUBLIC_ASTRO_BASE_PATH}/${locale}/rss.xml`,
+    `dist${basePath}/${locale}/rss.xml`,
     feedWithStyleSheet,
     { overwrite: true },
     (err) => {

@@ -8,8 +8,8 @@ export const parseHref = (href: string | URL | undefined | null) => {
         hrefString.startsWith("https://") ||
         hrefString.startsWith("www.") ||
         hrefString.startsWith("#") ||
-        hrefString.startsWith(`/${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/`) ||
-        hrefString.startsWith(`${import.meta.env.PUBLIC_ASTRO_BASE_PATH}/`) ||
+        hrefString.startsWith(`/${BASE_PATH}/`) ||
+        hrefString.startsWith(`${BASE_PATH}/`) ||
         hrefString.startsWith("./") ||
         hrefString.startsWith("../")
         ? href
