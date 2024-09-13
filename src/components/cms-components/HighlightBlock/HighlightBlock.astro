@@ -63,7 +63,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
         <Button
           class="mt-6"
           color="light"
-          link={getHrefFromLinkObject(highlight.cta?.link, getLocale(), true)}
+          link={getHrefFromLinkObject(highlight.cta?.link, getLocale())}
         >
           {highlight.cta.text}
         </Button>
@@ -72,7 +72,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
   </div>
 </div>
 
-<script define:vars={{ id }}>
+<script is:inline define:vars={{ id }}>
   const textBlock = document.querySelector(`.${id}`);
 
   const observer = new IntersectionObserver((entries) => {

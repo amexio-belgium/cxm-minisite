@@ -24,7 +24,8 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
                                     }
                                     `;
 
-const contentQuery = groq`content[] {
+const contentQuery = groq`
+content[] {
   ...,
   intro {
     ...,
@@ -249,6 +250,10 @@ export const serviceQuery = groq`*[_type == "service" && language == $language &
   customerReferences[]->{
     ...,
   },
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    "slug": metadata.slug.current,
+    language
+  },
   ${contentQuery}
 }`;
 
@@ -273,6 +278,10 @@ export const blogPostQuery = groq`*[_type == "blogPost" && language == $language
   topic[]->{
     prefLabel,
     definition
+  },
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    "slug": metadata.slug.current,
+    language
   },
   ${contentQuery}
 }`;
@@ -339,7 +348,7 @@ export const blogsListQueryPaginating = groq`
   intro
 }`;
 
-export const workQuery = groq`*[_type == "referenceCase" && language == "en" && metadata.slug.current == $slug][0]{
+export const workQuery = groq`*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{
   ...,
   collaborationModel-> {
     ...,
@@ -402,6 +411,10 @@ export const workQuery = groq`*[_type == "referenceCase" && language == "en" && 
       asset->{...}
     }
   },
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    "slug": metadata.slug.current,
+    language
+  },
   ${contentQuery}
 }`;
 
@@ -413,6 +426,10 @@ export const homePageSlugQuery = groq`*[_type == 'siteConfig' && language == $la
 
 export const contentPageQuery = groq`*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{
   ...,
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    "slug": metadata.slug.current,
+    language
+  },
   ${contentQuery}
 }`;
 
@@ -425,3 +442,19 @@ export const rssBlogPostsQuery = groq`
   "pubDate": publicationDate
 }
 `;
+
+export const allContentPagesQuery = groq`*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{
+  "slug": metadata.slug.current
+}.slug`;
+
+export const allServicePagesQuery = groq`*[_type == "service" && language == $language && defined(metadata.slug.current)]{
+  "slug": metadata.slug.current
+}.slug`;
+
+export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $language && defined(metadata.slug.current)]{
+  "slug": metadata.slug.current
+}.slug`;
+
+export const allCasePagesQuery = groq`*[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{
+  "slug": metadata.slug.current
+}.slug`;

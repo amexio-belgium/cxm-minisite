@@ -6,7 +6,6 @@ import { imageBuilder } from "@api/sanity";
 import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
 import { PortableText } from "astro-portabletext";
 import { getLocale } from "i18n:astro";
-import { isPreview } from "src/stores/global-store";
 
 interface Props {
   blogPost: BlogPostWithReferences;
@@ -52,7 +51,7 @@ const { blogPost } = Astro.props;
             onWhite
             textLength={blogPost.intro?.title?.length}
             class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
-            href={`/${getLocale()}/${isPreview.get() ? "preview/" : ""}insights/${blogPost.metadata?.slug?.current}`}
+            href={`/${getLocale()}/insights/${blogPost.metadata?.slug?.current}`}
           >
             {blogPost.intro?.title}
           </Link>

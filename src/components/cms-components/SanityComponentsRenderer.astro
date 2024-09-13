@@ -14,6 +14,7 @@ import type {
   TabsReferenced,
   WorkCardListReferenced,
   TestimonialReferenced,
+  Content,
 } from "@sanity/custom.sanity.types";
 import Callout from "@components/cms-components/Callout.astro";
 import LongFormText from "@components/cms-components/LongFormText.astro";
@@ -23,22 +24,10 @@ import Tabs from "@components/cms-components/Tabs.astro";
 import BlogHighlight from "@components/cms-components/BlogHighlight/BlogHighlight.astro";
 import BlogsList from "@components/cms-components/BlogsList/BlogsList.astro";
 import Quote from "@components/uicomposition/Quote.astro";
+import CodeEmbed from "./CodeEmbed.astro";
 
 interface Props {
-  content:
-    | Array<
-        | ServicesCardList
-        | CardGridType
-        | CalloutReferenced
-        | LongFormTextReferenced
-        | HighlightReferenced
-        | TabsReferenced
-        | WorkCardListReferenced
-        | BlogHighlightReferenced
-        | BlogsListReferenced
-        | TestimonialReferenced
-      >
-    | undefined;
+  content: Content | undefined;
 }
 
 const { content } = Astro.props;
@@ -77,6 +66,9 @@ const { content } = Astro.props;
         }
         case "blogsList": {
           return <BlogsList blogsList={content} />;
+        }
+        case "codeEmbed": {
+          return <CodeEmbed code={content} />;
         }
       }
     })

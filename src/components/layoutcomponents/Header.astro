@@ -4,7 +4,6 @@ import HeaderLink from "../uielements/HeaderLink.astro";
 import SkipLink from "../uielements/Skiplink.astro";
 import AmexioFuse from "@components/graphicelements/AmexioFuse.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-import { isPreview } from "src/stores/global-store";
 import type { LinkObjectReferenced } from "@sanity/custom.sanity.types";
 import { getLocale, t } from "i18n:astro";
 
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const { navigation } = Astro.props;
-const preview = isPreview.get();
 ---
 
 <SkipLink href="#main-content">{t("main.skiplink")}</SkipLink>
@@ -25,7 +23,7 @@ const preview = isPreview.get();
       class="flex h-full w-screen max-w-[1304px] flex-wrap items-center justify-between px-6 sm:px-8 md:px-6"
     >
       <a
-        href={`/${getLocale()}${preview ? "/preview" : ""}`}
+        href={`/${getLocale()}`}
         class="flex justify-center text-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
       >
         <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
@@ -54,7 +52,7 @@ const preview = isPreview.get();
             class="flex h-full w-screen flex-wrap items-center justify-between px-6 sm:px-8"
           >
             <a
-              href={`${preview ? "/preview" : ""}/${getLocale()}/`}
+              href={`/${getLocale()}`}
               class="flex justify-center text-xl focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
             >
               <AmexioFuse class="h-[36px] w-auto md:h-[50px]" />
@@ -88,7 +86,6 @@ const preview = isPreview.get();
                   href={getHrefFromLinkObject(
                     link.linkObject as LinkObjectReferenced,
                     getLocale(),
-                    preview,
                   )}
                 >
                   {link.title}
@@ -122,18 +119,18 @@ const preview = isPreview.get();
     ) as HTMLSpanElement;
     const closeMainMenuTrigger = document.getElementById("close-main-menu");
 
-    const getCenterX = (el) => {
+    const getCenterX = (el: Element) => {
       return el.getBoundingClientRect().width / 2;
     };
-    const getCenterY = (el) => {
+    const getCenterY = (el: Element) => {
       return el.getBoundingClientRect().height / 2;
     };
 
-    const getLeft = (el) => {
+    const getLeft = (el: Element) => {
       return el.getBoundingClientRect().left;
     };
 
-    const getTop = (el) => {
+    const getTop = (el: Element) => {
       return el.getBoundingClientRect().top;
     };
 
@@ -146,7 +143,7 @@ const preview = isPreview.get();
 
     const setInitialDotState = () => {
       if (activeMainNavLink) {
-        handleDotPosition(activeMainNavLink, mainNav);
+        handleDotPosition(activeMainNavLink, mainNav!);
         showDotIndicator();
       } else {
         hideDotIndicator();
@@ -154,12 +151,12 @@ const preview = isPreview.get();
     };
 
     const mainNavigationResizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (let i = 0; i < entries.length; i++) {
         setInitialDotState();
       }
     });
 
-    const handleDotPosition = (element, wrapper) => {
+    const handleDotPosition = (element: Element, wrapper: Element) => {
       if (isSmallScreen.matches) {
         dotIndicator!.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
       } else {
@@ -191,7 +188,7 @@ const preview = isPreview.get();
       }, 500);
     };
 
-    const handleOrientationChange = (mql) => {
+    const handleOrientationChange = () => {
       hideDotIndicator();
       if (isSmallScreen.matches) {
         mainMenu.removeAttribute("role");
@@ -224,15 +221,15 @@ const preview = isPreview.get();
       false,
     );
 
-    mainMenuTrigger.addEventListener("click", function (event) {
+    mainMenuTrigger.addEventListener("click", () => {
       openMobileMenu();
     });
 
     [...mainNavLinks].forEach((mainNavLink) => {
       mainNavLink.addEventListener(
         "mouseenter",
-        function (e) {
-          handleDotPosition(e.target, mainNav);
+        (e) => {
+          handleDotPosition(e.target as Element, mainNav!);
         },
         false,
       );

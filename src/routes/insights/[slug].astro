@@ -1,6 +1,10 @@
 ---
 import Base from "@layouts/Base.astro";
-import { blogPostQuery, siteConfigQuery } from "@api/queries";
+import {
+  allInsightPagesQuery,
+  blogPostQuery,
+  siteConfigQuery,
+} from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type BlogPostWithReferences } from "src/sanity/custom.sanity.types";
@@ -8,10 +12,34 @@ import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 
 import ProfileCard from "@components/uielements/ProfileCard.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+import type {
+  AllInsightPagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import sitemap from "i18n:astro/sitemap";
+import { getSitemapParams } from "@lib/sitemap";
 
-export const prerender = false;
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
+      query: allInsightPagesQuery,
+      params: { language: getLocalePlaceholder() },
+    });
+
+    sitemap({
+      dynamicParams: getSitemapParams(insights, getLocalePlaceholder()),
+    });
+
+    return insights.map((slug) => ({
+      params: { slug },
+    }));
+  } else {
+    return [];
+  }
+}
+
 const { slug } = Astro.params;
 if (!slug) {
   return Astro.redirect("/404");
@@ -37,6 +65,8 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   description={blogPost?.metadata?.description || ""}
   slug={slug}
   siteConfig={siteConfig}
+  translations={blogPost._translations}
+  routeMap="insights"
 >
   <HeroHeader
     headline={blogPost.intro?.title}

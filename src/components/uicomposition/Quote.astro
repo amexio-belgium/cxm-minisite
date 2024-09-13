@@ -4,7 +4,7 @@ import { defaultComponents } from "../cms-components/PortableText/helper";
 import { PortableText } from "astro-portabletext";
 import type { TestimonialReferenced } from "../../sanity/custom.sanity.types";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { getLocale } from "@builder.io/qwik";
+import { getLocale } from "i18n:astro";
 
 interface Props {
   testimonial: TestimonialReferenced;
@@ -118,7 +118,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
   </div>
 </blockquote>
 
-<script define:vars={{ id }}>
+<script is:inline define:vars={{ id }}>
   const textBlock = document.querySelector(`.${id}`);
 
   const observer = new IntersectionObserver((entries) => {

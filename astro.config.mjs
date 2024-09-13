@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import netlify from "@astrojs/netlify";
 import sanityImg from "@otterstack/sanity-img-astro/integration";
@@ -7,11 +6,12 @@ import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import { loadEnv } from "vite";
 import liciousI18n from "@astrolicious/i18n";
+import { locales } from "./src/locales/consts";
 const {
-  SANITY_API_READ_TOKEN,
   ASTRO_SITE_URL,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_PROJECT_ID,
+  SANITY_STUDIO_URL,
   SANITY_VISUAL_EDITING_ENABLED,
 } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
@@ -19,7 +19,6 @@ const {
 export default defineConfig({
   site: ASTRO_SITE_URL,
   integrations: [
-    sitemap(),
     tailwind({
       nesting: true,
     }),
@@ -29,7 +28,7 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       stega: {
-        studioUrl: "http://localhost:3333",
+        studioUrl: SANITY_STUDIO_URL + "en",
       },
     }),
     react(),
@@ -41,19 +40,14 @@ export default defineConfig({
     liciousI18n({
       defaultLocale: "en",
       strategy: "prefix",
-      locales: ["en", "nl", "fr"], // must include the default locale
-      client: {
-        data: true,
-        paths: true,
-        translations: true,
-        getStaticPaths: true,
-      },
+      sitemap: true,
+      locales: locales, // must include the default locale
       rootRedirect: {
         status: 301,
         destination: "/en",
       },
     }),
   ],
-  output: "hybrid",
+  output: SANITY_VISUAL_EDITING_ENABLED === "true" ? "server" : "static",
   adapter: netlify(),
 });

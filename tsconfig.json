@@ -5,6 +5,7 @@
     "allowJs": true,
     "strict": false, // see ticket CW-117 to fix this
     "baseUrl": ".",
+    "outDir": "dist",
     "paths": {
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
@@ -13,8 +14,6 @@
       "@api/*": ["src/api/*"],
       "@sanity/*": ["src/sanity/*"],
       "@src/*": ["src/*"]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "@builder.io/qwik"
+    }
   }
 }

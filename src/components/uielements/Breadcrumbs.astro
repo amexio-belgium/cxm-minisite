@@ -1,11 +1,9 @@
 ---
 import { getLocale, t } from "i18n:astro";
-import { isPreview } from "src/stores/global-store";
 
 const { pathname } = Astro.url;
 const paths = pathname.split("/").filter((x) => x);
 const lang = getLocale();
-const preview = isPreview.get();
 
 const servicesPath = /\/services\/\S+/;
 const casesPath = /\/cases\/\S+/;
@@ -14,7 +12,7 @@ const insightsPath = /\/insights\/\S+/;
 let parts: { text: string; href: string }[] = [
   {
     text: t("breadcrumb.home"),
-    href: `/${lang}/${preview ? "preview/" : ""}`,
+    href: `/${lang}/`,
   },
 ];
 

@@ -1,15 +1,42 @@
 ---
 import Base from "@layouts/Base.astro";
-import { contentPageQuery, siteConfigQuery } from "@api/queries";
+import {
+  allContentPagesQuery,
+  contentPageQuery,
+  siteConfigQuery,
+} from "@api/queries";
 import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import { isPreview } from "src/stores/global-store";
-import type { SiteConfigQueryResult } from "@sanity/sanity.types";
-import { getLocale } from "i18n:astro";
+import type {
+  AllContentPagesQueryResult,
+  SiteConfigQueryResult,
+} from "@sanity/sanity.types";
 
-export const prerender = false;
+import { getLocale, getLocalePlaceholder } from "i18n:astro";
+import { VISUAL_EDITING_ENABLED } from "@src/consts";
+import sitemap from "i18n:astro/sitemap";
+import { getSitemapParams } from "@lib/sitemap";
+
+export async function getStaticPaths() {
+  if (!VISUAL_EDITING_ENABLED) {
+    const { data: contentPages } = await loadQuery<AllContentPagesQueryResult>({
+      query: allContentPagesQuery,
+      params: { language: getLocalePlaceholder() },
+    });
+
+    sitemap({
+      dynamicParams: getSitemapParams(contentPages, getLocalePlaceholder()),
+    });
+    return contentPages.map((blog) => ({
+      params: { slug: blog },
+    }));
+  } else {
+    return [];
+  }
+}
+
 const { slug } = Astro.params;
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
@@ -21,12 +48,6 @@ if (!siteConfig) {
   return new Response(null, { status: 404 });
 }
 
-let pageSlug: string | null | undefined = slug;
-
-if (!slug) {
-  pageSlug = siteConfig?.homePage?.slug;
-}
-
 const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
   params: { language: getLocale(), slug: slug! },
@@ -35,8 +56,6 @@ const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
 if (contentPage == null) {
   return new Response(null, { status: 404 });
 }
-
-isPreview.set(true);
 ---
 
 <Base
@@ -44,6 +63,7 @@ isPreview.set(true);
   description={contentPage?.metadata?.description || ""}
   slug={slug!}
   siteConfig={siteConfig}
+  translations={contentPage._translations}
 >
   <HeroHeader
     headline={contentPage?.intro?.title}

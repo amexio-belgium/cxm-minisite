@@ -4,7 +4,6 @@ const lang = document.documentElement.getAttribute("lang");
 const hbsptContactForm = {
   init: function (lang) {
     let script = document.createElement("script");
-    script.charset = "utf-8";
     script.src = "https://js-eu1.hsforms.net/forms/embed/v2.js";
     script.addEventListener(
       "load",

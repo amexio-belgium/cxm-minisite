@@ -3,6 +3,7 @@ import type {
   AnswerQuestion,
   Callout,
   CardGrid,
+  CodeEmbed,
   CollaborationModel,
   CollabTab,
   Cta,
@@ -26,7 +27,12 @@ import type {
   Testimonial,
   WorkCardList,
   Youtube,
-} from "./sanity.types";
+} from "@sanity/sanity.types";
+
+export type PageTranslations = Array<{
+  slug: string | null;
+  language: string | null;
+} | null> | null;
 
 export interface LinkObjectReferenced {
   _type: "link";
@@ -370,6 +376,7 @@ export interface ContentPageWithReferences {
   metadata?: Metadata;
   _updatedAt?: string;
   _id: string;
+  _translations: PageTranslations;
   intro?: IntroReference;
 }
 
@@ -385,19 +392,24 @@ export type PersonReferenced = {
   image?: i18nImage;
 };
 
+export type Content = Array<
+  | ServicesCardList
+  | CardGrid
+  | CalloutReferenced
+  | LongFormTextReferenced
+  | HighlightReferenced
+  | TabsReferenced
+  | BlogHighlightReferenced
+  | BlogsListReferenced
+  | WorkCardListReferenced
+  | CodeEmbed
+  | TestimonialReferenced
+>;
+
 export interface BlogPostWithReferences {
   _type: "blogPost";
   language?: string;
-  content?: Array<
-    | ServicesCardList
-    | CardGrid
-    | CalloutReferenced
-    | LongFormTextReferenced
-    | HighlightReferenced
-    | TabsReferenced
-    | BlogHighlightReferenced
-    | BlogsListReferenced
-  >;
+  content?: Content;
   metadata?: Metadata;
   featuredImage?: i18nImage;
   _updatedAt?: string;
@@ -414,6 +426,7 @@ export interface BlogPostWithReferences {
     prefLabel: string | null;
     definition: string | null;
   }> | null;
+  _translations: PageTranslations;
 }
 
 export type BlogsListReferenced = {
@@ -429,17 +442,7 @@ export interface ServiceWithReferences {
   customerReferencesText?: string;
   language?: string;
   cta?: string;
-  content?: Array<
-    | ServicesCardList
-    | CardGrid
-    | CalloutReferenced
-    | LongFormTextReferenced
-    | HighlightReferenced
-    | TabsReferenced
-    | BlogHighlightReferenced
-    | BlogsListReferenced
-    | WorkCardListReferenced
-  >;
+  content?: Content;
   metadata?: Metadata;
   image?: i18nImage;
   _updatedAt?: string;
@@ -448,21 +451,14 @@ export interface ServiceWithReferences {
   servicePillar?: ServicePillar;
   customerReferences: CustomerReferenced[];
   faqs: FaqsReferenced;
+  _translations: PageTranslations;
 }
 
 export interface WorkWithReferences {
   _type: "works";
   language?: string;
   customerReferencesText?: string;
-  content?: Array<
-    | ServicesCardList
-    | CardGrid
-    | CalloutReferenced
-    | LongFormTextReferenced
-    | HighlightReferenced
-    | TabsReferenced
-    | WorkCardListReferenced
-  >;
+  content?: Content;
   logo?: {
     default: i18nImage | null;
     light: i18nImage | null;
@@ -475,11 +471,12 @@ export interface WorkWithReferences {
   _id: string;
   intro?: Intro;
   duration?: string;
-  collaborationModel?: CollaborationModel;
+  collaborationModel?: CollaborationModelReferenced;
   customerReferences?: CustomerReferenced[];
   services?: ServiceWithReferences[];
   technologies?: TechnologyReferenced[];
   relatedCases?: ReferenceCaseReferenced[];
+  _translations: PageTranslations;
 }
 
 export type CustomerReferenced = {
