@@ -50,6 +50,9 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     alt: social.icon?.asset?.altTexts?.[locale!] || "",
   };
 });
+
+console.log("Visual editing enabled:");
+console.log(VISUAL_EDITING_ENABLED);
 ---
 
 <html class="overflow-x-clip" lang={locale!}>
@@ -75,6 +78,7 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     <Tracking />
   </head>
   <body class="overflow-x-clip bg-blue-800">
+    <h1>{JSON.stringify(VISUAL_EDITING_ENABLED)}</h1>
     {VISUAL_EDITING_ENABLED && <VisualEditing enabled={true} zIndex={1000} />}
 
     <Header navigation={header} />
