@@ -6,14 +6,14 @@ import SanityComponentsRenderer from "../../../components/cms-components/SanityC
 import HeroHeader from "../../../components/uicomposition/HeroHeader.astro";
 import Customers from "../../../components/uicomposition/Customers.astro";
 import type { SiteConfigQueryResult } from "../../../sanity/sanity.types";
-import type {WorkWithReferences} from "../../../sanity/custom.sanity.types";
+import type { WorkWithReferences } from "../../../sanity/custom.sanity.types";
 import ProjectMetadata from "../../../components/uicomposition/ProjectMetadata.astro";
 import TechnologyIcon from "../../../components/uielements/TechnologyIcon.astro";
 import SanityImg from "@otterstack/sanity-img-astro";
-import {getHrefFromLinkObject} from "../../../lib/sanityHelpers";
-import CasePreview from '../../../components/uielements/CasePreview.astro';
+import { getHrefFromLinkObject } from "../../../lib/sanityHelpers";
+import CasePreview from "../../../components/uielements/CasePreview.astro";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import {getLocale} from "i18n:astro";
+import { getLocale } from "i18n:astro";
 
 export const prerender = false;
 const { slug } = Astro.params;
@@ -73,37 +73,51 @@ const { data: workPage } = await loadQuery<WorkWithReferences>({
         )
     }
   </HeroHeader>
-    <ProjectMetadata
-            duration={workPage?.duration}
-            collaboration={workPage?.collaborationModel}
-            services={workPage?.services}
-            technologies={workPage?.technologies}>
-        {
-            workPage?.technologies?.map((technology) => (
-            <TechnologyIcon link={technology?.partner?.link ? getHrefFromLinkObject(technology.partner.link, getLocale(), true) : undefined}>
-                <SanityImg
-                        src={technology?.logo?.default as SanityImageSource}
-                        alt={technology?.logo?.default?.asset?.altTexts?.[workPage.language || "en"] || ""}
-                        sizes="200px"
-                        class="h-[unset] w-auto max-w-[unset] transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
-                        loading="lazy"
-                />
-              <p>{technology.name}</p>
-            </TechnologyIcon>
-            ))
-        }
-    </ProjectMetadata>
+  <ProjectMetadata
+    duration={workPage?.duration}
+    collaboration={workPage?.collaborationModel}
+    services={workPage?.services}
+    technologies={workPage?.technologies}
+  >
+    {
+      workPage?.technologies?.map((technology) => (
+        <TechnologyIcon
+          link={
+            technology?.partner?.link
+              ? getHrefFromLinkObject(
+                  technology.partner.link,
+                  getLocale(),
+                  true,
+                )
+              : undefined
+          }
+        >
+          <SanityImg
+            src={technology?.logo?.default}
+            alt={
+              technology?.logo?.default?.asset?.altTexts?.[
+                workPage.language || "en"
+              ] || ""
+            }
+            sizes="200px"
+            class="h-[unset] w-auto max-w-[unset] transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
+            loading="lazy"
+          />
+          <p>{technology.name}</p>
+        </TechnologyIcon>
+      ))
+    }
+  </ProjectMetadata>
   <SanityComponentsRenderer content={workPage?.content} />
-  {workPage?.relatedCases && workPage?.relatedCases?.length > 1 && (
-    <div
-        class="relative xl:mb-40 flex flex-col py-20 xl:pr-12 before:-z-10 before:bg-light-blue-50 before:absolute before:top-0 before:bottom-0 before:-right-24 xl:before:right-0 before:h-full before:w-[3000px] xl:before:rounded-xl">
-      <div class="text-black relative grid grid-cols-1 lg:grid-cols-2 w-full gap-8">
-        {
-          workPage?.relatedCases.splice(0,2).map((casePost) => (
-              <CasePreview small caseData={casePost}/>
-          ))
-        }
+  {
+    workPage?.relatedCases && workPage?.relatedCases?.length > 1 && (
+      <div class="relative flex flex-col py-20 before:absolute before:-right-24 before:bottom-0 before:top-0 before:-z-10 before:h-full before:w-[3000px] before:bg-light-blue-50 xl:mb-40 xl:pr-12 xl:before:right-0 xl:before:rounded-xl">
+        <div class="relative grid w-full grid-cols-1 gap-8 text-black lg:grid-cols-2">
+          {workPage?.relatedCases.splice(0, 2).map((casePost) => (
+            <CasePreview small caseData={casePost} />
+          ))}
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 </Base>

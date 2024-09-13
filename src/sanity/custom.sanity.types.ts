@@ -14,7 +14,6 @@ import type {
   Link,
   LongFormText,
   Metadata,
-  Person,
   ReferenceCase,
   SanityImageAsset,
   SanityImageCrop,
@@ -371,7 +370,7 @@ export interface ContentPageWithReferences {
   metadata?: Metadata;
   _updatedAt?: string;
   _id: string;
-  intro?: Intro;
+  intro?: IntroReference;
 }
 
 export type PersonReferenced = {
@@ -545,4 +544,8 @@ export type CollabTabReferenced = Omit<CollabTab, "concept"> & {
 
 export type WorkCardListReferenced = Omit<WorkCardList, "referenceCases"> & {
   referenceCases: ReferenceCaseReferenced[];
+};
+
+export type IntroReference = Intro & {
+  introCta: Cta | null;
 };

@@ -1,14 +1,14 @@
 ---
 import Button from "@components/uielements/Button.astro";
 import { PortableText } from "astro-portabletext";
-import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
+import type { ReferenceCaseReferenced } from "../../sanity/custom.sanity.types";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
 import { isPreview } from "src/stores/global-store";
 import { getLocale, t } from "i18n:astro";
 
 interface Props {
-  caseData: ServiceWithReferences;
+  caseData: ReferenceCaseReferenced;
 }
 
 const { caseData } = Astro.props;
@@ -22,7 +22,7 @@ const preview = isPreview.get();
       <div class="h-1/2 w-full p-4 sm:p-8 lg:h-full lg:w-1/2">
         <div class="flex flex-col">
           <h3 class="mb-2 font-serif text-lg [&>mark]:text-black">
-            {caseData.intro.title}
+            {caseData.intro?.title}
           </h3>
           {caseData.intro?.intro && (
             <div class="text-sm font-light [&>mark]:text-black">

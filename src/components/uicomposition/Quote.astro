@@ -1,19 +1,17 @@
 ---
 import SanityImg from "@otterstack/sanity-img-astro";
-import {defaultComponents} from "../cms-components/PortableText/helper";
-import {PortableText} from "astro-portabletext";
-import type {TestimonialReferenced} from "../../sanity/custom.sanity.types";
-import type {SanityImageSource} from "@sanity/image-url/lib/types/types";
-import {getLocale} from "@builder.io/qwik";
+import { defaultComponents } from "../cms-components/PortableText/helper";
+import { PortableText } from "astro-portabletext";
+import type { TestimonialReferenced } from "../../sanity/custom.sanity.types";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { getLocale } from "@builder.io/qwik";
 
 interface Props {
-  testimonial: TestimonialReferenced,
+  testimonial: TestimonialReferenced;
   class?: string;
 }
 
-const {
-  testimonial,
-} = Astro.props;
+const { testimonial } = Astro.props;
 
 const id = "id_" + Math.random().toString(36).slice(2, 11);
 const variant = testimonial.variant ? testimonial.variant : "glass";
@@ -21,14 +19,14 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
 
 <blockquote
   class:list={[
-    "mb-40 group/quote mt-20 flex flex-col justify-end gap-8 md:flex-row lg:mt-0 lg:first:mt-0",
+    "group/quote mb-40 mt-20 flex flex-col justify-end gap-8 md:flex-row lg:mt-0 lg:first:mt-0",
   ]}
 >
   {
     variant == "flat" && (
       <div class="flex flex-col items-center justify-center text-white md:w-4/12">
         <SanityImg
-          src={testimonial.person?.image?.asset?._id as SanityImageSource}
+          src={testimonial.person?.image?.asset?._id}
           alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
           class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
           loading="lazy"
@@ -60,20 +58,20 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
               <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
             </svg>
           </div>
-          {
-            testimonial?.textObject?.richText && (
-              <PortableText
-                components={defaultComponents}
-                value={testimonial?.textObject?.richText}
-              />
-            )
-          }
+          {testimonial?.textObject?.richText && (
+            <PortableText
+              components={defaultComponents}
+              value={testimonial?.textObject?.richText}
+            />
+          )}
         </>
       ) : (
         <>
           <SanityImg
-            src={testimonial.person?.image?.asset?._id as SanityImageSource}
-            alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
+            src={testimonial.person?.image?.asset?._id}
+            alt={
+              testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""
+            }
             class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
             loading="lazy"
             sizes="(min-width:768px) 50vw, 100vw"
@@ -88,14 +86,12 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
             >
               <use xlink:href="/icons/icon-sprite.svg#icon-quote" />
             </svg>
-            {
-              testimonial?.textObject?.richText && (
-                <PortableText
-                  components={defaultComponents}
-                  value={testimonial.textObject?.richText}
-                />
-              )
-            }
+            {testimonial?.textObject?.richText && (
+              <PortableText
+                components={defaultComponents}
+                value={testimonial.textObject?.richText}
+              />
+            )}
             />
             <svg
               class="absolute -bottom-0 -right-0 h-4 w-4 rotate-180"
@@ -110,7 +106,10 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
           <footer>
             <cite class="flex flex-col pl-4 not-italic text-white sm:pl-4">
               <span class="text-xs" set:html={testimonial.person?.name} />
-              <span class="font-serif text-xxs" set:html={testimonial.person?.jobTitle} />
+              <span
+                class="font-serif text-xxs"
+                set:html={testimonial.person?.jobTitle}
+              />
             </cite>
           </footer>
         </>
