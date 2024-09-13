@@ -28,7 +28,9 @@ const {
 
 // Remove the first / from the pathname, then you are left with en/fr/nl if it's a homepage
 const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
-const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
+const pathNameAsLocale = Astro.url.pathname
+  .substring(basePathLength)
+  .replace("/", "");
 
 const isHomePage = locales.includes(pathNameAsLocale);
 

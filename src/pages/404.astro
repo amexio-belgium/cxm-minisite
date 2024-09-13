@@ -11,7 +11,7 @@ import { loadQuery } from "src/api/sanity";
 import type { SiteConfigQueryResult } from "src/sanity/sanity.types";
 import type { PageTranslations } from "@sanity/custom.sanity.types";
 
-const locale = "en";
+const locale = Astro.currentLocale || Astro.preferredLocale || "en";
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
   params: { language: locale },
