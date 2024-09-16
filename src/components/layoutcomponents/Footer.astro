@@ -10,6 +10,7 @@ import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { imageBuilder } from "@api/sanity";
 import { getLocale, t } from "i18n:astro";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
+import LanguageMenu from "@components/uielements/LanguageMenu.astro";
 
 export type Social = {
   name: string;
@@ -181,6 +182,7 @@ const isContactPage = slug == "contact";
           <svg class="h-6 w-6 fill-secondary">
             <use xlink:href="/icons/icon-sprite.svg#icon-slant"></use>
           </svg>
+          <LanguageMenu />
         </div>
       </div>
     </div>
