@@ -19,9 +19,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
 ---
 
 <blockquote
-  class:list={[
-    "group/quote mb-40 mt-20 flex flex-col justify-end gap-8 md:flex-row lg:mt-0 lg:first:mt-0",
-  ]}
+  class:list={["group/quote flex flex-col justify-end gap-8 md:flex-row"]}
 >
   {
     variant == "flat" && (
@@ -72,9 +70,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
         <>
           <SanityImg
             src={testimonial.person?.image?.asset?._id as SanityImageSource}
-            alt={
-              testimonial.person?.image?.asset?.altTexts?.[locale] || ""
-            }
+            alt={testimonial.person?.image?.asset?.altTexts?.[locale] || ""}
             class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
             loading="lazy"
             sizes="(min-width:768px) 50vw, 100vw"

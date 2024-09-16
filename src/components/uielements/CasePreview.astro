@@ -85,24 +85,21 @@ const { caseData, small } = Astro.props;
       <ol class="mt-2 list-inside list-disc font-serif text-sm">
         {
           caseData?.duration && (
-            <li class="">
-              {m.metadataDuration()}:{caseData.duration}
-            </li>
+            <li class="ml-5 list-outside">{`${m.metadataDuration()}: ${caseData.duration}`}</li>
           )
         }
         {
           caseData?.collaborationModel && (
-            <li class="">
-              {m.metadataCollaboration()}:
-              {caseData.collaborationModel?.collaborationTabs
+            <li class="ml-5 list-outside">
+              {`${m.metadataCollaboration()}: ${caseData.collaborationModel?.collaborationTabs
                 ?.map((tab) => tab?.concept?.prefLabel)
-                .join(", ")}
+                .join(", ")}`}
             </li>
           )
         }
         {
           caseData?.technologies && (
-            <li class="">
+            <li class="ml-5 list-outside">
               {m.metadataTechnologies()}:
               {caseData.technologies
                 ?.map((technology) => technology?.name)
@@ -112,7 +109,7 @@ const { caseData, small } = Astro.props;
         }
         {
           caseData?.services && (
-            <li class="">
+            <li class="ml-5 list-outside">
               {m.metadataServices()}:
               {caseData.services
                 ?.map((service) => service?.metadata?.title)
