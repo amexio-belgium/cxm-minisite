@@ -4,9 +4,8 @@ import "dotenv/config";
 
 const PUBLIC_ASTRO_BASE_PATH = process.env.PUBLIC_ASTRO_BASE_PATH;
 const basePath = PUBLIC_ASTRO_BASE_PATH || "";
-const SANITY_VISUAL_EDITING_ENABLED = process.env.SANITY_VISUAL_EDITING_ENABLED;
 
-if (SANITY_VISUAL_EDITING_ENABLED !== "true" && basePath && basePath !== "") {
+if (basePath && basePath !== "") {
   // Source and destination directories
   if (!fs.existsSync("./build")) {
     fs.mkdirSync("./build");

@@ -50,9 +50,6 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     alt: social.icon?.asset?.altTexts?.[locale!] || "",
   };
 });
-
-console.log("Visual editing enabled:");
-console.log(VISUAL_EDITING_ENABLED);
 ---
 
 <html class="overflow-x-clip" lang={locale!}>
