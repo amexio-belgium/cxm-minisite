@@ -24,4 +24,6 @@ pnpm-debug.log*
 .idea/
 /.env.local
 /.vscode/
+
+/public/fonts/fonts.css
 /.netlify/
