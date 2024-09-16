@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import vercel from '@astrojs/vercel/serverless';
 import sanityImg from "@otterstack/sanity-img-astro/integration";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
@@ -8,6 +7,7 @@ import { loadEnv } from "vite";
 import { locales } from "./src/locales/consts";
 import paraglide from "@inlang/paraglide-astro";
 import sitemap from "@astrojs/sitemap";
+import netlify from "@astrojs/netlify";
 
 const {
   ASTRO_SITE_URL,
@@ -27,7 +27,7 @@ const basePath =
 export default defineConfig({
   site: ASTRO_SITE_URL,
   output: SANITY_VISUAL_EDITING_ENABLED === "true" ? "server" : "static",
-  adapter: vercel(),
+  adapter: netlify(),
   base: basePath,
   outDir: `./dist${PUBLIC_ASTRO_BASE_PATH}`,
   i18n: {
