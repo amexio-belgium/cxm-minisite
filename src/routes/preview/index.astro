@@ -5,7 +5,6 @@ import { loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
-import { isPreview } from "src/stores/global-store";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
 import { getLocale } from "i18n:astro";
 import Button from "../../components/uielements/Button.astro";
@@ -27,8 +26,6 @@ const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   query: contentPageQuery,
   params: { language: getLocale(), slug: slug },
 });
-
-isPreview.set(true);
 ---
 
 <Base
@@ -47,11 +44,7 @@ isPreview.set(true);
       longText
       icon="email"
       link={contentPage?.intro?.introCta?.link
-        ? getHrefFromLinkObject(
-            contentPage?.intro?.introCta?.link,
-            getLocale(),
-            true,
-          )
+        ? getHrefFromLinkObject(contentPage?.intro?.introCta?.link, getLocale())
         : undefined}
       color="dark"
       >{contentPage?.intro?.introCta?.text}
