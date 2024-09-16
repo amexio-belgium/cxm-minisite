@@ -1,24 +1,35 @@
 ---
+import { FaqsReferenced } from "../../sanity/custom.sanity.types";
+import FaqQuestion from "../uielements/FaqQuestion.astro";
+import { PortableText } from "astro-portabletext";
+import { defaultComponents } from "../cms-components/PortableText/helper";
 interface Props {
-  headline: string;
-  class?: string;
+  faq: FaqsReferenced;
 }
 
-const { headline, class: className } = Astro.props;
+const { faq } = Astro.props;
 ---
 
 <div
   class:list={[
     "relative flex flex-col pb-20 pt-10 md:pb-40 md:pt-20 xl:flex-row",
-    className,
   ]}
 >
   <h2
     class="top-40 mb-2 h-fit w-full text-pretty pt-3 font-serif text-3xl text-white xl:sticky xl:w-5/12 xl:pr-8"
   >
-    {headline}
+    {faq?.title}
   </h2>
   <div class="flex w-full flex-col gap-2 xl:w-7/12">
-    <slot />
+    {
+      faq?.questions.map((question) => (
+        <FaqQuestion headline={question.question} headlineTag="h3">
+          <PortableText
+            value={question.answer}
+            components={defaultComponents}
+          />
+        </FaqQuestion>
+      ))
+    }
   </div>
 </div>

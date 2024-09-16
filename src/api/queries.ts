@@ -214,6 +214,23 @@ content[] {
         }
       } 
     }
+  },
+  _type == "faq" => {
+    ...,
+    defined(questions) => {
+      questions[]->{
+        ...,
+        answer[] {
+          ...,
+          markDefs[]{
+            ...,
+            defined(internalLink) => {
+              internalLink -> {...}
+            }
+          }
+        }
+      }
+    }
   }
 }`;
 
