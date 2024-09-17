@@ -2,14 +2,13 @@
 import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImageAsset } from "@sanity/custom.sanity.types";
-import type { CardGrid } from "@sanity/sanity.types";
+import type { CardGridReferenced } from "../../sanity/custom.sanity.types";
 import { imageBuilder } from "src/api/sanity";
 import { getLocale } from "i18n:astro";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
-  cardGrid: CardGrid;
+  cardGrid: CardGridReferenced;
 }
 
 const { cardGrid } = Astro.props;
@@ -36,7 +35,7 @@ const stylesSmallTile = {
   cta={cardGrid?.intro?.introCta}
 >
   {
-    cardGrid?.cards?.map((card) => {
+    cardGrid?.cards?.map((card: any) => {
       const asset = card?.icon?.asset as any as i18nImageAsset;
       return (
         <SmallTile

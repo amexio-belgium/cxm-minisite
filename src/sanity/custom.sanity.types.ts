@@ -228,7 +228,7 @@ export type i18nImageAsset = SanityImageAsset & {
 };
 
 export type i18nImage = {
-  asset: i18nImageAsset | null;
+  asset: i18nImageAsset;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   _type: "image";
@@ -366,7 +366,7 @@ export interface ContentPageWithReferences {
   _type: "contentPage";
   content?: Array<
     | ServicesCardList
-    | CardGrid
+    | CardGridReferenced
     | CalloutReferenced
     | LongFormTextReferenced
     | HighlightReferenced
@@ -394,7 +394,7 @@ export type PersonReferenced = {
 
 export type Content = Array<
   | ServicesCardList
-  | CardGrid
+  | CardGridReferenced
   | CalloutReferenced
   | LongFormTextReferenced
   | HighlightReferenced
@@ -545,4 +545,8 @@ export type WorkCardListReferenced = Omit<WorkCardList, "referenceCases"> & {
 
 export type IntroReference = Intro & {
   introCta: Cta | null;
+};
+
+export type CardGridReferenced = Omit<CardGrid, "backgroundImage"> & {
+  backgroundImage?: i18nImage;
 };
