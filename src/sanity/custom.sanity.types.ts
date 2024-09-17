@@ -404,6 +404,7 @@ export type Content = Array<
   | WorkCardListReferenced
   | CodeEmbed
   | TestimonialReferenced
+  | FaqsReferenced
 >;
 
 export interface BlogPostWithReferences {
