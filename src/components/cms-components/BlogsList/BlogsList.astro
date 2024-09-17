@@ -82,7 +82,7 @@ const items = isLatestBlogs
             <BlogPreview blogPost={blog} />
           ))}
         </div>
-        {blogsList.hidePagination && (
+        {!blogsList.hidePagination && (
           <div class="flex flex-col items-center justify-center py-4">
             <span
               id={`total-viewed-${uuid}`}
