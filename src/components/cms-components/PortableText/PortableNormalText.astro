@@ -28,8 +28,7 @@ const markTags = {
 
     return (
       <span
-        class="text-balance font-sans text-sm font-light sm:text-base"
-        set:html={openingTags + child.text + closingTags}
+        set:html={openingTags + child.text.replace(/\r\n|\r|\n/g, '<br>') + closingTags}
       />
     );
   })

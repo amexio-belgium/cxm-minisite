@@ -27,6 +27,15 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
 const contentQuery = groq`
 content[] {
   ...,
+  intro {
+    ...,
+    introCta {
+      ...,
+      link {
+        internalLink->{...}
+      }
+    }
+  },
    _type == "blogsList" => {
     ...,
     blogsType == "specific" => {
@@ -129,7 +138,19 @@ content[] {
       }
     }
   },
-  defined(cards) => {
+  _type == "cardGrid" => {
+    backgroundImage{
+      asset->{...}
+    },
+    intro {
+      ...,
+      introCta {
+        ...,
+        link {
+          internalLink->{...}
+        }
+      }
+    },
     cards[] {
       ...,
       icon{
@@ -153,7 +174,6 @@ content[] {
     ...,
     defined(image) => {
       image{
-        ...,
         asset->{...}
       }
     }
@@ -181,7 +201,6 @@ content[] {
       content[]{
         ...,
           _type == "image" => {
-          ...,
             asset->{...}
           }
       }

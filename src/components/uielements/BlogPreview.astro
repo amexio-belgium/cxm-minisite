@@ -20,7 +20,6 @@ const { blogPost } = Astro.props;
       <div class="flex aspect-[5/3] w-full shrink-0 items-center justify-center overflow-hidden rounded-t-xl">
         {blogPost.featuredImage?.asset && (
           <img
-            loading="eager"
             src={imageBuilder
               .image(blogPost.featuredImage?.asset)
               .width(400)

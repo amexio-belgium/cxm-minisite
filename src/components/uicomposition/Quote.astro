@@ -3,7 +3,6 @@ import SanityImg from "@otterstack/sanity-img-astro";
 import { defaultComponents } from "../cms-components/PortableText/helper";
 import { PortableText } from "astro-portabletext";
 import type { TestimonialReferenced } from "../../sanity/custom.sanity.types";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { getLocale } from "i18n:astro";
 
 interface Props {
@@ -26,7 +25,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
     variant == "flat" && (
       <div class="flex flex-col items-center justify-center text-white md:w-4/12">
         <SanityImg
-          src={testimonial.person?.image?.asset?._id as SanityImageSource}
+          src={testimonial.person?.image?.asset?._id || ""}
           alt={testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""}
           class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
           loading="lazy"
@@ -68,7 +67,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
       ) : (
         <>
           <SanityImg
-            src={testimonial.person?.image?.asset?._id as SanityImageSource}
+            src={testimonial.person?.image?.asset?._id || ""}
             alt={
               testimonial.person?.image?.asset?.altTexts?.[getLocale()] || ""
             }

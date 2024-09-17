@@ -1,24 +1,31 @@
 ---
 import { PortableText } from "astro-portabletext";
+import { defaultComponents } from "../cms-components/PortableText/helper";
+import { getHrefFromLinkObject } from "../../lib/sanityHelpers";
+import { getLocale } from "i18n:astro";
+import Button from "../uielements/Button.astro";
+import type { Cta } from "../../sanity/sanity.types";
 
 interface Props {
   headline: string | undefined;
   description: any;
   orangeSlant?: boolean;
   class?: string;
+  cta?: Cta;
 }
 
 const {
   headline,
   description,
   orangeSlant = false,
+  cta,
   class: className,
 } = Astro.props;
 ---
 
 <div
   class:list={[
-    "relative my-20 inline-flex w-full flex-col items-start justify-start gap-20 bg-cover xl:my-40",
+    "relative my-20 inline-flex w-full flex-col items-start justify-start gap-20 bg-cover",
     className,
   ]}
 >
@@ -29,17 +36,30 @@ const {
       <slot name="bg-image" />
     )
   }
-
-  <div class="flex flex-col items-start justify-start gap-6 lg:w-9/12">
+  <div class="flex w-full flex-col items-start justify-start">
+    {headline && !cta && <h2 class="font-serif text-2xl">{headline}</h2>}
     {
-      headline && (
-        <h2 class="text-balance font-serif text-3xl text-white">{headline}</h2>
+      headline && cta && (
+        <div class="mb-8 flex w-full flex-col items-start justify-between gap-4 md:mb-4 md:flex-row md:items-center">
+          <h2 class="font-serif text-2xl">{headline}</h2>
+          <Button
+            link={
+              cta?.link
+                ? getHrefFromLinkObject(cta.link, getLocale())
+                : undefined
+            }
+            style="primary"
+            color="light"
+          >
+            {cta.text}
+          </Button>
+        </div>
       )
     }
     {
       description && (
-        <div class="prose prose-ondark max-w-prose text-base font-light">
-          <PortableText value={description} />
+        <div class="max-w-prose text-base font-light lg:w-9/12">
+          <PortableText components={defaultComponents} value={description} />
         </div>
       )
     }
