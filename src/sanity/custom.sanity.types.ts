@@ -435,6 +435,8 @@ export type BlogsListReferenced = {
   blogsType?: "latest" | "specific";
   blogPosts?: BlogPostWithReferences[];
   maxPerPage?: number;
+  hidePagination?: boolean;
+  intro?: IntroReference;
 };
 
 export interface ServiceWithReferences {

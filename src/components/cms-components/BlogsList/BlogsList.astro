@@ -18,7 +18,7 @@ const { blogsList } = Astro.props;
 
 const itemsPerTime = blogsList.maxPerPage || 15;
 
-let blogs: BlogPostWithReferences[] | undefined = [];
+let blogs: BlogPostWithReferences[] | undefined;
 let totalItems: number;
 if (blogsList.blogsType === "latest") {
   const { data: blogsFetched } = await loadQuery<{
@@ -69,6 +69,11 @@ const items = isLatestBlogs
       data-islatestblogs={JSON.stringify(isLatestBlogs)}
     >
       <div class="relative w-full gap-8 py-20 before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl before:bg-light-blue-50 marker:before:h-full motion-safe:animate-fade-up motion-safe:animate-delay-1000">
+        {blogsList?.intro?.title && (
+          <h2 class="mb-8 font-serif text-2xl text-black md:text-3xl">
+            {blogsList?.intro?.title}
+          </h2>
+        )}
         <div
           id={`blogs-preview-list-${uuid}`}
           class="grid auto-rows-fr grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
@@ -77,37 +82,38 @@ const items = isLatestBlogs
             <BlogPreview blogPost={blog} />
           ))}
         </div>
-
-        <div class="flex flex-col items-center justify-center py-4">
-          <span
-            id={`total-viewed-${uuid}`}
-            class="font-sans text-[14px] text-black focus-visible:outline-orange"
-            tabindex="0"
-          >
-            {t("blogslist.totalviewed", {
-              viewedItems:
-                itemsPerTime > totalItems ? totalItems : itemsPerTime,
-              totalItems,
-            })}
-          </span>
-          <div class="bg-gray-200 dark:bg-gray-700 mx-0.5 mb-6 mt-[15px] h-[3px] w-[216px] bg-lightest-blue-800">
-            <div
-              id={`progress-bar-${uuid}`}
-              class="h-[3px] bg-orange"
-              style={`width: ${((itemsPerTime > totalItems ? totalItems : itemsPerTime) / totalItems!) * 100}%`}
-            />
-          </div>
-          {(isLatestBlogs
-            ? items! < totalItems
-            : itemsPerTime < totalItems) && (
-            <button
-              id={`load-more-btn-${uuid}`}
-              class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
+        {blogsList.hidePagination && (
+          <div class="flex flex-col items-center justify-center py-4">
+            <span
+              id={`total-viewed-${uuid}`}
+              class="font-sans text-[14px] text-black focus-visible:outline-orange"
+              tabindex="0"
             >
-              {t("blogslist.loadmore")}
-            </button>
-          )}
-        </div>
+              {t("blogslist.totalviewed", {
+                viewedItems:
+                  itemsPerTime > totalItems ? totalItems : itemsPerTime,
+                totalItems,
+              })}
+            </span>
+            <div class="bg-gray-200 dark:bg-gray-700 mx-0.5 mb-6 mt-[15px] h-[3px] w-[216px] bg-lightest-blue-800">
+              <div
+                id={`progress-bar-${uuid}`}
+                class="h-[3px] bg-orange"
+                style={`width: ${((itemsPerTime > totalItems ? totalItems : itemsPerTime) / totalItems!) * 100}%`}
+              />
+            </div>
+            {(isLatestBlogs
+              ? items! < totalItems
+              : itemsPerTime < totalItems) && (
+              <button
+                id={`load-more-btn-${uuid}`}
+                class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
+              >
+                {t("blogslist.loadmore")}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </astro-blogs-list>
   )
