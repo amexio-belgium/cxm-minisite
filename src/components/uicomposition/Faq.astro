@@ -22,14 +22,17 @@ const { faq } = Astro.props;
   </h2>
   <div class="flex w-full flex-col gap-2 xl:w-7/12">
     {
-      faq?.questions.map((question) => (
-        <FaqQuestion headline={question.question} headlineTag="h3">
-          <PortableText
-            value={question.answer}
-            components={defaultComponents}
-          />
-        </FaqQuestion>
-      ))
+      faq?.questions?.length > 0 &&
+        faq?.questions.map((question) =>
+          question?.question && question?.answer ? (
+            <FaqQuestion headline={question?.question} headlineTag="h3">
+              <PortableText
+                value={question?.answer}
+                components={defaultComponents}
+              />
+            </FaqQuestion>
+          ) : null,
+        )
     }
   </div>
 </div>
