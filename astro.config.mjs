@@ -41,7 +41,7 @@ export default defineConfig({
           }
 
           if (
-            url.pathname.startsWith("/3f5a3037-fd04-4d20-9b59-cd8759bfacf9/") &&
+            url.pathname.startsWith("/bc1980b0-1e04-4da9-8b72-cabb6d00ff5e/") &&
             url.hostname === "partytown-fuse.netlify.app"
           ) {
             const newUrl = new URL("https://partytown-fuse.netlify.app");
