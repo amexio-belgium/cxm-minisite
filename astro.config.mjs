@@ -33,7 +33,7 @@ export default defineConfig({
           };
 
           if (proxyMap[url.hostname] && proxyMap[url.hostname] !== "") {
-            const newUrl = new URL("http://localhost:4321");
+            const newUrl = new URL("https://partytown-fuse.netlify.app");
             newUrl.pathname = proxyMap[url.hostname] + url.pathname;
             newUrl.search = url.search;
             newUrl.searchParams = url.searchParams;
@@ -42,9 +42,9 @@ export default defineConfig({
 
           if (
             url.pathname.startsWith("/bc1980b0-1e04-4da9-8b72-cabb6d00ff5e/") &&
-            url.hostname === "localhost:4321"
+            url.hostname === "partytown-fuse.netlify.app"
           ) {
-            const newUrl = new URL("http://localhost:4321");
+            const newUrl = new URL("https://partytown-fuse.netlify.app");
             newUrl.pathname = "/cookiebot" + url.pathname;
             newUrl.search = url.search;
             newUrl.searchParams = url.searchParams;
