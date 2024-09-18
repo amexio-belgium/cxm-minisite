@@ -11,6 +11,7 @@ import BlogHighlight from "@components/cms-components/BlogHighlight/BlogHighligh
 import BlogsList from "@components/cms-components/BlogsList/BlogsList.astro";
 import Quote from "@components/uicomposition/Quote.astro";
 import CodeEmbed from "./CodeEmbed.astro";
+import Faq from "../uicomposition/Faq.astro";
 import ComponentWrapper from "@components/uielements/ComponentWrapper.astro";
 
 interface Props {
@@ -99,6 +100,13 @@ const { content } = Astro.props;
             bgClass={content.style === "light" ? "bg-light-blue-50" : undefined}
           >
             <CodeEmbed code={content} />
+          </ComponentWrapper>
+        );
+      }
+      case "faq": {
+        return (
+          <ComponentWrapper>
+            <Faq faq={content} />
           </ComponentWrapper>
         );
       }

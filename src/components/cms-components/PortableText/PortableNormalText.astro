@@ -1,5 +1,6 @@
 ---
 import type { Block, Props as PortableProps } from "astro-portabletext/types";
+import Link from "@components/uielements/Link.astro";
 
 interface Props extends PortableProps<Block> {}
 
@@ -26,10 +27,33 @@ const markTags = {
       }
     });
 
+    // Check for links in markDefs
+    const linkMarkDef = props.node.markDefs?.find(
+      (markDef) =>
+        child.marks?.includes(markDef._key) && markDef._type === "link",
+    );
+
+    if (linkMarkDef) {
+      const href =
+        linkMarkDef.type === "external"
+          ? linkMarkDef.url
+          : linkMarkDef.internalLink &&
+            `/${linkMarkDef.internalLink?.language}/${linkMarkDef.internalLink?.metadata?.slug?.current}`;
+
+      return (
+        <Link
+          className="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
+          href={href}
+          target={linkMarkDef.blank}
+          hoverColor="yellow"
+          set:html={openingTags + child.text + closingTags}
+        />
+      );
+    }
+
     return (
       <span
-        class="text-balance font-sans text-sm font-light sm:text-base"
-        set:html={openingTags + child.text + closingTags}
+        set:html={openingTags + child.text.replace(/\r\n|\r|\n/g, '<br>') + closingTags}
       />
     );
   })

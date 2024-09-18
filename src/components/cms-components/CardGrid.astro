@@ -2,27 +2,52 @@
 import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImageAsset } from "@sanity/custom.sanity.types";
-import type { CardGrid } from "@sanity/sanity.types";
+import type { CardGridReferenced } from "../../sanity/custom.sanity.types";
 import { imageBuilder } from "src/api/sanity";
 
 interface Props {
-  cardGrid: CardGrid;
+  cardGrid: CardGridReferenced;
 }
 
 const locale = Astro.currentLocale!;
 const { cardGrid } = Astro.props;
+
+const stylesContainer = {
+  popping:
+    "text-black relative flex flex-col py-20 xl:mb-40 before:bg-light-blue-50 before:-z-10 before:absolute before:top-0 before:bottom-0 before:-left-12 marker:before:h-full before:w-[3000px] lg:before:rounded-xl",
+  subtle:
+    "text-white relative inline-flex flex-col items-start justify-start gap-20 bg-cover",
+};
+
+const stylesSmallTile = {
+  popping:
+    "services flex flex-row flex-wrap justify-between w-full gap-8 lg:flex-row lg:flex-nowrap text-black",
+  subtle:
+    "smalltile border-1 inline-flex w-full flex-col items-center justify-start gap-8 rounded-2xl border-blue-500 bg-gradient-to-l from-blue-600/70 to-blue-800/70 px-4 py-6 shadow shadow-blue-200 backdrop-blur-lg md:px-12 text-white",
+};
 ---
 
 <TilesContainer
   headline={cardGrid?.intro?.title}
   description={cardGrid?.intro?.intro}
+  class={stylesContainer[cardGrid.style!]}
+  cta={cardGrid?.intro?.introCta}
 >
   {
-    cardGrid?.cards?.map((card) => {
+    cardGrid?.cards?.map((card: any) => {
       const asset = card?.icon?.asset as any as i18nImageAsset;
       return (
-        <SmallTile headline={card.title || ""} description={card.content}>
-          {card.icon?.asset && (
+        <SmallTile
+          headline={card.title || ""}
+          description={card.content}
+          class={stylesSmallTile[cardGrid.style!]}
+        >
+          {card.icon?.asset && card.icon?.asset?.extension == "svg" && (
+            <div class="service__item w-5/12">
+              <object data={asset.url} />
+            </div>
+          )}
+          {card.icon?.asset && card.icon?.asset?.extension != "svg" && (
             <img
               src={imageBuilder.image(asset).height(192).url()}
               alt={asset?.altTexts?.[locale]}
@@ -36,5 +61,19 @@ const { cardGrid } = Astro.props;
         </SmallTile>
       );
     })
+  }
+  {
+    cardGrid?.backgroundImage && (
+      <div
+        slot="bg-image"
+        class="absolute -bottom-20 -right-3/4 -z-10 h-[1000px] w-[250%] bg-contain bg-no-repeat sm:-right-full md:-top-20 md:w-[1240px] lg:-right-1/3"
+      >
+        <SanityImg
+          src={cardGrid.backgroundImage?.asset?._id}
+          alt={cardGrid.backgroundImage?.asset?.altTexts?.[locale] || ""}
+          loading="lazy"
+        />
+      </div>
+    )
   }
 </TilesContainer>

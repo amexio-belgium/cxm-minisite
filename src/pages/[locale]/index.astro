@@ -8,6 +8,8 @@ import SanityComponentsRenderer from "@components/cms-components/SanityComponent
 import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import type { SiteConfigQueryResult } from "@sanity/sanity.types";
+import { getHrefFromLinkObject } from "../lib/sanityHelpers";
+import Button from "../components/uielements/Button.astro";
 
 const locale = Astro.currentLocale!;
 
@@ -51,6 +53,17 @@ const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
     headline={contentPage.intro?.title}
     text={contentPage.intro?.intro}
     homepage={true}
-  />
+  >
+    <Button
+      class="mt-8"
+      longText
+      icon="email"
+      link={contentPage?.intro?.introCta?.link
+        ? getHrefFromLinkObject(contentPage?.intro?.introCta?.link, locale)
+        : undefined}
+      color="dark"
+      >{contentPage?.intro?.introCta?.text}
+    </Button>
+  </HeroHeader>
   <SanityComponentsRenderer content={contentPage?.content} />
 </Base>

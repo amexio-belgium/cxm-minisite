@@ -227,7 +227,7 @@ export type i18nImageAsset = SanityImageAsset & {
 };
 
 export type i18nImage = {
-  asset: i18nImageAsset | null;
+  asset: i18nImageAsset;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   _type: "image";
@@ -365,7 +365,7 @@ export interface ContentPageWithReferences {
   _type: "contentPage";
   content?: Array<
     | ServicesCardList
-    | CardGrid
+    | CardGridReferenced
     | CalloutReferenced
     | LongFormTextReferenced
     | HighlightReferenced
@@ -375,8 +375,8 @@ export interface ContentPageWithReferences {
   metadata?: Metadata;
   _updatedAt?: string;
   _id: string;
-  intro?: Intro;
   _translations: PageTranslations;
+  intro?: IntroReference;
 }
 
 export type PersonReferenced = {
@@ -393,7 +393,7 @@ export type PersonReferenced = {
 
 export type Content = Array<
   | ServicesCardList
-  | CardGrid
+  | CardGridReferenced
   | CalloutReferenced
   | LongFormTextReferenced
   | HighlightReferenced
@@ -403,6 +403,7 @@ export type Content = Array<
   | WorkCardListReferenced
   | CodeEmbed
   | TestimonialReferenced
+  | FaqsReferenced
 >;
 
 export interface BlogPostWithReferences {
@@ -433,6 +434,8 @@ export type BlogsListReferenced = {
   blogsType?: "latest" | "specific";
   blogPosts?: BlogPostWithReferences[];
   maxPerPage?: number;
+  hidePagination?: boolean;
+  intro?: IntroReference;
 };
 
 export interface ServiceWithReferences {
@@ -540,4 +543,12 @@ export type CollabTabReferenced = Omit<CollabTab, "concept"> & {
 
 export type WorkCardListReferenced = Omit<WorkCardList, "referenceCases"> & {
   referenceCases: ReferenceCaseReferenced[];
+};
+
+export type IntroReference = Intro & {
+  introCta: Cta | null;
+};
+
+export type CardGridReferenced = Omit<CardGrid, "backgroundImage"> & {
+  backgroundImage?: i18nImage;
 };
