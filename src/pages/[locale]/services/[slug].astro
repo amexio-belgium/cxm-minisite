@@ -10,9 +10,6 @@ import SanityComponentsRenderer from "@components/cms-components/SanityComponent
 import { type ServiceWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import Customers from "@components/uicomposition/Customers.astro";
-import Faq from "@components/uicomposition/Faq.astro";
-import FaqQuestion from "@components/uielements/FaqQuestion.astro";
-import { PortableText } from "astro-portabletext";
 import type {
   AllServicePagesQueryResult,
   SiteConfigQueryResult,
@@ -105,20 +102,4 @@ if (servicePage == null) {
     }
   </HeroHeader>
   <SanityComponentsRenderer content={servicePage?.content} />
-
-  {
-    servicePage.faqs && (
-      <Faq headline={servicePage.faqs.title || ""}>
-        {servicePage.faqs.questions?.map((question) => (
-          <>
-            {question.question && (
-              <FaqQuestion headline={question.question} headlineTag="h3">
-                {question.answer && <PortableText value={question.answer} />}
-              </FaqQuestion>
-            )}
-          </>
-        ))}
-      </Faq>
-    )
-  }
 </Base>

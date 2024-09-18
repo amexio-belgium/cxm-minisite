@@ -386,6 +386,22 @@
             "value": "blogsList"
           }
         },
+        "intro": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "object",
+            "attributes": {
+              "title": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              }
+            }
+          },
+          "optional": true
+        },
         "maxPerPage": {
           "type": "objectAttribute",
           "value": {
@@ -451,6 +467,13 @@
                 }
               }
             }
+          },
+          "optional": true
+        },
+        "hidePagination": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
           },
           "optional": true
         }
@@ -4683,6 +4706,21 @@
                   "type": "inline",
                   "name": "codeEmbed"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
+                }
               }
             ]
           }
@@ -5480,6 +5518,21 @@
                   "type": "inline",
                   "name": "codeEmbed"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
+                }
               }
             ]
           }
@@ -6136,6 +6189,21 @@
                   "type": "inline",
                   "name": "codeEmbed"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
+                }
               }
             ]
           }
@@ -6701,6 +6769,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "codeEmbed"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
                 }
               }
             ]
@@ -7725,6 +7808,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "codeEmbed"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
                 }
               }
             ]
