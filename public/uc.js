@@ -2071,19 +2071,24 @@
           (!cookieConsent.inlineConfiguration ||
             !0 !== cookieConsent.inlineConfiguration.DisableSessionPixel)
         ) {
-          var sessionPixel = new Image();
-          console.log(sessionPixel);
-          (sessionPixel.id = "CookiebotSessionPixel"),
-            (sessionPixel.src =
-              (cookieConsent.computedConfiguration.useBunny
-                ? "https://img.sct.eu1.usercentrics.eu/1.gif?dgi="
-                : "https://imgsct.cookiebot.com/1.gif?dgi=") +
-              cookieConsent.serial),
-            (sessionPixel.alt = "Cookiebot session tracker icon loaded"),
-            sessionPixel.setAttribute("data-cookieconsent", "ignore"),
-            (sessionPixel.style.display = "none"),
-            document.body.appendChild(sessionPixel);
-          console.log(sessionPixel);
+          var sessionPixel = document.createElement("image");
+          sessionPixel.id = "CookiebotSessionPixel";
+          sessionPixel.setAttribute(
+            "src",
+            (cookieConsent.computedConfiguration.useBunny
+              ? "https://img.sct.eu1.usercentrics.eu/1.gif?dgi="
+              : "https://imgsct.cookiebot.com/1.gif?dgi=") +
+              cookieConsent.serial
+          );
+
+          sessionPixel.setAttribute(
+            "alt",
+            "Cookiebot session tracker icon loaded"
+          );
+
+          sessionPixel.style.display = "none";
+          sessionPixel.setAttribute("data-cookieconsent", "ignore");
+          document.body.appendChild(sessionPixel);
         }
       }
       (this.$assign =
@@ -2802,7 +2807,7 @@
             try {
               window.CookieConsent.iframe.contentWindow.postMessage(
                 postObj,
-                this.CDN
+                window.location.origin
               );
             } catch (e) {
               window.CookieConsent.iframeReady = !0;
