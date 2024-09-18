@@ -89,10 +89,10 @@ const items = isLatestBlogs
               class="font-sans text-[14px] text-black focus-visible:outline-orange"
               tabindex="0"
             >
-              {t("blogslist.totalviewed", {
+              {m.blogslistTotalviewed({
                 viewedItems:
                   itemsPerTime > totalItems ? totalItems : itemsPerTime,
-                totalItems,
+                totalItems: totalItems,
               })}
             </span>
             <div class="bg-gray-200 dark:bg-gray-700 mx-0.5 mb-6 mt-[15px] h-[3px] w-[216px] bg-lightest-blue-800">
@@ -109,7 +109,7 @@ const items = isLatestBlogs
                 id={`load-more-btn-${uuid}`}
                 class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
               >
-                {t("blogslist.loadmore")}
+                {m.blogslistLoadmore()}
               </button>
             )}
           </div>
