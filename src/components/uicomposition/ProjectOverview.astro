@@ -2,7 +2,7 @@
 import type { WorkCardListReferenced } from "../../sanity/custom.sanity.types";
 import ProjectCard from "../uielements/ProjectCard.astro";
 import Button from "../uielements/Button.astro";
-import { t } from "i18next";
+import * as m from "@src/paraglide/messages";
 
 interface Props {
   workCardList: WorkCardListReferenced;
@@ -17,10 +17,10 @@ const { workCardList } = Astro.props;
     class="top-40 mb-8 flex h-fit w-full flex-col items-start gap-2 md:mb-16 md:pr-12 xl:sticky xl:w-3/12"
   >
     <h2 class="mb-2 font-serif text-3xl font-bold">
-      {t("projectoverview.headline", { defaultValue: "" })}
+      {m.projectoverviewHeadline()}
     </h2>
     <Button link="/work" class="" style="secondary" color="light">
-      {t("projectoverview.button", { defaultValue: "" })}
+      {m.projectoverviewButton()}
     </Button>
   </div>
   <div class="flex w-full flex-col gap-2 xl:w-9/12">

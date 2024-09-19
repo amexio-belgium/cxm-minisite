@@ -1,9 +1,13 @@
 ---
-import { getLocale, t } from "i18n:astro";
+import { parseHref } from "@lib/helpers";
+import { BASE_PATH } from "@src/consts";
+import * as m from "@src/paraglide/messages";
 
-const { pathname } = Astro.url;
-const paths = pathname.split("/").filter((x) => x);
-const lang = getLocale();
+const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
+const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
+
+const paths = pathNameAsLocale.split("/").filter((x) => x);
+const locale = Astro.currentLocale!;
 
 const servicesPath = /\/services\/\S+/;
 const casesPath = /\/cases\/\S+/;
@@ -11,10 +15,14 @@ const insightsPath = /\/insights\/\S+/;
 
 let parts: { text: string; href: string }[] = [
   {
-    text: t("breadcrumb.home"),
-    href: `/${lang}/`,
+    text: m.breadcrumbHome(),
+    href: `/${locale}/`,
   },
 ];
+
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 paths.forEach((text, i) => {
   const href = `/${paths.slice(0, i + 1).join("/")}`;
@@ -22,15 +30,14 @@ paths.forEach((text, i) => {
     let translatedText: string = "";
     if (
       i == paths.length - 1 &&
-      (servicesPath.test(pathname) ||
-        casesPath.test(pathname) ||
-        insightsPath.test(pathname))
+      (servicesPath.test(pathNameAsLocale) ||
+        casesPath.test(pathNameAsLocale) ||
+        insightsPath.test(pathNameAsLocale))
     ) {
       translatedText = text.replace(/[-_]/g, " ");
     } else {
-      translatedText = t("nav." + text.replace(/[-_]/g, " "), {
-        defaultValue: "",
-      });
+      translatedText =
+        m["nav" + capitalizeFirstLetter(text.replace(/[-_]/g, " "))];
     }
 
     parts.push({
@@ -47,7 +54,7 @@ const removeTrailingSlash = (text: string) => {
 
 {
   parts.length > 1 && (
-    <nav aria-label={t("breadcrumb.label")}>
+    <nav aria-label={m.breadcrumbLabel()}>
       <ol
         class="mb-8 flex flex-row flex-wrap gap-1 pl-2 text-white md:-ms-2 md:mb-0"
         role="list"
@@ -57,9 +64,9 @@ const removeTrailingSlash = (text: string) => {
             {index !== parts.length - 1 ? (
               <>
                 <a
-                  href={href}
+                  href={parseHref(href)}
                   {...attrs}
-                  aria-current={href === pathname && "page"}
+                  aria-current={href === pathNameAsLocale && "page"}
                   class="bg-gradient-to-r from-tertiary from-0% via-tertiary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-xs capitalize text-transparent underline decoration-white decoration-1 underline-offset-2 outline-none transition-all duration-300 hover:bg-[0%_100%] hover:decoration-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500 motion-reduce:transition-none md:py-2"
                 >
                   {text}
@@ -69,15 +76,19 @@ const removeTrailingSlash = (text: string) => {
                   aria-hidden="true"
                   focusable="false"
                 >
-                  <use xlink:href="/icons/icon-sprite.svg#icon-chevron-right" />
+                  <use
+                    xlink:href={parseHref(
+                      "/icons/icon-sprite.svg#icon-chevron-right",
+                    )}
+                  />
                 </svg>
               </>
             ) : (
               <span
                 {...attrs}
                 aria-current={
-                  removeTrailingSlash(href) === removeTrailingSlash(pathname) &&
-                  "page"
+                  removeTrailingSlash(href) ===
+                    removeTrailingSlash(pathNameAsLocale) && "page"
                 }
                 class="text-xs capitalize outline-none md:py-2"
               >

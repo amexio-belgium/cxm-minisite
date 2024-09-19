@@ -1,4 +1,5 @@
 import type { Link } from "@sanity/sanity.types";
+import { BASE_PATH } from "@src/consts";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 
 export const getHrefFromLinkObject = (
@@ -12,7 +13,7 @@ export const getHrefFromLinkObject = (
     (linkObject.internalLink?._type == "contentPage" ||
       linkObject.internalLink._type == "service")
   ) {
-    href = `/${language}/${linkObject.internalLink.metadata?.slug?.current}`;
+    href = `${BASE_PATH}/${language}/${linkObject.internalLink.metadata?.slug?.current}`;
   } else if (linkObject?.type === "external") {
     href = linkObject.url || "";
   } else if (linkObject?.type === "email") {

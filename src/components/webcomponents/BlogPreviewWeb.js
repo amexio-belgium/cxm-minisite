@@ -1,3 +1,4 @@
+import { parseHref } from "@lib/helpers";
 import { stegaClean } from "@sanity/client/stega";
 
 export class BlogPreviewWeb extends HTMLElement {
@@ -92,7 +93,7 @@ export class BlogPreviewWeb extends HTMLElement {
           </div>
           <h2 class="mb-2 font-serif text-lg font-bold [&>mark]:text-black">
             <a
-              href="${this.link}"
+              href="${parseHref(this.link)}"
               class="bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-black to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-black text-transparent no-underline decoration-white decoration-1 underline-offset-2 outline-none transition-all content-none before:absolute before:inset-x-0 before:inset-y-0 hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
               style="transition-duration: ${stegaClean(this.title).length *
               20}ms"

@@ -4,13 +4,13 @@ import type {
   ServiceWithReferences,
   TechnologyReferenced,
 } from "@sanity/custom.sanity.types";
-import { t } from "i18n:astro";
+import * as m from "@src/paraglide/messages";
 
 interface Props {
-  duration: string | undefined;
-  collaboration: CollaborationModelReferenced | undefined;
-  services: ServiceWithReferences[] | undefined;
-  technologies: TechnologyReferenced[] | undefined;
+  duration: string | undefined | null;
+  collaboration: CollaborationModelReferenced | undefined | null;
+  services: ServiceWithReferences[] | undefined | null;
+  technologies: TechnologyReferenced[] | undefined | null;
 }
 
 const { duration, collaboration, services, technologies } = Astro.props;
@@ -19,14 +19,14 @@ const { duration, collaboration, services, technologies } = Astro.props;
 <div
   class="relative -mt-16 mb-20 inline-block h-fit w-full flex-col items-start justify-start rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 p-4 text-white shadow-sm shadow-blue-200 animate-delay-500 animate-ease-out motion-safe:animate-fade-up md:p-8"
 >
-  <h2 class="mb-6 font-serif text-lg">{t("metadata.headline")}</h2>
+  <h2 class="mb-6 font-serif text-lg">{m.metadataHeadline()}</h2>
   <dl
     class="project-metadata mb-8 flex flex-col gap-4 font-serif text-sm lg:flex-row lg:flex-wrap"
   >
     {
       duration && (
         <div class="flex after:text-secondary lg:after:ml-4">
-          <dt class="inline lg:block">{t("metadata.duration") + ":"}</dt>
+          <dt class="inline lg:block">{m.metadataDuration() + ":"}</dt>
           <dd class="inline lg:block">{duration}</dd>
         </div>
       )
@@ -34,7 +34,7 @@ const { duration, collaboration, services, technologies } = Astro.props;
     {
       collaboration?.collaborationTabs && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
-          <dt class="inline lg:block">{t("metadata.collaboration") + ":"}</dt>
+          <dt class="inline lg:block">{m.metadataCollaboration() + ":"}</dt>
           <dd class="inline lg:block">
             {collaboration.collaborationTabs
               .map((tab) => tab?.concept?.prefLabel)
@@ -46,7 +46,7 @@ const { duration, collaboration, services, technologies } = Astro.props;
     {
       technologies && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
-          <dt class="inline lg:block">{t("metadata.technologies") + ":"}</dt>
+          <dt class="inline lg:block">{m.metadataTechnologies() + ":"}</dt>
           <dd class="inline lg:block">
             {technologies.map((technology) => technology.name).join(", ")}
           </dd>
@@ -56,7 +56,7 @@ const { duration, collaboration, services, technologies } = Astro.props;
     {
       services && (
         <div class="lg:flex">
-          <dt class="inline lg:block">{t("metadata.services") + ":"}</dt>
+          <dt class="inline lg:block">{m.metadataServices() + ":"}</dt>
           <dd class="inline lg:block">
             {services.map((service) => service?.metadata?.title).join(", ")}
           </dd>

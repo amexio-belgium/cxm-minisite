@@ -2,7 +2,6 @@
 import { PortableText } from "astro-portabletext";
 import { defaultComponents } from "../cms-components/PortableText/helper";
 import { getHrefFromLinkObject } from "../../lib/sanityHelpers";
-import { getLocale } from "i18n:astro";
 import Button from "../uielements/Button.astro";
 import type { Cta } from "../../sanity/sanity.types";
 
@@ -14,6 +13,7 @@ interface Props {
   cta?: Cta;
 }
 
+const locale = Astro.currentLocale!;
 const {
   headline,
   description,
@@ -25,7 +25,7 @@ const {
 
 <div
   class:list={[
-    "relative my-20 inline-flex w-full flex-col items-start justify-start gap-20 bg-cover",
+    "relative inline-flex w-full flex-col items-start justify-start gap-20 bg-cover",
     className,
   ]}
 >
@@ -44,9 +44,7 @@ const {
           <h2 class="font-serif text-2xl">{headline}</h2>
           <Button
             link={
-              cta?.link
-                ? getHrefFromLinkObject(cta.link, getLocale())
-                : undefined
+              cta?.link ? getHrefFromLinkObject(cta.link, locale) : undefined
             }
             style="primary"
             color="light"

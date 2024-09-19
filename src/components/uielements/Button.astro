@@ -1,4 +1,6 @@
 ---
+import { parseHref } from "@lib/helpers";
+
 interface Props {
   size?: "sm" | "md" | "lg";
   icon?: "phone" | "info" | "email" | "none";
@@ -69,7 +71,7 @@ const TagName = decorative ? "span" : "a";
     styles[style + "_" + color],
     className,
   ]}
-  href={link}
+  href={parseHref(link)}
 >
   {
     icon !== "none" && (
@@ -83,7 +85,7 @@ const TagName = decorative ? "span" : "a";
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <use xlink:href={`/icons/icon-sprite.svg#icon-${icon}`} />
+        <use xlink:href={parseHref(`/icons/icon-sprite.svg#icon-${icon}`)} />
       </svg>
     )
   }
@@ -95,7 +97,9 @@ const TagName = decorative ? "span" : "a";
         aria-hidden="true"
         focusable="false"
       >
-        <use xlink:href="/icons/icon-sprite.svg#icon-chevron-right" />
+        <use
+          xlink:href={parseHref("/icons/icon-sprite.svg#icon-chevron-right")}
+        />
       </svg>
     )
   }

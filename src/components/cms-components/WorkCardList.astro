@@ -15,7 +15,9 @@ const { workCardList } = Astro.props;
     workCardList?.style === "slanted" ? (
       <ProjectOverview workCardList={workCardList} />
     ) : (
-      <div class="relative flex w-full flex-col gap-8 pb-20 pt-20 before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl before:bg-light-blue-50 marker:before:h-full motion-safe:animate-fade-up motion-safe:animate-delay-500 md:pb-40">
+      <div
+        class="relative flex w-full flex-col gap-8 bg-light-blue-50 motion-safe:animate-fade-up motion-safe:animate-delay-500"
+      >
         {workCardList?.referenceCases.map((casePost) => (
           <CasePreview caseData={casePost} />
         ))}

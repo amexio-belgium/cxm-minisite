@@ -6,10 +6,11 @@ import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
 import { stegaClean } from "@sanity/client/stega";
-import { getLocale } from "i18n:astro";
+
 interface Props {
   blogPost: BlogHighlightReferenced;
 }
+const locale = Astro.currentLocale!;
 
 const blogPost = Astro.props.blogPost.blogPost;
 ---
@@ -28,7 +29,7 @@ const blogPost = Astro.props.blogPost.blogPost;
               .url()}
             class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt={blogPost.featuredImage?.asset.altTexts?.[getLocale()]}
+            alt={blogPost.featuredImage?.asset.altTexts?.[locale]}
             width={400}
             height={400}
           />
@@ -39,7 +40,7 @@ const blogPost = Astro.props.blogPost.blogPost;
           <h2 class="mb-2 font-serif text-lg [&>mark]:text-black">
             <Link
               class="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
-              href={`/${getLocale()}/insights/${blogPost.metadata?.slug?.current}`}
+              href={`/${locale}/insights/${blogPost.metadata?.slug?.current}`}
               textLength={stegaClean(blogPost.intro?.title)?.length}
               hoverColor="yellow"
             >

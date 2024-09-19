@@ -16,25 +16,32 @@ import type {
   AllInsightPagesQueryResult,
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
-import { getLocale, getLocalePlaceholder } from "i18n:astro";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
-import sitemap from "i18n:astro/sitemap";
-import { getSitemapParams } from "@lib/sitemap";
+import { locales } from "@src/locales/consts";
+
+const locale = Astro.currentLocale!;
 
 export async function getStaticPaths() {
   if (!VISUAL_EDITING_ENABLED) {
-    const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
-      query: allInsightPagesQuery,
-      params: { language: getLocalePlaceholder() },
-    });
+    let pages: { params: { slug: string; locale: string } }[] = [];
 
-    sitemap({
-      dynamicParams: getSitemapParams(insights, getLocalePlaceholder()),
-    });
+    for (const language of locales) {
+      const { data: insights } = await loadQuery<AllInsightPagesQueryResult>({
+        query: allInsightPagesQuery,
+        params: { language },
+      });
 
-    return insights.map((slug) => ({
-      params: { slug },
-    }));
+      const slugs = insights.map((slug) => ({
+        params: { slug: slug!, locale: language },
+      }));
+      pages = pages.concat(slugs);
+    }
+
+    // sitemap({
+    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
+    // });
+
+    return pages;
   } else {
     return [];
   }
@@ -47,7 +54,7 @@ if (!slug) {
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
   query: siteConfigQuery,
-  params: { language: getLocale() },
+  params: { language: locale },
 });
 
 if (!siteConfig) {
@@ -56,7 +63,7 @@ if (!siteConfig) {
 
 const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   query: blogPostQuery,
-  params: { language: getLocale(), slug: slug },
+  params: { language: locale, slug: slug },
 });
 ---
 
@@ -65,7 +72,7 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   description={blogPost?.metadata?.description || ""}
   slug={slug}
   siteConfig={siteConfig}
-  translations={blogPost._translations}
+  translations={blogPost?._translations}
   routeMap="insights"
 >
   <HeroHeader

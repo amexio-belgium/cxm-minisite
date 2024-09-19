@@ -3,7 +3,8 @@ import Button from "./Button.astro";
 import Link from "./Link.astro";
 import type { i18nImage } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
-import { t } from "i18n:astro";
+import * as m from "@src/paraglide/messages";
+import { parseHref } from "@lib/helpers";
 
 interface Props {
   profileImg?: i18nImage;
@@ -44,7 +45,7 @@ const directions = {
   right: "bg-gradient-to-l mr-16 md:mr-0",
 };
 
-const twitterText = t("share.twitter");
+const twitterText = m.shareTwitter();
 ---
 
 <div
@@ -86,14 +87,16 @@ const twitterText = t("share.twitter");
     {
       sharing && (
         <div class="md:gap flex items-center">
-          <span class="mr-2 text-sm">{t("share.message")}</span>
+          <span class="mr-2 text-sm">{m.shareMessage()}</span>
           <Link
             id="linkedin-share-button"
             class="border-transparant rounded-full border-2 hover:border-secondary focus-visible:rounded-full"
             href="#"
           >
             <svg class="h-8 w-8 fill-white">
-              <use xlink:href="/icons/icon-sprite.svg#icon-linkedin" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-linkedin")}
+              />
             </svg>
             <span class="sr-only">LinkedIn</span>
           </Link>
@@ -103,7 +106,9 @@ const twitterText = t("share.twitter");
             href="#"
           >
             <svg class="h-8 w-8 fill-white">
-              <use xlink:href="/icons/icon-sprite.svg#icon-twitter" />
+              <use
+                xlink:href={parseHref("/icons/icon-sprite.svg#icon-twitter")}
+              />
             </svg>
             <span class="sr-only">X(twitter)</span>
           </Link>

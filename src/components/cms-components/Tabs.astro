@@ -2,15 +2,15 @@
 import type { TabsReferenced } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
-import { getLocale } from "i18n:astro";
+
 interface Props {
   tabsContent: TabsReferenced;
 }
-
+const locale = Astro.currentLocale!;
 const { tabsContent } = Astro.props;
 ---
 
-<div class="mb-20 text-white md:mb-40">
+<div class="text-white">
   <h2 class="mb-8 text-balance font-serif text-3xl">
     {tabsContent.intro?.title}
   </h2>
@@ -41,7 +41,7 @@ const { tabsContent } = Astro.props;
     {
       tabsContent?.tabsOverview?.map((tab, index) => (
         <sl-tab
-          class="w-1/4 text-center text-lg aria-selected:border-b-2 aria-selected:border-secondary"
+          class="min-w-1/4 text-center text-lg aria-selected:border-b-2 aria-selected:border-secondary"
           slot="nav"
           panel={`model${index + 1}`}
         >
@@ -65,7 +65,7 @@ const { tabsContent } = Astro.props;
                   <img
                     loading="lazy"
                     src={imageBuilder.image(content.asset).url()}
-                    alt={content.asset.altTexts?.[getLocale()]}
+                    alt={content.asset.altTexts?.[locale]}
                     class="h-fit w-full overflow-hidden rounded-2xl shadow-sm shadow-primary lg:w-1/2"
                   />
                 )}

@@ -28,13 +28,13 @@ const markTags = {
     });
 
     // Check for links in markDefs
-    const linkMarkDef = props.node.markDefs?.find(
+    const linkMarkDef: any = props.node.markDefs?.find(
       (markDef) =>
         child.marks?.includes(markDef._key) && markDef._type === "link",
     );
 
     if (linkMarkDef) {
-      const href =
+      const href: string =
         linkMarkDef.type === "external"
           ? linkMarkDef.url
           : linkMarkDef.internalLink &&
@@ -42,7 +42,7 @@ const markTags = {
 
       return (
         <Link
-          className="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
+          class="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
           href={href}
           target={linkMarkDef.blank}
           hoverColor="yellow"
@@ -53,7 +53,9 @@ const markTags = {
 
     return (
       <span
-        set:html={openingTags + child.text.replace(/\r\n|\r|\n/g, '<br>') + closingTags}
+        set:html={
+          openingTags + child.text.replace(/\r\n|\r|\n/g, "<br>") + closingTags
+        }
       />
     );
   })

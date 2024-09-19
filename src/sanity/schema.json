@@ -345,6 +345,23 @@
           },
           "optional": true
         },
+        "style": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "dark"
+              },
+              {
+                "type": "string",
+                "value": "light"
+              }
+            ]
+          },
+          "optional": true
+        },
         "Code": {
           "type": "objectAttribute",
           "value": {
@@ -368,6 +385,22 @@
             "type": "string",
             "value": "blogsList"
           }
+        },
+        "intro": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "object",
+            "attributes": {
+              "title": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              }
+            }
+          },
+          "optional": true
         },
         "maxPerPage": {
           "type": "objectAttribute",
@@ -434,6 +467,13 @@
                 }
               }
             }
+          },
+          "optional": true
+        },
+        "hidePagination": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
           },
           "optional": true
         }
@@ -4666,6 +4706,21 @@
                   "type": "inline",
                   "name": "codeEmbed"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
+                }
               }
             ]
           }
@@ -5463,6 +5518,21 @@
                   "type": "inline",
                   "name": "codeEmbed"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
+                }
               }
             ]
           }
@@ -6119,6 +6189,21 @@
                   "type": "inline",
                   "name": "codeEmbed"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
+                }
               }
             ]
           }
@@ -6684,6 +6769,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "codeEmbed"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
                 }
               }
             ]
@@ -7708,6 +7808,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "codeEmbed"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "faq"
                 }
               }
             ]

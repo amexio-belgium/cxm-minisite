@@ -7,9 +7,9 @@ interface AltTexts {
 }
 
 export const i18nParams = [
-  { params: { lang: "en" } },
-  { params: { lang: "nl" } },
-  { params: { lang: "fr" } },
+  { params: { locale: "en" } },
+  { params: { locale: "nl" } },
+  { params: { locale: "fr" } },
 ];
 
 export const locales = ["en", "nl", "fr"];
