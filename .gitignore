@@ -25,5 +25,5 @@ pnpm-debug.log*
 /.vscode/
 *.local
 /.netlify/
-
 src/locales/*/
+/public/fonts/fonts.css

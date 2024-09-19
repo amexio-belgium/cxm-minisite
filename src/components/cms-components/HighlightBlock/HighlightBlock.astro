@@ -4,7 +4,7 @@ import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import Button from "@components/uielements/Button.astro";
-import { portableHighlightComponents } from "@components/cms-components/HighlightBlock/PortableText/helper";
+import { defaultComponents } from "../PortableText/helper";
 
 interface Props {
   highlight: HighlightReferenced;
@@ -48,16 +48,16 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
     <h2 class="text-balance font-serif text-lg font-medium sm:text-xl">
       {highlight.intro?.title}
     </h2>
-    <div class="font-sm prose font-light"></div>
-    {
-      highlight.intro?.intro && (
-        <PortableText
-          value={highlight.intro?.intro}
-          components={portableHighlightComponents}
-        />
-      )
-    }
-
+    <div class="font-sm prose font-light">
+      {
+        highlight.intro?.intro && (
+          <PortableText
+            value={highlight.intro?.intro}
+            components={defaultComponents}
+          />
+        )
+      }
+    </div>
     {
       highlight.ctaVisible && highlight.cta?.link && (
         <Button

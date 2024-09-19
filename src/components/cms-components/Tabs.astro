@@ -2,6 +2,7 @@
 import type { TabsReferenced } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
+import { defaultComponents } from "./PortableText/helper";
 
 interface Props {
   tabsContent: TabsReferenced;
@@ -17,7 +18,10 @@ const { tabsContent } = Astro.props;
   {
     tabsContent.intro?.intro && (
       <div class="mb-4">
-        <PortableText value={tabsContent.intro.intro} />
+        <PortableText
+          value={tabsContent.intro.intro}
+          components={defaultComponents}
+        />
       </div>
     )
   }
@@ -58,7 +62,10 @@ const { tabsContent } = Astro.props;
               <>
                 {content._type == "content" && content.content && (
                   <div class="w-full font-light lg:w-1/2">
-                    <PortableText value={content.content} />
+                    <PortableText
+                      value={content.content}
+                      components={defaultComponents}
+                    />
                   </div>
                 )}
                 {content._type == "image" && content.asset && (

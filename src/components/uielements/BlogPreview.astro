@@ -3,9 +3,9 @@ import Link from "@components/uielements/Link.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
 import type { BlogPostWithReferences } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
-import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
 import { PortableText } from "astro-portabletext";
 import { parseHref } from "@lib/helpers";
+import { defaultComponents } from "../cms-components/PortableText/helper";
 
 interface Props {
   blogPost: BlogPostWithReferences;
@@ -62,7 +62,7 @@ const { blogPost } = Astro.props;
         <div class="text-sm font-light">
           {blogPost.intro?.intro && (
             <PortableText
-              components={portableBlogHighlightComponents}
+              components={defaultComponents}
               value={blogPost.intro?.intro}
             />
           )}
