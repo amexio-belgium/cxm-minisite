@@ -1,0 +1,43 @@
+---
+import type { Props as $, Mark as MarkType } from "astro-portabletext/types";
+import { Mark } from "astro-portabletext/components";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import type { Link } from "@sanity/sanity.types";
+
+export type Props = $<MarkType<never>>; // 👈 Use `never` for type parameter
+
+const props = Astro.props;
+
+const locale = Astro.currentLocale!;
+
+const markDef: Link = props.node.markDef;
+---
+
+{
+  () => {
+    switch (props.node.markType) {
+      case "highlight":
+        return (
+          <mark>
+            <slot />
+          </mark>
+        );
+      case "link":
+        return (
+          <a
+            target={markDef.blank ? "_blank" : undefined}
+            href={getHrefFromLinkObject(markDef, locale)}
+          >
+            <slot />
+          </a>
+        );
+
+      default:
+        return (
+          <Mark {...props}>
+            <slot />
+          </Mark>
+        );
+    }
+  }
+}
