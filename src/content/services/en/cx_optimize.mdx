@@ -1,7 +1,7 @@
 ---
 title: 'CX Optimize'
 previewTitle: 'Boost your conversion rates'
-description: 'We help you find and apply strategies to turn more visitors into loyal customers, boosting your sales.'
+description: 'We help you find and apply strategies to turn visitors into loyal customers, boosting your sales and conversions.'
 pubDate: 'May 24 2024'
 heroImage: '/src/assets/images/chess2.jpg'
 altTextImage: 'The alt text for the hero image'
@@ -22,85 +22,73 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
+import deceuninck from '@assets/logos/beaulieu_logo_white.png';
+import kbc from '@assets/logos/kbc_logo_square_white.png';
+import sligro from '@assets/logos/sligro_logo_wit.png';
+import argenta from '@assets/logos/argenta_logo_white.png';
+import slant from "@assets/images/slantwithimage.png"
 
 
 <HeroHeader 
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we advised on strategy">
+	<Customers headline="Customers we advised on optimization">
+		<Image src={deceuninck} alt="Deceuninck" class="h-10 w-auto"/>
 		<Image src={kbc} alt="" class="h-10 w-auto"/>
-		<Image src={telenet} alt="" class="h-10 w-auto"/>
-		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+		<Image src={sligro} alt="" class="h-10 w-auto"/>
+		<Image src={argenta} alt="" class="h-10 w-auto"/>
+
 	</Customers> 
 </HeroHeader>
 
+<TilesContainer 
+    headline="Market challenges"
+    description="In today’s rapidly evolving digital landscape, businesses face increasing competition and significant challenges that impact their ability to acquire and retain customers. Common struggles include:">
+    <SmallTile 
+		headline="Lack of Customer-Centricity"
+		description="Without a deep understanding of customer frustrations and needs, you risk failing to address critical issues, leading to low customer satisfaction and loyalty." >
+    </SmallTile>
+    <SmallTile 
+		headline="War on Traffic"
+		description="Competition for online traffic has reached unprecedented levels, intensifying the fight for attention and acquisition. This results in a higher likelihood of losing potential prospects to competitors.">
+    </SmallTile>
+    <SmallTile 
+		headline="Costly Product Roadmaps"
+		description="The struggle to align your product development costs with customer and business benefits. Product roadmaps are often built on internal assumptions rather than real-world data, leading to insufficient ROI and failing to meet customer needs." >
+    </SmallTile>
+    <div slot="bg-image" class="absolute -z-10 w-[250%] md:w-[1240px] h-[1000px] -right-3/4 sm:-right-full lg:-right-1/3 -bottom-20 md:-top-20 bg-contain bg-no-repeat">
+      <Image loading="lazy" src={slant} alt="" />
+    </div>
+</TilesContainer>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
+	headline="Impact"
+	description="
+		<p>The culmination of these challenges leads to:</p>
+		<ul>
+			<li>High acquisition costs due to increased competition.</li>
+			<li>Missed revenue opportunities from inadequate customer engagement.</li>
+			<li>Escalating development costs resulting from misaligned product roadmaps with actual customer needs.</li>
+			<li>Low customer satisfaction and loyalty, which hinders long-term growth and retention.</li>
+		</ul>
+	">
 	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
-    headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    headline="A holistic approach to optimization"
+    description="To effectively tackle these challenges, it is essential for companies to adopt a comprehensive Optimization Strategy and foster an experimentation culture. Our unique, holistic approach focuses on:">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Data-Driven Friction Hunting"
+		description="The foundation of a successful optimization strategy is identifying and understanding the pain points that your customers experience throughout their journey. We use a data-driven approach to uncover these critical friction points, ensuring that all optimization efforts are aligned with real customer needs." >
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Dual Agile Track for Continuous Improvement"
+		description="We employ a dual agile methodology to balance long-term strategy with short-term execution. This approach allows for both rapid iteration and strategic planning, ensuring continuous improvement and real-time adjustments based on customer feedback.">
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Strategy, Process, and Team Alignment"
+		description="A successful optimization strategy requires not only the right tools but also the right team and processes. We help align your internal strategy with optimized processes and a customer-focused team, ensuring that every decision is backed by data and geared towards delivering measurable business benefits." >
     </SmallTile>
 </TilesContainer>
-  
-<Highlight 
-	title="In the picture"
-	text="Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam."
-	image='/src/assets/images/highlight.png'
-	buttonText="discover"
-	/>
-
-<Faq headline="Questions we usually get">
-	<FaqQuestion
-		headline="Can you help me with services for development only?"
-		headlineTag="h3"> 
-		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-    	<ul> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ul>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Can you help me with services for development only?"
-		headlineTag="h3" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="What makes you different from other agencies?" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-    	<ol> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ol>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Can you support my in-house team?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Do you work for startups?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-	</FaqQuestion>
-</Faq>
