@@ -16,6 +16,7 @@ import type {
 
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import { locales } from "@src/locales/consts";
+import type { Image } from "sanity";
 
 const locale = Astro.currentLocale!;
 
@@ -74,6 +75,8 @@ if (contentPage == null) {
   slug={slug!}
   siteConfig={siteConfig}
   translations={contentPage?._translations}
+  noIndex={contentPage?.metadata?.noIndex}
+  seoImage={contentPage?.metadata?.image as Image}
 >
   <HeroHeader
     headline={contentPage?.intro?.title}
