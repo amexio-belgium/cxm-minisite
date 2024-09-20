@@ -13,12 +13,11 @@ const locale = Astro.currentLocale!;
 {
   image.asset?._id && (
     <img
-      src={imageBuilder.image(image.asset?._id).height(1024).url()}
+      src={imageBuilder.image(image.asset?._id).url()}
       loading="lazy"
       decoding="async"
       alt={image.asset.altTexts?.[locale]}
-      class="mx-auto my-8 w-1/2 overflow-hidden rounded-xl shadow-xl shadow-primary/20"
-      height="1024"
+      class="mx-auto overflow-hidden rounded-xl shadow-xl shadow-primary/20"
     />
   )
 }
