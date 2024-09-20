@@ -44,7 +44,7 @@ const stylesSmallTile = {
           class={stylesSmallTile[cardGrid.style!]}
         >
           {card.icon?.asset && card.icon?.asset?.extension == "svg" && (
-            <div class="service__item w-5/12">
+            <div class="service__item h-20 w-20 overflow-visible">
               <object data={asset.url} />
             </div>
           )}
