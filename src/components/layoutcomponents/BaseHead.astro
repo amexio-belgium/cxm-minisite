@@ -2,14 +2,20 @@
 import css from "../../styles/global.css?url";
 import printcss from "../../styles/print.css?url";
 
-import { type PageTranslations } from "@sanity/custom.sanity.types";
+import {
+  type i18nImage,
+  type PageTranslations,
+} from "@sanity/custom.sanity.types";
 import { locales } from "@src/locales/consts";
 import { BASE_PATH } from "@src/consts";
 import { parseHref } from "@lib/helpers";
+import { imageBuilder } from "@api/sanity";
+import type { Image } from "sanity";
+
 interface Props {
   title: string;
   description: string;
-  image?: string;
+  seoImage?: Image;
   translations: PageTranslations;
   routeMap?: string;
   slug: string;
@@ -17,14 +23,8 @@ interface Props {
 
 const locale = Astro.currentLocale;
 
-const {
-  title,
-  description,
-  image = "/share-image.jpg",
-  translations,
-  routeMap,
-  slug,
-} = Astro.props;
+const { title, description, seoImage, translations, routeMap, slug } =
+  Astro.props;
 
 // Remove the first / from the pathname, then you are left with en/fr/nl if it's a homepage
 const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
@@ -148,14 +148,24 @@ const canonicalURL = isHomePage
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta
+  property="og:image"
+  content={seoImage
+    ? imageBuilder.image(seoImage).width(1200).height(630).url()
+    : new URL("/share-image.jpg", Astro.url)}
+/>
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta
+  property="twitter:image"
+  content={seoImage
+    ? imageBuilder.image(seoImage).width(1200).height(630).url()
+    : new URL("/share-image.jpg", Astro.url)}
+/>
 
 <link rel="stylesheet" href={css} />
 <link rel="stylesheet" href={printcss} media="print" />
