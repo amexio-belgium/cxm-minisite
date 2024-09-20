@@ -6,6 +6,7 @@ import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { parseHref } from "@lib/helpers";
 import { defaultComponents } from "../cms-components/PortableText/helper";
+import { stegaClean } from "@sanity/client/stega";
 
 interface Props {
   blogPost: BlogPostWithReferences;
@@ -50,7 +51,7 @@ const { blogPost } = Astro.props;
         <h2 class="mb-2 font-serif text-lg font-bold [&>mark]:text-black">
           <Link
             onWhite
-            textLength={blogPost.intro?.title?.length}
+            textLength={stegaClean(blogPost.intro?.title)?.length}
             class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
             href={parseHref(
               `/${locale}/insights/${blogPost.metadata?.slug?.current}`,
