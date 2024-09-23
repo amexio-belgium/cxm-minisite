@@ -67,7 +67,9 @@ const { content } = Astro.props;
       }
       case "highlight": {
         return (
-          <ComponentWrapper>
+          <ComponentWrapper
+            classes={`${content.style === "subtle" ? "mb-20" : ""}`}
+          >
             <HighlightBlock highlight={content} />
           </ComponentWrapper>
         );
