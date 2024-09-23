@@ -19,6 +19,7 @@ import type {
 } from "@sanity/sanity.types";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import { locales } from "@src/locales/consts";
+import type { Image } from "sanity";
 
 const locale = Astro.currentLocale!;
 
@@ -75,6 +76,8 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
   siteConfig={siteConfig}
   translations={casePage?._translations}
   routeMap="cases"
+  noIndex={casePage?.metadata?.noIndex}
+  seoImage={casePage?.metadata?.image as Image}
 >
   <HeroHeader
     headline={casePage?.intro?.title}

@@ -7,7 +7,10 @@ import {
 } from "@api/queries";
 import { imageBuilder, loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
-import { type ServiceWithReferences } from "src/sanity/custom.sanity.types";
+import {
+  type i18nImage,
+  type ServiceWithReferences,
+} from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import Customers from "@components/uicomposition/Customers.astro";
 import type {
@@ -16,6 +19,7 @@ import type {
 } from "@sanity/sanity.types";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import { locales } from "@src/locales/consts";
+import type { Image } from "sanity";
 
 const locale = Astro.currentLocale!;
 
@@ -73,6 +77,8 @@ if (servicePage == null) {
   siteConfig={siteConfig}
   routeMap="services"
   translations={servicePage?._translations}
+  noIndex={servicePage?.metadata?.noIndex}
+  seoImage={servicePage?.metadata?.image as Image}
 >
   <HeroHeader
     headline={servicePage.intro?.title}

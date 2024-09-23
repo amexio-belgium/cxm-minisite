@@ -48,6 +48,7 @@ const { data: contentPage } = await loadQuery<ContentPageWithReferences>({
   slug={slug!}
   siteConfig={siteConfig}
   translations={[]}
+  noIndex={contentPage?.metadata?.noIndex}
 >
   <HeroHeader
     headline={contentPage.intro?.title}
