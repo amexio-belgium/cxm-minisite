@@ -43,6 +43,7 @@ content[] {
     introCta {
       ...,
       link {
+        ...,
         internalLink->{...}
       }
     }
@@ -158,6 +159,7 @@ content[] {
       introCta {
         ...,
         link {
+          ...,
           internalLink->{...}
         }
       }
