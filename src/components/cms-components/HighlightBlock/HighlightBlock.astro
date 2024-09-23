@@ -63,6 +63,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
         <Button
           class="mt-6"
           color="light"
+          target={highlight.cta?.link?.blank ? "_blank" : undefined}
           link={getHrefFromLinkObject(highlight.cta?.link, locale)}
         >
           {highlight.cta.text}

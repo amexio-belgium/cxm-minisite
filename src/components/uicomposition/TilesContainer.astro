@@ -46,6 +46,7 @@ const {
             link={
               cta?.link ? getHrefFromLinkObject(cta.link, locale) : undefined
             }
+            target={cta?.link?.blank ? "_blank" : undefined}
             style="primary"
             color="light"
           >
