@@ -23,13 +23,16 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
   {
     variant == "flat" && (
       <div class="flex flex-col items-center justify-center text-white md:w-4/12">
-        <SanityImg
-          src={testimonial.person?.image?.asset?._id || ""}
-          alt={testimonial.person?.image?.asset?.altTexts?.[locale] || ""}
-          class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
-          loading="lazy"
-          sizes="(min-width:768px) 50vw, 100vw"
-        />
+        {testimonial.person?.image?.asset?._id && (
+          <SanityImg
+            src={testimonial.person?.image?.asset?._id}
+            alt={testimonial.person?.image?.asset?.altTexts?.[locale] || ""}
+            class="mb-8 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-110 sm:h-40 sm:w-40 lg:h-52 lg:w-52"
+            loading="lazy"
+            sizes="(min-width:768px) 50vw, 100vw"
+          />
+        )}
+
         <footer>
           <cite class="flex flex-col items-center justify-center not-italic">
             <span class="text-xs" set:html={testimonial.person?.name} />
@@ -67,15 +70,16 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
         </>
       ) : (
         <>
-          <SanityImg
-            src={testimonial.person?.image?.asset?._id || ""}
-            alt={
-              testimonial.person?.image?.asset?.altTexts?.[locale] || ""
-            }
-            class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
-            loading="lazy"
-            sizes="(min-width:768px) 50vw, 100vw"
-          />
+          {testimonial.person?.image?.asset?._id && (
+            <SanityImg
+              src={testimonial.person?.image?.asset?._id}
+              alt={testimonial.person?.image?.asset?.altTexts?.[locale] || ""}
+              class="absolute -top-20 left-4 aspect-square h-52 w-52 rounded-full transition-transform duration-300 ease-in-out motion-safe:group-hover/quote:scale-105 lg:-left-20 lg:top-[unset]"
+              loading="lazy"
+              sizes="(min-width:768px) 50vw, 100vw"
+            />
+          )}
+
           <div class="relative p-4">
             <svg
               class="absolute left-0 top-0 h-4 w-4"
