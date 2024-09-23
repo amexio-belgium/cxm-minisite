@@ -24,11 +24,22 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
                                     }
                                     `;
 
+const portableTextResolveInternalLink = groq`markDefs[] {
+  ...,
+  defined(internalLink) => {
+    internalLink -> {...}
+  }
+}`;
+
 const contentQuery = groq`
 content[] {
   ...,
   intro {
     ...,
+    intro[] {
+      ...,
+      ${portableTextResolveInternalLink}
+    },
     introCta {
       ...,
       link {
@@ -181,6 +192,13 @@ content[] {
   _type == "tabs" => {
     ...,
     defined(tabsOverview) => {
+      intro {
+        ...,
+        intro[] {
+          ...,
+          ${portableTextResolveInternalLink}
+        }
+      },
       tabsOverview[]{
         ...,
         _type == "tab" => {
@@ -189,6 +207,12 @@ content[] {
             ...,
             _type == "image" => {
               asset->{...}
+            },
+            _type == "content" => {
+              content[] {
+                ...,
+                ${portableTextResolveInternalLink}
+              }
             }
           }
         }
@@ -200,9 +224,10 @@ content[] {
     defined(content) => {
       content[]{
         ...,
-          _type == "image" => {
-            asset->{...}
-          }
+        _type == "image" => {
+          asset->{...}
+        },
+        ${portableTextResolveInternalLink}
       }
     } 
   },
@@ -241,12 +266,7 @@ content[] {
         ...,
         answer[] {
           ...,
-          markDefs[]{
-            ...,
-            defined(internalLink) => {
-              internalLink -> {...}
-            }
-          }
+          ${portableTextResolveInternalLink}
         }
       }
     }
@@ -446,6 +466,13 @@ export const contentPageQuery = groq`*[_type == "contentPage" && language == $la
   "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
     "slug": metadata.slug.current,
     language
+  },
+  intro {
+    ...,
+    intro[] {
+      ...,
+      ${portableTextResolveInternalLink}
+    },
   },
   ${contentQuery}
 }`;

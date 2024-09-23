@@ -14,6 +14,7 @@ import { VisualEditing } from "@sanity/astro/visual-editing";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import type { PageTranslations } from "@sanity/custom.sanity.types";
+import type { Image } from "sanity";
 
 interface Props {
   title: string;
@@ -22,12 +23,22 @@ interface Props {
   siteConfig: SiteConfigQueryResult;
   translations: PageTranslations;
   routeMap?: string;
+  noIndex?: boolean;
+  seoImage?: Image;
 }
 
 const locale = Astro.currentLocale;
 
-const { title, description, slug, siteConfig, translations, routeMap } =
-  Astro.props;
+const {
+  title,
+  description,
+  slug,
+  siteConfig,
+  translations,
+  routeMap,
+  noIndex,
+  seoImage,
+} = Astro.props;
 
 if (!siteConfig) {
   return new Response(null, { status: 404 });
@@ -56,12 +67,14 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
   <head>
     <meta charset="utf-8" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {noIndex && <meta name="robots" content="noindex" />}
     <BaseHead
       translations={translations}
       slug={slug}
       routeMap={routeMap}
       title={title}
       description={description}
+      seoImage={seoImage}
     />
     {
       slug === "contact" && (

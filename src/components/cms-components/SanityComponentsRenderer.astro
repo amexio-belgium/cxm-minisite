@@ -26,7 +26,11 @@ const { content } = Astro.props;
     switch (content._type) {
       case "cardGrid": {
         return (
-          <ComponentWrapper>
+          <ComponentWrapper
+            bgClass={
+              content.style === "popping" ? "bg-light-blue-50" : undefined
+            }
+          >
             <CardGrid cardGrid={content} />
           </ComponentWrapper>
         );
@@ -47,7 +51,9 @@ const { content } = Astro.props;
       }
       case "longFormText": {
         return (
-          <ComponentWrapper>
+          <ComponentWrapper
+            bgClass={content.standOut ? "bg-lightest-blue-50" : undefined}
+          >
             <LongFormText longFormText={content} />
           </ComponentWrapper>
         );

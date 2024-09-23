@@ -1,5 +1,6 @@
 ---
 import { PortableText } from "astro-portabletext";
+import { defaultComponents } from "../cms-components/PortableText/helper";
 
 interface Props {
   headline: string | undefined;
@@ -17,12 +18,8 @@ const {
 const HeadlineTagName = headlineTag;
 ---
 
-<div
-  class:list={[
-    className,
-  ]}
->
-  <div class="flex flex-col items-center justify-start gap-2 md:gap-4">
+<div class:list={[className]}>
+  <div class="mx-auto flex flex-col items-center justify-start gap-2 md:gap-4">
     <slot />
     <HeadlineTagName
       class:list={[
@@ -31,7 +28,7 @@ const HeadlineTagName = headlineTag;
       set:html={headline}
     />
     <span class="text-center text-sm font-light">
-      <PortableText value={description} />
+      <PortableText value={description} components={defaultComponents} />
     </span>
   </div>
 </div>

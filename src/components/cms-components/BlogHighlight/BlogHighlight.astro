@@ -4,8 +4,8 @@ import FormattedDate from "@components/uielements/FormattedDate.astro";
 import type { BlogHighlightReferenced } from "@sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
-import { portableBlogHighlightComponents } from "@components/cms-components/BlogHighlight/helpers";
 import { stegaClean } from "@sanity/client/stega";
+import { defaultComponents } from "../PortableText/helper";
 
 interface Props {
   blogPost: BlogHighlightReferenced;
@@ -21,7 +21,6 @@ const blogPost = Astro.props.blogPost.blogPost;
       <div class="flex h-[300px] items-center justify-center overflow-hidden rounded-t-xl shadow-xl shadow-primary/20 lg:aspect-square lg:h-[unset] lg:shrink-0 lg:rounded-l-xl lg:rounded-tr-none">
         {blogPost.featuredImage?.asset && (
           <img
-            loading="eager"
             src={imageBuilder
               .image(blogPost.featuredImage?.asset)
               .width(400)
@@ -50,7 +49,7 @@ const blogPost = Astro.props.blogPost.blogPost;
           {blogPost.intro?.intro && (
             <div class="text-sm font-light">
               <PortableText
-                components={portableBlogHighlightComponents}
+                components={defaultComponents}
                 value={blogPost.intro?.intro}
               />
             </div>
