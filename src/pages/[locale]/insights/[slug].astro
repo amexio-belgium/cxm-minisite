@@ -80,7 +80,6 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
 >
   <HeroHeader
     headline={blogPost.intro?.title}
-    text={blogPost.intro?.intro}
     backgroundImage={blogPost?.featuredImage?.asset?._id}
   >
     <div class="mt-8 flex flex-row items-center gap-4 text-white">
@@ -93,6 +92,13 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
         blogPost.topic && (
           <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
             {blogPost.topic.map((topic) => topic.prefLabel)}
+          </p>
+        )
+      }
+      {
+        blogPost.postType && (
+          <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
+            {blogPost.postType.map((type) => type.prefLabel)}
           </p>
         )
       }
