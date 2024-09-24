@@ -2135,6 +2135,73 @@
     }
   },
   {
+    "name": "faq",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "faq"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "questions": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "_ref": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "_type": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string",
+                    "value": "reference"
+                  }
+                },
+                "_weak": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "boolean"
+                  },
+                  "optional": true
+                }
+              },
+              "dereferencesTo": "answerQuestion",
+              "rest": {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "solutionDomain",
     "type": "document",
     "attributes": {
@@ -4711,6 +4778,13 @@
         },
         "optional": true
       },
+      "coreTechnology": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "technologies": {
         "type": "objectAttribute",
         "value": {
@@ -6194,6 +6268,13 @@
         },
         "optional": true
       },
+      "language": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "type": {
         "type": "objectAttribute",
         "value": {
@@ -6775,14 +6856,6 @@
         },
         "optional": true
       },
-      "faqs": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "faq"
-        },
-        "optional": true
-      },
       "customerReferencesText": {
         "type": "objectAttribute",
         "value": {
@@ -6922,73 +6995,6 @@
           "type": "string"
         },
         "optional": true
-      }
-    }
-  },
-  {
-    "name": "faq",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "faq"
-          }
-        },
-        "title": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "questions": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "object",
-              "attributes": {
-                "_ref": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  }
-                },
-                "_type": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string",
-                    "value": "reference"
-                  }
-                },
-                "_weak": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "boolean"
-                  },
-                  "optional": true
-                }
-              },
-              "dereferencesTo": "answerQuestion",
-              "rest": {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "optional": true
-        }
       }
     }
   },

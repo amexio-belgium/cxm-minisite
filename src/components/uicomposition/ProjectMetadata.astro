@@ -11,9 +11,11 @@ interface Props {
   collaboration: CollaborationModelReferenced | undefined | null;
   services: ServiceWithReferences[] | undefined | null;
   technologies: TechnologyReferenced[] | undefined | null;
+  coreTechnology?: string;
 }
 
-const { duration, collaboration, services, technologies } = Astro.props;
+const { duration, collaboration, services, technologies, coreTechnology } =
+  Astro.props;
 ---
 
 <div
@@ -44,12 +46,10 @@ const { duration, collaboration, services, technologies } = Astro.props;
       )
     }
     {
-      technologies && (
+      coreTechnology && coreTechnology.length > 0 && (
         <div class="after:text-secondary lg:flex lg:after:ml-4">
           <dt class="inline lg:block">{m.metadataTechnologies() + ":"}</dt>
-          <dd class="inline lg:block">
-            {technologies.map((technology) => technology.name).join(", ")}
-          </dd>
+          <dd class="inline lg:block">{coreTechnology}</dd>
         </div>
       )
     }
