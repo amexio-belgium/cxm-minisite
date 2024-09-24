@@ -75,14 +75,14 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
   slug={slug}
   siteConfig={siteConfig}
   translations={casePage?._translations}
-  routeMap="cases"
+  routeMap="work"
   noIndex={casePage?.metadata?.noIndex}
   seoImage={casePage?.metadata?.image as Image}
 >
   <HeroHeader
     headline={casePage?.intro?.title}
     text={casePage?.intro?.intro}
-    backgroundImage={casePage?.image?.asset?._id}
+    backgroundImage={casePage.introImage?.asset._id}
   >
     {
       casePage?.customerReferences &&
@@ -115,6 +115,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
     collaboration={casePage?.collaborationModel}
     services={casePage?.services}
     technologies={casePage?.technologies}
+    coreTechnology={casePage?.coreTechnology}
   >
     {
       casePage?.technologies?.map((technology) => (
