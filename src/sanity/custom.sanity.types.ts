@@ -432,6 +432,7 @@ export interface BlogPostWithReferences {
 export type BlogsListReferenced = {
   _type: "blogsList";
   blogsType?: "latest" | "specific";
+  style?: "popping" | "subtle";
   blogPosts?: BlogPostWithReferences[];
   maxPerPage?: number;
   hidePagination?: boolean;
