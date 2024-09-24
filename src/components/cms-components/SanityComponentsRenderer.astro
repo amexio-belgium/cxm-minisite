@@ -44,7 +44,7 @@ const { content } = Astro.props;
       }
       case "callout": {
         return (
-          <ComponentWrapper>
+          <ComponentWrapper classes="py-0 xl:py-20 relative before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl  marker:before:h-full">
             <Callout callout={content} />
           </ComponentWrapper>
         );
