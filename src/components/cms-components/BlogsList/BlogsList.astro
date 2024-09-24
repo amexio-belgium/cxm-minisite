@@ -151,7 +151,7 @@ const items = isLatestBlogs
         blogs = JSON.parse(this.dataset.blogs) as BlogPostWithReferences[];
       }
       // Get the id of the last item in the existing items so we can filter from there in the query
-      let lastId = blogs[blogs.length - 1]._id;
+      let lastPubDate = blogs[blogs.length - 1].publicationDate;
 
       function GetBlogpostPreviewWebComponent(blog: BlogPostWithReferences) {
         const el = new BlogPreviewWeb();
@@ -204,7 +204,7 @@ const items = isLatestBlogs
           query: blogsListQueryPaginating,
           params: {
             language: lang!,
-            lastId: lastId,
+            lastPubDate: lastPubDate,
             itemsPerTime: itemsPerTime,
           },
         });
@@ -235,7 +235,7 @@ const items = isLatestBlogs
           totalViewed!.textContent = `You've viewed ${items} of the ${totalItems} blogposts`;
         }
 
-        lastId = blogsFetched[blogsFetched.length - 1]._id;
+        lastPubDate = blogsFetched[blogsFetched.length - 1].publicationDate;
 
         // If click came from enter key, get the last
         // article that was there before loading new ones and focus on them for accessibility

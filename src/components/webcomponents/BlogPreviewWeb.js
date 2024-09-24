@@ -81,7 +81,8 @@ export class BlogPreviewWeb extends HTMLElement {
               date="${this.publicationDate}"
             />
 
-            ${this.topics
+            ${this.topics &&
+            this.topics
               .map(
                 (topic) => `
         <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
