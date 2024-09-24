@@ -467,8 +467,9 @@ export interface WorkWithReferences {
     dark: i18nImage | null;
   } | null;
   link?: Link;
+  coreTechnology?: string;
   metadata?: Metadata;
-  image?: i18nImage;
+  introImage?: i18nImage;
   _updatedAt?: string;
   _id: string;
   intro?: Intro;

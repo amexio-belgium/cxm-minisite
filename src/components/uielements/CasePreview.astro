@@ -98,12 +98,9 @@ const { caseData, small } = Astro.props;
           )
         }
         {
-          caseData?.technologies && (
+          caseData?.coreTechnology && caseData.coreTechnology.length > 0 && (
             <li class="ml-5 list-outside">
-              {m.metadataTechnologies()}:
-              {caseData.technologies
-                ?.map((technology) => technology?.name)
-                .join(", ")}
+              {`${m.metadataTechnologies()}: ${caseData.coreTechnology}`}
             </li>
           )
         }
@@ -121,7 +118,7 @@ const { caseData, small } = Astro.props;
     </div>
     <Button
       class="self-end"
-      link={`/${locale}/cases/${caseData?.metadata?.slug?.current}`}
+      link={`/${locale}/work/${caseData?.metadata?.slug?.current}`}
       size="sm"
       color="light"
     >
