@@ -409,6 +409,23 @@
           },
           "optional": true
         },
+        "style": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "subtle"
+              },
+              {
+                "type": "string",
+                "value": "popping"
+              }
+            ]
+          },
+          "optional": true
+        },
         "blogsType": {
           "type": "objectAttribute",
           "value": {

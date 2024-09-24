@@ -68,7 +68,7 @@ const items = isLatestBlogs
       data-itemspertime={itemsPerTime}
       data-islatestblogs={JSON.stringify(isLatestBlogs)}
     >
-      <div class="relative w-full gap-8 before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl before:bg-light-blue-50 marker:before:h-full motion-safe:animate-fade-up motion-safe:animate-delay-1000">
+      <div class="relative flex flex-col py-20 before:absolute before:-right-24 before:bottom-0 before:top-0 before:-z-10 before:h-full before:w-[3000px] before:bg-light-blue-50 xl:pr-12 xl:before:right-0 xl:before:rounded-xl">
         {blogsList?.intro?.title && (
           <h2 class="mb-8 font-serif text-2xl text-black md:text-3xl">
             {blogsList?.intro?.title}

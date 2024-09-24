@@ -81,6 +81,7 @@ export type BlogsList = {
     title?: string;
   };
   maxPerPage?: number;
+  style?: "subtle" | "popping";
   blogsType?: "latest" | "specific";
   blogPosts?: Array<{
     _ref: string;
@@ -2228,6 +2229,7 @@ export type ServiceQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -2248,6 +2250,7 @@ export type ServiceQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -2266,6 +2269,7 @@ export type ServiceQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -2285,6 +2289,7 @@ export type ServiceQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -2302,6 +2307,7 @@ export type ServiceQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -2451,6 +2457,7 @@ export type ServiceQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -7170,6 +7177,7 @@ export type BlogPostQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -7190,6 +7198,7 @@ export type BlogPostQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -7208,6 +7217,7 @@ export type BlogPostQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -7227,6 +7237,7 @@ export type BlogPostQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -7244,6 +7255,7 @@ export type BlogPostQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -7393,6 +7405,7 @@ export type BlogPostQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -12141,6 +12154,7 @@ export type WorkQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -12161,6 +12175,7 @@ export type WorkQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -12179,6 +12194,7 @@ export type WorkQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -12198,6 +12214,7 @@ export type WorkQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -12215,6 +12232,7 @@ export type WorkQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -12364,6 +12382,7 @@ export type WorkQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -17729,6 +17748,7 @@ export type ContentPageQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -17749,6 +17769,7 @@ export type ContentPageQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -17767,6 +17788,7 @@ export type ContentPageQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -17786,6 +17808,7 @@ export type ContentPageQueryResult = {
           introCta: null;
         } | null;
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts?: Array<{
           _ref: string;
@@ -17803,6 +17826,7 @@ export type ContentPageQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
@@ -17952,6 +17976,7 @@ export type ContentPageQueryResult = {
           title?: string;
         };
         maxPerPage?: number;
+        style?: "popping" | "subtle";
         blogsType?: "latest" | "specific";
         blogPosts: Array<{
           _id: string;
