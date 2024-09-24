@@ -37,7 +37,7 @@ const { content } = Astro.props;
       }
       case "servicesCardList": {
         return (
-          <ComponentWrapper bgClass="bg-light-blue-50">
+          <ComponentWrapper bgClass="bg-red-500">
             <ServiceCardList serviceCardList={content} />
           </ComponentWrapper>
         );
@@ -76,7 +76,7 @@ const { content } = Astro.props;
       }
       case "workCardList": {
         return (
-          <ComponentWrapper bgClass="bg-light-blue-50">
+          <ComponentWrapper>
             <WorkCardList workCardList={content} />
           </ComponentWrapper>
         );
