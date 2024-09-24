@@ -204,7 +204,7 @@ const items = isLatestBlogs
           query: blogsListQueryPaginating,
           params: {
             language: lang!,
-            lastPubDate: lastPubDate,
+            lastPubDate: lastPubDate || "",
             itemsPerTime: itemsPerTime,
           },
         });
