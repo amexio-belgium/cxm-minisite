@@ -27,8 +27,10 @@ const { content } = Astro.props;
       case "cardGrid": {
         return (
           <ComponentWrapper
-            bgClass={
-              content.style === "popping" ? "bg-light-blue-50" : undefined
+            classes={
+              content.style === "popping"
+                ? "xl:py-20 relative before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl  marker:before:h-full"
+                : undefined
             }
           >
             <CardGrid cardGrid={content} />
@@ -37,7 +39,7 @@ const { content } = Astro.props;
       }
       case "servicesCardList": {
         return (
-          <ComponentWrapper bgClass="bg-red-500">
+          <ComponentWrapper bgClass="bg-light-blue-50">
             <ServiceCardList serviceCardList={content} />
           </ComponentWrapper>
         );
@@ -76,7 +78,7 @@ const { content } = Astro.props;
       }
       case "workCardList": {
         return (
-          <ComponentWrapper>
+          <ComponentWrapper classes="py-0 xl:py-20 relative before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl  marker:before:h-full">
             <WorkCardList workCardList={content} />
           </ComponentWrapper>
         );
@@ -97,7 +99,7 @@ const { content } = Astro.props;
       }
       case "blogsList": {
         return (
-          <ComponentWrapper bgClass="bg-light-blue-50">
+          <ComponentWrapper classes="py-0 xl:py-20 relative before:absolute before:-left-[3000px] before:bottom-0 before:right-[1000px] before:top-0 before:-z-10 before:w-[10000px] before:rounded-xl  marker:before:h-full">
             <BlogsList blogsList={content} />
           </ComponentWrapper>
         );
