@@ -39,7 +39,7 @@ const {
   <div class="flex w-full flex-col items-start justify-start">
     {
       headline &&
-        (!cta || (cta && cta?.text?.length === 0)) &&
+        (!cta || (cta && (!cta.text || cta.text.length === 0))) &&
         headline.length > 0 && <h2 class="font-serif text-2xl">{headline}</h2>
     }
     {
