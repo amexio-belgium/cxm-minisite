@@ -1,7 +1,7 @@
 ---
 title: "Making sense of composability"
 description: 'Enterprises are increasingly embracing composable CXM. Discover how our unique CXM Reference Framework supports the assessment and decomposition of CXM ecosystems, helping businesses scale their operations with confidence.'
-pubDate: 2024-09-02
+pubDate: 2024-09-16
 heroImage: '/src/assets/images/composability.jpg'
 tags: 'Composability'
 author: "Jan Lemmens"
@@ -9,168 +9,17 @@ authorTitle: "Solution Manager CXM"
 authorProfileImg: '/src/assets/people/jan-lemmens.jpg'
 ---
 import LayoutSection  from "@components/uicomposition/LayoutSection.astro"
-import ContentImage  from "@components/uielements/ContentImage.astro"
+import Highlight from "@components/uicomposition/Highlight.astro"
 
 
 <LayoutSection backgroundColor="dark">
     <p>Customer expectations are changing constantly, and technology is evolving at a more rapid pace than ever before, disrupting every aspect of our lives. As digital experiences become more sophisticated and customer touchpoints keep expanding, the move towards so-called ‘Composable Customer Experience Management’ architectures has become talk of the town for many enterprises, looking for flexibility and agility in their systems as they scale their operations.</p>
 </LayoutSection>
 
-<LayoutSection>
-    <p>At its core, a composable architecture focuses on modular, interchangeable components, offering flexibility and adaptability when setting up and managing complex solution landscapes. It involves breaking down monoliths into smaller, independent units that can be assembled and rearranged to meet specific business needs.</p>
-    <p>Benefits of a composable architecture include:</p>
-    <ul>
-        <li><strong>Flexibility:</strong> Components can be added, removed, or replaced, enabling organizations to adapt to changing requirements without extensive re-development. Moreover, organizations can tailor the system to their needs by selecting and combining components that best suit their specific requirements, leading to more tailored solutions.</li>
-        <li><strong>Scalability:</strong> As the system is composed of modular components, it can scale horizontally or vertically to handle varying workloads and growth.</li>
-        <li><strong>Agility:</strong> Composable architectures align well with agile development methodologies, allowing for rapid iterations, continuous integration, and quick response to market demands.</li>
-        <li><strong>Interoperability:</strong> Different components can be developed using diverse technologies and languages, fostering interoperability and the integration of third-party services.</li>
-    </ul>
-    <p>While the benefits of Composability seem clear, the implementation journey tends to be riddled with challenges. After all, having a system which is tightly integrated comes with specific advantages too, which need to be taken into account when decomposition is done:</p>
-    <ul>
-        <li>On the <strong>business</strong> side, end-users get to work with a comprehensive and integrated solution, which tends to be easy to learn and use.</li>
-        <li>On the <strong>IT</strong> side, one can usually rely on vendor support, spanning the entire solution spectrum. This often entails a fully managed Software-as-a-Service (SaaS) offering. This means that the need for businesses to build up extensive internal knowledge about their CXM tools is rather limited. Also, the integration costs for the various building blocks are relatively low.</li>
-    </ul>
-    <p>So, both for the business and the IT side, we clearly notice concerns about the complexity of transitioning towards more modular building blocks, breaking down existing monoliths.</p>
-    <p>It’s not easy however to have a discussion about this topic when you consider a composable stack as an unstructured “mesh” of capabilities and touchpoints, like illustrated in the image below (non-exhaustive). In light blue, we see our different customer channels. The dark blue boxes represent the different business capabilities required to manage these channels and associated data.</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/composable-mesh.png' 
-            width="796"
-            height="322"
+<Highlight 
+    title="Download our Composability Playbook"
+    text="It provides you with the insights to determine whether Composability aligns with your digital strategy and to understand the potential benefits. Furthermore, it introduces our CXM Reference Framework, which you can use as a blueprint for architecting future iterations of your CXM platform."
+    image='/src/assets/images/composability-playbook.png'
+    buttonText="Download now"
+    buttonLink="https://info.amexio.fr/composability-playbook"
     />
-    <p>When looking closely at the depicted business capabilities, we can distinct three types of components:</p>
-    <ol>
-        <li>Channels used by customers to interact with the organization.</li>
-        <li>Services that are used to manage specific customer channels.</li>
-        <li>Services that go more broadly, offering data and functions spanning across various channels.</li>
-    </ol>
-    <p>Taken into account this insight, we can bring some more structure to our earlier diagram:</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-full.png' 
-            width="796"
-            height="322"
-    />
-    <p>Using a more layered approach enables us to have an informed discussion concerning composability and help us answer the questions mentioned earlier. Now, let’s dive a bit deeper into each layer separately, from bottom to top.</p>
-    <h2>Layer 1: Channel-Agnostic Capabilities</h2>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-layer-1.png' 
-            width="796"
-            height="322"
-    />
-    <p>These capabilities are the backbone of your organization and transcend individual channels. The elements in this layer can be divided into 5 groups: data, journeys, content, design, and search. Some concrete examples:</p>
-    <ul>
-        <li>Analytics data ideally takes into account customer interactions across every touch point.</li>
-        <li>When building omnichannel journeys, things like running A/B tests or setting up personalization span across multiple touchpoints in the customer journey.</li>
-        <li>A Digital Asset Management (DAM) system provides assets to be used across a wide variety of channels.</li>
-        <li>Structured Content Management is typically implemented by a Headless CMS, designed to be a truly channel-agnostic source of content.</li>
-        <li>A Design System defines design properties across every customer interaction.</li>
-    </ul>
-    <p>These fundamental capabilities form the backbone of the organization, remaining relatively stable over time (10-15 years). These are the bedrock, embodying long-term investments in core services that transcend individual channels.</p>
-    <h2>Layer 2: Channel-Specific Capabilities</h2>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-layer-2.png' 
-            width="796"
-            height="322"
-    />
-    <p>Next in our framework, we have capabilities which are specifically designed to manage the complexities related to certain customer channels. In this layer, you often find the typical “composition” and “authoring” services built for business users to execute fine-grained control over the experiences being set up. Some highlights:</p>
-    <ul>
-        <li>A Website Management capability is used to manage different websites in your organization. This usually includes multisite features and ways to manage navigation across web pages.</li>
-        <li>Page Management capabilities include features to build actual web pages. This usually includes a library of page components which can be used to compose web pages. Features typically include a drag-and-drop interface, an in-context editor, a responsive preview feature and an SEO toolchain.</li>
-        <li>Customer Communication Management (CCM) typically includes a form builder, including a workflow engine to process and follow up on form submissions and customer cases.</li>
-    </ul>
-    <p>Notice the absence of a traditional “WCMS”. Being a monolith, a typical WCMS offers a whole plethora of integrated capabilities, not fitting a single capability in a modern composable stack. Instead, Website Management and Page Management are included instead as separated capabilities.</p>
-    <p>Compared to the services in layer 1, capabilities in layer 2 tend to more short-lived (5-10 years). This is mainly fueled by the volatility of the customer-facing channels of the organization. When making investments for technology in this layer, adaptability and flexibility should be key points of consideration.</p>
-    <h2>Layer 3: Aggregation</h2>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-layer-3.png' 
-            width="796"
-            height="322"
-    />
-    <p>As mentioned in our introduction, the level of sophistication for customer experiences increases continuously, often combining content, data and services managed in various systems across your CXM stack. Take for example a Web page offering an interactive experience by using properties of your customer profile to personalize certain elements on the page. Using a WCMS, you can rely on the tightly integrated capabilities (user profiles, analytics, personalization and page building) to compose that webpage. In a composable environment, every one of these capabilities lives in their own component in the stack.</p>
-    <p>This is where the Aggregation Layer comes in: it ensures the customer channels are decoupled from the underlying layers in the stack. Without this layer, every channel would need to connect to numerous services in lower tiers and should include substantial business logic to process and combine relevant content and data. Moreover, an Aggregation Layer ensures the actual channels remain more light weight by offloading complexities to a dedicated layer. Example products in the market today include Apollo GraphOS and Hygraph.</p>
-    <p>The Aggregation Layer is a key ingredient of a composable stack, since it facilitates loose coupling between front and back-end. Take SoundCloud as an example, where they use the Backends for Frontends (BFF) pattern in this layer to support the transition from a monolith to a decomposed stack and to make sure the customer-facing channels can be built with minimal dependency on back-end APIs.</p>       
-    <h2>Layer 4: Channels</h2>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-layer-4.png' 
-            width="796"
-            height="322"
-    />
-    <p>In layer 4 we find the diverse channels through which your customers engage with your organization. These are typically called your “front ends”. Whether it's through a website, mobile app, or customer service portal, each channel adds a unique dimension to the customer experience. While the individual channels themselves are relatively stable, they represent the frontline of customer interaction, necessitating adaptability to evolving preferences, expectations, trends and technology evolutions (e.g. yet another new JavaScript framework).</p>
-    <h2>Layer 5: Edge</h2>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-layer-5.png' 
-            width="796"
-            height="322"
-    />
-    <p>The Edge Layer captures the boundary between your internal systems and the external world. This layer acts as the frontline defense, managing the flow of information between your organization and the outside world. A typical feature of this layer is caching.</p>
-    <h2>Layer 6: Customer touchpoints</h2>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-layer-6.png' 
-            width="796"
-            height="322"
-    />
-    <p>At the top of our framework are the customer touchpoints. This layer represents the various interactions your customers have when communicating with your organization. Touchpoints typically include the Web, mobile apps, chatbots, phone, point-of-sale, email, etc.</p>
-    <p>Now that we have an understanding of its different layers, we can draw some key insights from our Reference Model: in the vertical dimension, each of the six layers represents a distinct level of stability and adaptability, offering insights into the temporal aspects of technology, services, and capabilities. In essence, the vertical dimension of the framework offers a dynamic perspective, guiding organizations to make strategic decisions about where to invest in stable, long-term capabilities and where to embrace adaptability to meet the ever-changing landscape of technology, trends, and customer preferences (see illustration below).</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-vertical.png' 
-            width="796"
-            height="322"
-    />
-    <h2>Mapping your traditional WCMS</h2>
-    <p>Now, as a first exercise, let’s take a traditional WCMS monolith like Adobe Experience Manager and map it onto our framework:</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-aem.png' 
-            width="796"
-            height="322"
-    />
-    <p>We can clearly see that Adobe integrates a DAM (AEM Assets), the ability to manage structured content (AEM Content Fragments), Website and Page Management (AEM Sites) and the website front end layer (AEM Editable Templates & Core Components) in one single integrated system. Additionally, with AEM Forms and AEM Screens Adobe offers a solution for managing form workflows and in-store content displays respectively. While this architecture certainly has numerous advantages (especially concerning ease-of-use and flexibility for business users, being a tightly integrated system), it also comes with the drawbacks of a typical monolith as mentioned earlier.</p>
-    <p>Notice that with AEM, Adobe slices vertically through the layers of our Reference Model. This illustrates a typical challenge for monoliths: the inability to distinguish between the layers that form the backbone of the organization's infrastructure and those that operate at the forefront of customer interaction. A monolith’s all-encompassing nature, while beneficial for comprehensive solutions, underscores the inherent difficulty in isolating and evolving individual components based on their distinct lifecycle needs. The lack of clear separation hinders the organization's ability to respond agilely to changing customer expectations, emerging technologies, and evolving market trends.</p>
-    <p>This vertical integration emphasizes the necessity for a paradigm shift, urging organizations to adopt a more modular and composable approach.</p>
-    <h2>Real-life composable use cases</h2>
-    <p>Next, let’s apply our Reference Framework to a more composable use case.</p>
-    <p>Let’s say our organization plans to rebuild its customer touchpoints as part of a re-envisioned omnichannel digital strategy. Currently, the organization relies on a traditional WCMS. This is a heavyweight system with many customizations developed over numerous years by a team with specialized expertise. Changing templates, implementing new components, and integrating enterprise systems tend to have a high cost and long throughput time. With our new strategy however, we need a more flexible and scalable way of working to support our changing content needs. Headless seems like a logical choice since it supports our requirement for omnichannel experiences. Moreover, it enables the usage of a modern and wide-spread front-end framework (e.g. Next.js or Astro).</p>
-    <p>However, the market for Headless CMS’s is extremely fragmented and existing solutions are far from equal. Luckily, our Reference Framework can help.</p>
-    <p>Let’s take Sanity as an example, a Headless CMS gaining traction in the market, and map it onto our Reference Framework:</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-sanity.png' 
-            width="796"
-            height="322"
-    />
-    <p>We see that Sanity purely focuses on Structured Content Management as a capability. Unlike competitive products like e.g. Contentstack or Storyblok, Sanity offers no real website or page management features. Which is fine of course, depending on what your needs are and how far you want to go in separating capabilities in your stack.</p>
-    <p>Keep in mind that in a lot of cases, vendors of composable solutions like a Headless CMS gradually expand their footprint and start implementing neighboring capabilities. We already mentioned Storyblok, which – next to its Headless capability – includes one of the most easy-to-use Website and Page Management capabilities available in the market today. It maps to our Reference Framework as follows:</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-storyblok.png' 
-            width="796"
-            height="322"
-    />
-    <p>Analogue to monoliths, solutions covering multiple capabilities can offer unique advantages. In the case of Storyblok, it gives business users full control over the web experience and provides a way to blend structured content in page-based experiences.</p>
-</LayoutSection>
-
-<LayoutSection backgroundColor="dark">
-    <p>We have seen this happening more often in the past years: vendors of modular capabilities expanding their footprint, mostly to address the business need for more intuitive and user-friendly CXM tooling.</p>
-    <p>At the same time, vendors of monoliths are re-architecting their systems to become more flexible and scalable. Adobe is taking this route too, by decomposing their WCMS application into multiple separated solutions (still offered under the “AEM” brand):</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-ngc.png' 
-            width="796"
-            height="322"
-    />
-    <p>Both types of vendors are navigating a landscape that demands a balance between modularity and integration. Clients seek solutions that offer the flexibility of modular tools while ensuring a unified and integrated user experience. This convergence reflects the industry's recognition that the ideal CXM tool should be adaptable to evolving business needs while maintaining a cohesive and user-friendly interface. Dries Buytaert, creator of the open-source Drupal CMS, has a great writing about this topic, illustrating the benefits of tightly integrated solutions, which should not be taken for granted.</p>
-</LayoutSection>
-
-<LayoutSection>
-    <p>Let’s say on the other hand that you want to separate capabilities as much as possible. Your need includes the ability for business users to compose webpages and configure blocks with personalized content. Next to that, you are looking for a scalable cloud environment to host your Web front end. This could result in the following diagram:</p>
-    <ContentImage loading="lazy" class='mx-auto shadow-xl shadow-primary/20 rounded-xl overflow-hidden'
-            src='/src/assets/images/reference-framework-dxc.png' 
-            width="796"
-            height="322"
-    />
-    <p>This scenario really shows the power of taking a more structured approach towards thinking about your composable stack: as a first step, it allows you to think about the various capabilities you need. Next, you can map various potential solutions in the market and ensure all your required capabilities are covered.</p>
-    <h2>Conclusion</h2>
-    <p>The shift towards composable CXM stacks is not just a response to the evolving technological landscape but a strategic imperative for enterprises seeking to meet ever-evolving customer expectations.</p>
-    <p>The structured framework presented above can serve as an assessment tool for your existing CXM ecosystem, but also as a guide to help you with decomposition. It offers a systematic approach to the challenges and complexities of implementing composable architectures. As businesses navigate the delicate balance between modularity and integration, the framework provides a roadmap for informed decisions, ensuring that the benefits of flexibility, scalability, and agility are realized while addressing concerns about ease of use and comprehensive vendor support.</p>
-    <p>Is your organization – like many others today – on a journey to adopt a more composable CXM stack or are you planning to do so?  At AmeXio, we provide specific consultancy services around the CXM Reference Model described in this post.</p>
-    <p>Challenges and questions we can help with include:</p>
-</LayoutSection>
-
-<LayoutSection backgroundColor="dark">
-    <p>Don’t hesitate to contact us if you are dealing with any of these challenges. Initially, we organize a non-committal introductory meeting in which we get a deeper understanding of your business and its context and listen to specific challenges and pain points. Next, we propose a tailored advisory plan incorporating the necessary expertise to support your organization in architecting your future CXM stack.</p>
-</LayoutSection>
