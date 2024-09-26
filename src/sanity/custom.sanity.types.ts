@@ -5,6 +5,7 @@ import type {
   CodeEmbed,
   CollaborationModel,
   CollabTab,
+  Company,
   Cta,
   Faq,
   Geopoint,
@@ -458,7 +459,7 @@ export interface ServiceWithReferences {
 }
 
 export interface WorkWithReferences {
-  _type: "works";
+  // _type: "works";
   language?: string;
   customerReferencesText?: string;
   content?: Content;
@@ -481,6 +482,7 @@ export interface WorkWithReferences {
   technologies?: TechnologyReferenced[];
   relatedCases?: ReferenceCaseReferenced[];
   _translations: PageTranslations;
+  company?: CompanyWithReferences;
 }
 
 export type CustomerReferenced = {
@@ -526,6 +528,7 @@ export type ReferenceCaseReferenced = Omit<
   collaborationModel?: CollaborationModelReferenced;
   technologies?: TechnologyReferenced[];
   services?: ServiceWithReferences[];
+  company?: CompanyWithReferences;
 };
 
 export type MetadataReferenced = Omit<Metadata, "image"> & {
@@ -553,4 +556,12 @@ export type IntroReference = Intro & {
 
 export type CardGridReferenced = Omit<CardGrid, "backgroundImage"> & {
   backgroundImage?: i18nImage;
+};
+
+export type CompanyWithReferences = Omit<Company, "logo" | "_type"> & {
+  logo?: {
+    default?: i18nImage;
+    light?: i18nImage;
+    dark?: i18nImage;
+  };
 };

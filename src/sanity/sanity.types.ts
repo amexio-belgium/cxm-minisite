@@ -748,6 +748,12 @@ export type ReferenceCase = {
     _type: "image";
   };
   duration?: string;
+  company?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "company";
+  };
   content?: Array<
     | ({
         _key: string;
@@ -830,129 +836,6 @@ export type CollaborationModel = {
       _key: string;
     } & CollabTab
   >;
-};
-
-export type BlogPost = {
-  _id: string;
-  _type: "blogPost";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  intro?: {
-    title?: string;
-    intro?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<
-        {
-          _key: string;
-        } & Link
-      >;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  };
-  featuredImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  publicationDate?: string;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "person";
-  };
-  postType?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "skosConcept";
-  }>;
-  topic?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "skosConcept";
-  }>;
-  content?: Array<
-    | ({
-        _key: string;
-      } & Highlight)
-    | ({
-        _key: string;
-      } & CardGrid)
-    | ({
-        _key: string;
-      } & Callout)
-    | ({
-        _key: string;
-      } & LongFormText)
-    | ({
-        _key: string;
-      } & Tabs)
-    | ({
-        _key: string;
-      } & Testimonial)
-    | ({
-        _key: string;
-      } & Faq)
-    | ({
-        _key: string;
-      } & ServicesCardList)
-    | ({
-        _key: string;
-      } & WorkCardList)
-    | ({
-        _key: string;
-      } & BlogHighlight)
-    | ({
-        _key: string;
-      } & BlogsList)
-    | ({
-        _key: string;
-      } & CodeEmbed)
-  >;
-  metadata?: Metadata;
-  language?: string;
-};
-
-export type Person = {
-  _id: string;
-  _type: "person";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  jobTitle?: string;
-  contactLink?: Link;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
 };
 
 export type Navigation = {
@@ -1209,16 +1092,146 @@ export type InternationalizedArrayReference = Array<
   } & InternationalizedArrayReferenceValue
 >;
 
+export type BlogPost = {
+  _id: string;
+  _type: "blogPost";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  intro?: {
+    title?: string;
+    intro?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<
+        {
+          _key: string;
+        } & Link
+      >;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+  };
+  featuredImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  publicationDate?: string;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "person";
+  };
+  postType?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  topic?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
+      } & Faq)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & WorkCardList)
+    | ({
+        _key: string;
+      } & BlogHighlight)
+    | ({
+        _key: string;
+      } & BlogsList)
+    | ({
+        _key: string;
+      } & CodeEmbed)
+  >;
+  metadata?: Metadata;
+  language?: string;
+};
+
+export type Person = {
+  _id: string;
+  _type: "person";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  jobTitle?: string;
+  contactLink?: Link;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type Link = {
   _type: "link";
   text?: string;
   type?: string;
-  internalLink?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "contentPage";
-  };
+  internalLink?:
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contentPage";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "blogPost";
+      };
   url?: string;
   email?: string;
   phone?: string;
@@ -1640,8 +1653,6 @@ export type AllSanitySchemaTypes =
   | Translation
   | ReferenceCase
   | CollaborationModel
-  | BlogPost
-  | Person
   | Navigation
   | Company
   | AnswerQuestion
@@ -1649,6 +1660,8 @@ export type AllSanitySchemaTypes =
   | ServicePillar
   | Intro
   | InternationalizedArrayReference
+  | BlogPost
+  | Person
   | Link
   | ContentPage
   | Metadata
@@ -1770,88 +1783,190 @@ export type NavigationQueryResult = {
       _type: "link";
       text?: string;
       type?: string;
-      internalLink: {
-        _id: string;
-        _type: "contentPage";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        intro?: {
-          title?: Array<{
-            children?: Array<{
-              marks?: Array<string>;
-              text?: string;
-              _type: "span";
-              _key: string;
-            }>;
-            style?: "normal";
-            listItem?: never;
-            markDefs?: null;
-            level?: number;
-            _type: "block";
-            _key: string;
-          }>;
-          intro?: Array<{
-            children?: Array<{
-              marks?: Array<string>;
-              text?: string;
-              _type: "span";
-              _key: string;
-            }>;
-            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-            listItem?: "bullet" | "number";
-            markDefs?: Array<
-              {
+      internalLink:
+        | {
+            _id: string;
+            _type: "blogPost";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: {
+              title?: string;
+              intro?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
                 _key: string;
-              } & Link
+              }>;
+            };
+            featuredImage?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            publicationDate?: string;
+            author?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "person";
+            };
+            postType?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            }>;
+            topic?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            }>;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
             >;
-            level?: number;
-            _type: "block";
-            _key: string;
-          }>;
-          introCta?: Cta;
-        };
-        content?: Array<
-          | ({
-              _key: string;
-            } & BlogHighlight)
-          | ({
-              _key: string;
-            } & BlogsList)
-          | ({
-              _key: string;
-            } & Callout)
-          | ({
-              _key: string;
-            } & CardGrid)
-          | ({
-              _key: string;
-            } & CodeEmbed)
-          | ({
-              _key: string;
-            } & Faq)
-          | ({
-              _key: string;
-            } & Highlight)
-          | ({
-              _key: string;
-            } & LongFormText)
-          | ({
-              _key: string;
-            } & ServicesCardList)
-          | ({
-              _key: string;
-            } & Tabs)
-          | ({
-              _key: string;
-            } & Testimonial)
-          | ({
-              _key: string;
-            } & WorkCardList)
-        >;
-        metadata?: Metadata;
-        language?: string;
-      } | null;
+            metadata?: Metadata;
+            language?: string;
+          }
+        | {
+            _id: string;
+            _type: "contentPage";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: {
+              title?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "normal";
+                listItem?: never;
+                markDefs?: null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              intro?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<
+                  {
+                    _key: string;
+                  } & Link
+                >;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              introCta?: Cta;
+            };
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            metadata?: Metadata;
+            language?: string;
+          }
+        | null;
       url?: string;
       email?: string;
       phone?: string;
@@ -1867,10 +1982,10 @@ export type NavigationQueryResult = {
 // Query: markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}
 export type PortableTextResolveInternalLinkResult = never;
 // Variable: contentQuery
-// Query: content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}
+// Query: content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}
 export type ContentQueryResult = never;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -2814,88 +2929,190 @@ export type ServiceQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -3013,88 +3230,190 @@ export type ServiceQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -3238,12 +3557,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3257,88 +3754,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3396,12 +3824,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3415,88 +4021,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3574,12 +4111,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3593,88 +4308,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3818,12 +4464,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -3837,88 +4661,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -4064,12 +4819,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -4083,88 +5016,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -4280,12 +5144,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -4299,88 +5341,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -4454,12 +5427,196 @@ export type ServiceQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -4473,88 +5630,19 @@ export type ServiceQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -4627,12 +5715,196 @@ export type ServiceQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -4646,88 +5918,19 @@ export type ServiceQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -4936,12 +6139,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -4955,88 +6336,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5080,12 +6392,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5099,88 +6589,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5216,12 +6637,196 @@ export type ServiceQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -5235,94 +6840,19 @@ export type ServiceQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -5402,12 +6932,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5421,88 +7129,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5545,12 +7184,190 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5564,88 +7381,19 @@ export type ServiceQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -5681,12 +7429,196 @@ export type ServiceQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -5700,94 +7632,19 @@ export type ServiceQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -6006,6 +7863,149 @@ export type ServiceQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -6347,6 +8347,149 @@ export type ServiceQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -6757,7 +8900,7 @@ export type ServiceQueryResult = {
   >;
 } | null;
 // Variable: blogPostQuery
-// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type BlogPostQueryResult = {
   _id: string;
   _type: "blogPost";
@@ -7762,88 +9905,190 @@ export type BlogPostQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -7961,88 +10206,190 @@ export type BlogPostQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -8186,12 +10533,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8205,88 +10730,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8344,12 +10800,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8363,88 +10997,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8522,12 +11087,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8541,88 +11284,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8766,12 +11440,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -8785,88 +11637,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -9012,12 +11795,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -9031,88 +11992,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -9228,12 +12120,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -9247,88 +12317,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -9402,12 +12403,196 @@ export type BlogPostQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -9421,88 +12606,19 @@ export type BlogPostQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -9575,12 +12691,196 @@ export type BlogPostQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -9594,88 +12894,19 @@ export type BlogPostQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -9884,12 +13115,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -9903,88 +13312,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10028,12 +13368,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10047,88 +13565,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10164,12 +13613,196 @@ export type BlogPostQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -10183,94 +13816,19 @@ export type BlogPostQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -10350,12 +13908,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10369,88 +14105,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10493,12 +14160,190 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10512,88 +14357,19 @@ export type BlogPostQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -10629,12 +14405,196 @@ export type BlogPostQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -10648,94 +14608,19 @@ export type BlogPostQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -10954,6 +14839,149 @@ export type BlogPostQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -11295,6 +15323,149 @@ export type BlogPostQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -11600,7 +15771,7 @@ export type BlogPostQueryResult = {
   >;
 } | null;
 // Variable: blogsListQuery
-// Query: {  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...$itemsPerTime]{    _id,    featuredImage{      asset->{...}    },    postType[]->{      prefLabel,      definition    },    author->{      ...,      image{        ...,        asset->{          ...        }      }    },    topic[]->{      prefLabel,      definition    },    metadata,    publicationDate,    _createdAt,    intro  },  "totalItems": count(*[_type == "blogPost" && language == $language])}
+// Query: {  "blogPosts": *[_type == "blogPost" && language == $language && !metadata.noIndex]|order(publicationDate desc)[0...$itemsPerTime]{    _id,    featuredImage{      asset->{...}    },    postType[]->{      prefLabel,      definition    },    author->{      ...,      image{        ...,        asset->{          ...        }      }    },    topic[]->{      prefLabel,      definition    },    metadata,    publicationDate,    _createdAt,    intro  },  "totalItems": count(*[_type == "blogPost" && language == $language && !metadata.noIndex])}
 export type BlogsListQueryResult = {
   blogPosts: Array<{
     _id: string;
@@ -11701,7 +15872,7 @@ export type BlogsListQueryResult = {
   totalItems: number;
 };
 // Variable: blogsListQueryPaginating
-// Query: *[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...$itemsPerTime]{  _id,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  metadata,  publicationDate,  _createdAt,  intro}
+// Query: *[_type == "blogPost" && language == $language && !metadata.noIndex && publicationDate < $lastPubDate]|order(publicationDate desc)[0...$itemsPerTime]{  _id,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  metadata,  publicationDate,  _createdAt,  intro}
 export type BlogsListQueryPaginatingResult = Array<{
   _id: string;
   featuredImage: {
@@ -11799,7 +15970,7 @@ export type BlogsListQueryPaginatingResult = Array<{
   } | null;
 }>;
 // Variable: workQuery
-// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  company -> {    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type WorkQueryResult = {
   _id: string;
   _type: "referenceCase";
@@ -11832,6 +16003,149 @@ export type WorkQueryResult = {
     } | null;
   } | null;
   duration?: string;
+  company: {
+    _id: string;
+    _type: "company";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    link?: Link;
+    logo: {
+      default: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      light: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      dark: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+    } | null;
+    content?: Array<
+      | ({
+          _key: string;
+        } & BlogHighlight)
+      | ({
+          _key: string;
+        } & BlogsList)
+      | ({
+          _key: string;
+        } & Callout)
+      | ({
+          _key: string;
+        } & CardGrid)
+      | ({
+          _key: string;
+        } & CodeEmbed)
+      | ({
+          _key: string;
+        } & Faq)
+      | ({
+          _key: string;
+        } & Highlight)
+      | ({
+          _key: string;
+        } & LongFormText)
+      | ({
+          _key: string;
+        } & ServicesCardList)
+      | ({
+          _key: string;
+        } & Tabs)
+      | ({
+          _key: string;
+        } & Testimonial)
+      | ({
+          _key: string;
+        } & WorkCardList)
+    >;
+    language?: string;
+    type?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "skosConcept";
+    };
+    industryVertical?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "skosConcept";
+    };
+  } | null;
   content: Array<
     | {
         _key: string;
@@ -12739,88 +17053,190 @@ export type WorkQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -12938,88 +17354,190 @@ export type WorkQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -13163,12 +17681,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13182,88 +17878,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13321,12 +17948,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13340,88 +18145,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13499,12 +18235,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13518,88 +18432,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13743,12 +18588,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13762,88 +18785,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -13989,12 +18943,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -14008,88 +19140,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -14205,12 +19268,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -14224,88 +19465,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -14379,12 +19551,196 @@ export type WorkQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -14398,88 +19754,19 @@ export type WorkQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -14552,12 +19839,196 @@ export type WorkQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -14571,88 +20042,19 @@ export type WorkQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -14861,12 +20263,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -14880,88 +20460,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15005,12 +20516,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15024,88 +20713,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15141,12 +20761,196 @@ export type WorkQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -15160,94 +20964,19 @@ export type WorkQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -15327,12 +21056,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15346,88 +21253,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15470,12 +21308,190 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15489,88 +21505,19 @@ export type WorkQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -15606,12 +21553,196 @@ export type WorkQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -15625,94 +21756,19 @@ export type WorkQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -15931,6 +21987,149 @@ export type WorkQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -16272,6 +22471,149 @@ export type WorkQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -16936,6 +23278,12 @@ export type WorkQueryResult = {
       } | null;
     } | null;
     duration?: string;
+    company?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "company";
+    };
     content?: Array<
       | ({
           _key: string;
@@ -17273,7 +23621,7 @@ export type WorkQueryResult = {
 // Query: *[_type == 'siteConfig' && language == $language][0]{  homePage->{    "slug": metadata.slug.current  }}.homePage.slug
 export type HomePageSlugQueryResult = string | null;
 // Variable: contentPageQuery
-// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type ContentPageQueryResult = {
   _id: string;
   _type: "contentPage";
@@ -17310,12 +23658,190 @@ export type ContentPageQueryResult = {
             _type: "link";
             text?: string;
             type?: string;
-            internalLink?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "contentPage";
-            };
+            internalLink:
+              | {
+                  _id: string;
+                  _type: "blogPost";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  intro?: {
+                    title?: string;
+                    intro?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                  };
+                  featuredImage?: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                  };
+                  publicationDate?: string;
+                  author?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "person";
+                  };
+                  postType?: Array<{
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    _key: string;
+                    [internalGroqTypeReferenceTo]?: "skosConcept";
+                  }>;
+                  topic?: Array<{
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    _key: string;
+                    [internalGroqTypeReferenceTo]?: "skosConcept";
+                  }>;
+                  content?: Array<
+                    | ({
+                        _key: string;
+                      } & BlogHighlight)
+                    | ({
+                        _key: string;
+                      } & BlogsList)
+                    | ({
+                        _key: string;
+                      } & Callout)
+                    | ({
+                        _key: string;
+                      } & CardGrid)
+                    | ({
+                        _key: string;
+                      } & CodeEmbed)
+                    | ({
+                        _key: string;
+                      } & Faq)
+                    | ({
+                        _key: string;
+                      } & Highlight)
+                    | ({
+                        _key: string;
+                      } & LongFormText)
+                    | ({
+                        _key: string;
+                      } & ServicesCardList)
+                    | ({
+                        _key: string;
+                      } & Tabs)
+                    | ({
+                        _key: string;
+                      } & Testimonial)
+                    | ({
+                        _key: string;
+                      } & WorkCardList)
+                  >;
+                  metadata?: Metadata;
+                  language?: string;
+                }
+              | {
+                  _id: string;
+                  _type: "contentPage";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  intro?: {
+                    title?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "normal";
+                      listItem?: never;
+                      markDefs?: null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    intro?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<
+                        {
+                          _key: string;
+                        } & Link
+                      >;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    introCta?: Cta;
+                  };
+                  content?: Array<
+                    | ({
+                        _key: string;
+                      } & BlogHighlight)
+                    | ({
+                        _key: string;
+                      } & BlogsList)
+                    | ({
+                        _key: string;
+                      } & Callout)
+                    | ({
+                        _key: string;
+                      } & CardGrid)
+                    | ({
+                        _key: string;
+                      } & CodeEmbed)
+                    | ({
+                        _key: string;
+                      } & Faq)
+                    | ({
+                        _key: string;
+                      } & Highlight)
+                    | ({
+                        _key: string;
+                      } & LongFormText)
+                    | ({
+                        _key: string;
+                      } & ServicesCardList)
+                    | ({
+                        _key: string;
+                      } & Tabs)
+                    | ({
+                        _key: string;
+                      } & Testimonial)
+                    | ({
+                        _key: string;
+                      } & WorkCardList)
+                  >;
+                  metadata?: Metadata;
+                  language?: string;
+                }
+              | null;
             url?: string;
             email?: string;
             phone?: string;
@@ -17329,88 +23855,19 @@ export type ContentPageQueryResult = {
             _type: "link";
             text?: string;
             type?: string;
-            internalLink: {
-              _id: string;
-              _type: "contentPage";
-              _createdAt: string;
-              _updatedAt: string;
-              _rev: string;
-              intro?: {
-                title?: Array<{
-                  children?: Array<{
-                    marks?: Array<string>;
-                    text?: string;
-                    _type: "span";
-                    _key: string;
-                  }>;
-                  style?: "normal";
-                  listItem?: never;
-                  markDefs?: null;
-                  level?: number;
-                  _type: "block";
-                  _key: string;
-                }>;
-                intro?: Array<{
-                  children?: Array<{
-                    marks?: Array<string>;
-                    text?: string;
-                    _type: "span";
-                    _key: string;
-                  }>;
-                  style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                  listItem?: "bullet" | "number";
-                  markDefs?: Array<
-                    {
-                      _key: string;
-                    } & Link
-                  >;
-                  level?: number;
-                  _type: "block";
-                  _key: string;
-                }>;
-                introCta?: Cta;
-              };
-              content?: Array<
-                | ({
-                    _key: string;
-                  } & BlogHighlight)
-                | ({
-                    _key: string;
-                  } & BlogsList)
-                | ({
-                    _key: string;
-                  } & Callout)
-                | ({
-                    _key: string;
-                  } & CardGrid)
-                | ({
-                    _key: string;
-                  } & CodeEmbed)
-                | ({
-                    _key: string;
-                  } & Faq)
-                | ({
-                    _key: string;
-                  } & Highlight)
-                | ({
-                    _key: string;
-                  } & LongFormText)
-                | ({
-                    _key: string;
-                  } & ServicesCardList)
-                | ({
-                    _key: string;
-                  } & Tabs)
-                | ({
-                    _key: string;
-                  } & Testimonial)
-                | ({
-                    _key: string;
-                  } & WorkCardList)
-              >;
-              metadata?: Metadata;
-              language?: string;
-            } | null;
+            internalLink?:
+              | {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "blogPost";
+                }
+              | {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "contentPage";
+                };
             url?: string;
             email?: string;
             phone?: string;
@@ -18333,88 +24790,190 @@ export type ContentPageQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -18532,88 +25091,190 @@ export type ContentPageQueryResult = {
               _type: "link";
               text?: string;
               type?: string;
-              internalLink: {
-                _id: string;
-                _type: "contentPage";
-                _createdAt: string;
-                _updatedAt: string;
-                _rev: string;
-                intro?: {
-                  title?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "normal";
-                    listItem?: never;
-                    markDefs?: null;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  intro?: Array<{
-                    children?: Array<{
-                      marks?: Array<string>;
-                      text?: string;
-                      _type: "span";
-                      _key: string;
-                    }>;
-                    style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                    listItem?: "bullet" | "number";
-                    markDefs?: Array<
-                      {
+              internalLink:
+                | {
+                    _id: string;
+                    _type: "blogPost";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: string;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
                         _key: string;
-                      } & Link
+                      }>;
+                    };
+                    featuredImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    publicationDate?: string;
+                    author?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "person";
+                    };
+                    postType?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    topic?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    }>;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
                     >;
-                    level?: number;
-                    _type: "block";
-                    _key: string;
-                  }>;
-                  introCta?: Cta;
-                };
-                content?: Array<
-                  | ({
-                      _key: string;
-                    } & BlogHighlight)
-                  | ({
-                      _key: string;
-                    } & BlogsList)
-                  | ({
-                      _key: string;
-                    } & Callout)
-                  | ({
-                      _key: string;
-                    } & CardGrid)
-                  | ({
-                      _key: string;
-                    } & CodeEmbed)
-                  | ({
-                      _key: string;
-                    } & Faq)
-                  | ({
-                      _key: string;
-                    } & Highlight)
-                  | ({
-                      _key: string;
-                    } & LongFormText)
-                  | ({
-                      _key: string;
-                    } & ServicesCardList)
-                  | ({
-                      _key: string;
-                    } & Tabs)
-                  | ({
-                      _key: string;
-                    } & Testimonial)
-                  | ({
-                      _key: string;
-                    } & WorkCardList)
-                >;
-                metadata?: Metadata;
-                language?: string;
-              } | null;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "contentPage";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: {
+                      title?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "normal";
+                        listItem?: never;
+                        markDefs?: null;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      intro?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<
+                          {
+                            _key: string;
+                          } & Link
+                        >;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      introCta?: Cta;
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | null;
               url?: string;
               email?: string;
               phone?: string;
@@ -18757,12 +25418,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -18776,88 +25615,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -18915,12 +25685,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -18934,88 +25882,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19093,12 +25972,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19112,88 +26169,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19337,12 +26325,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19356,88 +26522,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19583,12 +26680,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19602,88 +26877,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19799,12 +27005,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19818,88 +27202,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -19973,12 +27288,196 @@ export type ContentPageQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -19992,88 +27491,19 @@ export type ContentPageQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -20146,12 +27576,196 @@ export type ContentPageQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink?: {
-                      _ref: string;
-                      _type: "reference";
-                      _weak?: boolean;
-                      [internalGroqTypeReferenceTo]?: "contentPage";
-                    };
+                    internalLink:
+                      | {
+                          _id: string;
+                          _type: "blogPost";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: string;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                          };
+                          featuredImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          publicationDate?: string;
+                          author?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "person";
+                          };
+                          postType?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          topic?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "skosConcept";
+                          }>;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "contentPage";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: {
+                            title?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?: "normal";
+                              listItem?: never;
+                              markDefs?: null;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            intro?: Array<{
+                              children?: Array<{
+                                marks?: Array<string>;
+                                text?: string;
+                                _type: "span";
+                                _key: string;
+                              }>;
+                              style?:
+                                | "h2"
+                                | "h3"
+                                | "h4"
+                                | "h5"
+                                | "h6"
+                                | "normal";
+                              listItem?: "bullet" | "number";
+                              markDefs?: Array<
+                                {
+                                  _key: string;
+                                } & Link
+                              >;
+                              level?: number;
+                              _type: "block";
+                              _key: string;
+                            }>;
+                            introCta?: Cta;
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | null;
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -20165,88 +27779,19 @@ export type ContentPageQueryResult = {
                     _type: "link";
                     text?: string;
                     type?: string;
-                    internalLink: {
-                      _id: string;
-                      _type: "contentPage";
-                      _createdAt: string;
-                      _updatedAt: string;
-                      _rev: string;
-                      intro?: {
-                        title?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "normal";
-                          listItem?: never;
-                          markDefs?: null;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        intro?: Array<{
-                          children?: Array<{
-                            marks?: Array<string>;
-                            text?: string;
-                            _type: "span";
-                            _key: string;
-                          }>;
-                          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                          listItem?: "bullet" | "number";
-                          markDefs?: Array<
-                            {
-                              _key: string;
-                            } & Link
-                          >;
-                          level?: number;
-                          _type: "block";
-                          _key: string;
-                        }>;
-                        introCta?: Cta;
-                      };
-                      content?: Array<
-                        | ({
-                            _key: string;
-                          } & BlogHighlight)
-                        | ({
-                            _key: string;
-                          } & BlogsList)
-                        | ({
-                            _key: string;
-                          } & Callout)
-                        | ({
-                            _key: string;
-                          } & CardGrid)
-                        | ({
-                            _key: string;
-                          } & CodeEmbed)
-                        | ({
-                            _key: string;
-                          } & Faq)
-                        | ({
-                            _key: string;
-                          } & Highlight)
-                        | ({
-                            _key: string;
-                          } & LongFormText)
-                        | ({
-                            _key: string;
-                          } & ServicesCardList)
-                        | ({
-                            _key: string;
-                          } & Tabs)
-                        | ({
-                            _key: string;
-                          } & Testimonial)
-                        | ({
-                            _key: string;
-                          } & WorkCardList)
-                      >;
-                      metadata?: Metadata;
-                      language?: string;
-                    } | null;
+                    internalLink?:
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "blogPost";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "contentPage";
+                        };
                     url?: string;
                     email?: string;
                     phone?: string;
@@ -20455,12 +28000,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -20474,88 +28197,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -20599,12 +28253,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -20618,88 +28450,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -20735,12 +28498,196 @@ export type ContentPageQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -20754,94 +28701,19 @@ export type ContentPageQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -20921,12 +28793,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -20940,88 +28990,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -21064,12 +29045,190 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "contentPage";
-                  };
+                  internalLink:
+                    | {
+                        _id: string;
+                        _type: "blogPost";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: string;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                        };
+                        featuredImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        publicationDate?: string;
+                        author?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "person";
+                        };
+                        postType?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        topic?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "skosConcept";
+                        }>;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "contentPage";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: {
+                          title?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "normal";
+                            listItem?: never;
+                            markDefs?: null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          intro?: Array<{
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs?: Array<
+                              {
+                                _key: string;
+                              } & Link
+                            >;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }>;
+                          introCta?: Cta;
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | null;
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -21083,88 +29242,19 @@ export type ContentPageQueryResult = {
                   _type: "link";
                   text?: string;
                   type?: string;
-                  internalLink: {
-                    _id: string;
-                    _type: "contentPage";
-                    _createdAt: string;
-                    _updatedAt: string;
-                    _rev: string;
-                    intro?: {
-                      title?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "normal";
-                        listItem?: never;
-                        markDefs?: null;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      intro?: Array<{
-                        children?: Array<{
-                          marks?: Array<string>;
-                          text?: string;
-                          _type: "span";
-                          _key: string;
-                        }>;
-                        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-                        listItem?: "bullet" | "number";
-                        markDefs?: Array<
-                          {
-                            _key: string;
-                          } & Link
-                        >;
-                        level?: number;
-                        _type: "block";
-                        _key: string;
-                      }>;
-                      introCta?: Cta;
-                    };
-                    content?: Array<
-                      | ({
-                          _key: string;
-                        } & BlogHighlight)
-                      | ({
-                          _key: string;
-                        } & BlogsList)
-                      | ({
-                          _key: string;
-                        } & Callout)
-                      | ({
-                          _key: string;
-                        } & CardGrid)
-                      | ({
-                          _key: string;
-                        } & CodeEmbed)
-                      | ({
-                          _key: string;
-                        } & Faq)
-                      | ({
-                          _key: string;
-                        } & Highlight)
-                      | ({
-                          _key: string;
-                        } & LongFormText)
-                      | ({
-                          _key: string;
-                        } & ServicesCardList)
-                      | ({
-                          _key: string;
-                        } & Tabs)
-                      | ({
-                          _key: string;
-                        } & Testimonial)
-                      | ({
-                          _key: string;
-                        } & WorkCardList)
-                    >;
-                    metadata?: Metadata;
-                    language?: string;
-                  } | null;
+                  internalLink?:
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "blogPost";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "contentPage";
+                      };
                   url?: string;
                   email?: string;
                   phone?: string;
@@ -21200,12 +29290,196 @@ export type ContentPageQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink?: {
-                          _ref: string;
-                          _type: "reference";
-                          _weak?: boolean;
-                          [internalGroqTypeReferenceTo]?: "contentPage";
-                        };
+                        internalLink:
+                          | {
+                              _id: string;
+                              _type: "blogPost";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: string;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                              };
+                              featuredImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              publicationDate?: string;
+                              author?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "person";
+                              };
+                              postType?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              topic?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "skosConcept";
+                              }>;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "contentPage";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: {
+                                title?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?: "normal";
+                                  listItem?: never;
+                                  markDefs?: null;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                intro?: Array<{
+                                  children?: Array<{
+                                    marks?: Array<string>;
+                                    text?: string;
+                                    _type: "span";
+                                    _key: string;
+                                  }>;
+                                  style?:
+                                    | "h2"
+                                    | "h3"
+                                    | "h4"
+                                    | "h5"
+                                    | "h6"
+                                    | "normal";
+                                  listItem?: "bullet" | "number";
+                                  markDefs?: Array<
+                                    {
+                                      _key: string;
+                                    } & Link
+                                  >;
+                                  level?: number;
+                                  _type: "block";
+                                  _key: string;
+                                }>;
+                                introCta?: Cta;
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | null;
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -21219,94 +29493,19 @@ export type ContentPageQueryResult = {
                         _type: "link";
                         text?: string;
                         type?: string;
-                        internalLink: {
-                          _id: string;
-                          _type: "contentPage";
-                          _createdAt: string;
-                          _updatedAt: string;
-                          _rev: string;
-                          intro?: {
-                            title?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?: "normal";
-                              listItem?: never;
-                              markDefs?: null;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            intro?: Array<{
-                              children?: Array<{
-                                marks?: Array<string>;
-                                text?: string;
-                                _type: "span";
-                                _key: string;
-                              }>;
-                              style?:
-                                | "h2"
-                                | "h3"
-                                | "h4"
-                                | "h5"
-                                | "h6"
-                                | "normal";
-                              listItem?: "bullet" | "number";
-                              markDefs?: Array<
-                                {
-                                  _key: string;
-                                } & Link
-                              >;
-                              level?: number;
-                              _type: "block";
-                              _key: string;
-                            }>;
-                            introCta?: Cta;
-                          };
-                          content?: Array<
-                            | ({
-                                _key: string;
-                              } & BlogHighlight)
-                            | ({
-                                _key: string;
-                              } & BlogsList)
-                            | ({
-                                _key: string;
-                              } & Callout)
-                            | ({
-                                _key: string;
-                              } & CardGrid)
-                            | ({
-                                _key: string;
-                              } & CodeEmbed)
-                            | ({
-                                _key: string;
-                              } & Faq)
-                            | ({
-                                _key: string;
-                              } & Highlight)
-                            | ({
-                                _key: string;
-                              } & LongFormText)
-                            | ({
-                                _key: string;
-                              } & ServicesCardList)
-                            | ({
-                                _key: string;
-                              } & Tabs)
-                            | ({
-                                _key: string;
-                              } & Testimonial)
-                            | ({
-                                _key: string;
-                              } & WorkCardList)
-                          >;
-                          metadata?: Metadata;
-                          language?: string;
-                        } | null;
+                        internalLink?:
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "blogPost";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "contentPage";
+                            };
                         url?: string;
                         email?: string;
                         phone?: string;
@@ -21525,6 +29724,149 @@ export type ContentPageQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -21866,6 +30208,149 @@ export type ContentPageQueryResult = {
             _type: "image";
           } | null;
           duration?: string;
+          company: {
+            _id: string;
+            _type: "company";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            link?: Link;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                } | null;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+              } | null;
+            } | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            language?: string;
+            type?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+            industryVertical?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          } | null;
           content?: Array<
             | ({
                 _key: string;
@@ -22199,14 +30684,14 @@ declare module "@sanity/client" {
     '*[_type == "siteConfig" && language == $language][0]{\n  ...,\n  homePage->{\n    "slug": metadata.slug.current\n  },\n  socials[]{\n    ...,\n    icon{\n      asset->{\n        ...,\n        altTexts{...},\n        descriptions{...},\n        titles{...}\n      }\n    },\n  }\n}': SiteConfigQueryResult;
     '*[_type == "navigation" && _id == $navigationId][0]{\n                                        ..., \n                                        links[]{title, linkObject{..., internalLink->{...}}}\n                                    }\n                                    ': NavigationQueryResult;
     "markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}": PortableTextResolveInternalLinkResult;
-    '\ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}': ContentQueryResult;
-    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ServiceQueryResult;
-    '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': BlogPostQueryResult;
-    '\n{\n  "blogPosts": *[_type == "blogPost" && language == $language]|order(publicationDate desc)[0...$itemsPerTime]{\n    _id,\n    featuredImage{\n      asset->{...}\n    },\n    postType[]->{\n      prefLabel,\n      definition\n    },\n    author->{\n      ...,\n      image{\n        ...,\n        asset->{\n          ...\n        }\n      }\n    },\n    topic[]->{\n      prefLabel,\n      definition\n    },\n    metadata,\n    publicationDate,\n    _createdAt,\n    intro\n  },\n  "totalItems": count(*[_type == "blogPost" && language == $language])\n}\n': BlogsListQueryResult;
-    '\n*[_type == "blogPost" && language == $language && _id > $lastId]|order(publicationDate desc)[0...$itemsPerTime]{\n  _id,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  metadata,\n  publicationDate,\n  _createdAt,\n  intro\n}': BlogsListQueryPaginatingResult;
-    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': WorkQueryResult;
+    '\ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}': ContentQueryResult;
+    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ServiceQueryResult;
+    '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': BlogPostQueryResult;
+    '\n{\n  "blogPosts": *[_type == "blogPost" && language == $language && !metadata.noIndex]|order(publicationDate desc)[0...$itemsPerTime]{\n    _id,\n    featuredImage{\n      asset->{...}\n    },\n    postType[]->{\n      prefLabel,\n      definition\n    },\n    author->{\n      ...,\n      image{\n        ...,\n        asset->{\n          ...\n        }\n      }\n    },\n    topic[]->{\n      prefLabel,\n      definition\n    },\n    metadata,\n    publicationDate,\n    _createdAt,\n    intro\n  },\n  "totalItems": count(*[_type == "blogPost" && language == $language && !metadata.noIndex])\n}\n': BlogsListQueryResult;
+    '\n*[_type == "blogPost" && language == $language && !metadata.noIndex && publicationDate < $lastPubDate]|order(publicationDate desc)[0...$itemsPerTime]{\n  _id,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  metadata,\n  publicationDate,\n  _createdAt,\n  intro\n}': BlogsListQueryPaginatingResult;
+    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  company -> {\n    ...,\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': WorkQueryResult;
     "*[_type == 'siteConfig' && language == $language][0]{\n  homePage->{\n    \"slug\": metadata.slug.current\n  }\n}.homePage.slug": HomePageSlugQueryResult;
-    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ContentPageQueryResult;
+    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ContentPageQueryResult;
     '\n*[_type == "blogPost" && language == $language]{\n  "title": metadata.title,\n  "slug": metadata.slug.current,\n  "author": author->{name}.name,\n  "description": metadata.description,\n  "pubDate": publicationDate\n}\n': RssBlogPostsQueryResult;
     '*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllContentPagesQueryResult;
     '*[_type == "service" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllServicePagesQueryResult;

@@ -83,6 +83,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
     headline={casePage?.intro?.title}
     text={casePage?.intro?.intro}
     backgroundImage={casePage.introImage?.asset._id}
+    client={casePage?.company?.name}
   >
     {
       casePage?.customerReferences &&
