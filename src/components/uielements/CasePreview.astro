@@ -66,14 +66,15 @@ const { caseData, small } = Astro.props;
           />
         </div>
         {
-          caseData?.company?.logo?.dark?.asset._id && (
+          caseData?.company?.logo?.default?.asset._id && (
             <SanityImg
               loading="lazy"
-              src={caseData?.company?.logo?.dark?.asset?._id}
+              src={caseData?.company?.logo?.default?.asset?._id}
               class="h-12 w-auto shrink-0 sm:h-16 md:h-12 xl:h-16"
               height={60}
               alt={
-                caseData?.company?.logo?.dark?.asset?.altTexts?.[locale] || ""
+                caseData?.company?.logo?.default?.asset?.altTexts?.[locale] ||
+                ""
               }
             />
           )
@@ -120,13 +121,17 @@ const { caseData, small } = Astro.props;
         }
       </ol>
     </div>
-    <Button
-      class="self-end"
-      link={`/${locale}/work/${caseData?.metadata?.slug?.current}`}
-      size="sm"
-      color="light"
-    >
-      {m.overviewCta()}
-    </Button>
+    {
+      caseData.content && caseData.content.length > 0 && (
+        <Button
+          class="self-end"
+          link={`/${locale}/work/${caseData?.metadata?.slug?.current}`}
+          size="sm"
+          color="light"
+        >
+          {m.overviewCta()}
+        </Button>
+      )
+    }
   </div>
 </div>

@@ -459,7 +459,7 @@ export interface ServiceWithReferences {
 }
 
 export interface WorkWithReferences {
-  // _type: "works";
+  _type: "works";
   language?: string;
   customerReferencesText?: string;
   content?: Content;
@@ -558,7 +558,7 @@ export type CardGridReferenced = Omit<CardGrid, "backgroundImage"> & {
   backgroundImage?: i18nImage;
 };
 
-export type CompanyWithReferences = Omit<Company, "logo" | "_type"> & {
+export type CompanyWithReferences = Omit<Company, "logo"> & {
   logo?: {
     default?: i18nImage;
     light?: i18nImage;
