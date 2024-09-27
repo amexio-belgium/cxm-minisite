@@ -82,6 +82,7 @@ export class BlogPreviewWeb extends HTMLElement {
             />
 
             ${this.topics &&
+            this.topics.length > 0 &&
             this.topics
               .map(
                 (topic) => `
@@ -90,7 +91,7 @@ export class BlogPreviewWeb extends HTMLElement {
         </span>
         `,
               )
-              .join()}
+              .join(", ")}
           </div>
           <h2 class="mb-2 font-serif text-lg font-bold [&>mark]:text-black">
             <a

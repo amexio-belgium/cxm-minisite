@@ -44,7 +44,7 @@ const { blogPost } = Astro.props;
 
           {blogPost.topic && (
             <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
-              {blogPost.topic.map((topic) => topic.prefLabel)}
+              {blogPost.topic.map((topic) => topic.prefLabel).join(", ")}
             </span>
           )}
         </div>
