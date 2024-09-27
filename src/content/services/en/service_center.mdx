@@ -1,11 +1,11 @@
 ---
-title: 'AmeXio Shared Service Center'
+title: 'Service Center'
 previewTitle: 'Keep your CXM ecosystem running smoothly'
-description: 'We provide full support and maintenance to ensure your CXM system operates smoothly and efficiently.'
+description: 'We provide full support and maintenance for your CXM platform, ensuring it operates smoothly and efficiently.'
 pubDate: 'May 23 2024'
 heroImage: '/src/assets/images/office.jpg'
 altTextImage: 'The alt text for the hero image'
-cta: 'Discover AmeXio Shared Service Center'
+cta: 'Discover Service Center'
 groupType: 'Design & Realize'
 ---
 
@@ -22,18 +22,29 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
-import kbc from '@assets/logos/kbc_logo.png';
-import telenet from '@assets/logos/telenet_logo.png';
-import mediafin from '@assets/logos/mediafin_logo.png';
+import kbc from '@assets/logos/kbc_logo_square_white.png';
+import mediafin from '@assets/logos/mediafin_logo_white.png';
+import argenta from '@assets/logos/argenta_logo_white.png';
+import daikin from '@assets/logos/daikin_logo_white.png';
+import deceuninck from '@assets/logos/deceuninck_logo_white.png';
+import deme from '@assets/logos/demegroup_logo_white.png';
+import kdg from '@assets/logos/kdghogeschool_logo_white.png';
+import leuven from '@assets/logos/leuven_logo_white.png';
+import oecd from '@assets/logos/oecd_logo_white.png';
+import sligro from '@assets/logos/sligro_logo_wit.png';
 
 <HeroHeader 
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we advised on strategy">
-		<Image src={kbc} alt="" class="h-10 w-auto"/>
-		<Image src={telenet} alt="" class="h-10 w-auto"/>
+	<Customers headline="Customers we support through Service Center">
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
+		<Image src={argenta} alt="" class="h-10 w-auto"/>
+		<Image src={daikin} alt="" class="h-10 w-auto"/>
+		<Image src={deme} alt="" class="h-10 w-auto"/>
+		<Image src={kdg} alt="" class="h-10 w-auto"/>
+		<Image src={leuven} alt="" class="h-10 w-auto"/>
+		<Image src={oecd} alt="" class="h-10 w-auto"/>
 	</Customers> 
 </HeroHeader>
 
