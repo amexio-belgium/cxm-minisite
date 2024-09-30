@@ -36,10 +36,6 @@ export async function getStaticPaths() {
       pages = pages.concat(slugs);
     }
 
-    // sitemap({
-    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
-    // });
-
     return pages;
   } else {
     return [];
@@ -88,13 +84,13 @@ if (servicePage == null) {
           <Customers headline={servicePage.customerReferencesText}>
             {servicePage.customerReferences?.map((customer: any) => (
               <>
-                {customer?.logo?.default?.asset && (
+                {customer?.logo?.light?.asset && (
                   <img
                     src={imageBuilder
-                      .image(customer.logo?.default?.asset)
+                      .image(customer.logo.light.asset)
                       .height(80)
                       .url()}
-                    alt={customer.logo.default.asset.altTexts?.[locale] || ""}
+                    alt={customer.logo.light.asset.altTexts?.[locale] || ""}
                     class="h-10 w-auto"
                   />
                 )}
