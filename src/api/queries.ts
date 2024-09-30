@@ -242,6 +242,24 @@ content[] {
           ...,
           asset->{...}
         },
+        company -> {
+          ...,
+          logo{
+            ...,
+            default{
+              ...,
+              asset->{...}
+            },
+            dark{
+              ...,
+              asset->{...}
+            },
+            light{
+              ...,
+              asset->{...}
+            }
+          }
+        },
         technologies[]->{...},
         services[]->{...},
         metadata{
@@ -389,6 +407,24 @@ export const blogsListQueryPaginating = groq`
 
 export const workQuery = groq`*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{
   ...,
+  company -> {
+    ...,
+    logo{
+      ...,
+      default{
+        ...,
+        asset->{...}
+      },
+      dark{
+        ...,
+        asset->{...}
+      },
+      light{
+        ...,
+        asset->{...}
+      }
+    }
+  },
   collaborationModel-> {
     ...,
     collaborationTabs[]{

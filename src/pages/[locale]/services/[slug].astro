@@ -7,10 +7,7 @@ import {
 } from "@api/queries";
 import { imageBuilder, loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
-import {
-  type i18nImage,
-  type ServiceWithReferences,
-} from "src/sanity/custom.sanity.types";
+import { type ServiceWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import Customers from "@components/uicomposition/Customers.astro";
 import type {
@@ -38,10 +35,6 @@ export async function getStaticPaths() {
       }));
       pages = pages.concat(slugs);
     }
-
-    // sitemap({
-    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
-    // });
 
     return pages;
   } else {
@@ -91,13 +84,13 @@ if (servicePage == null) {
           <Customers headline={servicePage.customerReferencesText}>
             {servicePage.customerReferences?.map((customer: any) => (
               <>
-                {customer?.logo?.default?.asset && (
+                {customer?.logo?.light?.asset && (
                   <img
                     src={imageBuilder
-                      .image(customer.logo?.default?.asset)
+                      .image(customer.logo.light.asset)
                       .height(80)
                       .url()}
-                    alt={customer.logo.default.asset.altTexts?.[locale] || ""}
+                    alt={customer.logo.light.asset.altTexts?.[locale] || ""}
                     class="h-10 w-auto"
                   />
                 )}

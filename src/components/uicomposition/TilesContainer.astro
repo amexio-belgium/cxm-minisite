@@ -36,7 +36,7 @@ const {
       <slot name="bg-image" />
     )
   }
-  <div class="flex flex-col items-start justify-start gap-6 lg:w-9/12">
+  <div class="flex w-full flex-col items-start justify-start gap-6">
     {
       headline &&
         (!cta || (cta && (!cta.text || cta.text.length === 0))) &&
@@ -63,7 +63,7 @@ const {
     }
     {
       description && (
-        <div class="max-w-prose text-base font-light lg:w-9/12">
+        <div class="text-base font-light lg:w-9/12">
           <PortableText components={defaultComponents} value={description} />
         </div>
       )
