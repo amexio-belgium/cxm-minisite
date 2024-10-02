@@ -12,7 +12,11 @@ export const i18nParams = [
   { params: { locale: "fr" } },
 ];
 
-export const locales = ["en", "nl", "fr"];
+export const locales = [
+  "en",
+  // "nl",
+  // "fr"
+];
 
 export const languages: AltTexts = {
   en: "English",
