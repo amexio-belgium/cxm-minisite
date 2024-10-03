@@ -38,7 +38,7 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
     });
 
     const { data: posts } = await sanityContentQuery({
-      query: `*[_type == "blogPost" && language == $language]{
+      query: `*[_type == "blogPost" && language == $language && !metadata.noIndex]{
   "title": metadata.title,
   "slug": metadata.slug.current,
   "author": author->{name}.name,
