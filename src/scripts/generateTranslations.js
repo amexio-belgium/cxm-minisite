@@ -38,7 +38,11 @@ async function querySanityData({ query, params }) {
   };
 }
 
-const locales = ["en", "nl", "fr"];
+const locales = [
+  "en",
+  // "nl",
+  // "fr"
+];
 
 for (const locale of locales) {
   const { data: translations } = await querySanityData({

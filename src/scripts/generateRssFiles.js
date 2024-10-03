@@ -49,7 +49,11 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
     };
   }
 
-  const locales = ["en", "nl", "fr"];
+  const locales = [
+    "en",
+    // "nl",
+    // "fr"
+  ];
 
   for (const locale of locales) {
     const { data: siteConfig } = await querySanityData({
