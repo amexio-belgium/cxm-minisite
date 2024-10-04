@@ -540,3 +540,5 @@ export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $l
 export const allCasePagesQuery = groq`*[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;
+
+export const getNoIndexedPages = groq``;

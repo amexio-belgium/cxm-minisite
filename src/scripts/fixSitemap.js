@@ -2,12 +2,17 @@ import "dotenv/config";
 import * as fs from "node:fs";
 import * as path from "path";
 import * as xml2js from "xml2js";
+import { sanityContentQuery } from "../scripts/sanityContentQuery.js";
 
 const SANITY_VISUAL_EDITING_ENABLED = process.env.SANITY_VISUAL_EDITING_ENABLED;
+const PUBLIC_ASTRO_BASE_PATH = process.env.PUBLIC_ASTRO_BASE_PATH;
 
 if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
   // Path to the sitemap file
-  const sitemapPath = path.join("./dist", "sitemap-0.xml");
+  const sitemapPath = path.join(
+    `./dist/${PUBLIC_ASTRO_BASE_PATH}`,
+    "sitemap-0.xml",
+  );
 
   // Read the sitemap.xml file
   fs.readFile(sitemapPath, "utf-8", (err, data) => {
@@ -22,7 +27,7 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
       ignoreAttrs: false, // Keeps attributes intact
     });
 
-    parser.parseString(data, (err, result) => {
+    parser.parseString(data, async (err, result) => {
       if (err) {
         console.error("Error parsing XML:", err);
         return;
@@ -42,8 +47,30 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
           !entry.loc.endsWith("/[slug]/") && !entry.loc.endsWith("/404/"),
       );
 
-      // Update the result object with the filtered URLs
-      result.urlset.url = filteredUrls;
+      // Get the noIndexed pages
+      const query = {
+        query: `*[
+            metadata.noIndex == true
+          ]{
+            metadata {
+              noIndex,
+              slug {
+                current
+              }
+            }
+          }`,
+        params: "",
+      };
+      const { data } = await sanityContentQuery(query);
+
+      const slugs = Array.isArray(data)
+        ? data.map((item) => item.metadata.slug.current)
+        : [];
+
+      // Update the result object with the filtered URLs and filter out the noIndexed slugs
+      result.urlset.url = filteredUrls.filter((locObj) => {
+        return !slugs.some((slug) => locObj.loc.includes(slug));
+      });
 
       // Convert the updated object back to XML
       const builder = new xml2js.Builder({
@@ -60,7 +87,7 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
         }
 
         console.log(
-          "Successfully removed paths containing '[slug]' from sitemap.xml.",
+          "Successfully removed [slug] and non-indexed pages from sitemap.xml",
         );
       });
     });
