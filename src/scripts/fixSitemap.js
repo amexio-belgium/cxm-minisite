@@ -6,6 +6,34 @@ import * as xml2js from "xml2js";
 const SANITY_VISUAL_EDITING_ENABLED = process.env.SANITY_VISUAL_EDITING_ENABLED;
 
 if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
+  const client = createClient({
+    projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+    dataset: process.env.SANITY_STUDIO_DATASET,
+    useCdn: false, // set to `false` to bypass the edge cache
+    apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
+  });
+
+  async function querySanityData({ query, params }) {
+    const { result, resultSourceMap } = await client.fetch(
+      query,
+      params ?? {},
+      {
+        filterResponse: false,
+        perspective,
+        resultSourceMap: visualEditingEnabled ? "withKeyArraySelector" : false,
+        stega: false,
+        visualEditingEnabled: false,
+        useCdn: false,
+      },
+    );
+
+    return {
+      data: result,
+      sourceMap: resultSourceMap,
+      perspective,
+    };
+  }
+
   // Path to the sitemap file
   const sitemapPath = path.join("./dist", "sitemap-0.xml");
 

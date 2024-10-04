@@ -21,14 +21,6 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
   const token = process.env.SANITY_API_READ_TOKEN;
 
   async function querySanityData({ query, params }) {
-    if (visualEditingEnabled && !token) {
-      throw new Error(
-        "The `SANITY_API_READ_TOKEN` environment variable is required in Draft Mode.",
-      );
-    }
-
-    const perspective = visualEditingEnabled ? "previewDrafts" : "published";
-
     const { result, resultSourceMap } = await client.fetch(
       query,
       params ?? {},
@@ -37,7 +29,7 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
         perspective,
         resultSourceMap: visualEditingEnabled ? "withKeyArraySelector" : false,
         stega: false,
-        ...(visualEditingEnabled ? { token } : {}),
+        visualEditingEnabled: false,
         useCdn: false,
       },
     );
@@ -74,7 +66,7 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
     });
 
     const { data: posts } = await querySanityData({
-      query: `*[_type == "blogPost" && language == $language]{
+      query: `*[_type == "blogPost" && language == $language && metadata.noIndex == false]{
   "title": metadata.title,
   "slug": metadata.slug.current,
   "author": author->{name}.name,
