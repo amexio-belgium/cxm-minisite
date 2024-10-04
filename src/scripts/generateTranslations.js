@@ -2,11 +2,7 @@ import "dotenv/config";
 import * as fs from "node:fs";
 import { sanityContentQuery } from "../scripts/sanityContentQuery.js";
 
-const locales = [
-  "en",
-  // "nl",
-  // "fr"
-];
+const locales = process.env.SANITY_LOCALES.split(", ");
 
 for (const locale of locales) {
   const { data: translations } = await sanityContentQuery({
