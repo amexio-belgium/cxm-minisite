@@ -3,7 +3,6 @@ import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImageAsset } from "@sanity/custom.sanity.types";
 import type { CardGridReferenced } from "../../sanity/custom.sanity.types";
-import { imageBuilder } from "src/api/sanity";
 import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
@@ -49,12 +48,12 @@ const stylesSmallTile = {
             </div>
           )}
           {card.icon?.asset && card.icon?.asset?.extension != "svg" && (
-            <img
-              src={imageBuilder.image(asset).height(192).url()}
-              alt={asset?.altTexts?.[locale]}
-              class="h-24 w-auto"
+            <SanityImg
+              src={asset}
+              alt={asset?.altTexts?.[locale] || ""}
               width="300"
               height="150"
+              class="h-24 w-auto"
               loading="lazy"
               decoding="async"
             />
@@ -74,6 +73,8 @@ const stylesSmallTile = {
             src={cardGrid.backgroundImage?.asset?._id}
             alt={cardGrid.backgroundImage?.asset?.altTexts?.[locale] || ""}
             loading="lazy"
+            width="1200"
+            height="800"
           />
         )}
       </div>

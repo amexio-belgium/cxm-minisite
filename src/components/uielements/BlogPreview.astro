@@ -2,11 +2,11 @@
 import Link from "@components/uielements/Link.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
 import type { BlogPostWithReferences } from "@sanity/custom.sanity.types";
-import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { parseHref } from "@lib/helpers";
 import { defaultComponents } from "../cms-components/PortableText/helper";
 import { stegaClean } from "@sanity/client/stega";
+import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
   blogPost: BlogPostWithReferences;
@@ -21,17 +21,13 @@ const { blogPost } = Astro.props;
     <article class="group relative flex h-full flex-col justify-stretch has-[:focus-visible]:rounded-xl has-[:focus-visible]:outline has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-offset-0 has-[:focus-visible]:outline-orange-500">
       <div class="flex aspect-[5/3] w-full shrink-0 items-center justify-center overflow-hidden rounded-t-xl">
         {blogPost.featuredImage?.asset && (
-          <img
-            src={imageBuilder
-              .image(blogPost.featuredImage?.asset)
-              .width(400)
-              .height(400)
-              .url()}
+          <SanityImg
+            src={blogPost.featuredImage?.asset?._id}
             class="w-full transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt={blogPost.featuredImage?.asset.altTexts?.[locale]}
-            width={400}
-            height={400}
+            alt={blogPost.featuredImage?.asset.altTexts?.[locale] || ""}
+            width="400"
+            height="400"
           />
         )}
       </div>
@@ -72,17 +68,13 @@ const { blogPost } = Astro.props;
         {blogPost.author && (
           <div class="self-bottom mt-auto flex items-center gap-4 pt-8">
             {blogPost.author.image?.asset && (
-              <img
-                loading="eager"
-                src={imageBuilder
-                  .image(blogPost.author.image?.asset)
-                  .width(54)
-                  .height(54)
-                  .url()}
+              <SanityImg
+                src={blogPost.author.image?.asset}
                 class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
+                alt={blogPost.author.name + " " + blogPost.author.jobTitle}
                 width={50}
                 height={50}
-                alt={blogPost.author.name + " " + blogPost.author.jobTitle}
+                loading="eager"
               />
             )}
             <div class="flex flex-col justify-center gap-1">

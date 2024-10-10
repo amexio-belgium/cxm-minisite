@@ -1,8 +1,8 @@
 ---
 import type { TabsReferenced } from "@sanity/custom.sanity.types";
-import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { defaultComponents } from "./PortableText/helper";
+import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
   tabsContent: TabsReferenced;
@@ -69,11 +69,13 @@ const { tabsContent } = Astro.props;
                   </div>
                 )}
                 {content._type == "image" && content.asset && (
-                  <img
-                    loading="lazy"
-                    src={imageBuilder.image(content.asset).url()}
-                    alt={content.asset.altTexts?.[locale]}
+                  <SanityImg
+                    src={content.asset}
+                    alt={content.asset?.altTexts?.[locale] || ""}
                     class="h-fit w-full overflow-hidden rounded-2xl shadow-sm shadow-primary lg:w-1/2"
+                    loading="lazy"
+                    width="480"
+                    height="480"
                   />
                 )}
               </>

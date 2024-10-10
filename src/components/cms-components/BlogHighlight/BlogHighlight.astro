@@ -2,10 +2,10 @@
 import Link from "@components/uielements/Link.astro";
 import FormattedDate from "@components/uielements/FormattedDate.astro";
 import type { BlogHighlightReferenced } from "@sanity/custom.sanity.types";
-import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { stegaClean } from "@sanity/client/stega";
 import { defaultComponents } from "../PortableText/helper";
+import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
   blogPost: BlogHighlightReferenced;
@@ -20,17 +20,14 @@ const blogPost = Astro.props.blogPost.blogPost;
     <article class="group relative flex w-full flex-col justify-stretch gap-8 overflow-hidden rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 shadow-sm shadow-blue-200 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-yellow-500 lg:flex-row">
       <div class="flex h-[300px] items-center justify-center overflow-hidden rounded-t-xl shadow-xl shadow-primary/20 lg:aspect-square lg:h-[unset] lg:shrink-0 lg:rounded-l-xl lg:rounded-tr-none">
         {blogPost.featuredImage?.asset && (
-          <img
-            src={imageBuilder
-              .image(blogPost.featuredImage?.asset)
-              .width(400)
-              .height(400)
-              .url()}
+          <SanityImg
+            src={blogPost.featuredImage?.asset}
+            alt={blogPost.featuredImage?.asset?.altTexts?.[locale] || ""}
+            widths={[400, 600, 790]}
+            height="400"
+            width="400"
             class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt={blogPost.featuredImage?.asset.altTexts?.[locale]}
-            width={400}
-            height={400}
           />
         )}
       </div>
@@ -70,17 +67,13 @@ const blogPost = Astro.props.blogPost.blogPost;
           {blogPost.author && (
             <div class="flex items-center gap-4">
               {blogPost.author.image?.asset && (
-                <img
-                  loading="eager"
-                  src={imageBuilder
-                    .image(blogPost.author.image?.asset)
-                    .width(54)
-                    .height(54)
-                    .url()}
-                  class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
+                <SanityImg
+                  src={blogPost.author.image?.asset}
+                  alt={blogPost.author.name + " " + blogPost.author.jobTitle}
                   width={50}
                   height={50}
-                  alt={blogPost.author.name + " " + blogPost.author.jobTitle}
+                  class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
+                  loading="eager"
                 />
               )}
               <div class="flex flex-col justify-center gap-1">
