@@ -1,9 +1,9 @@
 ---
 import iconWorld from "@assets/icons/world.svg";
 import { parseHref } from "@lib/helpers";
-import { languages } from "@src/locales/consts";
+import { languages, locales } from "@src/locales/consts";
 
-const locale = Astro.currentLocale!;
+const currentLocale = Astro.currentLocale!;
 ---
 
 <button
@@ -17,7 +17,7 @@ const locale = Astro.currentLocale!;
     src={iconWorld.src}
     alt=""
   />
-  {languages[locale]}
+  {languages[currentLocale]}
 </button>
 
 <ul
@@ -25,16 +25,16 @@ const locale = Astro.currentLocale!;
   class="l absolute -right-2 bottom-0 hidden rounded-xl border border-blue-200 bg-primary/90 p-4 text-white shadow-sm backdrop-blur-sm"
 >
   {
-    Object.entries(languages).map(([lang, label]) => (
+    locales.map((locale) => (
       <li>
         <a
-          aria-current={locale == lang}
+          aria-current={currentLocale == locale}
           class="bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 transition-all hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
-          href={parseHref(`/${lang}/`)}
-          hreflang={`${lang}`}
-          lang={`${lang}`}
+          href={parseHref(`/${locale}/`)}
+          hreflang={`${locale}`}
+          lang={`${locale}`}
         >
-          {label}
+          {languages[locale]}
         </a>
       </li>
     ))

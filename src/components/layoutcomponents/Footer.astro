@@ -12,6 +12,7 @@ import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 import LanguageMenu from "@components/uielements/LanguageMenu.astro";
 import { parseHref } from "@lib/helpers";
 import * as m from "@src/paraglide/messages";
+import { locales } from "../../locales/consts";
 
 export type Social = {
   name: string;
@@ -178,13 +179,18 @@ const isContactPage = slug == "contact";
             </Link>
           ))
         }
-        <div class="inline-flex items-center gap-8">
-          <svg class="h-6 w-6 fill-secondary">
-            <use xlink:href={parseHref("/icons/icon-sprite.svg#icon-slant")}
-            ></use>
-          </svg>
-          <LanguageMenu />
-        </div>
+        {
+          locales.length > 1 && (
+            <div class="inline-flex items-center gap-8">
+              <svg class="h-6 w-6 fill-secondary">
+                <use
+                  xlink:href={parseHref("/icons/icon-sprite.svg#icon-slant")}
+                />
+              </svg>
+              <LanguageMenu />
+            </div>
+          )
+        }
       </div>
     </div>
   </div>
