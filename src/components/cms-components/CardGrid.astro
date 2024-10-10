@@ -44,7 +44,7 @@ const stylesSmallTile = {
         >
           {card.icon?.asset && card.icon?.asset?.extension == "svg" && (
             <div class="service__item h-20 w-20 overflow-visible">
-              <object data={asset.url} />
+              <object data={asset.url} title={card.title || ""} />
             </div>
           )}
           {card.icon?.asset && card.icon?.asset?.extension != "svg" && (
