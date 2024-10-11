@@ -180,6 +180,10 @@ content[] {
       ...,
       defined(asset) => {
         asset->{...}
+      },
+      richText[] {
+        ...,
+        ${portableTextResolveInternalLink}
       }
     }
   },

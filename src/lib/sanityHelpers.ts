@@ -1,5 +1,10 @@
 import type { Link } from "@sanity/sanity.types";
-import { BASE_PATH } from "@src/consts";
+import {
+  BASE_PATH,
+  insightsPageName,
+  servicesPageName,
+  worksPageName,
+} from "@src/consts";
 import type { LinkObjectReferenced } from "src/sanity/custom.sanity.types";
 
 export const getHrefFromLinkObject = (
@@ -11,9 +16,17 @@ export const getHrefFromLinkObject = (
     linkObject?.type === "internal" &&
     linkObject.internalLink &&
     (linkObject.internalLink?._type == "contentPage" ||
-      linkObject.internalLink._type == "service")
+      linkObject.internalLink._type == "service" ||
+      linkObject.internalLink._type == "blogPost" ||
+      linkObject.internalLink._type == "referenceCase")
   ) {
-    href = `${BASE_PATH}/${language}/${linkObject.internalLink.metadata?.slug?.current}`;
+    const subpage =
+      {
+        service: `${servicesPageName}/`,
+        blogPost: `${insightsPageName}/`,
+        referenceCase: `${worksPageName}/`,
+      }[linkObject.internalLink._type] || "";
+    href = `${BASE_PATH}/${language}/${subpage}${linkObject.internalLink.metadata?.slug?.current}`;
   } else if (linkObject?.type === "external") {
     href = linkObject.url || "";
     if (!href.startsWith("https://") && !href.startsWith("http://")) {
