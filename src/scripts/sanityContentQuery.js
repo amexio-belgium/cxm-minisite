@@ -13,10 +13,6 @@ export function sanityCreateClient() {
 }
 
 export async function sanityContentQuery({ query, params }) {
-  if (SANITY_VISUAL_EDITING_ENABLED === "true") {
-    return null;
-  }
-
   const client = sanityCreateClient();
 
   const visualEditingEnabled =
