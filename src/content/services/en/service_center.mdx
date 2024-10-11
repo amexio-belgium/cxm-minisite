@@ -22,6 +22,7 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import placeholder from '@assets/images/placeholder.png';
 import kbc from '@assets/logos/kbc_logo_square_white.png';
 import mediafin from '@assets/logos/mediafin_logo_white.png';
 import argenta from '@assets/logos/argenta_logo_white.png';
@@ -49,68 +50,84 @@ import sligro from '@assets/logos/sligro_logo_wit.png';
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Why work with us?"
-	description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.
-		Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet.">
-	<Image src={explainer} alt="" width={512} height={512} class="rounded-xl" />
+	headline="Managing your application lifecycle"
+	description="
+	<p>A software <strong>application lifecycle</strong> typically consists of 3 phases. The last phase is called the 'run' phase, and it's typically the phase that lasts the longest.
+	</p>
+	<p>At AmeXio Fuse, we place great emphasis on this phase by establishing a professional service, dedicated to relieving you of any concerns related to the software application(s) involved.</p>
+	<p>The goal of our Service Center is to provide you with <strong>peace of mind</strong>, ensuring that your application landscape continues to perform optimally within your evolving IT landscape, taking into account potential changing in business needs.</p>
+	">
+	<Image src={placeholder} alt="" width={512} height={512} class="rounded-xl" />
+</TeaserWithImage>
+
+<TeaserWithImage
+	align="left"
+	headline="How Service Center supports your organization"
+	description="
+	<p>In practice, Service Center serves as the <strong>single point-of-contact</strong> in the years following project delivery for any inquiries or issues that may arise during the solution’s operational lifecycle.</p>
+	<p>Our Service Center comprises 35 highly skilled professionals, each <strong>specializing</strong> in a specific technology. Supported technologies include those that we implements in our project operations:</p>
+	<ul>
+		<li>Adobe Experience Cloud</li>
+		<li>Sanity headless CMS</li>
+		<li>Drupal hybrid CMS</li>
+		<li>Accompanying frontend frameworks like Next.js, Astro, React, Angular and Vue</li>	
+	</ul>
+	<p>In addition, there are 6 Service Delivery Managers who oversee operations across all technologies and are responsible for managing their assigned client portfolios.</p>
+	">
+	<Image src={placeholder} alt="" width={768} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer 
-    headline="Approach and techniques"
-    description="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.">
+    headline="A robust enterprise offering"
+    description="
+    <p>We adhere to pragmatic <strong>ITIL</strong> processes, while preserving the flexibility that our clients have valued for many years.</p>
+    <p>Service Center is well-versed in setting up <strong>Key Performance Indicators</strong> (KPIs) and corresponding <strong>Service Level Agreements</strong> (SLAs) measuring the quality we deliver. We are familiar with the principles of conducting releases outside office hours and work with a 24/7 regime for several high-end clients.</p>
+    <p>We offer professional technical support 3 main areas:">
     <SmallTile 
-		headline="Cum Solis"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Corrective maintenance"
+		description="Incident & Problem Mgt, Key User Support, ..." >
     </SmallTile>
     <SmallTile 
-		headline="Nulla Vitae"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Preventive maintenance"
+		description="Software Upgrade Mgt, Patch Mgt" >
     </SmallTile>
     <SmallTile 
-		headline="Aenean eu leo quam"
-		description="natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." >
+		headline="Evolutionary maintenance"
+		description="Change & Release Mgt, ..." >
     </SmallTile>
 </TilesContainer>
-  
-<Highlight 
-	title="Stabilize & optimize your Adobe-based CXM platform"
-	text="For large enterprises using Adobe Experience Manager, we address common issues and enhance your digital experience management. Our focus: stabilize, professionalize, and support your AEM ecosystem."
-	image='/src/assets/images/highlight.png'
-	buttonText="Read more"
-	buttonLink="/insights/aem-stabilize-optimize/"
-	/>
 
 <Faq headline="Questions we usually get">
 	<FaqQuestion
-		headline="Can you help me with services for development only?"
+		headline="Why work with our Service Center?"
 		headlineTag="h3"> 
-		<p>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-    	<ul> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
-		</ul>
+		<p>AmeXio Fuse operates within a specialized niche market, and within this domain, the AmeXio Service Center has over a decade of experience in delivering high-quality services. This extensive expertise has enabled the Service Center to consistently provide <strong>exceptional value</strong> and piece of mind.</p>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you help me with services for development only?"
-		headlineTag="h3" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam. <a href="#internal link">Internal link comes here</a>Lorem ipsum dolor sit amet massa dapibus orci lobortis. Fusce malesuada leo senectus at libero aliqua etiam.</p>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="What makes you different from other agencies?" >
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-    	<ol> 
-			<li>item 1</li>
-			<li>item 1</li>
-			<li>item 1</li>
+		headline="How do we differentiate from competitors?">
+		<ol>
+			<li>The AmeXio Service Center Team is a real team, not a virtual team on paper. It is not a collection of Service Delivery Managers constantly seeking resources. Based on our current customer base, our dedicated team consists of 35 individuals working full-time in a service and support context.</li>
+			<li>We are not common JAVA, .NET developers. We are technology experts. We have deep knowledge and expertise in the AmeXio Fuse product portfolio and maintain partnerships with our various software vendors.</li>
+			<li>While we are passionate about technology, your business remains our top priority! We seek to understand you as a customer, including what brings you satisfaction and what concerns you may have.</li>
+			<li>We serve clients across various sectors, including finance, government, and industry, each with distinct concerns and sensitivities. Our extensive experience in executing the design and construction phases allows us to be well-acquainted with these specific needs, enabling us to address them effectively and deliver the value you require. For instance, our ‘Guidance’ services involve regular visits to our clients to discuss new product developments and roadmap updates applied to the specific client situation.</li>
+			<li>We value concise communication channels. As a customer, you will not only communicate with your designated AmeXio Fuse Service Delivery Manager or Account Manager, but also have direct access to other relevant team members / technical engineers. We know all our customers personally by name and they are as familiar with us as well.</li>
+			<li>We possess over a decade of relevant experience in the field. Our support extends to the solutions implemented across our client portfolio, enabling us to share valuable best practices.</li>
 		</ol>
 	</FaqQuestion>
 	<FaqQuestion 
-		headline="Can you support my in-house team?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
-	</FaqQuestion>
-	<FaqQuestion 
-		headline="Do you work for startups?">
-		<p>Fusce malesuada leo senectus at libero aliqua etiam.Lorem ipsum</p>
+		headline="How does the cost model for Service Center look like?">
+		<p>The cost model of the Service Center is based on 2 main components:</p>
+		<ol>
+			<li>
+				A recurrent fee
+				<ul>
+					<li>Providing access to the Service Center and usage of the provided tooling</li>
+					<li>Including Service Delivery Management follow up actions</li>
+					<li>Budget reporting</li>
+					<li>Periodic SLA / Service reporting</li>
+				</ul>
+			</li>
+			<li>Time & means rate for all technical interventions</li>
+		</ol>
 	</FaqQuestion>
 </Faq>
