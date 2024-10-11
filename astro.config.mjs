@@ -37,6 +37,9 @@ export default defineConfig({
       prefixDefaultLocale: true,
     },
   },
+  redirects: {
+    '/': '/en/'
+  },
   integrations: [
     sitemap(),
     paraglide({
