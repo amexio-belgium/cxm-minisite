@@ -7,3 +7,7 @@ export const VISUAL_EDITING_ENABLED =
   import.meta.env.SANITY_VISUAL_EDITING_ENABLED === "true" ||
   import.meta.env.SANITY_VISUAL_EDITING_ENABLED === true;
 export const BASE_PATH = import.meta.env.PUBLIC_ASTRO_BASE_PATH || "";
+
+export const servicesPageName = "services";
+export const insightsPageName = "insights";
+export const worksPageName = "work";

@@ -1,19 +1,15 @@
 import type {
   AnswerQuestion,
-  Callout,
   CardGrid,
   CodeEmbed,
   CollaborationModel,
   CollabTab,
   Company,
   Cta,
-  Faq,
   Geopoint,
-  Highlight,
   internalGroqTypeReferenceTo,
   Intro,
   Link,
-  LongFormText,
   Metadata,
   ReferenceCase,
   SanityImageAsset,
@@ -22,7 +18,6 @@ import type {
   ServicePillar,
   ServicesCardList,
   SkosConcept,
-  Tabs,
   Technology,
   Testimonial,
   WorkCardList,
@@ -39,178 +34,10 @@ export interface LinkObjectReferenced {
   text?: string;
   type?: string;
   internalLink:
-    | {
-        _id: string;
-        _type: "company";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        name?: string;
-        link?: Link;
-        logo?: {
-          default?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-          light?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-          dark?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          };
-        };
-        content?: Array<
-          | ({
-              _key: string;
-            } & Callout)
-          | ({
-              _key: string;
-            } & CardGrid)
-          | ({
-              _key: string;
-            } & Highlight)
-          | ({
-              _key: string;
-            } & LongFormText)
-          | ({
-              _key: string;
-            } & ServicesCardList)
-          | ({
-              _key: string;
-            } & Tabs)
-          | ({
-              _key: string;
-            } & WorkCardList)
-        >;
-        type?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "skosConcept";
-        };
-        industryVertical?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "skosConcept";
-        };
-      }
-    | {
-        _id: string;
-        _type: "contentPage";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        intro?: Intro;
-        content?: Array<
-          | ({
-              _key: string;
-            } & Callout)
-          | ({
-              _key: string;
-            } & CardGrid)
-          | ({
-              _key: string;
-            } & Highlight)
-          | ({
-              _key: string;
-            } & LongFormText)
-          | ({
-              _key: string;
-            } & ServicesCardList)
-          | ({
-              _key: string;
-            } & Tabs)
-          | ({
-              _key: string;
-            } & WorkCardList)
-        >;
-        metadata?: Metadata;
-        language?: string;
-      }
-    | {
-        _id: string;
-        _type: "service";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        intro?: Intro;
-        image?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-        challenge?: string;
-        cta?: string;
-        content?: Array<
-          | ({
-              _key: string;
-            } & Callout)
-          | ({
-              _key: string;
-            } & CardGrid)
-          | ({
-              _key: string;
-            } & Highlight)
-          | ({
-              _key: string;
-            } & LongFormText)
-          | ({
-              _key: string;
-            } & ServicesCardList)
-          | ({
-              _key: string;
-            } & Tabs)
-          | ({
-              _key: string;
-            } & WorkCardList)
-        >;
-        faqs?: Faq;
-        customerReferences?: Array<{
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "company";
-        }>;
-        servicePillar?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "servicePillar";
-        };
-        language?: string;
-        metadata?: Metadata;
-      }
+    | ContentPageWithReferences
+    | ServiceWithReferences
+    | BlogPostWithReferences
+    | ReferenceCaseReferenced
     | null;
   url?: string;
   email?: string;

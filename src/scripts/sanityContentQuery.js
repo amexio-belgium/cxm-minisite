@@ -1,8 +1,6 @@
 import "dotenv/config";
 import { createClient } from "@sanity/client";
 
-const SANITY_VISUAL_EDITING_ENABLED = process.env.SANITY_VISUAL_EDITING_ENABLED;
-
 export function sanityCreateClient() {
   return createClient({
     projectId: process.env.SANITY_STUDIO_PROJECT_ID,

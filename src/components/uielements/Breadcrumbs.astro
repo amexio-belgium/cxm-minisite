@@ -1,6 +1,11 @@
 ---
 import { parseHref } from "@lib/helpers";
-import { BASE_PATH } from "@src/consts";
+import {
+  BASE_PATH,
+  servicesPageName,
+  worksPageName,
+  insightsPageName,
+} from "@src/consts";
 import * as m from "@src/paraglide/messages";
 
 const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
@@ -9,9 +14,9 @@ const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
 const paths = pathNameAsLocale.split("/").filter((x) => x);
 const locale = Astro.currentLocale!;
 
-const servicesPath = /\/services\/\S+/;
-const casesPath = /\/work\/\S+/;
-const insightsPath = /\/insights\/\S+/;
+const servicesPath = new RegExp(`/${servicesPageName}/\\S+`);
+const casesPath = new RegExp(`/${worksPageName}/\\S+`);
+const insightsPath = new RegExp(`/${insightsPageName}/\\S+`);
 
 let parts: { text: string; href: string }[] = [
   {
