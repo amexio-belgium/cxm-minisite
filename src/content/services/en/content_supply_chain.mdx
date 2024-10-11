@@ -1,11 +1,11 @@
 ---
-title: 'FusionCX approach'
-previewTitle: 'FusionCX approach'
-description: 'By establishing a joint multidisciplinary team, we aim to design and build a robust content platform that aligns with your domain-specific content processes and integrates seamlessly with your customer touchpoints.'
+title: 'Content Supply Chain'
+previewTitle: 'Content Supply Chain'
+description: 'Streamline your Content Supply Chain'
 pubDate: 'May 28 2024'
 heroImage: '/src/assets/images/leuvenoffice_3.jpg'
 altTextImage: '2 team members collaborating on a project, looking at a single laptop screen.'
-cta: 'Discover our FusionCX approach'
+cta: 'Discover Content Supply Chain'
 groupType: 'Design & Realize'
 
 ---
@@ -23,6 +23,7 @@ import Faq from "@components/uicomposition/Faq.astro"
 import FaqQuestion from "@components/uielements/FaqQuestion.astro"
 import { Image } from 'astro:assets';
 import explainer from '@assets/images/explainer.jpg';
+import placeholder from '@assets/images/placeholder.png';
 import fusioncx from '@assets/images/fusioncx.png';
 import dots from '@assets/images/dots.jpg';
 import kbc from '@assets/logos/kbc_logo_square_white.png';
@@ -40,7 +41,7 @@ import sligro from '@assets/logos/sligro_logo_wit.png';
 	headline={frontmatter.title}
     text={frontmatter.description}
     backgroundImage={frontmatter.heroImage} >	
-	<Customers headline="Customers we supported with their content platform">
+	<Customers headline="Customers for which we implemented their DXP">
 		<Image src={kbc} alt="" class="h-10 w-auto"/>
 		<Image src={mediafin} alt="" class="h-10 w-auto"/>
 		<Image src={argenta} alt="" class="h-10 w-auto"/>
@@ -55,45 +56,58 @@ import sligro from '@assets/logos/sligro_logo_wit.png';
 </HeroHeader>
 
 <TeaserWithImage 
-	headline="Customer Experience Management is not a pure technical story"
+	headline="Orchestrating engaging digital experiences"
 	description="
-	<p>The only way to achieve tangible business outcomes, is to use a <strong>holistic</strong> approach that spans from user experience (UX) design and technical implementation all the way to strategic guidance and team enablement.</p>
-	<p>Therefore, we implement our FusionCX approach in your project, in which we closely <strong>collaborate</strong> with key stakeholders at your organization (IT, business, author teams and marketing) to define clear business goals, streamline content processes, and cultivate a culture of continuous optimization and experimentation.</p>
-	<p>To ensure proper rollout and user adoption, we provide thorough onboarding and training for your teams, sharing best practices to ensure <strong>sustained</strong> success and a deep understanding of the tools and strategies at their disposal.</p>
+	<p>In today’s digital-first world, delivering consistent, engaging, and <strong>personalized experiences across channels</strong> is essential to stay competitive. However, businesses often face significant challenges when it comes to managing and optimizing their <strong>Content Supply Chain</strong>. Content must flow efficiently from creation to delivery, ensuring that every customer interaction delivers a seamless experience.</p><p>With our DXP Architect & Implement service, we aim to optimize your content operations and provide a <strong>tailored solution</strong> that supports your organization to manage and deliver your content efficiently.</p>
 	">
-	<Image src={fusioncx} alt="" width={768} class="rounded-xl" />
+	<Image src={placeholder} alt="" width={768} class="rounded-xl" />
 </TeaserWithImage>
 
 <TeaserWithImage
 	align="left"
-	headline="Connecting content & design across your organization"
+	headline="Enterprise content challenges"
 	description="
-	<p>Creating unified and seamless digital experiences is essential to engage with your various target audiences. A <strong>modular</strong> approach is therefore indispensible. By standardizing the way content and design are structured, governed and shared across different platforms, you can foster <strong>better collaboration</strong> and <strong>break down silos</strong> between your teams.</p>
-	<p>The goal is to develop <strong>structured content models</strong> that can be implemented in one or more content management systems in your organization, making your content more flexible and scalable. Just as <strong>design systems</strong> break down UI components into smaller, reusable parts, content can be organized in a modular way, ensuring it fits seamlessly into different contexts.</p>
-	<p>By separating content from design and ensuring everything works together smoothly, organizations can gradually implement these best-practices, creating a more mature and <strong>future-friendly CXM ecosystem</strong> that supports long-term success.</p>">
+	<p>After working with enterprise organization on the topic of content management for over 20 years, we have witnessed a number recurring challenges:</p> 
+	<ol>
+		<li><strong>Inconsistent Customer Experiences:</strong> Without an integrated platform, it’s difficult to deliver a consistent brand message across different touchpoints like web, mobile, and social media, leading to poor customer engagement.</li>
+		<li><strong>Content locked in silos:</strong> Too often, organizations have their content shattered in silos. They struggle with inflexible CMS systems, locking content into specific formats and channels while forcing the same generic workflow for all types of authors.</li>
+		<li><strong>Fragmented Systems:</strong> Businesses often use multiple, disconnected systems for content creation, management, and delivery. This fragmentation leads to inefficiencies, errors, and delayed time-to-market.</li>
+		<li><strong>Slow time-to-market:</strong> As businesses grow, scaling content creation and distribution becomes a significant bottleneck. Without a robust content supply chain, it’s challenging to manage the volume and complexity of content required for omnichannel delivery, resulting in reduced time-to-market.</li>
+	</ol>
+	">
 	<Image src={dots} alt="" width={768} class="rounded-xl" />
 </TeaserWithImage>
 
 <TilesContainer
-    headline="Measure, learn, and adapt"
+    headline="Streamline your Content Supply Chain by implementing a DXP"
     description="
-    <p>Successful CXM projects thrive on early and continuous feedback from business stakeholders and real end users. A traditional phased 'waterfall' approach, with its linear process of gathering requirements, designing, developing, and testing, is ill-suited for these projects. The risks associated with a waterfall process are significant: it can lead to extensive delays, unanticipated costs, and late discovery of critical issues, which may result in costly changes and ultimately deliver value only towards the end of the project.</p>
-	<p>Therefore, we use Agile best-practices like DevOps and Test Automation in our FusionCX approach. This allows us to release early and often, facilitating a constant feedback loop. This enables us to gather real-world data, measure outcomes, and adapt our solutions to changing market trends, business requirements, and technological advancements.</p>
-	<p>Launching a Minimum Marketable Product (MMP) early in the project lifecycle is central to this approach. It allows us to collect valuable data from actual users, which informs iterative improvements.</p>
+    <p>An enterprise Content Supply Chain consists of 4 main components. Your DXP ideally supports every one of these.</p>
     ">
     <SmallTile 
-		headline="Focus on actual business value"
-		description="Delivering business value instead of merely a list of features">
+		headline="Creation"
+		description="Ensure authors can produce content with ease.">
     </SmallTile>
     <SmallTile 
-		headline="Continuous prioritization"
-		description="The Product Owner (PO) is tasked with deciding on the business value per user story, deciding on where available budget and time is best spent.">
+		headline="Management"
+		description="Roll out a robust content lifecycle toolset.">
     </SmallTile>
     <SmallTile 
-		headline="Fusion Teams"
-		description="A multidisciplary team ensures the right expertise is available to fully research, analyse, design, build and roll out the backlog stories.">
+		headline="Distribution"
+		description="Deliver content to the right person, in the right channel, at the right time.">
+    </SmallTile>
+    <SmallTile 
+		headline="Optimization"
+		description="Adopt a data-driven approach to optimizing content and experiences.">
     </SmallTile>
 </TilesContainer>
+
+<Highlight 
+	title="Improving Customer Experience with Content Hubs and Design Systems"
+	text="Content Hubs and Design Systems are two complementary tools which can help to streamline your content operations. In this blog post, we recap what they are and how they can enable seamless customer experiences."
+	image='/src/assets/images/leuvenoffice_2.jpg'
+	buttonText="Read more"
+	buttonLink="/insights/improving-customer-experience-with-content-hubs-and-design-systems/"
+	/>
 
 <Faq headline="Questions we usually get">
 	<FaqQuestion

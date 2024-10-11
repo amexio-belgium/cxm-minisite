@@ -27,7 +27,7 @@ export const home = {
         'painpoint3.description': 'Too often, digital projects are output-driven. There is not enough focus on delivering actual business outcomes, aligning with the overall business objectives and striving to meet KPIs.',
         'services.headline': 'How we can help',
         'services.button': 'Discover all our services',
-        'services.descriptionP1': 'We bring into place a future-friendly <strong>Content Supply Chain</strong> at your organization, empowering you to manage and deliver content-driven customer experiences at massive scales. To maximize success, we strive for a strong partnership in which we <strong>integrate</strong> strategic advice, design and robust content management technology you can rely on to curate, manage, and optimize your digital experiences in an <strong>efficient</strong> and <strong>cost-effective</strong> way.',
+        'services.descriptionP1': 'We bring into place a future-friendly <strong>Content Supply Chain</strong> at your organization, empowering your teams to manage and deliver content-driven customer experiences at massive scales. To maximize success, we strive for a strong partnership in which we <strong>integrate</strong> strategic advice, design and robust <strong>Digital Experience Platforms</strong> you can rely on to curate, manage, and optimize your digital experiences in an <strong>efficient</strong> and <strong>cost-effective</strong> way.',
         'services.descriptionP2': '<br />Turning your content into <strong>value.</strong>',
         'services1.headline': 'Strategize',
         'services1.description': 'Craft a tailored improvement roadmap by identifying key challenges and prioritizing high-impact projects.',
