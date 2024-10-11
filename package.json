@@ -61,5 +61,8 @@
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tsx": "^4.19.1",
     "vite": "^5.4.8"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.24.0"
   }
 }
