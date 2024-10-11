@@ -1,10 +1,10 @@
 ---
 import type { HighlightReferenced } from "@sanity/custom.sanity.types";
-import { imageBuilder } from "@api/sanity";
 import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import Button from "@components/uielements/Button.astro";
 import { defaultComponents } from "../PortableText/helper";
+import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
   highlight: HighlightReferenced;
@@ -29,11 +29,13 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
   >
     {
       highlight.image && (
-        <img
-          loading="lazy"
+        <SanityImg
+          src={highlight.image?.asset?._id}
+          alt={highlight.image?.asset?.altTexts?.[locale] || ""}
           class="transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
-          src={imageBuilder.image(highlight.image).url()}
-          alt={highlight.image.asset?.altTexts?.[locale]}
+          loading="lazy"
+          width="1200"
+          height="800"
         />
       )
     }

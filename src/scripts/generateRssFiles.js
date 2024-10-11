@@ -10,7 +10,6 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
   const basePath = PUBLIC_ASTRO_BASE_PATH || "";
 
   const locales = process.env.SANITY_LOCALES.split(", ");
-  console.log(locales);
 
   for (const locale of locales) {
     const { data: siteConfig } = await sanityContentQuery({

@@ -1,7 +1,7 @@
 ---
-import { imageBuilder } from "@api/sanity";
 import TeaserWithImage from "@components/uicomposition/TeaserWithImage.astro";
 import type { CalloutReferenced, i18nImage } from "@sanity/custom.sanity.types";
+import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props {
   callout: CalloutReferenced;
@@ -28,9 +28,11 @@ if (callout?.content?.[0]._type == "textObject") {
       align={callout?.content?.[0]._type == "textObject" ? "right" : "left"}
     >
       {imageObject && imageObject.asset?._id && (
-        <img
-          src={imageBuilder.image(imageObject.asset?._id).url()}
+        <SanityImg
+          src={imageObject.asset?._id}
           alt={imageObject.asset.altTexts?.[locale] || ""}
+          height="470"
+          width="790"
           class="rounded-xl"
         />
       )}

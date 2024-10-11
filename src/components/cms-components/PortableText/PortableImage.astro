@@ -1,7 +1,7 @@
 ---
-import { imageBuilder } from "@api/sanity";
 import type { i18nImage } from "@sanity/custom.sanity.types";
 import type { Props as PortableProps } from "astro-portabletext/types";
+import SanityImg from "@otterstack/sanity-img-astro";
 
 interface Props extends PortableProps<i18nImage> {}
 
@@ -12,12 +12,14 @@ const locale = Astro.currentLocale!;
 
 {
   image.asset?._id && (
-    <img
-      src={imageBuilder.image(image.asset?._id).url()}
+    <SanityImg
+      src={image.asset?._id}
+      alt={image.asset?.altTexts?.[locale] || ""}
+      width="1280"
+      height="800"
+      class="mx-auto overflow-hidden rounded-xl shadow-xl shadow-primary/20"
       loading="lazy"
       decoding="async"
-      alt={image.asset.altTexts?.[locale]}
-      class="mx-auto overflow-hidden rounded-xl shadow-xl shadow-primary/20"
     />
   )
 }

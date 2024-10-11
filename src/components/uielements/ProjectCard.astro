@@ -3,7 +3,6 @@ import SanityImg from "@otterstack/sanity-img-astro";
 import Button from "../uielements/Button.astro";
 import { PortableText } from "astro-portabletext";
 import Link from "./Link.astro";
-import { imageBuilder } from "../../api/sanity";
 import * as m from "@src/paraglide/messages";
 interface Props {
   smallImage: boolean;
@@ -44,12 +43,11 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
       caseData.introImage?.asset?._id && (
         <SanityImg
           src={caseData.introImage?.asset?._id}
-          alt={caseData.introImage?.asset?.altTexts?.[locale]}
-          widths={[400, 600, 790]}
-          sizes="(max-width: 790px) 100vw, 790px"
+          alt={caseData.introImage?.asset?.altTexts?.[locale] || ""}
+          width={790}
+          height={470}
           class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100"
           loading="lazy"
-          imageUrlBuilder={imageBuilder}
         />
       )
     }
@@ -57,12 +55,11 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
       smallImage && caseData?.company?.logo?.light?.asset._id && (
         <SanityImg
           src={caseData?.company?.logo?.light?.asset?._id}
-          alt={caseData?.company?.logo?.light?.asset?.altTexts?.[locale]}
-          widths={[400, 600, 790]}
-          sizes="(max-width: 790px) 100vw, 790px"
+          alt={caseData?.company?.logo?.light?.asset?.altTexts?.[locale] || ""}
           class="absolute right-4 top-4 h-20 w-auto md:right-8 md:top-8"
           loading="eager"
-          imageUrlBuilder={imageBuilder}
+          width="120"
+          height="80"
         />
       )
     }
