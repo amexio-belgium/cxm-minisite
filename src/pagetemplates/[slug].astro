@@ -15,34 +15,24 @@ import type {
 } from "@sanity/sanity.types";
 
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
-import { locales } from "@src/locales/consts";
 import type { Image } from "sanity";
 
 const locale = Astro.currentLocale!;
 
 export async function getStaticPaths() {
+  const staticLocale = "replaceMeWithLocale";
+
   if (!VISUAL_EDITING_ENABLED) {
-    let pages: { params: { slug: string; locale: string } }[] = [];
+    const { data: contentPages } = await loadQuery<AllContentPagesQueryResult>({
+      query: allContentPagesQuery,
+      params: { language: staticLocale },
+    });
 
-    for (const language of locales) {
-      const { data: contentPages } =
-        await loadQuery<AllContentPagesQueryResult>({
-          query: allContentPagesQuery,
-          params: { language: language },
-        });
+    const slugs = contentPages.map((slug) => ({
+      params: { slug: slug!, locale: staticLocale },
+    }));
 
-      const slugs = contentPages.map((slug) => ({
-        params: { slug: slug!, locale: language },
-      }));
-
-      pages = [...pages, ...slugs];
-    }
-
-    // sitemap({
-    //   dynamicParams: getSitemapParams(services, getLocalePlaceholder()),
-    // });
-
-    return pages;
+    return slugs;
   } else {
     return [];
   }

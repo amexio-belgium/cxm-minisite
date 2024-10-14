@@ -14,12 +14,14 @@ import Button from "@components/uielements/Button.astro";
 const locale = Astro.currentLocale!;
 
 export async function getStaticPaths() {
+  const staticLocale = "replaceMeWithLocale";
+
   if (!VISUAL_EDITING_ENABLED) {
-    return locales.map((locale) => ({
+    return {
       params: {
-        locale: locale,
+        locale: staticLocale,
       },
-    }));
+    };
   } else {
     return [];
   }
