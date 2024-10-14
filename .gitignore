@@ -27,3 +27,6 @@ pnpm-debug.log*
 /.netlify/
 src/locales/*/
 /public/fonts/fonts.css
+/src/pages/en/
+/src/pages/fr/
+/src/pages/nl/
