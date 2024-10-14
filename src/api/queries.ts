@@ -511,6 +511,17 @@ export const contentPageQuery = groq`*[_type == "contentPage" && language == $la
   },
   intro {
     ...,
+    introCta {
+      ...,
+      link {
+        ...,
+        internalLink->{
+          metadata,
+          _type,
+          blank
+        }
+      }
+    },
     intro[] {
       ...,
       ${portableTextResolveInternalLink}
