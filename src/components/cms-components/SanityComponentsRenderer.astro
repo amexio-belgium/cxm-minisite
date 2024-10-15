@@ -13,6 +13,7 @@ import Quote from "@components/uicomposition/Quote.astro";
 import CodeEmbed from "./CodeEmbed.astro";
 import Faq from "../uicomposition/Faq.astro";
 import ComponentWrapper from "@components/uielements/ComponentWrapper.astro";
+import TechnologiesShowcase from "@components/uielements/TechnologiesShowcase.astro";
 
 interface Props {
   content: Content | undefined;
@@ -126,6 +127,13 @@ const { content } = Astro.props;
         return (
           <ComponentWrapper>
             <Faq faq={content} />
+          </ComponentWrapper>
+        );
+      }
+      case "technologiesShowcase": {
+        return (
+          <ComponentWrapper>
+            <TechnologiesShowcase technologies={content} />
           </ComponentWrapper>
         );
       }

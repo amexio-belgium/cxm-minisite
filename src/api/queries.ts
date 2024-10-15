@@ -34,6 +34,49 @@ const portableTextResolveInternalLink = groq`markDefs[] {
 const contentQuery = groq`
 content[] {
   ...,
+  _type == "technologiesShowcase" => {
+    technologies[]{
+      ...,
+      technology->{
+        ...,
+        logo{
+          ...,
+          default{
+            asset->{
+              ...,
+              altTexts{...},
+              descriptions{...},
+              titles{...}
+            }
+          },
+          dark{
+            asset->{
+              ...,
+              altTexts{...},
+              descriptions{...},
+              titles{...}
+            }
+          },
+          light{
+            asset->{
+              ...,
+              altTexts{...},
+              descriptions{...},
+              titles{...}
+            }
+          }
+        }
+      },
+      technologyLink{
+        ...,
+        internalLink->{
+          metadata,
+          _type,
+          blank
+        }
+      }
+    }
+  },
   intro {
     ...,
     intro[] {
@@ -555,5 +598,3 @@ export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $l
 export const allCasePagesQuery = groq`*[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;
-
-export const getNoIndexedPages = groq``;

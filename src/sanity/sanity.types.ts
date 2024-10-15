@@ -68,6 +68,20 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type TechnologiesShowcase = {
+  _type: "technologiesShowcase";
+  technologies?: Array<{
+    technology?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "technology";
+    };
+    technologyLink?: Link;
+    _key: string;
+  }>;
+};
+
 export type CodeEmbed = {
   _type: "codeEmbed";
   title?: string;
@@ -297,56 +311,6 @@ export type Testimonial = {
     [internalGroqTypeReferenceTo]?: "person";
   };
   variant?: "flat" | "glass";
-};
-
-export type Technology = {
-  _id: string;
-  _type: "technology";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  logo?: {
-    default?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    light?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    dark?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  partner?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "company";
-  };
 };
 
 export type Tabs = {
@@ -729,6 +693,56 @@ export type Translation = {
   language?: string;
 };
 
+export type Navigation = {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  links?: Array<{
+    title?: string;
+    linkObject?: Link;
+    _type: "linkObject";
+    _key: string;
+  }>;
+  language?: string;
+};
+
+export type AnswerQuestion = {
+  _id: string;
+  _type: "answerQuestion";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  question?: string;
+  answer?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  language?: string;
+};
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayReferenceValue
+>;
+
 export type ReferenceCase = {
   _id: string;
   _type: "referenceCase";
@@ -791,6 +805,9 @@ export type ReferenceCase = {
     | ({
         _key: string;
       } & CodeEmbed)
+    | ({
+        _key: string;
+      } & TechnologiesShowcase)
   >;
   coreTechnology?: string;
   technologies?: Array<{
@@ -838,146 +855,6 @@ export type CollaborationModel = {
   >;
 };
 
-export type Navigation = {
-  _id: string;
-  _type: "navigation";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  links?: Array<{
-    title?: string;
-    linkObject?: Link;
-    _type: "linkObject";
-    _key: string;
-  }>;
-  language?: string;
-};
-
-export type Company = {
-  _id: string;
-  _type: "company";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  link?: Link;
-  logo?: {
-    default?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    light?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    dark?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  content?: Array<
-    | ({
-        _key: string;
-      } & Highlight)
-    | ({
-        _key: string;
-      } & CardGrid)
-    | ({
-        _key: string;
-      } & Callout)
-    | ({
-        _key: string;
-      } & LongFormText)
-    | ({
-        _key: string;
-      } & Tabs)
-    | ({
-        _key: string;
-      } & Testimonial)
-    | ({
-        _key: string;
-      } & Faq)
-    | ({
-        _key: string;
-      } & ServicesCardList)
-    | ({
-        _key: string;
-      } & WorkCardList)
-    | ({
-        _key: string;
-      } & BlogHighlight)
-    | ({
-        _key: string;
-      } & BlogsList)
-    | ({
-        _key: string;
-      } & CodeEmbed)
-  >;
-  language?: string;
-  type?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "skosConcept";
-  };
-  industryVertical?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "skosConcept";
-  };
-};
-
-export type AnswerQuestion = {
-  _id: string;
-  _type: "answerQuestion";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  question?: string;
-  answer?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<
-      {
-        _key: string;
-      } & Link
-    >;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  language?: string;
-};
-
 export type Service = {
   _id: string;
   _type: "service";
@@ -997,7 +874,6 @@ export type Service = {
     _type: "image";
   };
   challenge?: string;
-  cta?: Cta;
   content?: Array<
     | ({
         _key: string;
@@ -1035,6 +911,9 @@ export type Service = {
     | ({
         _key: string;
       } & CodeEmbed)
+    | ({
+        _key: string;
+      } & TechnologiesShowcase)
   >;
   customerReferencesText?: string;
   customerReferences?: Array<{
@@ -1085,12 +964,6 @@ export type Intro = {
     _key: string;
   }>;
 };
-
-export type InternationalizedArrayReference = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayReferenceValue
->;
 
 export type BlogPost = {
   _id: string;
@@ -1188,6 +1061,9 @@ export type BlogPost = {
     | ({
         _key: string;
       } & CodeEmbed)
+    | ({
+        _key: string;
+      } & TechnologiesShowcase)
   >;
   metadata?: Metadata;
   language?: string;
@@ -1213,32 +1089,6 @@ export type Person = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-};
-
-export type Link = {
-  _type: "link";
-  text?: string;
-  type?: string;
-  internalLink?:
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "blogPost";
-      };
-  url?: string;
-  email?: string;
-  phone?: string;
-  value?: string;
-  blank?: boolean;
-  parameters?: string;
-  anchor?: string;
 };
 
 export type ContentPage = {
@@ -1319,6 +1169,9 @@ export type ContentPage = {
     | ({
         _key: string;
       } & CodeEmbed)
+    | ({
+        _key: string;
+      } & TechnologiesShowcase)
   >;
   metadata?: Metadata;
   language?: string;
@@ -1341,6 +1194,193 @@ export type Metadata = {
     _type: "image";
   };
   noIndex?: boolean;
+};
+
+export type Technology = {
+  _id: string;
+  _type: "technology";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  logo?: {
+    default?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    light?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    dark?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  partner?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "company";
+  };
+};
+
+export type Company = {
+  _id: string;
+  _type: "company";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  link?: Link;
+  logo?: {
+    default?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    light?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    dark?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
+      } & Faq)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & WorkCardList)
+    | ({
+        _key: string;
+      } & BlogHighlight)
+    | ({
+        _key: string;
+      } & BlogsList)
+    | ({
+        _key: string;
+      } & CodeEmbed)
+    | ({
+        _key: string;
+      } & TechnologiesShowcase)
+  >;
+  language?: string;
+  type?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
+  industryVertical?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
+};
+
+export type Link = {
+  _type: "link";
+  text?: string;
+  type?: string;
+  internalLink?:
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contentPage";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "blogPost";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "service";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "referenceCase";
+      };
+  url?: string;
+  email?: string;
+  phone?: string;
+  value?: string;
+  blank?: boolean;
+  parameters?: string;
+  anchor?: string;
 };
 
 export type SanityImageCrop = {
@@ -1630,6 +1670,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | TechnologiesShowcase
   | CodeEmbed
   | BlogsList
   | BlogHighlight
@@ -1639,7 +1680,6 @@ export type AllSanitySchemaTypes =
   | WorkCardList
   | SiteConfig
   | Testimonial
-  | Technology
   | Tabs
   | Faq
   | SolutionDomain
@@ -1651,20 +1691,21 @@ export type AllSanitySchemaTypes =
   | TranslationMetadata
   | InternationalizedArrayReferenceValue
   | Translation
+  | Navigation
+  | AnswerQuestion
+  | InternationalizedArrayReference
   | ReferenceCase
   | CollaborationModel
-  | Navigation
-  | Company
-  | AnswerQuestion
   | Service
   | ServicePillar
   | Intro
-  | InternationalizedArrayReference
   | BlogPost
   | Person
-  | Link
   | ContentPage
   | Metadata
+  | Technology
+  | Company
+  | Link
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
@@ -1876,6 +1917,9 @@ export type NavigationQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -1958,6 +2002,9 @@ export type NavigationQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -1965,6 +2012,180 @@ export type NavigationQueryResult = {
             >;
             metadata?: Metadata;
             language?: string;
+          }
+        | {
+            _id: string;
+            _type: "referenceCase";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            introImage?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            duration?: string;
+            company?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            coreTechnology?: string;
+            technologies?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "technology";
+            }>;
+            services?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "service";
+            }>;
+            collaborationModel?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "collaborationModel";
+            };
+            relatedCases?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "referenceCase";
+            }>;
+            metadata?: Metadata;
+            language?: string;
+          }
+        | {
+            _id: string;
+            _type: "service";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            intro?: Intro;
+            image?: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+            challenge?: string;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & BlogHighlight)
+              | ({
+                  _key: string;
+                } & BlogsList)
+              | ({
+                  _key: string;
+                } & Callout)
+              | ({
+                  _key: string;
+                } & CardGrid)
+              | ({
+                  _key: string;
+                } & CodeEmbed)
+              | ({
+                  _key: string;
+                } & Faq)
+              | ({
+                  _key: string;
+                } & Highlight)
+              | ({
+                  _key: string;
+                } & LongFormText)
+              | ({
+                  _key: string;
+                } & ServicesCardList)
+              | ({
+                  _key: string;
+                } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
+                } & Testimonial)
+              | ({
+                  _key: string;
+                } & WorkCardList)
+            >;
+            customerReferencesText?: string;
+            customerReferences?: Array<{
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              _key: string;
+              [internalGroqTypeReferenceTo]?: "company";
+            }>;
+            servicePillar?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "servicePillar";
+            };
+            language?: string;
+            metadata?: Metadata;
           }
         | null;
       url?: string;
@@ -1982,10 +2203,10 @@ export type NavigationQueryResult = {
 // Query: markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}
 export type PortableTextResolveInternalLinkResult = never;
 // Variable: contentQuery
-// Query: content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}
+// Query: content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}
 export type ContentQueryResult = never;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -2021,7 +2242,6 @@ export type ServiceQueryResult = {
     _type: "image";
   } | null;
   challenge?: string;
-  cta?: Cta;
   content: Array<
     | {
         _key: string;
@@ -2182,6 +2402,9 @@ export type ServiceQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -2327,6 +2550,9 @@ export type ServiceQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -2554,6 +2780,9 @@ export type ServiceQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -2702,6 +2931,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -2869,6 +3101,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -2957,6 +3192,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -2964,6 +3202,180 @@ export type ServiceQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -2991,6 +3403,18 @@ export type ServiceQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -3118,6 +3542,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -3206,6 +3633,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -3213,6 +3643,180 @@ export type ServiceQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -3240,6 +3844,18 @@ export type ServiceQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -3416,6 +4032,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -3504,6 +4123,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -3511,6 +4133,180 @@ export type ServiceQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -3538,6 +4334,18 @@ export type ServiceQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -3665,6 +4473,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -3753,6 +4564,9 @@ export type ServiceQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -3760,6 +4574,180 @@ export type ServiceQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -3787,6 +4775,18 @@ export type ServiceQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -3930,6 +4930,9 @@ export type ServiceQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -4012,6 +5015,9 @@ export type ServiceQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -4019,6 +5025,180 @@ export type ServiceQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -4231,6 +5411,9 @@ export type ServiceQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -4313,6 +5496,9 @@ export type ServiceQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -4320,6 +5506,180 @@ export type ServiceQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -4558,6 +5918,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -4640,6 +6003,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -4647,6 +6013,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -4674,6 +6214,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -4825,6 +6377,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -4907,6 +6462,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -4914,6 +6472,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -4941,6 +6673,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -5112,6 +6856,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -5194,6 +6941,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -5201,6 +6951,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -5228,6 +7152,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -5465,6 +7401,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -5547,6 +7486,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -5554,6 +7496,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -5581,6 +7697,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -5820,6 +7948,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -5902,6 +8033,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -5909,6 +8043,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -5936,6 +8244,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -6145,6 +8465,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -6227,6 +8550,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -6234,6 +8560,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -6261,6 +8761,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -6428,6 +8940,9 @@ export type ServiceQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -6516,6 +9031,9 @@ export type ServiceQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -6523,6 +9041,180 @@ export type ServiceQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -6550,6 +9242,18 @@ export type ServiceQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -6716,6 +9420,9 @@ export type ServiceQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -6804,6 +9511,9 @@ export type ServiceQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -6811,6 +9521,180 @@ export type ServiceQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -6838,6 +9722,18 @@ export type ServiceQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -6955,7 +9851,6 @@ export type ServiceQueryResult = {
               _type: "image";
             } | null;
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -6987,6 +9882,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -7140,6 +10038,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -7222,6 +10123,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -7229,6 +10133,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -7256,6 +10334,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -7393,6 +10483,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -7475,6 +10568,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -7482,6 +10578,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -7509,6 +10779,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -7638,6 +10920,9 @@ export type ServiceQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -7726,6 +11011,9 @@ export type ServiceQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -7733,6 +11021,180 @@ export type ServiceQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -7760,6 +11222,18 @@ export type ServiceQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -7933,6 +11407,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -8015,6 +11492,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -8022,6 +11502,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -8049,6 +11703,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -8185,6 +11851,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -8267,6 +11936,9 @@ export type ServiceQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -8274,6 +11946,180 @@ export type ServiceQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -8301,6 +12147,18 @@ export type ServiceQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -8430,6 +12288,9 @@ export type ServiceQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -8518,6 +12379,9 @@ export type ServiceQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -8525,6 +12389,180 @@ export type ServiceQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -8552,6 +12590,18 @@ export type ServiceQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -8599,6 +12649,285 @@ export type ServiceQueryResult = {
               }
           > | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
       }
     | {
         _key: string;
@@ -8895,6 +13224,9 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -8945,6 +13277,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -9021,7 +13356,6 @@ export type ServiceQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -9053,6 +13387,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -9379,6 +13716,9 @@ export type ServiceQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -9429,6 +13769,9 @@ export type ServiceQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -9505,7 +13848,6 @@ export type ServiceQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -9537,6 +13879,9 @@ export type ServiceQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -9765,6 +14110,9 @@ export type ServiceQueryResult = {
         } & Tabs)
       | ({
           _key: string;
+        } & TechnologiesShowcase)
+      | ({
+          _key: string;
         } & Testimonial)
       | ({
           _key: string;
@@ -9808,7 +14156,7 @@ export type ServiceQueryResult = {
   >;
 } | null;
 // Variable: blogPostQuery
-// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type BlogPostQueryResult = {
   _id: string;
   _type: "blogPost";
@@ -10066,6 +14414,9 @@ export type BlogPostQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -10211,6 +14562,9 @@ export type BlogPostQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -10438,6 +14792,9 @@ export type BlogPostQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -10586,6 +14943,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -10753,6 +15113,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -10841,6 +15204,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -10848,6 +15214,180 @@ export type BlogPostQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -10875,6 +15415,18 @@ export type BlogPostQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -11002,6 +15554,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -11090,6 +15645,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -11097,6 +15655,180 @@ export type BlogPostQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -11124,6 +15856,18 @@ export type BlogPostQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -11300,6 +16044,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -11388,6 +16135,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -11395,6 +16145,180 @@ export type BlogPostQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -11422,6 +16346,18 @@ export type BlogPostQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -11549,6 +16485,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -11637,6 +16576,9 @@ export type BlogPostQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -11644,6 +16586,180 @@ export type BlogPostQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -11671,6 +16787,18 @@ export type BlogPostQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -11814,6 +16942,9 @@ export type BlogPostQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -11896,6 +17027,9 @@ export type BlogPostQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -11903,6 +17037,180 @@ export type BlogPostQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -12115,6 +17423,9 @@ export type BlogPostQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -12197,6 +17508,9 @@ export type BlogPostQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -12204,6 +17518,180 @@ export type BlogPostQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -12442,6 +17930,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -12524,6 +18015,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -12531,6 +18025,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -12558,6 +18226,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -12709,6 +18389,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -12791,6 +18474,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -12798,6 +18484,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -12825,6 +18685,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -12996,6 +18868,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -13078,6 +18953,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -13085,6 +18963,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -13112,6 +19164,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -13349,6 +19413,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -13431,6 +19498,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -13438,6 +19508,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -13465,6 +19709,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -13704,6 +19960,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -13786,6 +20045,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -13793,6 +20055,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -13820,6 +20256,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -14029,6 +20477,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -14111,6 +20562,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -14118,6 +20572,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -14145,6 +20773,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -14312,6 +20952,9 @@ export type BlogPostQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -14400,6 +21043,9 @@ export type BlogPostQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -14407,6 +21053,180 @@ export type BlogPostQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -14434,6 +21254,18 @@ export type BlogPostQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -14600,6 +21432,9 @@ export type BlogPostQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -14688,6 +21523,9 @@ export type BlogPostQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -14695,6 +21533,180 @@ export type BlogPostQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -14722,6 +21734,18 @@ export type BlogPostQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -14839,7 +21863,6 @@ export type BlogPostQueryResult = {
               _type: "image";
             } | null;
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -14871,6 +21894,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -15024,6 +22050,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -15106,6 +22135,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -15113,6 +22145,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -15140,6 +22346,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -15277,6 +22495,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -15359,6 +22580,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -15366,6 +22590,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -15393,6 +22791,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -15522,6 +22932,9 @@ export type BlogPostQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -15610,6 +23023,9 @@ export type BlogPostQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -15617,6 +23033,180 @@ export type BlogPostQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -15644,6 +23234,18 @@ export type BlogPostQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -15817,6 +23419,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -15899,6 +23504,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -15906,6 +23514,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -15933,6 +23715,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -16069,6 +23863,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -16151,6 +23948,9 @@ export type BlogPostQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -16158,6 +23958,180 @@ export type BlogPostQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -16185,6 +24159,18 @@ export type BlogPostQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -16314,6 +24300,9 @@ export type BlogPostQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -16402,6 +24391,9 @@ export type BlogPostQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -16409,6 +24401,180 @@ export type BlogPostQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -16436,6 +24602,18 @@ export type BlogPostQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -16483,6 +24661,285 @@ export type BlogPostQueryResult = {
               }
           > | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
       }
     | {
         _key: string;
@@ -16779,6 +25236,9 @@ export type BlogPostQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -16829,6 +25289,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -16905,7 +25368,6 @@ export type BlogPostQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -16937,6 +25399,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -17263,6 +25728,9 @@ export type BlogPostQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -17313,6 +25781,9 @@ export type BlogPostQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -17389,7 +25860,6 @@ export type BlogPostQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -17421,6 +25891,9 @@ export type BlogPostQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -17786,7 +26259,7 @@ export type BlogsListQueryPaginatingResult = Array<{
   } | null;
 }>;
 // Variable: workQuery
-// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  company -> {    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  company -> {    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type WorkQueryResult = {
   _id: string;
   _type: "referenceCase";
@@ -17941,6 +26414,9 @@ export type WorkQueryResult = {
       | ({
           _key: string;
         } & Tabs)
+      | ({
+          _key: string;
+        } & TechnologiesShowcase)
       | ({
           _key: string;
         } & Testimonial)
@@ -18122,6 +26598,9 @@ export type WorkQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -18267,6 +26746,9 @@ export type WorkQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -18494,6 +26976,9 @@ export type WorkQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -18642,6 +27127,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -18809,6 +27297,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -18897,6 +27388,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -18904,6 +27398,180 @@ export type WorkQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -18931,6 +27599,18 @@ export type WorkQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -19058,6 +27738,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -19146,6 +27829,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -19153,6 +27839,180 @@ export type WorkQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -19180,6 +28040,18 @@ export type WorkQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -19356,6 +28228,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -19444,6 +28319,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -19451,6 +28329,180 @@ export type WorkQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -19478,6 +28530,18 @@ export type WorkQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -19605,6 +28669,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -19693,6 +28760,9 @@ export type WorkQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -19700,6 +28770,180 @@ export type WorkQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -19727,6 +28971,18 @@ export type WorkQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -19870,6 +29126,9 @@ export type WorkQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -19952,6 +29211,9 @@ export type WorkQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -19959,6 +29221,180 @@ export type WorkQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -20171,6 +29607,9 @@ export type WorkQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -20253,6 +29692,9 @@ export type WorkQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -20260,6 +29702,180 @@ export type WorkQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -20498,6 +30114,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -20580,6 +30199,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -20587,6 +30209,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -20614,6 +30410,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -20765,6 +30573,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -20847,6 +30658,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -20854,6 +30668,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -20881,6 +30869,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -21052,6 +31052,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -21134,6 +31137,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -21141,6 +31147,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -21168,6 +31348,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -21405,6 +31597,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -21487,6 +31682,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -21494,6 +31692,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -21521,6 +31893,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -21760,6 +32144,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -21842,6 +32229,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -21849,6 +32239,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -21876,6 +32440,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -22085,6 +32661,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -22167,6 +32746,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -22174,6 +32756,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -22201,6 +32957,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -22368,6 +33136,9 @@ export type WorkQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -22456,6 +33227,9 @@ export type WorkQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -22463,6 +33237,180 @@ export type WorkQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -22490,6 +33438,18 @@ export type WorkQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -22656,6 +33616,9 @@ export type WorkQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -22744,6 +33707,9 @@ export type WorkQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -22751,6 +33717,180 @@ export type WorkQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -22778,6 +33918,18 @@ export type WorkQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -22895,7 +34047,6 @@ export type WorkQueryResult = {
               _type: "image";
             } | null;
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -22927,6 +34078,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -23080,6 +34234,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -23162,6 +34319,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -23169,6 +34329,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -23196,6 +34530,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -23333,6 +34679,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -23415,6 +34764,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -23422,6 +34774,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -23449,6 +34975,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -23578,6 +35116,9 @@ export type WorkQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -23666,6 +35207,9 @@ export type WorkQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -23673,6 +35217,180 @@ export type WorkQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -23700,6 +35418,18 @@ export type WorkQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -23873,6 +35603,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -23955,6 +35688,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -23962,6 +35698,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -23989,6 +35899,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -24125,6 +36047,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -24207,6 +36132,9 @@ export type WorkQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -24214,6 +36142,180 @@ export type WorkQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -24241,6 +36343,18 @@ export type WorkQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -24370,6 +36484,9 @@ export type WorkQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -24458,6 +36575,9 @@ export type WorkQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -24465,6 +36585,180 @@ export type WorkQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -24492,6 +36786,18 @@ export type WorkQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -24539,6 +36845,285 @@ export type WorkQueryResult = {
               }
           > | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
       }
     | {
         _key: string;
@@ -24835,6 +37420,9 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -24885,6 +37473,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -24961,7 +37552,6 @@ export type WorkQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -24993,6 +37583,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -25319,6 +37912,9 @@ export type WorkQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -25369,6 +37965,9 @@ export type WorkQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -25445,7 +38044,6 @@ export type WorkQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -25477,6 +38075,9 @@ export type WorkQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -25795,6 +38396,9 @@ export type WorkQueryResult = {
           } & Tabs)
         | ({
             _key: string;
+          } & TechnologiesShowcase)
+        | ({
+            _key: string;
           } & Testimonial)
         | ({
             _key: string;
@@ -25834,7 +38438,6 @@ export type WorkQueryResult = {
       _type: "image";
     };
     challenge?: string;
-    cta?: Cta;
     content?: Array<
       | ({
           _key: string;
@@ -25866,6 +38469,9 @@ export type WorkQueryResult = {
       | ({
           _key: string;
         } & Tabs)
+      | ({
+          _key: string;
+        } & TechnologiesShowcase)
       | ({
           _key: string;
         } & Testimonial)
@@ -26041,6 +38647,9 @@ export type WorkQueryResult = {
         } & Tabs)
       | ({
           _key: string;
+        } & TechnologiesShowcase)
+      | ({
+          _key: string;
         } & Testimonial)
       | ({
           _key: string;
@@ -26115,7 +38724,6 @@ export type WorkQueryResult = {
         _type: "image";
       };
       challenge?: string;
-      cta?: Cta;
       content?: Array<
         | ({
             _key: string;
@@ -26147,6 +38755,9 @@ export type WorkQueryResult = {
         | ({
             _key: string;
           } & Tabs)
+        | ({
+            _key: string;
+          } & TechnologiesShowcase)
         | ({
             _key: string;
           } & Testimonial)
@@ -26345,7 +38956,7 @@ export type WorkQueryResult = {
 // Query: *[_type == 'siteConfig' && language == $language][0]{  homePage->{    "slug": metadata.slug.current  }}.homePage.slug
 export type HomePageSlugQueryResult = string | null;
 // Variable: contentPageQuery
-// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  intro {    ...,    introCta {      ...,      link {        ...,        internalLink->{          metadata,          _type,          blank        }      }    },    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },  },  content[] {  ...,  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  intro {    ...,    introCta {      ...,      link {        ...,        internalLink->{          metadata,          _type,          blank        }      }    },    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type ContentPageQueryResult = {
   _id: string;
   _type: "contentPage";
@@ -26475,6 +39086,9 @@ export type ContentPageQueryResult = {
                       } & Tabs)
                     | ({
                         _key: string;
+                      } & TechnologiesShowcase)
+                    | ({
+                        _key: string;
                       } & Testimonial)
                     | ({
                         _key: string;
@@ -26557,6 +39171,9 @@ export type ContentPageQueryResult = {
                       } & Tabs)
                     | ({
                         _key: string;
+                      } & TechnologiesShowcase)
+                    | ({
+                        _key: string;
                       } & Testimonial)
                     | ({
                         _key: string;
@@ -26564,6 +39181,180 @@ export type ContentPageQueryResult = {
                   >;
                   metadata?: Metadata;
                   language?: string;
+                }
+              | {
+                  _id: string;
+                  _type: "referenceCase";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  intro?: Intro;
+                  introImage?: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                  };
+                  duration?: string;
+                  company?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "company";
+                  };
+                  content?: Array<
+                    | ({
+                        _key: string;
+                      } & BlogHighlight)
+                    | ({
+                        _key: string;
+                      } & BlogsList)
+                    | ({
+                        _key: string;
+                      } & Callout)
+                    | ({
+                        _key: string;
+                      } & CardGrid)
+                    | ({
+                        _key: string;
+                      } & CodeEmbed)
+                    | ({
+                        _key: string;
+                      } & Faq)
+                    | ({
+                        _key: string;
+                      } & Highlight)
+                    | ({
+                        _key: string;
+                      } & LongFormText)
+                    | ({
+                        _key: string;
+                      } & ServicesCardList)
+                    | ({
+                        _key: string;
+                      } & Tabs)
+                    | ({
+                        _key: string;
+                      } & TechnologiesShowcase)
+                    | ({
+                        _key: string;
+                      } & Testimonial)
+                    | ({
+                        _key: string;
+                      } & WorkCardList)
+                  >;
+                  coreTechnology?: string;
+                  technologies?: Array<{
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    _key: string;
+                    [internalGroqTypeReferenceTo]?: "technology";
+                  }>;
+                  services?: Array<{
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    _key: string;
+                    [internalGroqTypeReferenceTo]?: "service";
+                  }>;
+                  collaborationModel?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "collaborationModel";
+                  };
+                  relatedCases?: Array<{
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    _key: string;
+                    [internalGroqTypeReferenceTo]?: "referenceCase";
+                  }>;
+                  metadata?: Metadata;
+                  language?: string;
+                }
+              | {
+                  _id: string;
+                  _type: "service";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  intro?: Intro;
+                  image?: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                  };
+                  challenge?: string;
+                  content?: Array<
+                    | ({
+                        _key: string;
+                      } & BlogHighlight)
+                    | ({
+                        _key: string;
+                      } & BlogsList)
+                    | ({
+                        _key: string;
+                      } & Callout)
+                    | ({
+                        _key: string;
+                      } & CardGrid)
+                    | ({
+                        _key: string;
+                      } & CodeEmbed)
+                    | ({
+                        _key: string;
+                      } & Faq)
+                    | ({
+                        _key: string;
+                      } & Highlight)
+                    | ({
+                        _key: string;
+                      } & LongFormText)
+                    | ({
+                        _key: string;
+                      } & ServicesCardList)
+                    | ({
+                        _key: string;
+                      } & Tabs)
+                    | ({
+                        _key: string;
+                      } & TechnologiesShowcase)
+                    | ({
+                        _key: string;
+                      } & Testimonial)
+                    | ({
+                        _key: string;
+                      } & WorkCardList)
+                  >;
+                  customerReferencesText?: string;
+                  customerReferences?: Array<{
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    _key: string;
+                    [internalGroqTypeReferenceTo]?: "company";
+                  }>;
+                  servicePillar?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "servicePillar";
+                  };
+                  language?: string;
+                  metadata?: Metadata;
                 }
               | null;
             url?: string;
@@ -26591,6 +39382,18 @@ export type ContentPageQueryResult = {
                   _type: "reference";
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "contentPage";
+                }
+              | {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "referenceCase";
+                }
+              | {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "service";
                 };
             url?: string;
             email?: string;
@@ -26621,6 +39424,16 @@ export type ContentPageQueryResult = {
           | {
               metadata: Metadata | null;
               _type: "contentPage";
+              blank: null;
+            }
+          | {
+              metadata: Metadata | null;
+              _type: "referenceCase";
+              blank: null;
+            }
+          | {
+              metadata: Metadata | null;
+              _type: "service";
               blank: null;
             }
           | null;
@@ -26794,6 +39607,9 @@ export type ContentPageQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -26939,6 +39755,9 @@ export type ContentPageQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -27166,6 +39985,9 @@ export type ContentPageQueryResult = {
               } & Tabs)
             | ({
                 _key: string;
+              } & TechnologiesShowcase)
+            | ({
+                _key: string;
               } & Testimonial)
             | ({
                 _key: string;
@@ -27314,6 +40136,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -27481,6 +40306,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -27569,6 +40397,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -27576,6 +40407,180 @@ export type ContentPageQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -27603,6 +40608,18 @@ export type ContentPageQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -27730,6 +40747,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -27818,6 +40838,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -27825,6 +40848,180 @@ export type ContentPageQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -27852,6 +41049,18 @@ export type ContentPageQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -28028,6 +41237,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -28116,6 +41328,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -28123,6 +41338,180 @@ export type ContentPageQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -28150,6 +41539,18 @@ export type ContentPageQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -28277,6 +41678,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -28365,6 +41769,9 @@ export type ContentPageQueryResult = {
                                 } & Tabs)
                               | ({
                                   _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
                                 } & Testimonial)
                               | ({
                                   _key: string;
@@ -28372,6 +41779,180 @@ export type ContentPageQueryResult = {
                             >;
                             metadata?: Metadata;
                             language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "referenceCase";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            introImage?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            duration?: string;
+                            company?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            };
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            coreTechnology?: string;
+                            technologies?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "technology";
+                            }>;
+                            services?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "service";
+                            }>;
+                            collaborationModel?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "collaborationModel";
+                            };
+                            relatedCases?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }>;
+                            metadata?: Metadata;
+                            language?: string;
+                          }
+                        | {
+                            _id: string;
+                            _type: "service";
+                            _createdAt: string;
+                            _updatedAt: string;
+                            _rev: string;
+                            intro?: Intro;
+                            image?: {
+                              asset?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                              };
+                              hotspot?: SanityImageHotspot;
+                              crop?: SanityImageCrop;
+                              _type: "image";
+                            };
+                            challenge?: string;
+                            content?: Array<
+                              | ({
+                                  _key: string;
+                                } & BlogHighlight)
+                              | ({
+                                  _key: string;
+                                } & BlogsList)
+                              | ({
+                                  _key: string;
+                                } & Callout)
+                              | ({
+                                  _key: string;
+                                } & CardGrid)
+                              | ({
+                                  _key: string;
+                                } & CodeEmbed)
+                              | ({
+                                  _key: string;
+                                } & Faq)
+                              | ({
+                                  _key: string;
+                                } & Highlight)
+                              | ({
+                                  _key: string;
+                                } & LongFormText)
+                              | ({
+                                  _key: string;
+                                } & ServicesCardList)
+                              | ({
+                                  _key: string;
+                                } & Tabs)
+                              | ({
+                                  _key: string;
+                                } & TechnologiesShowcase)
+                              | ({
+                                  _key: string;
+                                } & Testimonial)
+                              | ({
+                                  _key: string;
+                                } & WorkCardList)
+                            >;
+                            customerReferencesText?: string;
+                            customerReferences?: Array<{
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              _key: string;
+                              [internalGroqTypeReferenceTo]?: "company";
+                            }>;
+                            servicePillar?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "servicePillar";
+                            };
+                            language?: string;
+                            metadata?: Metadata;
                           }
                         | null;
                       url?: string;
@@ -28399,6 +41980,18 @@ export type ContentPageQueryResult = {
                             _type: "reference";
                             _weak?: boolean;
                             [internalGroqTypeReferenceTo]?: "contentPage";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }
+                        | {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "service";
                           };
                       url?: string;
                       email?: string;
@@ -28542,6 +42135,9 @@ export type ContentPageQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -28624,6 +42220,9 @@ export type ContentPageQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -28631,6 +42230,180 @@ export type ContentPageQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -28843,6 +42616,9 @@ export type ContentPageQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -28925,6 +42701,9 @@ export type ContentPageQueryResult = {
                         } & Tabs)
                       | ({
                           _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
                         } & Testimonial)
                       | ({
                           _key: string;
@@ -28932,6 +42711,180 @@ export type ContentPageQueryResult = {
                     >;
                     metadata?: Metadata;
                     language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "referenceCase";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    introImage?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    duration?: string;
+                    company?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    };
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    coreTechnology?: string;
+                    technologies?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "technology";
+                    }>;
+                    services?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "service";
+                    }>;
+                    collaborationModel?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "collaborationModel";
+                    };
+                    relatedCases?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "referenceCase";
+                    }>;
+                    metadata?: Metadata;
+                    language?: string;
+                  }
+                | {
+                    _id: string;
+                    _type: "service";
+                    _createdAt: string;
+                    _updatedAt: string;
+                    _rev: string;
+                    intro?: Intro;
+                    image?: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                    };
+                    challenge?: string;
+                    content?: Array<
+                      | ({
+                          _key: string;
+                        } & BlogHighlight)
+                      | ({
+                          _key: string;
+                        } & BlogsList)
+                      | ({
+                          _key: string;
+                        } & Callout)
+                      | ({
+                          _key: string;
+                        } & CardGrid)
+                      | ({
+                          _key: string;
+                        } & CodeEmbed)
+                      | ({
+                          _key: string;
+                        } & Faq)
+                      | ({
+                          _key: string;
+                        } & Highlight)
+                      | ({
+                          _key: string;
+                        } & LongFormText)
+                      | ({
+                          _key: string;
+                        } & ServicesCardList)
+                      | ({
+                          _key: string;
+                        } & Tabs)
+                      | ({
+                          _key: string;
+                        } & TechnologiesShowcase)
+                      | ({
+                          _key: string;
+                        } & Testimonial)
+                      | ({
+                          _key: string;
+                        } & WorkCardList)
+                    >;
+                    customerReferencesText?: string;
+                    customerReferences?: Array<{
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      _key: string;
+                      [internalGroqTypeReferenceTo]?: "company";
+                    }>;
+                    servicePillar?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "servicePillar";
+                    };
+                    language?: string;
+                    metadata?: Metadata;
                   }
                 | null;
               url?: string;
@@ -29170,6 +43123,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -29252,6 +43208,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -29259,6 +43218,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -29286,6 +43419,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -29437,6 +43582,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -29519,6 +43667,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -29526,6 +43677,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -29553,6 +43878,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -29724,6 +44061,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -29806,6 +44146,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -29813,6 +44156,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -29840,6 +44357,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -30077,6 +44606,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -30159,6 +44691,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -30166,6 +44701,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -30193,6 +44902,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -30432,6 +45153,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -30514,6 +45238,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -30521,6 +45248,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -30548,6 +45449,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -30757,6 +45670,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -30839,6 +45755,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -30846,6 +45765,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -30873,6 +45966,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -31040,6 +46145,9 @@ export type ContentPageQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -31128,6 +46236,9 @@ export type ContentPageQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -31135,6 +46246,180 @@ export type ContentPageQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -31162,6 +46447,18 @@ export type ContentPageQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -31328,6 +46625,9 @@ export type ContentPageQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -31416,6 +46716,9 @@ export type ContentPageQueryResult = {
                               } & Tabs)
                             | ({
                                 _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
                               } & Testimonial)
                             | ({
                                 _key: string;
@@ -31423,6 +46726,180 @@ export type ContentPageQueryResult = {
                           >;
                           metadata?: Metadata;
                           language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "referenceCase";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          introImage?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          duration?: string;
+                          company?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          };
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          coreTechnology?: string;
+                          technologies?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "technology";
+                          }>;
+                          services?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "service";
+                          }>;
+                          collaborationModel?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "collaborationModel";
+                          };
+                          relatedCases?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "referenceCase";
+                          }>;
+                          metadata?: Metadata;
+                          language?: string;
+                        }
+                      | {
+                          _id: string;
+                          _type: "service";
+                          _createdAt: string;
+                          _updatedAt: string;
+                          _rev: string;
+                          intro?: Intro;
+                          image?: {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            _type: "image";
+                          };
+                          challenge?: string;
+                          content?: Array<
+                            | ({
+                                _key: string;
+                              } & BlogHighlight)
+                            | ({
+                                _key: string;
+                              } & BlogsList)
+                            | ({
+                                _key: string;
+                              } & Callout)
+                            | ({
+                                _key: string;
+                              } & CardGrid)
+                            | ({
+                                _key: string;
+                              } & CodeEmbed)
+                            | ({
+                                _key: string;
+                              } & Faq)
+                            | ({
+                                _key: string;
+                              } & Highlight)
+                            | ({
+                                _key: string;
+                              } & LongFormText)
+                            | ({
+                                _key: string;
+                              } & ServicesCardList)
+                            | ({
+                                _key: string;
+                              } & Tabs)
+                            | ({
+                                _key: string;
+                              } & TechnologiesShowcase)
+                            | ({
+                                _key: string;
+                              } & Testimonial)
+                            | ({
+                                _key: string;
+                              } & WorkCardList)
+                          >;
+                          customerReferencesText?: string;
+                          customerReferences?: Array<{
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            _key: string;
+                            [internalGroqTypeReferenceTo]?: "company";
+                          }>;
+                          servicePillar?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "servicePillar";
+                          };
+                          language?: string;
+                          metadata?: Metadata;
                         }
                       | null;
                     url?: string;
@@ -31450,6 +46927,18 @@ export type ContentPageQueryResult = {
                           _type: "reference";
                           _weak?: boolean;
                           [internalGroqTypeReferenceTo]?: "contentPage";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }
+                      | {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "service";
                         };
                     url?: string;
                     email?: string;
@@ -31567,7 +47056,6 @@ export type ContentPageQueryResult = {
               _type: "image";
             } | null;
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -31599,6 +47087,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -31752,6 +47243,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -31834,6 +47328,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -31841,6 +47338,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -31868,6 +47539,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -32005,6 +47688,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -32087,6 +47773,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -32094,6 +47783,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -32121,6 +47984,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -32250,6 +48125,9 @@ export type ContentPageQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -32338,6 +48216,9 @@ export type ContentPageQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -32345,6 +48226,180 @@ export type ContentPageQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -32372,6 +48427,18 @@ export type ContentPageQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -32545,6 +48612,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -32627,6 +48697,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -32634,6 +48707,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -32661,6 +48908,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -32797,6 +49056,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -32879,6 +49141,9 @@ export type ContentPageQueryResult = {
                             } & Tabs)
                           | ({
                               _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
                             } & Testimonial)
                           | ({
                               _key: string;
@@ -32886,6 +49151,180 @@ export type ContentPageQueryResult = {
                         >;
                         metadata?: Metadata;
                         language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "referenceCase";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        introImage?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        duration?: string;
+                        company?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        };
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        coreTechnology?: string;
+                        technologies?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "technology";
+                        }>;
+                        services?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "service";
+                        }>;
+                        collaborationModel?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "collaborationModel";
+                        };
+                        relatedCases?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "referenceCase";
+                        }>;
+                        metadata?: Metadata;
+                        language?: string;
+                      }
+                    | {
+                        _id: string;
+                        _type: "service";
+                        _createdAt: string;
+                        _updatedAt: string;
+                        _rev: string;
+                        intro?: Intro;
+                        image?: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                        };
+                        challenge?: string;
+                        content?: Array<
+                          | ({
+                              _key: string;
+                            } & BlogHighlight)
+                          | ({
+                              _key: string;
+                            } & BlogsList)
+                          | ({
+                              _key: string;
+                            } & Callout)
+                          | ({
+                              _key: string;
+                            } & CardGrid)
+                          | ({
+                              _key: string;
+                            } & CodeEmbed)
+                          | ({
+                              _key: string;
+                            } & Faq)
+                          | ({
+                              _key: string;
+                            } & Highlight)
+                          | ({
+                              _key: string;
+                            } & LongFormText)
+                          | ({
+                              _key: string;
+                            } & ServicesCardList)
+                          | ({
+                              _key: string;
+                            } & Tabs)
+                          | ({
+                              _key: string;
+                            } & TechnologiesShowcase)
+                          | ({
+                              _key: string;
+                            } & Testimonial)
+                          | ({
+                              _key: string;
+                            } & WorkCardList)
+                        >;
+                        customerReferencesText?: string;
+                        customerReferences?: Array<{
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          _key: string;
+                          [internalGroqTypeReferenceTo]?: "company";
+                        }>;
+                        servicePillar?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "servicePillar";
+                        };
+                        language?: string;
+                        metadata?: Metadata;
                       }
                     | null;
                   url?: string;
@@ -32913,6 +49352,18 @@ export type ContentPageQueryResult = {
                         _type: "reference";
                         _weak?: boolean;
                         [internalGroqTypeReferenceTo]?: "contentPage";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "referenceCase";
+                      }
+                    | {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "service";
                       };
                   url?: string;
                   email?: string;
@@ -33042,6 +49493,9 @@ export type ContentPageQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -33130,6 +49584,9 @@ export type ContentPageQueryResult = {
                                   } & Tabs)
                                 | ({
                                     _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
                                   } & Testimonial)
                                 | ({
                                     _key: string;
@@ -33137,6 +49594,180 @@ export type ContentPageQueryResult = {
                               >;
                               metadata?: Metadata;
                               language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "referenceCase";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              introImage?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              duration?: string;
+                              company?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              };
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              coreTechnology?: string;
+                              technologies?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "technology";
+                              }>;
+                              services?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "service";
+                              }>;
+                              collaborationModel?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "collaborationModel";
+                              };
+                              relatedCases?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "referenceCase";
+                              }>;
+                              metadata?: Metadata;
+                              language?: string;
+                            }
+                          | {
+                              _id: string;
+                              _type: "service";
+                              _createdAt: string;
+                              _updatedAt: string;
+                              _rev: string;
+                              intro?: Intro;
+                              image?: {
+                                asset?: {
+                                  _ref: string;
+                                  _type: "reference";
+                                  _weak?: boolean;
+                                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                                };
+                                hotspot?: SanityImageHotspot;
+                                crop?: SanityImageCrop;
+                                _type: "image";
+                              };
+                              challenge?: string;
+                              content?: Array<
+                                | ({
+                                    _key: string;
+                                  } & BlogHighlight)
+                                | ({
+                                    _key: string;
+                                  } & BlogsList)
+                                | ({
+                                    _key: string;
+                                  } & Callout)
+                                | ({
+                                    _key: string;
+                                  } & CardGrid)
+                                | ({
+                                    _key: string;
+                                  } & CodeEmbed)
+                                | ({
+                                    _key: string;
+                                  } & Faq)
+                                | ({
+                                    _key: string;
+                                  } & Highlight)
+                                | ({
+                                    _key: string;
+                                  } & LongFormText)
+                                | ({
+                                    _key: string;
+                                  } & ServicesCardList)
+                                | ({
+                                    _key: string;
+                                  } & Tabs)
+                                | ({
+                                    _key: string;
+                                  } & TechnologiesShowcase)
+                                | ({
+                                    _key: string;
+                                  } & Testimonial)
+                                | ({
+                                    _key: string;
+                                  } & WorkCardList)
+                              >;
+                              customerReferencesText?: string;
+                              customerReferences?: Array<{
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                _key: string;
+                                [internalGroqTypeReferenceTo]?: "company";
+                              }>;
+                              servicePillar?: {
+                                _ref: string;
+                                _type: "reference";
+                                _weak?: boolean;
+                                [internalGroqTypeReferenceTo]?: "servicePillar";
+                              };
+                              language?: string;
+                              metadata?: Metadata;
                             }
                           | null;
                         url?: string;
@@ -33164,6 +49795,18 @@ export type ContentPageQueryResult = {
                               _type: "reference";
                               _weak?: boolean;
                               [internalGroqTypeReferenceTo]?: "contentPage";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "referenceCase";
+                            }
+                          | {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "service";
                             };
                         url?: string;
                         email?: string;
@@ -33211,6 +49854,285 @@ export type ContentPageQueryResult = {
               }
           > | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
+        groups: null;
+      }
+    | {
+        _key: string;
+        _type: "technologiesShowcase";
+        technologies: Array<{
+          technology: {
+            _id: string;
+            _type: "technology";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            name?: string;
+            logo: {
+              default: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              light: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+              dark: {
+                asset: {
+                  _id: string;
+                  _type: "sanity.imageAsset";
+                  _createdAt: string;
+                  _updatedAt: string;
+                  _rev: string;
+                  originalFilename?: string;
+                  label?: string;
+                  title?: string;
+                  description?: string;
+                  altText?: string;
+                  sha1hash?: string;
+                  extension?: string;
+                  mimeType?: string;
+                  size?: number;
+                  assetId?: string;
+                  uploadId?: string;
+                  path?: string;
+                  url?: string;
+                  metadata?: SanityImageMetadata;
+                  source?: SanityAssetSourceData;
+                  altTexts: null;
+                  descriptions: null;
+                  titles: null;
+                } | null;
+              } | null;
+            } | null;
+            partner?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "company";
+            };
+          } | null;
+          technologyLink: {
+            _type: "link";
+            text?: string;
+            type?: string;
+            internalLink:
+              | {
+                  metadata: Metadata | null;
+                  _type: "blogPost";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "contentPage";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "referenceCase";
+                  blank: null;
+                }
+              | {
+                  metadata: Metadata | null;
+                  _type: "service";
+                  blank: null;
+                }
+              | null;
+            url?: string;
+            email?: string;
+            phone?: string;
+            value?: string;
+            blank?: boolean;
+            parameters?: string;
+            anchor?: string;
+          } | null;
+          _key: string;
+        }> | null;
+        intro: null;
       }
     | {
         _key: string;
@@ -33507,6 +50429,9 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -33557,6 +50482,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -33633,7 +50561,6 @@ export type ContentPageQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -33665,6 +50592,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -33991,6 +50921,9 @@ export type ContentPageQueryResult = {
                 } & Tabs)
               | ({
                   _key: string;
+                } & TechnologiesShowcase)
+              | ({
+                  _key: string;
                 } & Testimonial)
               | ({
                   _key: string;
@@ -34041,6 +50974,9 @@ export type ContentPageQueryResult = {
             | ({
                 _key: string;
               } & Tabs)
+            | ({
+                _key: string;
+              } & TechnologiesShowcase)
             | ({
                 _key: string;
               } & Testimonial)
@@ -34117,7 +51053,6 @@ export type ContentPageQueryResult = {
               _type: "image";
             };
             challenge?: string;
-            cta?: Cta;
             content?: Array<
               | ({
                   _key: string;
@@ -34149,6 +51084,9 @@ export type ContentPageQueryResult = {
               | ({
                   _key: string;
                 } & Tabs)
+              | ({
+                  _key: string;
+                } & TechnologiesShowcase)
               | ({
                   _key: string;
                 } & Testimonial)
@@ -34343,14 +51281,14 @@ declare module "@sanity/client" {
     '*[_type == "siteConfig" && language == $language][0]{\n  ...,\n  homePage->{\n    "slug": metadata.slug.current\n  },\n  socials[]{\n    ...,\n    icon{\n      asset->{\n        ...,\n        altTexts{...},\n        descriptions{...},\n        titles{...}\n      }\n    },\n  }\n}': SiteConfigQueryResult;
     '*[_type == "navigation" && _id == $navigationId][0]{\n                                        ..., \n                                        links[]{title, linkObject{..., internalLink->{...}}}\n                                    }\n                                    ': NavigationQueryResult;
     "markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}": PortableTextResolveInternalLinkResult;
-    '\ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}': ContentQueryResult;
-    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ServiceQueryResult;
-    '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': BlogPostQueryResult;
+    '\ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}': ContentQueryResult;
+    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ServiceQueryResult;
+    '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': BlogPostQueryResult;
     '\n{\n  "blogPosts": *[_type == "blogPost" && language == $language && !metadata.noIndex]|order(publicationDate desc)[0...$itemsPerTime]{\n    _id,\n    featuredImage{\n      asset->{...}\n    },\n    postType[]->{\n      prefLabel,\n      definition\n    },\n    author->{\n      ...,\n      image{\n        ...,\n        asset->{\n          ...\n        }\n      }\n    },\n    topic[]->{\n      prefLabel,\n      definition\n    },\n    metadata,\n    publicationDate,\n    _createdAt,\n    intro\n  },\n  "totalItems": count(*[_type == "blogPost" && language == $language && !metadata.noIndex])\n}\n': BlogsListQueryResult;
     '\n*[_type == "blogPost" && language == $language && !metadata.noIndex && publicationDate < $lastPubDate]|order(publicationDate desc)[0...$itemsPerTime]{\n  _id,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  metadata,\n  publicationDate,\n  _createdAt,\n  intro\n}': BlogsListQueryPaginatingResult;
-    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  company -> {\n    ...,\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': WorkQueryResult;
+    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  company -> {\n    ...,\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': WorkQueryResult;
     "*[_type == 'siteConfig' && language == $language][0]{\n  homePage->{\n    \"slug\": metadata.slug.current\n  }\n}.homePage.slug": HomePageSlugQueryResult;
-    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  intro {\n    ...,\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    },\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n  },\n  \ncontent[] {\n  ...,\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ContentPageQueryResult;
+    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  intro {\n    ...,\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    },\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ContentPageQueryResult;
     '\n*[_type == "blogPost" && language == $language]{\n  "title": metadata.title,\n  "slug": metadata.slug.current,\n  "author": author->{name}.name,\n  "description": metadata.description,\n  "pubDate": publicationDate\n}\n': RssBlogPostsQueryResult;
     '*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllContentPagesQueryResult;
     '*[_type == "service" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllServicePagesQueryResult;

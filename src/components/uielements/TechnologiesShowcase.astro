@@ -1,0 +1,30 @@
+---
+import { imageBuilder } from "@api/sanity";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import type { TechnologiesShowcaseReferenced } from "@sanity/custom.sanity.types";
+
+interface Props {
+  technologies: TechnologiesShowcaseReferenced;
+}
+
+const { technologies } = Astro.props;
+
+const locale = Astro.currentLocale!;
+---
+
+<div class="flex h-48 flex-row justify-center gap-8">
+  {
+    technologies.technologies.map((technology) => (
+      <a href={getHrefFromLinkObject(technology.technologyLink, locale)}>
+        {technology.technology?.logo?.default && (
+          <img
+            src={imageBuilder
+              .image(technology.technology?.logo?.default.asset)
+              .height(160)
+              .url()}
+          />
+        )}
+      </a>
+    ))
+  }
+</div>

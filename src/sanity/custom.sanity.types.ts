@@ -18,6 +18,7 @@ import type {
   ServicePillar,
   ServicesCardList,
   SkosConcept,
+  TechnologiesShowcase,
   Technology,
   Testimonial,
   WorkCardList,
@@ -199,6 +200,7 @@ export interface ContentPageWithReferences {
     | HighlightReferenced
     | TabsReferenced
     | WorkCardListReferenced
+    | TechnologiesShowcaseReferenced
   >;
   metadata?: Metadata;
   _updatedAt?: string;
@@ -232,6 +234,7 @@ export type Content = Array<
   | CodeEmbed
   | TestimonialReferenced
   | FaqsReferenced
+  | TechnologiesShowcaseReferenced
 >;
 
 export interface BlogPostWithReferences {
@@ -391,4 +394,20 @@ export type CompanyWithReferences = Omit<Company, "logo" | "_type"> & {
     light?: i18nImage;
     dark?: i18nImage;
   };
+};
+
+export type TechnologiesShowcaseReferenced = Omit<
+  TechnologiesShowcase,
+  "technologies"
+> & {
+  technologies: {
+    technology: Omit<Technology, "logo"> & {
+      logo?: {
+        default?: i18nImage;
+        light?: i18nImage;
+        dark?: i18nImage;
+      };
+    };
+    technologyLink: LinkObjectReferenced;
+  }[];
 };
