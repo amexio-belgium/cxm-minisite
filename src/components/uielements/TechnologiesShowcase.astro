@@ -1,0 +1,70 @@
+---
+import { imageBuilder } from "@api/sanity";
+import { defaultComponents } from "@components/cms-components/PortableText/helper";
+import { getHrefFromLinkObject } from "@lib/sanityHelpers";
+import type { TechnologiesShowcaseReferenced } from "@sanity/custom.sanity.types";
+import { PortableText } from "astro-portabletext";
+
+interface Props {
+  technologies: TechnologiesShowcaseReferenced;
+}
+
+const { technologies } = Astro.props;
+
+const locale = Astro.currentLocale!;
+---
+
+<div
+  class="fixed top-0 hidden h-0 w-0 text-balance font-serif text-3xl text-base font-light text-black text-white lg:w-9/12"
+>
+</div>
+<div class="flex w-full flex-col items-start justify-start gap-6">
+  {
+    technologies.intro?.title && (
+      <div
+        class={`text-balance font-serif text-3xl ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+      >
+        <PortableText
+          components={defaultComponents}
+          value={technologies.intro.title}
+        />
+      </div>
+    )
+  }
+  {
+    technologies.intro?.intro && (
+      <div
+        class={`text-base font-light lg:w-9/12 ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+      >
+        <PortableText
+          components={defaultComponents}
+          value={technologies.intro.intro}
+        />
+      </div>
+    )
+  }
+  {
+    technologies.technologies && technologies.technologies.length > 0 && (
+      <div class="mx-auto mt-2 flex flex-wrap justify-center gap-4 sm:mt-2 sm:gap-16">
+        {technologies.technologies.map((technology) => (
+          <a href={getHrefFromLinkObject(technology.technologyLink, locale)}>
+            {technology.technology?.logo?.default && (
+              <img
+                class="max-h-16 sm:max-h-28"
+                alt={
+                  technology.technology.logo.default.asset.altTexts?.[locale]
+                }
+                src={imageBuilder
+                  .image(technology.technology?.logo?.default.asset)
+                  .height(224)
+                  .fit("clip")
+                  .format("webp")
+                  .url()}
+              />
+            )}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</div>
