@@ -17,7 +17,7 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
   // Read the sitemap.xml file
   fs.readFile(sitemapPath, "utf-8", (err, data) => {
     if (err) {
-      console.error("Error reading sitemap.xml:", err);
+      console.error("Error reading sitemap-0.xml:", err);
       return;
     }
 
@@ -42,35 +42,52 @@ if (SANITY_VISUAL_EDITING_ENABLED !== "true") {
       }
 
       // Filter out URLs ending with /"[slug]"/ or "/404/"
-      const filteredUrls = urlEntries.filter(
+      let filteredUrls = urlEntries.filter(
         (entry) =>
           !entry.loc.endsWith("/[slug]/") && !entry.loc.endsWith("/404/"),
       );
 
       // Get the noIndexed pages
-      const query = {
-        query: `*[
-            metadata.noIndex == true
-          ]{
-            metadata {
-              noIndex,
-              slug {
-                current
-              }
-            }
-          }`,
-        params: "",
-      };
-      const { data } = await sanityContentQuery(query);
 
-      const slugs = Array.isArray(data)
-        ? data.map((item) => item.metadata.slug.current)
-        : [];
+      const pageTypes = [
+        {
+          type: "referenceCase",
+          url: "work/",
+        },
+        {
+          type: "contentPage",
+          url: "",
+        },
+        {
+          type: "service",
+          url: "service/",
+        },
+        {
+          type: "blogPost",
+          url: "insights/",
+        },
+      ];
+
+      for (const pageType of pageTypes) {
+        const query = {
+          query: `
+            *[metadata.noIndex == true && metadata.slug.current != null && _type == '${pageType.type}' ]{
+                'slug': metadata.slug.current
+              }.slug
+            `,
+        };
+
+        const { data: slugs } = await sanityContentQuery(query);
+
+        filteredUrls = filteredUrls.filter((locObj) => {
+          return !slugs.some((slug) =>
+            locObj.loc.endsWith(`/${pageType.url}${slug}/`),
+          );
+        });
+      }
 
       // Update the result object with the filtered URLs and filter out the noIndexed slugs
-      result.urlset.url = filteredUrls.filter((locObj) => {
-        return !slugs.some((slug) => locObj.loc.includes(slug));
-      });
+      result.urlset.url = filteredUrls;
 
       // Convert the updated object back to XML
       const builder = new xml2js.Builder({
