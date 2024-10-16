@@ -51,6 +51,9 @@ const locale = Astro.currentLocale!;
             {technology.technology?.logo?.default && (
               <img
                 class="max-h-16 sm:max-h-28"
+                alt={
+                  technology.technology.logo.default.asset.altTexts?.[locale]
+                }
                 src={imageBuilder
                   .image(technology.technology?.logo?.default.asset)
                   .height(224)
