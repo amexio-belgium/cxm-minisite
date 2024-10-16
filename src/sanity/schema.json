@@ -615,6 +615,13 @@
           },
           "optional": true
         },
+        "showName": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "style": {
           "type": "objectAttribute",
           "value": {
