@@ -132,7 +132,11 @@ const { content } = Astro.props;
       }
       case "technologiesShowcase": {
         return (
-          <ComponentWrapper>
+          <ComponentWrapper
+            bgClass={
+              content.style === "popping" ? "bg-light-blue-50" : undefined
+            }
+          >
             <TechnologiesShowcase technologies={content} />
           </ComponentWrapper>
         );

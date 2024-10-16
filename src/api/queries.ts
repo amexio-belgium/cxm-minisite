@@ -35,6 +35,14 @@ const contentQuery = groq`
 content[] {
   ...,
   _type == "technologiesShowcase" => {
+    ...,
+    intro {
+      ...,
+      intro[] {
+        ...,
+        ${portableTextResolveInternalLink}
+      }
+    },
     technologies[]{
       ...,
       technology->{
