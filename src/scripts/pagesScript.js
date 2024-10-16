@@ -25,18 +25,20 @@ const processDirectory = (dir, locale) => {
 };
 
 const locales = process.env.SANITY_LOCALES.split(", ");
+await fsExtra.remove("./src/pages/en");
+await fsExtra.remove("./src/pages/nl");
+await fsExtra.remove("./src/pages/fr");
+locales.forEach(async (locale) => {
+  const localeDir = `./src/pages/${locale}/`;
 
-locales.forEach((locale) => {
-  const localeDir = `./src/pages/${locale}`;
-
-  if (!fs.existsSync(localeDir)) {
-    fs.mkdirSync(localeDir);
+  if (!fsExtra.exists(localeDir)) {
+    await fsExtra.mkdir(localeDir);
   } else {
-    fsExtra.emptyDirSync(localeDir);
+    await fsExtra.emptyDir(localeDir);
   }
 
   // Copy files from pagetemplates to the locale directory
-  fs.cpSync("./src/pagetemplates", localeDir, {
+  await fsExtra.copy("./src/pagetemplates/", localeDir, {
     recursive: true,
   });
 
