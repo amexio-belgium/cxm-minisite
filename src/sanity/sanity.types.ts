@@ -104,6 +104,7 @@ export type TechnologiesShowcase = {
       _key: string;
     }>;
   };
+  showName?: boolean;
   style?: "subtle" | "popping";
   technologies?: Array<{
     technology?: {
@@ -13135,6 +13136,7 @@ export type ServiceQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -13722,6 +13724,7 @@ export type ServiceQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -26041,6 +26044,7 @@ export type BlogPostQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -26628,6 +26632,7 @@ export type BlogPostQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -39119,6 +39124,7 @@ export type WorkQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -39706,6 +39712,7 @@ export type WorkQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -53022,6 +53029,7 @@ export type ContentPageQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {
@@ -53609,6 +53617,7 @@ export type ContentPageQueryResult = {
           }> | null;
           introCta: null;
         } | null;
+        showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
           technology: {

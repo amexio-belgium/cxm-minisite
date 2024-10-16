@@ -18,11 +18,11 @@ const locale = Astro.currentLocale!;
   class="fixed top-0 hidden h-0 w-0 text-balance font-serif text-3xl text-base font-light text-black text-white lg:w-9/12"
 >
 </div>
-<div class="flex w-full flex-col items-start justify-start gap-6">
+<div class="flex w-full flex-col items-center gap-6 text-center">
   {
     technologies.intro?.title && (
       <div
-        class={`text-balance font-serif text-3xl ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+        class={`text-balance font-serif text-3xl lg:w-9/12 ${technologies.style === "popping" ? "text-black" : "text-white"}`}
       >
         <PortableText
           components={defaultComponents}
@@ -47,10 +47,13 @@ const locale = Astro.currentLocale!;
     technologies.technologies && technologies.technologies.length > 0 && (
       <div class="mx-auto mt-2 flex flex-wrap justify-center gap-4 sm:mt-4 sm:gap-20">
         {technologies.technologies.map((technology) => (
-          <a href={getHrefFromLinkObject(technology.technologyLink, locale)}>
+          <a
+            class="flex flex-col items-center text-center transition-transform duration-300 ease-in-out motion-safe:hover:scale-105"
+            href={getHrefFromLinkObject(technology.technologyLink, locale)}
+          >
             {technology.technology?.logo?.default && (
               <img
-                class="max-h-16 transition-transform duration-300 ease-in-out motion-safe:hover:scale-105 sm:max-h-24"
+                class="max-h-16 sm:max-h-24"
                 alt={
                   technology.technology.logo.default.asset.altTexts?.[locale]
                 }
@@ -61,6 +64,13 @@ const locale = Astro.currentLocale!;
                   .format("webp")
                   .url()}
               />
+            )}
+            {technologies?.showName && technology?.technology?.name && (
+              <p
+                class={`mt-1 font-light ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+              >
+                {technology.technology.name}
+              </p>
             )}
           </a>
         ))}
