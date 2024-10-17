@@ -7,6 +7,13 @@ import {
   insightsPageName,
 } from "@src/consts";
 import * as m from "@src/paraglide/messages";
+import { PortableText } from "astro-portabletext";
+
+interface Props {
+  pageTitle?: string | any[];
+}
+
+const { pageTitle } = Astro.props;
 
 const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
 const pathNameAsLocale = Astro.url.pathname.substring(basePathLength);
@@ -34,13 +41,13 @@ paths.forEach((text, i) => {
   if (i !== 0) {
     let translatedText: string = "";
     if (
-      i == paths.length - 1 &&
-      (servicesPath.test(pathNameAsLocale) ||
-        casesPath.test(pathNameAsLocale) ||
-        insightsPath.test(pathNameAsLocale))
+      !(
+        i == paths.length - 1 &&
+        (servicesPath.test(pathNameAsLocale) ||
+          casesPath.test(pathNameAsLocale) ||
+          insightsPath.test(pathNameAsLocale))
+      )
     ) {
-      translatedText = text.replace(/[-_]/g, " ");
-    } else {
       translatedText =
         m["nav" + capitalizeFirstLetter(text.replace(/[-_]/g, " "))];
     }
@@ -97,7 +104,11 @@ const removeTrailingSlash = (text: string) => {
                 }
                 class="text-xs capitalize outline-none md:py-2"
               >
-                {text}
+                {Array.isArray(pageTitle) ? (
+                  <PortableText value={pageTitle} />
+                ) : (
+                  pageTitle
+                )}
               </span>
             )}
           </li>

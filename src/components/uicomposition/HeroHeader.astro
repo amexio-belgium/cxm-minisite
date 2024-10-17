@@ -6,7 +6,7 @@ import SanityImg from "@otterstack/sanity-img-astro";
 import { defaultComponents } from "../cms-components/PortableText/helper";
 
 interface Props {
-  headline?: string;
+  headline?: string | any[];
   client?: string;
   text?: any;
   homepage?: boolean;
@@ -33,7 +33,7 @@ const {
       "bg-gradient-to-r from-blue-800 from-[33%] to-blue-800/0",
   ]}
 >
-  <Breadcrumbs />
+  <Breadcrumbs pageTitle={headline} />
 
   <div class="mb-10 mt-2 text-white">
     {client && <p class="font-serif text-xl uppercase" set:html={client} />}
