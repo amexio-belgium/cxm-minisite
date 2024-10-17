@@ -35,52 +35,53 @@ const contentQuery = groq`
 content[] {
   ...,
   _type == "technologiesShowcase" => {
-    ...,
-    intro {
+    technologies[]->{
       ...,
-      intro[] {
-        ...,
-        ${portableTextResolveInternalLink}
-      }
-    },
-    technologies[]{
-      ...,
-      technology->{
-        ...,
-        logo{
-          ...,
-          default{
-            asset->{
-              ...,
-              altTexts{...},
-              descriptions{...},
-              titles{...}
-            }
-          },
-          dark{
-            asset->{
-              ...,
-              altTexts{...},
-              descriptions{...},
-              titles{...}
-            }
-          },
-          light{
-            asset->{
-              ...,
-              altTexts{...},
-              descriptions{...},
-              titles{...}
-            }
-          }
-        }
-      },
       technologyLink{
         ...,
         internalLink->{
           metadata,
           _type,
           blank
+        }
+      },
+      logo{
+        ...,
+        default{
+          asset->{
+            ...,
+            altTexts{...},
+            descriptions{...},
+            titles{...}
+          }
+        },
+        dark{
+          asset->{
+            ...,
+            altTexts{...},
+            descriptions{...},
+            titles{...}
+          }
+        },
+        light{
+          asset->{
+            ...,
+            altTexts{...},
+            descriptions{...},
+            titles{...}
+          }
+        }
+      }
+    },
+    intro {
+      ...,
+      intro[] {
+        ...,
+        markDefs[] {
+          ...,
+          defined(internalLink) => {
+            internalLink -> {...}
+          }
         }
       }
     }
