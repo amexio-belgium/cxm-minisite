@@ -57,7 +57,11 @@ const locale = Astro.currentLocale!;
                   class="max-h-16 max-w-40 sm:max-h-20"
                   alt={technology.logo.default.asset.altTexts?.[locale]}
                   src={imageBuilder
-                    .image(technology?.logo?.default.asset)
+                    .image(
+                      technologies.style === "popping"
+                        ? technology?.logo?.dark || technology?.logo?.default
+                        : technology?.logo?.light || technology?.logo?.default,
+                    )
                     .height(160)
                     .fit("clip")
                     .format("webp")
