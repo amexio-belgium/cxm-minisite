@@ -1,3 +1,4 @@
+import PortableP from "@components/cms-components/PortableText/PortableP.astro";
 import PortableH2 from "@components/cms-components/PortableText/PortableH2.astro";
 import PortableH3 from "@components/cms-components/PortableText/PortableH3.astro";
 import PortableH4 from "@components/cms-components/PortableText/PortableH4.astro";
@@ -13,6 +14,7 @@ export const defaultComponents: SomePortableTextComponents = {
     youtube: PortableYoutube,
   },
   block: {
+    normal: PortableP,
     h2: PortableH2,
     h3: PortableH3,
     h4: PortableH4,

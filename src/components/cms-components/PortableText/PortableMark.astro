@@ -27,6 +27,7 @@ const markDef: Link = props.node.markDef;
           <a
             target={markDef.blank ? "_blank" : undefined}
             href={getHrefFromLinkObject(markDef, locale)}
+            class="underline"
           >
             <slot />
           </a>

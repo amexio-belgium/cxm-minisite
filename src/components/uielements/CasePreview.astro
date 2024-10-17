@@ -4,6 +4,7 @@ import SanityImg from "@otterstack/sanity-img-astro";
 import { PortableText } from "astro-portabletext";
 import type { ReferenceCaseReferenced } from "@sanity/custom.sanity.types";
 import * as m from "@src/paraglide/messages";
+import { defaultComponents } from "@components/cms-components/PortableText/helper";
 
 interface Props {
   caseData: ReferenceCaseReferenced;
@@ -86,7 +87,10 @@ const { caseData, small } = Astro.props;
       {
         caseData?.intro?.intro && (
           <div class="text-sm font-light [&>mark]:text-black">
-            <PortableText value={caseData?.intro?.intro} />
+            <PortableText
+              value={caseData?.intro?.intro}
+              components={defaultComponents}
+            />
           </div>
         )
       }

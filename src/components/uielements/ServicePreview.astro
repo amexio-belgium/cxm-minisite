@@ -4,6 +4,7 @@ import { PortableText } from "astro-portabletext";
 import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
 import SanityImg from "@otterstack/sanity-img-astro";
 import * as m from "@src/paraglide/messages";
+import { defaultComponents } from "@components/cms-components/PortableText/helper";
 
 interface Props {
   service: ServiceWithReferences;
@@ -24,7 +25,10 @@ const { service } = Astro.props;
           </h3>
           {service.intro?.intro && (
             <div class="text-sm font-light [&>mark]:text-black">
-              <PortableText value={service?.intro?.intro} />
+              <PortableText
+                value={service?.intro?.intro}
+                components={defaultComponents}
+              />
             </div>
           )}
         </div>

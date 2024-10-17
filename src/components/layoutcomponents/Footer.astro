@@ -13,6 +13,7 @@ import LanguageMenu from "@components/uielements/LanguageMenu.astro";
 import { parseHref } from "@lib/helpers";
 import * as m from "@src/paraglide/messages";
 import { locales } from "../../locales/consts";
+import { defaultComponents } from "@components/cms-components/PortableText/helper";
 
 export type Social = {
   name: string;
@@ -161,7 +162,7 @@ const isContactPage = slug == "contact";
       <div
         class="text-center text-xs font-light text-white md:text-left md:text-xs xl:w-1/2"
       >
-        <PortableText value={footerText} />
+        <PortableText value={footerText} components={defaultComponents} />
       </div>
       <div
         class="relative flex flex-wrap items-center justify-center gap-4 md:mt-0 md:gap-8 lg:justify-end xl:w-1/2"
