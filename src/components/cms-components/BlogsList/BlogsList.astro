@@ -107,6 +107,7 @@ const items = isLatestBlogs
               : itemsPerTime < totalItems) && (
               <button
                 id={`load-more-btn-${uuid}`}
+                data-analytics-click="list-load-more"
                 class="inline-flex h-12 items-center justify-start gap-1 rounded-[50px] bg-[#084772] px-4 py-3.5 text-center font-sans text-base font-normal leading-tight text-lightest-blue-50 focus-visible:outline-orange"
               >
                 {m.blogslistLoadmore()}
