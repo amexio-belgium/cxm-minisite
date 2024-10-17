@@ -4,9 +4,11 @@ import "dotenv/config";
 
 const PUBLIC_ASTRO_BASE_PATH = process.env.PUBLIC_ASTRO_BASE_PATH;
 const basePath = PUBLIC_ASTRO_BASE_PATH || "";
+
 const visualEditingEnabled =
-  process.env.VISUAL_EDITING_ENABLED === "true" ||
-  process.env.PUBLIC_ASTRO_BASE_PATH === true;
+  process.env.SANITY_VISUAL_EDITING_ENABLED === "true" ||
+  process.env.SANITY_VISUAL_EDITING_ENABLED === true;
+
 if (basePath && basePath !== "") {
   // Source and destination directories
 
