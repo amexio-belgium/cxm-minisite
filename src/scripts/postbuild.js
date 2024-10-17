@@ -1,7 +1,6 @@
 import fs from "node:fs";
 import * as fsExtra from "fs-extra";
 import "dotenv/config";
-import { VISUAL_EDITING_ENABLED } from "../consts";
 
 const PUBLIC_ASTRO_BASE_PATH = process.env.PUBLIC_ASTRO_BASE_PATH;
 const basePath = PUBLIC_ASTRO_BASE_PATH || "";
