@@ -43,7 +43,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 if (!slug) {
-  return Astro.redirect("/404");
+  return Astro.redirect(`/${locale}/404`);
 }
 
 const { data: siteConfig } = await loadQuery<SiteConfigQueryResult>({
