@@ -7,6 +7,8 @@ const basePath = PUBLIC_ASTRO_BASE_PATH || "";
 
 if (basePath && basePath !== "") {
   // Source and destination directories
+
+  fs.copyFileSync("./dist/en/404/index.html", "./dist/404.html");
   if (!fs.existsSync("./build")) {
     fs.mkdirSync("./build");
   }
@@ -23,4 +25,6 @@ if (basePath && basePath !== "") {
       throw err;
     }
   });
+} else {
+  fs.copyFileSync("./dist/en/404/index.html", "./dist/404.html");
 }
