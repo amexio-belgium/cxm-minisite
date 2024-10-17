@@ -3,6 +3,7 @@ import Base from "@layouts/Base.astro";
 import {
   allContentPagesQuery,
   contentPageQuery,
+  homePageSlugQuery,
   siteConfigQuery,
 } from "@api/queries";
 import { loadQuery } from "@api/sanity";
@@ -11,6 +12,7 @@ import { type ContentPageWithReferences } from "src/sanity/custom.sanity.types";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import type {
   AllContentPagesQueryResult,
+  HomePageSlugQueryResult,
   SiteConfigQueryResult,
 } from "@sanity/sanity.types";
 
@@ -23,9 +25,17 @@ export async function getStaticPaths() {
   const staticLocale = "replaceMeWithLocale";
 
   if (!VISUAL_EDITING_ENABLED) {
+    const { data: homePageSlugResult } =
+      await loadQuery<HomePageSlugQueryResult>({
+        query: homePageSlugQuery,
+        params: { language: staticLocale },
+      });
+
+    const homePageSlug = homePageSlugResult!;
+
     const { data: contentPages } = await loadQuery<AllContentPagesQueryResult>({
       query: allContentPagesQuery,
-      params: { language: staticLocale },
+      params: { language: staticLocale, homePageSlug },
     });
 
     const slugs = contentPages.map((slug) => ({

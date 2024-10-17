@@ -8,6 +8,8 @@ interface Props {
   workCardList: WorkCardListReferenced;
 }
 const { workCardList } = Astro.props;
+
+const locale = Astro.currentLocale;
 ---
 
 <div
@@ -19,7 +21,7 @@ const { workCardList } = Astro.props;
     <h2 class="mb-2 font-serif text-3xl font-bold">
       {m.projectoverviewHeadline()}
     </h2>
-    <Button link="/work" class="" style="secondary" color="light">
+    <Button link=`/${locale}/work/` class="" style="secondary" color="light">
       {m.projectoverviewButton()}
     </Button>
   </div>

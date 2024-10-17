@@ -592,7 +592,7 @@ export const rssBlogPostsQuery = groq`
 }
 `;
 
-export const allContentPagesQuery = groq`*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{
+export const allContentPagesQuery = groq`*[_type == "contentPage" && language == $language && defined(metadata.slug.current) && metadata.slug.current != $homePageSlug]{
   "slug": metadata.slug.current
 }.slug`;
 
