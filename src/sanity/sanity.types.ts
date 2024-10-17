@@ -107,14 +107,11 @@ export type TechnologiesShowcase = {
   showName?: boolean;
   style?: "subtle" | "popping";
   technologies?: Array<{
-    technology?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "technology";
-    };
-    technologyLink?: Link;
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
     _key: string;
+    [internalGroqTypeReferenceTo]?: "technology";
   }>;
 };
 
@@ -347,6 +344,57 @@ export type Testimonial = {
     [internalGroqTypeReferenceTo]?: "person";
   };
   variant?: "flat" | "glass";
+};
+
+export type Technology = {
+  _id: string;
+  _type: "technology";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  logo?: {
+    default?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    light?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    dark?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  partner?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "company";
+  };
+  technologyLink?: Link;
 };
 
 export type Tabs = {
@@ -891,6 +939,105 @@ export type CollaborationModel = {
   >;
 };
 
+export type Company = {
+  _id: string;
+  _type: "company";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  link?: Link;
+  logo?: {
+    default?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    light?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    dark?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  content?: Array<
+    | ({
+        _key: string;
+      } & Highlight)
+    | ({
+        _key: string;
+      } & CardGrid)
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & LongFormText)
+    | ({
+        _key: string;
+      } & Tabs)
+    | ({
+        _key: string;
+      } & Testimonial)
+    | ({
+        _key: string;
+      } & Faq)
+    | ({
+        _key: string;
+      } & ServicesCardList)
+    | ({
+        _key: string;
+      } & WorkCardList)
+    | ({
+        _key: string;
+      } & BlogHighlight)
+    | ({
+        _key: string;
+      } & BlogsList)
+    | ({
+        _key: string;
+      } & CodeEmbed)
+    | ({
+        _key: string;
+      } & TechnologiesShowcase)
+  >;
+  language?: string;
+  type?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
+  industryVertical?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
+};
+
 export type Service = {
   _id: string;
   _type: "service";
@@ -1127,6 +1274,44 @@ export type Person = {
   };
 };
 
+export type Link = {
+  _type: "link";
+  text?: string;
+  type?: string;
+  internalLink?:
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contentPage";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "blogPost";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "service";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "referenceCase";
+      };
+  url?: string;
+  email?: string;
+  phone?: string;
+  value?: string;
+  blank?: boolean;
+  parameters?: string;
+  anchor?: string;
+};
+
 export type ContentPage = {
   _id: string;
   _type: "contentPage";
@@ -1230,193 +1415,6 @@ export type Metadata = {
     _type: "image";
   };
   noIndex?: boolean;
-};
-
-export type Technology = {
-  _id: string;
-  _type: "technology";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  logo?: {
-    default?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    light?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    dark?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  partner?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "company";
-  };
-};
-
-export type Company = {
-  _id: string;
-  _type: "company";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  link?: Link;
-  logo?: {
-    default?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    light?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-    dark?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  content?: Array<
-    | ({
-        _key: string;
-      } & Highlight)
-    | ({
-        _key: string;
-      } & CardGrid)
-    | ({
-        _key: string;
-      } & Callout)
-    | ({
-        _key: string;
-      } & LongFormText)
-    | ({
-        _key: string;
-      } & Tabs)
-    | ({
-        _key: string;
-      } & Testimonial)
-    | ({
-        _key: string;
-      } & Faq)
-    | ({
-        _key: string;
-      } & ServicesCardList)
-    | ({
-        _key: string;
-      } & WorkCardList)
-    | ({
-        _key: string;
-      } & BlogHighlight)
-    | ({
-        _key: string;
-      } & BlogsList)
-    | ({
-        _key: string;
-      } & CodeEmbed)
-    | ({
-        _key: string;
-      } & TechnologiesShowcase)
-  >;
-  language?: string;
-  type?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "skosConcept";
-  };
-  industryVertical?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "skosConcept";
-  };
-};
-
-export type Link = {
-  _type: "link";
-  text?: string;
-  type?: string;
-  internalLink?:
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contentPage";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "blogPost";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "service";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "referenceCase";
-      };
-  url?: string;
-  email?: string;
-  phone?: string;
-  value?: string;
-  blank?: boolean;
-  parameters?: string;
-  anchor?: string;
 };
 
 export type SanityImageCrop = {
@@ -1716,6 +1714,7 @@ export type AllSanitySchemaTypes =
   | WorkCardList
   | SiteConfig
   | Testimonial
+  | Technology
   | Tabs
   | Faq
   | SolutionDomain
@@ -1732,16 +1731,15 @@ export type AllSanitySchemaTypes =
   | InternationalizedArrayReference
   | ReferenceCase
   | CollaborationModel
+  | Company
   | Service
   | ServicePillar
   | Intro
   | BlogPost
   | Person
+  | Link
   | ContentPage
   | Metadata
-  | Technology
-  | Company
-  | Link
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
@@ -2239,10 +2237,10 @@ export type NavigationQueryResult = {
 // Query: markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}
 export type PortableTextResolveInternalLinkResult = never;
 // Variable: contentQuery
-// Query: content[] {  ...,  _type == "technologiesShowcase" => {    ...,    intro {      ...,      intro[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    },    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}
+// Query: content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]->{      ...,      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      },      logo{        ...,        default{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        dark{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        light{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        }      }    },    intro {      ...,      intro[] {        ...,        markDefs[] {          ...,          defined(internalLink) => {            internalLink -> {...}          }        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}
 export type ContentQueryResult = never;
 // Variable: serviceQuery
-// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    ...,    intro {      ...,      intro[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    },    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "service" && language == $language && metadata.slug.current == $slug][0]{  ...,  faqs{    ...,    questions[]->{...}  },  servicePillar->{...},  image{    ...,    asset->{...}  },  customerReferences[]->{    ...,  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]->{      ...,      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      },      logo{        ...,        default{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        dark{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        light{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        }      }    },    intro {      ...,      intro[] {        ...,        markDefs[] {          ...,          defined(internalLink) => {            internalLink -> {...}          }        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type ServiceQueryResult = {
   _id: string;
   _type: "service";
@@ -13139,103 +13137,101 @@ export type ServiceQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -13270,7 +13266,6 @@ export type ServiceQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
         groups: null;
       }
@@ -13727,103 +13722,101 @@ export type ServiceQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -13858,7 +13851,6 @@ export type ServiceQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
       }
     | {
@@ -14268,6 +14260,7 @@ export type ServiceQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -14760,6 +14753,7 @@ export type ServiceQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -15088,7 +15082,7 @@ export type ServiceQueryResult = {
   >;
 } | null;
 // Variable: blogPostQuery
-// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    ...,    intro {      ...,      intro[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    },    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{  ...,  featuredImage{    asset->{...}  },  postType[]->{    prefLabel,    definition  },  author->{    ...,    image{      ...,      asset->{        ...      }    }  },  topic[]->{    prefLabel,    definition  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]->{      ...,      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      },      logo{        ...,        default{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        dark{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        light{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        }      }    },    intro {      ...,      intro[] {        ...,        markDefs[] {          ...,          defined(internalLink) => {            internalLink -> {...}          }        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type BlogPostQueryResult = {
   _id: string;
   _type: "blogPost";
@@ -26047,103 +26041,101 @@ export type BlogPostQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -26178,7 +26170,6 @@ export type BlogPostQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
         groups: null;
       }
@@ -26635,103 +26626,101 @@ export type BlogPostQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -26766,7 +26755,6 @@ export type BlogPostQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
       }
     | {
@@ -27176,6 +27164,7 @@ export type BlogPostQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -27668,6 +27657,7 @@ export type BlogPostQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -28087,7 +28077,7 @@ export type BlogsListQueryPaginatingResult = Array<{
   } | null;
 }>;
 // Variable: workQuery
-// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  company -> {    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    ...,    intro {      ...,      intro[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    },    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{  ...,  company -> {    ...,    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  collaborationModel-> {    ...,    collaborationTabs[]{      ...,      concept->{...}    }  },  introImage {    asset->{...}  },  technologies[]->{    ...,    partner->{      ...    },    logo{      ...,      default{        ...,        asset->{...}      },      dark{        ...,        asset->{...}      },      light{        ...,        asset->{...}      }    }  },  relatedCases[]->{    ...,    collaborationModel-> {      ...,      collaborationTabs[]{        ...,        concept->{...}      }    },    introImage {      asset->{...}    },    technologies[]->{...},    services[]->{...},    metadata{      ...,      image{        ...,        asset->{...}      }    },  },  services[]->{...},  metadata{    ...,    image{      ...,      asset->{...}    }  },  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]->{      ...,      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      },      logo{        ...,        default{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        dark{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        light{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        }      }    },    intro {      ...,      intro[] {        ...,        markDefs[] {          ...,          defined(internalLink) => {            internalLink -> {...}          }        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type WorkQueryResult = {
   _id: string;
   _type: "referenceCase";
@@ -39127,103 +39117,101 @@ export type WorkQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -39258,7 +39246,6 @@ export type WorkQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
         groups: null;
       }
@@ -39715,103 +39702,101 @@ export type WorkQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -39846,7 +39831,6 @@ export type WorkQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
       }
     | {
@@ -40256,6 +40240,7 @@ export type WorkQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -40748,6 +40733,7 @@ export type WorkQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -41142,6 +41128,7 @@ export type WorkQueryResult = {
         [internalGroqTypeReferenceTo]?: "skosConcept";
       };
     } | null;
+    technologyLink?: Link;
   }> | null;
   services: Array<{
     _id: string;
@@ -41428,6 +41415,7 @@ export type WorkQueryResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "company";
       };
+      technologyLink?: Link;
     }> | null;
     services: Array<{
       _id: string;
@@ -41680,7 +41668,7 @@ export type WorkQueryResult = {
 // Query: *[_type == 'siteConfig' && language == $language][0]{  homePage->{    "slug": metadata.slug.current  }}.homePage.slug
 export type HomePageSlugQueryResult = string | null;
 // Variable: contentPageQuery
-// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  intro {    ...,    introCta {      ...,      link {        ...,        internalLink->{          metadata,          _type,          blank        }      }    },    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },  },  content[] {  ...,  _type == "technologiesShowcase" => {    ...,    intro {      ...,      intro[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    },    technologies[]{      ...,      technology->{        ...,        logo{          ...,          default{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          dark{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          },          light{            asset->{              ...,              altTexts{...},              descriptions{...},              titles{...}            }          }        }      },      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
+// Query: *[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{  ...,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    "slug": metadata.slug.current,    language  },  intro {    ...,    introCta {      ...,      link {        ...,        internalLink->{          metadata,          _type,          blank        }      }    },    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },  },  content[] {  ...,  _type == "technologiesShowcase" => {    technologies[]->{      ...,      technologyLink{        ...,        internalLink->{          metadata,          _type,          blank        }      },      logo{        ...,        default{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        dark{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        },        light{          asset->{            ...,            altTexts{...},            descriptions{...},            titles{...}          }        }      }    },    intro {      ...,      intro[] {        ...,        markDefs[] {          ...,          defined(internalLink) => {            internalLink -> {...}          }        }      }    }  },  intro {    ...,    intro[] {      ...,      markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}    },    introCta {      ...,      link {        ...,        internalLink->{...}      }    }  },   _type == "blogsList" => {    ...,    blogsType == "specific" => {      blogPosts[]->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  _type == "blogHighlight" => {    ...,    blogType == "latest" => {      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },    blogType == "specific" => {      blogPost->{        ...,        featuredImage{          asset->{...}        },        postType[]->{          prefLabel,          definition        },        author->{          ...,          image{            ...,            asset->{              ...            }          }        },        topic[]->{          prefLabel,          definition        },      }    },  },  defined(groups) => {    groups[] {      ...,      'services': services[]->{        ...,        image{          ...,          asset->{...}        },      }    }  },  _type == "testimonial" => {    person->{      ...,      image {        ...,        asset->{...}      }    }  },  _type == "cardGrid" => {    backgroundImage{      asset->{...}    },    intro {      ...,      introCta {        ...,        link {          ...,          internalLink->{...}        }      }    },    cards[] {      ...,      icon{        ...,        asset->{          ...,        }      }    }  },  _type == "callout" => {    ...,    content[]{      ...,      defined(asset) => {        asset->{...}      },      richText[] {        ...,        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }  },  _type == "highlight" => {    ...,    defined(image) => {      image{        asset->{...}      }    }  },   _type == "tabs" => {    ...,    defined(tabsOverview) => {      intro {        ...,        intro[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      },      tabsOverview[]{        ...,        _type == "tab" => {          ...,          content[]{            ...,            _type == "image" => {              asset->{...}            },            _type == "content" => {              content[] {                ...,                markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}              }            }          }        }      }    }  },   _type == "longFormText" => {    ...,    defined(content) => {      content[]{        ...,        _type == "image" => {          asset->{...}        },        markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}      }    }   },  _type == "workCardList" => {    ...,    defined(referenceCases) => {      referenceCases[]-> {        ...,        introImage {          ...,          asset->{...}        },        company -> {          ...,          logo{            ...,            default{              ...,              asset->{...}            },            dark{              ...,              asset->{...}            },            light{              ...,              asset->{...}            }          }        },        technologies[]->{...},        services[]->{...},        metadata{          ...,          image{            ...,            asset->{...}          }        },        collaborationModel-> {          ...,          collaborationTabs[]{            ...,            concept->{...}          }        }      }     }  },  _type == "faq" => {    ...,    defined(questions) => {      questions[]->{        ...,        answer[] {          ...,          markDefs[] {  ...,  defined(internalLink) => {    internalLink -> {...}  }}        }      }    }  }}}
 export type ContentPageQueryResult = {
   _id: string;
   _type: "contentPage";
@@ -53032,103 +53020,101 @@ export type ContentPageQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -53163,7 +53149,6 @@ export type ContentPageQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
         groups: null;
       }
@@ -53620,103 +53605,101 @@ export type ContentPageQueryResult = {
         showName?: boolean;
         style?: "popping" | "subtle";
         technologies: Array<{
-          technology: {
-            _id: string;
-            _type: "technology";
-            _createdAt: string;
-            _updatedAt: string;
-            _rev: string;
-            name?: string;
-            logo: {
-              default: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              light: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
-              } | null;
-              dark: {
-                asset: {
-                  _id: string;
-                  _type: "sanity.imageAsset";
-                  _createdAt: string;
-                  _updatedAt: string;
-                  _rev: string;
-                  originalFilename?: string;
-                  label?: string;
-                  title?: string;
-                  description?: string;
-                  altText?: string;
-                  sha1hash?: string;
-                  extension?: string;
-                  mimeType?: string;
-                  size?: number;
-                  assetId?: string;
-                  uploadId?: string;
-                  path?: string;
-                  url?: string;
-                  metadata?: SanityImageMetadata;
-                  source?: SanityAssetSourceData;
-                  altTexts: null;
-                  descriptions: null;
-                  titles: null;
-                } | null;
+          _id: string;
+          _type: "technology";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          name?: string;
+          logo: {
+            default: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
               } | null;
             } | null;
-            partner?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "company";
-            };
+            light: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
+            dark: {
+              asset: {
+                _id: string;
+                _type: "sanity.imageAsset";
+                _createdAt: string;
+                _updatedAt: string;
+                _rev: string;
+                originalFilename?: string;
+                label?: string;
+                title?: string;
+                description?: string;
+                altText?: string;
+                sha1hash?: string;
+                extension?: string;
+                mimeType?: string;
+                size?: number;
+                assetId?: string;
+                uploadId?: string;
+                path?: string;
+                url?: string;
+                metadata?: SanityImageMetadata;
+                source?: SanityAssetSourceData;
+                altTexts: null;
+                descriptions: null;
+                titles: null;
+              } | null;
+            } | null;
           } | null;
+          partner?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "company";
+          };
           technologyLink: {
             _type: "link";
             text?: string;
@@ -53751,7 +53734,6 @@ export type ContentPageQueryResult = {
             parameters?: string;
             anchor?: string;
           } | null;
-          _key: string;
         }> | null;
       }
     | {
@@ -54161,6 +54143,7 @@ export type ContentPageQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -54653,6 +54636,7 @@ export type ContentPageQueryResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "company";
             };
+            technologyLink?: Link;
           }> | null;
           services: Array<{
             _id: string;
@@ -54901,14 +54885,14 @@ declare module "@sanity/client" {
     '*[_type == "siteConfig" && language == $language][0]{\n  ...,\n  homePage->{\n    "slug": metadata.slug.current\n  },\n  socials[]{\n    ...,\n    icon{\n      asset->{\n        ...,\n        altTexts{...},\n        descriptions{...},\n        titles{...}\n      }\n    },\n  }\n}': SiteConfigQueryResult;
     '*[_type == "navigation" && _id == $navigationId][0]{\n                                        ..., \n                                        links[]{title, linkObject{..., internalLink->{...}}}\n                                    }\n                                    ': NavigationQueryResult;
     "markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}": PortableTextResolveInternalLinkResult;
-    '\ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    ...,\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    },\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}': ContentQueryResult;
-    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    ...,\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    },\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ServiceQueryResult;
-    '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    ...,\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    },\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': BlogPostQueryResult;
+    '\ncontent[] {\n  ...,\n\n  _type == "technologiesShowcase" => {\n    technologies[]->{\n      ...,\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      },\n      logo{\n        ...,\n        default{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        dark{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        light{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        }\n      }\n    },\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n          ...,\n          defined(internalLink) => {\n            internalLink -> {...}\n          }\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}': ContentQueryResult;
+    '*[_type == "service" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  faqs{\n    ...,\n    questions[]->{...}\n  },\n  servicePillar->{...},\n  image{\n    ...,\n    asset->{...}\n  },\n  customerReferences[]->{\n    ...,\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n\n  _type == "technologiesShowcase" => {\n    technologies[]->{\n      ...,\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      },\n      logo{\n        ...,\n        default{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        dark{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        light{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        }\n      }\n    },\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n          ...,\n          defined(internalLink) => {\n            internalLink -> {...}\n          }\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ServiceQueryResult;
+    '*[_type == "blogPost" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n\n  _type == "technologiesShowcase" => {\n    technologies[]->{\n      ...,\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      },\n      logo{\n        ...,\n        default{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        dark{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        light{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        }\n      }\n    },\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n          ...,\n          defined(internalLink) => {\n            internalLink -> {...}\n          }\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': BlogPostQueryResult;
     '\n{\n  "blogPosts": *[_type == "blogPost" && language == $language && !metadata.noIndex]|order(publicationDate desc)[0...$itemsPerTime]{\n    _id,\n    featuredImage{\n      asset->{...}\n    },\n    postType[]->{\n      prefLabel,\n      definition\n    },\n    author->{\n      ...,\n      image{\n        ...,\n        asset->{\n          ...\n        }\n      }\n    },\n    topic[]->{\n      prefLabel,\n      definition\n    },\n    metadata,\n    publicationDate,\n    _createdAt,\n    intro\n  },\n  "totalItems": count(*[_type == "blogPost" && language == $language && !metadata.noIndex])\n}\n': BlogsListQueryResult;
     '\n*[_type == "blogPost" && language == $language && !metadata.noIndex && publicationDate < $lastPubDate]|order(publicationDate desc)[0...$itemsPerTime]{\n  _id,\n  featuredImage{\n    asset->{...}\n  },\n  postType[]->{\n    prefLabel,\n    definition\n  },\n  author->{\n    ...,\n    image{\n      ...,\n      asset->{\n        ...\n      }\n    }\n  },\n  topic[]->{\n    prefLabel,\n    definition\n  },\n  metadata,\n  publicationDate,\n  _createdAt,\n  intro\n}': BlogsListQueryPaginatingResult;
-    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  company -> {\n    ...,\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    ...,\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    },\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': WorkQueryResult;
+    '*[_type == "referenceCase" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  company -> {\n    ...,\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  collaborationModel-> {\n    ...,\n    collaborationTabs[]{\n      ...,\n      concept->{...}\n    }\n  },\n  introImage {\n    asset->{...}\n  },\n  technologies[]->{\n    ...,\n    partner->{\n      ...\n    },\n    logo{\n      ...,\n      default{\n        ...,\n        asset->{...}\n      },\n      dark{\n        ...,\n        asset->{...}\n      },\n      light{\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  relatedCases[]->{\n    ...,\n    collaborationModel-> {\n      ...,\n      collaborationTabs[]{\n        ...,\n        concept->{...}\n      }\n    },\n    introImage {\n      asset->{...}\n    },\n    technologies[]->{...},\n    services[]->{...},\n    metadata{\n      ...,\n      image{\n        ...,\n        asset->{...}\n      }\n    },\n  },\n  services[]->{...},\n  metadata{\n    ...,\n    image{\n      ...,\n      asset->{...}\n    }\n  },\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  \ncontent[] {\n  ...,\n\n  _type == "technologiesShowcase" => {\n    technologies[]->{\n      ...,\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      },\n      logo{\n        ...,\n        default{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        dark{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        light{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        }\n      }\n    },\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n          ...,\n          defined(internalLink) => {\n            internalLink -> {...}\n          }\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': WorkQueryResult;
     "*[_type == 'siteConfig' && language == $language][0]{\n  homePage->{\n    \"slug\": metadata.slug.current\n  }\n}.homePage.slug": HomePageSlugQueryResult;
-    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  intro {\n    ...,\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    },\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n  },\n  \ncontent[] {\n  ...,\n  _type == "technologiesShowcase" => {\n    ...,\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    },\n    technologies[]{\n      ...,\n      technology->{\n        ...,\n        logo{\n          ...,\n          default{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          dark{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          },\n          light{\n            asset->{\n              ...,\n              altTexts{...},\n              descriptions{...},\n              titles{...}\n            }\n          }\n        }\n      },\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ContentPageQueryResult;
+    '*[_type == "contentPage" && language == $language && metadata.slug.current == $slug][0]{\n  ...,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    "slug": metadata.slug.current,\n    language\n  },\n  intro {\n    ...,\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      }\n    },\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n  },\n  \ncontent[] {\n  ...,\n\n  _type == "technologiesShowcase" => {\n    technologies[]->{\n      ...,\n      technologyLink{\n        ...,\n        internalLink->{\n          metadata,\n          _type,\n          blank\n        }\n      },\n      logo{\n        ...,\n        default{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        dark{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        },\n        light{\n          asset->{\n            ...,\n            altTexts{...},\n            descriptions{...},\n            titles{...}\n          }\n        }\n      }\n    },\n    intro {\n      ...,\n      intro[] {\n        ...,\n        markDefs[] {\n          ...,\n          defined(internalLink) => {\n            internalLink -> {...}\n          }\n        }\n      }\n    }\n  },\n  intro {\n    ...,\n    intro[] {\n      ...,\n      markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n    },\n    introCta {\n      ...,\n      link {\n        ...,\n        internalLink->{...}\n      }\n    }\n  },\n   _type == "blogsList" => {\n    ...,\n    blogsType == "specific" => {\n      blogPosts[]->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  _type == "blogHighlight" => {\n    ...,\n    blogType == "latest" => {\n      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n    blogType == "specific" => {\n      blogPost->{\n        ...,\n        featuredImage{\n          asset->{...}\n        },\n        postType[]->{\n          prefLabel,\n          definition\n        },\n        author->{\n          ...,\n          image{\n            ...,\n            asset->{\n              ...\n            }\n          }\n        },\n        topic[]->{\n          prefLabel,\n          definition\n        },\n      }\n    },\n  },\n  defined(groups) => {\n    groups[] {\n      ...,\n      \'services\': services[]->{\n        ...,\n        image{\n          ...,\n          asset->{...}\n        },\n      }\n    }\n  },\n  _type == "testimonial" => {\n    person->{\n      ...,\n      image {\n        ...,\n        asset->{...}\n      }\n    }\n  },\n  _type == "cardGrid" => {\n    backgroundImage{\n      asset->{...}\n    },\n    intro {\n      ...,\n      introCta {\n        ...,\n        link {\n          ...,\n          internalLink->{...}\n        }\n      }\n    },\n    cards[] {\n      ...,\n      icon{\n        ...,\n        asset->{\n          ...,\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    ...,\n    content[]{\n      ...,\n      defined(asset) => {\n        asset->{...}\n      },\n      richText[] {\n        ...,\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    }\n  },\n  _type == "highlight" => {\n    ...,\n    defined(image) => {\n      image{\n        asset->{...}\n      }\n    }\n  }, \n  _type == "tabs" => {\n    ...,\n    defined(tabsOverview) => {\n      intro {\n        ...,\n        intro[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      },\n      tabsOverview[]{\n        ...,\n        _type == "tab" => {\n          ...,\n          content[]{\n            ...,\n            _type == "image" => {\n              asset->{...}\n            },\n            _type == "content" => {\n              content[] {\n                ...,\n                markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n              }\n            }\n          }\n        }\n      }\n    }\n  }, \n  _type == "longFormText" => {\n    ...,\n    defined(content) => {\n      content[]{\n        ...,\n        _type == "image" => {\n          asset->{...}\n        },\n        markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n      }\n    } \n  },\n  _type == "workCardList" => {\n    ...,\n    defined(referenceCases) => {\n      referenceCases[]-> {\n        ...,\n        introImage {\n          ...,\n          asset->{...}\n        },\n        company -> {\n          ...,\n          logo{\n            ...,\n            default{\n              ...,\n              asset->{...}\n            },\n            dark{\n              ...,\n              asset->{...}\n            },\n            light{\n              ...,\n              asset->{...}\n            }\n          }\n        },\n        technologies[]->{...},\n        services[]->{...},\n        metadata{\n          ...,\n          image{\n            ...,\n            asset->{...}\n          }\n        },\n        collaborationModel-> {\n          ...,\n          collaborationTabs[]{\n            ...,\n            concept->{...}\n          }\n        }\n      } \n    }\n  },\n  _type == "faq" => {\n    ...,\n    defined(questions) => {\n      questions[]->{\n        ...,\n        answer[] {\n          ...,\n          markDefs[] {\n  ...,\n  defined(internalLink) => {\n    internalLink -> {...}\n  }\n}\n        }\n      }\n    }\n  }\n}\n}': ContentPageQueryResult;
     '\n*[_type == "blogPost" && language == $language]{\n  "title": metadata.title,\n  "slug": metadata.slug.current,\n  "author": author->{name}.name,\n  "description": metadata.description,\n  "pubDate": publicationDate\n}\n': RssBlogPostsQueryResult;
     '*[_type == "contentPage" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllContentPagesQueryResult;
     '*[_type == "service" && language == $language && defined(metadata.slug.current)]{\n  "slug": metadata.slug.current\n}.slug': AllServicePagesQueryResult;

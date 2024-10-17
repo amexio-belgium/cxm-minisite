@@ -400,14 +400,14 @@ export type TechnologiesShowcaseReferenced = Omit<
   TechnologiesShowcase,
   "technologies"
 > & {
-  technologies: {
-    technology: Omit<Technology, "logo"> & {
+  technologies: Array<
+    Omit<Technology, "logo" | "technologyLink"> & {
       logo?: {
         default?: i18nImage;
         light?: i18nImage;
         dark?: i18nImage;
       };
-    };
-    technologyLink: LinkObjectReferenced;
-  }[];
+      technologyLink: LinkObjectReferenced;
+    }
+  >;
 };

@@ -45,31 +45,32 @@ const locale = Astro.currentLocale!;
   }
   {
     technologies.technologies && technologies.technologies.length > 0 && (
-      <div class="mx-auto mt-2 flex flex-wrap justify-center gap-4 sm:mt-4 sm:gap-20">
+      <div class="mx-auto mt-2 flex flex-wrap justify-center gap-4 sm:mt-4 sm:gap-6">
         {technologies.technologies.map((technology) => (
           <a
-            class="flex flex-col items-center text-center transition-transform duration-300 ease-in-out motion-safe:hover:scale-105"
+            class="flex min-w-40 flex-col items-center text-center transition-transform duration-300 ease-in-out motion-safe:hover:scale-105"
             href={getHrefFromLinkObject(technology.technologyLink, locale)}
           >
-            {technology.technology?.logo?.default && (
-              <img
-                class="max-h-16 sm:max-h-24"
-                alt={
-                  technology.technology.logo.default.asset.altTexts?.[locale]
-                }
-                src={imageBuilder
-                  .image(technology.technology?.logo?.default.asset)
-                  .height(224)
-                  .fit("clip")
-                  .format("webp")
-                  .url()}
-              />
-            )}
-            {technologies?.showName && technology?.technology?.name && (
+            <div class="flex h-16 flex-col justify-center sm:h-20">
+              {technology?.logo?.default && (
+                <img
+                  class="max-h-16 max-w-40 sm:max-h-20"
+                  alt={technology.logo.default.asset.altTexts?.[locale]}
+                  src={imageBuilder
+                    .image(technology?.logo?.default.asset)
+                    .height(160)
+                    .fit("clip")
+                    .format("webp")
+                    .url()}
+                />
+              )}
+            </div>
+
+            {technologies?.showName && technology?.name && (
               <p
-                class={`mt-1 font-light ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+                class={`mt-3 max-w-40 text-wrap font-light ${technologies.style === "popping" ? "text-black" : "text-white"}`}
               >
-                {technology.technology.name}
+                {technology?.name}
               </p>
             )}
           </a>
