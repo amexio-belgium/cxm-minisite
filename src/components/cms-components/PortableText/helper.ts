@@ -8,10 +8,22 @@ import PortableImage from "@components/cms-components/PortableText/PortableImage
 import PortableYoutube from "@components/cms-components/PortableText/PortableYoutube.astro";
 import type { SomePortableTextComponents } from "astro-portabletext/types";
 import PortableMark from "./PortableMark.astro";
+import PortableListBullet from "./PortableListBullet.astro";
+import PortableListNumber from "./PortableListNumber.astro";
+import PortableListBulletItem from "./PortableListBulletItem.astro";
+import PortableListNumberItem from "./PortableListNumberItem.astro";
 export const defaultComponents: SomePortableTextComponents = {
   type: {
     image: PortableImage,
     youtube: PortableYoutube,
+  },
+  list: {
+    bullet: PortableListBullet,
+    number: PortableListNumber,
+  },
+  listItem: {
+    bullet: PortableListBulletItem,
+    number: PortableListNumberItem,
   },
   block: {
     normal: PortableP,
