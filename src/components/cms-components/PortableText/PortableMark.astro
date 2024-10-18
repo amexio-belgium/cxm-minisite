@@ -8,6 +8,24 @@ export type Props = $<MarkType<never>>; // 👈 Use `never` for type parameter
 
 const props = Astro.props;
 
+function getAllTexts(node: any) {
+  let texts = "";
+
+  // If the node is a text node, push the text value
+  if (node._type === "@text" && node.text) {
+    texts += node.text;
+  }
+
+  // If the node has children, recurse through them
+  if (node.children && node.children.length > 0) {
+    node.children.forEach((child) => {
+      texts = texts.concat(getAllTexts(child)); // Recursively get texts from children
+    });
+  }
+
+  return texts;
+}
+
 const locale = Astro.currentLocale!;
 
 const markDef: Link = props.node.markDef;
@@ -27,7 +45,8 @@ const markDef: Link = props.node.markDef;
           <a
             target={markDef.blank ? "_blank" : undefined}
             href={getHrefFromLinkObject(markDef, locale)}
-            class="underline"
+            style={`transition-duration: ${getAllTexts(props.node).length * 20}ms`}
+            class="bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 transition-all hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
           >
             <slot />
           </a>
