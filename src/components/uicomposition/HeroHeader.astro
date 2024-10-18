@@ -22,6 +22,8 @@ const {
   client,
   backgroundImageAltText = "",
 } = Astro.props;
+
+const locale = Astro.currentLocale!;
 ---
 
 <div
@@ -39,9 +41,10 @@ const {
     {client && <p class="font-serif text-xl uppercase" set:html={client} />}
     <h1
       class:list={[
-        "w-full text-pretty font-serif font-bold lg:w-11/12 xl:w-2/3",
+        "w-full hyphens-auto text-pretty break-words font-serif font-bold lg:w-11/12 xl:w-2/3",
         homepage ? "text-3xl md:text-4xl" : "text-3xl md:text-4xl",
       ]}
+      lang={locale}
     >
       {
         Array.isArray(headline) ? (
