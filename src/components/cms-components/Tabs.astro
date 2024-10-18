@@ -47,6 +47,7 @@ const { tabsContent } = Astro.props;
         <sl-tab
           class="min-w-1/4 text-center text-lg aria-selected:border-b-2 aria-selected:border-secondary"
           slot="nav"
+          id={`analytics-tab-${index + 1}`}
           data-analytics-click="tab"
           data-analytics-title={tab.title}
           panel={`model${index + 1}`}
