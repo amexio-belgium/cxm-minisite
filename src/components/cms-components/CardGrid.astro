@@ -1,7 +1,7 @@
 ---
 import TilesContainer from "@components/uicomposition/TilesContainer.astro";
 import SmallTile from "@components/uielements/SmallTile.astro";
-import type { i18nImageAsset } from "@sanity/custom.sanity.types";
+import type { i18nImage, i18nImageAsset } from "@sanity/custom.sanity.types";
 import type { CardGridReferenced } from "../../sanity/custom.sanity.types";
 import SanityImg from "@otterstack/sanity-img-astro";
 
@@ -35,7 +35,7 @@ const stylesSmallTile = {
 >
   {
     cardGrid?.cards?.map((card: any) => {
-      const asset = card?.icon?.asset as any as i18nImageAsset;
+      const asset = card?.icon as any as i18nImage;
       return (
         <SmallTile
           headline={card.title || ""}
@@ -44,13 +44,13 @@ const stylesSmallTile = {
         >
           {card.icon?.asset && card.icon?.asset?.extension == "svg" && (
             <div class="service__item h-20 w-20 overflow-visible">
-              <object data={asset.url} title={card.title || ""} />
+              <object data={asset?.asset?.url} title={card.title || ""} />
             </div>
           )}
           {card.icon?.asset && card.icon?.asset?.extension != "svg" && (
             <SanityImg
               src={asset}
-              alt={asset?.altTexts?.[locale] || ""}
+              alt={asset?.asset.altTexts?.[locale] || ""}
               width="300"
               height="150"
               class="h-24 w-auto"
@@ -70,7 +70,7 @@ const stylesSmallTile = {
       >
         {cardGrid.backgroundImage?.asset?._id && (
           <SanityImg
-            src={cardGrid.backgroundImage?.asset?._id}
+            src={cardGrid.backgroundImage}
             alt={cardGrid.backgroundImage?.asset?.altTexts?.[locale] || ""}
             loading="lazy"
             width="1200"

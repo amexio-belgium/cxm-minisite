@@ -4,13 +4,14 @@ import Breadcrumbs from "@components/uielements/Breadcrumbs.astro";
 import { PortableText } from "astro-portabletext";
 import SanityImg from "@otterstack/sanity-img-astro";
 import { defaultComponents } from "../cms-components/PortableText/helper";
+import type { i18nImage } from "@sanity/custom.sanity.types";
 
 interface Props {
   headline?: string | any[];
   client?: string;
   text?: any;
   homepage?: boolean;
-  backgroundImage?: string;
+  backgroundImage?: i18nImage;
   backgroundImageAltText?: string;
 }
 

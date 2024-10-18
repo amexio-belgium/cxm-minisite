@@ -46,13 +46,13 @@ const { service } = Astro.props;
       <div class="mask-project md:-right-1/12 relative bottom-0 right-0 inline-flex max-h-[200px] w-full flex-col items-center justify-center overflow-hidden bg-blue-100 object-cover md:absolute md:h-full md:max-h-[unset] md:w-1/2">
         {service.image?.asset?._id && (
           <SanityImg
-            src={service.image?.asset?._id}
+            src={service.image}
             alt={service.image?.asset?.altTexts?.[locale] || ""}
             width="1280"
             height="720"
             widths={[400, 600, 790]}
             sizes="(max-width: 790px) 100vw, 790px"
-            class="left-0 top-0 w-full min-w-full max-w-[unset] shrink-0 transition-transform duration-300 ease-in-out motion-safe:group-hover/service:scale-110 md:absolute md:h-full md:w-auto"
+            class="left-0 top-0 w-full min-w-full max-w-[unset] shrink-0 transition-transform duration-300 ease-in-out motion-safe:group-hover/service:scale-110 md:absolute md:h-full md:min-h-full md:object-cover"
             loading="eager"
           />
         )}

@@ -177,7 +177,7 @@ const items = isLatestBlogs
           "previewImageUrl",
           blog.featuredImage?.asset
             ? imageBuilder
-                .image(blog.featuredImage?.asset)
+                .image(blog.featuredImage)
                 .width(400)
                 .height(400)
                 .url()
@@ -186,11 +186,7 @@ const items = isLatestBlogs
         el.setAttribute(
           "authorImageUrl",
           blog.author?.image?.asset
-            ? imageBuilder
-                .image(blog.author.image?.asset)
-                .width(400)
-                .height(400)
-                .url()
+            ? imageBuilder.image(blog.author.image).width(400).height(400).url()
             : "",
         );
 

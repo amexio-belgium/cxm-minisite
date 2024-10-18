@@ -25,7 +25,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
       <div class="flex flex-col items-center justify-center text-white md:w-4/12">
         {testimonial.person?.image?.asset?._id && (
           <SanityImg
-            src={testimonial.person?.image?.asset?._id}
+            src={testimonial.person?.image}
             alt={testimonial.person?.image?.asset?.altTexts?.[locale] || ""}
             width="768"
             height="768"
@@ -74,7 +74,7 @@ const variant = testimonial.variant ? testimonial.variant : "glass";
         <>
           {testimonial.person?.image?.asset?._id && (
             <SanityImg
-              src={testimonial.person?.image?.asset?._id}
+              src={testimonial.person?.image}
               alt={testimonial.person?.image?.asset?.altTexts?.[locale] || ""}
               width="768"
               height="768"

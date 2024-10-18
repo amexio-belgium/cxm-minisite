@@ -74,7 +74,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
   <HeroHeader
     headline={casePage?.intro?.title}
     text={casePage?.intro?.intro}
-    backgroundImage={casePage.introImage?.asset._id}
+    backgroundImage={casePage.introImage}
     client={casePage?.company?.name}
   >
     {
@@ -85,7 +85,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
               <>
                 {customer?.logo?.default?.asset && (
                   <SanityImg
-                    src={customer?.logo?.default?.asset}
+                    src={customer?.logo?.default}
                     alt={
                       customer?.logo?.default?.asset?.altTexts?.[locale] || ""
                     }

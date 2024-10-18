@@ -73,7 +73,7 @@ if (servicePage == null) {
   <HeroHeader
     headline={servicePage.intro?.title}
     text={servicePage.intro?.intro}
-    backgroundImage={servicePage?.image?.asset?._id}
+    backgroundImage={servicePage?.image}
   >
     {
       servicePage.customerReferences &&
@@ -83,7 +83,7 @@ if (servicePage == null) {
               <>
                 {customer?.logo?.light?.asset && (
                   <SanityImg
-                    src={customer.logo.light.asset}
+                    src={customer.logo.light}
                     alt={customer.logo.light.asset.altTexts?.[locale] || ""}
                     class="h-10 w-auto"
                     width="120"

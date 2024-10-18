@@ -72,7 +72,7 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
 >
   <HeroHeader
     headline={blogPost.intro?.title}
-    backgroundImage={blogPost?.featuredImage?.asset?._id}
+    backgroundImage={blogPost?.featuredImage}
   >
     <div class="mt-8 flex flex-row items-center gap-4 text-white">
       <FormattedDate

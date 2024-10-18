@@ -13,7 +13,7 @@ const locale = Astro.currentLocale!;
 {
   image.asset?._id && (
     <SanityImg
-      src={image.asset?._id}
+      src={image}
       alt={image.asset?.altTexts?.[locale] || ""}
       width="1280"
       height="800"

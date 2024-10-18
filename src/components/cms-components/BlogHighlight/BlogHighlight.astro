@@ -21,7 +21,7 @@ const blogPost = Astro.props.blogPost.blogPost;
       <div class="flex h-[300px] items-center justify-center overflow-hidden rounded-t-xl shadow-xl shadow-primary/20 lg:aspect-square lg:h-[unset] lg:shrink-0 lg:rounded-l-xl lg:rounded-tr-none">
         {blogPost.featuredImage?.asset && (
           <SanityImg
-            src={blogPost.featuredImage?.asset}
+            src={blogPost.featuredImage}
             alt={blogPost.featuredImage?.asset?.altTexts?.[locale] || ""}
             widths={[400, 600, 790]}
             height="400"
@@ -68,7 +68,7 @@ const blogPost = Astro.props.blogPost.blogPost;
             <div class="flex items-center gap-4">
               {blogPost.author.image?.asset && (
                 <SanityImg
-                  src={blogPost.author.image?.asset}
+                  src={blogPost.author.image}
                   alt={blogPost.author.name + " " + blogPost.author.jobTitle}
                   width={50}
                   height={50}

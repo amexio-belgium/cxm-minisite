@@ -72,7 +72,7 @@ const { tabsContent } = Astro.props;
                 )}
                 {content._type == "image" && content.asset && (
                   <SanityImg
-                    src={content.asset}
+                    src={content}
                     alt={content.asset?.altTexts?.[locale] || ""}
                     class="h-fit w-full overflow-hidden rounded-2xl shadow-sm shadow-primary lg:w-1/2"
                     loading="lazy"
