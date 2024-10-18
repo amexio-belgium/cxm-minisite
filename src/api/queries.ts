@@ -245,6 +245,19 @@ content[] {
       image{
         asset->{...}
       }
+    },
+    defined(cta) => {
+      cta {
+        ...,
+        link {
+          ...,
+          internalLink->{
+            metadata,
+            _type,
+            blank
+          }
+        }
+      }
     }
   }, 
   _type == "tabs" => {
