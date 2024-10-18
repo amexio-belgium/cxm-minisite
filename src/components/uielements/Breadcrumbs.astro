@@ -103,13 +103,10 @@ const removeTrailingSlash = (text: string) => {
                   removeTrailingSlash(href) ===
                     removeTrailingSlash(pathNameAsLocale) && "page"
                 }
-                class="text-xs capitalize outline-none md:py-2"
+                class="!mb-0 text-xs capitalize outline-none md:py-2"
               >
                 {Array.isArray(pageTitle) ? (
-                  <PortableText
-                    value={pageTitle}
-                    components={defaultComponents}
-                  />
+                  <PortableText value={pageTitle} />
                 ) : (
                   pageTitle
                 )}
