@@ -11,17 +11,17 @@ const { serviceCardList } = Astro.props;
 ---
 
 <div
-  class="flex flex-col motion-safe:animate-fade-up motion-safe:animate-delay-500 xl:flex-row"
+  class="flex flex-col motion-safe:animate-fade-up motion-safe:animate-delay-200 xl:flex-row"
 >
   <div
-    class="top-40 mb-8 flex h-fit w-full flex-col items-start gap-2 motion-safe:animate-fade-up motion-safe:animate-delay-700 md:mb-16 md:pr-12 xl:sticky xl:w-4/12"
+    class="top-40 mb-8 flex h-fit w-full flex-col items-start gap-2 animate-duration-75 motion-safe:animate-fade-up motion-safe:animate-delay-100 md:mb-16 md:pr-12 xl:sticky xl:w-4/12"
   >
     <h2 class="text-pretty font-serif text-3xl">
       {serviceCardList.intro?.title}
     </h2>
   </div>
   <div
-    class="flex w-full flex-col gap-2 motion-safe:animate-fade-up motion-safe:animate-delay-1000 xl:w-8/12"
+    class="flex w-full flex-col gap-2 motion-safe:animate-fade-up motion-safe:animate-delay-100 xl:w-8/12"
   >
     {
       serviceCardList?.groups?.map((group, index) => (
