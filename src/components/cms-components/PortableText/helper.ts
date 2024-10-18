@@ -12,6 +12,7 @@ import PortableListBullet from "./PortableListBullet.astro";
 import PortableListNumber from "./PortableListNumber.astro";
 import PortableListBulletItem from "./PortableListBulletItem.astro";
 import PortableListNumberItem from "./PortableListNumberItem.astro";
+import PortableMarkSimple from "./PortableMarkSimple.astro";
 export const defaultComponents: SomePortableTextComponents = {
   type: {
     image: PortableImage,
@@ -33,5 +34,9 @@ export const defaultComponents: SomePortableTextComponents = {
     h5: PortableH5,
     h6: PortableH6,
   },
+  mark: PortableMarkSimple,
+};
+
+export const simpleComponents: SomePortableTextComponents = {
   mark: PortableMark,
 };
