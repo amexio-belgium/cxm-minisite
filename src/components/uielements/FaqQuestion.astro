@@ -5,15 +5,17 @@ interface Props {
   headline: string;
   headlineTag?: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
   class?: string;
+  index: number;
 }
 
-const { headline, headlineTag = "h3", class: className } = Astro.props;
+const { headline, headlineTag = "h3", class: className, index } = Astro.props;
 ---
 
 <Details
   headline={headline}
   headlineTag={headlineTag}
   class:list={["border-gray-500 border-b text-white", className]}
+  index={index}
 >
   <slot />
 </Details>
