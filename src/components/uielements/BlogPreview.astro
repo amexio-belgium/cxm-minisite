@@ -50,7 +50,7 @@ const { blogPost } = Astro.props;
             textLength={stegaClean(blogPost.intro?.title)?.length}
             class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
             href={parseHref(
-              `/${locale}/insights/${blogPost.metadata?.slug?.current}`,
+              `/${locale}/insights/${blogPost.metadata?.slug?.current}/`,
             )}
           >
             {blogPost.intro?.title}

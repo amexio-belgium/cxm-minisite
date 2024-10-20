@@ -26,7 +26,7 @@ export const getHrefFromLinkObject = (
         blogPost: `${insightsPageName}/`,
         referenceCase: `${worksPageName}/`,
       }[linkObject.internalLink._type] || "";
-    href = `${BASE_PATH}/${language}/${subpage}${linkObject.internalLink.metadata?.slug?.current}`;
+    href = `${BASE_PATH}/${language}/${subpage}${linkObject.internalLink.metadata?.slug?.current}/`;
   } else if (linkObject?.type === "external") {
     href = linkObject.url || "";
     if (!href.startsWith("https://") && !href.startsWith("http://")) {

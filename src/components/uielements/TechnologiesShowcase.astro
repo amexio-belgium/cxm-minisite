@@ -54,7 +54,7 @@ const locale = Astro.currentLocale!;
             <div class="flex h-16 flex-col justify-center sm:h-20">
               {technology?.logo?.default && (
                 <img
-                  class="max-h-16 max-w-40 sm:max-h-20"
+                  class="max-h-16 max-w-40 opacity-80 sm:max-h-20"
                   alt={technology.logo.default.asset.altTexts?.[locale]}
                   src={imageBuilder
                     .image(

@@ -28,7 +28,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
         onWhite
         hoverColor="orange"
         class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 before:z-20"
-        href={`/${locale}/work/${caseData.metadata?.slug?.current}`}
+        href={`/${locale}/work/${caseData.metadata?.slug?.current}/`}
         set:html={caseData.intro.title}
       />
     </h3>

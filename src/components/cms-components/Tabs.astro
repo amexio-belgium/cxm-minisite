@@ -63,7 +63,7 @@ const { tabsContent } = Astro.props;
             {tab.content?.map((content) => (
               <>
                 {content._type == "content" && content.content && (
-                  <div class="w-full text-[18px] lg:w-1/2">
+                  <div class="w-full text-[18px] font-light lg:w-1/2">
                     <PortableText
                       value={content.content}
                       components={defaultComponents}
