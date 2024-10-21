@@ -66,6 +66,7 @@
     "@azure/storage-file-share": "^12.25.0",
     "@inlang/paraglide-js": "1.11.3",
     "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@netlify/functions": "^2.8.2",
     "@sanity/export": "^3.41.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/fs-extra": "^11.0.4",

@@ -2,6 +2,7 @@ import "dotenv/config";
 import { createClient } from "@sanity/client";
 import exportDataset from "@sanity/export";
 import fs from "node:fs";
+import { schedule } from "@netlify/functions";
 
 import {
   ShareServiceClient,
@@ -17,6 +18,18 @@ const sanityClient = createClient({
   apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
   token: process.env.SANITY_API_READ_TOKEN,
 });
+
+const shareName = "fusebackups";
+const directoryName = "backups";
+
+const account = "amexiofusebackup";
+const accountKey = process.env.AZURE_FILES_ACCOUNT_KEY;
+
+const credential = new StorageSharedKeyCredential(account, accountKey);
+const serviceClient = new ShareServiceClient(
+  `https://${account}.file.core.windows.net`,
+  credential,
+);
 
 async function backup() {
   console.log("export dataset");
@@ -34,18 +47,6 @@ async function backup() {
     assetConcurrency: 12,
   });
 
-  const account = "amexiofusebackup";
-  const accountKey = process.env.AZURE_FILES_ACCOUNT_KEY;
-
-  const credential = new StorageSharedKeyCredential(account, accountKey);
-  const serviceClient = new ShareServiceClient(
-    `https://${account}.file.core.windows.net`,
-    credential,
-  );
-
-  const shareName = "fusebackups";
-  const directoryName = "backups";
-
   const directoryClient = serviceClient
     .getShareClient(shareName)
     .getDirectoryClient(directoryName);
@@ -60,8 +61,12 @@ async function backup() {
   });
 
   readStream.on("end", async () => {
-    const date = new Date();
-    const fileName = `${date.getTime()}-${DATASET}.tar.gz`;
+    const now = new Date()
+      .toISOString()
+      .replace("T", "_")
+      .replace(/:/g, "-")
+      .slice(0, 19);
+    const fileName = `${now}-${DATASET}.tar.gz`;
     const fileClient = directoryClient.getFileClient(fileName);
 
     const buffer = Buffer.concat(chunks);
@@ -77,35 +82,77 @@ async function backup() {
       );
     }
 
+    console.log("Finished uploading backup to azure");
+
+    await deleteOldestZips();
     // Upload file range
   });
 
   return true;
-  // return Promise.all(promisesArray);
 }
 
-backup()
-  .then(() => {
-    console.log("all ok");
-  })
-  .catch((error) => {
-    console.log("oops error");
-    console.log(error);
-    // console.log(error);
-  });
+async function deleteOldestZips() {
+  try {
+    const directoryClient = serviceClient
+      .getShareClient(shareName)
+      .getDirectoryClient(directoryName);
+    let zipFiles = [];
 
-export default async function (event, context, callback) {
+    // List files in the directory
+    let iter = directoryClient.listFilesAndDirectories();
+    for await (const item of iter) {
+      if (item.kind === "file" && item.name.endsWith(".gz")) {
+        const fileClient = directoryClient.getFileClient(item.name);
+        const properties = await fileClient.getProperties();
+
+        zipFiles.push({
+          name: item.name,
+          lastModified: properties.lastModified,
+        });
+      }
+    }
+
+    console.log(zipFiles);
+
+    // Sort by last modified date (oldest first)
+    zipFiles.sort((a, b) => a.lastModified - b.lastModified);
+
+    // If there are more than 5 zip files, delete the oldest ones
+    const filesToDelete =
+      zipFiles.length > 5 ? zipFiles.slice(0, zipFiles.length - 5) : [];
+
+    // Delete the extra files
+    for (const file of filesToDelete) {
+      const fileClient = directoryClient.getFileClient(file.name);
+      console.log(`Deleting file: ${file.name}`);
+      await fileClient.delete();
+    }
+
+    if (filesToDelete.length > 0) {
+      console.log(
+        `${filesToDelete.length} old zip file(s) deleted successfully.`,
+      );
+    } else {
+      console.log("No zip files to delete. The 5 newest zip files are kept.");
+    }
+  } catch (error) {
+    console.error("Error deleting files:", error.message);
+  }
+}
+
+const handler = async function (event, context, callback) {
   backup()
     .then(() => {
-      callback(null, {
+      return {
         statusCode: 200,
-        body: "Everything went well!",
-      });
+      };
     })
     .catch((error) => {
-      callback(null, {
+      return {
         statusCode: 422,
-        body: `Oops! Something went wrong. ${error}`,
-      });
+        body: `Something went wrong ${error}`,
+      };
     });
-}
+};
+
+exports.handler = schedule("*/2 * * * *", handler);
