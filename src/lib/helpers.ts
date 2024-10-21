@@ -1,5 +1,4 @@
 import { BASE_PATH } from "@src/consts";
-import { endWith } from "../../node_modules/rxjs/dist/esm/internal/operators/endWith";
 
 export const parseHref = (href: string | URL | undefined | null) => {
   if (href) {

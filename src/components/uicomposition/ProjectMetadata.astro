@@ -1,4 +1,6 @@
 ---
+import { parseHref } from "@lib/helpers";
+import { stegaClean } from "@sanity/client/stega";
 import type {
   CollaborationModelReferenced,
   ServiceWithReferences,
@@ -15,6 +17,8 @@ interface Props {
 }
 
 const { duration, collaboration, services, coreTechnology } = Astro.props;
+
+const locale = Astro.currentLocale!;
 ---
 
 <div
@@ -57,7 +61,17 @@ const { duration, collaboration, services, coreTechnology } = Astro.props;
         <div class="lg:flex">
           <dt class="inline lg:block">{m.metadataServices() + ":"}</dt>
           <dd class="inline lg:block">
-            {services.map((service) => service?.metadata?.title).join(", ")}
+            {services.map((service, index) => (
+              <a
+                style={`transition-duration: ${stegaClean(service.metadata?.title || "").length * 20}ms`}
+                class="mr-1 bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-white to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-white decoration-1 underline-offset-2 transition-all hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
+                href={parseHref(
+                  `/${locale}/services/${service.metadata?.slug?.current}/`,
+                )}
+              >
+                {`${service.metadata?.title}${index + 1 !== services?.length ? ", " : ""}`}
+              </a>
+            ))}
           </dd>
         </div>
       )

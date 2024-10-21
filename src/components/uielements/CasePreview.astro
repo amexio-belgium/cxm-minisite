@@ -5,6 +5,8 @@ import { PortableText } from "astro-portabletext";
 import type { ReferenceCaseReferenced } from "@sanity/custom.sanity.types";
 import * as m from "@src/paraglide/messages";
 import { defaultComponents } from "@components/cms-components/PortableText/helper";
+import { stegaClean } from "@sanity/client/stega";
+import { parseHref } from "@lib/helpers";
 
 interface Props {
   caseData: ReferenceCaseReferenced;
@@ -120,9 +122,17 @@ const { caseData, small } = Astro.props;
           caseData?.services && (
             <li class="ml-5 list-outside">
               {m.metadataServices()}:
-              {caseData.services
-                ?.map((service) => service?.metadata?.title)
-                .join(", ")}
+              {caseData.services.map((service, index) => (
+                <a
+                  style={`transition-duration: ${stegaClean(service.metadata?.title || "").length * 20}ms`}
+                  class="mr-1 bg-gradient-to-r from-secondary from-0% via-secondary via-50% to-black to-50% bg-[length:200%_100%] bg-clip-text bg-[100%] text-transparent underline decoration-black decoration-1 underline-offset-2 transition-all hover:bg-[0%_100%] hover:decoration-secondary focus-visible:rounded focus-visible:px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary motion-reduce:transition-none"
+                  href={parseHref(
+                    `/${locale}/services/${service.metadata?.slug?.current}/`,
+                  )}
+                >
+                  {`${service.metadata?.title}${index + 1 !== caseData.services?.length ? ", " : ""}`}
+                </a>
+              ))}
             </li>
           )
         }
