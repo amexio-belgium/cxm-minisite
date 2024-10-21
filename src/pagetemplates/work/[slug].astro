@@ -112,8 +112,8 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
       casePage?.technologies?.map((technology) => (
         <TechnologyIcon
           link={
-            technology?.partner?.link
-              ? getHrefFromLinkObject(technology.partner.link, locale)
+            technology?.technologyLink
+              ? getHrefFromLinkObject(technology?.technologyLink, locale)
               : undefined
           }
         >
