@@ -23,13 +23,11 @@ const {
   client,
   backgroundImageAltText = "",
 } = Astro.props;
-
-const locale = Astro.currentLocale!;
 ---
 
 <div
   class:list={[
-    "relative pb-20 pt-10 text-white md:pb-32 lg:pb-40",
+    "relative pb-20 pt-10 text-white md:pb-8 lg:min-h-[490px] lg:pb-16",
     !backgroundImage && "hero-gradient",
     homepage && "md:mb-0",
     backgroundImage &&
