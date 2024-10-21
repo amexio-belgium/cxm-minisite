@@ -6,6 +6,7 @@ import TrackingFooter from "@components/uielements/TrackingFooter.astro";
 import Tracking from "@components/uielements/Tracking.astro";
 import { navigationQuery } from "src/api/queries";
 import type {
+  Canonical,
   NavigationQueryResult,
   SiteConfigQueryResult,
 } from "src/sanity/sanity.types";
@@ -25,6 +26,7 @@ interface Props {
   routeMap?: string;
   noIndex?: boolean;
   seoImage?: Image;
+  customCanonicals?: Canonical[];
 }
 
 const locale = Astro.currentLocale;
@@ -38,6 +40,7 @@ const {
   routeMap,
   noIndex,
   seoImage,
+  customCanonicals,
 } = Astro.props;
 
 if (!siteConfig) {
@@ -75,6 +78,7 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
       title={title}
       description={description}
       seoImage={seoImage}
+      customCanonicals={customCanonicals}
     />
     {
       slug === "contact" && (

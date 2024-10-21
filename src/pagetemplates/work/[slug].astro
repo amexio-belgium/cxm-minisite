@@ -70,6 +70,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
   routeMap="work"
   noIndex={casePage?.metadata?.noIndex}
   seoImage={casePage?.metadata?.image as Image}
+  customCanonicals={casePage?.metadata?.canonicals}
 >
   <HeroHeader
     headline={casePage?.intro?.title}
