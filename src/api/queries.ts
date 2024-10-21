@@ -592,7 +592,8 @@ export const contentPageQuery = groq`*[_type == "contentPage" && language == $la
       ${portableTextResolveInternalLink}
     },
   },
-  ${contentQuery}
+  ${contentQuery},
+  metadata
 }`;
 
 export const rssBlogPostsQuery = groq`

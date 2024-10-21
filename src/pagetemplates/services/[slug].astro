@@ -69,6 +69,7 @@ if (servicePage == null) {
   translations={servicePage?._translations}
   noIndex={servicePage?.metadata?.noIndex}
   seoImage={servicePage?.metadata?.image as Image}
+  customCanonicals={servicePage?.metadata?.canonicals}
 >
   <HeroHeader
     headline={servicePage.intro?.title}

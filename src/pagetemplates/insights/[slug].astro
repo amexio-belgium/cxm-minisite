@@ -69,6 +69,7 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   routeMap="insights"
   noIndex={blogPost?.metadata?.noIndex}
   seoImage={blogPost?.metadata?.image as Image}
+  customCanonicals={blogPost?.metadata?.canonicals}
 >
   <HeroHeader
     headline={blogPost.intro?.title}

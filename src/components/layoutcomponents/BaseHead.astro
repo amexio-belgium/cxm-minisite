@@ -8,6 +8,7 @@ import { BASE_PATH } from "@src/consts";
 import { parseHref } from "@lib/helpers";
 import { imageBuilder } from "@api/sanity";
 import type { Image } from "sanity";
+import type { Canonical } from "@sanity/sanity.types";
 
 interface Props {
   title: string;
@@ -16,12 +17,20 @@ interface Props {
   translations: PageTranslations;
   routeMap?: string;
   slug: string;
+  customCanonicals?: Canonical[];
 }
 
 const locale = Astro.currentLocale;
 
-const { title, description, seoImage, translations, routeMap, slug } =
-  Astro.props;
+const {
+  title,
+  description,
+  seoImage,
+  translations,
+  routeMap,
+  slug,
+  customCanonicals,
+} = Astro.props;
 
 // Remove the first / from the pathname, then you are left with en/fr/nl if it's a homepage
 const basePathLength = BASE_PATH && BASE_PATH !== "" ? BASE_PATH.length + 1 : 1;
@@ -31,9 +40,15 @@ const pathNameAsLocale = Astro.url.pathname
 
 const isHomePage = locales.includes(pathNameAsLocale);
 
+const customOriginalCanonical = customCanonicals?.find(
+  (canonical) => canonical.type === "original",
+)?.url;
+
 const canonicalURL = isHomePage
   ? `${Astro.site?.origin}${BASE_PATH}/${locale}/`
-  : `${Astro.site?.origin}${BASE_PATH}/${locale}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
+  : customOriginalCanonical
+    ? customOriginalCanonical
+    : `${Astro.site?.origin}${BASE_PATH}/${locale}${routeMap ? `/${routeMap}` : ""}/${slug}/`;
 ---
 
 <!-- Global Metadata -->
@@ -105,21 +120,33 @@ const canonicalURL = isHomePage
 />
 
 <!-- Canonical URL -->
+
 {
-  !isHomePage &&
-    translations &&
-    translations.length > 0 &&
-    translations.map((translation) => {
-      if (translation?.slug && translation.language) {
-        return (
-          <link
-            rel="alternate"
-            hreflang={translation?.language}
-            href={`${Astro.site?.origin}${BASE_PATH}/${translation?.language}${routeMap ? `/${routeMap}` : ""}/${translation?.slug}/`}
-          />
-        );
-      }
-    })
+  !isHomePage && customCanonicals && customCanonicals?.length > 0
+    ? customCanonicals.map(
+        (canonical) =>
+          canonical.type !== "original" && (
+            <link
+              rel="alternate"
+              hreflang={canonical.type}
+              href={canonical.url}
+            />
+          ),
+      )
+    : !isHomePage &&
+      translations &&
+      translations.length > 0 &&
+      translations.map((translation) => {
+        if (translation?.slug && translation.language) {
+          return (
+            <link
+              rel="alternate"
+              hreflang={translation?.language}
+              href={`${Astro.site?.origin}${BASE_PATH}/${translation?.language}${routeMap ? `/${routeMap}` : ""}/${translation?.slug}/`}
+            />
+          );
+        }
+      })
 }
 
 {

@@ -255,8 +255,7 @@ class LiteYTEmbed extends HTMLElement {
         // … per "annoying yt 404 behavior" in the .md
         const noAvailablePoster =
           e.target.naturalHeight == 90 && e.target.naturalWidth == 120;
-        console.log("upgradePosterImage");
-        console.log(noAvailablePoster);
+
         if (noAvailablePoster) return;
 
         this.posterImage.src = webpUrl;
