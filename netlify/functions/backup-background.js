@@ -2,7 +2,6 @@ import "dotenv/config";
 import { createClient } from "@sanity/client";
 import exportDataset from "@sanity/export";
 import fs from "node:fs";
-import { schedule } from "@netlify/functions";
 
 import {
   ShareServiceClient,
@@ -32,18 +31,13 @@ const serviceClient = new ShareServiceClient(
 );
 
 async function backup() {
-  console.log("export dataset");
-
   await exportDataset({
     // Instance of @sanity/client configured to correct project ID and dataset
     client: sanityClient,
-
     // Name of dataset to export
     dataset: DATASET,
-
     // Path to write zip-file to
     outputPath: `/tmp/${DATASET}.tar.gz`,
-
     assetConcurrency: 12,
   });
 
@@ -85,10 +79,9 @@ async function backup() {
     console.log("Finished uploading backup to azure");
 
     await deleteOldestZips();
-    // Upload file range
-  });
 
-  return true;
+    console.log("Finished backup");
+  });
 }
 
 async function deleteOldestZips() {
@@ -111,8 +104,6 @@ async function deleteOldestZips() {
         });
       }
     }
-
-    console.log(zipFiles);
 
     // Sort by last modified date (oldest first)
     zipFiles.sort((a, b) => a.lastModified - b.lastModified);
@@ -139,20 +130,33 @@ async function deleteOldestZips() {
     console.error("Error deleting files:", error.message);
   }
 }
-
-const handler = async function (event, context, callback) {
-  backup()
-    .then(() => {
-      return {
-        statusCode: 200,
-      };
-    })
-    .catch((error) => {
-      return {
-        statusCode: 422,
-        body: `Something went wrong ${error}`,
-      };
+export default async function executeBackup(req, context) {
+  try {
+    const body = await req?.json();
+    if (body?.password === process.env.BACKUP_FUNCTION_PASSWORD) {
+      try {
+        await backup();
+        return new Response(
+          JSON.stringify({ message: "Backup completed successfully" }),
+          { status: 200 },
+        );
+      } catch (err) {
+        console.error("Backup failed:", err.message);
+        return new Response(
+          JSON.stringify({ message: "Backup process failed" }),
+          { status: 500 },
+        );
+      }
+    } else {
+      console.error("Authorization failed");
+      return new Response(JSON.stringify({ message: "Unauthorized" }), {
+        status: 401,
+      });
+    }
+  } catch (err) {
+    console.error("Error parsing request:", err.message);
+    return new Response(JSON.stringify({ message: "Invalid request" }), {
+      status: 400,
     });
-};
-
-exports.handler = schedule("*/2 * * * *", handler);
+  }
+}
