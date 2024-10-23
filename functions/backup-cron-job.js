@@ -17,9 +17,15 @@ const handler = async function (event, context, callback) {
   })
     .then((data) => {
       console.log("Success:", data);
+      return new Response(JSON.stringify({ message: "Backup request sent" }), {
+        status: 200,
+      });
     })
     .catch((error) => {
       console.error("Error:", error);
+      return new Response(JSON.stringify({ message: "Error with backup" }), {
+        status: 500,
+      });
     });
 };
 
