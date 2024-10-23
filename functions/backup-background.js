@@ -41,6 +41,11 @@ async function backup() {
     assetConcurrency: 12,
   });
 
+  fs.readdirSync("/tmp/").forEach((file) => {
+    console.log("File in tmp folder:");
+    console.log(file);
+  });
+
   const directoryClient = serviceClient
     .getShareClient(shareName)
     .getDirectoryClient(directoryName);
@@ -50,8 +55,12 @@ async function backup() {
   });
   let chunks = [];
 
+  let chunkCount = 0;
+
   readStream.on("data", async (chunk) => {
     chunks.push(chunk); // Collect chunks
+    chunkCount += 1;
+    console.log(chunkCount);
   });
 
   readStream.on("end", async () => {
