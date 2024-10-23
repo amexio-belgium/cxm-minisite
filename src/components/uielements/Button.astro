@@ -54,53 +54,93 @@ const iconFill = {
   secondary_light: "fill-black",
   secondary_dark: "fill-tertiary",
 };
-
-const TagName = decorative ? "span" : "a";
 ---
 
-<TagName
-  {...rest}
-  class:list={[
-    "group/icon inline-flex flex-row items-center rounded-full text-center outline-offset-2 transition focus-visible:outline focus-visible:outline-2",
-    style === "tertiary" || iconOnly || longText ? "" : sizes[size],
-    iconOnly && size == "md" && "p-4",
-    iconOnly && size == "lg" && "p-8",
-    longText && size == "sm" && "px-4 py-1 text-[0.875rem] md:text-[1rem]",
-    longText && size == "md" && "px-4 py-4 sm:px-4 sm:py-3.5",
-    longText && size == "lg" && "px-4 py-2 md:p-6",
-    styles[style + "_" + color],
-    className,
-  ]}
-  href={parseHref(link)}
->
-  {
-    icon !== "none" && (
-      <svg
-        class:list={[
-          iconFill[style + "_" + color],
-          "h-6 w-6 shrink-0 will-change-transform animate-once animate-ease-out group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none",
-          size == "lg" && "mr-2 h-8 w-8",
-          longText && "hidden sm:inline",
-        ]}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <use xlink:href={parseHref(`/icons/icon-sprite.svg#icon-${icon}`)} />
-      </svg>
-    )
-  }
-  {!iconOnly && <slot />}
-  {
-    style == "tertiary" && (
-      <svg
-        class="fill-current h-6 w-6 will-change-transform animate-ease-out group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <use
-          xlink:href={parseHref("/icons/icon-sprite.svg#icon-chevron-right")}
-        />
-      </svg>
-    )
-  }
-</TagName>
+{
+  decorative ? (
+    <span
+      {...rest}
+      class:list={[
+        "group/icon inline-flex flex-row items-center rounded-full text-center outline-offset-2 transition focus-visible:outline focus-visible:outline-2",
+        style === "tertiary" || iconOnly || longText ? "" : sizes[size],
+        iconOnly && size == "md" && "p-4",
+        iconOnly && size == "lg" && "p-8",
+        longText && size == "sm" && "px-4 py-1 text-[0.875rem] md:text-[1rem]",
+        longText && size == "md" && "px-4 py-4 sm:px-4 sm:py-3.5",
+        longText && size == "lg" && "px-4 py-2 md:p-6",
+        styles[style + "_" + color],
+        className,
+      ]}
+    >
+      {icon !== "none" && (
+        <svg
+          class:list={[
+            iconFill[style + "_" + color],
+            "h-6 w-6 shrink-0 will-change-transform animate-once animate-ease-out group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none",
+            size == "lg" && "mr-2 h-8 w-8",
+            longText && "hidden sm:inline",
+          ]}
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <use xlink:href={parseHref(`/icons/icon-sprite.svg#icon-${icon}`)} />
+        </svg>
+      )}
+      {!iconOnly && <slot />}
+      {style == "tertiary" && (
+        <svg
+          class="fill-current h-6 w-6 will-change-transform animate-ease-out group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <use
+            xlink:href={parseHref("/icons/icon-sprite.svg#icon-chevron-right")}
+          />
+        </svg>
+      )}
+    </span>
+  ) : (
+    <a
+      {...rest}
+      class:list={[
+        "group/icon inline-flex flex-row items-center rounded-full text-center outline-offset-2 transition focus-visible:outline focus-visible:outline-2",
+        style === "tertiary" || iconOnly || longText ? "" : sizes[size],
+        iconOnly && size == "md" && "p-4",
+        iconOnly && size == "lg" && "p-8",
+        longText && size == "sm" && "px-4 py-1 text-[0.875rem] md:text-[1rem]",
+        longText && size == "md" && "px-4 py-4 sm:px-4 sm:py-3.5",
+        longText && size == "lg" && "px-4 py-2 md:p-6",
+        styles[style + "_" + color],
+        className,
+      ]}
+      href={parseHref(link)}
+    >
+      {icon !== "none" && (
+        <svg
+          class:list={[
+            iconFill[style + "_" + color],
+            "h-6 w-6 shrink-0 will-change-transform animate-once animate-ease-out group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none",
+            size == "lg" && "mr-2 h-8 w-8",
+            longText && "hidden sm:inline",
+          ]}
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <use xlink:href={parseHref(`/icons/icon-sprite.svg#icon-${icon}`)} />
+        </svg>
+      )}
+      {!iconOnly && <slot />}
+      {style == "tertiary" && (
+        <svg
+          class="fill-current h-6 w-6 will-change-transform animate-ease-out group-hover/icon:animate-jump motion-reduce:group-hover/icon:animate-none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <use
+            xlink:href={parseHref("/icons/icon-sprite.svg#icon-chevron-right")}
+          />
+        </svg>
+      )}
+    </a>
+  )
+}

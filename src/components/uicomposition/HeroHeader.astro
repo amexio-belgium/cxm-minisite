@@ -3,7 +3,10 @@ import LogoSlant from "@components/graphicelements/LogoSlant.astro";
 import Breadcrumbs from "@components/uielements/Breadcrumbs.astro";
 import { PortableText } from "astro-portabletext";
 import SanityImg from "@otterstack/sanity-img-astro";
-import { defaultComponents } from "../cms-components/PortableText/helper";
+import {
+  defaultComponents,
+  headerComponents,
+} from "../cms-components/PortableText/helper";
 import type { i18nImage } from "@sanity/custom.sanity.types";
 
 interface Props {
@@ -46,7 +49,7 @@ const {
     >
       {
         Array.isArray(headline) ? (
-          <PortableText components={defaultComponents} value={headline} />
+          <PortableText components={headerComponents} value={headline} />
         ) : (
           headline
         )
