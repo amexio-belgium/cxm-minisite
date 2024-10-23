@@ -28,26 +28,30 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
         onWhite
         hoverColor="orange"
         class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 before:z-20"
-        href={`/${locale}/work/${caseData.metadata?.slug?.current}/`}
-        set:html={caseData.intro.title}
+        href={`/${locale}/work/${caseData?.metadata?.slug?.current}/`}
+        set:html={caseData?.intro?.title}
       />
     </h3>
     <PortableText
       value={caseData?.intro?.intro}
       components={defaultComponents}
     />
-    <Button class="" decorative style="tertiary" color="dark">
-      {m.overviewCta()}
-    </Button>
+    {
+      caseData?.contentItems && caseData.contentItems > 0 && (
+        <Button class="" decorative style="tertiary" color="dark">
+          {m.overviewCta()}
+        </Button>
+      )
+    }
   </div>
   <div
     class="mask-project relative bottom-0 right-0 z-10 inline-flex h-[300px] w-full flex-col items-center justify-center overflow-hidden lg:absolute lg:h-full lg:w-3/4"
   >
     {
-      caseData.introImage?.asset?._id && (
+      caseData?.introImage?.asset?._id && (
         <SanityImg
-          src={caseData.introImage}
-          alt={caseData.introImage?.asset?.altTexts?.[locale] || ""}
+          src={caseData?.introImage}
+          alt={caseData?.introImage?.asset?.altTexts?.[locale] || ""}
           width={790}
           height={470}
           class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-105 motion-reduce:md:group-hover:scale-100"

@@ -359,6 +359,7 @@ export type ReferenceCaseReferenced = Omit<
   technologies?: TechnologyReferenced[];
   services?: ServiceWithReferences[];
   company?: CompanyWithReferences;
+  contentItems?: number | null;
 };
 
 export type MetadataReferenced = Omit<Metadata, "image"> & {

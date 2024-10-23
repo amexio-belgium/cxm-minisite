@@ -139,7 +139,7 @@ const { caseData, small } = Astro.props;
       </ol>
     </div>
     {
-      caseData.content && caseData.content.length > 0 && (
+      caseData?.contentItems && caseData.contentItems > 0 && (
         <Button
           class="self-end"
           link={`/${locale}/work/${caseData?.metadata?.slug?.current}/`}

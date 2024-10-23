@@ -24,7 +24,7 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
                                     }
                                     `;
 
-const portableTextResolveInternalLink = groq`
+const portableTextResolveInternalLink = `
 defined(markDefs[]) => {
   markDefs[] {
     ...,
@@ -312,15 +312,33 @@ content[] {
     ...,
     defined(referenceCases) => {
       referenceCases[]-> {
-        ...,
+        duration,
+        coreTechnology,
+        collaborationModel-> {
+          collaborationTabs[]{
+            concept->{
+              prefLabel
+            }
+          }
+        },
+        "contentItems": count(content),
+        services[]->{
+          metadata{
+            slug,
+            title
+          }
+        },
         introImage {
           ...,
           asset->{...}
         },
+        intro {
+          title,
+          intro
+        },
         company -> {
-          ...,
+          name,
           logo{
-            ...,
             default{
               ...,
               asset->{...}
@@ -335,21 +353,8 @@ content[] {
             }
           }
         },
-        technologies[]->{...},
-        services[]->{...},
         metadata{
-          ...,
-          image{
-            ...,
-            asset->{...}
-          }
-        },
-        collaborationModel-> {
-          ...,
-          collaborationTabs[]{
-            ...,
-            concept->{...}
-          }
+          slug
         }
       } 
     }
