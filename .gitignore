@@ -32,3 +32,4 @@ src/locales/*/
 /src/pages/nl/
 /netlify/functions/
 /netlify/
+/public/robots.txt
