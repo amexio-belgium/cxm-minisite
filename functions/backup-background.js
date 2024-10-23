@@ -65,6 +65,7 @@ async function backup() {
 
     const buffer = Buffer.concat(chunks);
     const fileSize = Buffer.byteLength(buffer);
+    console.log("Filesize: " + fileSize);
     await fileClient.create(fileSize);
     console.log(`Create file ${fileName} successfully`);
 
@@ -110,7 +111,7 @@ async function deleteOldestZips() {
 
     // If there are more than 5 zip files, delete the oldest ones
     const filesToDelete =
-      zipFiles.length > 5 ? zipFiles.slice(0, zipFiles.length - 31) : [];
+      zipFiles.length > 31 ? zipFiles.slice(0, zipFiles.length - 31) : [];
 
     // Delete the extra files
     for (const file of filesToDelete) {
@@ -124,7 +125,7 @@ async function deleteOldestZips() {
         `${filesToDelete.length} old zip file(s) deleted successfully.`,
       );
     } else {
-      console.log("No zip files to delete. The 5 newest zip files are kept.");
+      console.log("No zip files to delete. The 31 newest zip files are kept.");
     }
   } catch (error) {
     console.error("Error deleting files:", error.message);
