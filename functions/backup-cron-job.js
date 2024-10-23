@@ -14,19 +14,11 @@ const handler = function (event, context, callback) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  })
-    .then((data) => {
-      console.log("Success:", data);
-      return {
-        statusCode: 200,
-      };
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      return {
-        statusCode: 500,
-      };
-    });
+  });
+
+  return {
+    statusCode: 200,
+  };
 };
 
 exports.handler = schedule("*/2 * * * *", handler);
