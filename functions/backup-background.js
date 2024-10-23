@@ -110,7 +110,7 @@ async function deleteOldestZips() {
 
     // If there are more than 5 zip files, delete the oldest ones
     const filesToDelete =
-      zipFiles.length > 5 ? zipFiles.slice(0, zipFiles.length - 5) : [];
+      zipFiles.length > 5 ? zipFiles.slice(0, zipFiles.length - 31) : [];
 
     // Delete the extra files
     for (const file of filesToDelete) {
