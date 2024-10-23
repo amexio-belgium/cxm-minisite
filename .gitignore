@@ -33,3 +33,4 @@ src/locales/*/
 /netlify/functions/
 /netlify/
 /public/robots.txt
+/public/_redirects
