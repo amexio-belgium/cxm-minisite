@@ -1,5 +1,8 @@
 ---
-import { defaultComponents } from "@components/cms-components/PortableText/helper";
+import {
+  blankComponent,
+  defaultComponents,
+} from "@components/cms-components/PortableText/helper";
 import { parseHref } from "@lib/helpers";
 import {
   BASE_PATH,
@@ -106,7 +109,7 @@ const removeTrailingSlash = (text: string) => {
                 class="!mb-0 text-xs capitalize outline-none md:py-2"
               >
                 {Array.isArray(pageTitle) ? (
-                  <PortableText value={pageTitle} />
+                  <PortableText value={pageTitle} components={blankComponent} />
                 ) : (
                   pageTitle
                 )}

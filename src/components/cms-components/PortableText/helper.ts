@@ -6,7 +6,10 @@ import PortableH5 from "@components/cms-components/PortableText/PortableH5.astro
 import PortableH6 from "@components/cms-components/PortableText/PortableH6.astro";
 import PortableImage from "@components/cms-components/PortableText/PortableImage.astro";
 import PortableYoutube from "@components/cms-components/PortableText/PortableYoutube.astro";
-import type { SomePortableTextComponents } from "astro-portabletext/types";
+import type {
+  PortableTextComponents,
+  SomePortableTextComponents,
+} from "astro-portabletext/types";
 import PortableMark from "@components/cms-components/PortableText/PortableMark.astro";
 import PortableListBullet from "@components/cms-components/PortableText/PortableListBullet.astro";
 import PortableListNumber from "@components/cms-components/PortableText/PortableListNumber.astro";
@@ -14,6 +17,45 @@ import PortableListBulletItem from "@components/cms-components/PortableText/Port
 import PortableListNumberItem from "@components/cms-components/PortableText/PortableListNumberItem.astro";
 import PortableMarkSimple from "@components/cms-components/PortableText/PortableMarkSimple.astro";
 import PortableSpan from "@components/cms-components/PortableText/PortableSpan.astro";
+import PortableBlank from "./PortableBlank.astro";
+
+export const blankComponent: PortableTextComponents = {
+  type: PortableBlank,
+  unknownType: PortableBlank,
+  unknownBlock: PortableBlank,
+  unknownListItem: PortableBlank,
+  unknownList: PortableBlank,
+  unknownMark: PortableBlank,
+  block: {
+    h1: PortableBlank,
+    h2: PortableBlank,
+    h3: PortableBlank,
+    h4: PortableBlank,
+    h5: PortableBlank,
+    h6: PortableBlank,
+    blockquote: PortableBlank,
+    normal: PortableBlank,
+  },
+  list: {
+    bullet: PortableBlank,
+    number: PortableBlank,
+    menu: PortableBlank,
+  },
+  listItem: {
+    bullet: PortableBlank,
+    number: PortableBlank,
+    menu: PortableBlank,
+  },
+  mark: {
+    code: PortableBlank,
+    em: PortableBlank,
+    link: PortableBlank,
+    "strike-through": PortableBlank,
+    strong: PortableBlank,
+    underline: PortableBlank,
+  },
+  hardBreak: PortableBlank,
+};
 
 export const defaultComponents: SomePortableTextComponents = {
   type: {
