@@ -23,7 +23,7 @@ const styles = {
 const id = "id_" + Math.random().toString(36).slice(2, 11);
 ---
 
-<div class:list={["relative isolate flex flex-col"]}>
+<div class="relative isolate flex flex-col" }>
   <div
     class="ml-[-150%] flex max-h-[400px] w-[400%] items-center justify-center overflow-hidden rounded-xl lg:ml-[unset] lg:max-h-[unset] lg:w-full"
   >
@@ -32,7 +32,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
         <SanityImg
           src={highlight.image}
           alt={highlight.image?.asset?.altTexts?.[locale] || ""}
-          class="transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
+          class="rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
           loading="lazy"
           width="1200"
           height="800"
