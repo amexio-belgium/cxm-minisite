@@ -2,7 +2,7 @@ import "dotenv/config";
 import { schedule } from "@netlify/functions";
 
 const handler = async function (event, context, callback) {
-  const url = `${process.env.ASTRO_SITE_URL}`; // Replace with the actual endpoint
+  const url = `${process.env.ASTRO_SITE_URL}.netlify/functions/backup-background`; // Replace with the actual endpoint
 
   const data = {
     password: process.env.BACKUP_FUNCTION_PASSWORD,
