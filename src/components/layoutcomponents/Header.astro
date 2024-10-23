@@ -115,7 +115,10 @@ const { navigation } = Astro.props;
     "main-menu-trigger",
   ) as HTMLButtonElement;
 
-  if (mainMenu && mainMenuTrigger) {
+  const isReduced =
+    window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
+  if (mainMenu && mainMenuTrigger && !isReduced) {
     const isSmallScreen = window.matchMedia("(max-width: 767px)");
     const mainNav = mainMenu.querySelector(".main-navigation");
     const mainNavLinks = mainNav!.querySelectorAll("a");
