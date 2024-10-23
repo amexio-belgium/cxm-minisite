@@ -1,2 +1,3 @@
+https://www.*/* https://:splat 301!
 / /en/ 301!
 /:lang/* /:lang/404/ 404
