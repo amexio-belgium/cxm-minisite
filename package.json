@@ -8,7 +8,7 @@
     "font-script": "node src/scripts/fontscript.js",
     "pages-script": "node src/scripts/pagesScript.js",
     "rss-script": "node src/scripts/generateRssFiles.js",
-    "prebuild": "npm run pages-script && npm run font-script && npm run generate-translations",
+    "prebuild": "node src/scripts/prebuild.js && npm run pages-script && npm run font-script && npm run generate-translations",
     "postbuild": "node src/scripts/postbuild.js && npm run rss-script && npm run fix-sitemap",
     "dev": "npm run font-script && astro dev",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && astro check && astro build",
