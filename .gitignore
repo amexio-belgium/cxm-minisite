@@ -30,3 +30,5 @@ src/locales/*/
 /src/pages/en/
 /src/pages/fr/
 /src/pages/nl/
+/netlify/functions/
+/netlify/
