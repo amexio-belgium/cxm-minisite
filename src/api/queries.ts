@@ -24,12 +24,16 @@ export const navigationQuery = groq`*[_type == "navigation" && _id == $navigatio
                                     }
                                     `;
 
-const portableTextResolveInternalLink = groq`markDefs[] {
-  ...,
-  defined(internalLink) => {
-    internalLink -> {...}
+const portableTextResolveInternalLink = groq`
+defined(markDefs[]) => {
+  markDefs[] {
+    ...,
+    defined(internalLink) => {
+      internalLink -> {...}
+    }
   }
-}`;
+}
+  `;
 
 const contentQuery = groq`
 content[] {
@@ -77,10 +81,12 @@ content[] {
       ...,
       intro[] {
         ...,
-        markDefs[] {
-          ...,
-          defined(internalLink) => {
-            internalLink -> {...}
+        defined(markDefs[]) => {
+          markDefs[] {
+            ...,
+            defined(internalLink) => {
+              internalLink -> {...}
+            }
           }
         }
       }
@@ -621,3 +627,413 @@ export const allInsightPagesQuery = groq`*[_type == "blogPost" && language == $l
 export const allCasePagesQuery = groq`*[_type == "referenceCase" && language == $language && defined(metadata.slug.current)]{
   "slug": metadata.slug.current
 }.slug`;
+
+`
+*[_type == "contentPage" && language == "en" && metadata.slug.current == "workcopy"][0]{
+  ...,
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    "slug": metadata.slug.current,
+    language
+  },
+  intro {
+    ...,
+    introCta {
+      ...,
+      link {
+        ...,
+        internalLink->{
+          metadata,
+          _type,
+          blank
+        }
+      }
+    },
+    intro[] {
+      ...,
+      defined(markDefs[]) => {
+  markDefs[] {
+    ...,
+    defined(internalLink) => {
+      internalLink -> {...}
+    }
+  }
+}
+    },
+  },
+  
+content[] {
+  ...,
+  _type == "technologiesShowcase" => {
+    technologies[]->{
+      ...,
+      technologyLink{
+        ...,
+        internalLink->{
+          metadata,
+          _type,
+          blank
+        }
+      },
+      logo{
+        ...,
+        default{
+          asset->{
+            ...,
+            altTexts{...},
+            descriptions{...},
+            titles{...}
+          }
+        },
+        dark{
+          asset->{
+            ...,
+            altTexts{...},
+            descriptions{...},
+            titles{...}
+          }
+        },
+        light{
+          asset->{
+            ...,
+            altTexts{...},
+            descriptions{...},
+            titles{...}
+          }
+        }
+      }
+    },
+    intro {
+      ...,
+      intro[] {
+        ...,
+        defined(markDefs[]) => {
+          markDefs[] {
+            ...,
+            defined(internalLink) => {
+              internalLink -> {...}
+            }
+          }
+        }
+      }
+    }
+  },
+  intro {
+    ...,
+    intro[] {
+      ...,
+      defined(markDefs[]) => {
+        markDefs[] {
+          ...,
+          defined(internalLink) => {
+            internalLink -> {...}
+          }
+        }
+      }
+    },
+    introCta {
+      ...,
+      link {
+        ...,
+        internalLink->{...}
+      }
+    }
+  },
+   _type == "blogsList" => {
+    ...,
+    blogsType == "specific" => {
+      blogPosts[]->{
+        ...,
+        featuredImage{
+          asset->{...}
+        },
+        postType[]->{
+          prefLabel,
+          definition
+        },
+        author->{
+          ...,
+          image{
+            ...,
+            asset->{
+              ...
+            }
+          }
+        },
+        topic[]->{
+          prefLabel,
+          definition
+        },
+      }
+    },
+  },
+  _type == "blogHighlight" => {
+    ...,
+    blogType == "latest" => {
+      "blogPost": *[ _type == "blogPost" && !(_id in path("drafts.**"))]| order(_createdAt desc)[0]{
+        ...,
+        featuredImage{
+          asset->{...}
+        },
+        postType[]->{
+          prefLabel,
+          definition
+        },
+        author->{
+          ...,
+          image{
+            ...,
+            asset->{
+              ...
+            }
+          }
+        },
+        topic[]->{
+          prefLabel,
+          definition
+        },
+      }
+    },
+    blogType == "specific" => {
+      blogPost->{
+        ...,
+        featuredImage{
+          asset->{...}
+        },
+        postType[]->{
+          prefLabel,
+          definition
+        },
+        author->{
+          ...,
+          image{
+            ...,
+            asset->{
+              ...
+            }
+          }
+        },
+        topic[]->{
+          prefLabel,
+          definition
+        },
+      }
+    },
+  },
+  defined(groups) => {
+    groups[] {
+      ...,
+      'services': services[]->{
+        ...,
+        image{
+          ...,
+          asset->{...}
+        },
+      }
+    }
+  },
+  _type == "testimonial" => {
+    person->{
+      ...,
+      image {
+        ...,
+        asset->{...}
+      }
+    }
+  },
+  _type == "cardGrid" => {
+    backgroundImage{
+      asset->{...}
+    },
+    intro {
+      ...,
+      introCta {
+        ...,
+        link {
+          ...,
+          internalLink->{...}
+        }
+      }
+    },
+    cards[] {
+      ...,
+      icon{
+        ...,
+        asset->{
+          ...,
+        }
+      }
+    }
+  },
+  _type == "callout" => {
+    ...,
+    content[]{
+      ...,
+      defined(asset) => {
+        asset->{...}
+      },
+      richText[] {
+        ...,
+        defined(markDefs[]) => {
+          markDefs[] {
+            ...,
+            defined(internalLink) => {
+              internalLink -> {...}
+            }
+          }
+        }
+      }
+    }
+  },
+  _type == "highlight" => {
+    ...,
+    defined(image) => {
+      image{
+        asset->{...}
+      }
+    },
+    defined(cta) => {
+      cta {
+        ...,
+        link {
+          ...,
+          internalLink->{
+            metadata,
+            _type,
+            blank
+          }
+        }
+      }
+    }
+  }, 
+  _type == "tabs" => {
+    ...,
+    defined(tabsOverview) => {
+      intro {
+        ...,
+        intro[] {
+          ...,
+          defined(markDefs[]) => {
+            markDefs[] {
+              ...,
+              defined(internalLink) => {
+                internalLink -> {...}
+              }
+            }
+          }
+        }
+      },
+      tabsOverview[]{
+        ...,
+        _type == "tab" => {
+          ...,
+          content[]{
+            ...,
+            _type == "image" => {
+              asset->{...}
+            },
+            _type == "content" => {
+              content[] {
+                ...,
+                defined(markDefs[]) => {
+                markDefs[] {
+                  ...,
+                  defined(internalLink) => {
+                    internalLink -> {...}
+                  }
+                }
+              }
+              }
+            }
+          }
+        }
+      }
+    }
+  }, 
+  _type == "longFormText" => {
+    ...,
+    defined(content) => {
+      content[]{
+        ...,
+        _type == "image" => {
+          asset->{...}
+        },
+        defined(markDefs[]) => {
+          markDefs[] {
+            ...,
+            defined(internalLink) => {
+              internalLink -> {...}
+            }
+          }
+        }
+      }
+    } 
+  },
+  _type == "workCardList" => {
+    ...,
+    defined(referenceCases) => {
+      referenceCases[]-> {
+        ...,
+        introImage {
+          ...,
+          asset->{...}
+        },
+        company -> {
+          ...,
+          logo{
+            ...,
+            default{
+              ...,
+              asset->{...}
+            },
+            dark{
+              ...,
+              asset->{...}
+            },
+            light{
+              ...,
+              asset->{...}
+            }
+          }
+        },
+        technologies[]->{...},
+        services[]->{...},
+        metadata{
+          ...,
+          image{
+            ...,
+            asset->{...}
+          }
+        },
+        collaborationModel-> {
+          ...,
+          collaborationTabs[]{
+            ...,
+            concept->{...}
+          }
+        }
+      } 
+    }
+  },
+  _type == "faq" => {
+    ...,
+    defined(questions) => {
+      questions[]->{
+        ...,
+        answer[] {
+          ...,
+          defined(markDefs[]) => {
+            markDefs[] {
+              ...,
+              defined(internalLink) => {
+                internalLink -> {...}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+  metadata
+}
+`;
