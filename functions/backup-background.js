@@ -60,6 +60,7 @@ async function backup() {
   readStream.on("data", async (chunk) => {
     chunks.push(chunk); // Collect chunks
     chunkCount += 1;
+    console.log("Chunk count:");
     console.log(chunkCount);
   });
 
