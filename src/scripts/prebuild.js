@@ -10,5 +10,5 @@ fs.writeFileSync(
 // Script to create a robots.txt with the current sitemap
 fs.writeFileSync(
   "./public/robots.txt",
-  `Sitemap: ${process.env.ASTRO_SITE_URL}sitemap-index.xml`,
+  `Sitemap: ${process.env.ASTRO_SITE_URL}sitemap-index.xml \nUser-agent: * \nAllow: /`,
 );
