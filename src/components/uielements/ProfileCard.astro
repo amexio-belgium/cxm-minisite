@@ -5,6 +5,7 @@ import type { i18nImage } from "@sanity/custom.sanity.types";
 import * as m from "@src/paraglide/messages";
 import { parseHref } from "@lib/helpers";
 import SanityImg from "@otterstack/sanity-img-astro";
+import { imageBuilder } from "@api/sanity";
 
 interface Props {
   profileImg?: i18nImage;
@@ -66,11 +67,13 @@ const currentPath = encodeURIComponent(Astro.url.href);
     <div class="flex items-center gap-4">
       {
         profileImg && profileImg.asset && (
-          <SanityImg
-            src={profileImg}
+          <img
+            src={imageBuilder
+              .image(profileImg)
+              .size(120, 120)
+              .fit("clip")
+              .url()}
             alt={name + " " + title}
-            width={50}
-            height={50}
             class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
             loading="eager"
           />

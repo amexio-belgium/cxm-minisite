@@ -47,10 +47,7 @@ const { service } = Astro.props;
         {service.image?.asset?._id && (
           <SanityImg
             src={service.image}
-            alt={service.image?.asset?.altTexts?.[locale] || ""}
-            width="1280"
-            height="720"
-            widths={[400, 600, 790]}
+            alt={service.image?.asset?.altTexts?.[locale]}
             sizes="(max-width: 790px) 100vw, 790px"
             class="left-0 top-0 w-full min-w-full max-w-[unset] shrink-0 transition-transform duration-300 ease-in-out motion-safe:group-hover/service:scale-110 md:absolute md:h-full md:min-h-full md:object-cover"
             loading="eager"

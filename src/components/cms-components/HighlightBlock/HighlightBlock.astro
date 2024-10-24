@@ -4,7 +4,7 @@ import { PortableText } from "astro-portabletext";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import Button from "@components/uielements/Button.astro";
 import { defaultComponents } from "../PortableText/helper";
-import SanityImg from "@otterstack/sanity-img-astro";
+import { imageBuilder } from "@api/sanity";
 
 interface Props {
   highlight: HighlightReferenced;
@@ -23,26 +23,28 @@ const styles = {
 const id = "id_" + Math.random().toString(36).slice(2, 11);
 ---
 
-<div class="relative isolate flex flex-col" }>
+<div class="relative isolate flex flex-col">
   <div
     class="ml-[-150%] flex max-h-[400px] w-[400%] items-center justify-center overflow-hidden rounded-xl lg:ml-[unset] lg:max-h-[unset] lg:w-full"
   >
     {
       highlight.image && (
-        <SanityImg
-          src={highlight.image}
+        <img
+          src={imageBuilder
+            .image(highlight.image)
+            .size(1200, 420)
+            .fit("clip")
+            .url()}
           alt={highlight.image?.asset?.altTexts?.[locale] || ""}
-          class="rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
+          class="max-h-[420px] max-w-[1200px] rounded-xl transition-transform duration-300 ease-in-out group-hover:scale-105 motion-reduce:group-hover:scale-100"
           loading="lazy"
-          width="1200"
-          height="800"
         />
       )
     }
   </div>
   <div
     class:list={[
-      "z-20 flex flex-col items-start text-black animate-delay-100 animate-once animate-ease-out",
+      "z-20 -mt-[200px] flex flex-col items-start text-black animate-delay-100 animate-once animate-ease-out sm:mt-0",
       styles[highlight.style!],
       id,
     ]}

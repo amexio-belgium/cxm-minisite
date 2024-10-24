@@ -1,17 +1,14 @@
 ---
 import { allCasePagesQuery, siteConfigQuery, workQuery } from "@api/queries";
-import { loadQuery } from "@api/sanity";
+import { imageBuilder, loadQuery } from "@api/sanity";
 import SanityComponentsRenderer from "@components/cms-components/SanityComponentsRenderer.astro";
-import Customers from "@components/uicomposition/Customers.astro";
 import HeroHeader from "@components/uicomposition/HeroHeader.astro";
 import ProjectMetadata from "@components/uicomposition/ProjectMetadata.astro";
 import CasePreview from "@components/uielements/CasePreview.astro";
 import TechnologyIcon from "@components/uielements/TechnologyIcon.astro";
 import Base from "@layouts/Base.astro";
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
-import SanityImg from "@otterstack/sanity-img-astro";
 import type { WorkWithReferences } from "@sanity/custom.sanity.types";
-
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import type {
   AllCasePagesQueryResult,
@@ -77,30 +74,7 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
     text={casePage?.intro?.intro}
     backgroundImage={casePage.introImage}
     client={casePage?.company?.name}
-  >
-    {
-      casePage?.customerReferences &&
-        casePage.customerReferences.length > 0 && (
-          <Customers headline={casePage.customerReferencesText}>
-            {casePage.customerReferences?.map((customer) => (
-              <>
-                {customer?.logo?.default?.asset && (
-                  <SanityImg
-                    src={customer?.logo?.default}
-                    alt={
-                      customer?.logo?.default?.asset?.altTexts?.[locale] || ""
-                    }
-                    class="h-10 w-auto"
-                    width="120"
-                    height="80"
-                  />
-                )}
-              </>
-            ))}
-          </Customers>
-        )
-    }
-  </HeroHeader>
+  />
   <ProjectMetadata
     duration={casePage?.duration}
     collaboration={casePage?.collaborationModel}
@@ -118,18 +92,19 @@ const { data: casePage } = await loadQuery<WorkWithReferences>({
           }
         >
           {technology?.logo?.default?.asset._id && (
-            <SanityImg
-              src={technology?.logo?.default as SanityImageSource}
+            <img
+              src={imageBuilder
+                .image(technology?.logo?.default as SanityImageSource)
+                .size(100, 100)
+                .fit("clip")
+                .url()}
               alt={
                 technology?.logo?.default?.asset?.altTexts?.[
                   casePage.language || "en"
                 ] || ""
               }
-              sizes="200px"
-              class="h-[unset] w-auto max-w-[unset] transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
+              class="h-10 w-auto transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
               loading="lazy"
-              width="120"
-              height="80"
             />
           )}
 
