@@ -31,8 +31,8 @@ const locale = Astro.currentLocale!;
     {
       duration && (
         <div class="flex after:text-secondary lg:after:ml-4">
-          <dt class="inline lg:block">{m.metadataDuration() + ":"}</dt>
-          <dd class="inline lg:block">{duration}</dd>
+          <dt class="inline lg:block">{`${m.metadataDuration()}: `}</dt>
+          <dd class="ml-1 inline lg:block">{duration}</dd>
         </div>
       )
     }
