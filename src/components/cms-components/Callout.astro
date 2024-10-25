@@ -29,12 +29,7 @@ if (callout?.content?.[0]._type == "textObject") {
     >
       {imageObject && imageObject.asset?._id && (
         <img
-          src={imageBuilder
-            .image(imageObject)
-            .width(790)
-            .height(600)
-            .fit("clip")
-            .url()}
+          src={imageBuilder.image(imageObject).width(790).url()}
           alt={imageObject.asset.altTexts?.[locale] || ""}
           class="h-auto w-full rounded-xl"
         />
