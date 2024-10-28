@@ -17,7 +17,8 @@ import PortableListBulletItem from "@components/cms-components/PortableText/Port
 import PortableListNumberItem from "@components/cms-components/PortableText/PortableListNumberItem.astro";
 import PortableMarkSimple from "@components/cms-components/PortableText/PortableMarkSimple.astro";
 import PortableSpan from "@components/cms-components/PortableText/PortableSpan.astro";
-import PortableBlank from "./PortableBlank.astro";
+import PortableBlank from "@components/cms-components/PortableText/PortableBlank.astro";
+import PortableCode from "@components/cms-components/PortableText/PortableCode.astro";
 
 export const blankComponent: PortableTextComponents = {
   type: PortableBlank,
@@ -61,6 +62,7 @@ export const defaultComponents: SomePortableTextComponents = {
   type: {
     image: PortableImage,
     youtube: PortableYoutube,
+    codeEmbed: PortableCode,
   },
   list: {
     bullet: PortableListBullet,

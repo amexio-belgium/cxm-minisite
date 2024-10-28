@@ -1,5 +1,6 @@
 ---
 import type { CodeEmbed } from "@sanity/sanity.types";
+import { Code } from "astro:components";
 
 interface Props {
   code: CodeEmbed;
@@ -8,4 +9,12 @@ interface Props {
 const { code } = Astro.props;
 ---
 
-<Fragment set:html={code?.Code?.code} />
+{
+  code?.Code?.code && (
+    <Code
+      class="rounded-lg py-4"
+      theme={code?.style === "dark" ? "slack-dark" : "catppuccin-latte"}
+      code={code?.Code?.code}
+    />
+  )
+}

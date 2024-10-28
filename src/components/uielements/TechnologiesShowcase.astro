@@ -55,7 +55,13 @@ const locale = Astro.currentLocale!;
               {technology?.logo?.default && (
                 <img
                   class="max-h-16 max-w-40 opacity-80 sm:max-h-20"
-                  alt={technology.logo.default.asset.altTexts?.[locale]}
+                  alt={
+                    technologies.style === "popping"
+                      ? technology?.logo?.dark?.asset.altTexts?.[locale] ||
+                        technology?.logo?.default?.asset.altTexts?.[locale]
+                      : technology?.logo?.light?.asset.altTexts?.[locale] ||
+                        technology?.logo?.default?.asset.altTexts?.[locale]
+                  }
                   src={imageBuilder
                     .image(
                       technologies.style === "popping"

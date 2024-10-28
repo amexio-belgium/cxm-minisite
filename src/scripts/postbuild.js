@@ -9,27 +9,6 @@ const visualEditingEnabled =
   process.env.SANITY_VISUAL_EDITING_ENABLED === "true" ||
   process.env.SANITY_VISUAL_EDITING_ENABLED === true;
 
-const backupsEnabled =
-  process.env.ENABLE_BACKUPS === "true" || process.env.ENABLE_BACKUPS === true;
-
-if (backupsEnabled) {
-  if (!fs.existsSync("./netlify")) {
-    fs.mkdirSync("./netlify");
-  }
-  if (!fs.existsSync("./netlify/functions")) {
-    fs.mkdirSync("./netlify/functions");
-  }
-  fs.copyFileSync(
-    "./functions/backup-background.js",
-    "./netlify/functions/backup-background.js",
-  );
-
-  fs.copyFileSync(
-    "./functions/backup-cron-job.js",
-    "./netlify/functions/backup-cron-job.js",
-  );
-}
-
 if (basePath && basePath !== "") {
   // Source and destination directories
 
