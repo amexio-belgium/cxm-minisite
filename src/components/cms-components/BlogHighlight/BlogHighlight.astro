@@ -60,7 +60,7 @@ const blogPost = Astro.props.blogPost.blogPost;
             />
             {blogPost.topic && (
               <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
-                {blogPost.topic.map((topic) => topic.prefLabel)}
+                {blogPost.topic.map((topic) => stegaClean(topic.prefLabel))}
               </span>
             )}
           </div>

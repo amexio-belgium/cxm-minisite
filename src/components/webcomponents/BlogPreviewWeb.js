@@ -87,7 +87,7 @@ export class BlogPreviewWeb extends HTMLElement {
               .map(
                 (topic) => `
         <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
-          ${topic.prefLabel}
+          ${stegaClean(topic.prefLabel)}
         </span>
         `,
               )

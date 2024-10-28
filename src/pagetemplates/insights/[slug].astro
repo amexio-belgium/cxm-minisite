@@ -18,6 +18,7 @@ import type {
 } from "@sanity/sanity.types";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import type { Image } from "sanity";
+import { stegaClean } from "@sanity/client/stega";
 
 const locale = Astro.currentLocale!;
 
@@ -84,14 +85,14 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
       {
         blogPost.topic && (
           <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
-            {blogPost.topic.map((topic) => topic.prefLabel)}
+            {blogPost.topic.map((topic) => stegaClean(topic.prefLabel))}
           </p>
         )
       }
       {
         blogPost.postType && (
           <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
-            {blogPost.postType.map((type) => type.prefLabel)}
+            {blogPost.postType.map((type) => stegaClean(type.prefLabel))}
           </p>
         )
       }

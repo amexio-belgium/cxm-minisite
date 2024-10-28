@@ -42,7 +42,7 @@ const locale = Astro.currentLocale!;
           <dt class="inline lg:block">{m.metadataCollaboration() + ":"}</dt>
           <dd class="inline lg:block">
             {collaboration.collaborationTabs
-              .map((tab) => tab?.concept?.prefLabel)
+              .map((tab) => stegaClean(tab?.concept?.prefLabel))
               .join(", ")}
           </dd>
         </div>

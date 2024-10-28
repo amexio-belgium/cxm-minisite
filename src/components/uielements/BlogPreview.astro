@@ -40,9 +40,11 @@ const { blogPost } = Astro.props;
             date={new Date(blogPost.publicationDate || blogPost._createdAt)}
           />
 
-          {blogPost.topic && (
+          {blogPost?.topic && (
             <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
-              {blogPost.topic.map((topic) => topic.prefLabel).join(", ")}
+              {blogPost?.topic
+                ?.map((topic) => stegaClean(topic.prefLabel))
+                .join(", ")}
             </span>
           )}
         </div>

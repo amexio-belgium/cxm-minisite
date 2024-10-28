@@ -106,7 +106,7 @@ const { caseData, small } = Astro.props;
           caseData?.collaborationModel && (
             <li class="ml-5 list-outside">
               {`${m.metadataCollaboration()}: ${caseData.collaborationModel?.collaborationTabs
-                ?.map((tab) => tab?.concept?.prefLabel)
+                ?.map((tab) => stegaClean(tab?.concept?.prefLabel))
                 .join(", ")}`}
             </li>
           )
