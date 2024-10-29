@@ -117,7 +117,7 @@ const { navigation } = Astro.props;
   const isReduced =
     window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
-  if (mainMenu && mainMenuTrigger && !isReduced) {
+  if (mainMenu && mainMenuTrigger) {
     const isSmallScreen = window.matchMedia("(max-width: 767px)");
     const mainNav = mainMenu.querySelector(".main-navigation");
     const mainNavLinks = mainNav!.querySelectorAll("a");
@@ -165,10 +165,32 @@ const { navigation } = Astro.props;
     });
 
     const handleDotPosition = (element: Element, wrapper: Element) => {
+      const positionX =
+        getLeft(element) + getCenterX(element) - getLeft(wrapper);
+      const positionY =
+        getTop(element) +
+        getCenterY(element) -
+        getTop(wrapper) -
+        getCenterY(dotIndicator);
+
+      // Apply transform for dot position based on screen size
       if (isSmallScreen.matches) {
-        dotIndicator!.style.transform = `translateY(${getTop(element) + getCenterY(element) - getTop(wrapper) - getCenterY(dotIndicator)}px)`;
+        dotIndicator.style.transform = `translateY(${positionY}px)`;
       } else {
-        dotIndicator!.style.transform = `translateX(${getLeft(element) + getCenterX(element) - getLeft(wrapper)}px)`;
+        dotIndicator.style.transform = `translateX(${positionX}px)`;
+      }
+
+      // Conditionally apply Tailwind classes based on reduced motion setting
+      if (isReduced) {
+        dotIndicator.classList.add("transition-none"); // No animation
+        dotIndicator.classList.remove("transition-transform");
+      } else {
+        dotIndicator.classList.remove("transition-none");
+        dotIndicator.classList.add(
+          "transition-transform",
+          "duration-300",
+          "ease-in-out",
+        );
       }
 
       if (!activeMainNavLink) {
