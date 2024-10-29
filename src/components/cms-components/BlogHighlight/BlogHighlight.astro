@@ -5,7 +5,6 @@ import type { BlogHighlightReferenced } from "@sanity/custom.sanity.types";
 import { PortableText } from "astro-portabletext";
 import { stegaClean } from "@sanity/client/stega";
 import { defaultComponents } from "../PortableText/helper";
-import SanityImg from "@otterstack/sanity-img-astro";
 import { imageBuilder } from "@api/sanity";
 
 interface Props {
@@ -21,11 +20,9 @@ const blogPost = Astro.props.blogPost.blogPost;
     <article class="group relative flex w-full flex-col justify-stretch gap-8 overflow-hidden rounded-2xl border border-blue bg-gradient-to-r from-blue-600/70 to-blue-800/70 shadow-sm shadow-blue-200 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-yellow-500 lg:flex-row">
       <div class="flex h-[300px] items-center justify-center overflow-hidden rounded-t-xl shadow-xl shadow-primary/20 lg:aspect-square lg:h-[unset] lg:shrink-0 lg:rounded-l-xl lg:rounded-tr-none">
         {blogPost.featuredImage?.asset && (
-          <SanityImg
-            src={blogPost.featuredImage}
+          <img
+            src={imageBuilder.image(blogPost.featuredImage).width(1000).url()}
             alt={blogPost.featuredImage?.asset?.altTexts?.[locale] || ""}
-            widths={[400, 600, 790]}
-            sizes="(min-width:768px) 400px, (min-width:640px) 790px, 600px"
             class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105 md:w-[400px]"
             loading="lazy"
           />

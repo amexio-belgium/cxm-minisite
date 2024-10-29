@@ -2,9 +2,9 @@
 import Button from "@components/uielements/Button.astro";
 import { PortableText } from "astro-portabletext";
 import type { ServiceWithReferences } from "@sanity/custom.sanity.types";
-import SanityImg from "@otterstack/sanity-img-astro";
 import * as m from "@src/paraglide/messages";
 import { defaultComponents } from "@components/cms-components/PortableText/helper";
+import { imageBuilder } from "@api/sanity";
 
 interface Props {
   service: ServiceWithReferences;
@@ -45,8 +45,12 @@ const { service } = Astro.props;
       </div>
       <div class="mask-project md:-right-1/12 relative bottom-0 right-0 inline-flex max-h-[200px] w-full flex-col items-center justify-center overflow-hidden bg-blue-100 object-cover md:absolute md:h-full md:max-h-[unset] md:w-1/2">
         {service.image?.asset?._id && (
-          <SanityImg
-            src={service.image}
+          <img
+            src={imageBuilder
+              .image(service.image)
+              .size(1580, 940)
+              .fit("clip")
+              .url()}
             alt={service.image?.asset?.altTexts?.[locale]}
             sizes="(max-width: 790px) 100vw, 790px"
             class="left-0 top-0 w-full min-w-full max-w-[unset] shrink-0 transition-transform duration-300 ease-in-out motion-safe:group-hover/service:scale-110 md:absolute md:h-full md:min-h-full md:object-cover"

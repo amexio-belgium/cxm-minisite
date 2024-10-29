@@ -2,12 +2,12 @@
 import LogoSlant from "@components/graphicelements/LogoSlant.astro";
 import Breadcrumbs from "@components/uielements/Breadcrumbs.astro";
 import { PortableText } from "astro-portabletext";
-import SanityImg from "@otterstack/sanity-img-astro";
 import {
   defaultComponents,
   headerComponents,
 } from "../cms-components/PortableText/helper";
 import type { i18nImage } from "@sanity/custom.sanity.types";
+import { imageBuilder } from "@api/sanity";
 
 interface Props {
   headline?: string | any[];
@@ -70,13 +70,13 @@ const {
   </div>
   {
     backgroundImage ? (
-      <SanityImg
-        src={backgroundImage}
+      <img
+        src={imageBuilder
+          .image(backgroundImage)
+          .size(1200, 800)
+          .fit("clip")
+          .url()}
         alt={backgroundImageAltText || ""}
-        width="1200"
-        height="800"
-        widths={[400, 800, 1200]}
-        sizes="(max-width: 1200px) 100vw, 1200px"
         class="max-w-100vw absolute -right-1/4 top-0 -z-10 h-full w-full object-cover"
         loading="eager"
       />

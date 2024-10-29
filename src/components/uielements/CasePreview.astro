@@ -1,6 +1,5 @@
 ---
 import Button from "@components/uielements/Button.astro";
-import SanityImg from "@otterstack/sanity-img-astro";
 import { PortableText } from "astro-portabletext";
 import type { ReferenceCaseReferenced } from "@sanity/custom.sanity.types";
 import * as m from "@src/paraglide/messages";
@@ -36,13 +35,13 @@ const { caseData, small } = Astro.props;
         ]}
       >
         {caseData?.introImage && (
-          <SanityImg
-            src={caseData?.introImage}
+          <img
+            src={imageBuilder
+              .image(caseData?.introImage)
+              .size(1580, 940)
+              .fit("clip")
+              .url()}
             alt={caseData?.introImage?.asset?.altTexts?.[locale] || ""}
-            widths={[800, 1200, 1580]}
-            height="470"
-            width="790"
-            sizes="(max-width: 790px) 100vw, 790px"
             class:list={[
               "h-[unset] min-h-full w-auto min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105",
               small ? "shrink-0 object-scale-down" : "",

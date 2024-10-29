@@ -30,7 +30,6 @@
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
     "@inlang/paraglide-astro": "^0.2.2",
-    "@otterstack/sanity-img-astro": "^0.2.6",
     "@portabletext/react": "^3.1.0",
     "@portabletext/to-html": "^2.0.13",
     "@sanity/astro": "^3.1.6",
@@ -63,10 +62,7 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@azure/storage-file-share": "^12.25.0",
     "@inlang/paraglide-js": "1.11.3",
-    "@microsoft/microsoft-graph-client": "^3.0.7",
-    "@netlify/functions": "^2.8.2",
     "@sanity/export": "^3.41.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/fs-extra": "^11.0.4",

@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import sanityImg from "@otterstack/sanity-img-astro/integration";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import { loadEnv } from "vite";
@@ -57,11 +56,6 @@ export default defineConfig({
       },
     }),
     react(),
-    sanityImg({
-      options: {
-        auto: "format",
-      },
-    }),
   ],
   vite: {
     build: {
