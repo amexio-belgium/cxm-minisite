@@ -110,3 +110,28 @@ export const headerComponents: SomePortableTextComponents = {
 export const simpleComponents: SomePortableTextComponents = {
   mark: PortableMark,
 };
+
+export const tabComponents: SomePortableTextComponents = {
+  type: {
+    image: PortableImage,
+    youtube: PortableYoutube,
+    codeEmbed: PortableCode,
+  },
+  list: {
+    bullet: PortableListBullet,
+    number: PortableListNumber,
+  },
+  listItem: {
+    bullet: PortableListBulletItem,
+    number: PortableListNumberItem,
+  },
+  block: {
+    normal: PortableP,
+    h2: PortableH2,
+    h3: PortableH3,
+    h4: PortableH4,
+    h5: PortableH5,
+    h6: PortableH6,
+  },
+  mark: PortableMark,
+};
