@@ -76,7 +76,7 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
     headline={blogPost.intro?.title}
     backgroundImage={blogPost?.featuredImage}
   >
-    <div class="mt-8 flex flex-row items-center gap-4 text-white">
+    <div class="mt-8 flex flex-row flex-wrap items-center gap-4 text-white">
       <FormattedDate
         class="font-serif text-base"
         date={new Date(blogPost.publicationDate || blogPost._createdAt)}
@@ -84,16 +84,20 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
       />
       {
         blogPost.topic && (
-          <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
-            {blogPost.topic.map((topic) => stegaClean(topic.prefLabel))}
-          </p>
+          <div class="flex flex-row before:mr-4 before:font-sans before:text-secondary before:content-['/']">
+            <p class="break-words font-serif text-base uppercase">
+              {blogPost.topic.map((topic) => stegaClean(topic.prefLabel))}
+            </p>
+          </div>
         )
       }
       {
         blogPost.postType && (
-          <p class="font-serif text-base uppercase before:mr-4 before:font-sans before:text-secondary before:content-['/']">
-            {blogPost.postType.map((type) => stegaClean(type.prefLabel))}
-          </p>
+          <div class="flex flex-row before:mr-4 before:font-sans before:text-secondary before:content-['/']">
+            <p class="break-words font-serif text-base uppercase">
+              {blogPost.postType.map((type) => stegaClean(type.prefLabel))}
+            </p>
+          </div>
         )
       }
     </div>
