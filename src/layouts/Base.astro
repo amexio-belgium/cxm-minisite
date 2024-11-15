@@ -15,7 +15,7 @@ import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import { VISUAL_EDITING_ENABLED } from "@src/consts";
 import type { PageTranslations } from "@sanity/custom.sanity.types";
 import type { Image } from "sanity";
-import VisualEditor from "src/components/cms-components/VisualEditor.astro";
+import { VisualEditing } from "@sanity/astro/visual-editing";
 
 interface Props {
   title: string;
@@ -92,7 +92,7 @@ const socials: Social[] | undefined = siteConfig.socials?.map((social) => {
     <Tracking />
   </head>
   <body class="overflow-x-clip bg-blue-800">
-    {VISUAL_EDITING_ENABLED && <VisualEditor enabled={true} zIndex={1000} />}
+    {VISUAL_EDITING_ENABLED && <VisualEditing enabled={true} zIndex={1000} />}
     <Header navigation={header} />
     <main id="main-content" class="mx-auto max-w-[1304px] px-6 sm:px-8">
       <slot />
