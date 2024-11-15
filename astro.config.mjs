@@ -24,6 +24,9 @@ const basePath =
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    port: 3000,
+  },
   site: ASTRO_SITE_URL,
   output: SANITY_VISUAL_EDITING_ENABLED === "true" ? "server" : "static",
   adapter: netlify(),
@@ -64,6 +67,11 @@ export default defineConfig({
     },
     optimizeDeps: {
       exclude: ["fsevents"],
+    },
+    vite: {
+      server: {
+        hmr: { path: "/vite-hmr/" },
+      },
     },
   },
 });
