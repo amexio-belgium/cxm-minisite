@@ -58,6 +58,11 @@ export default defineConfig({
     react(),
   ],
   vite: {
+    resolve: {
+      alias: {
+        lodash : 'lodash-es'
+      }
+    },
     build: {
       outDir: `./dist${PUBLIC_ASTRO_BASE_PATH}`,
       emptyOutDir: true, // also necessary
