@@ -36,8 +36,7 @@
     "@sanity/cli": "^3.64.1",
     "@sanity/client": "^6.22.2",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/insert-menu": "^1.0.11",
-    "@sanity/visual-editing": "^2.7.1",
+    "@sanity/visual-editing": "^2.7.2",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
@@ -61,7 +60,6 @@
     "tailwindcss-animated": "^1.1.2",
     "typescript": "^5.6.3",
     "uuid": "^10.0.0",
-    "vitest": "^2.1.5",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
