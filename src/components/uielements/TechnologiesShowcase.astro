@@ -4,6 +4,7 @@ import { defaultComponents } from "@components/cms-components/PortableText/helpe
 import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import type { TechnologiesShowcaseReferenced } from "@sanity/custom.sanity.types";
 import { PortableText } from "astro-portabletext";
+import { stegaClean } from "@sanity/client/stega";
 
 interface Props {
   technologies: TechnologiesShowcaseReferenced;
@@ -22,7 +23,7 @@ const locale = Astro.currentLocale!;
   {
     technologies.intro?.title && (
       <div
-        class={`text-balance font-serif text-3xl lg:w-9/12 ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+        class={`text-balance font-serif text-3xl lg:w-9/12 ${stegaClean(technologies.style) === "popping" ? "text-black" : "text-white"}`}
       >
         <PortableText
           components={defaultComponents}
@@ -34,7 +35,7 @@ const locale = Astro.currentLocale!;
   {
     technologies.intro?.intro && (
       <div
-        class={`text-base font-light lg:w-9/12 ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+        class={`text-base font-light lg:w-9/12 ${stegaClean(technologies.style) === "popping" ? "text-black" : "text-white"}`}
       >
         <PortableText
           components={defaultComponents}
@@ -56,7 +57,7 @@ const locale = Astro.currentLocale!;
                 <img
                   class="max-h-16 max-w-40 opacity-80 sm:max-h-20"
                   alt={
-                    technologies.style === "popping"
+                    stegaClean(technologies.style) === "popping"
                       ? technology?.logo?.dark?.asset.altTexts?.[locale] ||
                         technology?.logo?.default?.asset.altTexts?.[locale]
                       : technology?.logo?.light?.asset.altTexts?.[locale] ||
@@ -64,7 +65,7 @@ const locale = Astro.currentLocale!;
                   }
                   src={imageBuilder
                     .image(
-                      technologies.style === "popping"
+                      stegaClean(technologies.style) === "popping"
                         ? technology?.logo?.dark || technology?.logo?.default
                         : technology?.logo?.light || technology?.logo?.default,
                     )
@@ -78,7 +79,7 @@ const locale = Astro.currentLocale!;
 
             {technologies?.showName && technology?.name && (
               <p
-                class={`mt-3 max-w-40 text-wrap font-light ${technologies.style === "popping" ? "text-black" : "text-white"}`}
+                class={`mt-3 max-w-40 text-wrap font-light ${stegaClean(technologies.style) === "popping" ? "text-black" : "text-white"}`}
               >
                 {technology?.name}
               </p>

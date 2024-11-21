@@ -1,5 +1,6 @@
 ---
 import { Code } from "astro:components";
+import { stegaClean } from "@sanity/client/stega";
 
 export type Props = any;
 
@@ -7,7 +8,9 @@ const props = Astro.props;
 ---
 
 <Code
-  theme={props.node?.style === "dark" ? "slack-dark" : "catppuccin-latte"}
+  theme={stegaClean(props.node?.style) === "dark"
+    ? "slack-dark"
+    : "catppuccin-latte"}
   class="rounded-lg py-4"
   code={props.node?.Code.code}
 />

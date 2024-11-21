@@ -5,6 +5,7 @@ import { getHrefFromLinkObject } from "@lib/sanityHelpers";
 import Button from "@components/uielements/Button.astro";
 import { defaultComponents } from "../PortableText/helper";
 import { imageBuilder } from "@api/sanity";
+import { stegaClean } from "@sanity/client/stega";
 
 interface Props {
   highlight: HighlightReferenced;
@@ -45,7 +46,7 @@ const id = "id_" + Math.random().toString(36).slice(2, 11);
   <div
     class:list={[
       "z-20 -mt-[200px] flex flex-col items-start text-black animate-delay-100 animate-once animate-ease-out sm:mt-0",
-      styles[highlight.style!],
+      styles[stegaClean(highlight.style!)],
       id,
     ]}
   >

@@ -4,6 +4,7 @@ import SmallTile from "@components/uielements/SmallTile.astro";
 import type { i18nImage, i18nImageAsset } from "@sanity/custom.sanity.types";
 import type { CardGridReferenced } from "../../sanity/custom.sanity.types";
 import { imageBuilder } from "@api/sanity";
+import { stegaClean } from "@sanity/client/stega";
 
 interface Props {
   cardGrid: CardGridReferenced;
@@ -30,7 +31,7 @@ const stylesSmallTile = {
 <TilesContainer
   headline={cardGrid?.intro?.title}
   description={cardGrid?.intro?.intro}
-  class={stylesContainer[cardGrid.style!]}
+  class={stylesContainer[stegaClean(cardGrid.style!)]}
   cta={cardGrid?.intro?.introCta}
 >
   {
@@ -40,7 +41,7 @@ const stylesSmallTile = {
         <SmallTile
           headline={card.title || ""}
           description={card.content}
-          class={stylesSmallTile[cardGrid.style!]}
+          class={stylesSmallTile[stegaClean(cardGrid.style!)]}
         >
           {card.icon?.asset && card.icon?.asset?.extension == "svg" && (
             <div class="service__item h-20 w-20 overflow-visible">

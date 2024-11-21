@@ -2,6 +2,7 @@
 import type { WorkCardListReferenced } from "@sanity/custom.sanity.types";
 import CasePreview from "../uielements/CasePreview.astro";
 import ProjectOverview from "../uicomposition/ProjectOverview.astro";
+import { stegaClean } from "@sanity/client/stega";
 
 interface Props {
   workCardList: WorkCardListReferenced;
@@ -12,7 +13,7 @@ const { workCardList } = Astro.props;
 
 <>
   {
-    workCardList?.style === "slanted" ? (
+    stegaClean(workCardList?.style) === "slanted" ? (
       <ProjectOverview workCardList={workCardList} />
     ) : (
       <div class="relative flex w-full flex-col gap-8 bg-light-blue-50 motion-safe:animate-fade-up motion-safe:animate-delay-100">
