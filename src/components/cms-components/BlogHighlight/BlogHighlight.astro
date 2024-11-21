@@ -34,17 +34,17 @@ const blogPost = Astro.props.blogPost.blogPost;
             <Link
               class="no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0 focus-visible:ring-0"
               href={`/${locale}/insights/${blogPost.metadata?.slug?.current}/`}
-              textLength={stegaClean(blogPost.intro?.title)?.length}
+              textLength={stegaClean(blogPost?.intro?.title)?.length}
               hoverColor="yellow"
             >
-              {blogPost.intro?.title}
+              {blogPost?.intro?.title}
             </Link>
           </h2>
-          {blogPost.intro?.intro && (
+          {blogPost?.intro?.intro && (
             <div class="text-sm font-light">
               <PortableText
                 components={defaultComponents}
-                value={blogPost.intro?.intro}
+                value={blogPost?.intro?.intro}
               />
             </div>
           )}
@@ -55,9 +55,9 @@ const blogPost = Astro.props.blogPost.blogPost;
               class="text-xs"
               date={new Date(blogPost.publicationDate || blogPost._createdAt)}
             />
-            {blogPost.topic && (
+            {blogPost?.topic && (
               <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
-                {blogPost.topic.map((topic) => stegaClean(topic.prefLabel))}
+                {blogPost.topic.map((topic) => stegaClean(topic?.prefLabel))}
               </span>
             )}
           </div>

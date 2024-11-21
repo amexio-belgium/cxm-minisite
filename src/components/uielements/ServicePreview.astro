@@ -23,7 +23,7 @@ const { service } = Astro.props;
           <h3 class="mb-2 font-serif text-lg [&>mark]:text-black">
             {service?.challenge}
           </h3>
-          {service.intro?.intro && (
+          {service?.intro?.intro && (
             <div class="text-sm font-light [&>mark]:text-black">
               <PortableText
                 value={service?.intro?.intro}

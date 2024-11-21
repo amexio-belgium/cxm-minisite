@@ -14,7 +14,7 @@ const { longFormText } = Astro.props;
 
 <LayoutSection backgroundColor={longFormText.standOut ? "light" : "dark"}>
   {
-    longFormText.intro?.title && (
+    longFormText?.intro?.title && (
       <ContentHeadline headlineTag="h2">
         {longFormText.intro?.title}
       </ContentHeadline>

@@ -73,7 +73,7 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
   customCanonicals={blogPost?.metadata?.canonicals}
 >
   <HeroHeader
-    headline={blogPost.intro?.title}
+    headline={blogPost?.intro?.title}
     backgroundImage={blogPost?.featuredImage}
   >
     <div class="mt-8 flex flex-row flex-wrap items-center gap-4 text-white">
@@ -83,19 +83,19 @@ const { data: blogPost } = await loadQuery<BlogPostWithReferences>({
         transition:name={blogPost.metadata?.slug?.current + "_date"}
       />
       {
-        blogPost.topic && (
+        blogPost?.topic && (
           <div class="flex flex-row before:mr-4 before:font-sans before:text-secondary before:content-['/']">
             <p class="break-words font-serif text-base uppercase">
-              {blogPost.topic.map((topic) => stegaClean(topic.prefLabel))}
+              {blogPost?.topic.map((topic) => stegaClean(topic?.prefLabel))}
             </p>
           </div>
         )
       }
       {
-        blogPost.postType && (
+        blogPost?.postType && (
           <div class="flex flex-row before:mr-4 before:font-sans before:text-secondary before:content-['/']">
             <p class="break-words font-serif text-base uppercase">
-              {blogPost.postType.map((type) => stegaClean(type.prefLabel))}
+              {blogPost?.postType.map((type) => stegaClean(type?.prefLabel))}
             </p>
           </div>
         )

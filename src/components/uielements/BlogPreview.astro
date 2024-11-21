@@ -43,7 +43,7 @@ const { blogPost } = Astro.props;
           {blogPost?.topic && (
             <span class="c-post-tag text-xs uppercase before:mr-2 before:font-sans before:text-secondary">
               {blogPost?.topic
-                ?.map((topic) => stegaClean(topic.prefLabel))
+                ?.map((topic) => stegaClean(topic?.prefLabel))
                 .join(", ")}
             </span>
           )}
@@ -51,20 +51,20 @@ const { blogPost } = Astro.props;
         <h2 class="mb-2 font-serif text-lg font-bold [&>mark]:text-black">
           <Link
             onWhite
-            textLength={stegaClean(blogPost.intro?.title)?.length}
+            textLength={stegaClean(blogPost?.intro?.title)?.length}
             class="text-black no-underline outline-none content-none before:absolute before:inset-x-0 before:inset-y-0"
             href={parseHref(
-              `/${locale}/insights/${blogPost.metadata?.slug?.current}/`,
+              `/${locale}/insights/${blogPost?.metadata?.slug?.current}/`,
             )}
           >
-            {blogPost.intro?.title}
+            {blogPost?.intro?.title}
           </Link>
         </h2>
         <div class="text-sm font-light">
-          {blogPost.intro?.intro && (
+          {blogPost?.intro?.intro && (
             <PortableText
               components={defaultComponents}
-              value={blogPost.intro?.intro}
+              value={blogPost?.intro?.intro}
             />
           )}
         </div>
