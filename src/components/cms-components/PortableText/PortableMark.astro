@@ -18,7 +18,7 @@ function getAllTexts(node: any) {
 
   // If the node has children, recurse through them
   if (node.children && node.children.length > 0) {
-    node.children.forEach((child) => {
+    node.children.forEach((child: any) => {
       texts = texts.concat(getAllTexts(child)); // Recursively get texts from children
     });
   }

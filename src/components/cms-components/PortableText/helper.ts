@@ -27,6 +27,7 @@ export const blankComponent: PortableTextComponents = {
   unknownListItem: PortableBlank,
   unknownList: PortableBlank,
   unknownMark: PortableBlank,
+  text: PortableBlank,
   block: {
     h1: PortableBlank,
     h2: PortableBlank,
