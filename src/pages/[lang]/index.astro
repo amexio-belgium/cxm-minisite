@@ -23,7 +23,7 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 const t = useTranslations(lang, 'home');
 ---
-<Base title={t('home.title')} description={t('home.seoDescription')}>
+<Base title="test" description={t('home.seoDescription')}>
   <HeroHeader 
       headline={t('hero.headline')}
       text={t('hero.text')}
