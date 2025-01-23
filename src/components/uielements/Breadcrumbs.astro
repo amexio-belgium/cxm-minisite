@@ -50,7 +50,7 @@ paths.forEach((text, i) => {
       )
     ) {
       translatedText =
-        m["nav" + capitalizeFirstLetter(text.replace(/[-_]/g, " "))];
+        m["nav" + capitalizeFirstLetter(text.replace(/[-_]/g, " "))]();
     }
 
     parts.push({
