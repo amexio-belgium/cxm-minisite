@@ -6,10 +6,7 @@ import PortableH5 from "@components/cms-components/PortableText/PortableH5.astro
 import PortableH6 from "@components/cms-components/PortableText/PortableH6.astro";
 import PortableImage from "@components/cms-components/PortableText/PortableImage.astro";
 import PortableYoutube from "@components/cms-components/PortableText/PortableYoutube.astro";
-import type {
-  PortableTextComponents,
-  SomePortableTextComponents,
-} from "astro-portabletext/types";
+import type { SomePortableTextComponents } from "astro-portabletext/types";
 import PortableMark from "@components/cms-components/PortableText/PortableMark.astro";
 import PortableListBullet from "@components/cms-components/PortableText/PortableListBullet.astro";
 import PortableListNumber from "@components/cms-components/PortableText/PortableListNumber.astro";
@@ -20,7 +17,7 @@ import PortableSpan from "@components/cms-components/PortableText/PortableSpan.a
 import PortableBlank from "@components/cms-components/PortableText/PortableBlank.astro";
 import PortableCode from "@components/cms-components/PortableText/PortableCode.astro";
 
-export const blankComponent: PortableTextComponents = {
+export const blankComponent: SomePortableTextComponents = {
   type: PortableBlank,
   unknownType: PortableBlank,
   unknownBlock: PortableBlank,
