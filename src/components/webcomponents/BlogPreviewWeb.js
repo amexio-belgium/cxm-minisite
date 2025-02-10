@@ -105,7 +105,7 @@ export class BlogPreviewWeb extends HTMLElement {
           </h2>
           <div class="text-sm font-light">${this.introHTML}</div>
 
-          <div class="self-bottom mt-auto flex items-center gap-4 pt-8">
+          <div class="self-bottom mt-auto flex items-center gap-4 pt-2 md:pt-8">
             ${this.authorImageUrl &&
             this.authorImageUrl !== "" &&
             `<img

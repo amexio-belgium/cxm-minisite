@@ -70,7 +70,7 @@ const { blogPost } = Astro.props;
         </div>
 
         {blogPost.author && (
-          <div class="self-bottom mt-auto flex items-center gap-4 pt-8">
+          <div class="self-bottom mt-auto flex items-center gap-4 pt-2 md:pt-8">
             {blogPost.author.image?.asset && (
               <img
                 src={imageBuilder
