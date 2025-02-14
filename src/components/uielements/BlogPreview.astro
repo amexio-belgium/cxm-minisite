@@ -29,7 +29,7 @@ const { blogPost } = Astro.props;
               .url()}
             class="w-full transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt={blogPost.featuredImage?.asset.altTexts?.[locale] || ""}
+            alt=""
           />
         )}
       </div>
@@ -79,7 +79,7 @@ const { blogPost } = Astro.props;
                   .fit("clip")
                   .url()}
                 class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
-                alt={blogPost.author.name + " " + blogPost.author.jobTitle}
+                alt=""
                 loading="eager"
               />
             )}

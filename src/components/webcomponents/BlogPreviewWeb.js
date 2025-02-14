@@ -67,7 +67,7 @@ export class BlogPreviewWeb extends HTMLElement {
             src="${this.previewImageUrl}"
             class="w-full transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105"
             loading="lazy"
-            alt="{blogPost.featuredImage?.asset.altTexts?.[lang]}"
+            alt=""
             width="{400}"
             height="{400}"
           />
@@ -114,7 +114,7 @@ export class BlogPreviewWeb extends HTMLElement {
               class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
               width="50"
               height="50"
-              alt="${`${this.authorName} ${this.jobTitle}`}"
+              alt=""
             />`}
             <div class="flex flex-col justify-center gap-1">
               <p class="font-xs">${this.authorName ? this.authorName : ""}</p>

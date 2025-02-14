@@ -41,7 +41,7 @@ const { caseData, small } = Astro.props;
               .size(1200, 1000)
               .fit("clip")
               .url()}
-            alt={caseData?.introImage?.asset?.altTexts?.[locale] || ""}
+            alt=""
             class:list={[
               "h-[unset] min-h-full w-auto min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105",
               small ? "shrink-0 object-scale-down" : "",
@@ -80,7 +80,7 @@ const { caseData, small } = Astro.props;
                 .fit("clip")
                 .url()}
               class="h-12 w-auto shrink-0 sm:h-16 md:h-12 xl:h-16"
-              alt={caseData?.company?.logo?.default?.asset?.altTexts?.[locale]}
+              alt=""
             />
           )
         }

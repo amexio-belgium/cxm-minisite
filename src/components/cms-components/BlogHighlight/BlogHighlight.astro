@@ -22,7 +22,7 @@ const blogPost = Astro.props.blogPost.blogPost;
         {blogPost.featuredImage?.asset && (
           <img
             src={imageBuilder.image(blogPost.featuredImage).width(1000).url()}
-            alt={blogPost.featuredImage?.asset?.altTexts?.[locale] || ""}
+            alt=""
             class="h-[unset] min-h-full min-w-full max-w-[unset] object-cover transition-transform duration-300 ease-in-out motion-safe:group-hover:scale-105 md:w-[400px]"
             loading="lazy"
           />
@@ -70,7 +70,7 @@ const blogPost = Astro.props.blogPost.blogPost;
                     .size(120, 120)
                     .fit("clip")
                     .url()}
-                  alt={blogPost.author.name + " " + blogPost.author.jobTitle}
+                  alt=""
                   class="h-10 w-10 rounded-full sm:h-14 sm:w-14"
                   loading="eager"
                 />
